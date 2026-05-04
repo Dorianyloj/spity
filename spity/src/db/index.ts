@@ -3,6 +3,6 @@ import mysql from 'mysql2/promise'
 import * as schema from './schema'
 import { env } from '@/lib/env'
 
-const connection = await mysql.createConnection(env.DATABASE_URL)
+const pool = mysql.createPool(env.DATABASE_URL)
 
-export const db = drizzle(connection, { schema, mode: 'default' })
+export const db = drizzle(pool, { schema, mode: 'default' })
