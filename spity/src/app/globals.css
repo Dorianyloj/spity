@@ -1,26 +1,549 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SPITY - Identité Visuelle
+   Application sociale pour la communauté escalade
+
+   Palette:
+   - Slate profond (#1a1f2e) : Ancrage, confiance, profondeur comme la roche
+   - Corail vivant (#e8614d) : Énergie, passion, la magnésie sur les prises
+   - Crème pierre (#f5f2ed) : Légèreté, naturel, le calcaire des falaises
+   - Gris granite (#6b7280) : Équilibre, technique, la texture du rocher
+
+   ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Couleurs principales */
+  --background: #f5f2ed;
+  --foreground: #1a1f2e;
+
+  /* Surfaces */
+  --card: #ffffff;
+  --card-foreground: #1a1f2e;
+  --popover: #ffffff;
+  --popover-foreground: #1a1f2e;
+
+  /* Action primaire - Corail */
+  --primary: #e8614d;
+  --primary-foreground: #ffffff;
+
+  /* Secondaire - Slate */
+  --secondary: #1a1f2e;
+  --secondary-foreground: #f5f2ed;
+
+  /* États neutres */
+  --muted: #e8e4de;
+  --muted-foreground: #6b7280;
+
+  /* Accent - Corail clair */
+  --accent: #fef0ed;
+  --accent-foreground: #e8614d;
+
+  /* Feedback */
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --success: #059669;
+  --success-foreground: #ffffff;
+  --warning: #d97706;
+  --warning-foreground: #ffffff;
+
+  /* Bordures et inputs */
+  --border: #d6d0c7;
+  --input: #e8e4de;
+  --ring: #e8614d;
+
+  /* Graphiques - Palette étendue */
+  --chart-1: #e8614d;
+  --chart-2: #1a1f2e;
+  --chart-3: #059669;
+  --chart-4: #d97706;
+  --chart-5: #6b7280;
+
+  /* Rayons */
+  --radius: 0.625rem;
+
+  /* Sidebar */
+  --sidebar: #1a1f2e;
+  --sidebar-foreground: #f5f2ed;
+  --sidebar-primary: #e8614d;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #2d3548;
+  --sidebar-accent-foreground: #f5f2ed;
+  --sidebar-border: #2d3548;
+  --sidebar-ring: #e8614d;
+
+  /* Tokens Spity personnalisés */
+  --spity-coral: #e8614d;
+  --spity-coral-light: #fef0ed;
+  --spity-coral-dark: #c24a39;
+  --spity-slate: #1a1f2e;
+  --spity-slate-light: #2d3548;
+  --spity-stone: #f5f2ed;
+  --spity-stone-dark: #e8e4de;
+  --spity-granite: #6b7280;
+
+  /* Niveaux de cotation escalade */
+  --grade-beginner: #22c55e;
+  --grade-intermediate: #3b82f6;
+  --grade-advanced: #f59e0b;
+  --grade-expert: #ef4444;
+  --grade-elite: #1a1f2e;
 }
+
+.dark {
+  --background: #0f1219;
+  --foreground: #f5f2ed;
+
+  --card: #1a1f2e;
+  --card-foreground: #f5f2ed;
+  --popover: #1a1f2e;
+  --popover-foreground: #f5f2ed;
+
+  --primary: #e8614d;
+  --primary-foreground: #ffffff;
+
+  --secondary: #2d3548;
+  --secondary-foreground: #f5f2ed;
+
+  --muted: #2d3548;
+  --muted-foreground: #9ca3af;
+
+  --accent: #2d1f1c;
+  --accent-foreground: #e8614d;
+
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  --border: #2d3548;
+  --input: #2d3548;
+  --ring: #e8614d;
+
+  --chart-1: #e8614d;
+  --chart-2: #f5f2ed;
+  --chart-3: #10b981;
+  --chart-4: #f59e0b;
+  --chart-5: #9ca3af;
+
+  --sidebar: #0f1219;
+  --sidebar-foreground: #f5f2ed;
+  --sidebar-primary: #e8614d;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1a1f2e;
+  --sidebar-accent-foreground: #f5f2ed;
+  --sidebar-border: #2d3548;
+  --sidebar-ring: #e8614d;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Theme Tailwind
+   ═══════════════════════════════════════════════════════════════════════════ */
 
 @theme inline {
+  /* Typographie - utilise les variables CSS injectées par Next.js */
+  --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), 'JetBrains Mono', monospace;
+  --font-display: var(--font-jakarta), 'Plus Jakarta Sans', sans-serif;
+
+  /* Couleurs système */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Rayons */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-full: 9999px;
+
+  /* Sidebar */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Couleurs Spity */
+  --color-coral: var(--spity-coral);
+  --color-coral-light: var(--spity-coral-light);
+  --color-coral-dark: var(--spity-coral-dark);
+  --color-slate-deep: var(--spity-slate);
+  --color-slate-light: var(--spity-slate-light);
+  --color-stone: var(--spity-stone);
+  --color-stone-dark: var(--spity-stone-dark);
+  --color-granite: var(--spity-granite);
+
+  /* Couleurs de cotation */
+  --color-grade-beginner: var(--grade-beginner);
+  --color-grade-intermediate: var(--grade-intermediate);
+  --color-grade-advanced: var(--grade-advanced);
+  --color-grade-expert: var(--grade-expert);
+  --color-grade-elite: var(--grade-elite);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ═══════════════════════════════════════════════════════════════════════════
+   Base & Reset
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Typographie fluide */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-balance;
+  }
+
+  p {
+    @apply leading-relaxed text-pretty;
+  }
+
+  /* Focus visible accessible */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+
+  /* Scrollbar personnalisée */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--muted);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--granite);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--spity-coral);
+  }
+
+  /* Selection */
+  ::selection {
+    background: var(--spity-coral);
+    color: white;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ═══════════════════════════════════════════════════════════════════════════
+   Composants Spity
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+  /* Badge de cotation */
+  .grade-badge {
+    @apply inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold rounded-md;
+  }
+
+  .grade-badge--beginner {
+    background: var(--grade-beginner);
+    color: white;
+  }
+
+  .grade-badge--intermediate {
+    background: var(--grade-intermediate);
+    color: white;
+  }
+
+  .grade-badge--advanced {
+    background: var(--grade-advanced);
+    color: white;
+  }
+
+  .grade-badge--expert {
+    background: var(--grade-expert);
+    color: white;
+  }
+
+  .grade-badge--elite {
+    background: var(--grade-elite);
+    color: white;
+  }
+
+  /* Carte avec effet de profondeur */
+  .spity-card {
+    @apply bg-card rounded-xl border border-border;
+    box-shadow:
+      0 1px 2px 0 rgb(0 0 0 / 0.03),
+      0 1px 3px 0 rgb(0 0 0 / 0.05);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .spity-card:hover {
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.05),
+      0 2px 4px -2px rgb(0 0 0 / 0.05);
+    transform: translateY(-1px);
+  }
+
+  /* Bouton primaire Spity */
+  .spity-btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5
+           font-medium text-sm rounded-lg transition-all duration-200;
+  }
+
+  .spity-btn--primary {
+    @apply bg-primary text-primary-foreground;
+    box-shadow: 0 1px 2px 0 rgb(232 97 77 / 0.3);
+  }
+
+  .spity-btn--primary:hover {
+    background: var(--spity-coral-dark);
+    box-shadow: 0 4px 12px 0 rgb(232 97 77 / 0.35);
+    transform: translateY(-1px);
+  }
+
+  .spity-btn--primary:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px 0 rgb(232 97 77 / 0.3);
+  }
+
+  .spity-btn--secondary {
+    @apply bg-secondary text-secondary-foreground;
+  }
+
+  .spity-btn--secondary:hover {
+    background: var(--spity-slate-light);
+  }
+
+  .spity-btn--ghost {
+    @apply bg-transparent text-foreground;
+  }
+
+  .spity-btn--ghost:hover {
+    @apply bg-muted;
+  }
+
+  /* Input Spity */
+  .spity-input {
+    @apply w-full px-4 py-2.5 bg-input border border-border rounded-lg
+           text-foreground placeholder:text-muted-foreground
+           transition-all duration-200;
+  }
+
+  .spity-input:focus {
+    @apply border-primary ring-2 ring-primary/20 outline-none;
+  }
+
+  /* Avatar avec anneau */
+  .spity-avatar {
+    @apply relative rounded-full overflow-hidden;
+  }
+
+  .spity-avatar--ring {
+    @apply ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
+
+  /* Tag de lieu */
+  .spity-tag {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1
+           text-xs font-medium rounded-full;
+  }
+
+  .spity-tag--gym {
+    @apply bg-blue-100 text-blue-700;
+  }
+
+  .spity-tag--outdoor {
+    @apply bg-emerald-100 text-emerald-700;
+  }
+
+  .spity-tag--club {
+    @apply bg-amber-100 text-amber-700;
+  }
+
+  /* Bottom navigation mobile */
+  .spity-bottom-nav {
+    @apply fixed bottom-0 left-0 right-0 z-50
+           bg-card/95 backdrop-blur-lg border-t border-border;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .spity-bottom-nav__item {
+    @apply flex flex-col items-center justify-center gap-0.5 py-2 px-3
+           text-muted-foreground transition-colors duration-200;
+  }
+
+  .spity-bottom-nav__item--active {
+    @apply text-primary;
+  }
+
+  .spity-bottom-nav__item:hover {
+    @apply text-foreground;
+  }
+
+  /* Story ring */
+  .spity-story-ring {
+    background: linear-gradient(135deg, var(--spity-coral) 0%, var(--spity-coral-dark) 100%);
+    @apply p-0.5 rounded-full;
+  }
+
+  .spity-story-ring--seen {
+    background: var(--border);
+  }
+
+  /* Stat card */
+  .spity-stat {
+    @apply flex flex-col items-center p-4 bg-muted/50 rounded-xl;
+  }
+
+  .spity-stat__value {
+    @apply text-2xl font-bold text-foreground;
+  }
+
+  .spity-stat__label {
+    @apply text-xs text-muted-foreground uppercase tracking-wider;
+  }
+
+  /* Pill badge */
+  .spity-pill {
+    @apply inline-flex items-center gap-1 px-2 py-0.5
+           text-xs font-medium rounded-full bg-muted text-muted-foreground;
+  }
+
+  .spity-pill--coral {
+    @apply bg-coral-light text-coral-dark;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Utilitaires
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer utilities {
+  /* Texture de fond subtile */
+  .spity-texture {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a1f2e' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Dégradé corail */
+  .spity-gradient-coral {
+    background: linear-gradient(135deg, var(--spity-coral) 0%, var(--spity-coral-dark) 100%);
+  }
+
+  /* Dégradé slate */
+  .spity-gradient-slate {
+    background: linear-gradient(135deg, var(--spity-slate) 0%, var(--spity-slate-light) 100%);
+  }
+
+  /* Ombre douce */
+  .spity-shadow-soft {
+    box-shadow:
+      0 2px 4px -1px rgb(0 0 0 / 0.04),
+      0 4px 6px -1px rgb(0 0 0 / 0.06);
+  }
+
+  .spity-shadow-medium {
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.06),
+      0 10px 15px -3px rgb(0 0 0 / 0.08);
+  }
+
+  .spity-shadow-coral {
+    box-shadow: 0 4px 14px 0 rgb(232 97 77 / 0.25);
+  }
+
+  /* Animation pulse pour notifications */
+  .spity-pulse {
+    animation: spity-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes spity-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  /* Animation de chargement */
+  .spity-skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--muted) 0%,
+      var(--muted-foreground)/10 50%,
+      var(--muted) 100%
+    );
+    background-size: 200% 100%;
+    animation: spity-skeleton 1.5s ease-in-out infinite;
+  }
+
+  @keyframes spity-skeleton {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  /* Safe area padding */
+  .spity-safe-bottom {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 4rem);
+  }
+
+  .spity-safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  /* Glassmorphism */
+  .spity-glass {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50;
+  }
+
+  /* Hide scrollbar */
+  .spity-no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .spity-no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
