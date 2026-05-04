@@ -1,6 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Award, CheckCircle2, Mail, MapPin, Mountain, ShieldCheck, UserRound, UsersRound } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -10,9 +11,11 @@ import { createClubProfileBodySchema, createGrimpeurProfileBodySchema, profileMe
 import type { CreateClubProfileBody, CreateGrimpeurProfileBody, ProfileMeResponse } from '../schemas'
 
 type ProfileFormMode = 'onboarding' | 'settings'
+type ProfileFormVariant = 'standalone' | 'app'
 
 type ProfileFormProps = {
   mode: ProfileFormMode
+  variant?: ProfileFormVariant
 }
 
 const disciplines = [
@@ -21,12 +24,29 @@ const disciplines = [
   { value: 'trad', label: 'Trad' },
 ]
 
+const disciplineLabels = {
+  bloc: 'Bloc',
+  voie: 'Voie',
+  trad: 'Trad',
+  escalade: 'Escalade',
+  'via-ferrata': 'Via ferrata',
+  'grandes-voies': 'Grandes voies',
+  speed: 'Speed',
+}
+
 const gear = [
   { value: 'chaussons', label: 'Chaussons' },
   { value: 'baudrier', label: 'Baudrier' },
   { value: 'corde', label: 'Corde' },
   { value: 'crashpad', label: 'Crashpad' },
 ]
+
+const gearLabels = {
+  chaussons: 'Chaussons',
+  baudrier: 'Baudrier',
+  corde: 'Corde',
+  crashpad: 'Crashpad',
+}
 
 const grades = ['4a', '4b', '4c', '5a', '5b', '5c', '6a', '6a+', '6b', '6b+', '6c', '6c+', '7a', '7a+', '7b', '7b+', '7c', '7c+', '8a', '8a+', '8b', '8b+', '8c', '8c+']
 
@@ -83,7 +103,7 @@ const mergeClubDefaults = (profile: ProfileMeResponse['clubProfile']): CreateClu
   }
 }
 
-export default function ProfileForm({ mode }: ProfileFormProps) {
+export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFormProps) {
   const [profile, setProfile] = useState<ProfileMeResponse | null>(null)
   const [isLoadingProfile, setIsLoadingProfile] = useState(true)
   const [feedback, setFeedback] = useState<string | null>(null)
@@ -178,6 +198,14 @@ export default function ProfileForm({ mode }: ProfileFormProps) {
   }
 
   if (isLoadingProfile) {
+    if (variant === 'app') {
+      return (
+        <Card hover={false}>
+          <CardContent className="p-6 text-sm text-muted-foreground">Chargement du profil...</CardContent>
+        </Card>
+      )
+    }
+
     return (
       <main className="min-h-screen bg-background px-4 py-10">
         <div className="mx-auto max-w-4xl">
@@ -190,6 +218,22 @@ export default function ProfileForm({ mode }: ProfileFormProps) {
   }
 
   if (!profile) {
+    if (variant === 'app') {
+      return (
+        <Card hover={false}>
+          <CardHeader>
+            <CardTitle>Connexion requise</CardTitle>
+            <CardDescription>Connectez-vous avant de compléter votre profil Spity.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Link className="spity-btn spity-btn--primary" href="/login">
+              Aller à la connexion
+            </Link>
+          </CardContent>
+        </Card>
+      )
+    }
+
     return (
       <main className="min-h-screen bg-background px-4 py-10">
         <div className="mx-auto max-w-4xl">
@@ -211,32 +255,157 @@ export default function ProfileForm({ mode }: ProfileFormProps) {
 
   const isGrimpeur = profile.user.role === 'grimpeur'
   const title = mode === 'onboarding' ? 'Compléter votre profil' : 'Mon profil'
+  const isSettings = mode === 'settings'
+  const displayName = profile.clubProfile?.nom ?? profile.user.email.split('@')[0]
+  const profileKind = isGrimpeur ? 'Grimpeur' : 'Club'
+  const selectedDisciplines = profile.grimpeurProfile?.disciplines ?? []
+  const selectedGear = profile.grimpeurProfile?.materiel ?? []
+  const profileStats = isGrimpeur
+    ? [
+        { label: 'Disciplines', value: String(selectedDisciplines.length), icon: Mountain },
+        { label: 'Matériel', value: String(selectedGear.length), icon: ShieldCheck },
+        { label: 'Karma', value: String(profile.grimpeurProfile?.karma ?? 0), icon: Award },
+      ]
+    : [
+        { label: 'Type', value: 'Club', icon: UsersRound },
+        { label: 'FFME', value: profile.clubProfile?.ffmeNum ? 'Oui' : 'Non', icon: ShieldCheck },
+        { label: 'Événements', value: '0', icon: Award },
+      ]
+  const content = (
+    <div className={variant === 'app' ? 'space-y-6' : 'mx-auto max-w-6xl space-y-6'}>
+      <section className="overflow-hidden rounded-xl border border-border bg-card">
+        <div className="bg-slate-deep px-6 py-8 text-white">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="flex items-start gap-4">
+              <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-white/10 ring-2 ring-white/20">
+                {isGrimpeur ? <UserRound size={34} /> : <UsersRound size={34} />}
+              </div>
+              <div>
+                <Badge variant={profile.onboardingComplete ? 'success' : 'warning'}>
+                  {profile.onboardingComplete ? 'Profil complet' : 'Onboarding'}
+                </Badge>
+                <h1 className="mt-3 text-4xl font-bold text-white">{isSettings ? displayName : title}</h1>
+                <p className="mt-2 max-w-2xl text-white/75">
+                  {isSettings
+                    ? 'Votre profil pilote les recommandations, le matching et les invitations locales.'
+                    : 'Complétez ces informations pour accéder à l’expérience connectée Spity.'}
+                </p>
+              </div>
+            </div>
 
-  return (
-    <main className="min-h-screen bg-background px-4 py-10">
-      <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[1fr_360px]">
-        <section className="space-y-6">
-          <div className="space-y-3">
-            <Badge variant={profile.onboardingComplete ? 'success' : 'warning'}>
-              {profile.onboardingComplete ? 'Profil complet' : 'Onboarding'}
-            </Badge>
-            <h1 className="text-4xl font-bold text-foreground">{title}</h1>
-            <p className="max-w-2xl text-muted-foreground">
-              Ces informations alimenteront le matching grimpeur, les événements clubs et les recommandations locales.
-            </p>
+            {variant === 'standalone' && (
+              <div className="flex flex-wrap gap-3">
+                {profile.onboardingComplete && (
+                  <Link className="spity-btn bg-white text-slate-deep hover:bg-white/90" href="/app">
+                    Entrer dans l’app
+                  </Link>
+                )}
+                <Link className="spity-btn bg-white/10 text-white hover:bg-white/20" href="/">
+                  Accueil
+                </Link>
+              </div>
+            )}
           </div>
+        </div>
 
+        {isSettings && (
+          <div className="grid gap-0 border-t border-border md:grid-cols-3">
+            {profileStats.map((stat) => {
+              const Icon = stat.icon
+
+              return (
+                <div key={stat.label} className="flex items-center gap-3 border-b border-border p-5 md:border-b-0 md:border-r last:md:border-r-0">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-coral-light text-coral">
+                    <Icon size={21} />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold text-foreground">{stat.value}</p>
+                    <p className="text-sm text-muted-foreground">{stat.label}</p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        )}
+      </section>
+
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
+        <section className="space-y-6">
           {feedback && (
-            <div className="rounded-lg border border-border bg-card p-4 text-sm text-muted-foreground">
+            <div className="rounded-lg border border-border bg-card p-4 text-sm font-medium text-foreground">
               {feedback}
             </div>
           )}
 
-          {isGrimpeur ? (
-            <Card>
+          {isSettings && isGrimpeur && profile.grimpeurProfile && (
+            <Card hover={false}>
               <CardHeader>
-                <CardTitle>Profil grimpeur</CardTitle>
-                <CardDescription>Disciplines, niveaux et matériel disponible.</CardDescription>
+                <CardTitle>Résumé grimpeur</CardTitle>
+                <CardDescription>Vue finale de votre profil tel qu’il sera utilisé dans le matching.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-5">
+                <div>
+                  <p className="text-sm font-medium text-foreground">Disciplines</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {selectedDisciplines.map((discipline) => (
+                      <Badge key={discipline} variant="primary">
+                        {disciplineLabels[discipline] ?? discipline}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  {selectedDisciplines.map((discipline) => (
+                    <div key={discipline} className="rounded-lg border border-border p-4">
+                      <p className="text-sm text-muted-foreground">{disciplineLabels[discipline] ?? discipline}</p>
+                      <p className="mt-1 text-2xl font-bold text-foreground">
+                        {profile.grimpeurProfile?.niveaux[discipline] ?? 'N/A'}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-foreground">Matériel disponible</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {selectedGear.map((item) => (
+                      <Badge key={item} variant="secondary">
+                        {gearLabels[item as keyof typeof gearLabels] ?? item}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {isSettings && !isGrimpeur && profile.clubProfile && (
+            <Card hover={false}>
+              <CardHeader>
+                <CardTitle>Résumé club</CardTitle>
+                <CardDescription>Informations visibles pour les grimpeurs et futurs membres.</CardDescription>
+              </CardHeader>
+              <CardContent className="grid gap-4 sm:grid-cols-2">
+                <div className="rounded-lg border border-border p-4">
+                  <p className="text-sm text-muted-foreground">Localisation</p>
+                  <p className="mt-1 font-medium text-foreground">{profile.clubProfile.location ?? 'À compléter'}</p>
+                </div>
+                <div className="rounded-lg border border-border p-4">
+                  <p className="text-sm text-muted-foreground">Affiliation FFME</p>
+                  <p className="mt-1 font-medium text-foreground">{profile.clubProfile.ffmeNum ?? 'Non renseignée'}</p>
+                </div>
+                <div className="rounded-lg border border-border p-4 sm:col-span-2">
+                  <p className="text-sm text-muted-foreground">Bio</p>
+                  <p className="mt-1 text-foreground">{profile.clubProfile.bio ?? 'Aucune bio renseignée.'}</p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {isGrimpeur ? (
+            <Card hover={false}>
+              <CardHeader>
+                <CardTitle>{isSettings ? 'Modifier mes informations' : 'Profil grimpeur'}</CardTitle>
+                <CardDescription>Disciplines, niveaux et matériel disponible pour trouver les bons partenaires.</CardDescription>
               </CardHeader>
               <CardContent>
                 <form className="space-y-6" onSubmit={grimpeurForm.handleSubmit(submitGrimpeurProfile)}>
@@ -244,7 +413,7 @@ export default function ProfileForm({ mode }: ProfileFormProps) {
                     <legend className="text-sm font-medium text-foreground">Disciplines</legend>
                     <div className="grid gap-3 sm:grid-cols-3">
                       {disciplines.map((discipline) => (
-                        <label key={discipline.value} className="flex items-center gap-2 rounded-lg border border-border p-3 text-sm">
+                        <label key={discipline.value} className="flex cursor-pointer items-center gap-2 rounded-lg border border-border p-3 text-sm transition-colors hover:bg-muted">
                           <input type="checkbox" value={discipline.value} {...grimpeurForm.register('disciplines')} />
                           {discipline.label}
                         </label>
@@ -277,7 +446,7 @@ export default function ProfileForm({ mode }: ProfileFormProps) {
                     <legend className="text-sm font-medium text-foreground">Matériel</legend>
                     <div className="grid gap-3 sm:grid-cols-2">
                       {gear.map((item) => (
-                        <label key={item.value} className="flex items-center gap-2 rounded-lg border border-border p-3 text-sm">
+                        <label key={item.value} className="flex cursor-pointer items-center gap-2 rounded-lg border border-border p-3 text-sm transition-colors hover:bg-muted">
                           <input type="checkbox" value={item.value} {...grimpeurForm.register('materiel')} />
                           {item.label}
                         </label>
@@ -292,10 +461,10 @@ export default function ProfileForm({ mode }: ProfileFormProps) {
               </CardContent>
             </Card>
           ) : (
-            <Card>
+            <Card hover={false}>
               <CardHeader>
-                <CardTitle>Profil club</CardTitle>
-                <CardDescription>Identité, localisation et affiliation FFME.</CardDescription>
+                <CardTitle>{isSettings ? 'Modifier les informations club' : 'Profil club'}</CardTitle>
+                <CardDescription>Identité, localisation et affiliation FFME pour rendre le club visible.</CardDescription>
               </CardHeader>
               <CardContent>
                 <form className="space-y-4" onSubmit={clubForm.handleSubmit(submitClubProfile)}>
@@ -329,32 +498,69 @@ export default function ProfileForm({ mode }: ProfileFormProps) {
           )}
         </section>
 
-        <aside>
-          <Card>
+        <aside className="space-y-6">
+          <Card hover={false}>
             <CardHeader>
               <CardTitle>Compte</CardTitle>
-              <CardDescription>{profile.user.email}</CardDescription>
+              <CardDescription>{profileKind} connecté</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-3 text-sm">
-              <div className="flex items-center justify-between">
+            <CardContent className="space-y-4 text-sm">
+              <div className="flex items-start gap-3 rounded-lg border border-border p-3">
+                <Mail className="mt-0.5 text-muted-foreground" size={18} />
+                <div className="min-w-0">
+                  <p className="font-medium text-foreground">Email</p>
+                  <p className="truncate text-muted-foreground">{profile.user.email}</p>
+                </div>
+              </div>
+              <div className="flex items-center justify-between rounded-lg border border-border p-3">
                 <span className="text-muted-foreground">Type</span>
                 <Badge variant="secondary">{profile.user.role}</Badge>
               </div>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between rounded-lg border border-border p-3">
                 <span className="text-muted-foreground">Email vérifié</span>
                 <Badge variant={profile.user.emailVerified ? 'success' : 'warning'}>
                   {profile.user.emailVerified ? 'Oui' : 'Non'}
                 </Badge>
               </div>
-              {profile.onboardingComplete && (
-                <Link className="spity-btn spity-btn--secondary w-full" href="/profile/me">
-                  Voir mon profil
+              {profile.onboardingComplete && variant === 'standalone' && (
+                <Link className="spity-btn spity-btn--secondary w-full" href="/app">
+                  Entrer dans l’app
                 </Link>
               )}
             </CardContent>
           </Card>
+
+          <Card hover={false}>
+            <CardHeader>
+              <CardTitle>Ce profil servira à</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3 text-sm">
+              <div className="flex gap-3">
+                <CheckCircle2 className="mt-0.5 text-success" size={18} />
+                <span>Améliorer le matching avec des partenaires compatibles.</span>
+              </div>
+              <div className="flex gap-3">
+                <MapPin className="mt-0.5 text-success" size={18} />
+                <span>Préparer les recommandations de lieux et d’événements locaux.</span>
+              </div>
+              <div className="flex gap-3">
+                <ShieldCheck className="mt-0.5 text-success" size={18} />
+                <span>Rendre les sessions plus fiables pour la communauté.</span>
+              </div>
+            </CardContent>
+          </Card>
         </aside>
       </div>
+    </div>
+  )
+
+  if (variant === 'app') {
+    return content
+  }
+
+  return (
+    <main className="min-h-screen bg-background px-4 py-8">
+      {content}
     </main>
   )
 }

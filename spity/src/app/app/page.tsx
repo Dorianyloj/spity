@@ -1,15 +1,14 @@
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
-import AppShell from '@/features/app/components/app-shell'
-import ProfileForm from '@/features/profile/components/profile-form'
+import AppDashboard from '@/features/app/components/app-dashboard'
 import { getCurrentProfile } from '@/features/profile/lib/current-profile'
 
 export const metadata: Metadata = {
-  title: 'Mon profil - Spity',
-  description: 'Consulter et modifier son profil Spity.',
+  title: 'Tableau de bord - Spity',
+  description: 'Tableau de bord connecté Spity.',
 }
 
-export default async function ProfileMePage() {
+export default async function AppPage() {
   const currentProfile = await getCurrentProfile()
 
   if (!currentProfile) {
@@ -21,8 +20,10 @@ export default async function ProfileMePage() {
   }
 
   return (
-    <AppShell activeItem="profile" user={currentProfile.user}>
-      <ProfileForm mode="settings" variant="app" />
-    </AppShell>
+    <AppDashboard
+      user={currentProfile.user}
+      grimpeurProfile={currentProfile.grimpeurProfile}
+      clubProfile={currentProfile.clubProfile}
+    />
   )
 }
