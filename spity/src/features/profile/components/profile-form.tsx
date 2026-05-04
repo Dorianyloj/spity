@@ -460,7 +460,7 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
   )
   const publicProfileCard = isSettings && isGrimpeur && profile.grimpeurProfile ? (
     <Card hover={false} className="overflow-hidden">
-      <div className="h-20 bg-slate-deep spity-texture" />
+      <div className="h-24 rock-sunset topo-lines" />
       <CardContent className="-mt-10 space-y-5">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex items-end gap-4">
@@ -1019,7 +1019,7 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
       )}
 
       {isSettings && (
-        <nav className="flex gap-2 overflow-x-auto rounded-xl border border-border bg-card p-2 spity-shadow-soft" aria-label="Navigation du profil">
+        <nav className="spity-tab-row" aria-label="Navigation du profil">
           {tabs.map((tab) => {
             const Icon = tab.icon
             const isActive = activeTab === tab.id
@@ -1028,9 +1028,9 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
               <button
                 key={tab.id}
                 aria-current={isActive ? 'page' : undefined}
-                className={`flex min-w-[132px] shrink-0 items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
-                  isActive ? 'bg-slate-deep text-white shadow-sm' : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                } ${tab.disabled ? 'cursor-not-allowed opacity-50' : ''}`}
+                className={`spity-tab-row__item min-w-[132px] ${
+                  isActive ? 'spity-tab-row__item--active' : ''
+                } ${tab.disabled ? 'spity-tab-row__item--disabled' : ''}`}
                 disabled={tab.disabled}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
