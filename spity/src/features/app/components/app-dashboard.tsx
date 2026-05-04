@@ -47,6 +47,30 @@ const popularPlaces = [
   { name: 'MROC Villeurbanne', type: 'Salle', detail: 'Bloc + voie · 5.1 km' },
 ]
 
+const feedPosts = [
+  {
+    author: 'Lina M.',
+    context: 'Arkose Lyon · Bloc · 6b',
+    content: 'Session bloc ce soir vers 19h. Je cherche quelqu’un pour travailler les profils déversants et filmer quelques essais.',
+    tag: 'Recherche partenaire',
+    meta: 'Il y a 18 min',
+  },
+  {
+    author: 'Club Alpin Lyon',
+    context: 'Curis-au-Mont-d’Or · Sortie club',
+    content: 'Sortie falaise samedi matin. Groupe limité à 8 personnes, niveau conseillé 5c/6a, encadrement bénévole.',
+    tag: 'Événement',
+    meta: 'Il y a 1 h',
+  },
+  {
+    author: 'Nassim B.',
+    context: 'MROC Villeurbanne · Voie · 6a+',
+    content: 'Bonne session voie hier, les nouvelles ouvertures en dalle sont propres. Disponible demain midi pour assurer.',
+    tag: 'Session',
+    meta: 'Hier',
+  },
+]
+
 const getDisplayName = (grimpeurProfile: GrimpeurProfile | null, clubProfile: ClubProfile | null, user: AuthUser) => {
   if (clubProfile) {
     return clubProfile.nom
@@ -62,17 +86,17 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile }: App
   const gearCount = grimpeurProfile?.materiel.length ?? 0
 
   return (
-    <main className="min-h-screen bg-background">
-      <div className="grid min-h-screen lg:grid-cols-[260px_1fr]">
-        <aside className="border-r border-border bg-card px-4 py-6">
-          <div className="mb-8 flex items-center justify-between">
-            <Link href="/app" className="text-2xl font-bold text-foreground">
+    <main className="min-h-screen bg-background pb-10">
+      <header className="sticky top-0 z-40 border-b border-border bg-card/95 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/app" className="text-2xl font-bold text-foreground tracking-normal">
               Spity
             </Link>
-            <Badge variant="success">MVP</Badge>
+            <Badge variant={isClub ? 'secondary' : 'primary'}>{isClub ? 'Club' : 'Grimpeur'}</Badge>
           </div>
 
-          <nav className="space-y-1" aria-label="Navigation principale">
+          <nav className="flex gap-2 overflow-x-auto pb-1 lg:pb-0" aria-label="Navigation principale">
             {navigationItems.map((item) => {
               const Icon = item.icon
 
@@ -80,7 +104,7 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile }: App
                 <Link
                   key={item.label}
                   href={item.href}
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                  className={`flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                     item.active ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                   }`}
                 >
@@ -91,38 +115,94 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile }: App
             })}
           </nav>
 
-          <div className="mt-8 rounded-lg border border-border bg-background p-4">
-            <p className="text-xs font-medium uppercase text-muted-foreground">Connecté</p>
-            <p className="mt-1 truncate font-medium text-foreground">{displayName}</p>
-            <p className="truncate text-sm text-muted-foreground">{user.email}</p>
+          <div className="hidden items-center gap-3 lg:flex">
+            <Link href="/profile/me" className="spity-btn spity-btn--secondary">
+              <UserRound size={18} />
+              Profil
+            </Link>
+            <LogoutButton />
           </div>
-        </aside>
+        </div>
+      </header>
 
-        <section className="px-4 py-6 sm:px-6 lg:px-8">
-          <header className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <Badge variant="primary">{isClub ? 'Espace club' : 'Espace grimpeur'}</Badge>
-              <h1 className="mt-3 text-4xl font-bold text-foreground">Bonjour {displayName}</h1>
-              <p className="mt-2 max-w-2xl text-muted-foreground">
-                Votre tableau de bord centralise les partenaires, lieux et événements à activer pour la démo MVP.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/profile/me" className="spity-btn spity-btn--secondary">
-                <UserRound size={18} />
-                Mon profil
-              </Link>
-              <LogoutButton />
-            </div>
-          </header>
-
-          <div className="mb-8 grid gap-4 md:grid-cols-3">
-            <StatCard value={isClub ? 'Club' : String(disciplineCount)} label={isClub ? 'Type de compte' : 'Disciplines'} icon={Mountain} />
-            <StatCard value={isClub ? '0' : String(gearCount)} label={isClub ? 'Événements publiés' : 'Matériel déclaré'} icon={Route} />
-            <StatCard value="3" label="Suggestions locales" icon={Compass} />
+      <div className="mx-auto max-w-7xl px-4 py-6">
+        <section className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <Badge variant="success">MVP feed</Badge>
+            <h1 className="mt-3 text-4xl font-bold text-foreground">Bonjour {displayName}</h1>
+            <p className="mt-2 max-w-2xl text-muted-foreground">
+              Un premier fil communautaire pour connecter les grimpeurs, les clubs, les lieux et les sessions à venir.
+            </p>
           </div>
+          <div className="flex flex-wrap gap-3 lg:hidden">
+            <Link href="/profile/me" className="spity-btn spity-btn--secondary">
+              <UserRound size={18} />
+              Mon profil
+            </Link>
+            <LogoutButton />
+          </div>
+        </section>
 
-          <div className="grid gap-6 xl:grid-cols-[1.25fr_0.75fr]">
+        <div className="mb-6 grid gap-4 md:grid-cols-3">
+          <StatCard value={isClub ? 'Club' : String(disciplineCount)} label={isClub ? 'Type de compte' : 'Disciplines'} icon={Mountain} />
+          <StatCard value={isClub ? '0' : String(gearCount)} label={isClub ? 'Événements publiés' : 'Matériel déclaré'} icon={Route} />
+          <StatCard value="3" label="Suggestions locales" icon={Compass} />
+        </div>
+
+        <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
+          <section className="space-y-6">
+            <Card hover={false}>
+              <CardContent className="p-4">
+                <div className="flex gap-3">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-coral-light text-coral">
+                    <UserRound size={20} />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-medium text-foreground">{displayName}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {isClub ? 'Publiez une sortie ou une annonce club.' : 'Partagez une session ou trouvez un partenaire.'}
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      <Badge variant="primary">Session</Badge>
+                      <Badge variant="secondary">Partenaire</Badge>
+                      <Badge variant="secondary">Lieu</Badge>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {feedPosts.map((post) => (
+              <Card key={`${post.author}-${post.meta}`} hover={false}>
+                <CardContent className="p-5">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex gap-3">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground">
+                        <Users size={20} />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-foreground">{post.author}</p>
+                        <p className="text-sm text-muted-foreground">{post.context}</p>
+                      </div>
+                    </div>
+                    <span className="shrink-0 text-xs text-muted-foreground">{post.meta}</span>
+                  </div>
+                  <p className="mt-4 text-foreground">{post.content}</p>
+                  <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+                    <Badge variant="primary">{post.tag}</Badge>
+                    <div className="flex gap-2">
+                      <button className="rounded-lg px-3 py-1.5 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground" type="button">
+                        J’aime
+                      </button>
+                      <button className="rounded-lg px-3 py-1.5 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground" type="button">
+                        Commenter
+                      </button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+
             <Card hover={false}>
               <CardHeader>
                 <CardTitle>{isClub ? 'Demandes et activité locale' : 'Partenaires recommandés'}</CardTitle>
@@ -149,11 +229,13 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile }: App
                 ))}
               </CardContent>
             </Card>
+          </section>
 
+          <aside className="space-y-6">
             <Card hover={false}>
               <CardHeader>
                 <CardTitle>Profil actif</CardTitle>
-                <CardDescription>Informations utilisées pour personnaliser l’expérience.</CardDescription>
+                <CardDescription>{user.email}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 {grimpeurProfile && (
@@ -201,7 +283,7 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile }: App
                 <CardTitle>Événements proches</CardTitle>
                 <CardDescription>Base statique avant le module calendrier clubs.</CardDescription>
               </CardHeader>
-              <CardContent className="grid gap-3 md:grid-cols-3 xl:grid-cols-1">
+              <CardContent className="space-y-3">
                 {upcomingEvents.map((event) => (
                   <div key={event.title} className="rounded-lg border border-border p-4">
                     <p className="font-medium text-foreground">{event.title}</p>
@@ -220,7 +302,7 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile }: App
                 <CardTitle>Lieux populaires</CardTitle>
                 <CardDescription>Départ du futur répertoire salles/falaises/clubs.</CardDescription>
               </CardHeader>
-              <CardContent className="grid gap-3 md:grid-cols-3 xl:grid-cols-1">
+              <CardContent className="space-y-3">
                 {popularPlaces.map((place) => (
                   <div key={place.name} className="flex items-center justify-between rounded-lg border border-border p-4">
                     <div>
@@ -232,8 +314,8 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile }: App
                 ))}
               </CardContent>
             </Card>
-          </div>
-        </section>
+          </aside>
+        </div>
       </div>
     </main>
   )
