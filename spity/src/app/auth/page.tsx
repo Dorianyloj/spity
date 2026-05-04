@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import AuthPanel from '@/features/auth/components/auth-panel'
+import { redirect } from 'next/navigation'
 
 export const metadata: Metadata = {
   title: 'Authentification - Spity',
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 }
 
 export default function AuthPage() {
-  return <AuthPanel />
+  redirect('/login')
 }

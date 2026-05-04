@@ -195,14 +195,14 @@ export default function LandingPage() {
               className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
             >
               <Link
-                href="/auth"
+                href="/register"
                 className="spity-btn spity-btn--primary px-6 py-3 text-base spity-shadow-coral group"
               >
                 Rejoindre Spity
                 <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
               </Link>
               <Link
-                href="/auth"
+                href="/login"
                 className="spity-btn px-6 py-3 text-base bg-white/10 hover:bg-white/20 text-white border border-white/20"
               >
                 <Smartphone size={20} />

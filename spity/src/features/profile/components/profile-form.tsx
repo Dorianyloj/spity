@@ -199,7 +199,7 @@ export default function ProfileForm({ mode }: ProfileFormProps) {
               <CardDescription>Connectez-vous avant de compléter votre profil Spity.</CardDescription>
             </CardHeader>
             <CardContent>
-              <Link className="spity-btn spity-btn--primary" href="/auth">
+              <Link className="spity-btn spity-btn--primary" href="/login">
                 Aller à la connexion
               </Link>
             </CardContent>

@@ -1,16 +1,19 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { LogIn, LogOut, UserPlus } from 'lucide-react'
+import { Eye, EyeOff, Lock, LogIn, Mail, ShieldCheck, UserPlus, UsersRound } from 'lucide-react'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input } from '@/components/ui'
 import { loginSchema, registerSchema, type LoginInput, type RegisterInput } from '@/lib/validators'
-import { authStatusResponseSchema, authSuccessResponseSchema, type AuthUser } from '../schemas'
+import { authSuccessResponseSchema } from '../schemas'
 
-type AuthMode = 'login' | 'register'
+type AuthPanelProps = {
+  mode: 'login' | 'register'
+}
 
 const emptyLoginValues: LoginInput = {
   email: '',
@@ -31,10 +34,10 @@ const parseApiError = async (response: Response) => {
   return parsedError.success ? parsedError.data.error : 'Une erreur est survenue'
 }
 
-export default function AuthPanel() {
-  const [mode, setMode] = useState<AuthMode>('login')
-  const [currentUser, setCurrentUser] = useState<AuthUser | null>(null)
+export default function AuthPanel({ mode }: AuthPanelProps) {
+  const router = useRouter()
   const [feedback, setFeedback] = useState<string | null>(null)
+  const [showPassword, setShowPassword] = useState(false)
 
   const loginForm = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
@@ -45,36 +48,6 @@ export default function AuthPanel() {
     resolver: zodResolver(registerSchema),
     defaultValues: emptyRegisterValues,
   })
-
-  const refreshSession = async () => {
-    const response = await fetch('/api/auth/me', { cache: 'no-store' })
-    const data: unknown = await response.json()
-    const parsedData = authStatusResponseSchema.safeParse(data)
-
-    if (parsedData.success) {
-      setCurrentUser(parsedData.data.user)
-    }
-  }
-
-  useEffect(() => {
-    let isMounted = true
-
-    const loadSession = async () => {
-      const response = await fetch('/api/auth/me', { cache: 'no-store' })
-      const data: unknown = await response.json()
-      const parsedData = authStatusResponseSchema.safeParse(data)
-
-      if (isMounted && parsedData.success) {
-        setCurrentUser(parsedData.data.user)
-      }
-    }
-
-    void loadSession()
-
-    return () => {
-      isMounted = false
-    }
-  }, [])
 
   const submitLogin = async (values: LoginInput) => {
     setFeedback(null)
@@ -93,9 +66,9 @@ export default function AuthPanel() {
     const parsedData = authSuccessResponseSchema.safeParse(data)
 
     if (parsedData.success) {
-      setCurrentUser(parsedData.data.user)
-      setFeedback('Connexion réussie')
       loginForm.reset(emptyLoginValues)
+      router.push('/profile/onboarding')
+      router.refresh()
     }
   }
 
@@ -116,150 +89,158 @@ export default function AuthPanel() {
     const parsedData = authSuccessResponseSchema.safeParse(data)
 
     if (parsedData.success) {
-      setCurrentUser(parsedData.data.user)
-      setFeedback('Compte créé')
       registerForm.reset(emptyRegisterValues)
+      router.push('/profile/onboarding')
+      router.refresh()
     }
   }
 
-  const submitLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' })
-    setCurrentUser(null)
-    setFeedback('Déconnexion réussie')
-  }
+  const isLogin = mode === 'login'
+  const passwordType = showPassword ? 'text' : 'password'
 
   return (
-    <div className="min-h-screen bg-background px-4 py-10">
-      <main className="mx-auto grid w-full max-w-5xl gap-6 lg:grid-cols-[1fr_380px]">
-        <section className="space-y-6">
-          <div className="space-y-3">
-            <Badge variant="primary">Auth MVP</Badge>
-            <h1 className="text-4xl font-bold text-foreground">Connexion Spity</h1>
-            <p className="max-w-2xl text-muted-foreground">
-              Créez un compte grimpeur ou club, connectez-vous, puis vérifiez la session active via le cookie HttpOnly.
-            </p>
-          </div>
+    <main className="min-h-screen bg-background">
+      <div className="grid min-h-screen lg:grid-cols-[1fr_480px]">
+        <section className="relative hidden overflow-hidden bg-slate-deep text-white lg:block">
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(232,97,77,0.22),rgba(26,31,46,0.08))]" />
+          <div className="relative flex h-full flex-col justify-between p-10">
+            <Link href="/" className="text-2xl font-bold tracking-normal">
+              Spity
+            </Link>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Session active</CardTitle>
-              <CardDescription>État retourné par l&apos;endpoint `/api/auth/me`.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {currentUser ? (
-                <div className="rounded-lg border border-border bg-muted/40 p-4">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <Badge variant="success">Connecté</Badge>
-                    <span className="font-medium">{currentUser.email}</span>
-                    <Badge variant="secondary">{currentUser.role}</Badge>
-                  </div>
-                </div>
-              ) : (
-                <div className="rounded-lg border border-border bg-muted/40 p-4 text-sm text-muted-foreground">
-                  Aucun utilisateur connecté.
-                </div>
-              )}
+            <div className="max-w-xl space-y-6">
+              <Badge variant="primary">Communauté escalade</Badge>
+              <h1 className="text-5xl font-bold leading-tight">
+                Trouvez vos partenaires et gardez vos sessions au même endroit.
+              </h1>
+              <p className="text-lg text-white/78">
+                Profils grimpeurs, clubs, lieux et événements structurés pour une pratique plus simple.
+              </p>
+            </div>
 
-              <div className="flex flex-wrap gap-3">
-                <Button variant="secondary" type="button" onClick={() => void refreshSession()}>
-                  Rafraîchir
-                </Button>
-                <Button variant="ghost" type="button" onClick={() => void submitLogout()} disabled={!currentUser}>
-                  <LogOut size={18} />
-                  Déconnexion
-                </Button>
-                {currentUser && (
-                  <Link className="spity-btn spity-btn--primary" href="/profile/onboarding">
-                    Compléter le profil
-                  </Link>
-                )}
+            <div className="grid max-w-2xl grid-cols-3 gap-4 text-sm">
+              <div className="rounded-lg border border-white/15 bg-white/10 p-4">
+                <UsersRound className="mb-3 text-coral" size={22} />
+                Matching local
               </div>
-
-              {feedback && <p className="text-sm text-muted-foreground">{feedback}</p>}
-            </CardContent>
-          </Card>
+              <div className="rounded-lg border border-white/15 bg-white/10 p-4">
+                <ShieldCheck className="mb-3 text-coral" size={22} />
+                Sessions fiables
+              </div>
+              <div className="rounded-lg border border-white/15 bg-white/10 p-4">
+                <Lock className="mb-3 text-coral" size={22} />
+                Compte sécurisé
+              </div>
+            </div>
+          </div>
         </section>
 
-        <Card>
-          <CardHeader>
-            <div className="flex rounded-lg border border-border bg-muted p-1">
-              <button
-                type="button"
-                className={`flex-1 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                  mode === 'login' ? 'bg-card text-foreground shadow-sm' : 'text-muted-foreground'
-                }`}
-                onClick={() => setMode('login')}
-              >
-                Connexion
-              </button>
-              <button
-                type="button"
-                className={`flex-1 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                  mode === 'register' ? 'bg-card text-foreground shadow-sm' : 'text-muted-foreground'
-                }`}
-                onClick={() => setMode('register')}
-              >
-                Inscription
-              </button>
+        <section className="flex items-center px-4 py-8 sm:px-8">
+          <div className="mx-auto w-full max-w-md space-y-6">
+            <div className="flex items-center justify-between">
+              <Link href="/" className="text-xl font-bold text-foreground lg:hidden">
+                Spity
+              </Link>
+              <Link href={isLogin ? '/register' : '/login'} className="text-sm font-medium text-primary">
+                {isLogin ? 'Créer un compte' : 'Se connecter'}
+              </Link>
             </div>
-          </CardHeader>
 
-          <CardContent>
-            {mode === 'login' ? (
-              <form className="space-y-4" onSubmit={loginForm.handleSubmit(submitLogin)}>
-                <Input
-                  label="Email"
-                  type="email"
-                  autoComplete="email"
-                  error={loginForm.formState.errors.email?.message}
-                  {...loginForm.register('email')}
-                />
-                <Input
-                  label="Mot de passe"
-                  type="password"
-                  autoComplete="current-password"
-                  error={loginForm.formState.errors.password?.message}
-                  {...loginForm.register('password')}
-                />
-                <Button type="submit" className="w-full" isLoading={loginForm.formState.isSubmitting}>
-                  <LogIn size={18} />
-                  Se connecter
-                </Button>
-              </form>
-            ) : (
-              <form className="space-y-4" onSubmit={registerForm.handleSubmit(submitRegister)}>
-                <Input
-                  label="Email"
-                  type="email"
-                  autoComplete="email"
-                  error={registerForm.formState.errors.email?.message}
-                  {...registerForm.register('email')}
-                />
-                <Input
-                  label="Mot de passe"
-                  type="password"
-                  autoComplete="new-password"
-                  error={registerForm.formState.errors.password?.message}
-                  {...registerForm.register('password')}
-                />
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-foreground" htmlFor="role">
-                    Type de profil
-                  </label>
-                  <select id="role" className="spity-input" {...registerForm.register('role')}>
-                    <option value="grimpeur">Grimpeur</option>
-                    <option value="club">Club</option>
-                  </select>
-                </div>
-                <Button type="submit" className="w-full" isLoading={registerForm.formState.isSubmitting}>
-                  <UserPlus size={18} />
-                  Créer le compte
-                </Button>
-              </form>
-            )}
-          </CardContent>
-        </Card>
-      </main>
-    </div>
+            <Card hover={false}>
+              <CardHeader>
+                <CardTitle>{isLogin ? 'Connexion' : 'Inscription'}</CardTitle>
+                <CardDescription>
+                  {isLogin ? 'Accédez à votre compte Spity.' : 'Créez votre compte et complétez votre profil.'}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {isLogin ? (
+                  <form className="space-y-4" onSubmit={loginForm.handleSubmit(submitLogin)}>
+                    <Input
+                      label="Email"
+                      type="email"
+                      autoComplete="email"
+                      error={loginForm.formState.errors.email?.message}
+                      icon={<Mail size={18} />}
+                      {...loginForm.register('email')}
+                    />
+                    <Input
+                      label="Mot de passe"
+                      type={passwordType}
+                      autoComplete="current-password"
+                      error={loginForm.formState.errors.password?.message}
+                      icon={<Lock size={18} />}
+                      action={
+                        <button
+                          type="button"
+                          className="text-muted-foreground transition-colors hover:text-foreground"
+                          onClick={() => setShowPassword((value) => !value)}
+                          aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+                        >
+                          {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                        </button>
+                      }
+                      {...loginForm.register('password')}
+                    />
+                    {feedback && <p className="text-sm text-destructive">{feedback}</p>}
+                    <Button type="submit" className="w-full" isLoading={loginForm.formState.isSubmitting}>
+                      <LogIn size={18} />
+                      Se connecter
+                    </Button>
+                  </form>
+                ) : (
+                  <form className="space-y-4" onSubmit={registerForm.handleSubmit(submitRegister)}>
+                    <Input
+                      label="Email"
+                      type="email"
+                      autoComplete="email"
+                      error={registerForm.formState.errors.email?.message}
+                      icon={<Mail size={18} />}
+                      {...registerForm.register('email')}
+                    />
+                    <Input
+                      label="Mot de passe"
+                      type={passwordType}
+                      autoComplete="new-password"
+                      error={registerForm.formState.errors.password?.message}
+                      icon={<Lock size={18} />}
+                      action={
+                        <button
+                          type="button"
+                          className="text-muted-foreground transition-colors hover:text-foreground"
+                          onClick={() => setShowPassword((value) => !value)}
+                          aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+                        >
+                          {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                        </button>
+                      }
+                      {...registerForm.register('password')}
+                    />
+                    <fieldset className="space-y-2">
+                      <legend className="text-sm font-medium text-foreground">Type de profil</legend>
+                      <div className="grid grid-cols-2 gap-3">
+                        <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-border p-3 text-sm">
+                          <input type="radio" value="grimpeur" {...registerForm.register('role')} />
+                          Grimpeur
+                        </label>
+                        <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-border p-3 text-sm">
+                          <input type="radio" value="club" {...registerForm.register('role')} />
+                          Club
+                        </label>
+                      </div>
+                    </fieldset>
+                    {feedback && <p className="text-sm text-destructive">{feedback}</p>}
+                    <Button type="submit" className="w-full" isLoading={registerForm.formState.isSubmitting}>
+                      <UserPlus size={18} />
+                      Créer mon compte
+                    </Button>
+                  </form>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      </div>
+    </main>
   )
 }
