@@ -67,7 +67,7 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
 
     if (parsedData.success) {
       loginForm.reset(emptyLoginValues)
-      router.push('/profile/onboarding')
+      router.push('/app')
       router.refresh()
     }
   }
@@ -90,7 +90,7 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
 
     if (parsedData.success) {
       registerForm.reset(emptyRegisterValues)
-      router.push('/profile/onboarding')
+      router.push('/app')
       router.refresh()
     }
   }

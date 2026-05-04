@@ -1,0 +1,240 @@
+import {
+  Calendar,
+  Compass,
+  MapPin,
+  MessageCircle,
+  Mountain,
+  Route,
+  Search,
+  UserRound,
+  Users,
+} from 'lucide-react'
+import Link from 'next/link'
+import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle, StatCard } from '@/components/ui'
+import type { AuthUser } from '@/features/auth/schemas'
+import type { ClubProfile, GrimpeurProfile } from '@/features/profile/schemas'
+import LogoutButton from './logout-button'
+
+type AppDashboardProps = {
+  user: AuthUser
+  grimpeurProfile: GrimpeurProfile | null
+  clubProfile: ClubProfile | null
+}
+
+const navigationItems = [
+  { label: 'Feed', href: '/app', icon: MessageCircle, active: true },
+  { label: 'Découvrir', href: '/app', icon: Search, active: false },
+  { label: 'Lieux', href: '/app', icon: MapPin, active: false },
+  { label: 'Événements', href: '/app', icon: Calendar, active: false },
+  { label: 'Profil', href: '/profile/me', icon: UserRound, active: false },
+]
+
+const nearbyPartners = [
+  { name: 'Lina M.', discipline: 'Bloc', grade: '6b', place: 'Arkose Lyon', availability: 'Ce soir' },
+  { name: 'Nassim B.', discipline: 'Voie', grade: '6a+', place: 'MROC Villeurbanne', availability: 'Demain' },
+  { name: 'Camille R.', discipline: 'Trad', grade: '5c', place: 'Falaise de Curis', availability: 'Samedi' },
+]
+
+const upcomingEvents = [
+  { title: 'Sortie falaise découverte', club: 'Club Alpin Lyon', date: 'Samedi 18 mai', capacity: '8 places' },
+  { title: 'Contest bloc local', club: 'Spity Crew', date: 'Mercredi 22 mai', capacity: '24 places' },
+  { title: 'Initiation grandes voies', club: 'Verticale FFME', date: 'Dimanche 26 mai', capacity: '6 places' },
+]
+
+const popularPlaces = [
+  { name: 'Arkose Lyon', type: 'Salle', detail: 'Bloc · 2.4 km' },
+  { name: 'Curis-au-Mont-d’Or', type: 'Falaise', detail: 'Voie · 18 km' },
+  { name: 'MROC Villeurbanne', type: 'Salle', detail: 'Bloc + voie · 5.1 km' },
+]
+
+const getDisplayName = (grimpeurProfile: GrimpeurProfile | null, clubProfile: ClubProfile | null, user: AuthUser) => {
+  if (clubProfile) {
+    return clubProfile.nom
+  }
+
+  return user.email.split('@')[0]
+}
+
+export default function AppDashboard({ user, grimpeurProfile, clubProfile }: AppDashboardProps) {
+  const displayName = getDisplayName(grimpeurProfile, clubProfile, user)
+  const isClub = user.role === 'club'
+  const disciplineCount = grimpeurProfile?.disciplines.length ?? 0
+  const gearCount = grimpeurProfile?.materiel.length ?? 0
+
+  return (
+    <main className="min-h-screen bg-background">
+      <div className="grid min-h-screen lg:grid-cols-[260px_1fr]">
+        <aside className="border-r border-border bg-card px-4 py-6">
+          <div className="mb-8 flex items-center justify-between">
+            <Link href="/app" className="text-2xl font-bold text-foreground">
+              Spity
+            </Link>
+            <Badge variant="success">MVP</Badge>
+          </div>
+
+          <nav className="space-y-1" aria-label="Navigation principale">
+            {navigationItems.map((item) => {
+              const Icon = item.icon
+
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                    item.active ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                  }`}
+                >
+                  <Icon size={18} />
+                  {item.label}
+                </Link>
+              )
+            })}
+          </nav>
+
+          <div className="mt-8 rounded-lg border border-border bg-background p-4">
+            <p className="text-xs font-medium uppercase text-muted-foreground">Connecté</p>
+            <p className="mt-1 truncate font-medium text-foreground">{displayName}</p>
+            <p className="truncate text-sm text-muted-foreground">{user.email}</p>
+          </div>
+        </aside>
+
+        <section className="px-4 py-6 sm:px-6 lg:px-8">
+          <header className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <Badge variant="primary">{isClub ? 'Espace club' : 'Espace grimpeur'}</Badge>
+              <h1 className="mt-3 text-4xl font-bold text-foreground">Bonjour {displayName}</h1>
+              <p className="mt-2 max-w-2xl text-muted-foreground">
+                Votre tableau de bord centralise les partenaires, lieux et événements à activer pour la démo MVP.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/profile/me" className="spity-btn spity-btn--secondary">
+                <UserRound size={18} />
+                Mon profil
+              </Link>
+              <LogoutButton />
+            </div>
+          </header>
+
+          <div className="mb-8 grid gap-4 md:grid-cols-3">
+            <StatCard value={isClub ? 'Club' : String(disciplineCount)} label={isClub ? 'Type de compte' : 'Disciplines'} icon={Mountain} />
+            <StatCard value={isClub ? '0' : String(gearCount)} label={isClub ? 'Événements publiés' : 'Matériel déclaré'} icon={Route} />
+            <StatCard value="3" label="Suggestions locales" icon={Compass} />
+          </div>
+
+          <div className="grid gap-6 xl:grid-cols-[1.25fr_0.75fr]">
+            <Card hover={false}>
+              <CardHeader>
+                <CardTitle>{isClub ? 'Demandes et activité locale' : 'Partenaires recommandés'}</CardTitle>
+                <CardDescription>
+                  {isClub ? 'Premiers signaux pour recruter et animer votre communauté.' : 'Suggestions statiques en attendant l’algorithme de matching.'}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                {nearbyPartners.map((partner) => (
+                  <div key={partner.name} className="flex flex-col gap-3 rounded-lg border border-border p-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-coral-light text-coral">
+                        <Users size={18} />
+                      </div>
+                      <div>
+                        <p className="font-medium text-foreground">{partner.name}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {partner.discipline} · {partner.grade} · {partner.place}
+                        </p>
+                      </div>
+                    </div>
+                    <Badge variant="secondary">{partner.availability}</Badge>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            <Card hover={false}>
+              <CardHeader>
+                <CardTitle>Profil actif</CardTitle>
+                <CardDescription>Informations utilisées pour personnaliser l’expérience.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {grimpeurProfile && (
+                  <>
+                    <div>
+                      <p className="text-sm font-medium text-foreground">Disciplines</p>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {grimpeurProfile.disciplines.map((discipline) => (
+                          <Badge key={discipline} variant="primary">
+                            {discipline}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-foreground">Matériel</p>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {grimpeurProfile.materiel.map((item) => (
+                          <Badge key={item} variant="secondary">
+                            {item}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {clubProfile && (
+                  <div className="space-y-3 text-sm">
+                    <div className="flex items-center justify-between">
+                      <span className="text-muted-foreground">Localisation</span>
+                      <span className="font-medium">{clubProfile.location ?? 'À compléter'}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-muted-foreground">FFME</span>
+                      <span className="font-medium">{clubProfile.ffmeNum ?? 'Non renseigné'}</span>
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            <Card hover={false}>
+              <CardHeader>
+                <CardTitle>Événements proches</CardTitle>
+                <CardDescription>Base statique avant le module calendrier clubs.</CardDescription>
+              </CardHeader>
+              <CardContent className="grid gap-3 md:grid-cols-3 xl:grid-cols-1">
+                {upcomingEvents.map((event) => (
+                  <div key={event.title} className="rounded-lg border border-border p-4">
+                    <p className="font-medium text-foreground">{event.title}</p>
+                    <p className="mt-1 text-sm text-muted-foreground">{event.club}</p>
+                    <div className="mt-3 flex items-center justify-between text-sm">
+                      <span>{event.date}</span>
+                      <Badge variant="secondary">{event.capacity}</Badge>
+                    </div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            <Card hover={false}>
+              <CardHeader>
+                <CardTitle>Lieux populaires</CardTitle>
+                <CardDescription>Départ du futur répertoire salles/falaises/clubs.</CardDescription>
+              </CardHeader>
+              <CardContent className="grid gap-3 md:grid-cols-3 xl:grid-cols-1">
+                {popularPlaces.map((place) => (
+                  <div key={place.name} className="flex items-center justify-between rounded-lg border border-border p-4">
+                    <div>
+                      <p className="font-medium text-foreground">{place.name}</p>
+                      <p className="text-sm text-muted-foreground">{place.detail}</p>
+                    </div>
+                    <Badge variant="primary">{place.type}</Badge>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      </div>
+    </main>
+  )
+}

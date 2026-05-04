@@ -347,8 +347,8 @@ export default function ProfileForm({ mode }: ProfileFormProps) {
                 </Badge>
               </div>
               {profile.onboardingComplete && (
-                <Link className="spity-btn spity-btn--secondary w-full" href="/profile/me">
-                  Voir mon profil
+                <Link className="spity-btn spity-btn--secondary w-full" href="/app">
+                  Entrer dans l’app
                 </Link>
               )}
             </CardContent>

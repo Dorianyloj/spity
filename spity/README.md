@@ -100,6 +100,14 @@ Pages locales :
 - http://localhost:3000/profile/onboarding
 - http://localhost:3000/profile/me
 
+## Application connectée
+
+```bash
+GET /app  # Tableau de bord connecté, protégé par session et profil complet
+```
+
+La route `/app` redirige vers `/login` si l'utilisateur n'est pas connecté, puis vers `/profile/onboarding` si son profil n'est pas encore complété.
+
 ## Qualité
 
 Avant commit, lancer :
