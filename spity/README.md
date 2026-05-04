@@ -67,6 +67,19 @@ npm run db:studio    # Lance Drizzle Studio
 - `src/lib` : configuration et validateurs partagés
 - `drizzle` : migrations SQL générées
 
+## Authentification
+
+Routes disponibles :
+
+```bash
+POST /api/auth/register  # Crée un compte et pose le cookie de session
+POST /api/auth/login     # Connecte un utilisateur
+POST /api/auth/logout    # Supprime le cookie de session
+GET  /api/auth/me        # Retourne la session active
+```
+
+Page de test locale : http://localhost:3000/auth
+
 ## Qualité
 
 Avant commit, lancer :
