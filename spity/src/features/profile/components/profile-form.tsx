@@ -1,7 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Award, Camera, CheckCircle2, Clock, Mail, MapPin, Mountain, SearchCheck, ShieldCheck, Target, UserRound, UsersRound } from 'lucide-react'
+import { Camera, CheckCircle2, Clock, Mail, MapPin, Mountain, SearchCheck, ShieldCheck, Target, UserRound } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -411,28 +411,54 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
   const selectedGear = profile.grimpeurProfile?.materiel ?? []
   const selectedEquipment = profile.equipment
   const equipmentObjectCount = selectedEquipment.reduce((total, item) => total + item.quantity, 0)
-  const profileStats = isGrimpeur
-    ? [
-        { label: 'Disciplines', value: String(selectedDisciplines.length), icon: Mountain },
-        { label: 'Objets déclarés', value: String(equipmentObjectCount || selectedGear.length), icon: ShieldCheck },
-        { label: 'Karma', value: String(profile.grimpeurProfile?.karma ?? 0), icon: Award },
-      ]
-    : [
-        { label: 'Type', value: 'Club', icon: UsersRound },
-        { label: 'FFME', value: profile.clubProfile?.ffmeNum ? 'Oui' : 'Non', icon: ShieldCheck },
-        { label: 'Événements', value: '0', icon: Award },
-      ]
   const tabs: Array<{ id: ProfileTab; label: string; icon: typeof UserRound; disabled?: boolean }> = [
     { id: 'overview', label: 'Aperçu', icon: UserRound },
     { id: 'practice', label: isGrimpeur ? 'Pratique' : 'Club', icon: Mountain },
     { id: 'equipment', label: 'Matériel', icon: ShieldCheck, disabled: !isGrimpeur },
     { id: 'account', label: 'Compte', icon: Mail },
   ]
-  const topEquipment = selectedEquipment.slice(0, 3)
   const profileCompletionLabel = profile.onboardingComplete ? 'Complet' : 'À finaliser'
   const environmentLabel = profile.grimpeurProfile?.climbingEnvironment
     ? climbingEnvironmentLabels[profile.grimpeurProfile.climbingEnvironment]
     : 'À préciser'
+  const readinessItems = isGrimpeur
+    ? [
+        { label: 'Photo', done: Boolean(profile.user.avatarUrl) },
+        { label: 'Bio', done: Boolean(profile.grimpeurProfile?.bio) },
+        { label: 'Localisation', done: Boolean(profile.grimpeurProfile?.location) },
+        { label: 'Disponibilités', done: Boolean(profile.grimpeurProfile?.availability.length) },
+        { label: 'Objectifs', done: Boolean(profile.grimpeurProfile?.goals.length) },
+        { label: 'Matériel', done: selectedEquipment.length > 0 || selectedGear.length > 0 },
+      ]
+    : [
+        { label: 'Nom', done: Boolean(profile.clubProfile?.nom) },
+        { label: 'Bio', done: Boolean(profile.clubProfile?.bio) },
+        { label: 'Localisation', done: Boolean(profile.clubProfile?.location) },
+        { label: 'Affiliation', done: Boolean(profile.clubProfile?.ffmeNum) },
+      ]
+  const completedReadinessItems = readinessItems.filter((item) => item.done).length
+  const readinessCard = (
+    <Card hover={false}>
+      <CardHeader>
+        <CardTitle>Progression</CardTitle>
+        <CardDescription>Les éléments utiles pour rendre le profil clair et fiable.</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="rounded-lg bg-coral-light p-4 text-coral-dark">
+          <p className="text-3xl font-bold">{completedReadinessItems}/{readinessItems.length}</p>
+          <p className="text-sm font-medium">éléments complétés</p>
+        </div>
+        <div className="space-y-2">
+          {readinessItems.map((item) => (
+            <div key={item.label} className="flex items-center justify-between gap-3 rounded-lg border border-border p-3 text-sm">
+              <span className="text-foreground">{item.label}</span>
+              <Badge variant={item.done ? 'success' : 'default'}>{item.done ? 'OK' : 'À faire'}</Badge>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  )
   const publicProfileCard = isSettings && isGrimpeur && profile.grimpeurProfile ? (
     <Card hover={false} className="overflow-hidden">
       <div className="h-20 bg-slate-deep spity-texture" />
@@ -517,7 +543,7 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
   const publicIdentityEditorCard = isSettings && isGrimpeur ? (
     <Card hover={false}>
       <CardHeader>
-        <CardTitle>Fiche publique</CardTitle>
+        <CardTitle>Modifier la fiche</CardTitle>
         <CardDescription>Les informations visibles pour les futurs partenaires.</CardDescription>
       </CardHeader>
       <CardContent>
@@ -909,11 +935,10 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
           <section className="space-y-6">
             {publicProfileCard}
             {publicIdentityEditorCard}
-            {summaryCard}
             {clubSummaryCard}
           </section>
           <aside className="space-y-6">
-            {accountCard}
+            {readinessCard}
             {purposeCard}
           </aside>
         </div>
@@ -964,94 +989,53 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
   )
   const content = (
     <div className={variant === 'app' ? 'space-y-6' : 'mx-auto max-w-7xl space-y-6'}>
-      <section className="overflow-hidden rounded-xl border border-slate-deep bg-slate-deep text-white spity-shadow-medium">
-        <div className="relative spity-texture">
-          <div className="absolute inset-y-0 right-0 hidden w-1/3 bg-coral lg:block" />
-          <div className="relative grid gap-6 px-6 py-7 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
-            <div className="flex items-start gap-4">
-              <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl bg-coral text-white ring-4 ring-white/15">
-                {isGrimpeur ? <UserRound size={34} /> : <UsersRound size={34} />}
-              </div>
-              <div className="min-w-0">
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant={profile.onboardingComplete ? 'success' : 'warning'}>
-                    {profile.onboardingComplete ? 'Profil complet' : 'Onboarding'}
-                  </Badge>
-                  <Badge className="bg-white/10 text-white" variant="default">{profileKind}</Badge>
-                </div>
-                <h1 className="mt-3 text-4xl font-bold text-white">{isSettings ? displayName : title}</h1>
-                <p className="mt-2 max-w-2xl text-white/75">
-                  {isSettings
-                    ? 'Profil grimpe, matériel, compte et signaux de confiance au même endroit.'
-                    : 'Complétez votre identité Spity avant d’entrer dans l’espace connecté.'}
-                </p>
-                {isSettings && isGrimpeur && (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {selectedDisciplines.map((discipline) => (
-                      <span key={discipline} className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white">
-                        {disciplineLabels[discipline] ?? discipline}
-                      </span>
-                    ))}
-                    {topEquipment.map((item) => (
-                      <span key={item.id} className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white">
-                        {item.quantity} x {item.model}
-                      </span>
-                    ))}
-                  </div>
-                )}
+      <section className="rounded-xl border border-border bg-card p-5 spity-shadow-soft">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <div className="flex flex-wrap gap-2">
+              <Badge variant={profile.onboardingComplete ? 'success' : 'warning'}>
+                {profileCompletionLabel}
+              </Badge>
+              <Badge variant="secondary">{profileKind}</Badge>
             </div>
-            </div>
+            <h1 className="mt-3 text-3xl font-bold text-foreground">{isSettings ? 'Profil' : title}</h1>
+            <p className="mt-1 max-w-2xl text-muted-foreground">
+              {isSettings
+                ? 'Une fiche publique, une pratique, un inventaire et un compte. Chaque information a son espace.'
+                : 'Complétez votre identité Spity avant d’entrer dans l’espace connecté.'}
+            </p>
+          </div>
 
-            {variant === 'standalone' && (
-              <div className="flex flex-wrap gap-3 lg:justify-end">
-                {profile.onboardingComplete && (
-                  <Link className="spity-btn bg-white text-slate-deep hover:bg-white/90" href="/app">
-                    Entrer dans l’app
-                  </Link>
-                )}
-                <Link className="spity-btn bg-white/10 text-white hover:bg-white/20" href="/">
-                  Accueil
+          {variant === 'standalone' && (
+            <div className="flex flex-wrap gap-3 lg:justify-end">
+              {profile.onboardingComplete && (
+                <Link className="spity-btn spity-btn--primary" href="/app">
+                  Entrer dans l’app
                 </Link>
+              )}
+              <Link className="spity-btn spity-btn--secondary" href="/">
+                Accueil
+              </Link>
+            </div>
+          )}
+
+          {variant === 'app' && isSettings && (
+            <div className="grid grid-cols-3 gap-3 rounded-xl border border-border bg-muted/40 p-3 text-sm">
+              <div className="min-w-20">
+                <p className="text-muted-foreground">Disciplines</p>
+                <p className="mt-1 text-xl font-bold text-foreground">{selectedDisciplines.length}</p>
               </div>
-            )}
-            {variant === 'app' && (
-              <div className="rounded-xl border border-white/15 bg-white/10 p-4 backdrop-blur">
-                <p className="text-sm font-medium text-white/70">Statut du profil</p>
-                <p className="mt-1 text-3xl font-bold text-white">{profileCompletionLabel}</p>
-                <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
-                  <div className="rounded-lg bg-white/10 p-3">
-                    <p className="text-white/60">Disciplines</p>
-                    <p className="mt-1 text-xl font-bold">{selectedDisciplines.length}</p>
-                  </div>
-                  <div className="rounded-lg bg-white/10 p-3">
-                    <p className="text-white/60">Matériel</p>
-                    <p className="mt-1 text-xl font-bold">{equipmentObjectCount || selectedGear.length}</p>
-                  </div>
-                </div>
+              <div className="min-w-20">
+                <p className="text-muted-foreground">Matériel</p>
+                <p className="mt-1 text-xl font-bold text-foreground">{equipmentObjectCount || selectedGear.length}</p>
               </div>
-            )}
-          </div>
+              <div className="min-w-20">
+                <p className="text-muted-foreground">Profil</p>
+                <p className="mt-1 text-xl font-bold text-foreground">{completedReadinessItems}/{readinessItems.length}</p>
+              </div>
+            </div>
+          )}
         </div>
-
-        {isSettings && (
-          <div className="grid gap-0 border-t border-white/10 bg-card text-foreground md:grid-cols-3">
-            {profileStats.map((stat) => {
-              const Icon = stat.icon
-
-              return (
-                <div key={stat.label} className="flex items-center gap-3 border-b border-border p-5 md:border-b-0 md:border-r last:md:border-r-0">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-coral-light text-coral">
-                    <Icon size={21} />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold text-foreground">{stat.value}</p>
-                    <p className="text-sm text-muted-foreground">{stat.label}</p>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        )}
       </section>
 
       {isSettings && (
