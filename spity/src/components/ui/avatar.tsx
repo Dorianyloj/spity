@@ -1,10 +1,13 @@
-import { forwardRef, ImgHTMLAttributes } from 'react'
+import Image, { type ImageProps } from 'next/image'
+import { forwardRef } from 'react'
 import { User } from 'lucide-react'
 
-export interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
+export interface AvatarProps extends Omit<ImageProps, 'src' | 'alt' | 'width' | 'height' | 'fill'> {
   size?: 'sm' | 'md' | 'lg' | 'xl'
   ring?: boolean
   fallback?: string
+  src?: string
+  alt?: string
 }
 
 const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
@@ -45,11 +48,13 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
         `}
       >
         {src ? (
-          <img
+          <Image
             ref={ref}
             src={src}
             alt={alt}
-            className="w-full h-full object-cover"
+            fill
+            sizes="(max-width: 768px) 64px, 64px"
+            className="object-cover"
             {...props}
           />
         ) : fallback ? (
