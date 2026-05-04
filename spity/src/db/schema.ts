@@ -28,6 +28,37 @@ export const grimpeurProfiles = mysqlTable('grimpeur_profiles', {
   karma: int('karma').default(0),
 })
 
+// === USER EQUIPMENT ===
+export const userEquipment = mysqlTable('user_equipment', {
+  id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+  userId: varchar('user_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
+  category: mysqlEnum('category', [
+    'chaussons',
+    'baudrier',
+    'corde',
+    'degaine',
+    'mousqueton',
+    'assureur',
+    'casque',
+    'crashpad',
+    'longe',
+    'sac',
+    'autre',
+  ]).notNull(),
+  quantity: int('quantity').notNull().default(1),
+  brand: varchar('brand', { length: 80 }),
+  model: varchar('model', { length: 120 }).notNull(),
+  color: varchar('color', { length: 60 }),
+  size: varchar('size', { length: 60 }),
+  lengthMeters: int('length_meters'),
+  diameterMm: varchar('diameter_mm', { length: 20 }),
+  condition: mysqlEnum('condition', ['neuf', 'bon', 'use', 'a_verifier']).notNull().default('bon'),
+  availableForPartner: boolean('available_for_partner').notNull().default(true),
+  notes: varchar('notes', { length: 500 }),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().onUpdateNow(),
+})
+
 // === CLUB PROFILE ===
 export const clubProfiles = mysqlTable('club_profiles', {
   id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
@@ -112,6 +143,7 @@ export const events = mysqlTable('events', {
 export const usersRelations = relations(users, ({ one, many }) => ({
   grimpeurProfile: one(grimpeurProfiles),
   clubProfile: one(clubProfiles),
+  equipment: many(userEquipment),
   posts: many(posts),
 }))
 

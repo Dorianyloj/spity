@@ -8,7 +8,8 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input, Textarea } from '@/components/ui'
 import { createClubProfileBodySchema, createGrimpeurProfileBodySchema, profileMeResponseSchema } from '../schemas'
-import type { CreateClubProfileBody, CreateGrimpeurProfileBody, ProfileMeResponse } from '../schemas'
+import type { CreateClubProfileBody, CreateGrimpeurProfileBody, ProfileMeResponse, UserEquipment } from '../schemas'
+import EquipmentInventorySection from './equipment-inventory-section'
 
 type ProfileFormMode = 'onboarding' | 'settings'
 type ProfileFormVariant = 'standalone' | 'app'
@@ -197,6 +198,10 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
     }
   }
 
+  const updateEquipment = (equipment: UserEquipment[]) => {
+    setProfile((currentProfile) => currentProfile ? { ...currentProfile, equipment } : currentProfile)
+  }
+
   if (isLoadingProfile) {
     if (variant === 'app') {
       return (
@@ -260,10 +265,12 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
   const profileKind = isGrimpeur ? 'Grimpeur' : 'Club'
   const selectedDisciplines = profile.grimpeurProfile?.disciplines ?? []
   const selectedGear = profile.grimpeurProfile?.materiel ?? []
+  const selectedEquipment = profile.equipment
+  const equipmentObjectCount = selectedEquipment.reduce((total, item) => total + item.quantity, 0)
   const profileStats = isGrimpeur
     ? [
         { label: 'Disciplines', value: String(selectedDisciplines.length), icon: Mountain },
-        { label: 'Matériel', value: String(selectedGear.length), icon: ShieldCheck },
+        { label: 'Objets déclarés', value: String(equipmentObjectCount || selectedGear.length), icon: ShieldCheck },
         { label: 'Karma', value: String(profile.grimpeurProfile?.karma ?? 0), icon: Award },
       ]
     : [
@@ -367,15 +374,27 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
                 <div>
                   <p className="text-sm font-medium text-foreground">Matériel disponible</p>
                   <div className="mt-2 flex flex-wrap gap-2">
-                    {selectedGear.map((item) => (
-                      <Badge key={item} variant="secondary">
-                        {gearLabels[item as keyof typeof gearLabels] ?? item}
-                      </Badge>
-                    ))}
+                    {selectedEquipment.length > 0 ? (
+                      selectedEquipment.slice(0, 6).map((item) => (
+                        <Badge key={item.id} variant="secondary">
+                          {item.quantity} x {item.brand ? `${item.brand} ` : ''}{item.model}
+                        </Badge>
+                      ))
+                    ) : (
+                      selectedGear.map((item) => (
+                        <Badge key={item} variant="secondary">
+                          {gearLabels[item as keyof typeof gearLabels] ?? item}
+                        </Badge>
+                      ))
+                    )}
                   </div>
                 </div>
               </CardContent>
             </Card>
+          )}
+
+          {isSettings && isGrimpeur && (
+            <EquipmentInventorySection equipment={selectedEquipment} onEquipmentChange={updateEquipment} />
           )}
 
           {isSettings && !isGrimpeur && profile.clubProfile && (
@@ -405,7 +424,11 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
             <Card hover={false}>
               <CardHeader>
                 <CardTitle>{isSettings ? 'Modifier mes informations' : 'Profil grimpeur'}</CardTitle>
-                <CardDescription>Disciplines, niveaux et matériel disponible pour trouver les bons partenaires.</CardDescription>
+                <CardDescription>
+                  {isSettings
+                    ? 'Disciplines et niveaux utilisés pour trouver les bons partenaires.'
+                    : 'Disciplines, niveaux et matériel disponible pour trouver les bons partenaires.'}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <form className="space-y-6" onSubmit={grimpeurForm.handleSubmit(submitGrimpeurProfile)}>
@@ -442,17 +465,19 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
                     </div>
                   </fieldset>
 
-                  <fieldset className="space-y-3">
-                    <legend className="text-sm font-medium text-foreground">Matériel</legend>
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      {gear.map((item) => (
-                        <label key={item.value} className="flex cursor-pointer items-center gap-2 rounded-lg border border-border p-3 text-sm transition-colors hover:bg-muted">
-                          <input type="checkbox" value={item.value} {...grimpeurForm.register('materiel')} />
-                          {item.label}
-                        </label>
-                      ))}
-                    </div>
-                  </fieldset>
+                  {!isSettings && (
+                    <fieldset className="space-y-3">
+                      <legend className="text-sm font-medium text-foreground">Matériel de base</legend>
+                      <div className="grid gap-3 sm:grid-cols-2">
+                        {gear.map((item) => (
+                          <label key={item.value} className="flex cursor-pointer items-center gap-2 rounded-lg border border-border p-3 text-sm transition-colors hover:bg-muted">
+                            <input type="checkbox" value={item.value} {...grimpeurForm.register('materiel')} />
+                            {item.label}
+                          </label>
+                        ))}
+                      </div>
+                    </fieldset>
+                  )}
 
                   <Button type="submit" isLoading={grimpeurForm.formState.isSubmitting}>
                     {profile.grimpeurProfile ? 'Mettre à jour' : 'Créer le profil'}

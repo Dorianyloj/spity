@@ -7,13 +7,14 @@ import {
 } from 'lucide-react'
 import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle, StatCard } from '@/components/ui'
 import type { AuthUser } from '@/features/auth/schemas'
-import type { ClubProfile, GrimpeurProfile } from '@/features/profile/schemas'
+import type { ClubProfile, GrimpeurProfile, UserEquipment } from '@/features/profile/schemas'
 import AppShell from './app-shell'
 
 type AppDashboardProps = {
   user: AuthUser
   grimpeurProfile: GrimpeurProfile | null
   clubProfile: ClubProfile | null
+  equipment: UserEquipment[]
 }
 
 const nearbyPartners = [
@@ -66,11 +67,12 @@ const getDisplayName = (grimpeurProfile: GrimpeurProfile | null, clubProfile: Cl
   return user.email.split('@')[0]
 }
 
-export default function AppDashboard({ user, grimpeurProfile, clubProfile }: AppDashboardProps) {
+export default function AppDashboard({ user, grimpeurProfile, clubProfile, equipment }: AppDashboardProps) {
   const displayName = getDisplayName(grimpeurProfile, clubProfile, user)
   const isClub = user.role === 'club'
   const disciplineCount = grimpeurProfile?.disciplines.length ?? 0
-  const gearCount = grimpeurProfile?.materiel.length ?? 0
+  const detailedGearCount = equipment.reduce((total, item) => total + item.quantity, 0)
+  const gearCount = detailedGearCount || grimpeurProfile?.materiel.length || 0
 
   return (
     <AppShell activeItem="feed" user={user}>
@@ -84,7 +86,7 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile }: App
 
       <div className="mb-6 grid gap-4 md:grid-cols-3">
         <StatCard value={isClub ? 'Club' : String(disciplineCount)} label={isClub ? 'Type de compte' : 'Disciplines'} icon={Mountain} />
-        <StatCard value={isClub ? '0' : String(gearCount)} label={isClub ? 'Événements publiés' : 'Matériel déclaré'} icon={Route} />
+          <StatCard value={isClub ? '0' : String(gearCount)} label={isClub ? 'Événements publiés' : 'Objets déclarés'} icon={Route} />
         <StatCard value="3" label="Suggestions locales" icon={Compass} />
       </div>
 
@@ -192,11 +194,19 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile }: App
                     <div>
                       <p className="text-sm font-medium text-foreground">Matériel</p>
                       <div className="mt-2 flex flex-wrap gap-2">
-                        {grimpeurProfile.materiel.map((item) => (
-                          <Badge key={item} variant="secondary">
-                            {item}
-                          </Badge>
-                        ))}
+                        {equipment.length > 0 ? (
+                          equipment.slice(0, 4).map((item) => (
+                            <Badge key={item.id} variant="secondary">
+                              {item.quantity} x {item.model}
+                            </Badge>
+                          ))
+                        ) : (
+                          grimpeurProfile.materiel.map((item) => (
+                            <Badge key={item} variant="secondary">
+                              {item}
+                            </Badge>
+                          ))
+                        )}
                       </div>
                     </div>
                   </>
