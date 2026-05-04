@@ -80,6 +80,23 @@ GET  /api/auth/me        # Retourne la session active
 
 Page de test locale : http://localhost:3000/auth
 
+## Profils
+
+Routes disponibles :
+
+```bash
+GET   /api/profile/me        # Retourne le profil de l'utilisateur connecté
+POST  /api/profile/grimpeur  # Crée le profil grimpeur
+PATCH /api/profile/grimpeur  # Met à jour le profil grimpeur
+POST  /api/profile/club      # Crée le profil club
+PATCH /api/profile/club      # Met à jour le profil club
+```
+
+Pages locales :
+
+- http://localhost:3000/profile/onboarding
+- http://localhost:3000/profile/me
+
 ## Qualité
 
 Avant commit, lancer :
