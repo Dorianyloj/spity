@@ -14,6 +14,93 @@ export const updateGrimpeurProfileBodySchema = updateGrimpeurProfileSchema
 export const createClubProfileBodySchema = createClubProfileSchema.omit({ userId: true })
 export const updateClubProfileBodySchema = updateClubProfileSchema
 
+export const climbingEnvironmentSchema = z.enum(['indoor', 'outdoor', 'mixed'])
+export const availabilitySlotSchema = z.enum([
+  'weekday_morning',
+  'weekday_lunch',
+  'weekday_evening',
+  'weekend_morning',
+  'weekend_afternoon',
+  'weekend_evening',
+])
+export const partnerLevelPreferenceSchema = z.enum(['same_or_close', 'stronger', 'beginner_friendly', 'any'])
+export const partnerStyleSchema = z.enum(['relaxed', 'performance', 'training', 'discovery'])
+
+const nullableUrlSchema = z.preprocess((value) => {
+  if (typeof value !== 'string') {
+    return value ?? null
+  }
+
+  const trimmedValue = value.trim()
+
+  return trimmedValue.length > 0 ? trimmedValue : null
+}, z.string().url('URL de photo invalide').max(500).nullable())
+
+const nullableClimbingEnvironmentSchema = z.preprocess((value) => {
+  if (value === '' || value === null || value === undefined) {
+    return null
+  }
+
+  return value
+}, climbingEnvironmentSchema.nullable())
+
+export const partnerSearchSchema = z.object({
+  enabled: z.boolean(),
+  levelPreference: partnerLevelPreferenceSchema,
+  style: partnerStyleSchema,
+  notes: z.preprocess((value) => {
+    if (typeof value !== 'string') {
+      return value ?? null
+    }
+
+    const trimmedValue = value.trim()
+
+    return trimmedValue.length > 0 ? trimmedValue : null
+  }, z.string().max(300).nullable()),
+})
+
+export const defaultPartnerSearch = {
+  enabled: true,
+  levelPreference: 'same_or_close',
+  style: 'relaxed',
+  notes: null,
+} satisfies z.infer<typeof partnerSearchSchema>
+
+export const updatePublicProfileBodySchema = z.object({
+  avatarUrl: nullableUrlSchema,
+  displayName: z.preprocess((value) => {
+    if (typeof value !== 'string') {
+      return value ?? null
+    }
+
+    const trimmedValue = value.trim()
+
+    return trimmedValue.length > 0 ? trimmedValue : null
+  }, z.string().min(2, 'Le nom affiché doit contenir au moins 2 caractères').max(80).nullable()),
+  bio: z.preprocess((value) => {
+    if (typeof value !== 'string') {
+      return value ?? null
+    }
+
+    const trimmedValue = value.trim()
+
+    return trimmedValue.length > 0 ? trimmedValue : null
+  }, z.string().max(500).nullable()),
+  location: z.preprocess((value) => {
+    if (typeof value !== 'string') {
+      return value ?? null
+    }
+
+    const trimmedValue = value.trim()
+
+    return trimmedValue.length > 0 ? trimmedValue : null
+  }, z.string().max(255).nullable()),
+  climbingEnvironment: nullableClimbingEnvironmentSchema,
+  availability: z.array(availabilitySlotSchema).max(6),
+  partnerSearch: partnerSearchSchema,
+  goals: z.array(z.string().trim().min(1).max(80)).max(8),
+})
+
 export const equipmentCategorySchema = z.enum([
   'chaussons',
   'baudrier',
@@ -103,6 +190,13 @@ export const parseEquipmentResponseSchema = z.object({
 export const grimpeurProfileSchema = z.object({
   id: z.string().uuid(),
   userId: z.string().uuid(),
+  displayName: z.string().nullable(),
+  bio: z.string().nullable(),
+  location: z.string().nullable(),
+  climbingEnvironment: climbingEnvironmentSchema.nullable(),
+  availability: z.array(availabilitySlotSchema),
+  partnerSearch: partnerSearchSchema,
+  goals: z.array(z.string()),
   disciplines: z.array(disciplinesEnum),
   niveaux: z.record(z.string(), z.string()),
   materiel: z.array(z.string()),
@@ -135,6 +229,7 @@ export type CreateGrimpeurProfileBody = z.infer<typeof createGrimpeurProfileBody
 export type UpdateGrimpeurProfileBody = z.infer<typeof updateGrimpeurProfileBodySchema>
 export type CreateClubProfileBody = z.infer<typeof createClubProfileBodySchema>
 export type UpdateClubProfileBody = z.infer<typeof updateClubProfileBodySchema>
+export type UpdatePublicProfileBody = z.infer<typeof updatePublicProfileBodySchema>
 export type CreateUserEquipmentBody = z.infer<typeof createUserEquipmentBodySchema>
 export type UpdateUserEquipmentBody = z.infer<typeof updateUserEquipmentBodySchema>
 export type GrimpeurProfile = z.infer<typeof grimpeurProfileSchema>

@@ -22,6 +22,13 @@ export const users = mysqlTable('users', {
 export const grimpeurProfiles = mysqlTable('grimpeur_profiles', {
   id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
   userId: varchar('user_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
+  displayName: varchar('display_name', { length: 80 }),
+  bio: varchar('bio', { length: 500 }),
+  location: varchar('location', { length: 255 }),
+  climbingEnvironment: mysqlEnum('climbing_environment', ['indoor', 'outdoor', 'mixed']),
+  availability: json('availability').$type<string[]>(),
+  partnerSearch: json('partner_search').$type<Record<string, unknown>>(),
+  goals: json('goals').$type<string[]>(),
   disciplines: json('disciplines').$type<string[]>().notNull(),
   niveaux: json('niveaux').$type<Record<string, string>>().notNull(),
   materiel: json('materiel').$type<string[]>().notNull(),

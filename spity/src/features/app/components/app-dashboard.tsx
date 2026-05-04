@@ -64,7 +64,7 @@ const getDisplayName = (grimpeurProfile: GrimpeurProfile | null, clubProfile: Cl
     return clubProfile.nom
   }
 
-  return user.email.split('@')[0]
+  return grimpeurProfile?.displayName ?? user.email.split('@')[0]
 }
 
 export default function AppDashboard({ user, grimpeurProfile, clubProfile, equipment }: AppDashboardProps) {

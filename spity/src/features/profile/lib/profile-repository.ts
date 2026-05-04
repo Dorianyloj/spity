@@ -1,9 +1,10 @@
 import { and, eq } from 'drizzle-orm'
 import { randomUUID } from 'crypto'
 import { db } from '@/db'
-import { clubProfiles, grimpeurProfiles, userEquipment } from '@/db/schema'
+import { clubProfiles, grimpeurProfiles, userEquipment, users } from '@/db/schema'
 import {
   clubProfileSchema,
+  defaultPartnerSearch,
   grimpeurProfileSchema,
   userEquipmentSchema,
   type ClubProfile,
@@ -13,6 +14,7 @@ import {
   type GrimpeurProfile,
   type UpdateClubProfileBody,
   type UpdateGrimpeurProfileBody,
+  type UpdatePublicProfileBody,
   type UpdateUserEquipmentBody,
   type UserEquipment,
 } from '../schemas'
@@ -36,6 +38,9 @@ const parseStoredJson = (value: unknown): unknown => {
 const toGrimpeurProfile = (profile: GrimpeurProfileRow): GrimpeurProfile => {
   return grimpeurProfileSchema.parse({
     ...profile,
+    availability: parseStoredJson(profile.availability) ?? [],
+    partnerSearch: parseStoredJson(profile.partnerSearch) ?? defaultPartnerSearch,
+    goals: parseStoredJson(profile.goals) ?? [],
     disciplines: parseStoredJson(profile.disciplines),
     niveaux: parseStoredJson(profile.niveaux),
     materiel: parseStoredJson(profile.materiel),
@@ -92,6 +97,24 @@ export const createGrimpeurProfile = async (userId: string, values: CreateGrimpe
 
 export const updateGrimpeurProfile = async (userId: string, values: UpdateGrimpeurProfileBody) => {
   await db.update(grimpeurProfiles).set(values).where(eq(grimpeurProfiles.userId, userId))
+
+  return findGrimpeurProfileByUserId(userId)
+}
+
+export const updatePublicGrimpeurProfile = async (userId: string, values: UpdatePublicProfileBody) => {
+  await db.update(users).set({ avatarUrl: values.avatarUrl }).where(eq(users.id, userId))
+  await db
+    .update(grimpeurProfiles)
+    .set({
+      displayName: values.displayName,
+      bio: values.bio,
+      location: values.location,
+      climbingEnvironment: values.climbingEnvironment,
+      availability: values.availability,
+      partnerSearch: values.partnerSearch,
+      goals: values.goals,
+    })
+    .where(eq(grimpeurProfiles.userId, userId))
 
   return findGrimpeurProfileByUserId(userId)
 }

@@ -1,14 +1,14 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Award, CheckCircle2, Mail, MapPin, Mountain, ShieldCheck, UserRound, UsersRound } from 'lucide-react'
+import { Award, Camera, CheckCircle2, Clock, Mail, MapPin, Mountain, SearchCheck, ShieldCheck, Target, UserRound, UsersRound } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input, Textarea } from '@/components/ui'
-import { createClubProfileBodySchema, createGrimpeurProfileBodySchema, profileMeResponseSchema } from '../schemas'
-import type { CreateClubProfileBody, CreateGrimpeurProfileBody, ProfileMeResponse, UserEquipment } from '../schemas'
+import { createClubProfileBodySchema, createGrimpeurProfileBodySchema, defaultPartnerSearch, profileMeResponseSchema, updatePublicProfileBodySchema } from '../schemas'
+import type { CreateClubProfileBody, CreateGrimpeurProfileBody, ProfileMeResponse, UpdatePublicProfileBody, UserEquipment } from '../schemas'
 import EquipmentInventorySection from './equipment-inventory-section'
 
 type ProfileFormMode = 'onboarding' | 'settings'
@@ -50,6 +50,51 @@ const gearLabels = {
   crashpad: 'Crashpad',
 }
 
+const climbingEnvironmentOptions: Array<{ value: NonNullable<UpdatePublicProfileBody['climbingEnvironment']>; label: string }> = [
+  { value: 'indoor', label: 'Salle' },
+  { value: 'outdoor', label: 'Falaise' },
+  { value: 'mixed', label: 'Salle + falaise' },
+]
+
+const availabilityOptions: Array<{ value: UpdatePublicProfileBody['availability'][number]; label: string }> = [
+  { value: 'weekday_morning', label: 'Semaine matin' },
+  { value: 'weekday_lunch', label: 'Semaine midi' },
+  { value: 'weekday_evening', label: 'Semaine soir' },
+  { value: 'weekend_morning', label: 'Week-end matin' },
+  { value: 'weekend_afternoon', label: 'Week-end après-midi' },
+  { value: 'weekend_evening', label: 'Week-end soir' },
+]
+
+const partnerLevelOptions: Array<{ value: UpdatePublicProfileBody['partnerSearch']['levelPreference']; label: string }> = [
+  { value: 'same_or_close', label: 'Niveau proche' },
+  { value: 'stronger', label: 'Plus expérimenté' },
+  { value: 'beginner_friendly', label: 'Débutants bienvenus' },
+  { value: 'any', label: 'Peu importe' },
+]
+
+const partnerStyleOptions: Array<{ value: UpdatePublicProfileBody['partnerSearch']['style']; label: string }> = [
+  { value: 'relaxed', label: 'Session tranquille' },
+  { value: 'performance', label: 'Performance' },
+  { value: 'training', label: 'Entraînement' },
+  { value: 'discovery', label: 'Découverte' },
+]
+
+const goalOptions = [
+  'Trouver des partenaires réguliers',
+  'Progresser en voie',
+  'Progresser en bloc',
+  'Sortir plus en falaise',
+  'Préparer une grande voie',
+  'Reprendre après une pause',
+  'Participer à des événements club',
+  'Partager du matériel',
+]
+
+const climbingEnvironmentLabels = Object.fromEntries(climbingEnvironmentOptions.map((option) => [option.value, option.label]))
+const availabilityLabels = Object.fromEntries(availabilityOptions.map((option) => [option.value, option.label]))
+const partnerLevelLabels = Object.fromEntries(partnerLevelOptions.map((option) => [option.value, option.label]))
+const partnerStyleLabels = Object.fromEntries(partnerStyleOptions.map((option) => [option.value, option.label]))
+
 const grades = ['4a', '4b', '4c', '5a', '5b', '5c', '6a', '6a+', '6b', '6b+', '6c', '6c+', '7a', '7a+', '7b', '7b+', '7c', '7c+', '8a', '8a+', '8b', '8b+', '8c', '8c+']
 
 const grimpeurDefaultValues: CreateGrimpeurProfileBody = {
@@ -67,6 +112,17 @@ const clubDefaultValues: CreateClubProfileBody = {
   bio: '',
   location: '',
   ffmeNum: '',
+}
+
+const publicProfileDefaultValues: UpdatePublicProfileBody = {
+  avatarUrl: null,
+  displayName: null,
+  bio: null,
+  location: null,
+  climbingEnvironment: 'mixed',
+  availability: [],
+  partnerSearch: defaultPartnerSearch,
+  goals: [],
 }
 
 const parseApiError = async (response: Response) => {
@@ -105,11 +161,26 @@ const mergeClubDefaults = (profile: ProfileMeResponse['clubProfile']): CreateClu
   }
 }
 
+const mergePublicProfileDefaults = (profile: ProfileMeResponse): UpdatePublicProfileBody => {
+  return {
+    avatarUrl: profile.user.avatarUrl,
+    displayName: profile.grimpeurProfile?.displayName ?? profile.user.email.split('@')[0],
+    bio: profile.grimpeurProfile?.bio ?? null,
+    location: profile.grimpeurProfile?.location ?? null,
+    climbingEnvironment: profile.grimpeurProfile?.climbingEnvironment ?? 'mixed',
+    availability: profile.grimpeurProfile?.availability ?? [],
+    partnerSearch: profile.grimpeurProfile?.partnerSearch ?? defaultPartnerSearch,
+    goals: profile.grimpeurProfile?.goals ?? [],
+  }
+}
+
 export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFormProps) {
   const [profile, setProfile] = useState<ProfileMeResponse | null>(null)
   const [isLoadingProfile, setIsLoadingProfile] = useState(true)
   const [feedback, setFeedback] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<ProfileTab>('overview')
+  const [publicProfileDraft, setPublicProfileDraft] = useState<UpdatePublicProfileBody>(publicProfileDefaultValues)
+  const [isSavingPublicProfile, setIsSavingPublicProfile] = useState(false)
 
   const grimpeurForm = useForm<CreateGrimpeurProfileBody>({
     resolver: zodResolver(createGrimpeurProfileBodySchema),
@@ -141,6 +212,7 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
         setProfile(parsedData.data)
         grimpeurForm.reset(mergeGrimpeurDefaults(parsedData.data.grimpeurProfile))
         clubForm.reset(mergeClubDefaults(parsedData.data.clubProfile))
+        setPublicProfileDraft(mergePublicProfileDefaults(parsedData.data))
         setIsLoadingProfile(false)
       }
     }
@@ -204,6 +276,76 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
     setProfile((currentProfile) => currentProfile ? { ...currentProfile, equipment } : currentProfile)
   }
 
+  const updatePublicProfileDraft = <Field extends keyof UpdatePublicProfileBody>(
+    field: Field,
+    value: UpdatePublicProfileBody[Field]
+  ) => {
+    setPublicProfileDraft((currentDraft) => ({ ...currentDraft, [field]: value }))
+  }
+
+  const toggleAvailability = (availability: UpdatePublicProfileBody['availability'][number]) => {
+    setPublicProfileDraft((currentDraft) => ({
+      ...currentDraft,
+      availability: currentDraft.availability.includes(availability)
+        ? currentDraft.availability.filter((item) => item !== availability)
+        : [...currentDraft.availability, availability],
+    }))
+  }
+
+  const toggleGoal = (goal: string) => {
+    setPublicProfileDraft((currentDraft) => ({
+      ...currentDraft,
+      goals: currentDraft.goals.includes(goal)
+        ? currentDraft.goals.filter((item) => item !== goal)
+        : [...currentDraft.goals, goal],
+    }))
+  }
+
+  const updatePartnerSearch = <Field extends keyof UpdatePublicProfileBody['partnerSearch']>(
+    field: Field,
+    value: UpdatePublicProfileBody['partnerSearch'][Field]
+  ) => {
+    setPublicProfileDraft((currentDraft) => ({
+      ...currentDraft,
+      partnerSearch: {
+        ...currentDraft.partnerSearch,
+        [field]: value,
+      },
+    }))
+  }
+
+  const submitPublicProfile = async () => {
+    setFeedback(null)
+    const parsedDraft = updatePublicProfileBodySchema.safeParse(publicProfileDraft)
+
+    if (!parsedDraft.success) {
+      setFeedback(parsedDraft.error.issues[0]?.message ?? 'Profil public invalide')
+      return
+    }
+
+    setIsSavingPublicProfile(true)
+    const response = await fetch('/api/profile/public', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(parsedDraft.data),
+    })
+    setIsSavingPublicProfile(false)
+
+    if (!response.ok) {
+      setFeedback(await parseApiError(response))
+      return
+    }
+
+    const data: unknown = await response.json()
+    const parsedData = profileMeResponseSchema.safeParse(data)
+
+    if (parsedData.success) {
+      setProfile(parsedData.data)
+      setPublicProfileDraft(mergePublicProfileDefaults(parsedData.data))
+      setFeedback('Profil public mis à jour')
+    }
+  }
+
   if (isLoadingProfile) {
     if (variant === 'app') {
       return (
@@ -263,7 +405,7 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
   const isGrimpeur = profile.user.role === 'grimpeur'
   const title = mode === 'onboarding' ? 'Compléter votre profil' : 'Mon profil'
   const isSettings = mode === 'settings'
-  const displayName = profile.clubProfile?.nom ?? profile.user.email.split('@')[0]
+  const displayName = profile.grimpeurProfile?.displayName ?? profile.clubProfile?.nom ?? profile.user.email.split('@')[0]
   const profileKind = isGrimpeur ? 'Grimpeur' : 'Club'
   const selectedDisciplines = profile.grimpeurProfile?.disciplines ?? []
   const selectedGear = profile.grimpeurProfile?.materiel ?? []
@@ -288,6 +430,248 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
   ]
   const topEquipment = selectedEquipment.slice(0, 3)
   const profileCompletionLabel = profile.onboardingComplete ? 'Complet' : 'À finaliser'
+  const environmentLabel = profile.grimpeurProfile?.climbingEnvironment
+    ? climbingEnvironmentLabels[profile.grimpeurProfile.climbingEnvironment]
+    : 'À préciser'
+  const publicProfileCard = isSettings && isGrimpeur && profile.grimpeurProfile ? (
+    <Card hover={false} className="overflow-hidden">
+      <div className="h-20 bg-slate-deep spity-texture" />
+      <CardContent className="-mt-10 space-y-5">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex items-end gap-4">
+            <div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-xl border-4 border-card bg-coral-light text-coral spity-shadow-soft">
+              {profile.user.avatarUrl ? (
+                <div
+                  aria-label={`Photo de profil de ${displayName}`}
+                  className="h-full w-full bg-cover bg-center"
+                  role="img"
+                  style={{ backgroundImage: `url(${profile.user.avatarUrl})` }}
+                />
+              ) : (
+                <UserRound size={38} />
+              )}
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-foreground">{displayName}</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {profile.grimpeurProfile.location ?? 'Localisation à compléter'} · {environmentLabel}
+              </p>
+            </div>
+          </div>
+          <Badge variant={profile.grimpeurProfile.partnerSearch.enabled ? 'success' : 'secondary'}>
+            {profile.grimpeurProfile.partnerSearch.enabled ? 'Recherche partenaire' : 'Pas en recherche'}
+          </Badge>
+        </div>
+
+        <p className="text-foreground">
+          {profile.grimpeurProfile.bio ?? 'Ajoutez une bio courte pour présenter votre pratique, vos lieux habituels et ce que vous cherchez sur Spity.'}
+        </p>
+
+        <div className="grid gap-3 md:grid-cols-3">
+          <div className="rounded-lg border border-border p-4">
+            <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+              <Clock size={16} />
+              Disponibilités
+            </div>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {profile.grimpeurProfile.availability.length > 0 ? (
+                profile.grimpeurProfile.availability.map((availability) => (
+                  <Badge key={availability} variant="secondary">{availabilityLabels[availability]}</Badge>
+                ))
+              ) : (
+                <span className="text-sm text-muted-foreground">À compléter</span>
+              )}
+            </div>
+          </div>
+          <div className="rounded-lg border border-border p-4">
+            <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+              <Target size={16} />
+              Objectifs
+            </div>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {profile.grimpeurProfile.goals.length > 0 ? (
+                profile.grimpeurProfile.goals.slice(0, 3).map((goal) => (
+                  <Badge key={goal} variant="primary">{goal}</Badge>
+                ))
+              ) : (
+                <span className="text-sm text-muted-foreground">À définir</span>
+              )}
+            </div>
+          </div>
+          <div className="rounded-lg border border-border p-4">
+            <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+              <SearchCheck size={16} />
+              Matching
+            </div>
+            <p className="mt-3 text-sm font-medium text-foreground">
+              {partnerLevelLabels[profile.grimpeurProfile.partnerSearch.levelPreference]}
+            </p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {partnerStyleLabels[profile.grimpeurProfile.partnerSearch.style]}
+            </p>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  ) : null
+  const publicIdentityEditorCard = isSettings && isGrimpeur ? (
+    <Card hover={false}>
+      <CardHeader>
+        <CardTitle>Fiche publique</CardTitle>
+        <CardDescription>Les informations visibles pour les futurs partenaires.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form className="space-y-5" onSubmit={(event) => {
+          event.preventDefault()
+          void submitPublicProfile()
+        }}>
+          <div className="grid gap-4 md:grid-cols-2">
+            <Input
+              label="Photo de profil URL"
+              placeholder="https://..."
+              value={publicProfileDraft.avatarUrl ?? ''}
+              icon={<Camera size={17} />}
+              onChange={(event) => updatePublicProfileDraft('avatarUrl', event.target.value)}
+            />
+            <Input
+              label="Nom affiché"
+              placeholder="Dorian J."
+              value={publicProfileDraft.displayName ?? ''}
+              icon={<UserRound size={17} />}
+              onChange={(event) => updatePublicProfileDraft('displayName', event.target.value)}
+            />
+            <Input
+              label="Localisation"
+              placeholder="Lyon, Grenoble, Chambéry..."
+              value={publicProfileDraft.location ?? ''}
+              icon={<MapPin size={17} />}
+              onChange={(event) => updatePublicProfileDraft('location', event.target.value)}
+            />
+            <label className="space-y-1.5 text-sm font-medium text-foreground">
+              Environnement principal
+              <select
+                className="spity-input"
+                value={publicProfileDraft.climbingEnvironment ?? ''}
+                onChange={(event) => updatePublicProfileDraft('climbingEnvironment', event.target.value as UpdatePublicProfileBody['climbingEnvironment'])}
+              >
+                <option value="">À préciser</option>
+                {climbingEnvironmentOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+
+          <Textarea
+            label="Bio courte"
+            placeholder="Présente ta pratique, tes lieux habituels, ton style de session..."
+            value={publicProfileDraft.bio ?? ''}
+            onChange={(event) => updatePublicProfileDraft('bio', event.target.value)}
+          />
+
+          <fieldset className="space-y-3">
+            <legend className="text-sm font-medium text-foreground">Disponibilités</legend>
+            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+              {availabilityOptions.map((option) => (
+                <label key={option.value} className="flex cursor-pointer items-center gap-2 rounded-lg border border-border p-3 text-sm transition-colors hover:bg-muted">
+                  <input
+                    checked={publicProfileDraft.availability.includes(option.value)}
+                    type="checkbox"
+                    onChange={() => toggleAvailability(option.value)}
+                  />
+                  {option.label}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset className="space-y-3">
+            <legend className="text-sm font-medium text-foreground">Objectifs</legend>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {goalOptions.map((goal) => (
+                <label key={goal} className="flex cursor-pointer items-center gap-2 rounded-lg border border-border p-3 text-sm transition-colors hover:bg-muted">
+                  <input
+                    checked={publicProfileDraft.goals.includes(goal)}
+                    type="checkbox"
+                    onChange={() => toggleGoal(goal)}
+                  />
+                  {goal}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <Button type="submit" isLoading={isSavingPublicProfile}>
+            Mettre à jour la fiche publique
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
+  ) : null
+  const matchingPreferencesCard = isSettings && isGrimpeur ? (
+    <Card hover={false}>
+      <CardHeader>
+        <CardTitle>Préférences de matching</CardTitle>
+        <CardDescription>Ces signaux aideront Spity à proposer les bons partenaires.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form className="space-y-5" onSubmit={(event) => {
+          event.preventDefault()
+          void submitPublicProfile()
+        }}>
+          <label className="flex items-center gap-2 rounded-lg border border-border p-3 text-sm">
+            <input
+              checked={publicProfileDraft.partnerSearch.enabled}
+              type="checkbox"
+              onChange={(event) => updatePartnerSearch('enabled', event.target.checked)}
+            />
+            Je recherche actuellement des partenaires
+          </label>
+          <div className="grid gap-4 md:grid-cols-2">
+            <label className="space-y-1.5 text-sm font-medium text-foreground">
+              Niveau recherché
+              <select
+                className="spity-input"
+                value={publicProfileDraft.partnerSearch.levelPreference}
+                onChange={(event) => updatePartnerSearch('levelPreference', event.target.value as UpdatePublicProfileBody['partnerSearch']['levelPreference'])}
+              >
+                {partnerLevelOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="space-y-1.5 text-sm font-medium text-foreground">
+              Style de session
+              <select
+                className="spity-input"
+                value={publicProfileDraft.partnerSearch.style}
+                onChange={(event) => updatePartnerSearch('style', event.target.value as UpdatePublicProfileBody['partnerSearch']['style'])}
+              >
+                {partnerStyleOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <Textarea
+            label="Note partenaire"
+            placeholder="Ex: disponible pour assurer en voie, ok débutants, je préfère les sessions calmes..."
+            value={publicProfileDraft.partnerSearch.notes ?? ''}
+            onChange={(event) => updatePartnerSearch('notes', event.target.value)}
+          />
+          <Button type="submit" isLoading={isSavingPublicProfile}>
+            Enregistrer les préférences
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
+  ) : null
   const summaryCard = isSettings && isGrimpeur && profile.grimpeurProfile ? (
     <Card hover={false}>
       <CardHeader>
@@ -523,6 +907,8 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
       {activeTab === 'overview' && (
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
           <section className="space-y-6">
+            {publicProfileCard}
+            {publicIdentityEditorCard}
             {summaryCard}
             {clubSummaryCard}
           </section>
@@ -535,7 +921,10 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
 
       {activeTab === 'practice' && (
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
-          <section>{profileFormCard}</section>
+          <section className="space-y-6">
+            {profileFormCard}
+            {matchingPreferencesCard}
+          </section>
           <aside className="space-y-6">
             {summaryCard}
             {purposeCard}
