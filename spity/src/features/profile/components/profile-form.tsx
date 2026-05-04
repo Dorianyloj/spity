@@ -13,6 +13,7 @@ import EquipmentInventorySection from './equipment-inventory-section'
 
 type ProfileFormMode = 'onboarding' | 'settings'
 type ProfileFormVariant = 'standalone' | 'app'
+type ProfileTab = 'overview' | 'practice' | 'equipment' | 'account'
 
 type ProfileFormProps = {
   mode: ProfileFormMode
@@ -108,6 +109,7 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
   const [profile, setProfile] = useState<ProfileMeResponse | null>(null)
   const [isLoadingProfile, setIsLoadingProfile] = useState(true)
   const [feedback, setFeedback] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState<ProfileTab>('overview')
 
   const grimpeurForm = useForm<CreateGrimpeurProfileBody>({
     resolver: zodResolver(createGrimpeurProfileBodySchema),
@@ -278,6 +280,293 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
         { label: 'FFME', value: profile.clubProfile?.ffmeNum ? 'Oui' : 'Non', icon: ShieldCheck },
         { label: 'Événements', value: '0', icon: Award },
       ]
+  const tabs: Array<{ id: ProfileTab; label: string; icon: typeof UserRound; disabled?: boolean }> = [
+    { id: 'overview', label: 'Aperçu', icon: UserRound },
+    { id: 'practice', label: isGrimpeur ? 'Pratique' : 'Club', icon: Mountain },
+    { id: 'equipment', label: 'Matériel', icon: ShieldCheck, disabled: !isGrimpeur },
+    { id: 'account', label: 'Compte', icon: Mail },
+  ]
+  const summaryCard = isSettings && isGrimpeur && profile.grimpeurProfile ? (
+    <Card hover={false}>
+      <CardHeader>
+        <CardTitle>Résumé grimpeur</CardTitle>
+        <CardDescription>Vue finale de votre profil tel qu’il sera utilisé dans le matching.</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-5">
+        <div>
+          <p className="text-sm font-medium text-foreground">Disciplines</p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {selectedDisciplines.map((discipline) => (
+              <Badge key={discipline} variant="primary">
+                {disciplineLabels[discipline] ?? discipline}
+              </Badge>
+            ))}
+          </div>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-3">
+          {selectedDisciplines.map((discipline) => (
+            <div key={discipline} className="rounded-lg border border-border p-4">
+              <p className="text-sm text-muted-foreground">{disciplineLabels[discipline] ?? discipline}</p>
+              <p className="mt-1 text-2xl font-bold text-foreground">
+                {profile.grimpeurProfile?.niveaux[discipline] ?? 'N/A'}
+              </p>
+            </div>
+          ))}
+        </div>
+        <div>
+          <p className="text-sm font-medium text-foreground">Matériel disponible</p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {selectedEquipment.length > 0 ? (
+              selectedEquipment.slice(0, 6).map((item) => (
+                <Badge key={item.id} variant="secondary">
+                  {item.quantity} x {item.brand ? `${item.brand} ` : ''}{item.model}
+                </Badge>
+              ))
+            ) : (
+              selectedGear.map((item) => (
+                <Badge key={item} variant="secondary">
+                  {gearLabels[item as keyof typeof gearLabels] ?? item}
+                </Badge>
+              ))
+            )}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  ) : null
+  const clubSummaryCard = isSettings && !isGrimpeur && profile.clubProfile ? (
+    <Card hover={false}>
+      <CardHeader>
+        <CardTitle>Résumé club</CardTitle>
+        <CardDescription>Informations visibles pour les grimpeurs et futurs membres.</CardDescription>
+      </CardHeader>
+      <CardContent className="grid gap-4 sm:grid-cols-2">
+        <div className="rounded-lg border border-border p-4">
+          <p className="text-sm text-muted-foreground">Localisation</p>
+          <p className="mt-1 font-medium text-foreground">{profile.clubProfile.location ?? 'À compléter'}</p>
+        </div>
+        <div className="rounded-lg border border-border p-4">
+          <p className="text-sm text-muted-foreground">Affiliation FFME</p>
+          <p className="mt-1 font-medium text-foreground">{profile.clubProfile.ffmeNum ?? 'Non renseignée'}</p>
+        </div>
+        <div className="rounded-lg border border-border p-4 sm:col-span-2">
+          <p className="text-sm text-muted-foreground">Bio</p>
+          <p className="mt-1 text-foreground">{profile.clubProfile.bio ?? 'Aucune bio renseignée.'}</p>
+        </div>
+      </CardContent>
+    </Card>
+  ) : null
+  const profileFormCard = isGrimpeur ? (
+    <Card hover={false}>
+      <CardHeader>
+        <CardTitle>{isSettings ? 'Modifier ma pratique' : 'Profil grimpeur'}</CardTitle>
+        <CardDescription>
+          {isSettings
+            ? 'Disciplines et niveaux utilisés pour trouver les bons partenaires.'
+            : 'Disciplines, niveaux et matériel disponible pour trouver les bons partenaires.'}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form className="space-y-6" onSubmit={grimpeurForm.handleSubmit(submitGrimpeurProfile)}>
+          <fieldset className="space-y-3">
+            <legend className="text-sm font-medium text-foreground">Disciplines</legend>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {disciplines.map((discipline) => (
+                <label key={discipline.value} className="flex cursor-pointer items-center gap-2 rounded-lg border border-border p-3 text-sm transition-colors hover:bg-muted">
+                  <input type="checkbox" value={discipline.value} {...grimpeurForm.register('disciplines')} />
+                  {discipline.label}
+                </label>
+              ))}
+            </div>
+            {grimpeurForm.formState.errors.disciplines?.message && (
+              <p className="text-xs text-destructive">{grimpeurForm.formState.errors.disciplines.message}</p>
+            )}
+          </fieldset>
+
+          <fieldset className="space-y-3">
+            <legend className="text-sm font-medium text-foreground">Niveaux par discipline</legend>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {disciplines.map((discipline) => (
+                <label key={discipline.value} className="space-y-1.5 text-sm font-medium text-foreground">
+                  {discipline.label}
+                  <select className="spity-input" {...grimpeurForm.register(`niveaux.${discipline.value}`)}>
+                    {grades.map((grade) => (
+                      <option key={grade} value={grade}>
+                        {grade}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          {!isSettings && (
+            <fieldset className="space-y-3">
+              <legend className="text-sm font-medium text-foreground">Matériel de base</legend>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {gear.map((item) => (
+                  <label key={item.value} className="flex cursor-pointer items-center gap-2 rounded-lg border border-border p-3 text-sm transition-colors hover:bg-muted">
+                    <input type="checkbox" value={item.value} {...grimpeurForm.register('materiel')} />
+                    {item.label}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+          )}
+
+          <Button type="submit" isLoading={grimpeurForm.formState.isSubmitting}>
+            {profile.grimpeurProfile ? 'Mettre à jour' : 'Créer le profil'}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
+  ) : (
+    <Card hover={false}>
+      <CardHeader>
+        <CardTitle>{isSettings ? 'Modifier les informations club' : 'Profil club'}</CardTitle>
+        <CardDescription>Identité, localisation et affiliation FFME pour rendre le club visible.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form className="space-y-4" onSubmit={clubForm.handleSubmit(submitClubProfile)}>
+          <Input
+            label="Nom du club"
+            error={clubForm.formState.errors.nom?.message}
+            {...clubForm.register('nom')}
+          />
+          <Input
+            label="Localisation"
+            placeholder="Lyon, Grenoble, Chambéry..."
+            error={clubForm.formState.errors.location?.message}
+            {...clubForm.register('location')}
+          />
+          <Input
+            label="Numéro FFME"
+            error={clubForm.formState.errors.ffmeNum?.message}
+            {...clubForm.register('ffmeNum')}
+          />
+          <Textarea
+            label="Bio"
+            error={clubForm.formState.errors.bio?.message}
+            {...clubForm.register('bio')}
+          />
+          <Button type="submit" isLoading={clubForm.formState.isSubmitting}>
+            {profile.clubProfile ? 'Mettre à jour' : 'Créer le profil'}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
+  )
+  const accountCard = (
+    <Card hover={false}>
+      <CardHeader>
+        <CardTitle>Compte</CardTitle>
+        <CardDescription>{profileKind} connecté</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4 text-sm">
+        <div className="flex items-start gap-3 rounded-lg border border-border p-3">
+          <Mail className="mt-0.5 text-muted-foreground" size={18} />
+          <div className="min-w-0">
+            <p className="font-medium text-foreground">Email</p>
+            <p className="truncate text-muted-foreground">{profile.user.email}</p>
+          </div>
+        </div>
+        <div className="flex items-center justify-between rounded-lg border border-border p-3">
+          <span className="text-muted-foreground">Type</span>
+          <Badge variant="secondary">{profile.user.role}</Badge>
+        </div>
+        <div className="flex items-center justify-between rounded-lg border border-border p-3">
+          <span className="text-muted-foreground">Email vérifié</span>
+          <Badge variant={profile.user.emailVerified ? 'success' : 'warning'}>
+            {profile.user.emailVerified ? 'Oui' : 'Non'}
+          </Badge>
+        </div>
+        {profile.onboardingComplete && variant === 'standalone' && (
+          <Link className="spity-btn spity-btn--secondary w-full" href="/app">
+            Entrer dans l’app
+          </Link>
+        )}
+      </CardContent>
+    </Card>
+  )
+  const purposeCard = (
+    <Card hover={false}>
+      <CardHeader>
+        <CardTitle>Ce profil servira à</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-3 text-sm">
+        <div className="flex gap-3">
+          <CheckCircle2 className="mt-0.5 text-success" size={18} />
+          <span>Améliorer le matching avec des partenaires compatibles.</span>
+        </div>
+        <div className="flex gap-3">
+          <MapPin className="mt-0.5 text-success" size={18} />
+          <span>Préparer les recommandations de lieux et d’événements locaux.</span>
+        </div>
+        <div className="flex gap-3">
+          <ShieldCheck className="mt-0.5 text-success" size={18} />
+          <span>Rendre les sessions plus fiables pour la communauté.</span>
+        </div>
+      </CardContent>
+    </Card>
+  )
+  const settingsTabContent = (
+    <section className="space-y-6">
+      {feedback && (
+        <div className="rounded-lg border border-border bg-card p-4 text-sm font-medium text-foreground">
+          {feedback}
+        </div>
+      )}
+
+      {activeTab === 'overview' && (
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
+          <section className="space-y-6">
+            {summaryCard}
+            {clubSummaryCard}
+          </section>
+          <aside className="space-y-6">
+            {accountCard}
+            {purposeCard}
+          </aside>
+        </div>
+      )}
+
+      {activeTab === 'practice' && (
+        <div className="mx-auto max-w-4xl space-y-6">
+          {profileFormCard}
+        </div>
+      )}
+
+      {activeTab === 'equipment' && isGrimpeur && (
+        <EquipmentInventorySection equipment={selectedEquipment} onEquipmentChange={updateEquipment} />
+      )}
+
+      {activeTab === 'account' && (
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
+          <section className="space-y-6">
+            {accountCard}
+          </section>
+          <aside>{purposeCard}</aside>
+        </div>
+      )}
+    </section>
+  )
+  const onboardingContent = (
+    <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
+      <section className="space-y-6">
+        {feedback && (
+          <div className="rounded-lg border border-border bg-card p-4 text-sm font-medium text-foreground">
+            {feedback}
+          </div>
+        )}
+        {profileFormCard}
+      </section>
+      <aside className="space-y-6">
+        {accountCard}
+        {purposeCard}
+      </aside>
+    </div>
+  )
   const content = (
     <div className={variant === 'app' ? 'space-y-6' : 'mx-auto max-w-6xl space-y-6'}>
       <section className="overflow-hidden rounded-xl border border-border bg-card">
@@ -336,246 +625,32 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
         )}
       </section>
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
-        <section className="space-y-6">
-          {feedback && (
-            <div className="rounded-lg border border-border bg-card p-4 text-sm font-medium text-foreground">
-              {feedback}
-            </div>
-          )}
+      {isSettings && (
+        <nav className="flex gap-2 overflow-x-auto rounded-xl border border-border bg-card p-2" aria-label="Navigation du profil">
+          {tabs.map((tab) => {
+            const Icon = tab.icon
+            const isActive = activeTab === tab.id
 
-          {isSettings && isGrimpeur && profile.grimpeurProfile && (
-            <Card hover={false}>
-              <CardHeader>
-                <CardTitle>Résumé grimpeur</CardTitle>
-                <CardDescription>Vue finale de votre profil tel qu’il sera utilisé dans le matching.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-5">
-                <div>
-                  <p className="text-sm font-medium text-foreground">Disciplines</p>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {selectedDisciplines.map((discipline) => (
-                      <Badge key={discipline} variant="primary">
-                        {disciplineLabels[discipline] ?? discipline}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-                <div className="grid gap-3 sm:grid-cols-3">
-                  {selectedDisciplines.map((discipline) => (
-                    <div key={discipline} className="rounded-lg border border-border p-4">
-                      <p className="text-sm text-muted-foreground">{disciplineLabels[discipline] ?? discipline}</p>
-                      <p className="mt-1 text-2xl font-bold text-foreground">
-                        {profile.grimpeurProfile?.niveaux[discipline] ?? 'N/A'}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-foreground">Matériel disponible</p>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {selectedEquipment.length > 0 ? (
-                      selectedEquipment.slice(0, 6).map((item) => (
-                        <Badge key={item.id} variant="secondary">
-                          {item.quantity} x {item.brand ? `${item.brand} ` : ''}{item.model}
-                        </Badge>
-                      ))
-                    ) : (
-                      selectedGear.map((item) => (
-                        <Badge key={item} variant="secondary">
-                          {gearLabels[item as keyof typeof gearLabels] ?? item}
-                        </Badge>
-                      ))
-                    )}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          )}
+            return (
+              <button
+                key={tab.id}
+                aria-current={isActive ? 'page' : undefined}
+                className={`flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                  isActive ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                } ${tab.disabled ? 'cursor-not-allowed opacity-50' : ''}`}
+                disabled={tab.disabled}
+                type="button"
+                onClick={() => setActiveTab(tab.id)}
+              >
+                <Icon size={17} />
+                {tab.label}
+              </button>
+            )
+          })}
+        </nav>
+      )}
 
-          {isSettings && isGrimpeur && (
-            <EquipmentInventorySection equipment={selectedEquipment} onEquipmentChange={updateEquipment} />
-          )}
-
-          {isSettings && !isGrimpeur && profile.clubProfile && (
-            <Card hover={false}>
-              <CardHeader>
-                <CardTitle>Résumé club</CardTitle>
-                <CardDescription>Informations visibles pour les grimpeurs et futurs membres.</CardDescription>
-              </CardHeader>
-              <CardContent className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-lg border border-border p-4">
-                  <p className="text-sm text-muted-foreground">Localisation</p>
-                  <p className="mt-1 font-medium text-foreground">{profile.clubProfile.location ?? 'À compléter'}</p>
-                </div>
-                <div className="rounded-lg border border-border p-4">
-                  <p className="text-sm text-muted-foreground">Affiliation FFME</p>
-                  <p className="mt-1 font-medium text-foreground">{profile.clubProfile.ffmeNum ?? 'Non renseignée'}</p>
-                </div>
-                <div className="rounded-lg border border-border p-4 sm:col-span-2">
-                  <p className="text-sm text-muted-foreground">Bio</p>
-                  <p className="mt-1 text-foreground">{profile.clubProfile.bio ?? 'Aucune bio renseignée.'}</p>
-                </div>
-              </CardContent>
-            </Card>
-          )}
-
-          {isGrimpeur ? (
-            <Card hover={false}>
-              <CardHeader>
-                <CardTitle>{isSettings ? 'Modifier mes informations' : 'Profil grimpeur'}</CardTitle>
-                <CardDescription>
-                  {isSettings
-                    ? 'Disciplines et niveaux utilisés pour trouver les bons partenaires.'
-                    : 'Disciplines, niveaux et matériel disponible pour trouver les bons partenaires.'}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form className="space-y-6" onSubmit={grimpeurForm.handleSubmit(submitGrimpeurProfile)}>
-                  <fieldset className="space-y-3">
-                    <legend className="text-sm font-medium text-foreground">Disciplines</legend>
-                    <div className="grid gap-3 sm:grid-cols-3">
-                      {disciplines.map((discipline) => (
-                        <label key={discipline.value} className="flex cursor-pointer items-center gap-2 rounded-lg border border-border p-3 text-sm transition-colors hover:bg-muted">
-                          <input type="checkbox" value={discipline.value} {...grimpeurForm.register('disciplines')} />
-                          {discipline.label}
-                        </label>
-                      ))}
-                    </div>
-                    {grimpeurForm.formState.errors.disciplines?.message && (
-                      <p className="text-xs text-destructive">{grimpeurForm.formState.errors.disciplines.message}</p>
-                    )}
-                  </fieldset>
-
-                  <fieldset className="space-y-3">
-                    <legend className="text-sm font-medium text-foreground">Niveaux par discipline</legend>
-                    <div className="grid gap-3 sm:grid-cols-3">
-                      {disciplines.map((discipline) => (
-                        <label key={discipline.value} className="space-y-1.5 text-sm font-medium text-foreground">
-                          {discipline.label}
-                          <select className="spity-input" {...grimpeurForm.register(`niveaux.${discipline.value}`)}>
-                            {grades.map((grade) => (
-                              <option key={grade} value={grade}>
-                                {grade}
-                              </option>
-                            ))}
-                          </select>
-                        </label>
-                      ))}
-                    </div>
-                  </fieldset>
-
-                  {!isSettings && (
-                    <fieldset className="space-y-3">
-                      <legend className="text-sm font-medium text-foreground">Matériel de base</legend>
-                      <div className="grid gap-3 sm:grid-cols-2">
-                        {gear.map((item) => (
-                          <label key={item.value} className="flex cursor-pointer items-center gap-2 rounded-lg border border-border p-3 text-sm transition-colors hover:bg-muted">
-                            <input type="checkbox" value={item.value} {...grimpeurForm.register('materiel')} />
-                            {item.label}
-                          </label>
-                        ))}
-                      </div>
-                    </fieldset>
-                  )}
-
-                  <Button type="submit" isLoading={grimpeurForm.formState.isSubmitting}>
-                    {profile.grimpeurProfile ? 'Mettre à jour' : 'Créer le profil'}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          ) : (
-            <Card hover={false}>
-              <CardHeader>
-                <CardTitle>{isSettings ? 'Modifier les informations club' : 'Profil club'}</CardTitle>
-                <CardDescription>Identité, localisation et affiliation FFME pour rendre le club visible.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form className="space-y-4" onSubmit={clubForm.handleSubmit(submitClubProfile)}>
-                  <Input
-                    label="Nom du club"
-                    error={clubForm.formState.errors.nom?.message}
-                    {...clubForm.register('nom')}
-                  />
-                  <Input
-                    label="Localisation"
-                    placeholder="Lyon, Grenoble, Chambéry..."
-                    error={clubForm.formState.errors.location?.message}
-                    {...clubForm.register('location')}
-                  />
-                  <Input
-                    label="Numéro FFME"
-                    error={clubForm.formState.errors.ffmeNum?.message}
-                    {...clubForm.register('ffmeNum')}
-                  />
-                  <Textarea
-                    label="Bio"
-                    error={clubForm.formState.errors.bio?.message}
-                    {...clubForm.register('bio')}
-                  />
-                  <Button type="submit" isLoading={clubForm.formState.isSubmitting}>
-                    {profile.clubProfile ? 'Mettre à jour' : 'Créer le profil'}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          )}
-        </section>
-
-        <aside className="space-y-6">
-          <Card hover={false}>
-            <CardHeader>
-              <CardTitle>Compte</CardTitle>
-              <CardDescription>{profileKind} connecté</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4 text-sm">
-              <div className="flex items-start gap-3 rounded-lg border border-border p-3">
-                <Mail className="mt-0.5 text-muted-foreground" size={18} />
-                <div className="min-w-0">
-                  <p className="font-medium text-foreground">Email</p>
-                  <p className="truncate text-muted-foreground">{profile.user.email}</p>
-                </div>
-              </div>
-              <div className="flex items-center justify-between rounded-lg border border-border p-3">
-                <span className="text-muted-foreground">Type</span>
-                <Badge variant="secondary">{profile.user.role}</Badge>
-              </div>
-              <div className="flex items-center justify-between rounded-lg border border-border p-3">
-                <span className="text-muted-foreground">Email vérifié</span>
-                <Badge variant={profile.user.emailVerified ? 'success' : 'warning'}>
-                  {profile.user.emailVerified ? 'Oui' : 'Non'}
-                </Badge>
-              </div>
-              {profile.onboardingComplete && variant === 'standalone' && (
-                <Link className="spity-btn spity-btn--secondary w-full" href="/app">
-                  Entrer dans l’app
-                </Link>
-              )}
-            </CardContent>
-          </Card>
-
-          <Card hover={false}>
-            <CardHeader>
-              <CardTitle>Ce profil servira à</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3 text-sm">
-              <div className="flex gap-3">
-                <CheckCircle2 className="mt-0.5 text-success" size={18} />
-                <span>Améliorer le matching avec des partenaires compatibles.</span>
-              </div>
-              <div className="flex gap-3">
-                <MapPin className="mt-0.5 text-success" size={18} />
-                <span>Préparer les recommandations de lieux et d’événements locaux.</span>
-              </div>
-              <div className="flex gap-3">
-                <ShieldCheck className="mt-0.5 text-success" size={18} />
-                <span>Rendre les sessions plus fiables pour la communauté.</span>
-              </div>
-            </CardContent>
-          </Card>
-        </aside>
-      </div>
+      {isSettings ? settingsTabContent : onboardingContent}
     </div>
   )
 
