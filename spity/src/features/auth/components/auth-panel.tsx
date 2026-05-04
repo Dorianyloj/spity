@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { LogIn, LogOut, UserPlus } from 'lucide-react'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -167,6 +168,11 @@ export default function AuthPanel() {
                   <LogOut size={18} />
                   Déconnexion
                 </Button>
+                {currentUser && (
+                  <Link className="spity-btn spity-btn--primary" href="/profile/onboarding">
+                    Compléter le profil
+                  </Link>
+                )}
               </div>
 
               {feedback && <p className="text-sm text-muted-foreground">{feedback}</p>}

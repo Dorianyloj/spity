@@ -39,8 +39,10 @@ export const newPasswordSchema = z.object({
 // === GRIMPEUR VALIDATORS ===
 
 export const disciplinesEnum = z.enum([
-  'escalade',
   'bloc',
+  'voie',
+  'trad',
+  'escalade',
   'via-ferrata',
   'grandes-voies',
   'speed'
@@ -48,12 +50,14 @@ export const disciplinesEnum = z.enum([
 
 export const disciplinesSchema = z.array(disciplinesEnum).min(1, 'Au moins une discipline requise')
 
+export const gradeSchema = z.string().regex(/^[4-9][a-c]\+?$/, 'Cotation invalide')
+
 export const niveauxSchema = z.record(
   z.string(),
-  z.string().regex(/^[0-9][a-c]?$|^[4-9][a-c]?$/, 'Cotation invalide')
+  gradeSchema
 )
 
-export const materielSchema = z.array(z.string()).default([])
+export const materielSchema = z.array(z.string())
 
 export const createGrimpeurProfileSchema = z.object({
   userId: z.string().uuid('ID utilisateur invalide'),
@@ -103,7 +107,7 @@ export const updateFalaiseSchema = createFalaiseSchema.partial()
 export const createVoieSchema = z.object({
   falaiseId: z.string().uuid('ID falaise invalide'),
   nom: z.string().min(2, 'Le nom doit contenir au moins 2 caractères').max(255),
-  cotation: z.string().regex(/^[0-9][a-c]?$|^[4-9][a-c]?$/, 'Cotation invalide'),
+  cotation: gradeSchema,
   etatVotes: z.record(z.string(), z.number()).optional(),
 })
 
@@ -117,7 +121,7 @@ export const createPostSchema = z.object({
   falaiseId: z.string().uuid('ID falaise invalide').optional(),
   clubId: z.string().uuid('ID club invalide').optional(),
   contenu: z.string().max(500, 'Le contenu ne peut pas dépasser 500 caractères').optional(),
-  cotation: z.string().regex(/^[0-9][a-c]?$|^[4-9][a-c]?$/, 'Cotation invalide').optional(),
+  cotation: gradeSchema.optional(),
   isStory: z.boolean().default(false),
 })
 
