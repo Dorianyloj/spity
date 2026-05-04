@@ -410,7 +410,6 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
   const selectedDisciplines = profile.grimpeurProfile?.disciplines ?? []
   const selectedGear = profile.grimpeurProfile?.materiel ?? []
   const selectedEquipment = profile.equipment
-  const equipmentObjectCount = selectedEquipment.reduce((total, item) => total + item.quantity, 0)
   const tabs: Array<{ id: ProfileTab; label: string; icon: typeof UserRound; disabled?: boolean }> = [
     { id: 'overview', label: 'Aperçu', icon: UserRound },
     { id: 'practice', label: isGrimpeur ? 'Pratique' : 'Club', icon: Mountain },
@@ -989,24 +988,22 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
   )
   const content = (
     <div className={variant === 'app' ? 'space-y-6' : 'mx-auto max-w-7xl space-y-6'}>
-      <section className="rounded-xl border border-border bg-card p-5 spity-shadow-soft">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <div className="flex flex-wrap gap-2">
-              <Badge variant={profile.onboardingComplete ? 'success' : 'warning'}>
-                {profileCompletionLabel}
-              </Badge>
-              <Badge variant="secondary">{profileKind}</Badge>
+      {!isSettings && (
+        <section className="rounded-xl border border-border bg-card p-5 spity-shadow-soft">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <div className="flex flex-wrap gap-2">
+                <Badge variant={profile.onboardingComplete ? 'success' : 'warning'}>
+                  {profileCompletionLabel}
+                </Badge>
+                <Badge variant="secondary">{profileKind}</Badge>
+              </div>
+              <h1 className="mt-3 text-3xl font-bold text-foreground">{title}</h1>
+              <p className="mt-1 max-w-2xl text-muted-foreground">
+                Complétez votre identité Spity avant d’entrer dans l’espace connecté.
+              </p>
             </div>
-            <h1 className="mt-3 text-3xl font-bold text-foreground">{isSettings ? 'Profil' : title}</h1>
-            <p className="mt-1 max-w-2xl text-muted-foreground">
-              {isSettings
-                ? 'Une fiche publique, une pratique, un inventaire et un compte. Chaque information a son espace.'
-                : 'Complétez votre identité Spity avant d’entrer dans l’espace connecté.'}
-            </p>
-          </div>
 
-          {variant === 'standalone' && (
             <div className="flex flex-wrap gap-3 lg:justify-end">
               {profile.onboardingComplete && (
                 <Link className="spity-btn spity-btn--primary" href="/app">
@@ -1017,26 +1014,9 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
                 Accueil
               </Link>
             </div>
-          )}
-
-          {variant === 'app' && isSettings && (
-            <div className="grid grid-cols-3 gap-3 rounded-xl border border-border bg-muted/40 p-3 text-sm">
-              <div className="min-w-20">
-                <p className="text-muted-foreground">Disciplines</p>
-                <p className="mt-1 text-xl font-bold text-foreground">{selectedDisciplines.length}</p>
-              </div>
-              <div className="min-w-20">
-                <p className="text-muted-foreground">Matériel</p>
-                <p className="mt-1 text-xl font-bold text-foreground">{equipmentObjectCount || selectedGear.length}</p>
-              </div>
-              <div className="min-w-20">
-                <p className="text-muted-foreground">Profil</p>
-                <p className="mt-1 text-xl font-bold text-foreground">{completedReadinessItems}/{readinessItems.length}</p>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
 
       {isSettings && (
         <nav className="flex gap-2 overflow-x-auto rounded-xl border border-border bg-card p-2 spity-shadow-soft" aria-label="Navigation du profil">
