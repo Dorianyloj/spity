@@ -11,9 +11,11 @@ import { createClubProfileBodySchema, createGrimpeurProfileBodySchema, profileMe
 import type { CreateClubProfileBody, CreateGrimpeurProfileBody, ProfileMeResponse } from '../schemas'
 
 type ProfileFormMode = 'onboarding' | 'settings'
+type ProfileFormVariant = 'standalone' | 'app'
 
 type ProfileFormProps = {
   mode: ProfileFormMode
+  variant?: ProfileFormVariant
 }
 
 const disciplines = [
@@ -101,7 +103,7 @@ const mergeClubDefaults = (profile: ProfileMeResponse['clubProfile']): CreateClu
   }
 }
 
-export default function ProfileForm({ mode }: ProfileFormProps) {
+export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFormProps) {
   const [profile, setProfile] = useState<ProfileMeResponse | null>(null)
   const [isLoadingProfile, setIsLoadingProfile] = useState(true)
   const [feedback, setFeedback] = useState<string | null>(null)
@@ -196,6 +198,14 @@ export default function ProfileForm({ mode }: ProfileFormProps) {
   }
 
   if (isLoadingProfile) {
+    if (variant === 'app') {
+      return (
+        <Card hover={false}>
+          <CardContent className="p-6 text-sm text-muted-foreground">Chargement du profil...</CardContent>
+        </Card>
+      )
+    }
+
     return (
       <main className="min-h-screen bg-background px-4 py-10">
         <div className="mx-auto max-w-4xl">
@@ -208,6 +218,22 @@ export default function ProfileForm({ mode }: ProfileFormProps) {
   }
 
   if (!profile) {
+    if (variant === 'app') {
+      return (
+        <Card hover={false}>
+          <CardHeader>
+            <CardTitle>Connexion requise</CardTitle>
+            <CardDescription>Connectez-vous avant de compléter votre profil Spity.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Link className="spity-btn spity-btn--primary" href="/login">
+              Aller à la connexion
+            </Link>
+          </CardContent>
+        </Card>
+      )
+    }
+
     return (
       <main className="min-h-screen bg-background px-4 py-10">
         <div className="mx-auto max-w-4xl">
@@ -245,30 +271,29 @@ export default function ProfileForm({ mode }: ProfileFormProps) {
         { label: 'FFME', value: profile.clubProfile?.ffmeNum ? 'Oui' : 'Non', icon: ShieldCheck },
         { label: 'Événements', value: '0', icon: Award },
       ]
-
-  return (
-    <main className="min-h-screen bg-background px-4 py-8">
-      <div className="mx-auto max-w-6xl space-y-6">
-        <section className="overflow-hidden rounded-xl border border-border bg-card">
-          <div className="bg-slate-deep px-6 py-8 text-white">
-            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-              <div className="flex items-start gap-4">
-                <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-white/10 ring-2 ring-white/20">
-                  {isGrimpeur ? <UserRound size={34} /> : <UsersRound size={34} />}
-                </div>
-                <div>
-                  <Badge variant={profile.onboardingComplete ? 'success' : 'warning'}>
-                    {profile.onboardingComplete ? 'Profil complet' : 'Onboarding'}
-                  </Badge>
-                  <h1 className="mt-3 text-4xl font-bold text-white">{isSettings ? displayName : title}</h1>
-                  <p className="mt-2 max-w-2xl text-white/75">
-                    {isSettings
-                      ? 'Votre profil pilote les recommandations, le matching et les invitations locales.'
-                      : 'Complétez ces informations pour accéder à l’expérience connectée Spity.'}
-                  </p>
-                </div>
+  const content = (
+    <div className={variant === 'app' ? 'space-y-6' : 'mx-auto max-w-6xl space-y-6'}>
+      <section className="overflow-hidden rounded-xl border border-border bg-card">
+        <div className="bg-slate-deep px-6 py-8 text-white">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="flex items-start gap-4">
+              <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-white/10 ring-2 ring-white/20">
+                {isGrimpeur ? <UserRound size={34} /> : <UsersRound size={34} />}
               </div>
+              <div>
+                <Badge variant={profile.onboardingComplete ? 'success' : 'warning'}>
+                  {profile.onboardingComplete ? 'Profil complet' : 'Onboarding'}
+                </Badge>
+                <h1 className="mt-3 text-4xl font-bold text-white">{isSettings ? displayName : title}</h1>
+                <p className="mt-2 max-w-2xl text-white/75">
+                  {isSettings
+                    ? 'Votre profil pilote les recommandations, le matching et les invitations locales.'
+                    : 'Complétez ces informations pour accéder à l’expérience connectée Spity.'}
+                </p>
+              </div>
+            </div>
 
+            {variant === 'standalone' && (
               <div className="flex flex-wrap gap-3">
                 {profile.onboardingComplete && (
                   <Link className="spity-btn bg-white text-slate-deep hover:bg-white/90" href="/app">
@@ -279,31 +304,32 @@ export default function ProfileForm({ mode }: ProfileFormProps) {
                   Accueil
                 </Link>
               </div>
-            </div>
+            )}
           </div>
+        </div>
 
-          {isSettings && (
-            <div className="grid gap-0 border-t border-border md:grid-cols-3">
-              {profileStats.map((stat) => {
-                const Icon = stat.icon
+        {isSettings && (
+          <div className="grid gap-0 border-t border-border md:grid-cols-3">
+            {profileStats.map((stat) => {
+              const Icon = stat.icon
 
-                return (
-                  <div key={stat.label} className="flex items-center gap-3 border-b border-border p-5 md:border-b-0 md:border-r last:md:border-r-0">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-coral-light text-coral">
-                      <Icon size={21} />
-                    </div>
-                    <div>
-                      <p className="text-2xl font-bold text-foreground">{stat.value}</p>
-                      <p className="text-sm text-muted-foreground">{stat.label}</p>
-                    </div>
+              return (
+                <div key={stat.label} className="flex items-center gap-3 border-b border-border p-5 md:border-b-0 md:border-r last:md:border-r-0">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-coral-light text-coral">
+                    <Icon size={21} />
                   </div>
-                )
-              })}
-            </div>
-          )}
-        </section>
+                  <div>
+                    <p className="text-2xl font-bold text-foreground">{stat.value}</p>
+                    <p className="text-sm text-muted-foreground">{stat.label}</p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        )}
+      </section>
 
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
         <section className="space-y-6">
           {feedback && (
             <div className="rounded-lg border border-border bg-card p-4 text-sm font-medium text-foreground">
@@ -496,7 +522,7 @@ export default function ProfileForm({ mode }: ProfileFormProps) {
                   {profile.user.emailVerified ? 'Oui' : 'Non'}
                 </Badge>
               </div>
-              {profile.onboardingComplete && (
+              {profile.onboardingComplete && variant === 'standalone' && (
                 <Link className="spity-btn spity-btn--secondary w-full" href="/app">
                   Entrer dans l’app
                 </Link>
@@ -524,8 +550,17 @@ export default function ProfileForm({ mode }: ProfileFormProps) {
             </CardContent>
           </Card>
         </aside>
-        </div>
       </div>
+    </div>
+  )
+
+  if (variant === 'app') {
+    return content
+  }
+
+  return (
+    <main className="min-h-screen bg-background px-4 py-8">
+      {content}
     </main>
   )
 }

@@ -1,33 +1,20 @@
 import {
-  Calendar,
   Compass,
-  MapPin,
-  MessageCircle,
   Mountain,
   Route,
-  Search,
   UserRound,
   Users,
 } from 'lucide-react'
-import Link from 'next/link'
 import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle, StatCard } from '@/components/ui'
 import type { AuthUser } from '@/features/auth/schemas'
 import type { ClubProfile, GrimpeurProfile } from '@/features/profile/schemas'
-import LogoutButton from './logout-button'
+import AppShell from './app-shell'
 
 type AppDashboardProps = {
   user: AuthUser
   grimpeurProfile: GrimpeurProfile | null
   clubProfile: ClubProfile | null
 }
-
-const navigationItems = [
-  { label: 'Feed', href: '/app', icon: MessageCircle, active: true },
-  { label: 'Découvrir', href: '/app', icon: Search, active: false },
-  { label: 'Lieux', href: '/app', icon: MapPin, active: false },
-  { label: 'Événements', href: '/app', icon: Calendar, active: false },
-  { label: 'Profil', href: '/profile/me', icon: UserRound, active: false },
-]
 
 const nearbyPartners = [
   { name: 'Lina M.', discipline: 'Bloc', grade: '6b', place: 'Arkose Lyon', availability: 'Ce soir' },
@@ -86,71 +73,23 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile }: App
   const gearCount = grimpeurProfile?.materiel.length ?? 0
 
   return (
-    <main className="min-h-screen bg-background pb-10">
-      <header className="sticky top-0 z-40 border-b border-border bg-card/95 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex items-center justify-between gap-4">
-            <Link href="/app" className="text-2xl font-bold text-foreground tracking-normal">
-              Spity
-            </Link>
-            <Badge variant={isClub ? 'secondary' : 'primary'}>{isClub ? 'Club' : 'Grimpeur'}</Badge>
-          </div>
+    <AppShell activeItem="feed" user={user}>
+      <section className="mb-6">
+        <Badge variant="success">MVP feed</Badge>
+        <h1 className="mt-3 text-4xl font-bold text-foreground">Bonjour {displayName}</h1>
+        <p className="mt-2 max-w-2xl text-muted-foreground">
+          Un premier fil communautaire pour connecter les grimpeurs, les clubs, les lieux et les sessions à venir.
+        </p>
+      </section>
 
-          <nav className="flex gap-2 overflow-x-auto pb-1 lg:pb-0" aria-label="Navigation principale">
-            {navigationItems.map((item) => {
-              const Icon = item.icon
+      <div className="mb-6 grid gap-4 md:grid-cols-3">
+        <StatCard value={isClub ? 'Club' : String(disciplineCount)} label={isClub ? 'Type de compte' : 'Disciplines'} icon={Mountain} />
+        <StatCard value={isClub ? '0' : String(gearCount)} label={isClub ? 'Événements publiés' : 'Matériel déclaré'} icon={Route} />
+        <StatCard value="3" label="Suggestions locales" icon={Compass} />
+      </div>
 
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={`flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                    item.active ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                  }`}
-                >
-                  <Icon size={18} />
-                  {item.label}
-                </Link>
-              )
-            })}
-          </nav>
-
-          <div className="hidden items-center gap-3 lg:flex">
-            <Link href="/profile/me" className="spity-btn spity-btn--secondary">
-              <UserRound size={18} />
-              Profil
-            </Link>
-            <LogoutButton />
-          </div>
-        </div>
-      </header>
-
-      <div className="mx-auto max-w-7xl px-4 py-6">
-        <section className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <Badge variant="success">MVP feed</Badge>
-            <h1 className="mt-3 text-4xl font-bold text-foreground">Bonjour {displayName}</h1>
-            <p className="mt-2 max-w-2xl text-muted-foreground">
-              Un premier fil communautaire pour connecter les grimpeurs, les clubs, les lieux et les sessions à venir.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3 lg:hidden">
-            <Link href="/profile/me" className="spity-btn spity-btn--secondary">
-              <UserRound size={18} />
-              Mon profil
-            </Link>
-            <LogoutButton />
-          </div>
-        </section>
-
-        <div className="mb-6 grid gap-4 md:grid-cols-3">
-          <StatCard value={isClub ? 'Club' : String(disciplineCount)} label={isClub ? 'Type de compte' : 'Disciplines'} icon={Mountain} />
-          <StatCard value={isClub ? '0' : String(gearCount)} label={isClub ? 'Événements publiés' : 'Matériel déclaré'} icon={Route} />
-          <StatCard value="3" label="Suggestions locales" icon={Compass} />
-        </div>
-
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
-          <section className="space-y-6">
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
+        <section className="space-y-6">
             <Card hover={false}>
               <CardContent className="p-4">
                 <div className="flex gap-3">
@@ -316,7 +255,6 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile }: App
             </Card>
           </aside>
         </div>
-      </div>
-    </main>
+    </AppShell>
   )
 }
