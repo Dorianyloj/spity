@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Spity
 
-## Getting Started
+Spity est un réseau social pour la communauté escalade : matching entre grimpeurs, répertoire de salles/falaises/clubs, topos collaboratifs, événements clubs et contenu social contextualisé.
 
-First, run the development server:
+Le projet est développé dans le cadre d'une certification Titre RNCP. Le cadrage produit complet est disponible dans `../CADRAGE_PROJET.md`.
+
+## Stack
+
+- Next.js App Router
+- React
+- Tailwind CSS
+- Drizzle ORM
+- MariaDB
+- Zod
+
+## Prérequis
+
+- Node.js 20+
+- npm
+- Docker et Docker Compose
+
+## Installation
+
+```bash
+npm install
+cp .env.example .env.local
+docker compose up -d
+npm run db:migrate
+```
+
+Adaptez `DATABASE_URL` et `JWT_SECRET` dans `.env.local` si nécessaire.
+
+## Développement
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Application : http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+phpMyAdmin : http://localhost:8081
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Commandes
 
-## Learn More
+```bash
+npm run dev          # Serveur de développement
+npm run build        # Build production
+npm start            # Serveur production après build
+npm run lint         # ESLint
+npm run typecheck    # Vérification TypeScript
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Base de données
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run db:generate  # Génère une migration Drizzle
+npm run db:migrate   # Applique les migrations
+npm run db:push      # Synchronise le schéma sans migration
+npm run db:studio    # Lance Drizzle Studio
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Structure
 
-## Deploy on Vercel
+- `src/app` : routes App Router
+- `src/components/ui` : design system réutilisable
+- `src/db` : client et schéma Drizzle
+- `src/lib` : configuration et validateurs partagés
+- `drizzle` : migrations SQL générées
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Qualité
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Avant commit, lancer :
+
+```bash
+npm run lint && npm run typecheck && npm run build
+```
