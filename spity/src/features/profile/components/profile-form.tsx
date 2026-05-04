@@ -286,6 +286,8 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
     { id: 'equipment', label: 'Matériel', icon: ShieldCheck, disabled: !isGrimpeur },
     { id: 'account', label: 'Compte', icon: Mail },
   ]
+  const topEquipment = selectedEquipment.slice(0, 3)
+  const profileCompletionLabel = profile.onboardingComplete ? 'Complet' : 'À finaliser'
   const summaryCard = isSettings && isGrimpeur && profile.grimpeurProfile ? (
     <Card hover={false}>
       <CardHeader>
@@ -532,8 +534,12 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
       )}
 
       {activeTab === 'practice' && (
-        <div className="mx-auto max-w-4xl space-y-6">
-          {profileFormCard}
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
+          <section>{profileFormCard}</section>
+          <aside className="space-y-6">
+            {summaryCard}
+            {purposeCard}
+          </aside>
         </div>
       )}
 
@@ -568,29 +574,47 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
     </div>
   )
   const content = (
-    <div className={variant === 'app' ? 'space-y-6' : 'mx-auto max-w-6xl space-y-6'}>
-      <section className="overflow-hidden rounded-xl border border-border bg-card">
-        <div className="bg-slate-deep px-6 py-8 text-white">
-          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+    <div className={variant === 'app' ? 'space-y-6' : 'mx-auto max-w-7xl space-y-6'}>
+      <section className="overflow-hidden rounded-xl border border-slate-deep bg-slate-deep text-white spity-shadow-medium">
+        <div className="relative spity-texture">
+          <div className="absolute inset-y-0 right-0 hidden w-1/3 bg-coral lg:block" />
+          <div className="relative grid gap-6 px-6 py-7 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
             <div className="flex items-start gap-4">
-              <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-white/10 ring-2 ring-white/20">
+              <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl bg-coral text-white ring-4 ring-white/15">
                 {isGrimpeur ? <UserRound size={34} /> : <UsersRound size={34} />}
               </div>
-              <div>
-                <Badge variant={profile.onboardingComplete ? 'success' : 'warning'}>
-                  {profile.onboardingComplete ? 'Profil complet' : 'Onboarding'}
-                </Badge>
+              <div className="min-w-0">
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant={profile.onboardingComplete ? 'success' : 'warning'}>
+                    {profile.onboardingComplete ? 'Profil complet' : 'Onboarding'}
+                  </Badge>
+                  <Badge className="bg-white/10 text-white" variant="default">{profileKind}</Badge>
+                </div>
                 <h1 className="mt-3 text-4xl font-bold text-white">{isSettings ? displayName : title}</h1>
                 <p className="mt-2 max-w-2xl text-white/75">
                   {isSettings
-                    ? 'Votre profil pilote les recommandations, le matching et les invitations locales.'
-                    : 'Complétez ces informations pour accéder à l’expérience connectée Spity.'}
+                    ? 'Profil grimpe, matériel, compte et signaux de confiance au même endroit.'
+                    : 'Complétez votre identité Spity avant d’entrer dans l’espace connecté.'}
                 </p>
-              </div>
+                {isSettings && isGrimpeur && (
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {selectedDisciplines.map((discipline) => (
+                      <span key={discipline} className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white">
+                        {disciplineLabels[discipline] ?? discipline}
+                      </span>
+                    ))}
+                    {topEquipment.map((item) => (
+                      <span key={item.id} className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white">
+                        {item.quantity} x {item.model}
+                      </span>
+                    ))}
+                  </div>
+                )}
+            </div>
             </div>
 
             {variant === 'standalone' && (
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3 lg:justify-end">
                 {profile.onboardingComplete && (
                   <Link className="spity-btn bg-white text-slate-deep hover:bg-white/90" href="/app">
                     Entrer dans l’app
@@ -601,11 +625,27 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
                 </Link>
               </div>
             )}
+            {variant === 'app' && (
+              <div className="rounded-xl border border-white/15 bg-white/10 p-4 backdrop-blur">
+                <p className="text-sm font-medium text-white/70">Statut du profil</p>
+                <p className="mt-1 text-3xl font-bold text-white">{profileCompletionLabel}</p>
+                <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
+                  <div className="rounded-lg bg-white/10 p-3">
+                    <p className="text-white/60">Disciplines</p>
+                    <p className="mt-1 text-xl font-bold">{selectedDisciplines.length}</p>
+                  </div>
+                  <div className="rounded-lg bg-white/10 p-3">
+                    <p className="text-white/60">Matériel</p>
+                    <p className="mt-1 text-xl font-bold">{equipmentObjectCount || selectedGear.length}</p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
         {isSettings && (
-          <div className="grid gap-0 border-t border-border md:grid-cols-3">
+          <div className="grid gap-0 border-t border-white/10 bg-card text-foreground md:grid-cols-3">
             {profileStats.map((stat) => {
               const Icon = stat.icon
 
@@ -626,7 +666,7 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
       </section>
 
       {isSettings && (
-        <nav className="flex gap-2 overflow-x-auto rounded-xl border border-border bg-card p-2" aria-label="Navigation du profil">
+        <nav className="flex gap-2 overflow-x-auto rounded-xl border border-border bg-card p-2 spity-shadow-soft" aria-label="Navigation du profil">
           {tabs.map((tab) => {
             const Icon = tab.icon
             const isActive = activeTab === tab.id
@@ -635,8 +675,8 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
               <button
                 key={tab.id}
                 aria-current={isActive ? 'page' : undefined}
-                className={`flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                  isActive ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                className={`flex min-w-[132px] shrink-0 items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
+                  isActive ? 'bg-slate-deep text-white shadow-sm' : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                 } ${tab.disabled ? 'cursor-not-allowed opacity-50' : ''}`}
                 disabled={tab.disabled}
                 type="button"
