@@ -78,7 +78,10 @@ POST /api/auth/logout    # Supprime le cookie de session
 GET  /api/auth/me        # Retourne la session active
 ```
 
-Page de test locale : http://localhost:3000/auth
+Pages locales :
+
+- http://localhost:3000/login
+- http://localhost:3000/register
 
 ## Profils
 
