@@ -368,6 +368,12 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
                       </Badge>
                     ))}
                   </div>
+                  <Link
+                    href={`/app/places/salles/${salle.id}`}
+                    className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-colors hover:bg-[#e76f51]"
+                  >
+                    Voir la fiche salle
+                  </Link>
                   </div>
                 </article>
               ))}
@@ -514,6 +520,12 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
                     <Badge variant="primary">Club</Badge>
                     {club.ffmeNum && <Badge variant="secondary">{club.ffmeNum}</Badge>}
                   </div>
+                  <Link
+                    href={`/app/places/clubs/${club.id}`}
+                    className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-colors hover:bg-[#e76f51]"
+                  >
+                    Voir la fiche club
+                  </Link>
                 </article>
               ))}
               {filteredClubs.length === 0 && (

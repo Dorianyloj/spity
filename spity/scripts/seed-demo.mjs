@@ -51,6 +51,7 @@ const ids = {
     curisCondition: 'abababab-abab-4bab-8bab-ababababab01',
     curisSafety: 'abababab-abab-4bab-8bab-ababababab02',
     cormotAccess: 'abababab-abab-4bab-8bab-ababababab03',
+    arkoseInfo: 'abababab-abab-4bab-8bab-ababababab04',
   },
 }
 
@@ -117,7 +118,7 @@ const main = async () => {
       Object.values(ids.events)
     )
     await connection.execute(
-      `delete from place_reports where id in (?, ?, ?)`,
+      `delete from place_reports where id in (?, ?, ?, ?)`,
       Object.values(ids.reports)
     )
     await connection.execute(
@@ -402,6 +403,14 @@ const main = async () => {
         report_type: 'access',
         report_status: 'resolved',
         message: 'Sentier principal dégagé, accès OK avec casque conseillé au pied.',
+      },
+      {
+        id: ids.reports.arkoseInfo,
+        salle_id: ids.salles.arkose,
+        author_id: ids.users.lina,
+        report_type: 'info',
+        report_status: 'open',
+        message: 'Nouveau secteur dalle ouvert, forte affluence après 18h30 en semaine.',
       },
     ])
 
