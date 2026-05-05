@@ -2,12 +2,12 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Eye, EyeOff, Lock, LogIn, Mail, ShieldCheck, UserPlus, UsersRound } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import BrandMark from '@/components/brand/brand-mark'
 import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input } from '@/components/ui'
 import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
 import { loginSchema, registerSchema, type LoginInput, type RegisterInput } from '@/lib/validators'
@@ -110,9 +110,7 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
           <div className="absolute inset-0 bg-[#050a2a]/20" />
           <div className="relative flex h-full flex-col justify-between p-10">
             <Link href="/" className="flex items-center gap-3">
-              <span className="flex h-12 w-12 overflow-hidden rounded-lg bg-white shadow-xl shadow-black/20">
-                <Image src={brandAssets.logo} alt="" width={48} height={48} className="h-full w-full object-cover" priority />
-              </span>
+              <BrandMark className="bg-white/6 shadow-xl shadow-black/20 ring-1 ring-white/12" priority size={48} tone="dark" />
               <span className="text-2xl font-bold tracking-normal">Spity</span>
             </Link>
 
@@ -147,9 +145,7 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
           <div className="mx-auto w-full max-w-md space-y-6">
             <div className="flex items-center justify-between">
               <Link href="/" className="flex items-center gap-2 text-xl font-bold text-white lg:hidden">
-                <span className="flex h-9 w-9 overflow-hidden rounded-lg bg-white">
-                  <Image src={brandAssets.logo} alt="" width={36} height={36} className="h-full w-full object-cover" />
-                </span>
+                <BrandMark className="bg-white/6 ring-1 ring-white/12" size={36} tone="dark" />
                 <span>Spity</span>
               </Link>
               <Link href={isLogin ? '/register' : '/login'} className="text-sm font-medium text-[#f4a261]">

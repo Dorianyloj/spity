@@ -1,10 +1,10 @@
 import { Calendar, MapPin, MessageCircle, Search, UserRound } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import BrandMark from '@/components/brand/brand-mark'
 import { Badge } from '@/components/ui'
 import type { AuthUser } from '@/features/auth/schemas'
-import { brandAssets, demoClimbingAssets, makeDarkPanelBackground } from '@/lib/brand-assets'
+import { demoClimbingAssets, makeDarkPanelBackground } from '@/lib/brand-assets'
 import LogoutButton from './logout-button'
 
 type AppShellNavItem = 'feed' | 'discover' | 'places' | 'events' | 'profile'
@@ -43,9 +43,7 @@ export default function AppShell({ activeItem, children, user }: AppShellProps) 
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <Link href="/app" className="flex items-center gap-3 pr-2 text-2xl font-extrabold text-secondary-foreground">
-                <span className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg bg-white shadow-lg shadow-black/20">
-                  <Image src={brandAssets.logo} alt="" width={36} height={36} className="h-full w-full object-cover" priority />
-                </span>
+                <BrandMark className="bg-white/6 shadow-lg shadow-black/20 ring-1 ring-white/12" priority size={42} tone="dark" />
                 Spity
               </Link>
               <Badge className="bg-white/10 text-secondary-foreground" variant="default">{isClub ? 'Club' : 'Grimpeur'}</Badge>

@@ -1,5 +1,7 @@
 export const brandAssets = {
   logo: '/images/brand/logo-spity.png',
+  logoTransparent: '/images/brand/logo-spity-transparent.png',
+  logoWhite: '/images/brand/logo-spity-white.png',
   heroSunset: '/images/brand/escalade-falaise-coucher-soleil.jpeg',
   indoor: '/images/brand/escalade-salle.jpg',
   trad: '/images/brand/escalade-trad.jpg',

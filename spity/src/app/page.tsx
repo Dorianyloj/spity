@@ -13,9 +13,9 @@ import {
   ShieldCheck,
   Users,
 } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRef, type ReactNode } from 'react'
+import BrandMark from '@/components/brand/brand-mark'
 import { brandAssets, makeImmersiveBackground, makePanelBackground } from '@/lib/brand-assets'
 
 type AnimatedSectionProps = {
@@ -138,9 +138,7 @@ export default function LandingPage() {
       >
         <nav className="relative z-20 mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-6 text-sm text-white/[0.78] md:px-8">
           <Link href="/" className="flex items-center gap-3" aria-label="Accueil Spity">
-            <span className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg bg-white shadow-lg shadow-black/20">
-              <Image src={brandAssets.logo} alt="" width={40} height={40} className="h-full w-full object-cover" priority />
-            </span>
+            <BrandMark className="bg-white/6 shadow-lg shadow-black/20 ring-1 ring-white/12" priority size={42} tone="dark" />
             <span className="text-lg font-bold text-white">Spity</span>
           </Link>
           <div className="hidden items-center gap-10 md:flex">

@@ -18,7 +18,7 @@ import {
   Skeleton,
 } from '@/components/ui'
 import { Heart, MessageCircle, Share2, TrendingUp, Mountain, Award } from 'lucide-react'
-import Image from 'next/image'
+import BrandMark from '@/components/brand/brand-mark'
 import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
 
 export default function DesignSystemPage() {
@@ -30,9 +30,7 @@ export default function DesignSystemPage() {
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
-          <div className="mx-auto flex h-16 w-16 overflow-hidden rounded-lg bg-white shadow-xl shadow-black/20">
-            <Image src={brandAssets.logo} alt="" width={64} height={64} className="h-full w-full object-cover" priority />
-          </div>
+          <BrandMark className="mx-auto bg-white/6 shadow-xl shadow-black/20 ring-1 ring-white/12" priority size={64} tone="dark" />
           <h1 className="text-4xl font-bold spity-gradient-coral bg-clip-text text-transparent">
             Spity Design System
           </h1>
@@ -145,7 +143,7 @@ export default function DesignSystemPage() {
                 <Avatar size="lg" fallback="MR" ring />
                 <Avatar
                   size="xl"
-                  src={brandAssets.logo}
+                  src={brandAssets.logoTransparent}
                   alt="Avatar exemple"
                   ring
                 />
@@ -237,7 +235,7 @@ export default function DesignSystemPage() {
                 <StoryAvatar username="Alex" fallback="A" seen={true} />
                 <StoryAvatar
                   username="Sophie"
-                  src={brandAssets.logo}
+                  src={brandAssets.logoTransparent}
                   seen={false}
                 />
                 <StoryAvatar username="Thomas" fallback="T" seen={true} />
@@ -288,7 +286,7 @@ export default function DesignSystemPage() {
             <CardHeader>
               <div className="flex items-center gap-3">
                 <Avatar
-                  src={brandAssets.logo}
+                  src={brandAssets.logoTransparent}
                   alt="Pierre Durand"
                   size="md"
                 />
