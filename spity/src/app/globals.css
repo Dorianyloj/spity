@@ -17,30 +17,30 @@
 
 :root {
   /* Couleurs principales */
-  --background: #f4ecdf;
-  --foreground: #1a1f1b;
+  --background: #050a2a;
+  --foreground: #f8fafc;
 
   /* Surfaces */
-  --card: #fffcf7;
-  --card-foreground: #1a1f1b;
-  --popover: #fffcf7;
-  --popover-foreground: #1a1f1b;
+  --card: #111a55;
+  --card-foreground: #f8fafc;
+  --popover: #111a55;
+  --popover-foreground: #f8fafc;
 
   /* Action primaire - Orange */
   --primary: #f4a261;
-  --primary-foreground: #ffffff;
+  --primary-foreground: #050a2a;
 
   /* Secondaire - Encre */
-  --secondary: #1a1f1b;
-  --secondary-foreground: #f4ecdf;
+  --secondary: #241f7a;
+  --secondary-foreground: #f8fafc;
 
   /* États neutres */
-  --muted: #ebe2d0;
-  --muted-foreground: #8c8377;
+  --muted: #182060;
+  --muted-foreground: #b8bfd6;
 
   /* Accent - Corail clair */
-  --accent: #fbe3d8;
-  --accent-foreground: #e76f51;
+  --accent: #2d2142;
+  --accent-foreground: #f4a261;
 
   /* Feedback */
   --destructive: #c84b43;
@@ -51,9 +51,9 @@
   --warning-foreground: #ffffff;
 
   /* Bordures et inputs */
-  --border: #e0d5c0;
-  --input: #fffcf7;
-  --ring: #e76f51;
+  --border: #2d3675;
+  --input: #0b113d;
+  --ring: #f4a261;
 
   /* Graphiques - Palette étendue */
   --chart-1: #e76f51;
@@ -66,25 +66,25 @@
   --radius: 0.625rem;
 
   /* Sidebar */
-  --sidebar: #1a1f1b;
-  --sidebar-foreground: #f4ecdf;
+  --sidebar: #050a2a;
+  --sidebar-foreground: #f8fafc;
   --sidebar-primary: #f4a261;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #2a302b;
-  --sidebar-accent-foreground: #f4ecdf;
-  --sidebar-border: #2a302b;
+  --sidebar-accent: #111a55;
+  --sidebar-accent-foreground: #f8fafc;
+  --sidebar-border: #2d3675;
   --sidebar-ring: #e76f51;
 
   /* Tokens Spity personnalisés */
   --spity-coral: #f4a261;
   --spity-coral-light: #fbe3d8;
   --spity-coral-dark: #e76f51;
-  --spity-slate: #1a1f1b;
-  --spity-slate-light: #2a302b;
-  --spity-stone: #f4ecdf;
-  --spity-stone-dark: #ebe2d0;
-  --spity-granite: #8c8377;
-  --spity-primary-muted: #dde5e8;
+  --spity-slate: #050a2a;
+  --spity-slate-light: #111a55;
+  --spity-stone: #f8fafc;
+  --spity-stone-dark: #b8bfd6;
+  --spity-granite: #8791bd;
+  --spity-primary-muted: #182060;
   --spity-info: #4f7fb5;
 
   /* Niveaux de cotation escalade */

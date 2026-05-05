@@ -13,8 +13,10 @@ import {
   ShieldCheck,
   Users,
 } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRef, type ReactNode } from 'react'
+import { brandAssets, makeImmersiveBackground, makePanelBackground } from '@/lib/brand-assets'
 
 type AnimatedSectionProps = {
   children: ReactNode
@@ -44,8 +46,7 @@ type FeedItem = {
   tag: string
 }
 
-const heroBackground =
-  "linear-gradient(180deg, rgba(8, 12, 32, 0.22) 0%, rgba(8, 12, 32, 0.72) 56%, #050a2a 100%), linear-gradient(110deg, rgba(5, 10, 42, 0.92) 0%, rgba(5, 10, 42, 0.42) 48%, rgba(244, 162, 97, 0.24) 100%), url('https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=2400&q=85')"
+const heroBackground = makeImmersiveBackground(brandAssets.heroSunset)
 
 const features: Feature[] = [
   {
@@ -136,8 +137,11 @@ export default function LandingPage() {
         style={{ backgroundImage: heroBackground }}
       >
         <nav className="relative z-20 mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-6 text-sm text-white/[0.78] md:px-8">
-          <Link href="/" className="text-lg font-bold text-white" aria-label="Accueil Spity">
-            Spity
+          <Link href="/" className="flex items-center gap-3" aria-label="Accueil Spity">
+            <span className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg bg-white shadow-lg shadow-black/20">
+              <Image src={brandAssets.logo} alt="" width={40} height={40} className="h-full w-full object-cover" priority />
+            </span>
+            <span className="text-lg font-bold text-white">Spity</span>
           </Link>
           <div className="hidden items-center gap-10 md:flex">
             <a href="#activites" className="transition-colors hover:text-white">
@@ -279,6 +283,19 @@ export default function LandingPage() {
                   className="group relative min-h-[330px] overflow-hidden rounded-lg bg-[#463fc0] p-6 shadow-2xl shadow-black/20"
                 >
                   <div className={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${adventure.accent}`} />
+                  <div
+                    className="absolute inset-0 bg-cover bg-center opacity-[0.18] mix-blend-luminosity transition-opacity group-hover:opacity-[0.28]"
+                    style={{
+                      backgroundImage: `url(${
+                        adventure.number === '01'
+                          ? brandAssets.indoor
+                          : adventure.number === '02'
+                            ? brandAssets.crag
+                            : brandAssets.trad
+                      })`,
+                    }}
+                    aria-hidden="true"
+                  />
                   <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/[0.08]" />
                   <div className="relative z-10 flex h-full flex-col justify-between">
                     <div>
@@ -320,7 +337,7 @@ export default function LandingPage() {
         <div className="grid overflow-hidden rounded-lg border border-white/10 bg-[#241f7a] md:grid-cols-[1.05fr_0.95fr]">
           <div
             className="min-h-[360px] bg-cover bg-center"
-            style={{ backgroundImage: heroBackground }}
+            style={{ backgroundImage: makePanelBackground(brandAssets.crag) }}
             aria-hidden="true"
           />
           <div className="p-6 md:p-8">

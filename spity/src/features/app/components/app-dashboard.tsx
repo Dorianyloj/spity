@@ -8,6 +8,7 @@ import {
 import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle, StatCard } from '@/components/ui'
 import type { AuthUser } from '@/features/auth/schemas'
 import type { ClubProfile, GrimpeurProfile, UserEquipment } from '@/features/profile/schemas'
+import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
 import AppShell from './app-shell'
 
 type AppDashboardProps = {
@@ -76,12 +77,20 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile, equip
 
   return (
     <AppShell activeItem="feed" user={user}>
-      <section className="mb-6">
-        <Badge variant="success">MVP feed</Badge>
-        <h1 className="mt-3 text-4xl font-bold text-foreground">Bonjour {displayName}</h1>
-        <p className="mt-2 max-w-2xl text-muted-foreground">
+      <section
+        className="mb-6 overflow-hidden rounded-lg border border-white/10 bg-cover bg-center p-6 shadow-2xl shadow-black/20 md:p-8"
+        style={{ backgroundImage: makePanelBackground(isClub ? brandAssets.indoor : brandAssets.heroSunset) }}
+      >
+        <Badge className="bg-[#f4a261] text-[#050a2a]" variant="default">MVP feed</Badge>
+        <h1 className="mt-5 text-4xl font-black text-white md:text-5xl">Bonjour {displayName}</h1>
+        <p className="mt-3 max-w-2xl text-white/[0.78]">
           Un premier fil communautaire pour connecter les grimpeurs, les clubs, les lieux et les sessions à venir.
         </p>
+        <div className="mt-6 flex flex-wrap gap-2">
+          <Badge className="bg-white/10 text-white" variant="default">Matching local</Badge>
+          <Badge className="bg-white/10 text-white" variant="default">Topos vivants</Badge>
+          <Badge className="bg-white/10 text-white" variant="default">Événements clubs</Badge>
+        </div>
       </section>
 
       <div className="mb-6 grid gap-4 md:grid-cols-3">
@@ -92,7 +101,12 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile, equip
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
         <section className="space-y-6">
-            <Card hover={false}>
+            <Card hover={false} className="overflow-hidden">
+              <div
+                className="h-28 bg-cover bg-center"
+                style={{ backgroundImage: makePanelBackground(brandAssets.indoor) }}
+                aria-hidden="true"
+              />
               <CardContent className="p-4">
                 <div className="flex gap-3">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-coral-light text-coral">
@@ -144,7 +158,12 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile, equip
               </Card>
             ))}
 
-            <Card hover={false}>
+            <Card hover={false} className="overflow-hidden">
+              <div
+                className="h-24 bg-cover bg-center"
+                style={{ backgroundImage: makePanelBackground(brandAssets.trad) }}
+                aria-hidden="true"
+              />
               <CardHeader>
                 <CardTitle>{isClub ? 'Demandes et activité locale' : 'Partenaires recommandés'}</CardTitle>
                 <CardDescription>

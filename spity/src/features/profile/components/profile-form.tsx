@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input, Textarea } from '@/components/ui'
+import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
 import { createClubProfileBodySchema, createGrimpeurProfileBodySchema, defaultPartnerSearch, profileMeResponseSchema, updatePublicProfileBodySchema } from '../schemas'
 import type { CreateClubProfileBody, CreateGrimpeurProfileBody, ProfileMeResponse, UpdatePublicProfileBody, UserEquipment } from '../schemas'
 import EquipmentInventorySection from './equipment-inventory-section'
@@ -356,7 +357,10 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
     }
 
     return (
-      <main className="min-h-screen bg-background px-4 py-10">
+      <main
+        className="min-h-screen bg-background bg-cover bg-center px-4 py-10"
+        style={{ backgroundImage: makePanelBackground(brandAssets.cragClose) }}
+      >
         <div className="mx-auto max-w-4xl">
           <Card>
             <CardContent className="p-6 text-sm text-muted-foreground">Chargement du profil...</CardContent>
@@ -384,7 +388,10 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
     }
 
     return (
-      <main className="min-h-screen bg-background px-4 py-10">
+      <main
+        className="min-h-screen bg-background bg-cover bg-center px-4 py-10"
+        style={{ backgroundImage: makePanelBackground(brandAssets.cragClose) }}
+      >
         <div className="mx-auto max-w-4xl">
           <Card>
             <CardHeader>
@@ -460,7 +467,11 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
   )
   const publicProfileCard = isSettings && isGrimpeur && profile.grimpeurProfile ? (
     <Card hover={false} className="overflow-hidden">
-      <div className="h-24 rock-sunset topo-lines" />
+      <div
+        className="h-28 bg-cover bg-center"
+        style={{ backgroundImage: makePanelBackground(brandAssets.crag) }}
+        aria-hidden="true"
+      />
       <CardContent className="-mt-10 space-y-5">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex items-end gap-4">
@@ -989,7 +1000,10 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
   const content = (
     <div className={variant === 'app' ? 'space-y-6' : 'mx-auto max-w-7xl space-y-6'}>
       {!isSettings && (
-        <section className="rounded-xl border border-border bg-card p-5 spity-shadow-soft">
+        <section
+          className="overflow-hidden rounded-lg border border-white/10 bg-cover bg-center p-5 shadow-2xl shadow-black/20"
+          style={{ backgroundImage: makePanelBackground(profile.user.role === 'club' ? brandAssets.indoor : brandAssets.heroSunset) }}
+        >
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <div className="flex flex-wrap gap-2">
@@ -998,8 +1012,8 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
                 </Badge>
                 <Badge variant="secondary">{profileKind}</Badge>
               </div>
-              <h1 className="mt-3 text-3xl font-bold text-foreground">{title}</h1>
-              <p className="mt-1 max-w-2xl text-muted-foreground">
+              <h1 className="mt-3 text-3xl font-black text-white">{title}</h1>
+              <p className="mt-1 max-w-2xl text-white/[0.72]">
                 Complétez votre identité Spity avant d’entrer dans l’espace connecté.
               </p>
             </div>
@@ -1052,7 +1066,10 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
   }
 
   return (
-    <main className="min-h-screen bg-background px-4 py-8">
+    <main
+      className="min-h-screen bg-background bg-cover bg-center px-4 py-8"
+      style={{ backgroundImage: makePanelBackground(brandAssets.cragClose) }}
+    >
       {content}
     </main>
   )
