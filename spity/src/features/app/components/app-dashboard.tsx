@@ -5,10 +5,21 @@ import {
   UserRound,
   Users,
 } from 'lucide-react'
-import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle, StatCard } from '@/components/ui'
+import {
+  AppHero,
+  Badge,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  InfoTile,
+  MediaHeader,
+  StatCard,
+} from '@/components/ui'
 import type { AuthUser } from '@/features/auth/schemas'
 import type { ClubProfile, GrimpeurProfile, UserEquipment } from '@/features/profile/schemas'
-import { demoClimbingAssets, makeDarkPanelBackground } from '@/lib/brand-assets'
+import { demoClimbingAssets } from '@/lib/brand-assets'
 import AppShell from './app-shell'
 
 type AppDashboardProps = {
@@ -80,21 +91,17 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile, equip
 
   return (
     <AppShell activeItem="feed" user={user}>
-      <section
-        className="mb-6 overflow-hidden rounded-lg border border-white/10 bg-cover bg-center p-6 shadow-2xl shadow-black/20 md:p-8"
-        style={{ backgroundImage: makeDarkPanelBackground(isClub ? demoClimbingAssets.indoorGym : demoClimbingAssets.verdonWall) }}
+      <AppHero
+        className="mb-6"
+        backgroundImage={isClub ? demoClimbingAssets.indoorGym : demoClimbingAssets.verdonWall}
+        description="Un premier fil communautaire pour connecter les grimpeurs, les clubs, les lieux et les sessions à venir."
+        eyebrow="MVP feed"
+        title={`Bonjour ${displayName}`}
       >
-        <Badge className="bg-[#f4a261] text-[#050a2a]" variant="default">MVP feed</Badge>
-        <h1 className="mt-5 text-4xl font-black text-white md:text-5xl">Bonjour {displayName}</h1>
-        <p className="mt-3 max-w-2xl text-white/[0.78]">
-          Un premier fil communautaire pour connecter les grimpeurs, les clubs, les lieux et les sessions à venir.
-        </p>
-        <div className="mt-6 flex flex-wrap gap-2">
-          <Badge className="bg-white/10 text-white" variant="default">Matching local</Badge>
-          <Badge className="bg-white/10 text-white" variant="default">Topos vivants</Badge>
-          <Badge className="bg-white/10 text-white" variant="default">Événements clubs</Badge>
-        </div>
-      </section>
+        <Badge className="bg-white/10 text-white" variant="default">Matching local</Badge>
+        <Badge className="bg-white/10 text-white" variant="default">Topos vivants</Badge>
+        <Badge className="bg-white/10 text-white" variant="default">Événements clubs</Badge>
+      </AppHero>
 
       <div className="mb-6 grid gap-4 md:grid-cols-3">
         <StatCard value={isClub ? 'Club' : String(disciplineCount)} label={isClub ? 'Type de compte' : 'Disciplines'} icon={Mountain} />
@@ -105,11 +112,7 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile, equip
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
         <section className="space-y-6">
             <Card hover={false} className="overflow-hidden">
-              <div
-                className="h-28 bg-cover bg-center"
-                style={{ backgroundImage: makeDarkPanelBackground(demoClimbingAssets.indoorGym) }}
-                aria-hidden="true"
-              />
+              <MediaHeader imageUrl={demoClimbingAssets.indoorGym} />
               <CardContent className="p-4">
                 <div className="flex gap-3">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-coral-light text-coral">
@@ -132,11 +135,7 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile, equip
 
             {feedPosts.map((post) => (
               <Card key={`${post.author}-${post.meta}`} hover={false} className="overflow-hidden">
-                <div
-                  className="h-28 bg-cover bg-center"
-                  style={{ backgroundImage: makeDarkPanelBackground(post.image) }}
-                  aria-hidden="true"
-                />
+                <MediaHeader imageUrl={post.image} />
                 <CardContent className="p-5">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex gap-3">
@@ -167,11 +166,7 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile, equip
             ))}
 
             <Card hover={false} className="overflow-hidden">
-              <div
-                className="h-24 bg-cover bg-center"
-                style={{ backgroundImage: makeDarkPanelBackground(demoClimbingAssets.fontainebleau) }}
-                aria-hidden="true"
-              />
+              <MediaHeader className="h-24" imageUrl={demoClimbingAssets.fontainebleau} />
               <CardHeader>
                 <CardTitle>{isClub ? 'Demandes et activité locale' : 'Partenaires recommandés'}</CardTitle>
                 <CardDescription>
@@ -280,13 +275,12 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile, equip
               </CardHeader>
               <CardContent className="space-y-3">
                 {popularPlaces.map((place) => (
-                  <div key={place.name} className="flex items-center justify-between rounded-lg border border-border p-4">
-                    <div>
-                      <p className="font-medium text-foreground">{place.name}</p>
-                      <p className="text-sm text-muted-foreground">{place.detail}</p>
+                  <InfoTile key={place.name} label={place.name}>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-muted-foreground">{place.detail}</span>
+                      <Badge variant="primary">{place.type}</Badge>
                     </div>
-                    <Badge variant="primary">{place.type}</Badge>
-                  </div>
+                  </InfoTile>
                 ))}
               </CardContent>
             </Card>

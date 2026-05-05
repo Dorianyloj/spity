@@ -1,10 +1,21 @@
 'use client'
 
-import { Building2, Filter, MapPin, Mountain, Route, Search, ShieldCheck, UsersRound } from 'lucide-react'
+import { Building2, MapPin, Mountain, Route, SearchX, ShieldCheck, UsersRound } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
-import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui'
-import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
+import {
+  AppHero,
+  Badge,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  EmptyState,
+  FilterToolbar,
+  MediaHeader,
+} from '@/components/ui'
+import { brandAssets } from '@/lib/brand-assets'
 
 type SallePlace = {
   id: string
@@ -218,36 +229,17 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
 
   return (
     <div className="space-y-7">
-      <section
-        className="overflow-hidden rounded-lg border border-white/10 bg-cover bg-center p-6 shadow-2xl shadow-black/20 md:p-8"
-        style={{ backgroundImage: makePanelBackground(brandAssets.crag) }}
-      >
-        <Badge className="bg-[#f4a261] text-[#050a2a]" variant="default">
-          Répertoire MVP
-        </Badge>
-        <div className="mt-5 grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
-          <div>
-            <h1 className="text-4xl font-black text-white md:text-5xl">Lieux d’escalade</h1>
-            <p className="mt-3 max-w-2xl text-white/[0.76]">
-              Une première vue unifiée des salles, falaises et clubs, alimentée par MariaDB pour la démo.
-            </p>
-          </div>
-          <div className="grid grid-cols-3 gap-2 rounded-lg border border-white/10 bg-[#050a2a]/60 p-3 backdrop-blur">
-            <div>
-              <p className="text-2xl font-black text-[#f4a261]">{totalPlaces}</p>
-              <p className="text-xs font-semibold uppercase text-white/[0.62]">lieux</p>
-            </div>
-            <div>
-              <p className="text-2xl font-black text-[#f4a261]">{voies.length}</p>
-              <p className="text-xs font-semibold uppercase text-white/[0.62]">voies</p>
-            </div>
-            <div>
-              <p className="text-2xl font-black text-[#f4a261]">{clubs.length}</p>
-              <p className="text-xs font-semibold uppercase text-white/[0.62]">clubs</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <AppHero
+        backgroundImage={brandAssets.crag}
+        description="Une première vue unifiée des salles, falaises et clubs, alimentée par MariaDB pour la démo."
+        eyebrow="Répertoire MVP"
+        stats={[
+          { label: 'lieux', value: totalPlaces },
+          { label: 'voies', value: voies.length },
+          { label: 'clubs', value: clubs.length },
+        ]}
+        title="Lieux d’escalade"
+      />
 
       <section className="grid gap-4 md:grid-cols-3">
         {placeCards.map((placeCard) => {
@@ -255,11 +247,7 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
 
           return (
             <Card key={placeCard.label} hover={false} className="overflow-hidden">
-              <div
-                className="h-28 bg-cover bg-center"
-                style={{ backgroundImage: makePanelBackground(placeCard.image) }}
-                aria-hidden="true"
-              />
+              <MediaHeader imageUrl={placeCard.image} />
               <CardHeader>
                 <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                   <Icon size={22} />
@@ -272,62 +260,32 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
         })}
       </section>
 
-      <Card hover={false}>
-        <CardContent className="p-4">
-          <div className="flex flex-col gap-4 xl:flex-row xl:items-end">
-            <label className="min-w-0 flex-1 space-y-2">
-              <span className="text-xs font-bold uppercase text-white/62">Recherche</span>
-              <span className="relative block">
-                <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
-                <input
-                  className="spity-input h-12 pl-10"
-                  placeholder="Nom, ville, voie, service..."
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                />
-              </span>
-            </label>
-
-            <div className="grid gap-3 sm:grid-cols-3 xl:w-[660px]">
-              <label className="space-y-2">
-                <span className="text-xs font-bold uppercase text-white/62">Type</span>
-                <select className="spity-input h-12" value={placeKind} onChange={(event) => setPlaceKind(event.target.value as PlaceKind)}>
-                  {filters.map((filter) => (
-                    <option key={filter.value} value={filter.value}>
-                      {filter.label}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="space-y-2">
-                <span className="text-xs font-bold uppercase text-white/62">Discipline</span>
-                <select className="spity-input h-12" value={discipline} onChange={(event) => setDiscipline(event.target.value as DisciplineFilter)}>
-                  {disciplineFilters.map((filter) => (
-                    <option key={filter.value} value={filter.value}>
-                      {filter.label}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="space-y-2">
-                <span className="text-xs font-bold uppercase text-white/62">État</span>
-                <select className="spity-input h-12" value={status} onChange={(event) => setStatus(event.target.value as StatusFilter)}>
-                  {statusFilters.map((filter) => (
-                    <option key={filter.value} value={filter.value}>
-                      {filter.label}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-          </div>
-
-          <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-white/10 pt-4 text-sm text-muted-foreground">
-            <Filter size={16} />
-            <span>{visiblePlaces} résultat(s) affiché(s)</span>
-          </div>
-        </CardContent>
-      </Card>
+      <FilterToolbar
+        countLabel={`${visiblePlaces} résultat(s) affiché(s)`}
+        filters={[
+          {
+            label: 'Type',
+            options: filters,
+            value: placeKind,
+            onChange: (value) => setPlaceKind(value as PlaceKind),
+          },
+          {
+            label: 'Discipline',
+            options: disciplineFilters,
+            value: discipline,
+            onChange: (value) => setDiscipline(value as DisciplineFilter),
+          },
+          {
+            label: 'État',
+            options: statusFilters,
+            value: status,
+            onChange: (value) => setStatus(value as StatusFilter),
+          },
+        ]}
+        query={query}
+        queryPlaceholder="Nom, ville, voie, service..."
+        onQueryChange={setQuery}
+      />
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_380px]">
         <section className="space-y-6">
@@ -339,11 +297,7 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
             <CardContent className="grid gap-3 md:grid-cols-2">
               {filteredSalles.map((salle) => (
                 <article key={salle.id} className="overflow-hidden rounded-lg border border-border bg-white/[0.03]">
-                  <div
-                    className="h-28 bg-cover bg-center"
-                    style={{ backgroundImage: makePanelBackground(salle.photoUrl ?? brandAssets.indoor) }}
-                    aria-hidden="true"
-                  />
+                  <MediaHeader imageUrl={salle.photoUrl ?? brandAssets.indoor} />
                   <div className="p-4">
                   <div className="flex items-start justify-between gap-4">
                     <div>
@@ -384,9 +338,12 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
                 </article>
               ))}
               {filteredSalles.length === 0 && (
-                <p className="rounded-lg border border-border p-4 text-sm text-muted-foreground md:col-span-2">
-                  Aucune salle ne correspond aux filtres.
-                </p>
+                <EmptyState
+                  className="md:col-span-2"
+                  icon={SearchX}
+                  title="Aucune salle trouvée"
+                  description="Aucune salle ne correspond aux filtres actifs."
+                />
               )}
             </CardContent>
           </Card>
@@ -402,11 +359,7 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
 
                 return (
                   <article key={falaise.id} className="overflow-hidden rounded-lg border border-border bg-white/[0.03]">
-                    <div
-                      className="h-36 bg-cover bg-center"
-                      style={{ backgroundImage: makePanelBackground(falaise.photoUrl ?? brandAssets.crag) }}
-                      aria-hidden="true"
-                    />
+                    <MediaHeader className="h-36" imageUrl={falaise.photoUrl ?? brandAssets.crag} />
                     <div className="p-4">
                     <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                       <div>
@@ -469,9 +422,11 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
                 )
               })}
               {filteredFalaises.length === 0 && (
-                <p className="rounded-lg border border-border p-4 text-sm text-muted-foreground">
-                  Aucune falaise ne correspond aux filtres.
-                </p>
+                <EmptyState
+                  icon={SearchX}
+                  title="Aucune falaise trouvée"
+                  description="Aucune falaise ne correspond aux filtres actifs."
+                />
               )}
             </CardContent>
           </Card>
@@ -535,9 +490,11 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
                 </article>
               ))}
               {filteredClubs.length === 0 && (
-                <p className="rounded-lg border border-border p-4 text-sm text-muted-foreground">
-                  Aucun club ne correspond aux filtres.
-                </p>
+                <EmptyState
+                  icon={SearchX}
+                  title="Aucun club trouvé"
+                  description="Aucun club ne correspond aux filtres actifs."
+                />
               )}
             </CardContent>
           </Card>
