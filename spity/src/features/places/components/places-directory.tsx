@@ -273,52 +273,58 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
       </section>
 
       <Card hover={false}>
-        <CardContent className="space-y-4 p-4">
-          <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_220px_220px_220px]">
-            <label className="relative">
-              <span className="sr-only">Rechercher un lieu</span>
-              <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
-              <input
-                className="spity-input pl-10"
-                placeholder="Rechercher par nom, ville, voie, service..."
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-              />
+        <CardContent className="p-4">
+          <div className="flex flex-col gap-4 xl:flex-row xl:items-end">
+            <label className="min-w-0 flex-1 space-y-2">
+              <span className="text-xs font-bold uppercase text-white/62">Recherche</span>
+              <span className="relative block">
+                <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+                <input
+                  className="spity-input h-12 pl-10"
+                  placeholder="Nom, ville, voie, service..."
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                />
+              </span>
             </label>
-            <label className="space-y-1.5 text-sm font-medium text-foreground">
-              Type
-              <select className="spity-input" value={placeKind} onChange={(event) => setPlaceKind(event.target.value as PlaceKind)}>
-                {filters.map((filter) => (
-                  <option key={filter.value} value={filter.value}>
-                    {filter.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="space-y-1.5 text-sm font-medium text-foreground">
-              Discipline
-              <select className="spity-input" value={discipline} onChange={(event) => setDiscipline(event.target.value as DisciplineFilter)}>
-                {disciplineFilters.map((filter) => (
-                  <option key={filter.value} value={filter.value}>
-                    {filter.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="space-y-1.5 text-sm font-medium text-foreground">
-              État
-              <select className="spity-input" value={status} onChange={(event) => setStatus(event.target.value as StatusFilter)}>
-                {statusFilters.map((filter) => (
-                  <option key={filter.value} value={filter.value}>
-                    {filter.label}
-                  </option>
-                ))}
-              </select>
-            </label>
+
+            <div className="grid gap-3 sm:grid-cols-3 xl:w-[660px]">
+              <label className="space-y-2">
+                <span className="text-xs font-bold uppercase text-white/62">Type</span>
+                <select className="spity-input h-12" value={placeKind} onChange={(event) => setPlaceKind(event.target.value as PlaceKind)}>
+                  {filters.map((filter) => (
+                    <option key={filter.value} value={filter.value}>
+                      {filter.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="space-y-2">
+                <span className="text-xs font-bold uppercase text-white/62">Discipline</span>
+                <select className="spity-input h-12" value={discipline} onChange={(event) => setDiscipline(event.target.value as DisciplineFilter)}>
+                  {disciplineFilters.map((filter) => (
+                    <option key={filter.value} value={filter.value}>
+                      {filter.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="space-y-2">
+                <span className="text-xs font-bold uppercase text-white/62">État</span>
+                <select className="spity-input h-12" value={status} onChange={(event) => setStatus(event.target.value as StatusFilter)}>
+                  {statusFilters.map((filter) => (
+                    <option key={filter.value} value={filter.value}>
+                      {filter.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
           </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+
+          <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-white/10 pt-4 text-sm text-muted-foreground">
             <Filter size={16} />
-            {visiblePlaces} résultat(s) affiché(s)
+            <span>{visiblePlaces} résultat(s) affiché(s)</span>
           </div>
         </CardContent>
       </Card>
