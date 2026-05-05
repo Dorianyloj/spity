@@ -101,13 +101,13 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
   const passwordType = showPassword ? 'text' : 'password'
 
   return (
-    <main className="min-h-screen bg-[#050a2a] text-white">
+    <main className="min-h-screen bg-background text-foreground">
       <div className="grid min-h-screen lg:grid-cols-[1fr_480px]">
         <section
           className="relative hidden overflow-hidden bg-cover bg-center text-white lg:block"
           style={{ backgroundImage: makePanelBackground(isLogin ? brandAssets.cragClose : brandAssets.indoor) }}
         >
-          <div className="absolute inset-0 bg-[#050a2a]/20" />
+          <div className="absolute inset-0 bg-[#173236]/20" />
           <div className="relative flex h-full flex-col justify-between p-10">
             <Link href="/" className="flex items-center gap-3">
               <BrandMark className="bg-white/6 shadow-xl shadow-black/20 ring-1 ring-white/12" priority size={48} tone="dark" />
@@ -115,7 +115,7 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
             </Link>
 
             <div className="max-w-xl space-y-6">
-              <Badge className="bg-[#f4a261] text-[#050a2a]" variant="default">Communauté escalade</Badge>
+              <Badge className="bg-primary text-primary-foreground" variant="default">Communauté escalade</Badge>
               <h1 className="text-5xl font-bold leading-tight">
                 Trouvez vos partenaires et gardez vos sessions au même endroit.
               </h1>
@@ -141,14 +141,14 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
           </div>
         </section>
 
-        <section className="flex items-center bg-[#050a2a] px-4 py-8 sm:px-8">
+        <section className="flex items-center bg-background px-4 py-8 sm:px-8">
           <div className="mx-auto w-full max-w-md space-y-6">
             <div className="flex items-center justify-between">
-              <Link href="/" className="flex items-center gap-2 text-xl font-bold text-white lg:hidden">
+              <Link href="/" className="flex items-center gap-2 text-xl font-bold text-foreground lg:hidden">
                 <BrandMark className="bg-white/6 ring-1 ring-white/12" size={36} tone="dark" />
                 <span>Spity</span>
               </Link>
-              <Link href={isLogin ? '/register' : '/login'} className="text-sm font-medium text-[#f4a261]">
+              <Link href={isLogin ? '/register' : '/login'} className="text-sm font-medium text-primary">
                 {isLogin ? 'Créer un compte' : 'Se connecter'}
               </Link>
             </div>

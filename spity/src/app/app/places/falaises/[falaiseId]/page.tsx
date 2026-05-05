@@ -142,7 +142,7 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
           className="overflow-hidden rounded-lg border border-white/10 bg-cover bg-center p-6 shadow-2xl shadow-black/20 md:p-8"
           style={{ backgroundImage: makePanelBackground(photoUrl) }}
         >
-          <Badge className="bg-[#f4a261] text-[#050a2a]" variant="default">
+          <Badge className="bg-[#8bb957] text-[#173236]" variant="default">
             Falaise
           </Badge>
           <div className="mt-5 grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
@@ -156,17 +156,17 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
                 {falaise.acces ?? 'Accès à compléter par la communauté.'}
               </p>
             </div>
-            <div className="grid grid-cols-3 gap-2 rounded-lg border border-white/10 bg-[#050a2a]/60 p-3 backdrop-blur">
+            <div className="grid grid-cols-3 gap-2 rounded-lg border border-white/10 bg-[#173236]/60 p-3 backdrop-blur">
               <div>
-                <p className="text-2xl font-black text-[#f4a261]">{routeRows.length}</p>
+                <p className="text-2xl font-black text-[#8bb957]">{routeRows.length}</p>
                 <p className="text-xs font-semibold uppercase text-white/[0.62]">voies</p>
               </div>
               <div>
-                <p className="text-2xl font-black text-[#f4a261]">{reportRows.length}</p>
+                <p className="text-2xl font-black text-[#8bb957]">{reportRows.length}</p>
                 <p className="text-xs font-semibold uppercase text-white/[0.62]">alertes</p>
               </div>
               <div>
-                <p className="text-2xl font-black text-[#f4a261]">{falaise.status ? statusLabels[falaise.status] : 'N/A'}</p>
+                <p className="text-2xl font-black text-[#8bb957]">{falaise.status ? statusLabels[falaise.status] : 'N/A'}</p>
                 <p className="text-xs font-semibold uppercase text-white/[0.62]">état</p>
               </div>
             </div>

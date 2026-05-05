@@ -8,135 +8,135 @@
    Application sociale pour la communauté escalade
 
    Palette:
-   - Encre roche (#1a1f1b) : ancrage, contraste, navigation
-   - Ivoire calcaire (#f4ecdf) : fond chaud et naturel
-   - Orange magnésie (#f4a261) : action principale
-   - Corail relais (#e76f51) : accents, alertes et signaux forts
+   - Brume alpine (#eff6ef) : fond clair et respirant
+   - Sapin profond (#173236) : texte et navigation
+   - Mousse active (#8bb957) : action principale
+   - Givre végétal (#dfeecf) : surfaces secondaires
 
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
   /* Couleurs principales */
-  --background: #050a2a;
-  --foreground: #f8fafc;
+  --background: #eff6ef;
+  --foreground: #173236;
 
   /* Surfaces */
-  --card: #111a55;
-  --card-foreground: #f8fafc;
-  --popover: #111a55;
-  --popover-foreground: #f8fafc;
+  --card: #fbfdf8;
+  --card-foreground: #173236;
+  --popover: #fbfdf8;
+  --popover-foreground: #173236;
 
-  /* Action primaire - Orange */
-  --primary: #f4a261;
-  --primary-foreground: #050a2a;
+  /* Action primaire - Vert mousse */
+  --primary: #8bb957;
+  --primary-foreground: #132d2f;
 
-  /* Secondaire - Encre */
-  --secondary: #241f7a;
-  --secondary-foreground: #f8fafc;
+  /* Secondaire - Givre végétal */
+  --secondary: #dfeecf;
+  --secondary-foreground: #244331;
 
   /* États neutres */
-  --muted: #182060;
-  --muted-foreground: #b8bfd6;
+  --muted: #e5eddf;
+  --muted-foreground: #65736b;
 
-  /* Accent - Corail clair */
-  --accent: #2d2142;
-  --accent-foreground: #f4a261;
+  /* Accent - Forêt douce */
+  --accent: #d8ead0;
+  --accent-foreground: #2f6f4e;
 
   /* Feedback */
   --destructive: #c84b43;
   --destructive-foreground: #ffffff;
-  --success: #5a9a6f;
+  --success: #5f8f50;
   --success-foreground: #ffffff;
-  --warning: #c98a2a;
-  --warning-foreground: #ffffff;
+  --warning: #c79a42;
+  --warning-foreground: #173236;
 
   /* Bordures et inputs */
-  --border: #2d3675;
-  --input: #0b113d;
-  --ring: #f4a261;
+  --border: #ccd9c7;
+  --input: #f8fbf5;
+  --ring: #8bb957;
 
   /* Graphiques - Palette étendue */
-  --chart-1: #e76f51;
-  --chart-2: #264653;
-  --chart-3: #5a9a6f;
-  --chart-4: #f4a261;
-  --chart-5: #4f7fb5;
+  --chart-1: #8bb957;
+  --chart-2: #2f6f4e;
+  --chart-3: #6d8f9f;
+  --chart-4: #c79a42;
+  --chart-5: #173236;
 
   /* Rayons */
   --radius: 0.625rem;
 
   /* Sidebar */
-  --sidebar: #050a2a;
-  --sidebar-foreground: #f8fafc;
-  --sidebar-primary: #f4a261;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #111a55;
-  --sidebar-accent-foreground: #f8fafc;
-  --sidebar-border: #2d3675;
-  --sidebar-ring: #e76f51;
+  --sidebar: #173236;
+  --sidebar-foreground: #f8fbf5;
+  --sidebar-primary: #8bb957;
+  --sidebar-primary-foreground: #132d2f;
+  --sidebar-accent: #27494b;
+  --sidebar-accent-foreground: #f8fbf5;
+  --sidebar-border: #3b5b5b;
+  --sidebar-ring: #8bb957;
 
   /* Tokens Spity personnalisés */
-  --spity-coral: #f4a261;
-  --spity-coral-light: #2d2142;
-  --spity-coral-dark: #f4a261;
-  --spity-slate: #050a2a;
-  --spity-slate-light: #111a55;
-  --spity-stone: #f8fafc;
-  --spity-stone-dark: #b8bfd6;
-  --spity-granite: #8791bd;
-  --spity-primary-muted: #182060;
-  --spity-info: #4f7fb5;
+  --spity-coral: #8bb957;
+  --spity-coral-light: #dfeecf;
+  --spity-coral-dark: #5f8f50;
+  --spity-slate: #173236;
+  --spity-slate-light: #27494b;
+  --spity-stone: #fbfdf8;
+  --spity-stone-dark: #65736b;
+  --spity-granite: #8d9b91;
+  --spity-primary-muted: #e5eddf;
+  --spity-info: #6d8f9f;
 
   /* Niveaux de cotation escalade */
-  --grade-beginner: #5a9a6f;
-  --grade-intermediate: #4f7fb5;
-  --grade-advanced: #c9a14a;
-  --grade-expert: #e76f51;
-  --grade-elite: #1a1f1b;
+  --grade-beginner: #6fa65b;
+  --grade-intermediate: #6d8f9f;
+  --grade-advanced: #c79a42;
+  --grade-expert: #b96f55;
+  --grade-elite: #173236;
 }
 
 .dark {
-  --background: #0f1219;
-  --foreground: #f5f2ed;
+  --background: #132d2f;
+  --foreground: #f8fbf5;
 
-  --card: #1a1f2e;
-  --card-foreground: #f5f2ed;
-  --popover: #1a1f2e;
-  --popover-foreground: #f5f2ed;
+  --card: #173236;
+  --card-foreground: #f8fbf5;
+  --popover: #173236;
+  --popover-foreground: #f8fbf5;
 
-  --primary: #e8614d;
-  --primary-foreground: #ffffff;
+  --primary: #8bb957;
+  --primary-foreground: #132d2f;
 
-  --secondary: #2d3548;
-  --secondary-foreground: #f5f2ed;
+  --secondary: #27494b;
+  --secondary-foreground: #f8fbf5;
 
-  --muted: #2d3548;
-  --muted-foreground: #9ca3af;
+  --muted: #27494b;
+  --muted-foreground: #cbd8c7;
 
-  --accent: #2d1f1c;
-  --accent-foreground: #e8614d;
+  --accent: #203f3f;
+  --accent-foreground: #dfeecf;
 
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
 
-  --border: #2d3548;
-  --input: #2d3548;
-  --ring: #e8614d;
+  --border: #3b5b5b;
+  --input: #203f3f;
+  --ring: #8bb957;
 
-  --chart-1: #e8614d;
-  --chart-2: #f5f2ed;
-  --chart-3: #10b981;
-  --chart-4: #f59e0b;
-  --chart-5: #9ca3af;
+  --chart-1: #8bb957;
+  --chart-2: #dfeecf;
+  --chart-3: #6d8f9f;
+  --chart-4: #c79a42;
+  --chart-5: #f8fbf5;
 
-  --sidebar: #0f1219;
-  --sidebar-foreground: #f5f2ed;
-  --sidebar-primary: #e8614d;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #1a1f2e;
-  --sidebar-accent-foreground: #f5f2ed;
-  --sidebar-border: #2d3548;
-  --sidebar-ring: #e8614d;
+  --sidebar: #132d2f;
+  --sidebar-foreground: #f8fbf5;
+  --sidebar-primary: #8bb957;
+  --sidebar-primary-foreground: #132d2f;
+  --sidebar-accent: #203f3f;
+  --sidebar-accent-foreground: #f8fbf5;
+  --sidebar-border: #3b5b5b;
+  --sidebar-ring: #8bb957;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -311,17 +311,17 @@
 
   /* Carte avec effet de profondeur */
   .spity-card {
-    @apply rounded-lg border border-white/10 bg-[#0b113d]/90 text-card-foreground backdrop-blur-xl;
+    @apply rounded-lg border border-white/70 bg-[#fbfdf8]/92 text-card-foreground backdrop-blur-xl;
     box-shadow:
-      0 1px 0 0 rgb(255 255 255 / 0.04),
-      0 20px 46px -30px rgb(0 0 0 / 0.78);
+      0 1px 0 0 rgb(255 255 255 / 0.8),
+      0 20px 46px -34px rgb(23 50 54 / 0.36);
     transition: box-shadow 0.2s ease, transform 0.2s ease;
   }
 
   .spity-card:hover {
     box-shadow:
-      0 1px 0 0 rgb(255 255 255 / 0.05),
-      0 24px 56px -32px rgb(0 0 0 / 0.84);
+      0 1px 0 0 rgb(255 255 255 / 0.86),
+      0 24px 56px -34px rgb(23 50 54 / 0.42);
     transform: translateY(-1px);
   }
 
@@ -333,18 +333,19 @@
 
   .spity-btn--primary {
     @apply bg-primary text-primary-foreground;
-    box-shadow: 0 1px 2px 0 rgb(232 97 77 / 0.3);
+    box-shadow: 0 1px 2px 0 rgb(95 143 80 / 0.3);
   }
 
   .spity-btn--primary:hover {
     background: var(--spity-coral-dark);
-    box-shadow: 0 4px 12px 0 rgb(231 111 81 / 0.3);
+    color: white;
+    box-shadow: 0 4px 12px 0 rgb(95 143 80 / 0.28);
     transform: translateY(-1px);
   }
 
   .spity-btn--primary:active {
     transform: translateY(0);
-    box-shadow: 0 1px 2px 0 rgb(232 97 77 / 0.3);
+    box-shadow: 0 1px 2px 0 rgb(95 143 80 / 0.3);
   }
 
   .spity-btn--secondary {
@@ -353,6 +354,7 @@
 
   .spity-btn--secondary:hover {
     background: var(--spity-slate-light);
+    color: white;
   }
 
   .spity-btn--ghost {
@@ -365,7 +367,7 @@
 
   /* Input Spity */
   .spity-input {
-    @apply w-full rounded-lg border border-white/10 bg-[#080d32]/90 px-4 py-2.5
+    @apply w-full rounded-lg border border-border bg-[#f8fbf5]/95 px-4 py-2.5
            text-foreground placeholder:text-muted-foreground
            transition-all duration-200;
   }
@@ -433,8 +435,8 @@
 
   /* Stat card */
   .spity-stat {
-    @apply flex flex-col items-center rounded-lg border border-white/10 bg-[#0b113d]/80 p-4 text-card-foreground backdrop-blur-xl;
-    box-shadow: 0 18px 42px -32px rgb(0 0 0 / 0.82);
+    @apply flex flex-col items-center rounded-lg border border-white/70 bg-[#fbfdf8]/88 p-4 text-card-foreground backdrop-blur-xl;
+    box-shadow: 0 18px 42px -34px rgb(23 50 54 / 0.32);
   }
 
   .spity-stat__value {
@@ -457,15 +459,15 @@
   }
 
   .spity-tab-row {
-    @apply flex w-fit gap-1 overflow-x-auto rounded-lg border border-white/10 bg-[#0b113d]/80 p-1 backdrop-blur-xl;
+    @apply flex w-fit gap-1 overflow-x-auto rounded-lg border border-white/70 bg-[#fbfdf8]/88 p-1 backdrop-blur-xl;
   }
 
   .spity-tab-row__item {
-    @apply flex shrink-0 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-white/70 transition-colors;
+    @apply flex shrink-0 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors;
   }
 
   .spity-tab-row__item:hover {
-    @apply bg-white/10 text-white;
+    @apply bg-secondary text-foreground;
   }
 
   .spity-tab-row__item--active {
@@ -494,7 +496,7 @@
   }
 
   .rock-sunset {
-    background: linear-gradient(160deg, #f4a261, #e76f51 42%, #6b3d2e);
+    background: linear-gradient(160deg, #dfeecf, #8bb957 42%, #2f6f4e);
   }
 
   .rock-granite {

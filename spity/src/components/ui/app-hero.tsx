@@ -45,7 +45,7 @@ export default function AppHero({
           {children && <div className="mt-6 flex flex-wrap gap-2">{children}</div>}
         </div>
         {stats.length > 0 && (
-          <div className="grid grid-cols-3 gap-2 rounded-lg border border-white/10 bg-[#050a2a]/60 p-3 backdrop-blur">
+          <div className="grid grid-cols-3 gap-2 rounded-lg border border-white/10 bg-[#173236]/68 p-3 backdrop-blur">
             {stats.map((stat) => (
               <div key={stat.label}>
                 <p className="text-2xl font-black text-primary">{stat.value}</p>

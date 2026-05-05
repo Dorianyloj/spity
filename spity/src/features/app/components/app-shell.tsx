@@ -31,22 +31,22 @@ const navigationItems: Array<{
 export default function AppShell({ activeItem, children, user }: AppShellProps) {
   const isClub = user.role === 'club'
   const showProfileShortcut = activeItem !== 'profile'
-  const navActionClass = '!text-secondary-foreground/80 hover:!bg-white/10 hover:!text-white'
+  const navActionClass = '!text-white/80 hover:!bg-white/10 hover:!text-white'
 
   return (
     <main
       className="min-h-screen bg-background bg-fixed bg-cover bg-center pb-10 text-foreground"
       style={{ backgroundImage: makeDarkPanelBackground(demoClimbingAssets.verdonClimbers) }}
     >
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-[#050a2a]/90 text-secondary-foreground backdrop-blur-xl">
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-[#173236]/92 text-white backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <Link href="/app" className="flex items-center gap-3 pr-2 text-2xl font-extrabold text-secondary-foreground">
+              <Link href="/app" className="flex items-center gap-3 pr-2 text-2xl font-extrabold text-white">
                 <BrandMark className="bg-white/6 shadow-lg shadow-black/20 ring-1 ring-white/12" priority size={42} tone="dark" />
                 Spity
               </Link>
-              <Badge className="bg-white/10 text-secondary-foreground" variant="default">{isClub ? 'Club' : 'Grimpeur'}</Badge>
+              <Badge className="bg-white/10 text-white" variant="default">{isClub ? 'Club' : 'Grimpeur'}</Badge>
             </div>
             <div className="flex items-center gap-2 lg:hidden">
               <LogoutButton className={navActionClass} />
@@ -64,7 +64,7 @@ export default function AppShell({ activeItem, children, user }: AppShellProps) 
                   href={item.href}
                   aria-current={isActive ? 'page' : undefined}
                   className={`flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
-                    isActive ? 'bg-primary text-primary-foreground' : 'text-secondary-foreground/70 hover:bg-white/10 hover:text-white'
+                    isActive ? 'bg-primary text-primary-foreground' : 'text-white/70 hover:bg-white/10 hover:text-white'
                   }`}
                 >
                   <Icon size={18} />

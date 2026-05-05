@@ -168,7 +168,7 @@ export default async function GymDetailPage({ params }: GymDetailPageProps) {
           className="overflow-hidden rounded-lg border border-white/10 bg-cover bg-center p-6 shadow-2xl shadow-black/20 md:p-8"
           style={{ backgroundImage: makePanelBackground(photoUrl) }}
         >
-          <Badge className="bg-[#f4a261] text-[#050a2a]" variant="default">
+          <Badge className="bg-[#8bb957] text-[#173236]" variant="default">
             Salle
           </Badge>
           <div className="mt-5 grid gap-6 lg:grid-cols-[minmax(0,1fr)_380px] lg:items-end">
@@ -180,17 +180,17 @@ export default async function GymDetailPage({ params }: GymDetailPageProps) {
               </p>
               <p className="mt-4 max-w-2xl text-white/[0.76]">{salle.adresse}</p>
             </div>
-            <div className="grid grid-cols-3 gap-2 rounded-lg border border-white/10 bg-[#050a2a]/60 p-3 backdrop-blur">
+            <div className="grid grid-cols-3 gap-2 rounded-lg border border-white/10 bg-[#173236]/60 p-3 backdrop-blur">
               <div>
-                <p className="text-2xl font-black text-[#f4a261]">{disciplines.length}</p>
+                <p className="text-2xl font-black text-[#8bb957]">{disciplines.length}</p>
                 <p className="text-xs font-semibold uppercase text-white/[0.62]">pratiques</p>
               </div>
               <div>
-                <p className="text-2xl font-black text-[#f4a261]">{services.length}</p>
+                <p className="text-2xl font-black text-[#8bb957]">{services.length}</p>
                 <p className="text-xs font-semibold uppercase text-white/[0.62]">services</p>
               </div>
               <div>
-                <p className="text-2xl font-black text-[#f4a261]">{reportRows.length}</p>
+                <p className="text-2xl font-black text-[#8bb957]">{reportRows.length}</p>
                 <p className="text-xs font-semibold uppercase text-white/[0.62]">alertes</p>
               </div>
             </div>
@@ -317,7 +317,7 @@ export default async function GymDetailPage({ params }: GymDetailPageProps) {
                     href={salle.siteWeb}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-colors hover:bg-[#e76f51]"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-colors hover:bg-[#5f8f50]"
                   >
                     Site officiel
                     <ExternalLink size={16} />
@@ -363,7 +363,7 @@ export default async function GymDetailPage({ params }: GymDetailPageProps) {
                 <CardDescription>Repères pour la future carte interactive.</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="rounded-lg border border-border bg-[#050a2a]/40 p-4 text-sm text-muted-foreground">
+                <div className="rounded-lg border border-border bg-[#173236]/40 p-4 text-sm text-muted-foreground">
                   <div className="flex items-center gap-2 font-semibold text-foreground">
                     <CalendarDays className="text-primary" size={18} />
                     Coordonnées

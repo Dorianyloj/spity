@@ -36,7 +36,7 @@ export default function FilterToolbar({
       <CardContent className="p-4">
         <div className="flex flex-col gap-4 xl:flex-row xl:items-end">
           <label className="min-w-0 flex-1 space-y-2">
-            <span className="text-xs font-bold uppercase text-white/60">{queryLabel}</span>
+            <span className="text-xs font-bold uppercase text-muted-foreground">{queryLabel}</span>
             <span className="relative block">
               <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
               <input
@@ -51,7 +51,7 @@ export default function FilterToolbar({
           <div className="grid gap-3 sm:grid-cols-3 xl:w-[660px]">
             {filters.map((filter) => (
               <label key={filter.label} className="space-y-2">
-                <span className="text-xs font-bold uppercase text-white/60">{filter.label}</span>
+                <span className="text-xs font-bold uppercase text-muted-foreground">{filter.label}</span>
                 <select className="spity-input h-12" value={filter.value} onChange={(event) => filter.onChange(event.target.value)}>
                   {filter.options.map((option) => (
                     <option key={option.value} value={option.value}>

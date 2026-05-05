@@ -330,7 +330,7 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
                   </div>
                   <Link
                     href={`/app/places/salles/${salle.id}`}
-                    className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-colors hover:bg-[#e76f51]"
+                    className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-colors hover:bg-[#5f8f50] hover:text-white"
                   >
                     Voir la fiche salle
                   </Link>
@@ -398,7 +398,7 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
                     {routes.length > 0 && (
                       <div className="mt-4 grid gap-2 md:grid-cols-3">
                         {routes.map((route) => (
-                          <div key={route.id} className="rounded-lg border border-border bg-[#050a2a]/40 p-3">
+                          <div key={route.id} className="rounded-lg border border-border bg-secondary/60 p-3">
                             <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
                               <Route size={15} className="text-primary" />
                               {route.nom}
@@ -413,7 +413,7 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
                     )}
                     <Link
                       href={`/app/places/falaises/${falaise.id}`}
-                      className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-colors hover:bg-[#e76f51]"
+                      className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-colors hover:bg-[#5f8f50] hover:text-white"
                     >
                       Voir la fiche falaise
                     </Link>
@@ -439,7 +439,7 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
               <CardDescription>Préparation du futur affichage Mapbox ou Leaflet.</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="relative min-h-[280px] overflow-hidden rounded-lg border border-border bg-[#050a2a]">
+              <div className="relative min-h-[280px] overflow-hidden rounded-lg border border-border bg-[#173236]">
                 <div className="absolute inset-0 topo-lines opacity-80" />
                 {[
                   { label: 'Salle', x: '22%', y: '28%' },
@@ -483,7 +483,7 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
                   </div>
                   <Link
                     href={`/app/places/clubs/${club.id}`}
-                    className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-colors hover:bg-[#e76f51]"
+                    className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-colors hover:bg-[#5f8f50] hover:text-white"
                   >
                     Voir la fiche club
                   </Link>

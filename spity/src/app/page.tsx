@@ -75,7 +75,7 @@ const adventures: Adventure[] = [
     title: 'Sessions',
     description: 'Organisez une sortie bloc, voie ou falaise avec des grimpeurs compatibles.',
     icon: Users,
-    accent: 'from-[#f4a261] to-[#e76f51]',
+    accent: 'from-[#8bb957] to-[#5f8f50]',
   },
   {
     number: '02',
@@ -131,7 +131,7 @@ function AnimatedSection({ children, className = '', delay = 0, id }: AnimatedSe
 
 export default function LandingPage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#050a2a] text-white">
+    <main className="min-h-screen overflow-hidden bg-[#173236] text-white">
       <section
         className="relative flex min-h-[92svh] flex-col overflow-hidden bg-cover bg-center"
         style={{ backgroundImage: heroBackground }}
@@ -154,7 +154,7 @@ export default function LandingPage() {
           </div>
           <Link
             href="/login"
-            className="rounded-lg border border-white/30 px-4 py-2 font-semibold text-white transition-colors hover:bg-white hover:text-[#050a2a]"
+            className="rounded-lg border border-white/30 px-4 py-2 font-semibold text-white transition-colors hover:bg-white hover:text-[#173236]"
           >
             Connexion
           </Link>
@@ -168,7 +168,7 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="h-2 w-2 rounded-full bg-[#f4a261]" />
+              <span className="h-2 w-2 rounded-full bg-[#8bb957]" />
               Réseau social pour grimpeurs, clubs et salles
             </motion.p>
 
@@ -179,7 +179,7 @@ export default function LandingPage() {
               transition={{ duration: 0.7, delay: 0.1 }}
             >
               SPITY
-              <span className="ml-2 align-top text-4xl text-[#f4a261] md:text-6xl">*</span>
+              <span className="ml-2 align-top text-4xl text-[#8bb957] md:text-6xl">*</span>
             </motion.h1>
 
             <motion.p
@@ -200,7 +200,7 @@ export default function LandingPage() {
             >
               <Link
                 href="/register"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-5 py-3 font-bold text-[#050a2a] transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-5 py-3 font-bold text-[#173236] transition-transform hover:-translate-y-0.5"
               >
                 Rejoindre Spity
                 <ArrowRight size={18} aria-hidden="true" />
@@ -223,8 +223,8 @@ export default function LandingPage() {
             ['800+', 'salles indoor'],
             ['1 app', 'pour tout connecter'],
           ].map(([value, label]) => (
-            <div key={label} className="border-t border-white/[0.18] bg-[#050a2a]/[0.28] py-4 backdrop-blur-sm md:px-5">
-              <p className="text-2xl font-black text-[#f4a261]">{value}</p>
+            <div key={label} className="border-t border-white/[0.18] bg-[#173236]/[0.28] py-4 backdrop-blur-sm md:px-5">
+              <p className="text-2xl font-black text-[#8bb957]">{value}</p>
               <p className="mt-1 text-xs font-semibold uppercase text-white/[0.62]">{label}</p>
             </div>
           ))}
@@ -233,7 +233,7 @@ export default function LandingPage() {
 
       <AnimatedSection className="mx-auto grid max-w-7xl gap-8 px-5 py-20 md:grid-cols-[0.8fr_1.2fr] md:px-8 lg:py-24">
         <div>
-          <p className="text-sm font-bold uppercase text-[#f4a261]">01 / Expérience</p>
+          <p className="text-sm font-bold uppercase text-[#8bb957]">01 / Expérience</p>
           <h2 className="mt-4 max-w-md text-4xl font-black leading-tight md:text-5xl">
             Choisir sa prochaine session devient simple.
           </h2>
@@ -244,10 +244,10 @@ export default function LandingPage() {
 
             return (
               <article key={feature.title} className="rounded-lg border border-white/10 bg-white/[0.06] p-5">
-                <div className="mb-6 flex h-11 w-11 items-center justify-center rounded-lg bg-[#f4a261] text-[#050a2a]">
+                <div className="mb-6 flex h-11 w-11 items-center justify-center rounded-lg bg-[#8bb957] text-[#173236]">
                   <Icon size={21} aria-hidden="true" />
                 </div>
-                <p className="text-xs font-bold uppercase text-[#f4a261]">{feature.eyebrow}</p>
+                <p className="text-xs font-bold uppercase text-[#8bb957]">{feature.eyebrow}</p>
                 <h3 className="mt-2 text-xl font-black">{feature.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-white/[0.68]">{feature.description}</p>
               </article>
@@ -260,7 +260,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <p className="text-sm font-bold uppercase text-[#f4a261]">02 / Activités</p>
+              <p className="text-sm font-bold uppercase text-[#8bb957]">02 / Activités</p>
               <h2 className="mt-4 max-w-xl text-4xl font-black leading-tight md:text-5xl">
                 Les blocs clés du MVP en premier plan.
               </h2>
@@ -299,9 +299,9 @@ export default function LandingPage() {
                     <div>
                       <p className="font-mono text-lg font-bold text-white">
                         {adventure.number}
-                        <span className="ml-1 text-xs text-[#f4a261]">/ Spity</span>
+                        <span className="ml-1 text-xs text-[#8bb957]">/ Spity</span>
                       </p>
-                      <div className="mt-10 flex h-24 w-24 items-center justify-center rounded-lg bg-[#050a2a]/[0.35] text-[#f4a261] transition-transform group-hover:scale-105">
+                      <div className="mt-10 flex h-24 w-24 items-center justify-center rounded-lg bg-[#173236]/[0.35] text-[#8bb957] transition-transform group-hover:scale-105">
                         <Icon size={44} aria-hidden="true" />
                       </div>
                     </div>
@@ -322,7 +322,7 @@ export default function LandingPage() {
         className="mx-auto grid max-w-7xl gap-10 px-5 py-20 md:grid-cols-[0.9fr_1.1fr] md:px-8 lg:py-24"
       >
         <div>
-          <p className="text-sm font-bold uppercase text-[#f4a261]">03 / Topos vivants</p>
+          <p className="text-sm font-bold uppercase text-[#8bb957]">03 / Topos vivants</p>
           <h2 className="mt-4 text-4xl font-black leading-tight md:text-5xl">
             Une galerie utile, pas juste belle.
           </h2>
@@ -332,7 +332,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div className="grid overflow-hidden rounded-lg border border-white/10 bg-[#241f7a] md:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid overflow-hidden rounded-lg border border-white/10 bg-[#27494b] md:grid-cols-[1.05fr_0.95fr]">
           <div
             className="min-h-[360px] bg-cover bg-center"
             style={{ backgroundImage: makePanelBackground(brandAssets.crag) }}
@@ -341,7 +341,7 @@ export default function LandingPage() {
           <div className="p-6 md:p-8">
             <div className="mb-8 flex items-start justify-between gap-4">
               <div>
-                <p className="text-xs font-bold uppercase text-[#f4a261]">Falaise</p>
+                <p className="text-xs font-bold uppercase text-[#8bb957]">Falaise</p>
                 <h3 className="mt-2 text-3xl font-black">Curis Solitude</h3>
               </div>
               <p className="font-mono text-sm text-white/[0.58]">2026</p>
@@ -352,7 +352,7 @@ export default function LandingPage() {
                 <div key={item.title} className="rounded-lg border border-white/10 bg-white/[0.06] p-4">
                   <div className="flex items-center justify-between gap-3">
                     <h4 className="font-bold">{item.title}</h4>
-                    <span className="rounded-full bg-[#f4a261] px-2 py-1 text-xs font-bold text-[#050a2a]">
+                    <span className="rounded-full bg-[#8bb957] px-2 py-1 text-xs font-bold text-[#173236]">
                       {item.tag}
                     </span>
                   </div>
@@ -363,7 +363,7 @@ export default function LandingPage() {
 
             <Link
               href="/register"
-              className="mt-7 inline-flex items-center gap-2 rounded-lg bg-[#e76f51] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#f4a261] hover:text-[#050a2a]"
+              className="mt-7 inline-flex items-center gap-2 rounded-lg bg-[#5f8f50] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#8bb957] hover:text-[#173236]"
             >
               Explorer les topos
               <ArrowRight size={17} aria-hidden="true" />
@@ -395,7 +395,7 @@ export default function LandingPage() {
 
             return (
               <article key={item.title} className="rounded-lg border border-white/10 bg-white/[0.04] p-6">
-                <Icon className="text-[#f4a261]" size={26} aria-hidden="true" />
+                <Icon className="text-[#8bb957]" size={26} aria-hidden="true" />
                 <h3 className="mt-5 text-2xl font-black">{item.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-white/[0.64]">{item.description}</p>
               </article>
@@ -404,7 +404,7 @@ export default function LandingPage() {
         </div>
       </AnimatedSection>
 
-      <footer className="border-t border-white/10 bg-[#050a2a] px-5 py-8 md:px-8">
+      <footer className="border-t border-white/10 bg-[#173236] px-5 py-8 md:px-8">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-white/[0.55] md:flex-row md:items-center md:justify-between">
           <p>© 2026 Spity. Plateforme sociale pour la communauté escalade.</p>
           <div className="flex flex-wrap gap-4">

@@ -87,7 +87,7 @@ export default async function ClubDetailPage({ params }: ClubDetailPageProps) {
           className="overflow-hidden rounded-lg border border-white/10 bg-cover bg-center p-6 shadow-2xl shadow-black/20 md:p-8"
           style={{ backgroundImage: makePanelBackground(brandAssets.heroSunset) }}
         >
-          <Badge className="bg-[#f4a261] text-[#050a2a]" variant="default">
+          <Badge className="bg-[#8bb957] text-[#173236]" variant="default">
             Club
           </Badge>
           <div className="mt-5 grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
@@ -101,17 +101,17 @@ export default async function ClubDetailPage({ params }: ClubDetailPageProps) {
                 {club.bio ?? 'Présentation club à compléter.'}
               </p>
             </div>
-            <div className="grid grid-cols-3 gap-2 rounded-lg border border-white/10 bg-[#050a2a]/60 p-3 backdrop-blur">
+            <div className="grid grid-cols-3 gap-2 rounded-lg border border-white/10 bg-[#173236]/60 p-3 backdrop-blur">
               <div>
-                <p className="text-2xl font-black text-[#f4a261]">{eventRows.length}</p>
+                <p className="text-2xl font-black text-[#8bb957]">{eventRows.length}</p>
                 <p className="text-xs font-semibold uppercase text-white/[0.62]">événements</p>
               </div>
               <div>
-                <p className="text-2xl font-black text-[#f4a261]">{postRows.length}</p>
+                <p className="text-2xl font-black text-[#8bb957]">{postRows.length}</p>
                 <p className="text-xs font-semibold uppercase text-white/[0.62]">posts</p>
               </div>
               <div>
-                <p className="text-2xl font-black text-[#f4a261]">{club.ffmeNum ? 'Oui' : 'N/A'}</p>
+                <p className="text-2xl font-black text-[#8bb957]">{club.ffmeNum ? 'Oui' : 'N/A'}</p>
                 <p className="text-xs font-semibold uppercase text-white/[0.62]">FFME</p>
               </div>
             </div>
