@@ -5,7 +5,11 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Button } from '@/components/ui'
 
-export default function LogoutButton() {
+type LogoutButtonProps = {
+  className?: string
+}
+
+export default function LogoutButton({ className = '' }: LogoutButtonProps) {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -17,7 +21,7 @@ export default function LogoutButton() {
   }
 
   return (
-    <Button variant="ghost" type="button" onClick={() => void logout()} isLoading={isLoading}>
+    <Button className={className} variant="ghost" type="button" onClick={() => void logout()} isLoading={isLoading}>
       <LogOut size={18} />
       Déconnexion
     </Button>

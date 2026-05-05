@@ -4,6 +4,7 @@ import {
   createGrimpeurProfile,
   findClubProfileByUserId,
   findGrimpeurProfileByUserId,
+  findUserEquipmentByUserId,
   updateGrimpeurProfile,
 } from '@/features/profile/lib/profile-repository'
 import { profileErrorResponse, profileMeResponse, profileUnauthorizedResponse } from '@/features/profile/lib/responses'
@@ -53,8 +54,9 @@ export async function POST(request: Request) {
 
   const grimpeurProfile = await createGrimpeurProfile(user.id, parsedBody.data)
   const clubProfile = await findClubProfileByUserId(user.id)
+  const equipment = await findUserEquipmentByUserId(user.id)
 
-  return profileMeResponse(user, grimpeurProfile, clubProfile, 201)
+  return profileMeResponse(user, grimpeurProfile, clubProfile, equipment, 201)
 }
 
 export async function PATCH(request: Request) {
@@ -89,6 +91,7 @@ export async function PATCH(request: Request) {
 
   const grimpeurProfile = await updateGrimpeurProfile(user.id, parsedBody.data)
   const clubProfile = await findClubProfileByUserId(user.id)
+  const equipment = await findUserEquipmentByUserId(user.id)
 
-  return profileMeResponse(user, grimpeurProfile, clubProfile)
+  return profileMeResponse(user, grimpeurProfile, clubProfile, equipment)
 }

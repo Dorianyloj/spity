@@ -2,12 +2,14 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Eye, EyeOff, Lock, LogIn, Mail, ShieldCheck, UserPlus, UsersRound } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input } from '@/components/ui'
+import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
 import { loginSchema, registerSchema, type LoginInput, type RegisterInput } from '@/lib/validators'
 import { authSuccessResponseSchema } from '../schemas'
 
@@ -99,17 +101,23 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
   const passwordType = showPassword ? 'text' : 'password'
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-[#050a2a] text-white">
       <div className="grid min-h-screen lg:grid-cols-[1fr_480px]">
-        <section className="relative hidden overflow-hidden bg-slate-deep text-white lg:block">
-          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(232,97,77,0.22),rgba(26,31,46,0.08))]" />
+        <section
+          className="relative hidden overflow-hidden bg-cover bg-center text-white lg:block"
+          style={{ backgroundImage: makePanelBackground(isLogin ? brandAssets.cragClose : brandAssets.indoor) }}
+        >
+          <div className="absolute inset-0 bg-[#050a2a]/20" />
           <div className="relative flex h-full flex-col justify-between p-10">
-            <Link href="/" className="text-2xl font-bold tracking-normal">
-              Spity
+            <Link href="/" className="flex items-center gap-3">
+              <span className="flex h-12 w-12 overflow-hidden rounded-lg bg-white shadow-xl shadow-black/20">
+                <Image src={brandAssets.logo} alt="" width={48} height={48} className="h-full w-full object-cover" priority />
+              </span>
+              <span className="text-2xl font-bold tracking-normal">Spity</span>
             </Link>
 
             <div className="max-w-xl space-y-6">
-              <Badge variant="primary">Communauté escalade</Badge>
+              <Badge className="bg-[#f4a261] text-[#050a2a]" variant="default">Communauté escalade</Badge>
               <h1 className="text-5xl font-bold leading-tight">
                 Trouvez vos partenaires et gardez vos sessions au même endroit.
               </h1>
@@ -119,15 +127,15 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
             </div>
 
             <div className="grid max-w-2xl grid-cols-3 gap-4 text-sm">
-              <div className="rounded-lg border border-white/15 bg-white/10 p-4">
+              <div className="rounded-lg border border-white/15 bg-white/10 p-4 backdrop-blur">
                 <UsersRound className="mb-3 text-coral" size={22} />
                 Matching local
               </div>
-              <div className="rounded-lg border border-white/15 bg-white/10 p-4">
+              <div className="rounded-lg border border-white/15 bg-white/10 p-4 backdrop-blur">
                 <ShieldCheck className="mb-3 text-coral" size={22} />
                 Sessions fiables
               </div>
-              <div className="rounded-lg border border-white/15 bg-white/10 p-4">
+              <div className="rounded-lg border border-white/15 bg-white/10 p-4 backdrop-blur">
                 <Lock className="mb-3 text-coral" size={22} />
                 Compte sécurisé
               </div>
@@ -135,13 +143,16 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
           </div>
         </section>
 
-        <section className="flex items-center px-4 py-8 sm:px-8">
+        <section className="flex items-center bg-[#050a2a] px-4 py-8 sm:px-8">
           <div className="mx-auto w-full max-w-md space-y-6">
             <div className="flex items-center justify-between">
-              <Link href="/" className="text-xl font-bold text-foreground lg:hidden">
-                Spity
+              <Link href="/" className="flex items-center gap-2 text-xl font-bold text-white lg:hidden">
+                <span className="flex h-9 w-9 overflow-hidden rounded-lg bg-white">
+                  <Image src={brandAssets.logo} alt="" width={36} height={36} className="h-full w-full object-cover" />
+                </span>
+                <span>Spity</span>
               </Link>
-              <Link href={isLogin ? '/register' : '/login'} className="text-sm font-medium text-primary">
+              <Link href={isLogin ? '/register' : '/login'} className="text-sm font-medium text-[#f4a261]">
                 {isLogin ? 'Créer un compte' : 'Se connecter'}
               </Link>
             </div>
@@ -219,11 +230,11 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
                     <fieldset className="space-y-2">
                       <legend className="text-sm font-medium text-foreground">Type de profil</legend>
                       <div className="grid grid-cols-2 gap-3">
-                        <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-border p-3 text-sm">
+                        <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-border p-3 text-sm text-foreground">
                           <input type="radio" value="grimpeur" {...registerForm.register('role')} />
                           Grimpeur
                         </label>
-                        <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-border p-3 text-sm">
+                        <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-border p-3 text-sm text-foreground">
                           <input type="radio" value="club" {...registerForm.register('role')} />
                           Club
                         </label>

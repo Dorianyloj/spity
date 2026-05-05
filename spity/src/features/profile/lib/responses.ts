@@ -4,6 +4,7 @@ import { type AuthUser } from '@/features/auth/schemas'
 import {
   type ClubProfile,
   type GrimpeurProfile,
+  type UserEquipment,
   profileErrorResponseSchema,
   profileMeResponseSchema,
 } from '../schemas'
@@ -12,6 +13,7 @@ export const profileMeResponse = (
   user: AuthUser,
   grimpeurProfile: GrimpeurProfile | null,
   clubProfile: ClubProfile | null,
+  equipment: UserEquipment[] = [],
   status = 200
 ) => {
   return NextResponse.json(
@@ -19,6 +21,7 @@ export const profileMeResponse = (
       user,
       grimpeurProfile,
       clubProfile,
+      equipment,
       onboardingComplete: Boolean(grimpeurProfile || clubProfile),
     }),
     { status }

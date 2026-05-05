@@ -8,6 +8,27 @@
       "when": 1769251817792,
       "tag": "0000_amusing_vanisher",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1777888135982,
+      "tag": "0001_flashy_mysterio",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1777889705644,
+      "tag": "0002_tense_warpath",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1777970219028,
+      "tag": "0003_acoustic_kylun",
+      "breakpoints": true
     }
   ]
 }

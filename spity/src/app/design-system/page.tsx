@@ -18,13 +18,21 @@ import {
   Skeleton,
 } from '@/components/ui'
 import { Heart, MessageCircle, Share2, TrendingUp, Mountain, Award } from 'lucide-react'
+import Image from 'next/image'
+import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
 
 export default function DesignSystemPage() {
   return (
-    <div className="min-h-screen bg-background p-8">
+    <div
+      className="min-h-screen bg-background bg-fixed bg-cover bg-center p-8"
+      style={{ backgroundImage: makePanelBackground(brandAssets.cragClose) }}
+    >
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
+          <div className="mx-auto flex h-16 w-16 overflow-hidden rounded-lg bg-white shadow-xl shadow-black/20">
+            <Image src={brandAssets.logo} alt="" width={64} height={64} className="h-full w-full object-cover" priority />
+          </div>
           <h1 className="text-4xl font-bold spity-gradient-coral bg-clip-text text-transparent">
             Spity Design System
           </h1>
@@ -137,7 +145,7 @@ export default function DesignSystemPage() {
                 <Avatar size="lg" fallback="MR" ring />
                 <Avatar
                   size="xl"
-                  src="https://i.pravatar.cc/150?img=1"
+                  src={brandAssets.logo}
                   alt="Avatar exemple"
                   ring
                 />
@@ -229,7 +237,7 @@ export default function DesignSystemPage() {
                 <StoryAvatar username="Alex" fallback="A" seen={true} />
                 <StoryAvatar
                   username="Sophie"
-                  src="https://i.pravatar.cc/150?img=5"
+                  src={brandAssets.logo}
                   seen={false}
                 />
                 <StoryAvatar username="Thomas" fallback="T" seen={true} />
@@ -280,7 +288,7 @@ export default function DesignSystemPage() {
             <CardHeader>
               <div className="flex items-center gap-3">
                 <Avatar
-                  src="https://i.pravatar.cc/150?img=3"
+                  src={brandAssets.logo}
                   alt="Pierre Durand"
                   size="md"
                 />

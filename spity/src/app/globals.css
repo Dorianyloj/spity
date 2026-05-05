@@ -8,89 +8,91 @@
    Application sociale pour la communauté escalade
 
    Palette:
-   - Slate profond (#1a1f2e) : Ancrage, confiance, profondeur comme la roche
-   - Corail vivant (#e8614d) : Énergie, passion, la magnésie sur les prises
-   - Crème pierre (#f5f2ed) : Légèreté, naturel, le calcaire des falaises
-   - Gris granite (#6b7280) : Équilibre, technique, la texture du rocher
+   - Encre roche (#1a1f1b) : ancrage, contraste, navigation
+   - Ivoire calcaire (#f4ecdf) : fond chaud et naturel
+   - Orange magnésie (#f4a261) : action principale
+   - Corail relais (#e76f51) : accents, alertes et signaux forts
 
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
   /* Couleurs principales */
-  --background: #f5f2ed;
-  --foreground: #1a1f2e;
+  --background: #050a2a;
+  --foreground: #f8fafc;
 
   /* Surfaces */
-  --card: #ffffff;
-  --card-foreground: #1a1f2e;
-  --popover: #ffffff;
-  --popover-foreground: #1a1f2e;
+  --card: #111a55;
+  --card-foreground: #f8fafc;
+  --popover: #111a55;
+  --popover-foreground: #f8fafc;
 
-  /* Action primaire - Corail */
-  --primary: #e8614d;
-  --primary-foreground: #ffffff;
+  /* Action primaire - Orange */
+  --primary: #f4a261;
+  --primary-foreground: #050a2a;
 
-  /* Secondaire - Slate */
-  --secondary: #1a1f2e;
-  --secondary-foreground: #f5f2ed;
+  /* Secondaire - Encre */
+  --secondary: #241f7a;
+  --secondary-foreground: #f8fafc;
 
   /* États neutres */
-  --muted: #e8e4de;
-  --muted-foreground: #6b7280;
+  --muted: #182060;
+  --muted-foreground: #b8bfd6;
 
   /* Accent - Corail clair */
-  --accent: #fef0ed;
-  --accent-foreground: #e8614d;
+  --accent: #2d2142;
+  --accent-foreground: #f4a261;
 
   /* Feedback */
-  --destructive: #dc2626;
+  --destructive: #c84b43;
   --destructive-foreground: #ffffff;
-  --success: #059669;
+  --success: #5a9a6f;
   --success-foreground: #ffffff;
-  --warning: #d97706;
+  --warning: #c98a2a;
   --warning-foreground: #ffffff;
 
   /* Bordures et inputs */
-  --border: #d6d0c7;
-  --input: #e8e4de;
-  --ring: #e8614d;
+  --border: #2d3675;
+  --input: #0b113d;
+  --ring: #f4a261;
 
   /* Graphiques - Palette étendue */
-  --chart-1: #e8614d;
-  --chart-2: #1a1f2e;
-  --chart-3: #059669;
-  --chart-4: #d97706;
-  --chart-5: #6b7280;
+  --chart-1: #e76f51;
+  --chart-2: #264653;
+  --chart-3: #5a9a6f;
+  --chart-4: #f4a261;
+  --chart-5: #4f7fb5;
 
   /* Rayons */
   --radius: 0.625rem;
 
   /* Sidebar */
-  --sidebar: #1a1f2e;
-  --sidebar-foreground: #f5f2ed;
-  --sidebar-primary: #e8614d;
+  --sidebar: #050a2a;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #f4a261;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #2d3548;
-  --sidebar-accent-foreground: #f5f2ed;
-  --sidebar-border: #2d3548;
-  --sidebar-ring: #e8614d;
+  --sidebar-accent: #111a55;
+  --sidebar-accent-foreground: #f8fafc;
+  --sidebar-border: #2d3675;
+  --sidebar-ring: #e76f51;
 
   /* Tokens Spity personnalisés */
-  --spity-coral: #e8614d;
-  --spity-coral-light: #fef0ed;
-  --spity-coral-dark: #c24a39;
-  --spity-slate: #1a1f2e;
-  --spity-slate-light: #2d3548;
-  --spity-stone: #f5f2ed;
-  --spity-stone-dark: #e8e4de;
-  --spity-granite: #6b7280;
+  --spity-coral: #f4a261;
+  --spity-coral-light: #fbe3d8;
+  --spity-coral-dark: #e76f51;
+  --spity-slate: #050a2a;
+  --spity-slate-light: #111a55;
+  --spity-stone: #f8fafc;
+  --spity-stone-dark: #b8bfd6;
+  --spity-granite: #8791bd;
+  --spity-primary-muted: #182060;
+  --spity-info: #4f7fb5;
 
   /* Niveaux de cotation escalade */
-  --grade-beginner: #22c55e;
-  --grade-intermediate: #3b82f6;
-  --grade-advanced: #f59e0b;
-  --grade-expert: #ef4444;
-  --grade-elite: #1a1f2e;
+  --grade-beginner: #5a9a6f;
+  --grade-intermediate: #4f7fb5;
+  --grade-advanced: #c9a14a;
+  --grade-expert: #e76f51;
+  --grade-elite: #1a1f1b;
 }
 
 .dark {
@@ -143,9 +145,9 @@
 
 @theme inline {
   /* Typographie - utilise les variables CSS injectées par Next.js */
-  --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
+  --font-sans: var(--font-outfit), 'Outfit', system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), 'JetBrains Mono', monospace;
-  --font-display: var(--font-jakarta), 'Plus Jakarta Sans', sans-serif;
+  --font-display: var(--font-outfit), 'Outfit', system-ui, sans-serif;
 
   /* Couleurs système */
   --color-background: var(--background);
@@ -227,11 +229,13 @@
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     text-rendering: optimizeLegibility;
+    letter-spacing: 0;
   }
 
   /* Typographie fluide */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight text-balance;
+    @apply font-display text-balance;
+    letter-spacing: 0;
   }
 
   p {
@@ -277,7 +281,7 @@
 @layer components {
   /* Badge de cotation */
   .grade-badge {
-    @apply inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold rounded-md;
+    @apply inline-flex items-center justify-center rounded-md px-2 py-0.5 font-mono text-xs font-bold;
   }
 
   .grade-badge--beginner {
@@ -307,24 +311,24 @@
 
   /* Carte avec effet de profondeur */
   .spity-card {
-    @apply bg-card rounded-xl border border-border;
+    @apply rounded-xl border border-border bg-card;
     box-shadow:
-      0 1px 2px 0 rgb(0 0 0 / 0.03),
-      0 1px 3px 0 rgb(0 0 0 / 0.05);
+      0 1px 0 0 rgb(26 31 27 / 0.02),
+      0 16px 32px -28px rgb(26 31 27 / 0.42);
     transition: box-shadow 0.2s ease, transform 0.2s ease;
   }
 
   .spity-card:hover {
     box-shadow:
-      0 4px 6px -1px rgb(0 0 0 / 0.05),
-      0 2px 4px -2px rgb(0 0 0 / 0.05);
+      0 1px 0 0 rgb(26 31 27 / 0.02),
+      0 22px 42px -30px rgb(26 31 27 / 0.5);
     transform: translateY(-1px);
   }
 
   /* Bouton primaire Spity */
   .spity-btn {
     @apply inline-flex items-center justify-center gap-2 px-4 py-2.5
-           font-medium text-sm rounded-lg transition-all duration-200;
+           text-sm font-semibold rounded-lg transition-all duration-200;
   }
 
   .spity-btn--primary {
@@ -334,7 +338,7 @@
 
   .spity-btn--primary:hover {
     background: var(--spity-coral-dark);
-    box-shadow: 0 4px 12px 0 rgb(232 97 77 / 0.35);
+    box-shadow: 0 4px 12px 0 rgb(231 111 81 / 0.3);
     transform: translateY(-1px);
   }
 
@@ -361,7 +365,7 @@
 
   /* Input Spity */
   .spity-input {
-    @apply w-full px-4 py-2.5 bg-input border border-border rounded-lg
+    @apply w-full rounded-lg border border-border bg-input px-4 py-2.5
            text-foreground placeholder:text-muted-foreground
            transition-all duration-200;
   }
@@ -429,15 +433,16 @@
 
   /* Stat card */
   .spity-stat {
-    @apply flex flex-col items-center p-4 bg-muted/50 rounded-xl;
+    @apply flex flex-col items-center rounded-xl border border-border bg-card p-4;
   }
 
   .spity-stat__value {
-    @apply text-2xl font-bold text-foreground;
+    @apply font-mono text-2xl font-bold text-foreground;
   }
 
   .spity-stat__label {
-    @apply text-xs text-muted-foreground uppercase tracking-wider;
+    @apply text-xs font-semibold uppercase text-muted-foreground;
+    letter-spacing: 0.08em;
   }
 
   /* Pill badge */
@@ -449,6 +454,26 @@
   .spity-pill--coral {
     @apply bg-coral-light text-coral-dark;
   }
+
+  .spity-tab-row {
+    @apply flex w-fit gap-1 overflow-x-auto rounded-xl border border-border bg-muted p-1;
+  }
+
+  .spity-tab-row__item {
+    @apply flex shrink-0 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors;
+  }
+
+  .spity-tab-row__item:hover {
+    @apply bg-card text-foreground;
+  }
+
+  .spity-tab-row__item--active {
+    @apply bg-secondary text-secondary-foreground;
+  }
+
+  .spity-tab-row__item--disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -459,6 +484,24 @@
   /* Texture de fond subtile */
   .spity-texture {
     background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a1f2e' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .topo-lines {
+    background-image:
+      repeating-linear-gradient(60deg, rgb(255 255 255 / 0.04) 0 1px, transparent 1px 22px),
+      repeating-linear-gradient(120deg, rgb(255 255 255 / 0.03) 0 1px, transparent 1px 28px);
+  }
+
+  .rock-sunset {
+    background: linear-gradient(160deg, #f4a261, #e76f51 42%, #6b3d2e);
+  }
+
+  .rock-granite {
+    background: linear-gradient(160deg, #8fa0a8, #4f6470 50%, #1f2a30);
+  }
+
+  .rock-forest {
+    background: linear-gradient(135deg, #4f6b5e, #2d4438 60%, #1a2820);
   }
 
   /* Dégradé corail */

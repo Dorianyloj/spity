@@ -24,6 +24,7 @@ export default async function AppPage() {
       user={currentProfile.user}
       grimpeurProfile={currentProfile.grimpeurProfile}
       clubProfile={currentProfile.clubProfile}
+      equipment={currentProfile.equipment}
     />
   )
 }

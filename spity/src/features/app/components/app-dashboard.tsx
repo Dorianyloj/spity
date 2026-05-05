@@ -7,13 +7,15 @@ import {
 } from 'lucide-react'
 import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle, StatCard } from '@/components/ui'
 import type { AuthUser } from '@/features/auth/schemas'
-import type { ClubProfile, GrimpeurProfile } from '@/features/profile/schemas'
+import type { ClubProfile, GrimpeurProfile, UserEquipment } from '@/features/profile/schemas'
+import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
 import AppShell from './app-shell'
 
 type AppDashboardProps = {
   user: AuthUser
   grimpeurProfile: GrimpeurProfile | null
   clubProfile: ClubProfile | null
+  equipment: UserEquipment[]
 }
 
 const nearbyPartners = [
@@ -63,34 +65,48 @@ const getDisplayName = (grimpeurProfile: GrimpeurProfile | null, clubProfile: Cl
     return clubProfile.nom
   }
 
-  return user.email.split('@')[0]
+  return grimpeurProfile?.displayName ?? user.email.split('@')[0]
 }
 
-export default function AppDashboard({ user, grimpeurProfile, clubProfile }: AppDashboardProps) {
+export default function AppDashboard({ user, grimpeurProfile, clubProfile, equipment }: AppDashboardProps) {
   const displayName = getDisplayName(grimpeurProfile, clubProfile, user)
   const isClub = user.role === 'club'
   const disciplineCount = grimpeurProfile?.disciplines.length ?? 0
-  const gearCount = grimpeurProfile?.materiel.length ?? 0
+  const detailedGearCount = equipment.reduce((total, item) => total + item.quantity, 0)
+  const gearCount = detailedGearCount || grimpeurProfile?.materiel.length || 0
 
   return (
     <AppShell activeItem="feed" user={user}>
-      <section className="mb-6">
-        <Badge variant="success">MVP feed</Badge>
-        <h1 className="mt-3 text-4xl font-bold text-foreground">Bonjour {displayName}</h1>
-        <p className="mt-2 max-w-2xl text-muted-foreground">
+      <section
+        className="mb-6 overflow-hidden rounded-lg border border-white/10 bg-cover bg-center p-6 shadow-2xl shadow-black/20 md:p-8"
+        style={{ backgroundImage: makePanelBackground(isClub ? brandAssets.indoor : brandAssets.heroSunset) }}
+      >
+        <Badge className="bg-[#f4a261] text-[#050a2a]" variant="default">MVP feed</Badge>
+        <h1 className="mt-5 text-4xl font-black text-white md:text-5xl">Bonjour {displayName}</h1>
+        <p className="mt-3 max-w-2xl text-white/[0.78]">
           Un premier fil communautaire pour connecter les grimpeurs, les clubs, les lieux et les sessions à venir.
         </p>
+        <div className="mt-6 flex flex-wrap gap-2">
+          <Badge className="bg-white/10 text-white" variant="default">Matching local</Badge>
+          <Badge className="bg-white/10 text-white" variant="default">Topos vivants</Badge>
+          <Badge className="bg-white/10 text-white" variant="default">Événements clubs</Badge>
+        </div>
       </section>
 
       <div className="mb-6 grid gap-4 md:grid-cols-3">
         <StatCard value={isClub ? 'Club' : String(disciplineCount)} label={isClub ? 'Type de compte' : 'Disciplines'} icon={Mountain} />
-        <StatCard value={isClub ? '0' : String(gearCount)} label={isClub ? 'Événements publiés' : 'Matériel déclaré'} icon={Route} />
+          <StatCard value={isClub ? '0' : String(gearCount)} label={isClub ? 'Événements publiés' : 'Objets déclarés'} icon={Route} />
         <StatCard value="3" label="Suggestions locales" icon={Compass} />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
         <section className="space-y-6">
-            <Card hover={false}>
+            <Card hover={false} className="overflow-hidden">
+              <div
+                className="h-28 bg-cover bg-center"
+                style={{ backgroundImage: makePanelBackground(brandAssets.indoor) }}
+                aria-hidden="true"
+              />
               <CardContent className="p-4">
                 <div className="flex gap-3">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-coral-light text-coral">
@@ -142,7 +158,12 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile }: App
               </Card>
             ))}
 
-            <Card hover={false}>
+            <Card hover={false} className="overflow-hidden">
+              <div
+                className="h-24 bg-cover bg-center"
+                style={{ backgroundImage: makePanelBackground(brandAssets.trad) }}
+                aria-hidden="true"
+              />
               <CardHeader>
                 <CardTitle>{isClub ? 'Demandes et activité locale' : 'Partenaires recommandés'}</CardTitle>
                 <CardDescription>
@@ -192,11 +213,19 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile }: App
                     <div>
                       <p className="text-sm font-medium text-foreground">Matériel</p>
                       <div className="mt-2 flex flex-wrap gap-2">
-                        {grimpeurProfile.materiel.map((item) => (
-                          <Badge key={item} variant="secondary">
-                            {item}
-                          </Badge>
-                        ))}
+                        {equipment.length > 0 ? (
+                          equipment.slice(0, 4).map((item) => (
+                            <Badge key={item.id} variant="secondary">
+                              {item.quantity} x {item.model}
+                            </Badge>
+                          ))
+                        ) : (
+                          grimpeurProfile.materiel.map((item) => (
+                            <Badge key={item} variant="secondary">
+                              {item}
+                            </Badge>
+                          ))
+                        )}
                       </div>
                     </div>
                   </>
