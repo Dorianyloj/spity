@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input, Textarea } from '@/components/ui'
-import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
+import { demoClimbingAssets, makeDarkPanelBackground } from '@/lib/brand-assets'
 import { createClubProfileBodySchema, createGrimpeurProfileBodySchema, defaultPartnerSearch, profileMeResponseSchema, updatePublicProfileBodySchema } from '../schemas'
 import type { CreateClubProfileBody, CreateGrimpeurProfileBody, ProfileMeResponse, UpdatePublicProfileBody, UserEquipment } from '../schemas'
 import EquipmentInventorySection from './equipment-inventory-section'
@@ -359,7 +359,7 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
     return (
       <main
         className="min-h-screen bg-background bg-cover bg-center px-4 py-10"
-        style={{ backgroundImage: makePanelBackground(brandAssets.cragClose) }}
+        style={{ backgroundImage: makeDarkPanelBackground(demoClimbingAssets.verdonWall) }}
       >
         <div className="mx-auto max-w-4xl">
           <Card>
@@ -390,7 +390,7 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
     return (
       <main
         className="min-h-screen bg-background bg-cover bg-center px-4 py-10"
-        style={{ backgroundImage: makePanelBackground(brandAssets.cragClose) }}
+        style={{ backgroundImage: makeDarkPanelBackground(demoClimbingAssets.verdonWall) }}
       >
         <div className="mx-auto max-w-4xl">
           <Card>
@@ -469,7 +469,7 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
     <Card hover={false} className="overflow-hidden">
       <div
         className="h-28 bg-cover bg-center"
-        style={{ backgroundImage: makePanelBackground(brandAssets.crag) }}
+        style={{ backgroundImage: makeDarkPanelBackground(demoClimbingAssets.verdonRoute) }}
         aria-hidden="true"
       />
       <CardContent className="-mt-10 space-y-5">
@@ -1002,7 +1002,7 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
       {!isSettings && (
         <section
           className="overflow-hidden rounded-lg border border-white/10 bg-cover bg-center p-5 shadow-2xl shadow-black/20"
-          style={{ backgroundImage: makePanelBackground(profile.user.role === 'club' ? brandAssets.indoor : brandAssets.heroSunset) }}
+          style={{ backgroundImage: makeDarkPanelBackground(profile.user.role === 'club' ? demoClimbingAssets.indoorGym : demoClimbingAssets.fontainebleau) }}
         >
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
@@ -1068,7 +1068,7 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
   return (
     <main
       className="min-h-screen bg-background bg-cover bg-center px-4 py-8"
-      style={{ backgroundImage: makePanelBackground(brandAssets.cragClose) }}
+      style={{ backgroundImage: makeDarkPanelBackground(demoClimbingAssets.verdonWall) }}
     >
       {content}
     </main>

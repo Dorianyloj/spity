@@ -8,7 +8,7 @@ import {
 import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle, StatCard } from '@/components/ui'
 import type { AuthUser } from '@/features/auth/schemas'
 import type { ClubProfile, GrimpeurProfile, UserEquipment } from '@/features/profile/schemas'
-import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
+import { demoClimbingAssets, makeDarkPanelBackground } from '@/lib/brand-assets'
 import AppShell from './app-shell'
 
 type AppDashboardProps = {
@@ -43,6 +43,7 @@ const feedPosts = [
     content: 'Session bloc ce soir vers 19h. Je cherche quelqu’un pour travailler les profils déversants et filmer quelques essais.',
     tag: 'Recherche partenaire',
     meta: 'Il y a 18 min',
+    image: demoClimbingAssets.indoorWall,
   },
   {
     author: 'Club Alpin Lyon',
@@ -50,6 +51,7 @@ const feedPosts = [
     content: 'Sortie falaise samedi matin. Groupe limité à 8 personnes, niveau conseillé 5c/6a, encadrement bénévole.',
     tag: 'Événement',
     meta: 'Il y a 1 h',
+    image: demoClimbingAssets.verdonRoute,
   },
   {
     author: 'Nassim B.',
@@ -57,6 +59,7 @@ const feedPosts = [
     content: 'Bonne session voie hier, les nouvelles ouvertures en dalle sont propres. Disponible demain midi pour assurer.',
     tag: 'Session',
     meta: 'Hier',
+    image: demoClimbingAssets.indoorCrack,
   },
 ]
 
@@ -79,7 +82,7 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile, equip
     <AppShell activeItem="feed" user={user}>
       <section
         className="mb-6 overflow-hidden rounded-lg border border-white/10 bg-cover bg-center p-6 shadow-2xl shadow-black/20 md:p-8"
-        style={{ backgroundImage: makePanelBackground(isClub ? brandAssets.indoor : brandAssets.heroSunset) }}
+        style={{ backgroundImage: makeDarkPanelBackground(isClub ? demoClimbingAssets.indoorGym : demoClimbingAssets.verdonWall) }}
       >
         <Badge className="bg-[#f4a261] text-[#050a2a]" variant="default">MVP feed</Badge>
         <h1 className="mt-5 text-4xl font-black text-white md:text-5xl">Bonjour {displayName}</h1>
@@ -104,7 +107,7 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile, equip
             <Card hover={false} className="overflow-hidden">
               <div
                 className="h-28 bg-cover bg-center"
-                style={{ backgroundImage: makePanelBackground(brandAssets.indoor) }}
+                style={{ backgroundImage: makeDarkPanelBackground(demoClimbingAssets.indoorGym) }}
                 aria-hidden="true"
               />
               <CardContent className="p-4">
@@ -128,7 +131,12 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile, equip
             </Card>
 
             {feedPosts.map((post) => (
-              <Card key={`${post.author}-${post.meta}`} hover={false}>
+              <Card key={`${post.author}-${post.meta}`} hover={false} className="overflow-hidden">
+                <div
+                  className="h-28 bg-cover bg-center"
+                  style={{ backgroundImage: makeDarkPanelBackground(post.image) }}
+                  aria-hidden="true"
+                />
                 <CardContent className="p-5">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex gap-3">
@@ -161,7 +169,7 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile, equip
             <Card hover={false} className="overflow-hidden">
               <div
                 className="h-24 bg-cover bg-center"
-                style={{ backgroundImage: makePanelBackground(brandAssets.trad) }}
+                style={{ backgroundImage: makeDarkPanelBackground(demoClimbingAssets.fontainebleau) }}
                 aria-hidden="true"
               />
               <CardHeader>

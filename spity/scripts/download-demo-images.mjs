@@ -1,4 +1,4 @@
-import { mkdir, stat, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, stat, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
 const outputDir = join(process.cwd(), 'public', 'images', 'demo', 'climbing')
@@ -104,6 +104,25 @@ const fileExists = async (fileName) => {
 }
 
 const getMetadataValue = (metadata, key) => stripHtml(metadata[key]?.value)
+
+const readExistingAttributions = async () => {
+  try {
+    const content = await readFile(join(outputDir, 'attributions.json'), 'utf8')
+    const parsedContent = JSON.parse(content)
+
+    if (!Array.isArray(parsedContent)) {
+      return new Map()
+    }
+
+    return new Map(
+      parsedContent
+        .filter((item) => item && typeof item === 'object' && typeof item.localFile === 'string')
+        .map((item) => [item.localFile, item])
+    )
+  } catch {
+    return new Map()
+  }
+}
 
 const getImageInfo = async (file) => {
   const url = new URL(commonsApiUrl)
@@ -218,11 +237,20 @@ const main = async () => {
   await mkdir(outputDir, { recursive: true })
 
   const attributionItems = []
+  const existingAttributions = await readExistingAttributions()
 
   for (const asset of assets) {
+    const localFile = `${asset.slug}.jpg`
+    const existingAttribution = existingAttributions.get(localFile)
+
+    if ((await fileExists(localFile)) && existingAttribution) {
+      attributionItems.push(existingAttribution)
+      console.log(`Skipped ${localFile}`)
+      continue
+    }
+
     const imageInfo = await getImageInfo(asset.file)
     const metadata = imageInfo.extmetadata ?? {}
-    const localFile = `${asset.slug}.jpg`
     const downloadUrl = imageInfo.thumburl ?? imageInfo.url
 
     if (await fileExists(localFile)) {

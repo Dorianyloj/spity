@@ -4,7 +4,7 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { Badge } from '@/components/ui'
 import type { AuthUser } from '@/features/auth/schemas'
-import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
+import { brandAssets, demoClimbingAssets, makeDarkPanelBackground } from '@/lib/brand-assets'
 import LogoutButton from './logout-button'
 
 type AppShellNavItem = 'feed' | 'discover' | 'places' | 'events' | 'profile'
@@ -36,7 +36,7 @@ export default function AppShell({ activeItem, children, user }: AppShellProps) 
   return (
     <main
       className="min-h-screen bg-background bg-fixed bg-cover bg-center pb-10 text-foreground"
-      style={{ backgroundImage: makePanelBackground(brandAssets.cragClose) }}
+      style={{ backgroundImage: makeDarkPanelBackground(demoClimbingAssets.verdonClimbers) }}
     >
       <header className="sticky top-0 z-40 border-b border-white/10 bg-[#050a2a]/90 text-secondary-foreground backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
