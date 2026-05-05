@@ -23,7 +23,7 @@ const navigationItems: Array<{
 }> = [
   { key: 'feed', label: 'Feed', href: '/app', icon: MessageCircle },
   { key: 'discover', label: 'Découvrir', href: '/app', icon: Search },
-  { key: 'places', label: 'Lieux', href: '/app', icon: MapPin },
+  { key: 'places', label: 'Lieux', href: '/app/places', icon: MapPin },
   { key: 'events', label: 'Événements', href: '/app', icon: Calendar },
   { key: 'profile', label: 'Profil', href: '/profile/me', icon: UserRound },
 ]
