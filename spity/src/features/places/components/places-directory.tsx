@@ -1,4 +1,8 @@
-import { Building2, MapPin, Mountain, Route, ShieldCheck, UsersRound } from 'lucide-react'
+'use client'
+
+import { Building2, Filter, MapPin, Mountain, Route, Search, ShieldCheck, UsersRound } from 'lucide-react'
+import Link from 'next/link'
+import { useMemo, useState } from 'react'
 import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui'
 import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
 
@@ -8,6 +12,16 @@ type SallePlace = {
   location: string
   adresse: string
   disciplines: string[]
+  photoUrl: string | null
+  horaires: Record<string, string>
+  tarifs: Record<string, string>
+  services: string[]
+  siteWeb: string | null
+  latitude: number | null
+  longitude: number | null
+  niveauMin: string | null
+  niveauMax: string | null
+  frequentation: 'calme' | 'moderee' | 'elevee' | null
 }
 
 type FalaisePlace = {
@@ -16,6 +30,14 @@ type FalaisePlace = {
   location: string
   acces: string | null
   niveaux: string[] | null
+  photoUrl: string | null
+  latitude: number | null
+  longitude: number | null
+  orientation: 'nord' | 'sud' | 'est' | 'ouest' | 'multi' | null
+  approche: string | null
+  parking: string | null
+  saison: string[]
+  status: 'sec' | 'humide' | 'attention' | 'ferme' | null
 }
 
 type ClubPlace = {
@@ -31,7 +53,16 @@ type RoutePlace = {
   falaiseId: string
   nom: string
   cotation: string
+  hauteur: number | null
+  degaines: number | null
+  secteur: string | null
+  style: 'dalle' | 'devers' | 'vertical' | 'fissure' | 'pilier' | 'mixte' | null
+  status: 'ok' | 'humide' | 'spit_a_verifier' | 'fermee' | null
 }
+
+type PlaceKind = 'all' | 'salles' | 'falaises' | 'clubs'
+type DisciplineFilter = 'all' | 'bloc' | 'voie' | 'trad'
+type StatusFilter = 'all' | 'sec' | 'attention'
 
 type PlacesDirectoryProps = {
   salles: SallePlace[]
@@ -45,6 +76,53 @@ const disciplineLabels: Record<string, string> = {
   voie: 'Voie',
   trad: 'Trad',
 }
+
+const statusLabels = {
+  sec: 'Sec',
+  humide: 'Humide',
+  attention: 'Attention',
+  ferme: 'Fermé',
+} as const
+
+const routeStatusLabels = {
+  ok: 'OK',
+  humide: 'Humide',
+  spit_a_verifier: 'Spit à vérifier',
+  fermee: 'Fermée',
+} as const
+
+const frequentationLabels = {
+  calme: 'Calme',
+  moderee: 'Modérée',
+  elevee: 'Élevée',
+} as const
+
+const seasonLabels: Record<string, string> = {
+  printemps: 'Printemps',
+  ete: 'Été',
+  automne: 'Automne',
+  hiver: 'Hiver',
+}
+
+const filters = [
+  { value: 'all', label: 'Tous' },
+  { value: 'salles', label: 'Salles' },
+  { value: 'falaises', label: 'Falaises' },
+  { value: 'clubs', label: 'Clubs' },
+] satisfies Array<{ value: PlaceKind; label: string }>
+
+const disciplineFilters = [
+  { value: 'all', label: 'Toutes pratiques' },
+  { value: 'bloc', label: 'Bloc' },
+  { value: 'voie', label: 'Voie' },
+  { value: 'trad', label: 'Trad' },
+] satisfies Array<{ value: DisciplineFilter; label: string }>
+
+const statusFilters = [
+  { value: 'all', label: 'Tous statuts' },
+  { value: 'sec', label: 'Falaises sèches' },
+  { value: 'attention', label: 'Points à surveiller' },
+] satisfies Array<{ value: StatusFilter; label: string }>
 
 const placeCards = [
   {
@@ -72,7 +150,71 @@ const getRoutesForCrag = (voies: RoutePlace[], falaiseId: string) => {
 }
 
 export default function PlacesDirectory({ salles, falaises, clubs, voies }: PlacesDirectoryProps) {
+  const [query, setQuery] = useState('')
+  const [placeKind, setPlaceKind] = useState<PlaceKind>('all')
+  const [discipline, setDiscipline] = useState<DisciplineFilter>('all')
+  const [status, setStatus] = useState<StatusFilter>('all')
   const totalPlaces = salles.length + falaises.length + clubs.length
+  const normalizedQuery = query.trim().toLowerCase()
+  const filteredSalles = useMemo(() => {
+    return salles.filter((salle) => {
+      const matchesKind = placeKind === 'all' || placeKind === 'salles'
+      const matchesDiscipline = discipline === 'all' || salle.disciplines.includes(discipline)
+      const matchesStatus = status === 'all'
+      const matchesQuery =
+        normalizedQuery.length === 0 ||
+        [salle.nom, salle.location, salle.adresse, ...salle.disciplines, ...salle.services]
+          .join(' ')
+          .toLowerCase()
+          .includes(normalizedQuery)
+
+      return matchesKind && matchesDiscipline && matchesStatus && matchesQuery
+    })
+  }, [discipline, normalizedQuery, placeKind, salles, status])
+  const filteredFalaises = useMemo(() => {
+    return falaises.filter((falaise) => {
+      const routes = getRoutesForCrag(voies, falaise.id)
+      const matchesKind = placeKind === 'all' || placeKind === 'falaises'
+      const matchesDiscipline = discipline === 'all' || discipline === 'voie' || discipline === 'trad'
+      const matchesStatus =
+        status === 'all' ||
+        (status === 'sec' && falaise.status === 'sec') ||
+        (status === 'attention' && ['attention', 'ferme'].includes(falaise.status ?? ''))
+      const matchesQuery =
+        normalizedQuery.length === 0 ||
+        [
+          falaise.nom,
+          falaise.location,
+          falaise.acces ?? '',
+          falaise.approche ?? '',
+          falaise.parking ?? '',
+          ...(falaise.niveaux ?? []),
+          ...falaise.saison,
+          ...routes.map((route) => `${route.nom} ${route.cotation} ${route.secteur ?? ''}`),
+        ]
+          .join(' ')
+          .toLowerCase()
+          .includes(normalizedQuery)
+
+      return matchesKind && matchesDiscipline && matchesStatus && matchesQuery
+    })
+  }, [discipline, falaises, normalizedQuery, placeKind, status, voies])
+  const filteredClubs = useMemo(() => {
+    return clubs.filter((club) => {
+      const matchesKind = placeKind === 'all' || placeKind === 'clubs'
+      const matchesDiscipline = discipline === 'all'
+      const matchesStatus = status === 'all'
+      const matchesQuery =
+        normalizedQuery.length === 0 ||
+        [club.nom, club.location ?? '', club.bio ?? '', club.ffmeNum ?? '']
+          .join(' ')
+          .toLowerCase()
+          .includes(normalizedQuery)
+
+      return matchesKind && matchesDiscipline && matchesStatus && matchesQuery
+    })
+  }, [clubs, discipline, normalizedQuery, placeKind, status])
+  const visiblePlaces = filteredSalles.length + filteredFalaises.length + filteredClubs.length
 
   return (
     <div className="space-y-7">
@@ -130,6 +272,57 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
         })}
       </section>
 
+      <Card hover={false}>
+        <CardContent className="space-y-4 p-4">
+          <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_220px_220px_220px]">
+            <label className="relative">
+              <span className="sr-only">Rechercher un lieu</span>
+              <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+              <input
+                className="spity-input pl-10"
+                placeholder="Rechercher par nom, ville, voie, service..."
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+              />
+            </label>
+            <label className="space-y-1.5 text-sm font-medium text-foreground">
+              Type
+              <select className="spity-input" value={placeKind} onChange={(event) => setPlaceKind(event.target.value as PlaceKind)}>
+                {filters.map((filter) => (
+                  <option key={filter.value} value={filter.value}>
+                    {filter.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="space-y-1.5 text-sm font-medium text-foreground">
+              Discipline
+              <select className="spity-input" value={discipline} onChange={(event) => setDiscipline(event.target.value as DisciplineFilter)}>
+                {disciplineFilters.map((filter) => (
+                  <option key={filter.value} value={filter.value}>
+                    {filter.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="space-y-1.5 text-sm font-medium text-foreground">
+              État
+              <select className="spity-input" value={status} onChange={(event) => setStatus(event.target.value as StatusFilter)}>
+                {statusFilters.map((filter) => (
+                  <option key={filter.value} value={filter.value}>
+                    {filter.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Filter size={16} />
+            {visiblePlaces} résultat(s) affiché(s)
+          </div>
+        </CardContent>
+      </Card>
+
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_380px]">
         <section className="space-y-6">
           <Card hover={false}>
@@ -138,8 +331,14 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
               <CardDescription>Les lieux indoor disponibles dans le répertoire.</CardDescription>
             </CardHeader>
             <CardContent className="grid gap-3 md:grid-cols-2">
-              {salles.map((salle) => (
-                <article key={salle.id} className="rounded-lg border border-border bg-white/[0.03] p-4">
+              {filteredSalles.map((salle) => (
+                <article key={salle.id} className="overflow-hidden rounded-lg border border-border bg-white/[0.03]">
+                  <div
+                    className="h-28 bg-cover bg-center"
+                    style={{ backgroundImage: makePanelBackground(salle.photoUrl ?? brandAssets.indoor) }}
+                    aria-hidden="true"
+                  />
+                  <div className="p-4">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <h3 className="font-bold text-foreground">{salle.nom}</h3>
@@ -151,15 +350,32 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
                     <Badge variant="primary">Salle</Badge>
                   </div>
                   <p className="mt-3 text-sm text-muted-foreground">{salle.adresse}</p>
+                  <div className="mt-3 grid gap-2 text-sm text-muted-foreground sm:grid-cols-2">
+                    <span>Horaires : {salle.horaires.semaine ?? 'À compléter'}</span>
+                    <span>Entrée : {salle.tarifs.entree ?? 'À compléter'}</span>
+                    <span>Niveaux : {salle.niveauMin ?? '4a'} → {salle.niveauMax ?? '8a'}</span>
+                    <span>Fréquentation : {salle.frequentation ? frequentationLabels[salle.frequentation] : 'À préciser'}</span>
+                  </div>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {salle.disciplines.map((discipline) => (
                       <Badge key={discipline} variant="secondary">
                         {disciplineLabels[discipline] ?? discipline}
                       </Badge>
                     ))}
+                    {salle.services.slice(0, 4).map((service) => (
+                      <Badge key={service} variant="secondary">
+                        {service}
+                      </Badge>
+                    ))}
+                  </div>
                   </div>
                 </article>
               ))}
+              {filteredSalles.length === 0 && (
+                <p className="rounded-lg border border-border p-4 text-sm text-muted-foreground md:col-span-2">
+                  Aucune salle ne correspond aux filtres.
+                </p>
+              )}
             </CardContent>
           </Card>
 
@@ -169,11 +385,17 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
               <CardDescription>Sites naturels et voies associées.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              {falaises.map((falaise) => {
+              {filteredFalaises.map((falaise) => {
                 const routes = getRoutesForCrag(voies, falaise.id)
 
                 return (
-                  <article key={falaise.id} className="rounded-lg border border-border bg-white/[0.03] p-4">
+                  <article key={falaise.id} className="overflow-hidden rounded-lg border border-border bg-white/[0.03]">
+                    <div
+                      className="h-36 bg-cover bg-center"
+                      style={{ backgroundImage: makePanelBackground(falaise.photoUrl ?? brandAssets.crag) }}
+                      aria-hidden="true"
+                    />
+                    <div className="p-4">
                     <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                       <div>
                         <div className="flex flex-wrap items-center gap-2">
@@ -187,11 +409,22 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
                         <p className="mt-3 text-sm text-muted-foreground">
                           {falaise.acces ?? 'Accès à compléter par la communauté.'}
                         </p>
+                        <div className="mt-3 grid gap-2 text-sm text-muted-foreground sm:grid-cols-2">
+                          <span>Orientation : {falaise.orientation ?? 'À préciser'}</span>
+                          <span>Approche : {falaise.approche ?? 'À compléter'}</span>
+                          <span>Parking : {falaise.parking ?? 'À compléter'}</span>
+                          <span>État : {falaise.status ? statusLabels[falaise.status] : 'À confirmer'}</span>
+                        </div>
                       </div>
                       <div className="flex shrink-0 flex-wrap gap-2 md:max-w-52 md:justify-end">
                         {(falaise.niveaux ?? []).map((niveau) => (
                           <Badge key={niveau} variant="secondary">
                             {niveau}
+                          </Badge>
+                        ))}
+                        {falaise.saison.map((season) => (
+                          <Badge key={season} variant="secondary">
+                            {seasonLabels[season] ?? season}
                           </Badge>
                         ))}
                       </div>
@@ -206,13 +439,28 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
                               {route.nom}
                             </div>
                             <p className="mt-1 text-sm text-muted-foreground">Cotation {route.cotation}</p>
+                            <p className="mt-1 text-xs text-muted-foreground">
+                              {route.secteur ?? 'Secteur à préciser'} · {route.hauteur ?? '?'} m · {route.status ? routeStatusLabels[route.status] : 'État à confirmer'}
+                            </p>
                           </div>
                         ))}
                       </div>
                     )}
+                    <Link
+                      href={`/app/places/falaises/${falaise.id}`}
+                      className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-colors hover:bg-[#e76f51]"
+                    >
+                      Voir la fiche falaise
+                    </Link>
+                    </div>
                   </article>
                 )
               })}
+              {filteredFalaises.length === 0 && (
+                <p className="rounded-lg border border-border p-4 text-sm text-muted-foreground">
+                  Aucune falaise ne correspond aux filtres.
+                </p>
+              )}
             </CardContent>
           </Card>
         </section>
@@ -250,7 +498,7 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
               <CardDescription>Structures locales prêtes pour les événements.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              {clubs.map((club) => (
+              {filteredClubs.map((club) => (
                 <article key={club.id} className="rounded-lg border border-border bg-white/[0.03] p-4">
                   <div className="flex items-start justify-between gap-3">
                     <div>
@@ -268,6 +516,11 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
                   </div>
                 </article>
               ))}
+              {filteredClubs.length === 0 && (
+                <p className="rounded-lg border border-border p-4 text-sm text-muted-foreground">
+                  Aucun club ne correspond aux filtres.
+                </p>
+              )}
             </CardContent>
           </Card>
         </aside>

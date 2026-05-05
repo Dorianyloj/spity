@@ -47,6 +47,11 @@ const ids = {
     outing: 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1',
     contest: 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2',
   },
+  reports: {
+    curisCondition: 'abababab-abab-4bab-8bab-ababababab01',
+    curisSafety: 'abababab-abab-4bab-8bab-ababababab02',
+    cormotAccess: 'abababab-abab-4bab-8bab-ababababab03',
+  },
 }
 
 const demoEmails = [
@@ -110,6 +115,10 @@ const main = async () => {
     await connection.execute(
       `delete from events where id in (?, ?)`,
       Object.values(ids.events)
+    )
+    await connection.execute(
+      `delete from place_reports where id in (?, ?, ?)`,
+      Object.values(ids.reports)
     )
     await connection.execute(
       `delete from users where email in (${demoEmails.map(() => '?').join(', ')})`,
@@ -267,6 +276,16 @@ const main = async () => {
         location: 'Lyon 7e',
         adresse: '52 rue de Gerland, 69007 Lyon',
         disciplines: toJson(['bloc']),
+        photo_url: imageUrls.indoor,
+        horaires: toJson({ semaine: '10:00-23:00', weekEnd: '09:00-21:00' }),
+        tarifs: toJson({ entree: '15 €', abonnement: '59 €/mois' }),
+        services: toJson(['shop', 'restauration', 'location chaussons', 'vestiaires']),
+        site_web: 'https://arkose.com',
+        latitude: 45.7331,
+        longitude: 4.8307,
+        niveau_min: '4a',
+        niveau_max: '7c',
+        frequentation: 'moderee',
       },
       {
         id: ids.salles.mroc,
@@ -274,6 +293,16 @@ const main = async () => {
         location: 'Villeurbanne',
         adresse: '86 cours Tolstoï, 69100 Villeurbanne',
         disciplines: toJson(['bloc', 'voie']),
+        photo_url: imageUrls.indoor,
+        horaires: toJson({ semaine: '09:00-22:30', weekEnd: '09:30-20:00' }),
+        tarifs: toJson({ entree: '16 €', abonnement: '62 €/mois' }),
+        services: toJson(['douche', 'parking velo', 'location materiel', 'cours debutants']),
+        site_web: 'https://mroc.fr',
+        latitude: 45.7624,
+        longitude: 4.8843,
+        niveau_min: '4a',
+        niveau_max: '8a',
+        frequentation: 'elevee',
       },
     ])
 
@@ -284,6 +313,14 @@ const main = async () => {
         location: 'Monts d’Or',
         acces: 'Approche courte depuis le parking du village. Vérifier les restrictions après pluie.',
         niveaux: toJson(['5b', '6a', '6b', '7a']),
+        photo_url: imageUrls.sunset,
+        latitude: 45.8733,
+        longitude: 4.8218,
+        orientation: 'sud',
+        approche: '12 min depuis le parking du village',
+        parking: 'Parking de Curis, 18 places',
+        saison: toJson(['printemps', 'automne']),
+        status: 'sec',
       },
       {
         id: ids.falaises.cormot,
@@ -291,6 +328,14 @@ const main = async () => {
         location: 'Bourgogne',
         acces: 'Secteurs variés, casque recommandé au pied des voies.',
         niveaux: toJson(['5c', '6a+', '6c', '7b']),
+        photo_url: imageUrls.crag,
+        latitude: 46.9684,
+        longitude: 4.6328,
+        orientation: 'multi',
+        approche: '20 à 35 min selon secteur',
+        parking: 'Parking principal avant le sentier balisé',
+        saison: toJson(['printemps', 'ete', 'automne']),
+        status: 'attention',
       },
     ])
 
@@ -301,6 +346,11 @@ const main = async () => {
         nom: 'Le Rouge Gorge',
         cotation: '7a',
         etat_votes: toJson({ sec: 12, humide: 1, equipe: 10 }),
+        hauteur: 24,
+        degaines: 10,
+        secteur: 'Solitude',
+        style: 'devers',
+        route_status: 'ok',
       },
       {
         id: ids.voies.dalle,
@@ -308,6 +358,11 @@ const main = async () => {
         nom: 'Dalle du Matin',
         cotation: '6a+',
         etat_votes: toJson({ sec: 8, calme: 6, equipe: 8 }),
+        hauteur: 18,
+        degaines: 8,
+        secteur: 'Dalle basse',
+        style: 'dalle',
+        route_status: 'ok',
       },
       {
         id: ids.voies.pilier,
@@ -315,6 +370,38 @@ const main = async () => {
         nom: 'Pilier Bleu',
         cotation: '6c',
         etat_votes: toJson({ sec: 5, equipe: 5, approche_ok: 4 }),
+        hauteur: 32,
+        degaines: 12,
+        secteur: 'Pilier principal',
+        style: 'pilier',
+        route_status: 'spit_a_verifier',
+      },
+    ])
+
+    await insert(connection, 'place_reports', [
+      {
+        id: ids.reports.curisCondition,
+        falaise_id: ids.falaises.curis,
+        author_id: ids.users.lina,
+        report_type: 'condition',
+        report_status: 'open',
+        message: 'Rocher sec ce matin, pied des voies encore un peu gras après les pluies.',
+      },
+      {
+        id: ids.reports.curisSafety,
+        falaise_id: ids.falaises.curis,
+        author_id: ids.users.nassim,
+        report_type: 'safety',
+        report_status: 'open',
+        message: 'Relais de la Dalle du Matin à surveiller, mousqueton marqué.',
+      },
+      {
+        id: ids.reports.cormotAccess,
+        falaise_id: ids.falaises.cormot,
+        author_id: ids.users.camille,
+        report_type: 'access',
+        report_status: 'resolved',
+        message: 'Sentier principal dégagé, accès OK avec casque conseillé au pied.',
       },
     ])
 

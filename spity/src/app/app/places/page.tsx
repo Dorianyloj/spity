@@ -32,6 +32,30 @@ const parseStringArray = (value: unknown) => {
   }
 }
 
+const parseStringRecord = (value: unknown) => {
+  if (value && typeof value === 'object' && !Array.isArray(value)) {
+    return Object.fromEntries(
+      Object.entries(value).filter((entry): entry is [string, string] => typeof entry[1] === 'string')
+    )
+  }
+
+  if (typeof value !== 'string') {
+    return {}
+  }
+
+  try {
+    const parsedValue: unknown = JSON.parse(value)
+
+    return parsedValue && typeof parsedValue === 'object' && !Array.isArray(parsedValue)
+      ? Object.fromEntries(
+          Object.entries(parsedValue).filter((entry): entry is [string, string] => typeof entry[1] === 'string')
+        )
+      : {}
+  } catch {
+    return {}
+  }
+}
+
 export default async function PlacesPage() {
   const currentProfile = await getCurrentProfile()
 
@@ -56,10 +80,14 @@ export default async function PlacesPage() {
         salles={salleRows.map((salle) => ({
           ...salle,
           disciplines: parseStringArray(salle.disciplines),
+          horaires: parseStringRecord(salle.horaires),
+          tarifs: parseStringRecord(salle.tarifs),
+          services: parseStringArray(salle.services),
         }))}
         falaises={falaiseRows.map((falaise) => ({
           ...falaise,
           niveaux: parseStringArray(falaise.niveaux),
+          saison: parseStringArray(falaise.saison),
         }))}
         clubs={clubRows}
         voies={voieRows}

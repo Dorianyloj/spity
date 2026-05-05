@@ -1,4 +1,4 @@
-import { mysqlTable, varchar, timestamp, json, int, boolean, mysqlEnum } from 'drizzle-orm/mysql-core'
+import { mysqlTable, varchar, timestamp, json, int, boolean, mysqlEnum, double } from 'drizzle-orm/mysql-core'
 import { relations } from 'drizzle-orm'
 
 // === USERS ===
@@ -83,6 +83,16 @@ export const salles = mysqlTable('salles', {
   location: varchar('location', { length: 255 }).notNull(),
   adresse: varchar('adresse', { length: 500 }).notNull(),
   disciplines: json('disciplines').$type<string[]>().notNull(),
+  photoUrl: varchar('photo_url', { length: 500 }),
+  horaires: json('horaires').$type<Record<string, string>>(),
+  tarifs: json('tarifs').$type<Record<string, string>>(),
+  services: json('services').$type<string[]>(),
+  siteWeb: varchar('site_web', { length: 500 }),
+  latitude: double('latitude'),
+  longitude: double('longitude'),
+  niveauMin: varchar('niveau_min', { length: 10 }),
+  niveauMax: varchar('niveau_max', { length: 10 }),
+  frequentation: mysqlEnum('frequentation', ['calme', 'moderee', 'elevee']),
 })
 
 // === FALAISE ===
@@ -92,6 +102,14 @@ export const falaises = mysqlTable('falaises', {
   location: varchar('location', { length: 255 }).notNull(),
   acces: varchar('acces', { length: 500 }),
   niveaux: json('niveaux').$type<string[]>(),
+  photoUrl: varchar('photo_url', { length: 500 }),
+  latitude: double('latitude'),
+  longitude: double('longitude'),
+  orientation: mysqlEnum('orientation', ['nord', 'sud', 'est', 'ouest', 'multi']),
+  approche: varchar('approche', { length: 255 }),
+  parking: varchar('parking', { length: 255 }),
+  saison: json('saison').$type<string[]>(),
+  status: mysqlEnum('status', ['sec', 'humide', 'attention', 'ferme']),
 })
 
 // === VOIE ===
@@ -101,6 +119,23 @@ export const voies = mysqlTable('voies', {
   nom: varchar('nom', { length: 255 }).notNull(),
   cotation: varchar('cotation', { length: 10 }).notNull(),
   etatVotes: json('etat_votes').$type<Record<string, number>>(),
+  hauteur: int('hauteur'),
+  degaines: int('degaines'),
+  secteur: varchar('secteur', { length: 120 }),
+  style: mysqlEnum('style', ['dalle', 'devers', 'vertical', 'fissure', 'pilier', 'mixte']),
+  status: mysqlEnum('route_status', ['ok', 'humide', 'spit_a_verifier', 'fermee']),
+})
+
+// === PLACE REPORT ===
+export const placeReports = mysqlTable('place_reports', {
+  id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+  falaiseId: varchar('falaise_id', { length: 36 }).references(() => falaises.id, { onDelete: 'cascade' }),
+  salleId: varchar('salle_id', { length: 36 }).references(() => salles.id, { onDelete: 'cascade' }),
+  authorId: varchar('author_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
+  type: mysqlEnum('report_type', ['condition', 'access', 'safety', 'info']).notNull(),
+  status: mysqlEnum('report_status', ['open', 'resolved']).notNull().default('open'),
+  message: varchar('message', { length: 500 }).notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
 })
 
 // === POST ===
