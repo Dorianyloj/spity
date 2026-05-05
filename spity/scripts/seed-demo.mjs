@@ -63,12 +63,22 @@ const demoEmails = [
 ]
 
 const publicBaseUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'
+const demoImage = (fileName) => `${publicBaseUrl}/images/demo/climbing/${fileName}`
 
 const imageUrls = {
-  indoor: `${publicBaseUrl}/images/brand/escalade-salle.jpg`,
-  crag: `${publicBaseUrl}/images/brand/escalade-falaise.jpeg`,
-  sunset: `${publicBaseUrl}/images/brand/escalade-falaise-coucher-soleil.jpeg`,
   logo: `${publicBaseUrl}/images/brand/logo-spity.png`,
+  indoor: demoImage('indoor-gym-overview.jpg'),
+  indoorAlt: demoImage('indoor-crack-training.jpg'),
+  indoorWall: demoImage('indoor-climbing-wall.jpg'),
+  bouldering: demoImage('bouldering-dead-bug.jpg'),
+  fontainebleau: demoImage('fontainebleau-bouldering.jpg'),
+  fontainebleauBoulders: demoImage('fontainebleau-boulders.jpg'),
+  crag: demoImage('verdon-climber-route.jpg'),
+  cragWall: demoImage('verdon-wall-climber.jpg'),
+  cragClimbers: demoImage('verdon-climbers.jpg'),
+  cragLandscape: demoImage('verdon-cliff.jpg'),
+  calanques: demoImage('calanques-landscape.jpg'),
+  rockWall: demoImage('rock-climber-wall.jpg'),
 }
 
 const toJson = (value) => JSON.stringify(value)
@@ -152,7 +162,7 @@ const main = async () => {
         email: demoEmails[1],
         password_hash: passwordHash,
         role: 'grimpeur',
-        avatar_url: imageUrls.crag,
+        avatar_url: imageUrls.cragWall,
         email_verified: true,
       },
       {
@@ -160,7 +170,7 @@ const main = async () => {
         email: demoEmails[2],
         password_hash: passwordHash,
         role: 'grimpeur',
-        avatar_url: imageUrls.sunset,
+        avatar_url: imageUrls.fontainebleau,
         email_verified: true,
       },
       {
@@ -294,7 +304,7 @@ const main = async () => {
         location: 'Villeurbanne',
         adresse: '86 cours Tolstoï, 69100 Villeurbanne',
         disciplines: toJson(['bloc', 'voie']),
-        photo_url: imageUrls.indoor,
+        photo_url: imageUrls.indoorAlt,
         horaires: toJson({ semaine: '09:00-22:30', weekEnd: '09:30-20:00' }),
         tarifs: toJson({ entree: '16 €', abonnement: '62 €/mois' }),
         services: toJson(['douche', 'parking velo', 'location materiel', 'cours debutants']),
@@ -314,7 +324,7 @@ const main = async () => {
         location: 'Monts d’Or',
         acces: 'Approche courte depuis le parking du village. Vérifier les restrictions après pluie.',
         niveaux: toJson(['5b', '6a', '6b', '7a']),
-        photo_url: imageUrls.sunset,
+        photo_url: imageUrls.crag,
         latitude: 45.8733,
         longitude: 4.8218,
         orientation: 'sud',
@@ -329,7 +339,7 @@ const main = async () => {
         location: 'Bourgogne',
         acces: 'Secteurs variés, casque recommandé au pied des voies.',
         niveaux: toJson(['5c', '6a+', '6c', '7b']),
-        photo_url: imageUrls.crag,
+        photo_url: imageUrls.cragLandscape,
         latitude: 46.9684,
         longitude: 4.6328,
         orientation: 'multi',
@@ -463,17 +473,17 @@ const main = async () => {
       {
         id: 'cccccccc-cccc-4ccc-8ccc-ccccccccccc1',
         post_id: ids.posts.partner,
-        url: imageUrls.indoor,
+        url: imageUrls.indoorWall,
       },
       {
         id: 'cccccccc-cccc-4ccc-8ccc-ccccccccccc2',
         post_id: ids.posts.event,
-        url: imageUrls.sunset,
+        url: imageUrls.cragClimbers,
       },
       {
         id: 'cccccccc-cccc-4ccc-8ccc-ccccccccccc3',
         post_id: ids.posts.topo,
-        url: imageUrls.crag,
+        url: imageUrls.rockWall,
       },
     ])
 
