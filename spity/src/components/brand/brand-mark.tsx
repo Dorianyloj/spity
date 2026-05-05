@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { brandAssets } from '@/lib/brand-assets'
+import { cn } from '@/lib/class-names'
 
 type BrandMarkProps = {
   className?: string
@@ -20,7 +21,7 @@ export default function BrandMark({
 
   return (
     <span
-      className={`flex shrink-0 items-center justify-center overflow-hidden rounded-lg ${className}`}
+      className={cn('flex shrink-0 items-center justify-center overflow-hidden rounded-lg', className)}
       style={{ height: size, width: size }}
     >
       <Image
@@ -28,7 +29,7 @@ export default function BrandMark({
         alt=""
         width={size}
         height={size}
-        className={`h-full w-full object-contain ${imageClassName}`}
+        className={cn('h-full w-full object-contain', imageClassName)}
         priority={priority}
       />
     </span>

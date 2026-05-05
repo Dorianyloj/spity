@@ -1,5 +1,6 @@
-import { forwardRef, HTMLAttributes, MouseEventHandler } from 'react'
+import { forwardRef, type HTMLAttributes, type MouseEventHandler } from 'react'
 import Avatar from './avatar'
+import { cn } from '@/lib/class-names'
 
 export interface StoryAvatarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick'> {
   src?: string
@@ -35,26 +36,28 @@ const StoryAvatar = forwardRef<HTMLDivElement, StoryAvatarProps>(
     return (
       <div
         ref={ref}
-        className={`flex flex-col items-center gap-1 ${className}`}
+        className={cn('flex flex-col items-center gap-1', className)}
         {...props}
       >
         <button
+          type="button"
           onClick={onClick}
-          className={`
-            ${seen ? 'spity-story-ring--seen' : 'spity-story-ring'}
-            ${sizeClasses[size]}
-            transition-transform hover:scale-105 active:scale-95
-          `}
+          className={cn(
+            seen ? 'spity-story-ring--seen' : 'spity-story-ring',
+            sizeClasses[size],
+            'transition-transform hover:scale-105 active:scale-95 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background'
+          )}
+          aria-label={`${seen ? 'Revoir' : 'Voir'} la story de ${username}`}
         >
           <Avatar
             src={src}
             alt={alt || username}
             fallback={fallback || username}
             size={size}
-            className="w-full h-full"
+            className="h-full w-full"
           />
         </button>
-        <span className="text-xs text-foreground max-w-[64px] truncate">
+        <span className="max-w-20 truncate text-xs font-medium text-foreground">
           {username}
         </span>
       </div>

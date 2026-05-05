@@ -1,6 +1,7 @@
-import type { ReactNode } from 'react'
+import { useId, type ReactNode } from 'react'
 import { Filter, Search } from 'lucide-react'
 import { Card, CardContent } from './card'
+import { cn } from '@/lib/class-names'
 
 type FilterOption = {
   label: string
@@ -31,6 +32,8 @@ export default function FilterToolbar({
   queryLabel = 'Recherche',
   queryPlaceholder = 'Rechercher...',
 }: FilterToolbarProps) {
+  const searchId = useId()
+
   return (
     <Card hover={false}>
       <CardContent className="p-4">
@@ -38,23 +41,30 @@ export default function FilterToolbar({
           <label className="min-w-0 flex-1 space-y-2">
             <span className="text-xs font-bold uppercase text-muted-foreground">{queryLabel}</span>
             <span className="relative block">
-              <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+              <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} aria-hidden="true" />
               <input
+                id={searchId}
                 className="spity-input h-12 pl-10"
                 placeholder={queryPlaceholder}
+                type="search"
                 value={query}
                 onChange={(event) => onQueryChange(event.target.value)}
               />
             </span>
           </label>
 
-          <div className="grid gap-3 sm:grid-cols-3 xl:w-[660px]">
-            {filters.map((filter) => (
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:w-[660px]">
+            {filters.map((filter, index) => (
               <label key={filter.label} className="space-y-2">
                 <span className="text-xs font-bold uppercase text-muted-foreground">{filter.label}</span>
-                <select className="spity-input h-12" value={filter.value} onChange={(event) => filter.onChange(event.target.value)}>
+                <select
+                  className={cn('spity-input h-12', filters.length === 1 && 'sm:max-w-xs')}
+                  value={filter.value}
+                  onChange={(event) => filter.onChange(event.target.value)}
+                  aria-label={filter.label}
+                >
                   {filter.options.map((option) => (
-                    <option key={option.value} value={option.value}>
+                    <option key={`${index}-${option.value}`} value={option.value}>
                       {option.label}
                     </option>
                   ))}
@@ -65,7 +75,7 @@ export default function FilterToolbar({
         </div>
 
         <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-white/10 pt-4 text-sm text-muted-foreground">
-          <Filter size={16} />
+          <Filter size={16} aria-hidden="true" />
           <span>{countLabel}</span>
         </div>
       </CardContent>

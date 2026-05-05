@@ -1,4 +1,5 @@
-import { forwardRef, HTMLAttributes } from 'react'
+import { forwardRef, type HTMLAttributes } from 'react'
+import { cn } from '@/lib/class-names'
 
 export interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
   variant?: 'rect' | 'circle' | 'text'
@@ -15,11 +16,8 @@ const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
     return (
       <div
         ref={ref}
-        className={`
-          spity-skeleton
-          ${variantClasses[variant]}
-          ${className}
-        `}
+        className={cn('spity-skeleton', variantClasses[variant], className)}
+        aria-hidden="true"
         {...props}
       />
     )

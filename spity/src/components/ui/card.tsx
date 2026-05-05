@@ -1,4 +1,5 @@
-import { forwardRef, HTMLAttributes } from 'react'
+import { forwardRef, type HTMLAttributes } from 'react'
+import { cn } from '@/lib/class-names'
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   hover?: boolean
@@ -9,7 +10,11 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     return (
       <div
         ref={ref}
-        className={`spity-card ${!hover ? '[&:hover]:transform-none [&:hover]:shadow-none' : ''} ${className}`}
+        className={cn(
+          'spity-card',
+          !hover && '[&:hover]:transform-none [&:hover]:shadow-none',
+          className
+        )}
         {...props}
       >
         {children}
@@ -27,7 +32,7 @@ const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
     return (
       <div
         ref={ref}
-        className={`flex flex-col gap-1.5 p-6 ${className}`}
+        className={cn('flex flex-col gap-1.5 p-5 sm:p-6', className)}
         {...props}
       >
         {children}
@@ -45,7 +50,7 @@ const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(
     return (
       <h3
         ref={ref}
-        className={`text-xl font-bold leading-tight ${className}`}
+        className={cn('text-lg font-bold leading-tight sm:text-xl', className)}
         {...props}
       >
         {children}
@@ -63,7 +68,7 @@ const CardDescription = forwardRef<HTMLParagraphElement, CardDescriptionProps>(
     return (
       <p
         ref={ref}
-        className={`text-sm text-muted-foreground ${className}`}
+        className={cn('text-sm leading-relaxed text-muted-foreground', className)}
         {...props}
       >
         {children}
@@ -79,7 +84,7 @@ export type CardContentProps = HTMLAttributes<HTMLDivElement>
 const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
   ({ className = '', children, ...props }, ref) => {
     return (
-      <div ref={ref} className={`p-6 pt-0 ${className}`} {...props}>
+      <div ref={ref} className={cn('p-5 pt-0 sm:p-6 sm:pt-0', className)} {...props}>
         {children}
       </div>
     )
@@ -95,7 +100,7 @@ const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
     return (
       <div
         ref={ref}
-        className={`flex items-center gap-2 p-6 pt-0 ${className}`}
+        className={cn('flex flex-wrap items-center gap-2 p-5 pt-0 sm:p-6 sm:pt-0', className)}
         {...props}
       >
         {children}

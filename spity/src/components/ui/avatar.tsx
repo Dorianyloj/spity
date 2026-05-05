@@ -1,6 +1,7 @@
 import Image, { type ImageProps } from 'next/image'
 import { forwardRef } from 'react'
 import { User } from 'lucide-react'
+import { cn } from '@/lib/class-names'
 
 export interface AvatarProps extends Omit<ImageProps, 'src' | 'alt' | 'width' | 'height' | 'fill'> {
   size?: 'sm' | 'md' | 'lg' | 'xl'
@@ -17,7 +18,7 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
       size = 'md',
       ring = false,
       src,
-      alt = 'Avatar',
+      alt = '',
       fallback,
       ...props
     },
@@ -39,13 +40,15 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
 
     return (
       <div
-        className={`
-          spity-avatar
-          ${sizeClasses[size]}
-          ${ring ? 'spity-avatar--ring' : ''}
-          ${!src ? 'bg-muted flex items-center justify-center' : ''}
-          ${className}
-        `}
+        className={cn(
+          'spity-avatar',
+          sizeClasses[size],
+          ring && 'spity-avatar--ring',
+          !src && 'flex items-center justify-center bg-muted text-foreground',
+          className
+        )}
+        role={!src && alt ? 'img' : undefined}
+        aria-label={!src && alt ? alt : undefined}
       >
         {src ? (
           <Image
@@ -58,11 +61,11 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
             {...props}
           />
         ) : fallback ? (
-          <span className="text-foreground font-medium text-sm">
-            {fallback.charAt(0).toUpperCase()}
+          <span className="text-sm font-semibold text-foreground" aria-hidden={alt ? 'true' : undefined}>
+            {fallback.trim().charAt(0).toUpperCase()}
           </span>
         ) : (
-          <User className="text-muted-foreground" size={iconSizes[size]} />
+          <User className="text-muted-foreground" size={iconSizes[size]} aria-hidden={alt ? 'true' : undefined} />
         )}
       </div>
     )

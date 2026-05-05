@@ -1,4 +1,5 @@
-import { forwardRef, HTMLAttributes } from 'react'
+import { forwardRef, type HTMLAttributes } from 'react'
+import { cn } from '@/lib/class-names'
 
 export type GradeLevel = 'beginner' | 'intermediate' | 'advanced' | 'expert' | 'elite'
 
@@ -27,7 +28,8 @@ const GradeBadge = forwardRef<HTMLDivElement, GradeBadgeProps>(
     return (
       <div
         ref={ref}
-        className={`grade-badge grade-badge--${detectedLevel} ${className}`}
+        className={cn('grade-badge', `grade-badge--${detectedLevel}`, className)}
+        aria-label={`Cotation ${grade}`}
         {...props}
       >
         {grade}

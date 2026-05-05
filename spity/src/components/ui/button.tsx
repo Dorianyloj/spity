@@ -1,5 +1,6 @@
-import { forwardRef, ButtonHTMLAttributes } from 'react'
+import { forwardRef, type ButtonHTMLAttributes } from 'react'
 import { Loader2 } from 'lucide-react'
+import { cn } from '@/lib/class-names'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'destructive'
@@ -18,11 +19,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       loadingText,
       children,
       disabled,
+      type = 'button',
       ...props
     },
     ref
   ) => {
-    const baseClasses = 'spity-btn'
+    const isDisabled = disabled || isLoading
 
     const variantClasses = {
       primary: 'spity-btn--primary',
@@ -32,25 +34,27 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     const sizeClasses = {
-      sm: 'px-3 py-1.5 text-xs',
-      md: 'px-4 py-2.5 text-sm',
-      lg: 'px-6 py-3 text-base',
+      sm: 'min-h-9 px-3 py-1.5 text-xs',
+      md: 'min-h-11 px-4 py-2.5 text-sm',
+      lg: 'min-h-12 px-6 py-3 text-base',
     }
 
     return (
       <button
         ref={ref}
-        className={`
-          ${baseClasses}
-          ${variantClasses[variant]}
-          ${sizeClasses[size]}
-          ${disabled || isLoading ? 'opacity-50 cursor-not-allowed' : ''}
-          ${className}
-        `}
-        disabled={disabled || isLoading}
+        className={cn(
+          'spity-btn focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+          variantClasses[variant],
+          sizeClasses[size],
+          isDisabled && 'cursor-not-allowed opacity-60',
+          className
+        )}
+        disabled={isDisabled}
+        aria-busy={isLoading || undefined}
+        type={type}
         {...props}
       >
-        {isLoading && <Loader2 className="animate-spin" size={16} />}
+        {isLoading && <Loader2 className="shrink-0 animate-spin" size={16} aria-hidden="true" />}
         {isLoading && loadingText ? loadingText : children}
       </button>
     )

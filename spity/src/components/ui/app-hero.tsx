@@ -1,6 +1,7 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import Badge from './badge'
 import { makeDarkPanelBackground } from '@/lib/brand-assets'
+import { cn } from '@/lib/class-names'
 
 type AppHeroStat = {
   label: string
@@ -29,7 +30,10 @@ export default function AppHero({
 }: AppHeroProps) {
   return (
     <section
-      className={`overflow-hidden rounded-lg border border-white/10 bg-cover bg-center p-6 shadow-2xl shadow-black/20 md:p-8 ${className}`}
+      className={cn(
+        'overflow-hidden rounded-lg border border-white/10 bg-cover bg-center p-5 shadow-2xl shadow-black/20 sm:p-6 md:p-8',
+        className
+      )}
       style={{ backgroundImage: makeDarkPanelBackground(backgroundImage), ...style }}
       {...props}
     >
@@ -38,16 +42,16 @@ export default function AppHero({
           {eyebrow}
         </Badge>
       )}
-      <div className="mt-5 grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
-        <div>
-          <h1 className="text-4xl font-black text-white md:text-5xl">{title}</h1>
+      <div className="mt-5 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,360px)] lg:items-end">
+        <div className="min-w-0">
+          <h1 className="text-3xl font-black leading-tight text-balance text-white sm:text-4xl md:text-5xl">{title}</h1>
           {description && <p className="mt-3 max-w-2xl text-white/[0.78]">{description}</p>}
           {children && <div className="mt-6 flex flex-wrap gap-2">{children}</div>}
         </div>
         {stats.length > 0 && (
-          <div className="grid grid-cols-3 gap-2 rounded-lg border border-white/10 bg-[#173236]/68 p-3 backdrop-blur">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(5.75rem,1fr))] gap-2 rounded-lg border border-white/10 bg-[#173236]/68 p-3 backdrop-blur">
             {stats.map((stat) => (
-              <div key={stat.label}>
+              <div key={stat.label} className="min-w-0">
                 <p className="text-2xl font-black text-primary">{stat.value}</p>
                 <p className="text-xs font-semibold uppercase text-white/[0.62]">{stat.label}</p>
               </div>

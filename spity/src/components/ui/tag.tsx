@@ -1,5 +1,6 @@
-import { forwardRef, HTMLAttributes } from 'react'
+import { forwardRef, type HTMLAttributes } from 'react'
 import { MapPin, Building2, Users } from 'lucide-react'
+import { cn } from '@/lib/class-names'
 
 export interface TagProps extends HTMLAttributes<HTMLDivElement> {
   variant: 'gym' | 'outdoor' | 'club'
@@ -19,10 +20,10 @@ const Tag = forwardRef<HTMLDivElement, TagProps>(
     return (
       <div
         ref={ref}
-        className={`spity-tag spity-tag--${variant} ${className}`}
+        className={cn('spity-tag', `spity-tag--${variant}`, className)}
         {...props}
       >
-        {icon && <Icon size={12} />}
+        {icon && <Icon size={12} aria-hidden="true" />}
         {children}
       </div>
     )

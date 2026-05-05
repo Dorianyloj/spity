@@ -1,4 +1,5 @@
-import { forwardRef, TextareaHTMLAttributes } from 'react'
+import { forwardRef, type TextareaHTMLAttributes, useId } from 'react'
+import { cn } from '@/lib/class-names'
 
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: string
@@ -7,14 +8,16 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className = '', error, label, id, ...props }, ref) => {
-    const textareaId = id || label?.toLowerCase().replace(/\s+/g, '-')
+    const generatedId = useId()
+    const textareaId = id ?? `textarea-${generatedId}`
+    const errorId = error ? `${textareaId}-error` : undefined
 
     return (
       <div className="w-full">
         {label && (
           <label
             htmlFor={textareaId}
-            className="block text-sm font-medium text-foreground mb-1.5"
+            className="mb-1.5 block text-sm font-medium text-foreground"
           >
             {label}
           </label>
@@ -22,16 +25,19 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <textarea
           ref={ref}
           id={textareaId}
-          className={`
-            spity-input
-            min-h-[100px] resize-y
-            ${error ? 'border-destructive ring-destructive/20' : ''}
-            ${className}
-          `}
+          className={cn(
+            'spity-input min-h-28 resize-y leading-relaxed',
+            error && 'border-destructive ring-2 ring-destructive/20',
+            className
+          )}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={errorId}
           {...props}
         />
         {error && (
-          <p className="text-xs text-destructive mt-1.5">{error}</p>
+          <p id={errorId} className="mt-1.5 text-xs font-medium text-destructive">
+            {error}
+          </p>
         )}
       </div>
     )
