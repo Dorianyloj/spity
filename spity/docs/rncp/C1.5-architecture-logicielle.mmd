@@ -1,0 +1,52 @@
+flowchart LR
+  U["Utilisateurs<br/>Grimpeurs, clubs,<br/>administrateurs"]
+  WEB["Interface Web<br/>Next.js App Router<br/>React + TailwindCSS"]
+  UI["Composants UI<br/>src/components/ui<br/>React Hook Form"]
+  API["API Next.js<br/>Route Handlers"]
+  ZOD["Schémas Zod<br/>Validation systématique"]
+  DOMAIN["Services métier Spity<br/>Matching, profils, posts,<br/>topos, événements,<br/>modération"]
+  AUTH["Authentification<br/>NextAuth ou Lucia<br/>OTP email, CSRF, rôles"]
+  ORM["Drizzle ORM<br/>Schémas typés + migrations"]
+  MAP["Cartographie<br/>Leaflet ou Mapbox<br/>Salles, falaises, clubs"]
+  MONITOR["Monitoring<br/>Logs, erreurs,<br/>métriques simples"]
+  MEDIA["Stockage médias<br/>Cloudinary ou S3<br/>Images, vidéos, avatars"]
+  EMAIL["Email transactionnel<br/>OTP, alertes compte,<br/>événements proches"]
+  DB[("MariaDB<br/>Users, profils, lieux,<br/>posts, voies, events")]
+  BACKUP["Sauvegardes<br/>Restauration testée"]
+  SEC["Sécurité transversale<br/>OWASP, RGPD, rate limiting,<br/>sanitization, headers HTTP"]
+  ECO["Sobriété numérique<br/>pagination, cache,<br/>compression médias,<br/>services limités"]
+
+  U -->|"HTTPS"| WEB
+  WEB -->|"Formulaires + navigation"| UI
+  WEB -->|"Requêtes internes"| API
+  WEB -->|"Affichage carte"| MAP
+
+  API -->|"Validation input/output"| ZOD
+  API -->|"Sessions + rôles"| AUTH
+  API -->|"Règles métier"| DOMAIN
+  API -->|"Logs techniques"| MONITOR
+
+  DOMAIN -->|"Accès typé"| ORM
+  DOMAIN -->|"Upload / lecture médias"| MEDIA
+  DOMAIN -->|"Notifications"| EMAIL
+  ORM -->|"SQL généré"| DB
+  DB -->|"Sauvegardes planifiées"| BACKUP
+
+  SEC -.-> API
+  SEC -.-> AUTH
+  SEC -.-> DB
+  SEC -.-> MEDIA
+
+  ECO -.-> WEB
+  ECO -.-> MEDIA
+  ECO -.-> DB
+
+  classDef interface fill:#e7f1f5,stroke:#245b75,color:#16201b;
+  classDef app fill:#e8f4ed,stroke:#1f7a4d,color:#16201b;
+  classDef data fill:#fff3df,stroke:#7a4b00,color:#16201b;
+  classDef control fill:#fdecea,stroke:#8c2f22,color:#16201b;
+
+  class U,WEB,UI,MAP interface;
+  class API,ZOD,DOMAIN,AUTH,ORM app;
+  class MONITOR,MEDIA,EMAIL,DB,BACKUP data;
+  class SEC,ECO control;
