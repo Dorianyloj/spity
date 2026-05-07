@@ -9,6 +9,11 @@
         margin: 16mm 14mm 18mm;
       }
 
+      @page wide {
+        size: A4 landscape;
+        margin: 12mm;
+      }
+
       :root {
         --ink: #16201b;
         --muted: #5c6760;
@@ -292,6 +297,20 @@
         word-break: break-word;
       }
 
+      .wide-page {
+        page: wide;
+        page-break-before: always;
+        page-break-after: always;
+      }
+
+      .architecture-png {
+        width: 100%;
+        display: block;
+        border: 1px solid #101815;
+        border-radius: 8px;
+        background: #000000;
+      }
+
       table {
         width: 100%;
         border-collapse: collapse;
@@ -495,6 +514,14 @@
             </div>
           </div>
         </div>
+      </section>
+
+      <section class="wide-page">
+        <img
+          class="architecture-png"
+          src="C1.5-architecture-logicielle.png"
+          alt="Diagramme Mermaid de l'architecture logicielle Spity"
+        />
       </section>
 
       <section>
