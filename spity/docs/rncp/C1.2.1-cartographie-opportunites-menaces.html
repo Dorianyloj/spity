@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>C1.2.1 - Cartographie des opportunités et menaces - Spity</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 16mm 14mm 18mm;
+      }
+
+      :root {
+        --ink: #16201b;
+        --muted: #5c6760;
+        --line: #d8e2dc;
+        --paper: #fbfdfb;
+        --accent: #1f7a4d;
+        --accent-2: #245b75;
+        --accent-soft: #e8f4ed;
+        --sky-soft: #e7f1f5;
+        --warn-soft: #fff3df;
+        --danger-soft: #fdecea;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        font-size: 10.2pt;
+        line-height: 1.45;
+      }
+
+      .cover {
+        min-height: 263mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        page-break-after: always;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cover::before {
+        content: "";
+        position: absolute;
+        inset: -40mm -20mm auto auto;
+        width: 150mm;
+        height: 150mm;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(31, 122, 77, 0.18), transparent 62%);
+      }
+
+      .cover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 58mm;
+        background:
+          linear-gradient(135deg, rgba(36, 91, 117, 0.1), rgba(31, 122, 77, 0.16)),
+          repeating-linear-gradient(
+            135deg,
+            rgba(22, 32, 27, 0.08) 0,
+            rgba(22, 32, 27, 0.08) 1px,
+            transparent 1px,
+            transparent 9px
+          );
+        clip-path: polygon(0 38%, 100% 0, 100% 100%, 0% 100%);
+      }
+
+      .cover-content {
+        position: relative;
+        z-index: 1;
+        padding-top: 12mm;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--accent);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 8.5pt;
+      }
+
+      .eyebrow::before {
+        content: "";
+        display: inline-block;
+        width: 24px;
+        height: 3px;
+        border-radius: 99px;
+        background: var(--accent);
+      }
+
+      h1 {
+        margin: 18mm 0 5mm;
+        max-width: 160mm;
+        font-size: 30pt;
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        max-width: 150mm;
+        color: var(--muted);
+        font-size: 13.5pt;
+        line-height: 1.35;
+        margin: 0;
+      }
+
+      .cover-meta {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5mm;
+        margin-bottom: 22mm;
+      }
+
+      .meta-card {
+        border: 1px solid rgba(22, 32, 27, 0.14);
+        background: rgba(255, 255, 255, 0.84);
+        border-radius: 7px;
+        padding: 5mm;
+      }
+
+      .meta-label {
+        color: var(--muted);
+        font-size: 8pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .meta-value {
+        margin-top: 2mm;
+        font-size: 11pt;
+        font-weight: 800;
+      }
+
+      main {
+        background: white;
+      }
+
+      section {
+        page-break-inside: avoid;
+        margin-bottom: 9mm;
+      }
+
+      h2 {
+        margin: 0 0 4mm;
+        color: var(--accent);
+        font-size: 15pt;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 0 0 3mm;
+        color: var(--accent-2);
+        font-size: 11.5pt;
+      }
+
+      p {
+        margin: 0 0 3.5mm;
+      }
+
+      .lead {
+        padding: 5mm 6mm;
+        border-left: 4px solid var(--accent);
+        background: var(--accent-soft);
+        border-radius: 0 7px 7px 0;
+        font-size: 10.8pt;
+      }
+
+      .criteria,
+      .two-cols,
+      .three-cols,
+      .swot-grid {
+        display: grid;
+        gap: 4mm;
+        margin-top: 4mm;
+      }
+
+      .criteria,
+      .two-cols,
+      .swot-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .three-cols {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .panel,
+      .criteria-item,
+      .swot-card {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        padding: 4.5mm;
+        background: #ffffff;
+      }
+
+      .criteria-item {
+        min-height: 25mm;
+      }
+
+      .criteria-item strong,
+      .panel strong {
+        display: block;
+        margin-bottom: 2mm;
+        color: var(--accent-2);
+      }
+
+      .swot-card {
+        page-break-inside: avoid;
+      }
+
+      .swot-card.opportunity {
+        background: var(--accent-soft);
+        border-color: #badbca;
+      }
+
+      .swot-card.threat {
+        background: var(--danger-soft);
+        border-color: #f2b9b0;
+      }
+
+      .swot-card.strength {
+        background: var(--sky-soft);
+        border-color: #bfdbe5;
+      }
+
+      .swot-card.weakness {
+        background: var(--warn-soft);
+        border-color: #f1d5a2;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 3mm 0 0;
+        table-layout: fixed;
+        page-break-inside: auto;
+      }
+
+      thead {
+        display: table-header-group;
+      }
+
+      tr {
+        page-break-inside: avoid;
+      }
+
+      th {
+        background: var(--accent);
+        color: white;
+        font-size: 8.3pt;
+        text-align: left;
+        padding: 3mm 2.6mm;
+        vertical-align: top;
+      }
+
+      th:first-child {
+        border-top-left-radius: 6px;
+      }
+
+      th:last-child {
+        border-top-right-radius: 6px;
+      }
+
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 3mm 2.6mm;
+        vertical-align: top;
+        font-size: 8.7pt;
+      }
+
+      tbody tr:nth-child(even) td {
+        background: #f7faf8;
+      }
+
+      .impact th:nth-child(1) {
+        width: 22%;
+      }
+
+      .impact th:nth-child(2) {
+        width: 30%;
+      }
+
+      .impact th:nth-child(3) {
+        width: 26%;
+      }
+
+      .impact th:nth-child(4) {
+        width: 22%;
+      }
+
+      .actions th:nth-child(1) {
+        width: 25%;
+      }
+
+      .actions th:nth-child(2) {
+        width: 36%;
+      }
+
+      .actions th:nth-child(3) {
+        width: 23%;
+      }
+
+      .actions th:nth-child(4) {
+        width: 16%;
+      }
+
+      .badge {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 1mm 2.3mm;
+        max-width: 100%;
+        font-size: 7.4pt;
+        font-weight: 800;
+        line-height: 1.1;
+        text-align: center;
+      }
+
+      .badge-high {
+        color: #0f5e39;
+        background: #dff3e8;
+      }
+
+      .badge-medium {
+        color: #245b75;
+        background: var(--sky-soft);
+      }
+
+      .badge-risk {
+        color: #8c2f22;
+        background: var(--danger-soft);
+      }
+
+      .badge-core {
+        color: #7a4b00;
+        background: var(--warn-soft);
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 4.5mm;
+      }
+
+      li {
+        margin: 0 0 1.7mm;
+      }
+
+      .summary {
+        border-radius: 7px;
+        padding: 6mm;
+        color: white;
+        background: linear-gradient(135deg, #1f7a4d, #245b75);
+      }
+
+      .summary h2 {
+        color: white;
+      }
+
+      .footer-note {
+        margin-top: 7mm;
+        color: var(--muted);
+        font-size: 8.3pt;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="cover">
+      <div class="cover-content">
+        <div class="eyebrow">Bloc de compétences 1</div>
+        <h1>C1.2.1 - Cartographie des opportunités et menaces</h1>
+        <p class="subtitle">
+          Projet Spity : analyse SWOT, adhérences, impact environnemental,
+          préconisations sécurité et points de vigilance à piloter.
+        </p>
+      </div>
+
+      <div class="cover-meta">
+        <div class="meta-card">
+          <div class="meta-label">Projet</div>
+          <div class="meta-value">Spity</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Commanditaire</div>
+          <div class="meta-value">Collectif Altitude Grimpe</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Certification</div>
+          <div class="meta-value">Titre RNCP</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Livrable</div>
+          <div class="meta-value">SWOT projet</div>
+        </div>
+      </div>
+    </article>
+
+    <main>
+      <section>
+        <h2>Objectif de la compétence</h2>
+        <p class="lead">
+          Cartographier les opportunités et les menaces du projet, en analysant
+          l'impact environnemental et les adhérences du projet afin de déterminer
+          les actions à mener pour sécuriser le lancement du MVP Spity.
+        </p>
+
+        <div class="criteria">
+          <div class="criteria-item">
+            <strong>Livrable attendu</strong>
+            Une cartographie des opportunités et menaces du projet, structurée
+            avec un outil adapté de type SWOT.
+          </div>
+          <div class="criteria-item">
+            <strong>Critères couverts</strong>
+            Interactions avec d'autres projets, impact environnemental,
+            sécurité, points de vigilance et opportunités à exploiter.
+          </div>
+          <div class="criteria-item">
+            <strong>Périmètre analysé</strong>
+            MVP web Spity pour la zone pilote Rhône-Alpes, principalement Lyon,
+            Grenoble, salles, clubs et falaises locales.
+          </div>
+          <div class="criteria-item">
+            <strong>Finalité</strong>
+            Prioriser les actions permettant de réduire les risques et
+            d'exploiter les leviers métier, techniques et environnementaux.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Contexte d'analyse</h2>
+        <p>
+          Spity répond à la demande du Collectif Altitude Grimpe, qui souhaite
+          expérimenter une application centralisant la recherche de partenaires,
+          les lieux d'escalade, les topos collaboratifs, les événements clubs et
+          les contenus sociaux contextualisés. L'analyse ci-dessous identifie les
+          éléments favorables au projet, les menaces à anticiper et les mesures
+          de maîtrise à intégrer dès le MVP.
+        </p>
+      </section>
+
+      <section>
+        <h2>Analyse SWOT du projet</h2>
+        <div class="swot-grid">
+          <div class="swot-card strength">
+            <h3>Forces</h3>
+            <ul>
+              <li>Positionnement clair sur une communauté métier identifiée.</li>
+              <li>Proposition de valeur centralisée : social, lieux, topos, clubs.</li>
+              <li>Stack technique maîtrisée et adaptée à un MVP web démontrable.</li>
+              <li>Zone pilote pertinente avec forte densité de grimpeurs.</li>
+              <li>Fonctionnalités alignées avec les irritants remontés par le client.</li>
+            </ul>
+          </div>
+          <div class="swot-card weakness">
+            <h3>Faiblesses</h3>
+            <ul>
+              <li>Dépendance à une masse critique d'utilisateurs pour rendre le feed utile.</li>
+              <li>Qualité des données fortement liée aux contributions de la communauté.</li>
+              <li>Périmètre fonctionnel large pour un MVP RNCP.</li>
+              <li>Modération nécessaire sur les posts, commentaires et topos.</li>
+              <li>Budget limité pour les services externes comme cartes, emails ou médias.</li>
+            </ul>
+          </div>
+          <div class="swot-card opportunity">
+            <h3>Opportunités</h3>
+            <ul>
+              <li>Marché escalade dynamique et communauté locale active.</li>
+              <li>Manque d'une plateforme réunissant salle, falaise, club et social.</li>
+              <li>Possibilité d'impliquer les clubs comme relais d'acquisition.</li>
+              <li>Valorisation de données utiles : niveaux, disciplines, lieux et événements.</li>
+              <li>Différenciation par les signalements sécurité et les topos vivants.</li>
+            </ul>
+          </div>
+          <div class="swot-card threat">
+            <h3>Menaces</h3>
+            <ul>
+              <li>Concurrence indirecte des réseaux sociaux déjà utilisés.</li>
+              <li>Risque de données obsolètes sur les lieux, accès et conditions.</li>
+              <li>Responsabilité perçue en cas d'information terrain incorrecte.</li>
+              <li>Coûts variables liés au stockage média, cartographie et hébergement.</li>
+              <li>Risques RGPD et sécurité liés aux profils, photos et localisations.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Adhérences et interactions avec d'autres systèmes</h2>
+        <table class="impact">
+          <thead>
+            <tr>
+              <th>Adhérence</th>
+              <th>Impact sur le projet</th>
+              <th>Risque associé</th>
+              <th>Action de maîtrise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Cartographie</strong></td>
+              <td>Affichage des salles, falaises, clubs et événements sur carte.</td>
+              <td>Coût, quotas API, dépendance fournisseur.</td>
+              <td>Prévoir abstraction Leaflet/Mapbox et mode liste de secours.</td>
+            </tr>
+            <tr>
+              <td><strong>Stockage médias</strong></td>
+              <td>Photos de profils, posts, lieux, falaises et clubs.</td>
+              <td>Volume, coût, contenus inappropriés, temps de chargement.</td>
+              <td>Limiter tailles, compression, validation type MIME et modération.</td>
+            </tr>
+            <tr>
+              <td><strong>Email / OTP</strong></td>
+              <td>Inscription, vérification de compte, notifications.</td>
+              <td>Délivrabilité, spam, indisponibilité prestataire.</td>
+              <td>Journaliser les erreurs et prévoir un fournisseur remplaçable.</td>
+            </tr>
+            <tr>
+              <td><strong>Base de données</strong></td>
+              <td>Stockage des profils, lieux, posts, événements et contributions.</td>
+              <td>Perte de données, corruption, indisponibilité.</td>
+              <td>Sauvegardes, migrations contrôlées, contraintes et index.</td>
+            </tr>
+            <tr>
+              <td><strong>Réseaux sociaux existants</strong></td>
+              <td>Concurrence d'usage et canal d'acquisition potentiel.</td>
+              <td>Les utilisateurs peuvent rester sur leurs habitudes actuelles.</td>
+              <td>Mettre en avant les filtres métier et la donnée contextualisée.</td>
+            </tr>
+            <tr>
+              <td><strong>Clubs et salles</strong></td>
+              <td>Qualité des fiches, événements et données locales.</td>
+              <td>Adoption lente, informations non mises à jour.</td>
+              <td>Onboarding simple et périmètre pilote avec acteurs volontaires.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Impact environnemental du projet</h2>
+        <div class="two-cols">
+          <div class="panel">
+            <strong>Impacts identifiés</strong>
+            <ul>
+              <li>Stockage et transfert de médias liés aux posts et lieux.</li>
+              <li>Requêtes cartographiques et chargement de tuiles de carte.</li>
+              <li>Consommation serveur liée au feed, recherche et notifications.</li>
+              <li>Multiplication potentielle des données redondantes ou obsolètes.</li>
+              <li>Usage mobile sur le terrain avec contraintes réseau et batterie.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <strong>Actions de réduction</strong>
+            <ul>
+              <li>Compresser les images et limiter les formats lourds.</li>
+              <li>Mettre en cache les données peu volatiles : lieux, fiches, topos.</li>
+              <li>Charger les médias progressivement et éviter l'autoplay vidéo.</li>
+              <li>Limiter le MVP aux fonctionnalités nécessaires à la démonstration.</li>
+              <li>Nettoyer ou archiver les contenus obsolètes après contrôle.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Préconisations sécurité</h2>
+        <table class="actions">
+          <thead>
+            <tr>
+              <th>Risque sécurité</th>
+              <th>Préconisation</th>
+              <th>Contrôle attendu</th>
+              <th>Priorité</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Compte utilisateur compromis</strong></td>
+              <td>Hashage des mots de passe, sessions sécurisées, validation OTP.</td>
+              <td>Tests auth, revue endpoints sensibles.</td>
+              <td><span class="badge badge-risk">Haute</span></td>
+            </tr>
+            <tr>
+              <td><strong>Injection ou données invalides</strong></td>
+              <td>Validation Zod côté API, ORM Drizzle, aucun SQL brut non justifié.</td>
+              <td>Schémas d'entrée et de sortie documentés.</td>
+              <td><span class="badge badge-risk">Haute</span></td>
+            </tr>
+            <tr>
+              <td><strong>Contenus abusifs</strong></td>
+              <td>Signalement, modération, limites de taille et contrôle des médias.</td>
+              <td>Workflow de modération disponible.</td>
+              <td><span class="badge badge-core">Moyenne</span></td>
+            </tr>
+            <tr>
+              <td><strong>Données de localisation</strong></td>
+              <td>Limiter la précision exposée et contrôler les permissions d'accès.</td>
+              <td>Revue RGPD et mentions de consentement.</td>
+              <td><span class="badge badge-risk">Haute</span></td>
+            </tr>
+            <tr>
+              <td><strong>Spam et abus API</strong></td>
+              <td>Rate limiting sur auth, upload, commentaires et signalements.</td>
+              <td>Seuils définis et erreurs surveillées.</td>
+              <td><span class="badge badge-core">Moyenne</span></td>
+            </tr>
+            <tr>
+              <td><strong>Fuite d'informations</strong></td>
+              <td>Variables serveur, headers sécurité, absence de secrets côté client.</td>
+              <td>Audit `.env`, build et configuration.</td>
+              <td><span class="badge badge-risk">Haute</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Points de vigilance à mettre sous contrôle</h2>
+        <table class="actions">
+          <thead>
+            <tr>
+              <th>Point de vigilance</th>
+              <th>Impact possible</th>
+              <th>Indicateur de contrôle</th>
+              <th>Priorité</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Masse critique utilisateurs</strong></td>
+              <td>Feed vide, matching peu pertinent, faible rétention.</td>
+              <td>Nombre d'inscriptions, profils complets, posts actifs.</td>
+              <td><span class="badge badge-risk">Haute</span></td>
+            </tr>
+            <tr>
+              <td><strong>Qualité des données topo</strong></td>
+              <td>Perte de confiance et risque terrain pour les grimpeurs.</td>
+              <td>Nombre de signalements, délai de modération, corrections validées.</td>
+              <td><span class="badge badge-risk">Haute</span></td>
+            </tr>
+            <tr>
+              <td><strong>Périmètre MVP trop large</strong></td>
+              <td>Retard, dette technique, démonstration incomplète.</td>
+              <td>Backlog priorisé, fonctionnalités terminées, jalons hebdomadaires.</td>
+              <td><span class="badge badge-risk">Haute</span></td>
+            </tr>
+            <tr>
+              <td><strong>Coût des services externes</strong></td>
+              <td>Dépassement budgétaire ou limitation de fonctionnalités.</td>
+              <td>Suivi quotas API, stockage, emails envoyés et bande passante.</td>
+              <td><span class="badge badge-core">Moyenne</span></td>
+            </tr>
+            <tr>
+              <td><strong>Accessibilité et mobile</strong></td>
+              <td>Usage terrain dégradé et non-conformité aux attendus RGAA.</td>
+              <td>Tests responsive, contraste, navigation clavier, labels.</td>
+              <td><span class="badge badge-core">Moyenne</span></td>
+            </tr>
+            <tr>
+              <td><strong>Performance</strong></td>
+              <td>Chargement lent du feed, des médias ou de la carte.</td>
+              <td>Temps de chargement, poids pages, erreurs front et API.</td>
+              <td><span class="badge badge-core">Moyenne</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Opportunités à exploiter</h2>
+        <div class="three-cols">
+          <div class="panel">
+            <strong>Clubs comme relais</strong>
+            Les clubs peuvent fournir les premiers événements, inviter leurs
+            adhérents et rendre le calendrier utile rapidement.
+          </div>
+          <div class="panel">
+            <strong>Différenciation métier</strong>
+            Les filtres par niveau, discipline, lieu et matériel créent une
+            valeur que les réseaux sociaux généralistes ne proposent pas.
+          </div>
+          <div class="panel">
+            <strong>Sécurité terrain</strong>
+            Les signalements sur accès, conditions et équipements peuvent
+            devenir un argument fort d'adoption pour les grimpeurs outdoor.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Plan d'actions proposé</h2>
+        <table class="actions">
+          <thead>
+            <tr>
+              <th>Action</th>
+              <th>Objectif</th>
+              <th>Responsable</th>
+              <th>Priorité</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Limiter le MVP</strong></td>
+              <td>Conserver un périmètre démontrable : profils, lieux, événements, posts et matching simple.</td>
+              <td>Équipe projet</td>
+              <td><span class="badge badge-risk">Haute</span></td>
+            </tr>
+            <tr>
+              <td><strong>Définir une modération minimale</strong></td>
+              <td>Encadrer les contributions topo, signalements et contenus sociaux.</td>
+              <td>Commanditaire / modérateurs</td>
+              <td><span class="badge badge-risk">Haute</span></td>
+            </tr>
+            <tr>
+              <td><strong>Optimiser les médias</strong></td>
+              <td>Réduire l'impact environnemental et améliorer les performances.</td>
+              <td>Développeur</td>
+              <td><span class="badge badge-core">Moyenne</span></td>
+            </tr>
+            <tr>
+              <td><strong>Mettre en place les contrôles sécurité</strong></td>
+              <td>Protéger les comptes, données personnelles, localisations et uploads.</td>
+              <td>Développeur</td>
+              <td><span class="badge badge-risk">Haute</span></td>
+            </tr>
+            <tr>
+              <td><strong>Onboarder des acteurs pilotes</strong></td>
+              <td>Obtenir des clubs, salles et contributeurs volontaires pour alimenter le MVP.</td>
+              <td>Collectif Altitude Grimpe</td>
+              <td><span class="badge badge-core">Moyenne</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="summary">
+        <h2>Synthèse</h2>
+        <p>
+          L'analyse montre que Spity bénéficie d'une opportunité métier réelle :
+          la communauté escalade utilise aujourd'hui des outils dispersés, peu
+          contextualisés et rarement reliés entre eux. Le projet peut se
+          différencier par une approche spécialisée, locale et centrée sur les
+          usages concrets des grimpeurs.
+        </p>
+        <p>
+          Les principales menaces concernent la masse critique, la qualité des
+          données, la sécurité des comptes, la protection des localisations et
+          l'impact des médias. Les actions prioritaires consistent donc à
+          maîtriser le périmètre MVP, intégrer la sécurité dès la conception,
+          limiter l'impact environnemental et organiser une modération minimale.
+        </p>
+      </section>
+
+      <p class="footer-note">
+        Document produit pour le dossier RNCP - Bloc C1 - Projet Spity.
+      </p>
+    </main>
+  </body>
+</html>
