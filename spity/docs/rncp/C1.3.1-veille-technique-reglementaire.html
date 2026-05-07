@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>C1.3.1 - Veille technique, technologique et réglementaire - Spity</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 16mm 14mm 18mm;
+      }
+
+      :root {
+        --ink: #16201b;
+        --muted: #5c6760;
+        --line: #d8e2dc;
+        --paper: #fbfdfb;
+        --accent: #1f7a4d;
+        --accent-2: #245b75;
+        --accent-soft: #e8f4ed;
+        --sky-soft: #e7f1f5;
+        --warn-soft: #fff3df;
+        --danger-soft: #fdecea;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        font-size: 10.2pt;
+        line-height: 1.45;
+      }
+
+      .cover {
+        min-height: 263mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        page-break-after: always;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cover::before {
+        content: "";
+        position: absolute;
+        inset: -40mm -20mm auto auto;
+        width: 150mm;
+        height: 150mm;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(31, 122, 77, 0.18), transparent 62%);
+      }
+
+      .cover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 58mm;
+        background:
+          linear-gradient(135deg, rgba(36, 91, 117, 0.1), rgba(31, 122, 77, 0.16)),
+          repeating-linear-gradient(
+            135deg,
+            rgba(22, 32, 27, 0.08) 0,
+            rgba(22, 32, 27, 0.08) 1px,
+            transparent 1px,
+            transparent 9px
+          );
+        clip-path: polygon(0 38%, 100% 0, 100% 100%, 0% 100%);
+      }
+
+      .cover-content {
+        position: relative;
+        z-index: 1;
+        padding-top: 12mm;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--accent);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 8.5pt;
+      }
+
+      .eyebrow::before {
+        content: "";
+        display: inline-block;
+        width: 24px;
+        height: 3px;
+        border-radius: 99px;
+        background: var(--accent);
+      }
+
+      h1 {
+        margin: 18mm 0 5mm;
+        max-width: 165mm;
+        font-size: 30pt;
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        max-width: 150mm;
+        color: var(--muted);
+        font-size: 13.5pt;
+        line-height: 1.35;
+        margin: 0;
+      }
+
+      .cover-meta {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5mm;
+        margin-bottom: 22mm;
+      }
+
+      .meta-card {
+        border: 1px solid rgba(22, 32, 27, 0.14);
+        background: rgba(255, 255, 255, 0.84);
+        border-radius: 7px;
+        padding: 5mm;
+      }
+
+      .meta-label {
+        color: var(--muted);
+        font-size: 8pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .meta-value {
+        margin-top: 2mm;
+        font-size: 11pt;
+        font-weight: 800;
+      }
+
+      main {
+        background: white;
+      }
+
+      section {
+        page-break-inside: avoid;
+        margin-bottom: 9mm;
+      }
+
+      h2 {
+        margin: 0 0 4mm;
+        color: var(--accent);
+        font-size: 15pt;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 0 0 3mm;
+        color: var(--accent-2);
+        font-size: 11.5pt;
+      }
+
+      p {
+        margin: 0 0 3.5mm;
+      }
+
+      .lead {
+        padding: 5mm 6mm;
+        border-left: 4px solid var(--accent);
+        background: var(--accent-soft);
+        border-radius: 0 7px 7px 0;
+        font-size: 10.8pt;
+      }
+
+      .criteria,
+      .two-cols,
+      .three-cols {
+        display: grid;
+        gap: 4mm;
+        margin-top: 4mm;
+      }
+
+      .criteria,
+      .two-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .three-cols {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .panel,
+      .criteria-item {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        padding: 4.5mm;
+        background: #ffffff;
+      }
+
+      .criteria-item {
+        min-height: 25mm;
+      }
+
+      .criteria-item strong,
+      .panel strong {
+        display: block;
+        margin-bottom: 2mm;
+        color: var(--accent-2);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 3mm 0 0;
+        table-layout: fixed;
+        page-break-inside: auto;
+      }
+
+      thead {
+        display: table-header-group;
+      }
+
+      tr {
+        page-break-inside: avoid;
+      }
+
+      th {
+        background: var(--accent);
+        color: white;
+        font-size: 8.2pt;
+        text-align: left;
+        padding: 3mm 2.4mm;
+        vertical-align: top;
+      }
+
+      th:first-child {
+        border-top-left-radius: 6px;
+      }
+
+      th:last-child {
+        border-top-right-radius: 6px;
+      }
+
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 3mm 2.4mm;
+        vertical-align: top;
+        font-size: 8.5pt;
+      }
+
+      tbody tr:nth-child(even) td {
+        background: #f7faf8;
+      }
+
+      .sources th:nth-child(1) {
+        width: 20%;
+      }
+
+      .sources th:nth-child(2) {
+        width: 23%;
+      }
+
+      .sources th:nth-child(3) {
+        width: 34%;
+      }
+
+      .sources th:nth-child(4) {
+        width: 23%;
+      }
+
+      .watch th:nth-child(1) {
+        width: 16%;
+      }
+
+      .watch th:nth-child(2) {
+        width: 24%;
+      }
+
+      .watch th:nth-child(3) {
+        width: 30%;
+      }
+
+      .watch th:nth-child(4) {
+        width: 30%;
+      }
+
+      .badge {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 1mm 2.3mm;
+        max-width: 100%;
+        font-size: 7.2pt;
+        font-weight: 800;
+        line-height: 1.1;
+        text-align: center;
+      }
+
+      .badge-tech {
+        color: #245b75;
+        background: var(--sky-soft);
+      }
+
+      .badge-reg {
+        color: #7a4b00;
+        background: var(--warn-soft);
+      }
+
+      .badge-sec {
+        color: #8c2f22;
+        background: var(--danger-soft);
+      }
+
+      .badge-env {
+        color: #0f5e39;
+        background: #dff3e8;
+      }
+
+      .summary {
+        border-radius: 7px;
+        padding: 6mm;
+        color: white;
+        background: linear-gradient(135deg, #1f7a4d, #245b75);
+      }
+
+      .summary h2 {
+        color: white;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 4.5mm;
+      }
+
+      li {
+        margin: 0 0 1.7mm;
+      }
+
+      a {
+        color: var(--accent-2);
+        text-decoration: none;
+      }
+
+      .footer-note {
+        margin-top: 7mm;
+        color: var(--muted);
+        font-size: 8.3pt;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="cover">
+      <div class="cover-content">
+        <div class="eyebrow">Bloc de compétences 1</div>
+        <h1>C1.3.1 - Veille technique, technologique et réglementaire</h1>
+        <p class="subtitle">
+          Projet Spity : méthodologie de veille, sources consultées,
+          classification des évolutions et bénéfices attendus pour le MVP.
+        </p>
+      </div>
+
+      <div class="cover-meta">
+        <div class="meta-card">
+          <div class="meta-label">Projet</div>
+          <div class="meta-value">Spity</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Commanditaire</div>
+          <div class="meta-value">Collectif Altitude Grimpe</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Certification</div>
+          <div class="meta-value">Titre RNCP</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Livrable</div>
+          <div class="meta-value">Méthodologie de veille</div>
+        </div>
+      </div>
+    </article>
+
+    <main>
+      <section>
+        <h2>Objectif de la compétence</h2>
+        <p class="lead">
+          Réaliser une veille technique, technologique et réglementaire en
+          sélectionnant des sources fiables, en analysant les données recueillies
+          et en ciblant les évolutions qui améliorent la sécurité, la qualité,
+          l'accessibilité et l'impact environnemental du projet Spity.
+        </p>
+
+        <div class="criteria">
+          <div class="criteria-item">
+            <strong>Livrable attendu</strong>
+            Une synthèse des sources d'information, de la stratégie de veille,
+            des outils utilisés et des bénéfices attendus pour le projet.
+          </div>
+          <div class="criteria-item">
+            <strong>Critères couverts</strong>
+            Sources consultées, outils de veille, objectifs, évolutions
+            classifiées et justification de leur impact métier et environnemental.
+          </div>
+          <div class="criteria-item">
+            <strong>Périmètre</strong>
+            Next.js, Drizzle, sécurité OWASP, RGPD, accessibilité RGAA,
+            écoconception et suivi des dépendances npm.
+          </div>
+          <div class="criteria-item">
+            <strong>Date de consultation</strong>
+            Sources consultées et consolidées le 7 mai 2026 pour le dossier RNCP.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Stratégie de veille mise en œuvre</h2>
+        <p>
+          La veille est organisée autour des risques et besoins du MVP Spity :
+          livrer une application web fiable, sécurisée, accessible et
+          maintenable, tout en limitant l'impact environnemental des médias, des
+          cartes et des traitements serveur. Les sources retenues sont
+          prioritairement officielles afin de limiter les informations obsolètes
+          ou non vérifiées.
+        </p>
+        <div class="three-cols">
+          <div class="panel">
+            <strong>Veille technique</strong>
+            Suivre les frameworks, ORM, pratiques API, performances, migrations,
+            qualité TypeScript et bonnes pratiques de développement web.
+          </div>
+          <div class="panel">
+            <strong>Veille sécurité et conformité</strong>
+            Surveiller OWASP, dépendances vulnérables, RGPD, gestion des données
+            personnelles et protection des comptes.
+          </div>
+          <div class="panel">
+            <strong>Veille accessibilité et environnement</strong>
+            Suivre RGAA, méthodes de test, écoconception, sobriété des médias et
+            réduction des transferts réseau.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Outils et fréquence de veille</h2>
+        <table class="watch">
+          <thead>
+            <tr>
+              <th>Outil</th>
+              <th>Usage</th>
+              <th>Fréquence</th>
+              <th>Application à Spity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Documentation officielle</strong></td>
+              <td>Vérifier les pratiques recommandées par les éditeurs.</td>
+              <td>À chaque évolution majeure ou choix technique.</td>
+              <td>Next.js App Router, Route Handlers, Drizzle ORM, Zod.</td>
+            </tr>
+            <tr>
+              <td><strong>GitHub / Dependabot</strong></td>
+              <td>Suivre les vulnérabilités et mises à jour des dépendances.</td>
+              <td>Hebdomadaire et avant chaque jalon RNCP.</td>
+              <td>Next.js, React, Drizzle, mysql2, bcryptjs, jsonwebtoken.</td>
+            </tr>
+            <tr>
+              <td><strong>npm audit</strong></td>
+              <td>Identifier les vulnérabilités connues dans l'écosystème npm.</td>
+              <td>Avant build, recette et livraison.</td>
+              <td>Compléter `npm run lint` et `npm run typecheck`.</td>
+            </tr>
+            <tr>
+              <td><strong>Flux institutionnels</strong></td>
+              <td>Surveiller CNIL, RGAA, DINUM et référentiels publics.</td>
+              <td>Mensuelle ou à chaque nouvelle obligation.</td>
+              <td>RGPD, accessibilité, écoconception, documentation jury.</td>
+            </tr>
+            <tr>
+              <td><strong>Backlog de veille</strong></td>
+              <td>Transformer chaque information utile en action projet.</td>
+              <td>Revue hebdomadaire.</td>
+              <td>Tickets sécurité, accessibilité, performance, dette technique.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Sources principales consultées</h2>
+        <table class="sources">
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>Type de veille</th>
+              <th>Information retenue</th>
+              <th>Utilité pour Spity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Next.js Docs</strong><br /><a href="https://nextjs.org/docs/app">nextjs.org/docs/app</a></td>
+              <td><span class="badge badge-tech">Technique</span></td>
+              <td>App Router, Server Components, structure `app`, bonnes pratiques de routes.</td>
+              <td>Confirme le choix App Router et l'usage de route handlers pour l'API.</td>
+            </tr>
+            <tr>
+              <td><strong>Next.js Route Handlers</strong><br /><a href="https://nextjs.org/docs/app/getting-started/route-handlers">nextjs.org route handlers</a></td>
+              <td><span class="badge badge-tech">Technique</span></td>
+              <td>Création de handlers HTTP dans `app/api` avec les méthodes GET, POST, PATCH, DELETE.</td>
+              <td>Structure les API auth, profil, lieux, posts, événements et topos.</td>
+            </tr>
+            <tr>
+              <td><strong>Drizzle ORM MySQL</strong><br /><a href="https://orm.drizzle.team/docs/get-started/mysql-existing">orm.drizzle.team</a></td>
+              <td><span class="badge badge-tech">Technique</span></td>
+              <td>Configuration Drizzle, dossier migrations, schéma TypeScript, connexion MySQL.</td>
+              <td>Valide l'architecture `src/db/schema.ts`, `drizzle.config.ts` et MariaDB.</td>
+            </tr>
+            <tr>
+              <td><strong>OWASP Top 10</strong><br /><a href="https://owasp.org/index.php/Category%3AOWASP_Top_Ten_Project">owasp.org</a></td>
+              <td><span class="badge badge-sec">Sécurité</span></td>
+              <td>Référentiel de sensibilisation aux principaux risques de sécurité web.</td>
+              <td>Cadre les exigences sécurité : accès, injection, configuration, composants vulnérables.</td>
+            </tr>
+            <tr>
+              <td><strong>OWASP Privacy Risks</strong><br /><a href="https://owasp.org/www-project-top-10-privacy-risks/">owasp.org privacy</a></td>
+              <td><span class="badge badge-sec">Sécurité</span></td>
+              <td>Risques vie privée, fuite de données, privacy by design et contre-mesures.</td>
+              <td>Important pour profils, photos, localisation et contenus communautaires.</td>
+            </tr>
+            <tr>
+              <td><strong>Guide RGPD développeur CNIL</strong><br /><a href="https://www.cnil.fr/fr/guide-rgpd-du-developpeur">cnil.fr</a></td>
+              <td><span class="badge badge-reg">Réglementaire</span></td>
+              <td>Principes pour développer des applications respectueuses de la vie privée.</td>
+              <td>Encadre consentement, données personnelles, sécurité et droits utilisateurs.</td>
+            </tr>
+            <tr>
+              <td><strong>Principes RGPD CNIL</strong><br /><a href="https://cnil.fr/fr/comprendre-le-rgpd/les-six-grands-principes-du-rgpd">cnil.fr principes RGPD</a></td>
+              <td><span class="badge badge-reg">Réglementaire</span></td>
+              <td>Finalité, minimisation, transparence, durée de conservation et droits des personnes.</td>
+              <td>Justifie la réduction de précision des localisations et la collecte minimale.</td>
+            </tr>
+            <tr>
+              <td><strong>RGAA 4.1.2</strong><br /><a href="https://accessibilite.numerique.gouv.fr/">accessibilite.numerique.gouv.fr</a></td>
+              <td><span class="badge badge-reg">Accessibilité</span></td>
+              <td>Référentiel officiel, critères et méthode technique d'accessibilité numérique.</td>
+              <td>Base des tests UI : contrastes, formulaires, navigation clavier, alternatives.</td>
+            </tr>
+            <tr>
+              <td><strong>Écoconception DINUM</strong><br /><a href="https://design.numerique.gouv.fr/formations/ecoconception/introduction-ecoconception/">design.numerique.gouv.fr</a></td>
+              <td><span class="badge badge-env">Environnement</span></td>
+              <td>Réduction des impacts environnementaux du numérique et écoconception des services.</td>
+              <td>Guide les choix médias, cache, sobriété fonctionnelle et limitation du MVP.</td>
+            </tr>
+            <tr>
+              <td><strong>GitHub Dependabot</strong><br /><a href="https://docs.github.com/en/code-security/dependabot/dependabot-security-updates/about-dependabot-security-updates">docs.github.com</a></td>
+              <td><span class="badge badge-sec">Sécurité</span></td>
+              <td>Pull requests automatiques pour corriger des dépendances vulnérables.</td>
+              <td>Réduit le risque lié aux composants npm vulnérables.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Évolutions classifiées et impact projet</h2>
+        <table class="watch">
+          <thead>
+            <tr>
+              <th>Catégorie</th>
+              <th>Évolution observée</th>
+              <th>Impact métier / technique</th>
+              <th>Action recommandée</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-tech">Technique</span></td>
+              <td>Next.js App Router et Route Handlers restent adaptés aux applications full-stack.</td>
+              <td>Permet de conserver une architecture simple pour le MVP, sans serveur séparé.</td>
+              <td>Continuer avec `src/app` et documenter les conventions API.</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-tech">Technique</span></td>
+              <td>Drizzle ORM propose un modèle TypeScript + migrations compatible MySQL/MariaDB.</td>
+              <td>Améliore la maintenabilité et réduit le besoin de SQL brut.</td>
+              <td>Créer des migrations propres et ajouter les index métier utiles.</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-sec">Sécurité</span></td>
+              <td>OWASP maintient les risques liés aux accès, injections, configuration et dépendances.</td>
+              <td>Les profils, localisations et uploads de Spity augmentent la surface d'attaque.</td>
+              <td>Ajouter rate limiting, contrôle d'accès, validation Zod et revue dépendances.</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-reg">RGPD</span></td>
+              <td>La CNIL insiste sur finalité, transparence et minimisation des données.</td>
+              <td>Spity traite photos, pseudos, niveaux, équipement et localisation.</td>
+              <td>Limiter la localisation exposée, documenter les finalités et prévoir suppression/export.</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-reg">Accessibilité</span></td>
+              <td>Le RGAA 4.1.2 reste la référence applicable, avec RGAA 5 annoncé fin 2026.</td>
+              <td>Le MVP doit rester accessible sur les pages critiques et formulaires.</td>
+              <td>Tester contraste, focus clavier, labels, alternatives média et erreurs de formulaire.</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-env">Environnement</span></td>
+              <td>Les pratiques d'écoconception visent à réduire transferts, stockage et traitements inutiles.</td>
+              <td>Spity peut devenir lourd avec photos, vidéos, feed et cartographie.</td>
+              <td>Compression, lazy loading, cache, limitation du nombre de médias et pas d'autoplay.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Bénéfices attendus pour Spity</h2>
+        <div class="three-cols">
+          <div class="panel">
+            <strong>Sécurité renforcée</strong>
+            La veille OWASP, CNIL, npm et Dependabot permet d'anticiper les
+            failles liées aux comptes, dépendances, localisations et contenus.
+          </div>
+          <div class="panel">
+            <strong>Architecture maintenable</strong>
+            Les sources Next.js et Drizzle sécurisent les choix App Router,
+            Route Handlers, migrations et schéma typé.
+          </div>
+          <div class="panel">
+            <strong>Meilleure conformité</strong>
+            La veille RGPD et RGAA soutient les livrables RNCP, la transparence
+            utilisateur et l'accessibilité des parcours critiques.
+          </div>
+        </div>
+        <div class="three-cols">
+          <div class="panel">
+            <strong>Impact environnemental réduit</strong>
+            L'écoconception oriente la limitation des médias, le cache et la
+            sobriété fonctionnelle du MVP.
+          </div>
+          <div class="panel">
+            <strong>Réduction de la dette</strong>
+            Une veille régulière évite les dépendances obsolètes et limite les
+            refontes tardives.
+          </div>
+          <div class="panel">
+            <strong>Meilleure démonstration RNCP</strong>
+            Les choix techniques et réglementaires sont justifiés par des sources
+            officielles et actualisées.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Plan d'intégration dans le projet</h2>
+        <table class="watch">
+          <thead>
+            <tr>
+              <th>Action</th>
+              <th>Objectif</th>
+              <th>Responsable</th>
+              <th>Échéance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Activer le suivi dépendances</strong></td>
+              <td>Réduire les vulnérabilités npm et GitHub Actions.</td>
+              <td>Développeur</td>
+              <td>Avant livraison MVP</td>
+            </tr>
+            <tr>
+              <td><strong>Créer une checklist RGPD</strong></td>
+              <td>Identifier finalités, données, durée, droits et consentements.</td>
+              <td>Équipe projet</td>
+              <td>Avant mise en ligne</td>
+            </tr>
+            <tr>
+              <td><strong>Tester l'accessibilité</strong></td>
+              <td>Contrôler les pages login, register, profil, app et formulaires.</td>
+              <td>Développeur</td>
+              <td>À chaque recette</td>
+            </tr>
+            <tr>
+              <td><strong>Optimiser les médias</strong></td>
+              <td>Réduire le poids du feed, des fiches lieux et des posts.</td>
+              <td>Développeur</td>
+              <td>Avant démo finale</td>
+            </tr>
+            <tr>
+              <td><strong>Formaliser une revue mensuelle</strong></td>
+              <td>Transformer les informations de veille en tickets priorisés.</td>
+              <td>Collectif / développeur</td>
+              <td>Mensuel</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="summary">
+        <h2>Synthèse</h2>
+        <p>
+          La veille mise en place pour Spity s'appuie sur des sources officielles
+          et directement liées aux risques du projet : framework, base de
+          données, sécurité, RGPD, accessibilité, écoconception et dépendances.
+          Elle permet de justifier les choix techniques tout en anticipant les
+          contraintes réglementaires et environnementales.
+        </p>
+        <p>
+          Les bénéfices attendus sont concrets : maintenir une architecture
+          cohérente, réduire les vulnérabilités, protéger les données
+          personnelles, améliorer l'accessibilité et limiter le poids technique
+          du MVP. Cette veille doit être transformée régulièrement en actions de
+          backlog pour rester utile au projet.
+        </p>
+      </section>
+
+      <p class="footer-note">
+        Document produit pour le dossier RNCP - Bloc C1 - Projet Spity.
+      </p>
+    </main>
+  </body>
+</html>
