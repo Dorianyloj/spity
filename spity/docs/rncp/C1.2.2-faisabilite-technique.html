@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>C1.2.2 - Faisabilité technique - Spity</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 16mm 14mm 18mm;
+      }
+
+      :root {
+        --ink: #16201b;
+        --muted: #5c6760;
+        --line: #d8e2dc;
+        --paper: #fbfdfb;
+        --accent: #1f7a4d;
+        --accent-2: #245b75;
+        --accent-soft: #e8f4ed;
+        --sky-soft: #e7f1f5;
+        --warn-soft: #fff3df;
+        --danger-soft: #fdecea;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        font-size: 10.2pt;
+        line-height: 1.45;
+      }
+
+      .cover {
+        min-height: 263mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        page-break-after: always;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cover::before {
+        content: "";
+        position: absolute;
+        inset: -40mm -20mm auto auto;
+        width: 150mm;
+        height: 150mm;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(31, 122, 77, 0.18), transparent 62%);
+      }
+
+      .cover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 58mm;
+        background:
+          linear-gradient(135deg, rgba(36, 91, 117, 0.1), rgba(31, 122, 77, 0.16)),
+          repeating-linear-gradient(
+            135deg,
+            rgba(22, 32, 27, 0.08) 0,
+            rgba(22, 32, 27, 0.08) 1px,
+            transparent 1px,
+            transparent 9px
+          );
+        clip-path: polygon(0 38%, 100% 0, 100% 100%, 0% 100%);
+      }
+
+      .cover-content {
+        position: relative;
+        z-index: 1;
+        padding-top: 12mm;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--accent);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 8.5pt;
+      }
+
+      .eyebrow::before {
+        content: "";
+        display: inline-block;
+        width: 24px;
+        height: 3px;
+        border-radius: 99px;
+        background: var(--accent);
+      }
+
+      h1 {
+        margin: 18mm 0 5mm;
+        max-width: 158mm;
+        font-size: 30pt;
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        max-width: 150mm;
+        color: var(--muted);
+        font-size: 13.5pt;
+        line-height: 1.35;
+        margin: 0;
+      }
+
+      .cover-meta {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5mm;
+        margin-bottom: 22mm;
+      }
+
+      .meta-card {
+        border: 1px solid rgba(22, 32, 27, 0.14);
+        background: rgba(255, 255, 255, 0.84);
+        border-radius: 7px;
+        padding: 5mm;
+      }
+
+      .meta-label {
+        color: var(--muted);
+        font-size: 8pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .meta-value {
+        margin-top: 2mm;
+        font-size: 11pt;
+        font-weight: 800;
+      }
+
+      main {
+        background: white;
+      }
+
+      section {
+        page-break-inside: avoid;
+        margin-bottom: 9mm;
+      }
+
+      h2 {
+        margin: 0 0 4mm;
+        color: var(--accent);
+        font-size: 15pt;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 0 0 3mm;
+        color: var(--accent-2);
+        font-size: 11.5pt;
+      }
+
+      p {
+        margin: 0 0 3.5mm;
+      }
+
+      .lead {
+        padding: 5mm 6mm;
+        border-left: 4px solid var(--accent);
+        background: var(--accent-soft);
+        border-radius: 0 7px 7px 0;
+        font-size: 10.8pt;
+      }
+
+      .criteria,
+      .two-cols,
+      .three-cols {
+        display: grid;
+        gap: 4mm;
+        margin-top: 4mm;
+      }
+
+      .criteria,
+      .two-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .three-cols {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .panel,
+      .criteria-item {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        padding: 4.5mm;
+        background: #ffffff;
+      }
+
+      .criteria-item {
+        min-height: 25mm;
+      }
+
+      .criteria-item strong,
+      .panel strong {
+        display: block;
+        margin-bottom: 2mm;
+        color: var(--accent-2);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 3mm 0 0;
+        table-layout: fixed;
+        page-break-inside: auto;
+      }
+
+      thead {
+        display: table-header-group;
+      }
+
+      tr {
+        page-break-inside: avoid;
+      }
+
+      th {
+        background: var(--accent);
+        color: white;
+        font-size: 8.3pt;
+        text-align: left;
+        padding: 3mm 2.6mm;
+        vertical-align: top;
+      }
+
+      th:first-child {
+        border-top-left-radius: 6px;
+      }
+
+      th:last-child {
+        border-top-right-radius: 6px;
+      }
+
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 3mm 2.6mm;
+        vertical-align: top;
+        font-size: 8.7pt;
+      }
+
+      tbody tr:nth-child(even) td {
+        background: #f7faf8;
+      }
+
+      .audit th:nth-child(1) {
+        width: 23%;
+      }
+
+      .audit th:nth-child(2) {
+        width: 35%;
+      }
+
+      .audit th:nth-child(3) {
+        width: 22%;
+      }
+
+      .audit th:nth-child(4) {
+        width: 20%;
+      }
+
+      .constraints th:nth-child(1) {
+        width: 23%;
+      }
+
+      .constraints th:nth-child(2) {
+        width: 34%;
+      }
+
+      .constraints th:nth-child(3) {
+        width: 25%;
+      }
+
+      .constraints th:nth-child(4) {
+        width: 18%;
+      }
+
+      .badge {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 1mm 2.3mm;
+        max-width: 100%;
+        font-size: 7.4pt;
+        font-weight: 800;
+        line-height: 1.1;
+        text-align: center;
+      }
+
+      .badge-ok {
+        color: #0f5e39;
+        background: #dff3e8;
+      }
+
+      .badge-medium {
+        color: #245b75;
+        background: var(--sky-soft);
+      }
+
+      .badge-risk {
+        color: #8c2f22;
+        background: var(--danger-soft);
+      }
+
+      .badge-watch {
+        color: #7a4b00;
+        background: var(--warn-soft);
+      }
+
+      .decision {
+        border-radius: 7px;
+        padding: 6mm;
+        color: white;
+        background: linear-gradient(135deg, #1f7a4d, #245b75);
+      }
+
+      .decision h2 {
+        color: white;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 4.5mm;
+      }
+
+      li {
+        margin: 0 0 1.7mm;
+      }
+
+      .footer-note {
+        margin-top: 7mm;
+        color: var(--muted);
+        font-size: 8.3pt;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="cover">
+      <div class="cover-content">
+        <div class="eyebrow">Bloc de compétences 1</div>
+        <h1>C1.2.2 - Évaluation de la faisabilité technique</h1>
+        <p class="subtitle">
+          Projet Spity : démarche d'audit, diagnostic de l'existant, contraintes
+          techniques et financières, moyens nécessaires et avis de faisabilité.
+        </p>
+      </div>
+
+      <div class="cover-meta">
+        <div class="meta-card">
+          <div class="meta-label">Projet</div>
+          <div class="meta-value">Spity</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Commanditaire</div>
+          <div class="meta-value">Collectif Altitude Grimpe</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Certification</div>
+          <div class="meta-value">Titre RNCP</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Livrable</div>
+          <div class="meta-value">Audit technique</div>
+        </div>
+      </div>
+    </article>
+
+    <main>
+      <section>
+        <h2>Objectif de la compétence</h2>
+        <p class="lead">
+          Évaluer la faisabilité technique en analysant l'environnement technique
+          et fonctionnel, les contraintes et le budget du client, afin de décider
+          du lancement du projet et de déterminer les moyens nécessaires à sa
+          réalisation.
+        </p>
+
+        <div class="criteria">
+          <div class="criteria-item">
+            <strong>Livrable attendu</strong>
+            Une démarche d'audit documentée, un diagnostic de l'infrastructure
+            existante et un avis critique sur la faisabilité du MVP.
+          </div>
+          <div class="criteria-item">
+            <strong>Critères couverts</strong>
+            Langages, base de données, architecture, logiciels existants,
+            hébergement, OS, volume, utilisateurs, délais et ressources.
+          </div>
+          <div class="criteria-item">
+            <strong>Périmètre de l'audit</strong>
+            Application Next.js Spity, API routes, base MariaDB, Docker Compose,
+            scripts npm, schéma Drizzle et contraintes RNCP.
+          </div>
+          <div class="criteria-item">
+            <strong>Finalité</strong>
+            Valider que le projet peut être lancé dans un périmètre MVP
+            démontrable, avec les moyens disponibles et les risques identifiés.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Démarche d'audit mise en œuvre</h2>
+        <p>
+          L'audit a été mené à partir du cadrage produit, de l'analyse de la
+          demande du Collectif Altitude Grimpe et de l'observation du dépôt
+          applicatif existant. Les éléments contrôlés incluent la structure du
+          code, les dépendances, les scripts qualité, le modèle de données, les
+          routes API disponibles, l'environnement Docker et les contraintes
+          liées à la démonstration RNCP.
+        </p>
+        <div class="three-cols">
+          <div class="panel">
+            <strong>Sources analysées</strong>
+            Cadrage projet, `package.json`, `docker-compose.yml`, schéma Drizzle,
+            configuration d'environnement et arborescence `src/`.
+          </div>
+          <div class="panel">
+            <strong>Axes de contrôle</strong>
+            Cohérence technique, exploitabilité locale, sécurité, maintenabilité,
+            adéquation au MVP et capacité de démonstration.
+          </div>
+          <div class="panel">
+            <strong>Hypothèse de cible</strong>
+            MVP web local puis hébergement cloud léger, avec zone pilote
+            Rhône-Alpes et montée en charge progressive.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Diagnostic de l'existant technique</h2>
+        <table class="audit">
+          <thead>
+            <tr>
+              <th>Domaine audité</th>
+              <th>Constat</th>
+              <th>Niveau de maturité</th>
+              <th>Action recommandée</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Frontend</strong></td>
+              <td>
+                Application React avec Next.js App Router, Tailwind CSS et
+                composants UI réutilisables dans `src/components/ui/`.
+              </td>
+              <td><span class="badge badge-ok">Bon</span></td>
+              <td>Continuer à factoriser les composants et tester les parcours clés.</td>
+            </tr>
+            <tr>
+              <td><strong>Backend</strong></td>
+              <td>
+                Route handlers Next.js présents pour l'authentification et les
+                profils, avec logique API intégrée au même projet.
+              </td>
+              <td><span class="badge badge-medium">Correct</span></td>
+              <td>Étendre les API aux lieux, événements, posts et topos.</td>
+            </tr>
+            <tr>
+              <td><strong>Base de données</strong></td>
+              <td>
+                MariaDB avec Drizzle ORM. Le schéma couvre utilisateurs, profils,
+                équipements, salles, falaises, voies, reports, posts et events.
+              </td>
+              <td><span class="badge badge-ok">Bon</span></td>
+              <td>Ajouter index, contraintes métier et migrations futures propres.</td>
+            </tr>
+            <tr>
+              <td><strong>Validation</strong></td>
+              <td>
+                Zod est utilisé pour l'environnement et les schémas de features
+                auth/profil. La validation est cohérente avec les exigences.
+              </td>
+              <td><span class="badge badge-ok">Bon</span></td>
+              <td>Généraliser les schémas input/output sur toutes les API.</td>
+            </tr>
+            <tr>
+              <td><strong>Infrastructure locale</strong></td>
+              <td>
+                Docker Compose lance MariaDB 11 et phpMyAdmin. Les scripts npm
+                couvrent dev, build, lint, typecheck et migrations.
+              </td>
+              <td><span class="badge badge-medium">Correct</span></td>
+              <td>Externaliser les secrets et corriger les ports documentés.</td>
+            </tr>
+            <tr>
+              <td><strong>Sécurité</strong></td>
+              <td>
+                Présence de JWT, bcryptjs, lockout login et variables
+                d'environnement validées. Des durcissements restent nécessaires.
+              </td>
+              <td><span class="badge badge-watch">À renforcer</span></td>
+              <td>Ajouter rate limiting, headers sécurité, RGPD et contrôle uploads.</td>
+            </tr>
+            <tr>
+              <td><strong>Qualité</strong></td>
+              <td>
+                ESLint et TypeScript sont disponibles. Les tests automatisés ne
+                sont pas encore visibles dans le périmètre audité.
+              </td>
+              <td><span class="badge badge-watch">Partiel</span></td>
+              <td>Ajouter tests unitaires et tests de parcours critiques.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Langages, frameworks et outils utilisés</h2>
+        <table class="audit">
+          <thead>
+            <tr>
+              <th>Catégorie</th>
+              <th>Technologies identifiées</th>
+              <th>Utilisation dans Spity</th>
+              <th>Avis d'audit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Langages</strong></td>
+              <td>TypeScript, JSX/TSX, CSS via Tailwind.</td>
+              <td>Développement frontend, backend API et typage applicatif.</td>
+              <td>Adapté au MVP et à la maintenabilité.</td>
+            </tr>
+            <tr>
+              <td><strong>Frontend</strong></td>
+              <td>Next.js, React, Tailwind CSS, lucide-react, Framer Motion.</td>
+              <td>Pages, composants UI, interface responsive et interactions.</td>
+              <td>Stack moderne et suffisante pour l'expérience visée.</td>
+            </tr>
+            <tr>
+              <td><strong>Backend</strong></td>
+              <td>Next.js Route Handlers, JWT, bcryptjs, Zod.</td>
+              <td>API auth, profils, validation, sessions et sécurité minimale.</td>
+              <td>Faisable pour MVP, à durcir pour production.</td>
+            </tr>
+            <tr>
+              <td><strong>Données</strong></td>
+              <td>MariaDB, Drizzle ORM, mysql2, drizzle-kit.</td>
+              <td>Schéma relationnel, migrations, accès typé aux données.</td>
+              <td>Cohérent avec les besoins relationnels du projet.</td>
+            </tr>
+            <tr>
+              <td><strong>Outillage</strong></td>
+              <td>npm, Docker Compose, ESLint, TypeScript, scripts Drizzle.</td>
+              <td>Développement local, qualité, migrations et démonstration.</td>
+              <td>Base opérationnelle pour lancer le projet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Architecture existante et applications disponibles</h2>
+        <div class="two-cols">
+          <div class="panel">
+            <strong>Architecture applicative</strong>
+            <ul>
+              <li>`src/app` : pages et route handlers App Router.</li>
+              <li>`src/components/ui` : design system réutilisable.</li>
+              <li>`src/features` : schémas métier auth et profil.</li>
+              <li>`src/db` : client et schéma Drizzle.</li>
+              <li>`src/lib` : configuration, validateurs et utilitaires.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <strong>Applications et services existants</strong>
+            <ul>
+              <li>Application web Next.js accessible en développement.</li>
+              <li>API auth : register, login, logout, session active.</li>
+              <li>API profils : grimpeur, club, équipement, profil public.</li>
+              <li>MariaDB pour la persistance des données.</li>
+              <li>phpMyAdmin pour l'administration locale de la base.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Contraintes techniques, financières et humaines</h2>
+        <table class="constraints">
+          <thead>
+            <tr>
+              <th>Contrainte</th>
+              <th>Analyse</th>
+              <th>Impact sur le projet</th>
+              <th>Niveau</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Délais RNCP</strong></td>
+              <td>Le MVP doit être fonctionnel et démontrable pour la soutenance.</td>
+              <td>Priorisation stricte et limitation du périmètre.</td>
+              <td><span class="badge badge-risk">Fort</span></td>
+            </tr>
+            <tr>
+              <td><strong>Ressource humaine</strong></td>
+              <td>Réalisation portée par un développeur principal.</td>
+              <td>Risque de surcharge si toutes les features sont traitées en profondeur.</td>
+              <td><span class="badge badge-risk">Fort</span></td>
+            </tr>
+            <tr>
+              <td><strong>Budget</strong></td>
+              <td>Budget limité, adapté à un MVP et à des services cloud gratuits ou peu coûteux.</td>
+              <td>Choix de services maîtrisés, limitation médias et cartes.</td>
+              <td><span class="badge badge-watch">Moyen</span></td>
+            </tr>
+            <tr>
+              <td><strong>Hébergement</strong></td>
+              <td>Local via Docker pour le développement, cloud léger à prévoir pour production.</td>
+              <td>Besoin d'une configuration sécurisée et reproductible.</td>
+              <td><span class="badge badge-watch">Moyen</span></td>
+            </tr>
+            <tr>
+              <td><strong>Système d'exploitation</strong></td>
+              <td>Environnement compatible Linux, Node.js 20+, Docker et npm.</td>
+              <td>Bon niveau de portabilité pour développement et déploiement.</td>
+              <td><span class="badge badge-ok">Faible</span></td>
+            </tr>
+            <tr>
+              <td><strong>Volume de données</strong></td>
+              <td>MVP pilote : profils, posts, lieux, événements, topos et médias limités.</td>
+              <td>MariaDB suffit ; stockage externe recommandé pour les médias.</td>
+              <td><span class="badge badge-watch">Moyen</span></td>
+            </tr>
+            <tr>
+              <td><strong>Nombre d'utilisateurs</strong></td>
+              <td>Cible MVP : environ 150 grimpeurs, 15 clubs, 30 salles, 20 falaises.</td>
+              <td>Charge compatible avec architecture monolithique Next.js + MariaDB.</td>
+              <td><span class="badge badge-ok">Faible</span></td>
+            </tr>
+            <tr>
+              <td><strong>Sécurité et RGPD</strong></td>
+              <td>Profils, localisations, médias et contenus sociaux sont des données sensibles.</td>
+              <td>Consentement, minimisation, protection et suppression de compte à prévoir.</td>
+              <td><span class="badge badge-risk">Fort</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Moyens nécessaires à la réalisation</h2>
+        <table class="constraints">
+          <thead>
+            <tr>
+              <th>Moyen</th>
+              <th>Besoin identifié</th>
+              <th>Préconisation</th>
+              <th>Priorité</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Développement</strong></td>
+              <td>Finaliser les parcours MVP : auth, profils, lieux, événements, posts et matching.</td>
+              <td>Backlog découpé par feature et jalons courts.</td>
+              <td><span class="badge badge-risk">Haute</span></td>
+            </tr>
+            <tr>
+              <td><strong>Base de données</strong></td>
+              <td>Stabiliser les relations, index et migrations autour des tables principales.</td>
+              <td>Créer de nouvelles migrations sans modifier les existantes.</td>
+              <td><span class="badge badge-risk">Haute</span></td>
+            </tr>
+            <tr>
+              <td><strong>Sécurité</strong></td>
+              <td>Protéger auth, uploads, localisations et contenus communautaires.</td>
+              <td>Rate limiting, headers sécurité, validation Zod, contrôle permissions.</td>
+              <td><span class="badge badge-risk">Haute</span></td>
+            </tr>
+            <tr>
+              <td><strong>Infrastructure</strong></td>
+              <td>Préparer un environnement démo stable et reproductible.</td>
+              <td>Docker Compose, `.env.example`, scripts migration et seed.</td>
+              <td><span class="badge badge-watch">Moyenne</span></td>
+            </tr>
+            <tr>
+              <td><strong>Services externes</strong></td>
+              <td>Cartographie, stockage médias et email transactionnel.</td>
+              <td>Démarrer avec offres gratuites ou mocks, intégrer par abstraction.</td>
+              <td><span class="badge badge-watch">Moyenne</span></td>
+            </tr>
+            <tr>
+              <td><strong>Tests</strong></td>
+              <td>Sécuriser les parcours critiques de démonstration.</td>
+              <td>Tests unitaires ciblés et tests manuels documentés.</td>
+              <td><span class="badge badge-watch">Moyenne</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Points critiques identifiés</h2>
+        <div class="three-cols">
+          <div class="panel">
+            <strong>Secrets et configuration</strong>
+            Les secrets présents dans l'environnement local doivent être
+            externalisés et jamais exposés côté client ou dans les livrables
+            publics.
+          </div>
+          <div class="panel">
+            <strong>Cohérence documentaire</strong>
+            Les ports et commandes documentés doivent rester alignés avec le
+            `docker-compose.yml` pour éviter les erreurs de démo.
+          </div>
+          <div class="panel">
+            <strong>Périmètre fonctionnel</strong>
+            Le MVP doit prioriser les parcours démontrables plutôt que couvrir
+            toute la vision produit dès la première version.
+          </div>
+        </div>
+      </section>
+
+      <section class="decision">
+        <h2>Avis critique sur la faisabilité</h2>
+        <p>
+          Le projet Spity est techniquement faisable dans le cadre d'un MVP RNCP,
+          à condition de maintenir un périmètre strict et progressif. La stack
+          actuelle est cohérente avec les besoins : Next.js pour l'interface et
+          les API, MariaDB pour les données relationnelles, Drizzle pour la
+          maintenabilité du schéma, Docker pour la reproductibilité locale et
+          Zod pour la validation.
+        </p>
+        <p>
+          La faisabilité est jugée favorable pour une démonstration centrée sur
+          l'authentification, les profils, les lieux, les événements et un
+          matching simple. Les fonctions plus sensibles, comme les topos
+          collaboratifs complets, la modération avancée, les notifications et le
+          stockage média à grande échelle, doivent être intégrées par étapes.
+        </p>
+      </section>
+
+      <section>
+        <h2>Décision de lancement</h2>
+        <div class="two-cols">
+          <div class="panel">
+            <strong>Décision proposée</strong>
+            Lancement du MVP validé, avec trajectoire progressive et contrôle
+            renforcé sur la sécurité, les données personnelles, les médias et la
+            qualité des informations terrain.
+          </div>
+          <div class="panel">
+            <strong>Conditions de réussite</strong>
+            Périmètre MVP verrouillé, démo stable, migrations propres, secrets
+            externalisés, tests qualité et documentation technique à jour.
+          </div>
+        </div>
+      </section>
+
+      <p class="footer-note">
+        Document produit pour le dossier RNCP - Bloc C1 - Projet Spity.
+      </p>
+    </main>
+  </body>
+</html>
