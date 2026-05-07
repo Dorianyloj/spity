@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>C1.4.2 - Budget prévisionnel - Spity</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 16mm 14mm 18mm;
+      }
+
+      :root {
+        --ink: #16201b;
+        --muted: #5c6760;
+        --line: #d8e2dc;
+        --paper: #fbfdfb;
+        --accent: #1f7a4d;
+        --accent-2: #245b75;
+        --accent-soft: #e8f4ed;
+        --sky-soft: #e7f1f5;
+        --warn-soft: #fff3df;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        font-size: 10.2pt;
+        line-height: 1.45;
+      }
+
+      .cover {
+        min-height: 263mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        page-break-after: always;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cover::before {
+        content: "";
+        position: absolute;
+        inset: -40mm -20mm auto auto;
+        width: 150mm;
+        height: 150mm;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(31, 122, 77, 0.18), transparent 62%);
+      }
+
+      .cover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 58mm;
+        background:
+          linear-gradient(135deg, rgba(36, 91, 117, 0.1), rgba(31, 122, 77, 0.16)),
+          repeating-linear-gradient(
+            135deg,
+            rgba(22, 32, 27, 0.08) 0,
+            rgba(22, 32, 27, 0.08) 1px,
+            transparent 1px,
+            transparent 9px
+          );
+        clip-path: polygon(0 38%, 100% 0, 100% 100%, 0% 100%);
+      }
+
+      .cover-content {
+        position: relative;
+        z-index: 1;
+        padding-top: 12mm;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--accent);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 8.5pt;
+      }
+
+      .eyebrow::before {
+        content: "";
+        display: inline-block;
+        width: 24px;
+        height: 3px;
+        border-radius: 99px;
+        background: var(--accent);
+      }
+
+      h1 {
+        margin: 18mm 0 5mm;
+        max-width: 165mm;
+        font-size: 30pt;
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        max-width: 150mm;
+        color: var(--muted);
+        font-size: 13.5pt;
+        line-height: 1.35;
+        margin: 0;
+      }
+
+      .cover-meta {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5mm;
+        margin-bottom: 22mm;
+      }
+
+      .meta-card {
+        border: 1px solid rgba(22, 32, 27, 0.14);
+        background: rgba(255, 255, 255, 0.84);
+        border-radius: 7px;
+        padding: 5mm;
+      }
+
+      .meta-label {
+        color: var(--muted);
+        font-size: 8pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .meta-value {
+        margin-top: 2mm;
+        font-size: 11pt;
+        font-weight: 800;
+      }
+
+      main {
+        background: white;
+      }
+
+      section {
+        page-break-inside: avoid;
+        margin-bottom: 9mm;
+      }
+
+      h2 {
+        margin: 0 0 4mm;
+        color: var(--accent);
+        font-size: 15pt;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 0 0 3mm;
+        color: var(--accent-2);
+        font-size: 11.5pt;
+      }
+
+      p {
+        margin: 0 0 3.5mm;
+      }
+
+      .lead {
+        padding: 5mm 6mm;
+        border-left: 4px solid var(--accent);
+        background: var(--accent-soft);
+        border-radius: 0 7px 7px 0;
+        font-size: 10.8pt;
+      }
+
+      .criteria,
+      .two-cols,
+      .three-cols {
+        display: grid;
+        gap: 4mm;
+        margin-top: 4mm;
+      }
+
+      .criteria,
+      .two-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .three-cols {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .panel,
+      .criteria-item {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        padding: 4.5mm;
+        background: #ffffff;
+      }
+
+      .criteria-item strong,
+      .panel strong {
+        display: block;
+        margin-bottom: 2mm;
+        color: var(--accent-2);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 3mm 0 0;
+        table-layout: fixed;
+        page-break-inside: auto;
+      }
+
+      thead {
+        display: table-header-group;
+      }
+
+      tr {
+        page-break-inside: avoid;
+      }
+
+      th {
+        background: var(--accent);
+        color: white;
+        font-size: 8.2pt;
+        text-align: left;
+        padding: 3mm 2.4mm;
+        vertical-align: top;
+      }
+
+      th:first-child {
+        border-top-left-radius: 6px;
+      }
+
+      th:last-child {
+        border-top-right-radius: 6px;
+      }
+
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 3mm 2.4mm;
+        vertical-align: top;
+        font-size: 8.5pt;
+      }
+
+      tbody tr:nth-child(even) td {
+        background: #f7faf8;
+      }
+
+      .budget th:nth-child(1) {
+        width: 22%;
+      }
+
+      .budget th:nth-child(2) {
+        width: 32%;
+      }
+
+      .budget th:nth-child(3) {
+        width: 13%;
+      }
+
+      .budget th:nth-child(4) {
+        width: 16%;
+      }
+
+      .budget th:nth-child(5) {
+        width: 17%;
+      }
+
+      .total-row td {
+        color: white;
+        background: linear-gradient(135deg, #1f7a4d, #245b75) !important;
+        font-weight: 800;
+      }
+
+      .badge {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 1mm 2.3mm;
+        max-width: 100%;
+        font-size: 7.2pt;
+        font-weight: 800;
+        line-height: 1.1;
+        text-align: center;
+      }
+
+      .badge-core {
+        color: #0f5e39;
+        background: #dff3e8;
+      }
+
+      .badge-option {
+        color: #245b75;
+        background: var(--sky-soft);
+      }
+
+      .badge-watch {
+        color: #7a4b00;
+        background: var(--warn-soft);
+      }
+
+      .summary {
+        border-radius: 7px;
+        padding: 6mm;
+        color: white;
+        background: linear-gradient(135deg, #1f7a4d, #245b75);
+      }
+
+      .summary h2 {
+        color: white;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 4.5mm;
+      }
+
+      li {
+        margin: 0 0 1.7mm;
+      }
+
+      .footer-note {
+        margin-top: 7mm;
+        color: var(--muted);
+        font-size: 8.3pt;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="cover">
+      <div class="cover-content">
+        <div class="eyebrow">Bloc de compétences 1</div>
+        <h1>C1.4.2 - Estimation des coûts et budget prévisionnel</h1>
+        <p class="subtitle">
+          Projet Spity : valorisation budgétaire du MVP à partir de la charge
+          estimée, des postes techniques et des coûts d'exploitation.
+        </p>
+      </div>
+
+      <div class="cover-meta">
+        <div class="meta-card">
+          <div class="meta-label">Projet</div>
+          <div class="meta-value">Spity</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Commanditaire</div>
+          <div class="meta-value">Collectif Altitude Grimpe</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Certification</div>
+          <div class="meta-value">Titre RNCP</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Livrable</div>
+          <div class="meta-value">Budget prévisionnel</div>
+        </div>
+      </div>
+    </article>
+
+    <main>
+      <section>
+        <h2>Objectif de la compétence</h2>
+        <p class="lead">
+          Estimer le coût associé au projet Spity en se basant sur la charge de
+          travail évaluée précédemment, puis identifier les principaux postes de
+          coûts afin de présenter au commanditaire un budget prévisionnel lisible
+          et argumenté.
+        </p>
+
+        <div class="criteria">
+          <div class="criteria-item">
+            <strong>Base de calcul</strong>
+            Charge issue du livrable C1.4.1 : <strong>79 jours-homme</strong>
+            pour le MVP démontrable.
+          </div>
+          <div class="criteria-item">
+            <strong>Hypothèse tarifaire</strong>
+            Valorisation à <strong>420 EUR HT / jour</strong>, cohérente pour un
+            projet web full-stack MVP avec conception, développement et tests.
+          </div>
+          <div class="criteria-item">
+            <strong>Périmètre inclus</strong>
+            Développement, UX, sécurité, base de données, intégration,
+            documentation, déploiement et première année d'exploitation légère.
+          </div>
+          <div class="criteria-item">
+            <strong>Périmètre exclu</strong>
+            Acquisition marketing massive, support 24/7, applications mobiles
+            natives et paiement en ligne avancé.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Principes d'estimation</h2>
+        <div class="three-cols">
+          <div class="panel">
+            <strong>Charge x taux journalier</strong>
+            Les coûts humains sont calculés à partir des jours-homme du cahier
+            fonctionnel. Cette méthode relie directement le budget au périmètre
+            accepté.
+          </div>
+          <div class="panel">
+            <strong>Coûts récurrents séparés</strong>
+            Les dépenses d'hébergement, stockage médias, nom de domaine et
+            supervision sont isolées pour distinguer investissement initial et
+            exploitation.
+          </div>
+          <div class="panel">
+            <strong>Marge de sécurité</strong>
+            Une provision de 10 % couvre les aléas courants : ajustements RGPD,
+            corrections UX, retours de recette et intégrations externes.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Budget initial du MVP</h2>
+        <table class="budget">
+          <thead>
+            <tr>
+              <th>Poste</th>
+              <th>Détail</th>
+              <th>Quantité</th>
+              <th>Coût unitaire</th>
+              <th>Total HT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Développement full-stack</strong></td>
+              <td>Authentification, profils, répertoire, posts, topos, événements, API, intégration Drizzle.</td>
+              <td>52 j</td>
+              <td>420 EUR</td>
+              <td>21 840 EUR</td>
+            </tr>
+            <tr>
+              <td><strong>UX/UI et accessibilité</strong></td>
+              <td>Parcours clés, composants Tailwind, responsive, états clavier, contraste, retours de formulaires.</td>
+              <td>9 j</td>
+              <td>420 EUR</td>
+              <td>3 780 EUR</td>
+            </tr>
+            <tr>
+              <td><strong>Sécurité et RGPD</strong></td>
+              <td>Validation Zod, durcissement auth, consentement, export/suppression de compte, headers de sécurité.</td>
+              <td>7 j</td>
+              <td>420 EUR</td>
+              <td>2 940 EUR</td>
+            </tr>
+            <tr>
+              <td><strong>Tests et recette</strong></td>
+              <td>Tests unitaires ciblés, vérifications parcours critiques, correction anomalies, préparation soutenance.</td>
+              <td>7 j</td>
+              <td>420 EUR</td>
+              <td>2 940 EUR</td>
+            </tr>
+            <tr>
+              <td><strong>Documentation et déploiement</strong></td>
+              <td>Documentation technique, scripts Docker, variables, guide d'installation et support de démonstration.</td>
+              <td>4 j</td>
+              <td>420 EUR</td>
+              <td>1 680 EUR</td>
+            </tr>
+            <tr class="total-row">
+              <td><strong>Sous-total humain</strong></td>
+              <td>Charge C1.4.1 consolidée</td>
+              <td>79 j</td>
+              <td>420 EUR</td>
+              <td>33 180 EUR</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Coûts techniques et licences</h2>
+        <table class="budget">
+          <thead>
+            <tr>
+              <th>Poste</th>
+              <th>Détail</th>
+              <th>Quantité</th>
+              <th>Coût estimé</th>
+              <th>Total HT annuel</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Hébergement applicatif</strong></td>
+              <td>Instance ou plateforme managée pour Next.js, environnement de production et préproduction légère.</td>
+              <td>12 mois</td>
+              <td>35 EUR / mois</td>
+              <td>420 EUR</td>
+            </tr>
+            <tr>
+              <td><strong>Base de données MariaDB</strong></td>
+              <td>Base managée ou VPS sauvegardé, stockage initial limité et sauvegardes quotidiennes.</td>
+              <td>12 mois</td>
+              <td>25 EUR / mois</td>
+              <td>300 EUR</td>
+            </tr>
+            <tr>
+              <td><strong>Stockage médias</strong></td>
+              <td>Cloudinary ou S3 pour images, vidéos courtes, optimisation et CDN de base.</td>
+              <td>12 mois</td>
+              <td>20 EUR / mois</td>
+              <td>240 EUR</td>
+            </tr>
+            <tr>
+              <td><strong>Cartographie</strong></td>
+              <td>Leaflet avec tuiles gratuites contrôlées ou Mapbox plan de démarrage selon volume.</td>
+              <td>12 mois</td>
+              <td>10 EUR / mois</td>
+              <td>120 EUR</td>
+            </tr>
+            <tr>
+              <td><strong>Email transactionnel</strong></td>
+              <td>OTP, confirmation d'inscription, notifications d'événements et alertes sécurité.</td>
+              <td>12 mois</td>
+              <td>15 EUR / mois</td>
+              <td>180 EUR</td>
+            </tr>
+            <tr>
+              <td><strong>Nom de domaine et outils</strong></td>
+              <td>Domaine, monitoring basique, sauvegarde externe et petits outils projet.</td>
+              <td>Forfait</td>
+              <td>220 EUR</td>
+              <td>220 EUR</td>
+            </tr>
+            <tr class="total-row">
+              <td><strong>Sous-total technique</strong></td>
+              <td>Première année d'exploitation MVP</td>
+              <td>-</td>
+              <td>-</td>
+              <td>1 480 EUR</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Budget prévisionnel consolidé</h2>
+        <table class="budget">
+          <thead>
+            <tr>
+              <th>Catégorie</th>
+              <th>Composition</th>
+              <th>Nature</th>
+              <th>Montant HT</th>
+              <th>Priorité</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Investissement projet</strong></td>
+              <td>79 jours-homme de réalisation MVP.</td>
+              <td>Initial</td>
+              <td>33 180 EUR</td>
+              <td><span class="badge badge-core">Indispensable</span></td>
+            </tr>
+            <tr>
+              <td><strong>Exploitation annuelle</strong></td>
+              <td>Hébergement, base, médias, domaine, emails, supervision.</td>
+              <td>Récurrent</td>
+              <td>1 480 EUR</td>
+              <td><span class="badge badge-core">Indispensable</span></td>
+            </tr>
+            <tr>
+              <td><strong>Provision risques 10 %</strong></td>
+              <td>Aléas, ajustements fonctionnels, corrections après recette.</td>
+              <td>Réserve</td>
+              <td>3 466 EUR</td>
+              <td><span class="badge badge-watch">Pilotage</span></td>
+            </tr>
+            <tr class="total-row">
+              <td><strong>Total prévisionnel</strong></td>
+              <td>Budget recommandé pour lancer le MVP dans de bonnes conditions.</td>
+              <td>Initial + année 1</td>
+              <td>38 126 EUR</td>
+              <td>Validation client</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Lecture client du budget</h2>
+        <div class="two-cols">
+          <div class="panel">
+            <strong>Ce que finance le budget</strong>
+            <ul>
+              <li>Une application web démontrable et utilisable sur mobile.</li>
+              <li>Un socle de données robuste pour grimpeurs, clubs, lieux et événements.</li>
+              <li>Des mécanismes de sécurité et de conformité adaptés au MVP.</li>
+              <li>Une infrastructure maîtrisée pour une première année de test terrain.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <strong>Arbitrages de maîtrise des coûts</strong>
+            <ul>
+              <li>Pas d'application native au lancement.</li>
+              <li>Fonctions sociales avancées limitées au strict nécessaire.</li>
+              <li>Services managés légers plutôt qu'infrastructure complexe.</li>
+              <li>Fonctionnalités V2 différées après validation des usages.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="summary">
+        <h2>Avis budgétaire</h2>
+        <p>
+          Le budget prévisionnel de <strong>38 126 EUR HT</strong> est cohérent
+          avec la charge estimée, le périmètre MVP et les contraintes du
+          commanditaire. Il privilégie un investissement initial maîtrisé, une
+          exploitation annuelle légère et une réserve suffisante pour absorber
+          les retours de recette sans déstabiliser le planning.
+        </p>
+      </section>
+
+      <p class="footer-note">
+        Document RNCP - C1.4.2 - Projet Spity - Collectif Altitude Grimpe
+      </p>
+    </main>
+  </body>
+</html>
