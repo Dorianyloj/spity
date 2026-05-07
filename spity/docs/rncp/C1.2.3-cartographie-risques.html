@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>C1.2.3 - Cartographie des risques - Spity</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 16mm 14mm 18mm;
+      }
+
+      :root {
+        --ink: #16201b;
+        --muted: #5c6760;
+        --line: #d8e2dc;
+        --paper: #fbfdfb;
+        --accent: #1f7a4d;
+        --accent-2: #245b75;
+        --accent-soft: #e8f4ed;
+        --sky-soft: #e7f1f5;
+        --warn-soft: #fff3df;
+        --danger-soft: #fdecea;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        font-size: 10.2pt;
+        line-height: 1.45;
+      }
+
+      .cover {
+        min-height: 263mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        page-break-after: always;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cover::before {
+        content: "";
+        position: absolute;
+        inset: -40mm -20mm auto auto;
+        width: 150mm;
+        height: 150mm;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(31, 122, 77, 0.18), transparent 62%);
+      }
+
+      .cover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 58mm;
+        background:
+          linear-gradient(135deg, rgba(36, 91, 117, 0.1), rgba(31, 122, 77, 0.16)),
+          repeating-linear-gradient(
+            135deg,
+            rgba(22, 32, 27, 0.08) 0,
+            rgba(22, 32, 27, 0.08) 1px,
+            transparent 1px,
+            transparent 9px
+          );
+        clip-path: polygon(0 38%, 100% 0, 100% 100%, 0% 100%);
+      }
+
+      .cover-content {
+        position: relative;
+        z-index: 1;
+        padding-top: 12mm;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--accent);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 8.5pt;
+      }
+
+      .eyebrow::before {
+        content: "";
+        display: inline-block;
+        width: 24px;
+        height: 3px;
+        border-radius: 99px;
+        background: var(--accent);
+      }
+
+      h1 {
+        margin: 18mm 0 5mm;
+        max-width: 158mm;
+        font-size: 30pt;
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        max-width: 150mm;
+        color: var(--muted);
+        font-size: 13.5pt;
+        line-height: 1.35;
+        margin: 0;
+      }
+
+      .cover-meta {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5mm;
+        margin-bottom: 22mm;
+      }
+
+      .meta-card {
+        border: 1px solid rgba(22, 32, 27, 0.14);
+        background: rgba(255, 255, 255, 0.84);
+        border-radius: 7px;
+        padding: 5mm;
+      }
+
+      .meta-label {
+        color: var(--muted);
+        font-size: 8pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .meta-value {
+        margin-top: 2mm;
+        font-size: 11pt;
+        font-weight: 800;
+      }
+
+      main {
+        background: white;
+      }
+
+      section {
+        page-break-inside: avoid;
+        margin-bottom: 9mm;
+      }
+
+      h2 {
+        margin: 0 0 4mm;
+        color: var(--accent);
+        font-size: 15pt;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 0 0 3mm;
+        color: var(--accent-2);
+        font-size: 11.5pt;
+      }
+
+      p {
+        margin: 0 0 3.5mm;
+      }
+
+      .lead {
+        padding: 5mm 6mm;
+        border-left: 4px solid var(--accent);
+        background: var(--accent-soft);
+        border-radius: 0 7px 7px 0;
+        font-size: 10.8pt;
+      }
+
+      .criteria,
+      .two-cols,
+      .three-cols {
+        display: grid;
+        gap: 4mm;
+        margin-top: 4mm;
+      }
+
+      .criteria,
+      .two-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .three-cols {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .panel,
+      .criteria-item {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        padding: 4.5mm;
+        background: #ffffff;
+      }
+
+      .criteria-item {
+        min-height: 25mm;
+      }
+
+      .criteria-item strong,
+      .panel strong {
+        display: block;
+        margin-bottom: 2mm;
+        color: var(--accent-2);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 3mm 0 0;
+        table-layout: fixed;
+        page-break-inside: auto;
+      }
+
+      thead {
+        display: table-header-group;
+      }
+
+      tr {
+        page-break-inside: avoid;
+      }
+
+      th {
+        background: var(--accent);
+        color: white;
+        font-size: 8.2pt;
+        text-align: left;
+        padding: 3mm 2.4mm;
+        vertical-align: top;
+      }
+
+      th:first-child {
+        border-top-left-radius: 6px;
+      }
+
+      th:last-child {
+        border-top-right-radius: 6px;
+      }
+
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 3mm 2.4mm;
+        vertical-align: top;
+        font-size: 8.5pt;
+      }
+
+      tbody tr:nth-child(even) td {
+        background: #f7faf8;
+      }
+
+      .risk th:nth-child(1) {
+        width: 12%;
+      }
+
+      .risk th:nth-child(2) {
+        width: 17%;
+      }
+
+      .risk th:nth-child(3) {
+        width: 22%;
+      }
+
+      .risk th:nth-child(4) {
+        width: 18%;
+      }
+
+      .risk th:nth-child(5) {
+        width: 10%;
+      }
+
+      .risk th:nth-child(6) {
+        width: 21%;
+      }
+
+      .indicators th:nth-child(1) {
+        width: 24%;
+      }
+
+      .indicators th:nth-child(2) {
+        width: 31%;
+      }
+
+      .indicators th:nth-child(3) {
+        width: 25%;
+      }
+
+      .indicators th:nth-child(4) {
+        width: 20%;
+      }
+
+      .badge {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 1mm 2.3mm;
+        max-width: 100%;
+        font-size: 7.2pt;
+        font-weight: 800;
+        line-height: 1.1;
+        text-align: center;
+      }
+
+      .badge-low {
+        color: #0f5e39;
+        background: #dff3e8;
+      }
+
+      .badge-medium {
+        color: #245b75;
+        background: var(--sky-soft);
+      }
+
+      .badge-high {
+        color: #7a4b00;
+        background: var(--warn-soft);
+      }
+
+      .badge-critical {
+        color: #8c2f22;
+        background: var(--danger-soft);
+      }
+
+      .summary {
+        border-radius: 7px;
+        padding: 6mm;
+        color: white;
+        background: linear-gradient(135deg, #1f7a4d, #245b75);
+      }
+
+      .summary h2 {
+        color: white;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 4.5mm;
+      }
+
+      li {
+        margin: 0 0 1.7mm;
+      }
+
+      .footer-note {
+        margin-top: 7mm;
+        color: var(--muted);
+        font-size: 8.3pt;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="cover">
+      <div class="cover-content">
+        <div class="eyebrow">Bloc de compétences 1</div>
+        <h1>C1.2.3 - Cartographie des risques projet</h1>
+        <p class="subtitle">
+          Projet Spity : référentiel des risques techniques et fonctionnels,
+          criticité, suivi des incidents et indicateurs de contrôle.
+        </p>
+      </div>
+
+      <div class="cover-meta">
+        <div class="meta-card">
+          <div class="meta-label">Projet</div>
+          <div class="meta-value">Spity</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Commanditaire</div>
+          <div class="meta-value">Collectif Altitude Grimpe</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Certification</div>
+          <div class="meta-value">Titre RNCP</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Livrable</div>
+          <div class="meta-value">Registre des risques</div>
+        </div>
+      </div>
+    </article>
+
+    <main>
+      <section>
+        <h2>Objectif de la compétence</h2>
+        <p class="lead">
+          Cartographier les risques techniques et fonctionnels associés au
+          projet, mettre en place un référentiel d'évaluation et de suivi des
+          incidents, puis définir des indicateurs de contrôle afin de limiter
+          leurs impacts sur la performance du développement.
+        </p>
+
+        <div class="criteria">
+          <div class="criteria-item">
+            <strong>Livrable attendu</strong>
+            Une cartographie priorisée des risques techniques et fonctionnels
+            liés au MVP Spity.
+          </div>
+          <div class="criteria-item">
+            <strong>Critères couverts</strong>
+            Perte de données, interruption du système, facteurs de dégradation,
+            sécurité, criticité, référentiel et indicateurs.
+          </div>
+          <div class="criteria-item">
+            <strong>Périmètre</strong>
+            Application web Next.js, API, base MariaDB, contenus communautaires,
+            profils, lieux, topos, événements et données personnelles.
+          </div>
+          <div class="criteria-item">
+            <strong>Finalité</strong>
+            Anticiper les incidents probables, réduire leur impact et définir
+            une surveillance réaliste pour le contexte RNCP.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Référentiel d'évaluation des risques</h2>
+        <div class="three-cols">
+          <div class="panel">
+            <strong>Probabilité</strong>
+            Note de 1 à 4 : rare, possible, probable ou très probable selon la
+            maturité technique, les dépendances et l'exposition utilisateur.
+          </div>
+          <div class="panel">
+            <strong>Impact</strong>
+            Note de 1 à 4 : mineur, significatif, majeur ou critique selon les
+            effets sur données, sécurité, disponibilité ou démonstration.
+          </div>
+          <div class="panel">
+            <strong>Criticité</strong>
+            Score = probabilité x impact. 1-4 faible, 5-8 moyen, 9-12 élevé,
+            13-16 critique.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Cartographie des risques techniques</h2>
+        <table class="risk">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Risque</th>
+              <th>Cause probable</th>
+              <th>Impact projet</th>
+              <th>Criticité</th>
+              <th>Mesure de maîtrise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>RT-01</strong></td>
+              <td>Perte de données</td>
+              <td>Migrations mal contrôlées, absence de sauvegarde ou erreur humaine.</td>
+              <td>Perte de profils, posts, événements, topos ou données de test.</td>
+              <td><span class="badge badge-critical">16 Critique</span></td>
+              <td>Sauvegardes, migrations versionnées, seed contrôlé, jamais modifier les migrations existantes.</td>
+            </tr>
+            <tr>
+              <td><strong>RT-02</strong></td>
+              <td>Indisponibilité MariaDB</td>
+              <td>Conteneur arrêté, volume corrompu, configuration incorrecte.</td>
+              <td>Application inutilisable, routes API en erreur, démo bloquée.</td>
+              <td><span class="badge badge-high">12 Élevé</span></td>
+              <td>Procédure de relance Docker, healthcheck, sauvegarde du volume, script de vérification.</td>
+            </tr>
+            <tr>
+              <td><strong>RT-03</strong></td>
+              <td>Régression API</td>
+              <td>Modification non testée des routes auth, profil ou futures routes métier.</td>
+              <td>Parcours utilisateur cassé, impossibilité de créer ou consulter des données.</td>
+              <td><span class="badge badge-high">12 Élevé</span></td>
+              <td>Tests ciblés, validation Zod input/output, revue manuelle des endpoints critiques.</td>
+            </tr>
+            <tr>
+              <td><strong>RT-04</strong></td>
+              <td>Dégradation performance</td>
+              <td>Feed non paginé, images lourdes, requêtes sans index, carte trop chargée.</td>
+              <td>Temps de chargement élevé, mauvaise expérience mobile, abandon utilisateur.</td>
+              <td><span class="badge badge-high">9 Élevé</span></td>
+              <td>Pagination, compression médias, index DB, lazy loading, mesure temps de réponse.</td>
+            </tr>
+            <tr>
+              <td><strong>RT-05</strong></td>
+              <td>Dépendance service externe</td>
+              <td>Cartographie, stockage médias ou email indisponible ou limité par quota.</td>
+              <td>Fonctionnalités partielles, coûts imprévus, perte de confort en démo.</td>
+              <td><span class="badge badge-medium">8 Moyen</span></td>
+              <td>Abstraction fournisseur, mode dégradé, quotas suivis, mocks pour démonstration.</td>
+            </tr>
+            <tr>
+              <td><strong>RT-06</strong></td>
+              <td>Erreur de configuration</td>
+              <td>Variables d'environnement absentes, secrets invalides, ports incohérents.</td>
+              <td>Application impossible à lancer ou comportement différent entre environnements.</td>
+              <td><span class="badge badge-high">9 Élevé</span></td>
+              <td>Validation Zod de l'environnement, `.env.example`, documentation et contrôle avant démo.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Cartographie des risques fonctionnels</h2>
+        <table class="risk">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Risque</th>
+              <th>Cause probable</th>
+              <th>Impact projet</th>
+              <th>Criticité</th>
+              <th>Mesure de maîtrise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>RF-01</strong></td>
+              <td>Adoption insuffisante</td>
+              <td>Pas assez de grimpeurs, clubs ou salles dans la zone pilote.</td>
+              <td>Feed vide, matching pauvre, valeur perçue faible.</td>
+              <td><span class="badge badge-high">12 Élevé</span></td>
+              <td>Onboarding d'acteurs pilotes, données de démonstration, ciblage Lyon-Grenoble.</td>
+            </tr>
+            <tr>
+              <td><strong>RF-02</strong></td>
+              <td>Matching peu pertinent</td>
+              <td>Données profil incomplètes, niveaux mal renseignés, critères trop simples.</td>
+              <td>Perte de confiance dans la promesse principale de mise en relation.</td>
+              <td><span class="badge badge-high">9 Élevé</span></td>
+              <td>Profil obligatoire, critères visibles, filtres par discipline, niveau, matériel et distance.</td>
+            </tr>
+            <tr>
+              <td><strong>RF-03</strong></td>
+              <td>Données topo erronées</td>
+              <td>Contribution non modérée, signalement ancien, cotation incorrecte.</td>
+              <td>Risque terrain, atteinte à la crédibilité et à la sécurité utilisateur.</td>
+              <td><span class="badge badge-critical">16 Critique</span></td>
+              <td>Modération, historique, statut de confiance, signalements sécurité prioritaires.</td>
+            </tr>
+            <tr>
+              <td><strong>RF-04</strong></td>
+              <td>Événements clubs obsolètes</td>
+              <td>Clubs peu actifs ou absence de mise à jour après modification.</td>
+              <td>Inscriptions erronées, frustration utilisateur, perte de crédibilité club.</td>
+              <td><span class="badge badge-medium">8 Moyen</span></td>
+              <td>Dates obligatoires, statut annulé/complet, rappel aux clubs, tri automatique.</td>
+            </tr>
+            <tr>
+              <td><strong>RF-05</strong></td>
+              <td>Contenus abusifs</td>
+              <td>Posts, commentaires ou médias inappropriés sans modération suffisante.</td>
+              <td>Dégradation communautaire, risques juridiques et image négative.</td>
+              <td><span class="badge badge-high">12 Élevé</span></td>
+              <td>Signalement, règles de contenu, modération, limitation uploads et suppression rapide.</td>
+            </tr>
+            <tr>
+              <td><strong>RF-06</strong></td>
+              <td>UX trop complexe</td>
+              <td>Périmètre large, navigation confuse, trop de filtres ou parcours incomplets.</td>
+              <td>Abandon utilisateur et difficulté de démonstration RNCP.</td>
+              <td><span class="badge badge-high">9 Élevé</span></td>
+              <td>Parcours prioritaires, interface mobile-first, tests manuels, composants UI cohérents.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Risques sécurité et conformité</h2>
+        <table class="risk">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Risque</th>
+              <th>Cause probable</th>
+              <th>Impact projet</th>
+              <th>Criticité</th>
+              <th>Mesure de maîtrise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>RS-01</strong></td>
+              <td>Compte compromis</td>
+              <td>Mot de passe faible, absence de limitation, token mal protégé.</td>
+              <td>Accès non autorisé aux profils et actions utilisateur.</td>
+              <td><span class="badge badge-critical">16 Critique</span></td>
+              <td>Hash bcrypt, secret fort, lockout, rate limiting, cookies sécurisés.</td>
+            </tr>
+            <tr>
+              <td><strong>RS-02</strong></td>
+              <td>Exposition localisation</td>
+              <td>Affichage trop précis, absence de consentement ou paramètres privés.</td>
+              <td>Atteinte à la vie privée, non-conformité RGPD.</td>
+              <td><span class="badge badge-critical">16 Critique</span></td>
+              <td>Minimisation, consentement, précision réduite, contrôle de visibilité.</td>
+            </tr>
+            <tr>
+              <td><strong>RS-03</strong></td>
+              <td>Injection / input invalide</td>
+              <td>Données API non validées, requête manuelle, faille formulaire.</td>
+              <td>Corruption de données, erreur serveur ou faille applicative.</td>
+              <td><span class="badge badge-high">12 Élevé</span></td>
+              <td>Zod, Drizzle ORM, validations serveur, erreurs normalisées.</td>
+            </tr>
+            <tr>
+              <td><strong>RS-04</strong></td>
+              <td>Fuite de secrets</td>
+              <td>Variable sensible commitée, clé exposée côté client, configuration faible.</td>
+              <td>Compromission base, email, stockage média ou sessions.</td>
+              <td><span class="badge badge-critical">16 Critique</span></td>
+              <td>Ne jamais committer `.env*`, audit secrets, variables serveur, rotation des clés.</td>
+            </tr>
+            <tr>
+              <td><strong>RS-05</strong></td>
+              <td>Upload dangereux</td>
+              <td>Type MIME non contrôlé, fichier trop lourd, média inapproprié.</td>
+              <td>Risque sécurité, coût de stockage, contenu abusif.</td>
+              <td><span class="badge badge-high">12 Élevé</span></td>
+              <td>Limites taille/type, stockage externe, scan ou modération, droits stricts.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Référentiel de suivi des incidents</h2>
+        <div class="two-cols">
+          <div class="panel">
+            <strong>Champs de suivi</strong>
+            <ul>
+              <li>ID incident, date, auteur du signalement.</li>
+              <li>Type : technique, fonctionnel, sécurité, donnée, performance.</li>
+              <li>Sévérité : S1 critique, S2 majeure, S3 moyenne, S4 mineure.</li>
+              <li>Statut : ouvert, qualifié, en cours, corrigé, vérifié, clos.</li>
+              <li>Responsable, délai cible, cause racine et action corrective.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <strong>Règles de priorisation</strong>
+            <ul>
+              <li>S1 : données, sécurité, auth ou démo bloquée, traitement immédiat.</li>
+              <li>S2 : fonctionnalité majeure indisponible, correction sous 48 h.</li>
+              <li>S3 : anomalie contournable, planification dans le sprint courant.</li>
+              <li>S4 : amélioration ou gêne mineure, traitement selon capacité.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Indicateurs de contrôle</h2>
+        <table class="indicators">
+          <thead>
+            <tr>
+              <th>Indicateur</th>
+              <th>Objectif de contrôle</th>
+              <th>Seuil d'alerte</th>
+              <th>Fréquence</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Taux d'erreurs API</strong></td>
+              <td>Surveiller la stabilité des routes auth, profil, lieux et posts.</td>
+              <td>Plus de 2 % d'erreurs sur une période de test.</td>
+              <td>À chaque recette</td>
+            </tr>
+            <tr>
+              <td><strong>Temps de réponse API</strong></td>
+              <td>Détecter la dégradation des performances serveur.</td>
+              <td>Plus de 500 ms sur les endpoints critiques en local/démo.</td>
+              <td>Hebdomadaire</td>
+            </tr>
+            <tr>
+              <td><strong>Disponibilité base</strong></td>
+              <td>Contrôler la disponibilité MariaDB et la continuité de service.</td>
+              <td>Conteneur arrêté ou connexion DB impossible.</td>
+              <td>Avant chaque démo</td>
+            </tr>
+            <tr>
+              <td><strong>Sauvegardes valides</strong></td>
+              <td>Limiter l'impact d'une perte de données.</td>
+              <td>Aucune sauvegarde récente ou restauration non testée.</td>
+              <td>À chaque jalon</td>
+            </tr>
+            <tr>
+              <td><strong>Échecs de connexion</strong></td>
+              <td>Identifier brute force, problème UX ou compte compromis.</td>
+              <td>Hausse inhabituelle par compte ou IP.</td>
+              <td>Hebdomadaire</td>
+            </tr>
+            <tr>
+              <td><strong>Dette bugs critiques</strong></td>
+              <td>Mesurer les incidents bloquants non traités.</td>
+              <td>Un incident S1 ou plus de trois incidents S2 ouverts.</td>
+              <td>Hebdomadaire</td>
+            </tr>
+            <tr>
+              <td><strong>Complétude profils</strong></td>
+              <td>Contrôler la pertinence du matching.</td>
+              <td>Moins de 80 % des profils pilotes avec niveau, discipline et localisation.</td>
+              <td>Recette MVP</td>
+            </tr>
+            <tr>
+              <td><strong>Délai de modération</strong></td>
+              <td>Limiter l'impact des contenus abusifs et signalements sécurité.</td>
+              <td>Signalement critique non traité sous 24 h.</td>
+              <td>À chaque signalement</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Mesures prioritaires de réduction des risques</h2>
+        <div class="three-cols">
+          <div class="panel">
+            <strong>Données et disponibilité</strong>
+            Sauvegardes, migrations versionnées, contrôles de connexion DB,
+            index sur les tables de recherche et scénario de restauration.
+          </div>
+          <div class="panel">
+            <strong>Sécurité</strong>
+            Validation Zod, rate limiting, protection des secrets, permissions
+            serveur, limitation des uploads et minimisation des localisations.
+          </div>
+          <div class="panel">
+            <strong>Fonctionnel</strong>
+            Parcours MVP verrouillé, données de démo, onboarding club pilote,
+            modération minimale et tests manuels des parcours critiques.
+          </div>
+        </div>
+      </section>
+
+      <section class="summary">
+        <h2>Synthèse</h2>
+        <p>
+          Les risques majeurs du projet Spity concernent la perte de données,
+          l'interruption de la base, la sécurité des comptes, la protection des
+          localisations, la fiabilité des topos et la capacité du MVP à générer
+          suffisamment de valeur avec une communauté pilote limitée.
+        </p>
+        <p>
+          Le référentiel proposé permet de prioriser ces risques par criticité,
+          de suivre les incidents et de contrôler leur impact par des indicateurs
+          simples. Les actions les plus importantes sont la sécurisation des
+          données, la validation systématique, la modération, les sauvegardes et
+          le verrouillage du périmètre démontrable.
+        </p>
+      </section>
+
+      <p class="footer-note">
+        Document produit pour le dossier RNCP - Bloc C1 - Projet Spity.
+      </p>
+    </main>
+  </body>
+</html>
