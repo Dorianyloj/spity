@@ -1,0 +1,911 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>C1.1.2 - Analyse de la demande client - Spity</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 16mm 14mm 18mm;
+      }
+
+      :root {
+        --ink: #16201b;
+        --muted: #5c6760;
+        --line: #d8e2dc;
+        --paper: #fbfdfb;
+        --accent: #1f7a4d;
+        --accent-2: #245b75;
+        --accent-soft: #e8f4ed;
+        --sky-soft: #e7f1f5;
+        --warn-soft: #fff3df;
+        --danger-soft: #fdecea;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        font-size: 10.2pt;
+        line-height: 1.45;
+      }
+
+      .cover {
+        min-height: 263mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        page-break-after: always;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cover::before {
+        content: "";
+        position: absolute;
+        inset: -40mm -20mm auto auto;
+        width: 150mm;
+        height: 150mm;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(31, 122, 77, 0.18), transparent 62%);
+      }
+
+      .cover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 58mm;
+        background:
+          linear-gradient(135deg, rgba(36, 91, 117, 0.1), rgba(31, 122, 77, 0.16)),
+          repeating-linear-gradient(
+            135deg,
+            rgba(22, 32, 27, 0.08) 0,
+            rgba(22, 32, 27, 0.08) 1px,
+            transparent 1px,
+            transparent 9px
+          );
+        clip-path: polygon(0 38%, 100% 0, 100% 100%, 0% 100%);
+      }
+
+      .cover-content {
+        position: relative;
+        z-index: 1;
+        padding-top: 12mm;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--accent);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 8.5pt;
+      }
+
+      .eyebrow::before {
+        content: "";
+        display: inline-block;
+        width: 24px;
+        height: 3px;
+        border-radius: 99px;
+        background: var(--accent);
+      }
+
+      h1 {
+        margin: 18mm 0 5mm;
+        max-width: 155mm;
+        font-size: 30pt;
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        max-width: 145mm;
+        color: var(--muted);
+        font-size: 13.5pt;
+        line-height: 1.35;
+        margin: 0;
+      }
+
+      .cover-meta {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5mm;
+        margin-bottom: 22mm;
+      }
+
+      .meta-card {
+        border: 1px solid rgba(22, 32, 27, 0.14);
+        background: rgba(255, 255, 255, 0.84);
+        border-radius: 7px;
+        padding: 5mm;
+      }
+
+      .meta-label {
+        color: var(--muted);
+        font-size: 8pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .meta-value {
+        margin-top: 2mm;
+        font-size: 11pt;
+        font-weight: 800;
+      }
+
+      main {
+        background: white;
+      }
+
+      section {
+        page-break-inside: avoid;
+        margin-bottom: 9mm;
+      }
+
+      h2 {
+        margin: 0 0 4mm;
+        color: var(--accent);
+        font-size: 15pt;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 6mm 0 3mm;
+        color: var(--ink);
+        font-size: 11.5pt;
+      }
+
+      p {
+        margin: 0 0 3.5mm;
+      }
+
+      .lead {
+        padding: 5mm 6mm;
+        border-left: 4px solid var(--accent);
+        background: var(--accent-soft);
+        border-radius: 0 7px 7px 0;
+        font-size: 10.8pt;
+      }
+
+      .criteria,
+      .three-cols {
+        display: grid;
+        gap: 4mm;
+        margin-top: 4mm;
+      }
+
+      .criteria {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .three-cols {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .panel,
+      .criteria-item {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        padding: 4.5mm;
+        background: #ffffff;
+      }
+
+      .criteria-item {
+        min-height: 26mm;
+      }
+
+      .panel strong,
+      .criteria-item strong {
+        display: block;
+        margin-bottom: 2mm;
+        color: var(--accent-2);
+      }
+
+      .quote {
+        padding: 5mm 6mm;
+        border-radius: 7px;
+        color: white;
+        background: linear-gradient(135deg, #1f7a4d, #245b75);
+        font-size: 12pt;
+        font-weight: 750;
+        line-height: 1.35;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 3mm 0 0;
+        table-layout: fixed;
+        page-break-inside: auto;
+      }
+
+      thead {
+        display: table-header-group;
+      }
+
+      tr {
+        page-break-inside: avoid;
+      }
+
+      th {
+        background: var(--accent);
+        color: white;
+        font-size: 8.3pt;
+        text-align: left;
+        padding: 3mm 2.6mm;
+        vertical-align: top;
+      }
+
+      th:first-child {
+        border-top-left-radius: 6px;
+      }
+
+      th:last-child {
+        border-top-right-radius: 6px;
+      }
+
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 3mm 2.6mm;
+        vertical-align: top;
+        font-size: 8.7pt;
+      }
+
+      tbody tr:nth-child(even) td {
+        background: #f7faf8;
+      }
+
+      .existing th:nth-child(1) {
+        width: 23%;
+      }
+
+      .existing th:nth-child(2) {
+        width: 32%;
+      }
+
+      .existing th:nth-child(3) {
+        width: 45%;
+      }
+
+      .stakeholders th:nth-child(1) {
+        width: 20%;
+      }
+
+      .stakeholders th:nth-child(2) {
+        width: 27%;
+      }
+
+      .stakeholders th:nth-child(3) {
+        width: 28%;
+      }
+
+      .stakeholders th:nth-child(4) {
+        width: 25%;
+      }
+
+      .requirements th:nth-child(1) {
+        width: 23%;
+      }
+
+      .requirements th:nth-child(2) {
+        width: 43%;
+      }
+
+      .requirements th:nth-child(3) {
+        width: 34%;
+      }
+
+      .solutions th:nth-child(1) {
+        width: 27%;
+      }
+
+      .solutions th:nth-child(2) {
+        width: 39%;
+      }
+
+      .solutions th:nth-child(3) {
+        width: 34%;
+      }
+
+      .badge {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 1mm 2.3mm;
+        max-width: 100%;
+        font-size: 7.4pt;
+        font-weight: 800;
+        line-height: 1.1;
+        text-align: center;
+      }
+
+      .badge-high {
+        color: #0f5e39;
+        background: #dff3e8;
+      }
+
+      .badge-medium {
+        color: #245b75;
+        background: var(--sky-soft);
+      }
+
+      .badge-risk {
+        color: #8c2f22;
+        background: var(--danger-soft);
+      }
+
+      .badge-core {
+        color: #7a4b00;
+        background: var(--warn-soft);
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 4.5mm;
+      }
+
+      li {
+        margin: 0 0 1.7mm;
+      }
+
+      .summary {
+        border-radius: 7px;
+        padding: 6mm;
+        color: white;
+        background: linear-gradient(135deg, #1f7a4d, #245b75);
+      }
+
+      .summary h2 {
+        color: white;
+      }
+
+      .footer-note {
+        margin-top: 7mm;
+        color: var(--muted);
+        font-size: 8.3pt;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="cover">
+      <div class="cover-content">
+        <div class="eyebrow">Bloc de compétences 1</div>
+        <h1>C1.1.2 - Analyse de la demande client</h1>
+        <p class="subtitle">
+          Projet Spity : formalisation du besoin, de l'existant, des objectifs,
+          des enjeux et des premières pistes de solution pour le commanditaire.
+        </p>
+      </div>
+
+      <div class="cover-meta">
+        <div class="meta-card">
+          <div class="meta-label">Projet</div>
+          <div class="meta-value">Spity</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Commanditaire</div>
+          <div class="meta-value">Collectif Altitude Grimpe</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Certification</div>
+          <div class="meta-value">Titre RNCP</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Livrable</div>
+          <div class="meta-value">Analyse de la demande</div>
+        </div>
+      </div>
+    </article>
+
+    <main>
+      <section>
+        <h2>Objectif de la compétence</h2>
+        <p class="lead">
+          Analyser la demande et les données recueillies auprès du commanditaire
+          en menant un entretien d'explicitation du besoin, des attentes, des
+          exigences et un état des lieux de l'existant, afin de s'approprier le
+          contexte, les enjeux et les objectifs du projet.
+        </p>
+
+        <div class="criteria">
+          <div class="criteria-item">
+            <strong>Livrable attendu</strong>
+            Une présentation structurée de l'analyse de la demande, des objectifs
+            et des enjeux du projet pour chaque partie prenante.
+          </div>
+          <div class="criteria-item">
+            <strong>Critères couverts</strong>
+            Besoins, attentes, existant, problématique client, objectifs,
+            exigences et premières pistes de solutions techniques.
+          </div>
+          <div class="criteria-item">
+            <strong>Méthode utilisée</strong>
+            Entretien d'explicitation avec le commanditaire, reformulation des
+            irritants, analyse des usages actuels et priorisation MVP.
+          </div>
+          <div class="criteria-item">
+            <strong>Périmètre d'analyse</strong>
+            Zone pilote Rhône-Alpes, principalement Lyon, Grenoble, clubs,
+            salles, falaises locales et communauté de grimpeurs.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Cadre du commanditaire</h2>
+        <p>
+          Le commanditaire du projet est le
+          <strong>Collectif Altitude Grimpe</strong>, association régionale
+          fictive basée en Rhône-Alpes et représentée par
+          <strong>Claire Martin</strong>, présidente de l'association. Le
+          collectif souhaite expérimenter une plateforme commune pour faciliter
+          la pratique de l'escalade, améliorer la circulation de l'information
+          locale et renforcer les liens entre grimpeurs, clubs, salles et
+          contributeurs falaises.
+        </p>
+
+        <div class="three-cols">
+          <div class="panel">
+            <strong>Activité</strong>
+            Animation de la communauté escalade locale, coordination
+            d'événements et valorisation des lieux de pratique.
+          </div>
+          <div class="panel">
+            <strong>Public ciblé</strong>
+            Grimpeurs débutants ou réguliers, clubs, salles partenaires,
+            équipeurs et contributeurs terrain.
+          </div>
+          <div class="panel">
+            <strong>Besoin exprimé</strong>
+            Tester un MVP centralisant les informations et interactions utiles à
+            la pratique quotidienne.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Demande initiale formulée</h2>
+        <p>
+          Le Collectif Altitude Grimpe souhaite disposer d'une application web
+          nommée <strong>Spity</strong>, capable de regrouper les usages
+          actuellement dispersés autour de l'escalade : recherche de partenaires,
+          consultation de lieux, topos collaboratifs, événements clubs et partage
+          social contextualisé.
+        </p>
+        <p class="quote">
+          Comment permettre aux grimpeurs de centraliser leur pratique dans une
+          seule application fiable, communautaire et adaptée aux usages de
+          l'escalade ?
+        </p>
+      </section>
+
+      <section>
+        <h2>État des lieux de l'existant</h2>
+        <table class="existing">
+          <thead>
+            <tr>
+              <th>Besoin observé</th>
+              <th>Solution actuelle</th>
+              <th>Limites identifiées</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Trouver un partenaire</strong></td>
+              <td>Groupes Facebook, bouche-à-oreille, messages privés.</td>
+              <td>
+                Filtrage limité par niveau, discipline, localisation ou
+                matériel. Les informations sont peu structurées et rapidement
+                perdues dans les fils de discussion.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Consulter des topos</strong></td>
+              <td>Guides papier, plateformes spécialisées, contributions isolées.</td>
+              <td>
+                Données parfois anciennes, peu de signalement temps réel, faible
+                lien entre cotation, conditions terrain et retours de la
+                communauté.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Identifier salles et falaises</strong></td>
+              <td>Sites web indépendants, cartes généralistes, recherches manuelles.</td>
+              <td>
+                Informations dispersées, formats hétérogènes, recherche peu
+                adaptée aux critères escalade comme discipline, niveau ou
+                équipements.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Suivre les clubs</strong></td>
+              <td>Sites clubs, emails, réseaux sociaux, affichage local.</td>
+              <td>
+                Communication éclatée, visibilité faible pour les nouveaux
+                grimpeurs et difficulté à promouvoir les événements.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Partager ses sorties</strong></td>
+              <td>Instagram, Facebook, messageries privées.</td>
+              <td>
+                Contenus sociaux sans contexte technique : cotation, lieu,
+                matériel, discipline ou conditions ne sont pas exploitables.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Besoins et attentes par partie prenante</h2>
+        <table class="stakeholders">
+          <thead>
+            <tr>
+              <th>Partie prenante</th>
+              <th>Besoins recueillis</th>
+              <th>Attentes prioritaires</th>
+              <th>Enjeux associés</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Collectif Altitude Grimpe</strong></td>
+              <td>
+                Disposer d'un MVP clair pour tester l'intérêt d'une plateforme
+                commune sur une zone pilote.
+              </td>
+              <td>
+                Centralisation, fiabilité des informations, démonstration
+                fonctionnelle, périmètre réaliste.
+              </td>
+              <td>
+                Valider la pertinence métier avant un déploiement plus large.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Grimpeurs</strong></td>
+              <td>
+                Trouver des partenaires, lieux, topos et événements sans
+                multiplier les sources.
+              </td>
+              <td>
+                Recherche rapide, filtres utiles, informations à jour, interface
+                mobile et simple.
+              </td>
+              <td>
+                Réduire la perte de temps et renforcer la sécurité de pratique.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Clubs</strong></td>
+              <td>
+                Publier des événements et gagner en visibilité auprès des
+                grimpeurs locaux.
+              </td>
+              <td>
+                Fiche club, calendrier, inscriptions, communication centralisée.
+              </td>
+              <td>
+                Attirer de nouveaux membres et améliorer la participation aux
+                activités.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Salles d'escalade</strong></td>
+              <td>
+                Être correctement référencées avec leurs disciplines,
+                équipements, photos et informations pratiques.
+              </td>
+              <td>
+                Visibilité locale, données fiables, recherche par critères.
+              </td>
+              <td>
+                Faciliter la découverte des infrastructures par les pratiquants.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Contributeurs falaises</strong></td>
+              <td>
+                Pouvoir remonter des informations terrain, signalements sécurité
+                et corrections de voies.
+              </td>
+              <td>
+                Contributions encadrées, modération, traçabilité et qualité des
+                données.
+              </td>
+              <td>
+                Améliorer la sécurité et maintenir des topos vivants.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Équipe technique</strong></td>
+              <td>
+                Construire une solution robuste dans le délai et les contraintes
+                du projet RNCP.
+              </td>
+              <td>
+                Stack maîtrisée, architecture simple, données structurées,
+                sécurité intégrée.
+              </td>
+              <td>
+                Livrer un MVP démontrable, maintenable et évolutif.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Objectifs du projet</h2>
+        <table class="requirements">
+          <thead>
+            <tr>
+              <th>Objectif</th>
+              <th>Description</th>
+              <th>Critère de réussite</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Centraliser les usages</strong></td>
+              <td>
+                Regrouper profils, matching, lieux, topos, événements et contenu
+                social dans une même application.
+              </td>
+              <td>
+                Un utilisateur peut organiser une session sans quitter Spity.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Améliorer la mise en relation</strong></td>
+              <td>
+                Proposer une recherche de partenaires basée sur le niveau, la
+                discipline, la localisation et le matériel.
+              </td>
+              <td>
+                Les profils compatibles sont identifiables rapidement.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Fiabiliser les informations terrain</strong></td>
+              <td>
+                Permettre la contribution et le signalement sur les topos,
+                conditions, accès et équipements.
+              </td>
+              <td>
+                Les informations sensibles peuvent être mises à jour et modérées.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Valoriser les clubs</strong></td>
+              <td>
+                Donner aux clubs un espace visible pour présenter leurs
+                événements et mobiliser les grimpeurs.
+              </td>
+              <td>
+                Un club peut créer un événement et suivre les inscriptions.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Livrer un MVP RNCP</strong></td>
+              <td>
+                Produire une version fonctionnelle, sécurisée et démontrable du
+                projet dans un périmètre maîtrisé.
+              </td>
+              <td>
+                Le parcours principal est testable pendant la soutenance.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Exigences identifiées</h2>
+        <table class="requirements">
+          <thead>
+            <tr>
+              <th>Type d'exigence</th>
+              <th>Exigences retenues</th>
+              <th>Impact projet</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-core">Fonctionnelle</span></td>
+              <td>
+                Authentification, profils grimpeur et club, matching, répertoire
+                géolocalisé, topos collaboratifs, posts, événements.
+              </td>
+              <td>
+                Définit le périmètre du MVP et les parcours à prioriser.
+              </td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-medium">Technique</span></td>
+              <td>
+                Application web Next.js, API routes, Drizzle ORM, MariaDB,
+                Docker Compose pour l'environnement local.
+              </td>
+              <td>
+                Permet un développement rapide, structuré et démontrable.
+              </td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-risk">Sécurité</span></td>
+              <td>
+                Validation serveur, mots de passe hachés, contrôle des accès,
+                protection des endpoints sensibles et prise en compte OWASP.
+              </td>
+              <td>
+                Réduit les risques liés aux comptes, contenus et données
+                utilisateurs.
+              </td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-high">UX</span></td>
+              <td>
+                Interface claire, mobile-first, navigation simple, filtres
+                compréhensibles et expérience adaptée aux usages terrain.
+              </td>
+              <td>
+                Conditionne l'adoption par les grimpeurs et les clubs.
+              </td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-high">Accessibilité</span></td>
+              <td>
+                Contrastes suffisants, navigation clavier, composants
+                accessibles et libellés explicites.
+              </td>
+              <td>
+                Rend le service plus inclusif et conforme aux attendus RGAA.
+              </td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-medium">RNCP</span></td>
+              <td>
+                Documentation claire, justification des choix, démonstration du
+                MVP et traçabilité de la démarche.
+              </td>
+              <td>
+                Facilite l'évaluation du projet par le jury.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Pistes de solutions techniques</h2>
+        <table class="solutions">
+          <thead>
+            <tr>
+              <th>Besoin à couvrir</th>
+              <th>Solution envisagée</th>
+              <th>Justification</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Application web MVP</strong></td>
+              <td>Next.js avec App Router et composants React.</td>
+              <td>
+                Stack adaptée à une interface moderne, des routes API et une
+                démonstration rapide.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Données structurées</strong></td>
+              <td>MariaDB avec Drizzle ORM.</td>
+              <td>
+                Typage, maintenabilité du modèle et cohérence avec les besoins
+                relationnels : users, clubs, lieux, posts, événements, topos.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Formulaires fiables</strong></td>
+              <td>React Hook Form et Zod.</td>
+              <td>
+                Validation systématique des données côté formulaire et côté API.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Cartographie</strong></td>
+              <td>Leaflet ou Mapbox selon contraintes de coût et rendu.</td>
+              <td>
+                Permet une vue carte des salles, falaises, clubs et événements.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Médias utilisateurs</strong></td>
+              <td>Cloudinary ou stockage objet compatible S3.</td>
+              <td>
+                Externalise les images et vidéos pour ne pas alourdir
+                l'application.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Démo et environnement local</strong></td>
+              <td>Docker Compose avec MariaDB et phpMyAdmin.</td>
+              <td>
+                Rend le projet plus reproductible pour le développement et la
+                soutenance.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Sécurité applicative</strong></td>
+              <td>Middleware, validation serveur, contrôle de session et headers.</td>
+              <td>
+                Répond aux risques liés aux comptes, contenus sociaux et données
+                de localisation.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Priorisation du MVP</h2>
+        <div class="three-cols">
+          <div class="panel">
+            <strong>Priorité 1</strong>
+            Authentification, profils grimpeurs, profils clubs, base de données
+            et navigation principale.
+          </div>
+          <div class="panel">
+            <strong>Priorité 2</strong>
+            Répertoire géolocalisé, événements clubs, posts contextualisés et
+            matching simple.
+          </div>
+          <div class="panel">
+            <strong>Priorité 3</strong>
+            Topos collaboratifs, signalements sécurité, modération et
+            améliorations d'expérience.
+          </div>
+        </div>
+      </section>
+
+      <section class="summary">
+        <h2>Synthèse</h2>
+        <p>
+          L'analyse de la demande montre que le Collectif Altitude Grimpe
+          souhaite répondre à une fragmentation forte des usages escalade. Les
+          grimpeurs utilisent aujourd'hui plusieurs sources non connectées pour
+          trouver des partenaires, consulter les lieux, suivre les clubs, lire
+          les topos et partager leurs sorties.
+        </p>
+        <p>
+          La solution Spity répond à cette problématique par un MVP centralisé,
+          social et contextualisé. Les pistes techniques retenues sont cohérentes
+          avec les objectifs du projet : livrer rapidement une application web
+          démontrable, structurée, sécurisée et suffisamment évolutive pour être
+          enrichie après validation du concept.
+        </p>
+      </section>
+
+      <p class="footer-note">
+        Document produit pour le dossier RNCP - Bloc C1 - Projet Spity.
+      </p>
+    </main>
+  </body>
+</html>
