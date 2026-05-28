@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spity - Soutenance Bloc 01 RNCP</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" />
+    <style>
+      :root {
+        --spity-ink: #17231f;
+        --spity-muted: #5b665f;
+        --spity-green: #1f8a5b;
+        --spity-lime: #c7e565;
+        --spity-sand: #f4efe6;
+        --spity-paper: #fffaf1;
+        --spity-orange: #d97706;
+        --spity-red: #b42318;
+        --spity-blue: #2f6f9f;
+      }
+
+      .reveal {
+        color: var(--spity-ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
+
+      .reveal .slides {
+        text-align: left;
+      }
+
+      .reveal h1,
+      .reveal h2,
+      .reveal h3 {
+        color: var(--spity-ink);
+        font-weight: 850;
+        letter-spacing: 0;
+        text-transform: none;
+      }
+
+      .reveal h1 {
+        font-size: 3.6rem;
+        line-height: 0.95;
+      }
+
+      .reveal h2 {
+        font-size: 2.35rem;
+      }
+
+      .reveal h3 {
+        font-size: 1.18rem;
+      }
+
+      .reveal p,
+      .reveal li {
+        color: var(--spity-muted);
+        font-size: 1.02rem;
+        line-height: 1.45;
+      }
+
+      .reveal strong {
+        color: var(--spity-ink);
+      }
+
+      .reveal section {
+        box-sizing: border-box;
+      }
+
+      .topline {
+        align-items: center;
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+
+      .logo {
+        background: white;
+        border-radius: 999px;
+        box-shadow: 0 10px 30px rgba(23, 35, 31, 0.15);
+        height: 54px;
+        object-fit: contain;
+        padding: 0.35rem 0.55rem;
+      }
+
+      .kicker {
+        color: var(--spity-green);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .hero {
+        min-height: 100%;
+      }
+
+      .hero::before {
+        background: linear-gradient(90deg, rgba(10, 16, 14, 0.84), rgba(10, 16, 14, 0.45), rgba(10, 16, 14, 0.08));
+        content: "";
+        inset: 0;
+        position: absolute;
+        z-index: -1;
+      }
+
+      .hero h1,
+      .hero h2,
+      .hero p {
+        color: white;
+        max-width: 760px;
+        text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+      }
+
+      .hero .subtitle {
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 1.25rem;
+      }
+
+      .hero .meta {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        margin-top: 2rem;
+      }
+
+      .pill {
+        align-items: center;
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 999px;
+        color: white;
+        display: inline-flex;
+        font-size: 0.82rem;
+        font-weight: 750;
+        gap: 0.45rem;
+        padding: 0.48rem 0.78rem;
+      }
+
+      .slide-shell {
+        background:
+          linear-gradient(180deg, rgba(255, 250, 241, 0.96), rgba(255, 255, 255, 0.98)),
+          var(--spity-paper);
+        border-radius: 24px;
+        box-shadow: 0 22px 70px rgba(23, 35, 31, 0.13);
+        margin: 0 auto;
+        padding: 2.2rem;
+        width: min(1120px, 100%);
+      }
+
+      .grid-2 {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid-3 {
+        display: grid;
+        gap: 0.9rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .grid-4 {
+        display: grid;
+        gap: 0.75rem;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .card {
+        background: white;
+        border: 1px solid rgba(23, 35, 31, 0.09);
+        border-radius: 16px;
+        box-shadow: 0 12px 32px rgba(23, 35, 31, 0.08);
+        min-height: 118px;
+        padding: 1rem;
+      }
+
+      .card h3 {
+        margin: 0 0 0.45rem;
+      }
+
+      .card p,
+      .card li {
+        font-size: 0.82rem;
+        margin: 0;
+      }
+
+      .metric {
+        background: var(--spity-ink);
+        border-radius: 18px;
+        color: white;
+        padding: 1.1rem;
+      }
+
+      .metric b {
+        color: white;
+        display: block;
+        font-size: 1.85rem;
+        line-height: 1;
+      }
+
+      .metric span {
+        color: rgba(255, 255, 255, 0.75);
+        display: block;
+        font-size: 0.78rem;
+        margin-top: 0.35rem;
+      }
+
+      .tag {
+        border-radius: 999px;
+        display: inline-flex;
+        font-size: 0.72rem;
+        font-weight: 800;
+        margin-bottom: 0.55rem;
+        padding: 0.32rem 0.55rem;
+      }
+
+      .tag.green {
+        background: rgba(31, 138, 91, 0.12);
+        color: var(--spity-green);
+      }
+
+      .tag.orange {
+        background: rgba(217, 119, 6, 0.13);
+        color: var(--spity-orange);
+      }
+
+      .tag.red {
+        background: rgba(180, 35, 24, 0.12);
+        color: var(--spity-red);
+      }
+
+      .tag.blue {
+        background: rgba(47, 111, 159, 0.13);
+        color: var(--spity-blue);
+      }
+
+      .flow {
+        align-items: center;
+        display: grid;
+        gap: 0.65rem;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        margin-top: 1rem;
+      }
+
+      .node {
+        background: white;
+        border: 1px solid rgba(23, 35, 31, 0.1);
+        border-radius: 18px;
+        min-height: 92px;
+        padding: 0.9rem;
+        text-align: center;
+      }
+
+      .node b {
+        display: block;
+        font-size: 0.9rem;
+      }
+
+      .node span {
+        color: var(--spity-muted);
+        display: block;
+        font-size: 0.7rem;
+        margin-top: 0.25rem;
+      }
+
+      .arrow {
+        color: var(--spity-green);
+        font-size: 1.8rem;
+        font-weight: 900;
+        text-align: center;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 0.7rem;
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+      .step {
+        background: white;
+        border-top: 6px solid var(--spity-green);
+        border-radius: 16px;
+        box-shadow: 0 12px 30px rgba(23, 35, 31, 0.08);
+        padding: 0.9rem;
+      }
+
+      .step b {
+        color: var(--spity-green);
+        display: block;
+        font-size: 0.78rem;
+        margin-bottom: 0.45rem;
+      }
+
+      .step p {
+        font-size: 0.78rem;
+        margin: 0;
+      }
+
+      .proof-list {
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 1rem;
+      }
+
+      .proof {
+        align-items: center;
+        background: white;
+        border: 1px solid rgba(23, 35, 31, 0.08);
+        border-radius: 12px;
+        display: flex;
+        gap: 0.65rem;
+        padding: 0.65rem 0.8rem;
+      }
+
+      .proof b {
+        background: var(--spity-green);
+        border-radius: 8px;
+        color: white;
+        font-size: 0.7rem;
+        padding: 0.25rem 0.35rem;
+      }
+
+      .proof span {
+        color: var(--spity-muted);
+        font-size: 0.78rem;
+      }
+
+      .phone {
+        background: var(--spity-ink);
+        border: 10px solid #0d1512;
+        border-radius: 34px;
+        box-shadow: 0 22px 50px rgba(23, 35, 31, 0.22);
+        height: 520px;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        width: 270px;
+      }
+
+      .phone img {
+        height: 190px;
+        object-fit: cover;
+        width: 100%;
+      }
+
+      .phone-body {
+        background: #fffaf1;
+        bottom: 0;
+        left: 0;
+        padding: 1rem;
+        position: absolute;
+        right: 0;
+        top: 190px;
+      }
+
+      .phone-body h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.45rem;
+      }
+
+      .mini-row {
+        align-items: center;
+        background: white;
+        border-radius: 12px;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.55rem;
+        padding: 0.55rem;
+      }
+
+      .mini-row span {
+        color: var(--spity-muted);
+        font-size: 0.68rem;
+      }
+
+      .mini-row b {
+        color: var(--spity-ink);
+        font-size: 0.72rem;
+      }
+
+      .decision {
+        background: var(--spity-green);
+        border-radius: 24px;
+        color: white;
+        padding: 1.6rem;
+      }
+
+      .decision h2,
+      .decision p {
+        color: white;
+      }
+
+      .muted-note {
+        color: var(--spity-muted);
+        font-size: 0.72rem;
+        margin-top: 0.8rem;
+      }
+
+      @media print {
+        @page {
+          margin: 0;
+          size: 16in 9in;
+        }
+
+        html,
+        body {
+          background: white;
+          height: auto;
+          margin: 0;
+          width: auto;
+        }
+
+        .reveal,
+        .reveal .slides,
+        .reveal .slides section {
+          background: white;
+          display: block !important;
+          height: 9in !important;
+          inset: auto !important;
+          margin: 0 !important;
+          opacity: 1 !important;
+          page-break-after: always;
+          position: relative !important;
+          transform: none !important;
+          visibility: visible !important;
+          width: 16in !important;
+        }
+
+        .reveal .slides section {
+          box-sizing: border-box;
+          overflow: hidden;
+          padding: 0.65in;
+        }
+
+        .reveal .slides section.stack {
+          height: auto !important;
+          padding: 0 !important;
+        }
+
+        .slide-shell,
+        .card,
+        .metric,
+        .step {
+          box-shadow: none;
+        }
+
+        .hero {
+          background: #17231f !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section
+          class="hero"
+          data-background-image="../../public/images/brand/escalade-falaise-coucher-soleil.jpeg"
+          data-background-size="cover"
+          data-background-position="center"
+        >
+          <div class="topline">
+            <img class="logo" src="../../public/images/brand/logo-spity-white.png" alt="Logo Spity" />
+            <span class="pill">Bloc 01 - RNCP 39583</span>
+          </div>
+          <h1>Spity</h1>
+          <p class="subtitle">
+            Cadrer un projet de développement logiciel pour une plateforme sociale dédiée à l'escalade.
+          </p>
+          <div class="meta">
+            <span class="pill">Soutenance RNCP</span>
+            <span class="pill">MVP démontrable</span>
+            <span class="pill">Rhône-Alpes</span>
+          </div>
+          <aside class="notes">
+            Ouvrir avec la vision produit, puis annoncer que chaque partie correspond à une compétence de la grille Bloc 01.
+          </aside>
+        </section>
+
+        <section>
+          <div class="slide-shell">
+            <p class="kicker">Promesse de la soutenance</p>
+            <h2>Un projet cadré, faisable et défendable</h2>
+            <div class="grid-4">
+              <div class="metric"><b>11</b><span>compétences couvertes de C1.1.1 à C1.6</span></div>
+              <div class="metric"><b>82</b><span>jours-homme estimés pour le MVP</span></div>
+              <div class="metric"><b>44k</b><span>EUR de budget prévisionnel</span></div>
+              <div class="metric"><b>3</b><span>axes critiques : sécurité, RGPD, adoption</span></div>
+            </div>
+            <div class="proof-list">
+              <div class="proof"><b>C1.1</b><span>Acteurs, utilisateurs, demande et enjeux</span></div>
+              <div class="proof"><b>C1.2</b><span>Opportunités, menaces, faisabilité et risques</span></div>
+              <div class="proof"><b>C1.3</b><span>Veille et choix d'architecture</span></div>
+              <div class="proof"><b>C1.4</b><span>Charge de travail et budget</span></div>
+              <div class="proof"><b>C1.5</b><span>Architecture logicielle modélisée</span></div>
+              <div class="proof"><b>C1.6</b><span>Préconisation argumentée au commanditaire</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="slide-shell">
+            <p class="kicker">Projet support</p>
+            <h2>Un réseau social pour les grimpeurs</h2>
+            <div class="grid-2">
+              <div>
+                <p>
+                  Spity réunit les usages dispersés de la communauté escalade : trouver un partenaire,
+                  consulter des lieux, contribuer aux topos, suivre les clubs et partager ses sessions.
+                </p>
+                <div class="grid-2">
+                  <div class="card"><span class="tag green">Social</span><h3>Feed contextualisé</h3><p>Posts avec salle, falaise, cotation, discipline et matériel.</p></div>
+                  <div class="card"><span class="tag blue">Local</span><h3>Carte et lieux</h3><p>Salles, falaises et clubs filtrés par distance et pratique.</p></div>
+                  <div class="card"><span class="tag orange">Terrain</span><h3>Topos vivants</h3><p>Cotations, état, photos, alertes sécurité et contributions.</p></div>
+                  <div class="card"><span class="tag green">Clubs</span><h3>Événements</h3><p>Sorties, initiations, coaching et inscriptions.</p></div>
+                </div>
+              </div>
+              <div class="phone">
+                <img src="../../public/images/demo/climbing/verdon-climber-route.jpg" alt="Grimpeur en falaise" />
+                <div class="phone-body">
+                  <h3>Session Verdon</h3>
+                  <p>Voie 6c · sec · 8 dégaines · partenaire recherché</p>
+                  <div class="mini-row"><b>Topo</b><span>Cotation confirmée</span></div>
+                  <div class="mini-row"><b>Club</b><span>Sortie samedi</span></div>
+                  <div class="mini-row"><b>Match</b><span>3 grimpeurs compatibles</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="slide-shell">
+            <p class="kicker">Problématique</p>
+            <h2>Aujourd'hui, l'expérience escalade est fragmentée</h2>
+            <div class="grid-3">
+              <div class="card"><span class="tag red">Partenaires</span><h3>Groupes sociaux</h3><p>Filtrage difficile par niveau, discipline, disponibilité et matériel.</p></div>
+              <div class="card"><span class="tag red">Topos</span><h3>Données figées</h3><p>Informations parfois datées, alertes terrain peu visibles.</p></div>
+              <div class="card"><span class="tag red">Clubs</span><h3>Visibilité faible</h3><p>Événements dispersés entre sites, emails et réseaux sociaux.</p></div>
+            </div>
+            <div class="decision" style="margin-top: 1rem">
+              <h2 style="font-size: 1.7rem; margin: 0 0 0.4rem">Enjeu client</h2>
+              <p style="margin: 0">
+                Centraliser les informations utiles, fiables et locales pour réduire le temps perdu et sécuriser la pratique.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="slide-shell">
+            <p class="kicker">C1.1.1 - Parties prenantes</p>
+            <h2>Qui participe, qui décide, qui utilise ?</h2>
+            <div class="grid-3">
+              <div class="card"><span class="tag green">Très actif</span><h3>Grimpeurs</h3><p>Profils, posts, matching, votes topos, inscriptions événements.</p></div>
+              <div class="card"><span class="tag green">Actif</span><h3>Clubs FFME</h3><p>Création d'événements, coachs, validation et animation locale.</p></div>
+              <div class="card"><span class="tag orange">Consulté</span><h3>Salles</h3><p>Fiches lieux, horaires, disciplines, photos et offres.</p></div>
+              <div class="card"><span class="tag orange">Expert</span><h3>Équipeurs</h3><p>Signalements sécurité, cotations, état des voies.</p></div>
+              <div class="card"><span class="tag blue">Réalisation</span><h3>Développeur</h3><p>Cadrage, architecture, développement, tests et démo RNCP.</p></div>
+              <div class="card"><span class="tag blue">Perspective</span><h3>FFME</h3><p>Agrégation nationale et référentiel club en version ultérieure.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="slide-shell">
+            <p class="kicker">C1.1.2 - Analyse de la demande</p>
+            <h2>Transformer un besoin diffus en MVP démontrable</h2>
+            <div class="timeline">
+              <div class="step"><b>1. Comprendre</b><p>Fragmentation des outils et manque de fiabilité locale.</p></div>
+              <div class="step"><b>2. Prioriser</b><p>Profils, feed, lieux, topos, événements.</p></div>
+              <div class="step"><b>3. Sécuriser</b><p>Auth, validation, RGPD, modération.</p></div>
+              <div class="step"><b>4. Démontrer</b><p>Parcours utilisateur complet en soutenance.</p></div>
+              <div class="step"><b>5. Mesurer</b><p>Acquisition, engagement, rétention, qualité.</p></div>
+            </div>
+            <p class="muted-note">Critère jury : la problématique, les objectifs et les pistes de solution sont structurés et reliés aux parties prenantes.</p>
+          </div>
+        </section>
+
+        <section>
+          <div class="slide-shell">
+            <p class="kicker">C1.2.1 - Opportunités et menaces</p>
+            <h2>La SWOT opérationnelle</h2>
+            <div class="grid-2">
+              <div class="card"><span class="tag green">Opportunités</span><h3>Marché et usage</h3><p>Croissance de l'escalade, besoin local, clubs en recherche de visibilité, données terrain différenciantes.</p></div>
+              <div class="card"><span class="tag orange">Menaces</span><h3>Adoption et concurrence</h3><p>Effet réseau au démarrage, concurrence réseaux sociaux, périmètre MVP trop ambitieux.</p></div>
+              <div class="card"><span class="tag blue">Sécurité</span><h3>Points de contrôle</h3><p>Alertes terrain, modération, validation serveur, protection des données personnelles.</p></div>
+              <div class="card"><span class="tag green">Environnement</span><h3>Sobriété</h3><p>Images optimisées, données filtrées par rayon, hébergement dimensionné au pilote.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="slide-shell">
+            <p class="kicker">C1.2.2 - Faisabilité technique</p>
+            <h2>Un MVP faisable avec une stack web maîtrisée</h2>
+            <div class="flow">
+              <div class="node"><b>Next.js</b><span>App Router et UI responsive</span></div>
+              <div class="arrow">→</div>
+              <div class="node"><b>API Routes</b><span>Zod, auth, services métier</span></div>
+              <div class="arrow">→</div>
+              <div class="node"><b>MariaDB</b><span>Drizzle ORM et migrations</span></div>
+            </div>
+            <div class="grid-3" style="margin-top: 1rem">
+              <div class="card"><span class="tag green">Front</span><h3>Next.js + Tailwind</h3><p>Développement rapide, design system local, mobile-first.</p></div>
+              <div class="card"><span class="tag blue">Back</span><h3>Route Handlers</h3><p>Validation Zod, logique par feature, typage TypeScript.</p></div>
+              <div class="card"><span class="tag orange">Services</span><h3>Médias + carte</h3><p>Cloudinary/S3 et Leaflet/Mapbox selon coût et besoin.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="slide-shell">
+            <p class="kicker">C1.2.3 - Risques</p>
+            <h2>Ce qui doit être sous contrôle</h2>
+            <div class="grid-3">
+              <div class="card"><span class="tag red">Critique</span><h3>Données personnelles</h3><p>Hash, cookies sécurisés, RGPD, minimisation, suppression compte.</p></div>
+              <div class="card"><span class="tag red">Critique</span><h3>Données terrain</h3><p>Signalements datés, modération, karma contributeur, historique.</p></div>
+              <div class="card"><span class="tag orange">Élevé</span><h3>Périmètre MVP</h3><p>Priorisation MoSCoW, lots démontrables, backlog verrouillé.</p></div>
+              <div class="card"><span class="tag orange">Moyen</span><h3>Disponibilité</h3><p>Logs, healthcheck, sauvegardes, restauration testée.</p></div>
+              <div class="card"><span class="tag blue">Moyen</span><h3>Coûts API</h3><p>Quotas média/carte, cache, suivi mensuel.</p></div>
+              <div class="card"><span class="tag blue">Moyen</span><h3>Adoption</h3><p>Zone pilote, clubs partenaires, données de démonstration.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="slide-shell">
+            <p class="kicker">C1.3 - Veille et choix technique</p>
+            <h2>Les décisions viennent de la veille</h2>
+            <div class="grid-3">
+              <div class="card"><span class="tag green">Technique</span><h3>Next.js / React</h3><p>App Router, rendu serveur, composants, performance.</p></div>
+              <div class="card"><span class="tag green">Données</span><h3>Drizzle + MariaDB</h3><p>Typage fort, migrations, modèle relationnel adapté.</p></div>
+              <div class="card"><span class="tag blue">Sécurité</span><h3>OWASP Top 10</h3><p>Validation, sessions, rate limiting, headers, uploads.</p></div>
+              <div class="card"><span class="tag blue">Réglementaire</span><h3>RGPD</h3><p>Consentement, export, suppression, minimisation.</p></div>
+              <div class="card"><span class="tag orange">Accessibilité</span><h3>RGAA</h3><p>Clavier, contrastes AA, labels ARIA, parcours critiques.</p></div>
+              <div class="card"><span class="tag orange">Sobriété</span><h3>Images et CDN</h3><p>Compression, lazy loading, pagination, données filtrées.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="slide-shell">
+            <p class="kicker">C1.5 - Architecture logicielle</p>
+            <h2>Une architecture modulaire pour livrer vite</h2>
+            <div class="flow">
+              <div class="node"><b>Utilisateur</b><span>Web responsive</span></div>
+              <div class="arrow">→</div>
+              <div class="node"><b>Next.js</b><span>Pages, layouts, server components</span></div>
+              <div class="arrow">→</div>
+              <div class="node"><b>Features</b><span>Auth, profil, lieux, topos</span></div>
+            </div>
+            <div class="flow">
+              <div class="node"><b>Validation</b><span>Zod input/output</span></div>
+              <div class="arrow">→</div>
+              <div class="node"><b>Drizzle</b><span>Accès DB typé</span></div>
+              <div class="arrow">→</div>
+              <div class="node"><b>MariaDB</b><span>Données métier</span></div>
+            </div>
+            <div class="grid-3" style="margin-top: 1rem">
+              <div class="card"><h3>Maintenable</h3><p>Découpage par feature et composants UI réutilisables.</p></div>
+              <div class="card"><h3>Sécurisée</h3><p>Validation serveur, sessions, rôles, contrôle des uploads.</p></div>
+              <div class="card"><h3>Extensible</h3><p>Notifications, mobile, FFME et recommandations en V2.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="slide-shell">
+            <p class="kicker">C1.4 - Charge et budget</p>
+            <h2>Un MVP cadré par lots</h2>
+            <div class="grid-2">
+              <div>
+                <div class="grid-2">
+                  <div class="metric"><b>82 j.h</b><span>charge totale MVP</span></div>
+                  <div class="metric"><b>44 250 EUR</b><span>budget prévisionnel</span></div>
+                </div>
+                <div class="card" style="margin-top: 0.8rem">
+                  <span class="tag green">Must</span>
+                  <h3>Démo prioritaire</h3>
+                  <p>Auth, profils, feed, répertoire, fiches lieux et parcours utilisateur complet.</p>
+                </div>
+                <div class="card" style="margin-top: 0.8rem">
+                  <span class="tag orange">Should / Could</span>
+                  <h3>Extensions contrôlées</h3>
+                  <p>Topos avancés, événements clubs, matching, notifications.</p>
+                </div>
+              </div>
+              <div class="timeline" style="grid-template-columns: 1fr">
+                <div class="step"><b>8 j.h</b><p>Cadrage, UX, backlog.</p></div>
+                <div class="step"><b>25 j.h</b><p>Setup, auth, sécurité et profils.</p></div>
+                <div class="step"><b>39 j.h</b><p>Feed, lieux, topos, événements.</p></div>
+                <div class="step"><b>10 j.h</b><p>Tests, accessibilité, documentation.</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="slide-shell">
+            <p class="kicker">C1.6 - Préconisation</p>
+            <div class="decision">
+              <h2>Décision proposée : lancer le MVP Spity</h2>
+              <p>
+                Démarrer en architecture web monolithe modulaire, sur une zone pilote Rhône-Alpes,
+                avec priorité aux parcours démontrables et aux exigences sécurité, RGPD et RGAA.
+              </p>
+            </div>
+            <div class="grid-3" style="margin-top: 1rem">
+              <div class="card"><h3>Pourquoi maintenant ?</h3><p>Marché en croissance et besoin utilisateur clairement identifié.</p></div>
+              <div class="card"><h3>Pourquoi ce périmètre ?</h3><p>Fonctionnalités visibles en soutenance et risques maîtrisés.</p></div>
+              <div class="card"><h3>Pourquoi cette stack ?</h3><p>Livraison rapide, maintenabilité et évolutivité suffisante pour le MVP.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="slide-shell">
+            <p class="kicker">Parcours de démonstration</p>
+            <h2>Ce que le jury doit voir</h2>
+            <div class="timeline">
+              <div class="step"><b>1</b><p>Créer un compte grimpeur et compléter le profil.</p></div>
+              <div class="step"><b>2</b><p>Consulter le feed contextualisé.</p></div>
+              <div class="step"><b>3</b><p>Rechercher une salle, falaise ou club proche.</p></div>
+              <div class="step"><b>4</b><p>Ouvrir une fiche falaise et consulter les topos.</p></div>
+              <div class="step"><b>5</b><p>S'inscrire à un événement club.</p></div>
+            </div>
+            <p class="muted-note">
+              Pendant la démo, chaque écran est relié à une compétence : besoin, acteur, risque, architecture, charge et décision.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <div class="slide-shell">
+            <p class="kicker">Synthèse jury</p>
+            <h2>Couverture complète du Bloc 01</h2>
+            <div class="proof-list">
+              <div class="proof"><b>C1.1.1</b><span>Cartographie des parties prenantes</span></div>
+              <div class="proof"><b>C1.1.2</b><span>Analyse de la demande client</span></div>
+              <div class="proof"><b>C1.2.1</b><span>Opportunités, menaces et vigilance</span></div>
+              <div class="proof"><b>C1.2.2</b><span>Faisabilité technique argumentée</span></div>
+              <div class="proof"><b>C1.2.3</b><span>Risques priorisés et indicateurs</span></div>
+              <div class="proof"><b>C1.3.1</b><span>Veille technique et réglementaire</span></div>
+              <div class="proof"><b>C1.3.2</b><span>Comparatif d'architectures</span></div>
+              <div class="proof"><b>C1.4.1</b><span>Fonctions et charge de travail</span></div>
+              <div class="proof"><b>C1.4.2</b><span>Budget prévisionnel</span></div>
+              <div class="proof"><b>C1.5</b><span>Architecture logicielle</span></div>
+              <div class="proof"><b>C1.6</b><span>Préconisation au commanditaire</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="hero"
+          data-background-image="../../public/images/demo/climbing/verdon-cliff.jpg"
+          data-background-size="cover"
+          data-background-position="center"
+        >
+          <h1>Questions</h1>
+          <p class="subtitle">Validation du cadrage MVP Spity</p>
+          <div class="meta">
+            <span class="pill">Cadrage</span>
+            <span class="pill">Faisabilité</span>
+            <span class="pill">Préconisation</span>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        history: true,
+        margin: 0.06,
+        slideNumber: "c/t",
+        transition: "slide",
+        backgroundTransition: "fade",
+        plugins: [RevealNotes],
+        pdfSeparateFragments: false
+      });
+    </script>
+  </body>
+</html>
