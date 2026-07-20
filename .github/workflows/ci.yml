@@ -175,3 +175,133 @@ jobs:
           include-hidden-files: true
           if-no-files-found: warn
           retention-days: 30
+
+  staging:
+    name: Deploy verified staging images
+    needs: [quality, integration, performance]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: staging
+    permissions:
+      contents: read
+      packages: write
+    env:
+      APP_IMAGE: ghcr.io/dorianyloj/spity
+      MIGRATION_IMAGE: ghcr.io/dorianyloj/spity-migrations
+      DATABASE_CONTAINER: spity-staging-db-${{ github.run_id }}
+      APP_CONTAINER: spity-staging-app-${{ github.run_id }}
+      STAGING_NETWORK: spity-staging-${{ github.run_id }}
+
+    steps:
+      - name: Checkout verified sources
+        uses: actions/checkout@v6
+
+      - name: Define staging version
+        id: metadata
+        run: |
+          base_version=$(jq --raw-output .version spity/package.json)
+          echo "version=$base_version" >> "$GITHUB_OUTPUT"
+
+      - name: Build immutable images
+        env:
+          VERSION: ${{ steps.metadata.outputs.version }}
+        run: |
+          docker build \
+            --target migration \
+            --label "org.opencontainers.image.version=$VERSION" \
+            --label "org.opencontainers.image.revision=$GITHUB_SHA" \
+            --label "org.opencontainers.image.source=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" \
+            --tag "$MIGRATION_IMAGE:sha-$GITHUB_SHA" \
+            spity
+          docker build \
+            --target runner \
+            --build-arg "APP_VERSION=$VERSION" \
+            --build-arg "APP_REVISION=$GITHUB_SHA" \
+            --tag "$APP_IMAGE:sha-$GITHUB_SHA" \
+            spity
+
+      - name: Smoke test staging images
+        env:
+          VERSION: ${{ steps.metadata.outputs.version }}
+        run: |
+          mkdir -p staging-evidence
+          docker network create "$STAGING_NETWORK"
+          docker run --detach \
+            --name "$DATABASE_CONTAINER" \
+            --network "$STAGING_NETWORK" \
+            --env MARIADB_ROOT_PASSWORD=spity_staging_root_password \
+            --env MARIADB_DATABASE=spity \
+            --env MARIADB_USER=spity \
+            --env MARIADB_PASSWORD=spity_staging_password \
+            mariadb:11.4
+
+          for attempt in $(seq 1 40); do
+            if docker exec "$DATABASE_CONTAINER" healthcheck.sh --connect --innodb_initialized; then
+              break
+            fi
+            if [ "$attempt" -eq 40 ]; then
+              docker logs "$DATABASE_CONTAINER"
+              exit 1
+            fi
+            sleep 3
+          done
+
+          docker run --rm \
+            --network "$STAGING_NETWORK" \
+            --env DATABASE_URL=mysql://spity:spity_staging_password@"$DATABASE_CONTAINER":3306/spity \
+            "$MIGRATION_IMAGE:sha-$GITHUB_SHA"
+          docker run --detach \
+            --name "$APP_CONTAINER" \
+            --network "$STAGING_NETWORK" \
+            --publish 127.0.0.1:3000:3000 \
+            --env DATABASE_URL=mysql://spity:spity_staging_password@"$DATABASE_CONTAINER":3306/spity \
+            --env JWT_SECRET=staging_only_secret_with_at_least_32_characters \
+            "$APP_IMAGE:sha-$GITHUB_SHA"
+
+          for attempt in $(seq 1 40); do
+            if payload=$(curl --fail --silent http://127.0.0.1:3000/api/health); then
+              printf '%s\n' "$payload" | jq --exit-status \
+                --arg version "$VERSION" \
+                --arg revision "$GITHUB_SHA" \
+                '.status == "ok" and .version == $version and .revision == $revision'
+              printf '%s\n' "$payload" | jq . > staging-evidence/health.json
+              break
+            fi
+            if [ "$attempt" -eq 40 ]; then
+              docker logs "$APP_CONTAINER"
+              exit 1
+            fi
+            sleep 3
+          done
+
+          docker image inspect "$APP_IMAGE:sha-$GITHUB_SHA" > staging-evidence/app-image.json
+          docker image inspect "$MIGRATION_IMAGE:sha-$GITHUB_SHA" > staging-evidence/migration-image.json
+
+      - name: Stop staging smoke test
+        if: always()
+        run: |
+          docker rm --force "$APP_CONTAINER" "$DATABASE_CONTAINER" 2>/dev/null || true
+          docker network rm "$STAGING_NETWORK" 2>/dev/null || true
+
+      - name: Authenticate to GitHub Container Registry
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "$GHCR_TOKEN" | docker login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+
+      - name: Publish staging images
+        run: |
+          docker tag "$APP_IMAGE:sha-$GITHUB_SHA" "$APP_IMAGE:staging"
+          docker tag "$MIGRATION_IMAGE:sha-$GITHUB_SHA" "$MIGRATION_IMAGE:staging"
+          docker push "$APP_IMAGE:sha-$GITHUB_SHA"
+          docker push "$APP_IMAGE:staging"
+          docker push "$MIGRATION_IMAGE:sha-$GITHUB_SHA"
+          docker push "$MIGRATION_IMAGE:staging"
+
+      - name: Upload staging deployment evidence
+        uses: actions/upload-artifact@v6
+        with:
+          name: staging-${{ github.sha }}
+          path: staging-evidence
+          if-no-files-found: error
+          retention-days: 30
