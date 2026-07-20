@@ -28,7 +28,7 @@ Le livrable final devra associer :
 | C2.2.4 | Historique des versions et dernière version fiable | Couvert techniquement | Release `v0.1.0`, changelog, staging continu, images immuables, bundle et manifeste validés ; session de retours utilisateurs réelle à organiser. |
 | C2.3.1 | Cahier de recettes | Couvert | Recette Playwright F01 à F10 réussie localement et dans la CI `29747713909`, avec artefact et staging bloqué par son résultat. |
 | C2.3.2 | Plan de correction des bogues | Couvert | Six anomalies réelles qualifiées, corrigées et retestées ; échecs du harnais analysés sans baisse des seuils. |
-| C2.4.1 | Manuels de déploiement, d'utilisation et de mise à jour | Partiel | Produire trois manuels clairs et documenter les choix techniques. |
+| C2.4.1 | Manuels de déploiement, d'utilisation et de mise à jour | Couvert | Trois manuels séparés décrivent les technologies, les rôles, les procédures reproductibles, les limites et la maintenance. |
 
 ## Structure cible du dossier final
 
@@ -123,10 +123,15 @@ Documents de référence : [cahier de recettes](./10_CAHIER_RECETTES_C231.md) et
 
 ### Étape 9 - Documentation finale (C2.4.1)
 
-- Finaliser les manuels de déploiement, d'utilisation et de mise à jour.
-- Assembler le dossier final et ses annexes.
-- Vérifier que chaque ligne de la grille possède au moins une preuve explicite.
-- Exporter et contrôler visuellement la version PDF remise au jury.
+Documents de référence : [manuel de déploiement](./12_MANUEL_DEPLOIEMENT_C241.md), [manuel d'utilisation](./13_MANUEL_UTILISATION_C241.md) et [manuel de mise à jour](./14_MANUEL_MISE_A_JOUR_C241.md).
+
+- [x] Finaliser le manuel de déploiement et vérifier ses commandes critiques.
+- [x] Finaliser le manuel d'utilisation pour les rôles grimpeur et club.
+- [x] Finaliser le manuel de mise à jour, de versionnement et de maintenance.
+- [x] Décrire les choix de technologies et de langages demandés par la grille.
+- [ ] Assembler le dossier final et ses annexes.
+- [ ] Vérifier que chaque ligne de la grille possède au moins une preuve explicite.
+- [ ] Exporter et contrôler visuellement la version PDF remise au jury.
 
 ## Règle de preuve
 
@@ -139,4 +144,4 @@ Chaque compétence sera considérée prête uniquement si les quatre éléments 
 
 ## Prochaine action
 
-Poursuivre l'étape 9 : finaliser les manuels de déploiement, d'utilisation et de mise à jour. La session pilote réelle de l'étape 7 reste à organiser.
+Poursuivre l'étape 9 : assembler le dossier final, créer l'index des preuves et préparer l'export PDF. La session pilote réelle de l'étape 7 et les captures finales de l'étape 4 restent à organiser.

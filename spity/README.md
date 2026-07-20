@@ -1,117 +1,96 @@
 # Spity
 
-Spity est un réseau social pour la communauté escalade : matching entre grimpeurs, répertoire de salles/falaises/clubs, topos collaboratifs, événements clubs et contenu social contextualisé.
+Spity est le prototype fonctionnel d'un réseau social pour la communauté escalade : profils grimpeurs et clubs, inventaire de matériel, recherche de partenaires, événements et répertoire de lieux.
 
-Le projet est développé dans le cadre d'une certification Titre RNCP. Le cadrage produit complet est disponible dans `../CADRAGE_PROJET.md`.
+Le cadrage produit complet se trouve dans [`../CADRAGE_PROJET.md`](../CADRAGE_PROJET.md). Les preuves et livrables du bloc de compétences BC02 se trouvent dans [`../docs/bc02`](../docs/bc02).
 
 ## Stack
 
-- Next.js App Router
-- React
-- Tailwind CSS
-- Drizzle ORM
-- MariaDB
-- Zod
+- TypeScript strict, Next.js App Router et React ;
+- Tailwind CSS et composants accessibles internes ;
+- Route Handlers Next.js, Zod et Drizzle ORM ;
+- MariaDB 11.4 ;
+- Jest, Node Test Runner, Playwright, axe et Lighthouse ;
+- Docker Compose, GitHub Actions et GitHub Container Registry.
 
 ## Prérequis
 
-- Node.js 20+
-- npm
-- Docker et Docker Compose
+- Node.js 22.x, conformément à [`.nvmrc`](.nvmrc) ;
+- npm 10 ou supérieur ;
+- Docker Engine avec Docker Compose v2.
 
-## Installation
+## Installation locale
+
+Depuis ce dossier `spity/` :
 
 ```bash
-npm install
 cp .env.example .env.local
-docker compose up -d
+docker compose --env-file .env.local up -d mariadb
+npm ci
 npm run db:migrate
-```
-
-Adaptez `DATABASE_URL` et `JWT_SECRET` dans `.env.local` si nécessaire.
-
-## Développement
-
-```bash
 npm run dev
 ```
 
-Application : http://localhost:3000
+Renseigner un `JWT_SECRET` aléatoire d'au moins 64 octets dans `.env.local`. L'application est ensuite disponible sur <http://localhost:3000>.
 
-phpMyAdmin : http://localhost:8081
+phpMyAdmin est un outil local facultatif. Il n'est pas démarré par défaut :
+
+```bash
+docker compose --env-file .env.local --profile tools up -d
+```
+
+Il est alors disponible sur <http://localhost:8083>. Le port est modifiable avec `PHPMYADMIN_PORT`.
+
+Pour charger les comptes et données de démonstration dans une base locale uniquement :
+
+```bash
+npm run db:seed
+```
 
 ## Commandes
 
 ```bash
-npm run dev          # Serveur de développement
-npm run build        # Build production
-npm start            # Serveur production après build
-npm run lint         # ESLint
-npm run typecheck    # Vérification TypeScript
+npm run dev                  # Serveur de développement
+npm run build                # Build de production
+npm start                    # Serveur après build
+npm run lint                 # ESLint
+npm run typecheck            # Vérification TypeScript
+npm run test:coverage        # Tests unitaires et couverture
+npm run test:integration     # Tests HTTP avec MariaDB
+npm run test:acceptance      # Recette Playwright F01 à F10
+npm run accessibility:audit # Audit axe authentifié
+npm run perf:audit           # Build et audit Lighthouse
+npm run security:audit       # Audit des dépendances de production
 ```
+
+Les tests d'intégration et d'acceptation nécessitent une MariaDB disponible via `DATABASE_URL`. Playwright nécessite aussi Chromium, installable avec `npx playwright install chromium`.
 
 ## Base de données
 
 ```bash
-npm run db:generate  # Génère une migration Drizzle
-npm run db:migrate   # Applique les migrations
-npm run db:push      # Synchronise le schéma sans migration
-npm run db:studio    # Lance Drizzle Studio
+npm run db:generate  # Génère une nouvelle migration Drizzle
+npm run db:migrate   # Applique les migrations existantes
+npm run db:studio    # Ouvre Drizzle Studio
 ```
+
+`db:push` est réservé aux expérimentations locales. Une mise à jour partagée ou de production passe toujours par une nouvelle migration versionnée ; une migration existante n'est jamais modifiée.
 
 ## Structure
 
-- `src/app` : routes App Router
-- `src/components/ui` : design system réutilisable
-- `src/db` : client et schéma Drizzle
-- `src/lib` : configuration et validateurs partagés
-- `drizzle` : migrations SQL générées
+- `src/app` : pages et Route Handlers App Router ;
+- `src/features` : composants, schémas et logique par fonctionnalité ;
+- `src/components/ui` : design system réutilisable ;
+- `src/db` : client et schéma Drizzle ;
+- `src/lib` : services et validateurs partagés ;
+- `drizzle` : migrations SQL générées ;
+- `tests` : intégration et recette navigateur ;
+- `scripts` : audits, données de démonstration et validation de release.
 
-## Authentification
+## Documentation d'exploitation
 
-Routes disponibles :
+- [Manuel de déploiement](../docs/bc02/12_MANUEL_DEPLOIEMENT_C241.md)
+- [Manuel d'utilisation](../docs/bc02/13_MANUEL_UTILISATION_C241.md)
+- [Manuel de mise à jour et maintenance](../docs/bc02/14_MANUEL_MISE_A_JOUR_C241.md)
+- [Procédure autonome incluse dans chaque bundle de release](DEPLOYMENT.md)
 
-```bash
-POST /api/auth/register  # Crée un compte et pose le cookie de session
-POST /api/auth/login     # Connecte un utilisateur
-POST /api/auth/logout    # Supprime le cookie de session
-GET  /api/auth/me        # Retourne la session active
-```
-
-Pages locales :
-
-- http://localhost:3000/login
-- http://localhost:3000/register
-
-## Profils
-
-Routes disponibles :
-
-```bash
-GET   /api/profile/me        # Retourne le profil de l'utilisateur connecté
-POST  /api/profile/grimpeur  # Crée le profil grimpeur
-PATCH /api/profile/grimpeur  # Met à jour le profil grimpeur
-POST  /api/profile/club      # Crée le profil club
-PATCH /api/profile/club      # Met à jour le profil club
-```
-
-Pages locales :
-
-- http://localhost:3000/profile/onboarding
-- http://localhost:3000/profile/me
-
-## Application connectée
-
-```bash
-GET /app  # Tableau de bord connecté, protégé par session et profil complet
-```
-
-La route `/app` redirige vers `/login` si l'utilisateur n'est pas connecté, puis vers `/profile/onboarding` si son profil n'est pas encore complété.
-
-## Qualité
-
-Avant commit, lancer :
-
-```bash
-npm run lint && npm run typecheck && npm run build
-```
+Avant une contribution, consulter les consignes du dépôt dans [`../AGENTS.md`](../AGENTS.md).
