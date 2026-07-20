@@ -8,6 +8,8 @@ const createJestConfig = nextJest({
 const config: Config = {
   collectCoverageFrom: [
     'src/features/auth/lib/csrf.ts',
+    'src/features/events/lib/event-rules.ts',
+    'src/features/matching/lib/matching-rules.ts',
     'src/features/profile/lib/equipment-parser.ts',
     'src/features/profile/schemas.ts',
     'src/lib/validators.ts',

@@ -47,6 +47,13 @@ const ids = {
     outing: 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1',
     contest: 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2',
   },
+  partnerships: {
+    linaNassim: 'acacacac-acac-4cac-8cac-acacacacac01',
+  },
+  registrations: {
+    linaOuting: 'adadadad-adad-4dad-8dad-adadadadad01',
+    nassimContest: 'adadadad-adad-4dad-8dad-adadadadad02',
+  },
   reports: {
     curisCondition: 'abababab-abab-4bab-8bab-ababababab01',
     curisSafety: 'abababab-abab-4bab-8bab-ababababab02',
@@ -82,6 +89,16 @@ const imageUrls = {
 }
 
 const toJson = (value) => JSON.stringify(value)
+
+const futureDate = (days, hour, minute = 0) => {
+  const date = new Date()
+  date.setDate(date.getDate() + days)
+  date.setHours(hour, minute, 0, 0)
+
+  return date
+}
+
+const toSqlDate = (date) => date.toISOString().slice(0, 19).replace('T', ' ')
 
 const escapeIdentifier = (identifier) => `\`${identifier.replaceAll('`', '``')}\``
 
@@ -122,6 +139,14 @@ const main = async () => {
     await connection.execute(
       `delete from posts where id in (?, ?, ?)`,
       Object.values(ids.posts)
+    )
+    await connection.execute(
+      `delete from event_registrations where event_id in (?, ?)`,
+      Object.values(ids.events)
+    )
+    await connection.execute(
+      `delete from partnership_requests where sender_id in (?, ?, ?) or recipient_id in (?, ?, ?)`,
+      [...Object.values(ids.users).slice(0, 3), ...Object.values(ids.users).slice(0, 3)]
     )
     await connection.execute(
       `delete from events where id in (?, ?)`,
@@ -429,15 +454,48 @@ const main = async () => {
         id: ids.events.outing,
         club_id: ids.profiles.club,
         titre: 'Sortie falaise découverte à Curis',
-        debut: '2026-05-18 09:30:00',
+        event_type: 'outing',
+        description: 'Sortie encadrée pour découvrir la falaise, niveau conseillé 5c et matériel personnel vérifié.',
+        location: 'Curis-au-Mont-d’Or',
+        debut: toSqlDate(futureDate(7, 9, 30)),
+        fin: toSqlDate(futureDate(7, 17)),
         capacite: 8,
       },
       {
         id: ids.events.contest,
         club_id: ids.profiles.club,
         titre: 'Contest bloc local Spity Crew',
-        debut: '2026-05-27 18:30:00',
+        event_type: 'contest',
+        description: 'Contest amical ouvert à tous les niveaux, finale conviviale et lots partenaires.',
+        location: 'Arkose Lyon',
+        debut: toSqlDate(futureDate(14, 18, 30)),
+        fin: toSqlDate(futureDate(14, 22)),
         capacite: 24,
+      },
+    ])
+
+    await insert(connection, 'partnership_requests', [
+      {
+        id: ids.partnerships.linaNassim,
+        pair_key: [ids.users.lina, ids.users.nassim].sort().join(':'),
+        sender_id: ids.users.lina,
+        recipient_id: ids.users.nassim,
+        partnership_status: 'pending',
+      },
+    ])
+
+    await insert(connection, 'event_registrations', [
+      {
+        id: ids.registrations.linaOuting,
+        event_id: ids.events.outing,
+        user_id: ids.users.lina,
+        registration_status: 'active',
+      },
+      {
+        id: ids.registrations.nassimContest,
+        event_id: ids.events.contest,
+        user_id: ids.users.nassim,
+        registration_status: 'active',
       },
     ])
 

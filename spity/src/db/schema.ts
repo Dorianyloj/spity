@@ -1,4 +1,15 @@
-import { mysqlTable, varchar, timestamp, json, int, boolean, mysqlEnum, double } from 'drizzle-orm/mysql-core'
+import {
+  boolean,
+  double,
+  index,
+  int,
+  json,
+  mysqlEnum,
+  mysqlTable,
+  timestamp,
+  uniqueIndex,
+  varchar,
+} from 'drizzle-orm/mysql-core'
 import { relations } from 'drizzle-orm'
 
 // === USERS ===
@@ -19,21 +30,25 @@ export const users = mysqlTable('users', {
 })
 
 // === GRIMPEUR PROFILE ===
-export const grimpeurProfiles = mysqlTable('grimpeur_profiles', {
-  id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
-  userId: varchar('user_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
-  displayName: varchar('display_name', { length: 80 }),
-  bio: varchar('bio', { length: 500 }),
-  location: varchar('location', { length: 255 }),
-  climbingEnvironment: mysqlEnum('climbing_environment', ['indoor', 'outdoor', 'mixed']),
-  availability: json('availability').$type<string[]>(),
-  partnerSearch: json('partner_search').$type<Record<string, unknown>>(),
-  goals: json('goals').$type<string[]>(),
-  disciplines: json('disciplines').$type<string[]>().notNull(),
-  niveaux: json('niveaux').$type<Record<string, string>>().notNull(),
-  materiel: json('materiel').$type<string[]>().notNull(),
-  karma: int('karma').default(0),
-})
+export const grimpeurProfiles = mysqlTable(
+  'grimpeur_profiles',
+  {
+    id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+    userId: varchar('user_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
+    displayName: varchar('display_name', { length: 80 }),
+    bio: varchar('bio', { length: 500 }),
+    location: varchar('location', { length: 255 }),
+    climbingEnvironment: mysqlEnum('climbing_environment', ['indoor', 'outdoor', 'mixed']),
+    availability: json('availability').$type<string[]>(),
+    partnerSearch: json('partner_search').$type<Record<string, unknown>>(),
+    goals: json('goals').$type<string[]>(),
+    disciplines: json('disciplines').$type<string[]>().notNull(),
+    niveaux: json('niveaux').$type<Record<string, string>>().notNull(),
+    materiel: json('materiel').$type<string[]>().notNull(),
+    karma: int('karma').default(0),
+  },
+  (table) => [uniqueIndex('grimpeur_profiles_user_id_unique').on(table.userId)]
+)
 
 // === USER EQUIPMENT ===
 export const userEquipment = mysqlTable('user_equipment', {
@@ -67,14 +82,39 @@ export const userEquipment = mysqlTable('user_equipment', {
 })
 
 // === CLUB PROFILE ===
-export const clubProfiles = mysqlTable('club_profiles', {
-  id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
-  userId: varchar('user_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
-  nom: varchar('nom', { length: 255 }).notNull(),
-  bio: varchar('bio', { length: 1000 }),
-  location: varchar('location', { length: 255 }),
-  ffmeNum: varchar('ffme_num', { length: 50 }),
-})
+export const clubProfiles = mysqlTable(
+  'club_profiles',
+  {
+    id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+    userId: varchar('user_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
+    nom: varchar('nom', { length: 255 }).notNull(),
+    bio: varchar('bio', { length: 1000 }),
+    location: varchar('location', { length: 255 }),
+    ffmeNum: varchar('ffme_num', { length: 50 }),
+  },
+  (table) => [uniqueIndex('club_profiles_user_id_unique').on(table.userId)]
+)
+
+// === PARTNERSHIP REQUEST ===
+export const partnershipRequests = mysqlTable(
+  'partnership_requests',
+  {
+    id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+    pairKey: varchar('pair_key', { length: 73 }).notNull(),
+    senderId: varchar('sender_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
+    recipientId: varchar('recipient_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
+    status: mysqlEnum('partnership_status', ['pending', 'accepted', 'declined']).notNull().default('pending'),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),
+    respondedAt: timestamp('responded_at'),
+  },
+  (table) => [
+    uniqueIndex('partnership_requests_pair_key_unique').on(table.pairKey),
+    index('partnership_requests_sender_idx').on(table.senderId),
+    index('partnership_requests_recipient_idx').on(table.recipientId),
+    index('partnership_requests_status_idx').on(table.status),
+  ]
+)
 
 // === SALLE ===
 export const salles = mysqlTable('salles', {
@@ -173,13 +213,41 @@ export const likes = mysqlTable('likes', {
 })
 
 // === EVENT ===
-export const events = mysqlTable('events', {
-  id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
-  clubId: varchar('club_id', { length: 36 }).notNull().references(() => clubProfiles.id, { onDelete: 'cascade' }),
-  titre: varchar('titre', { length: 255 }).notNull(),
-  debut: timestamp('debut').notNull(),
-  capacite: int('capacite').notNull(),
-})
+export const events = mysqlTable(
+  'events',
+  {
+    id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+    clubId: varchar('club_id', { length: 36 }).notNull().references(() => clubProfiles.id, { onDelete: 'cascade' }),
+    titre: varchar('titre', { length: 255 }).notNull(),
+    type: mysqlEnum('event_type', ['outing', 'contest', 'coaching', 'initiation']).notNull().default('outing'),
+    description: varchar('description', { length: 1000 }),
+    location: varchar('location', { length: 255 }),
+    debut: timestamp('debut').notNull(),
+    fin: timestamp('fin'),
+    capacite: int('capacite').notNull(),
+    status: mysqlEnum('event_status', ['scheduled', 'cancelled']).notNull().default('scheduled'),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),
+  },
+  (table) => [index('events_club_idx').on(table.clubId), index('events_start_idx').on(table.debut)]
+)
+
+// === EVENT REGISTRATION ===
+export const eventRegistrations = mysqlTable(
+  'event_registrations',
+  {
+    id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+    eventId: varchar('event_id', { length: 36 }).notNull().references(() => events.id, { onDelete: 'cascade' }),
+    userId: varchar('user_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
+    status: mysqlEnum('registration_status', ['active', 'cancelled']).notNull().default('active'),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),
+  },
+  (table) => [
+    uniqueIndex('event_registrations_event_user_unique').on(table.eventId, table.userId),
+    index('event_registrations_event_status_idx').on(table.eventId, table.status),
+  ]
+)
 
 // === RELATIONS (identiques) ===
 export const usersRelations = relations(users, ({ one, many }) => ({
@@ -187,6 +255,37 @@ export const usersRelations = relations(users, ({ one, many }) => ({
   clubProfile: one(clubProfiles),
   equipment: many(userEquipment),
   posts: many(posts),
+  sentPartnershipRequests: many(partnershipRequests, { relationName: 'partnership_sender' }),
+  receivedPartnershipRequests: many(partnershipRequests, { relationName: 'partnership_recipient' }),
+  eventRegistrations: many(eventRegistrations),
+}))
+
+export const partnershipRequestsRelations = relations(partnershipRequests, ({ one }) => ({
+  sender: one(users, {
+    fields: [partnershipRequests.senderId],
+    references: [users.id],
+    relationName: 'partnership_sender',
+  }),
+  recipient: one(users, {
+    fields: [partnershipRequests.recipientId],
+    references: [users.id],
+    relationName: 'partnership_recipient',
+  }),
+}))
+
+export const clubProfilesRelations = relations(clubProfiles, ({ one, many }) => ({
+  user: one(users, { fields: [clubProfiles.userId], references: [users.id] }),
+  events: many(events),
+}))
+
+export const eventsRelations = relations(events, ({ one, many }) => ({
+  club: one(clubProfiles, { fields: [events.clubId], references: [clubProfiles.id] }),
+  registrations: many(eventRegistrations),
+}))
+
+export const eventRegistrationsRelations = relations(eventRegistrations, ({ one }) => ({
+  event: one(events, { fields: [eventRegistrations.eventId], references: [events.id] }),
+  user: one(users, { fields: [eventRegistrations.userId], references: [users.id] }),
 }))
 
 export const postsRelations = relations(posts, ({ one, many }) => ({

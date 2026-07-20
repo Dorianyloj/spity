@@ -5,6 +5,7 @@ import {
   UserRound,
   Users,
 } from 'lucide-react'
+import Link from 'next/link'
 import {
   AppHero,
   Badge,
@@ -18,6 +19,8 @@ import {
   StatCard,
 } from '@/components/ui'
 import type { AuthUser } from '@/features/auth/schemas'
+import type { SpityEvent } from '@/features/events/schemas'
+import type { PublicClimber } from '@/features/matching/schemas'
 import type { ClubProfile, GrimpeurProfile, UserEquipment } from '@/features/profile/schemas'
 import { demoClimbingAssets } from '@/lib/brand-assets'
 import AppShell from './app-shell'
@@ -27,19 +30,9 @@ type AppDashboardProps = {
   grimpeurProfile: GrimpeurProfile | null
   clubProfile: ClubProfile | null
   equipment: UserEquipment[]
+  events: SpityEvent[]
+  matchingClimbers: PublicClimber[]
 }
-
-const nearbyPartners = [
-  { name: 'Lina M.', discipline: 'Bloc', grade: '6b', place: 'Arkose Lyon', availability: 'Ce soir' },
-  { name: 'Nassim B.', discipline: 'Voie', grade: '6a+', place: 'MROC Villeurbanne', availability: 'Demain' },
-  { name: 'Camille R.', discipline: 'Trad', grade: '5c', place: 'Falaise de Curis', availability: 'Samedi' },
-]
-
-const upcomingEvents = [
-  { title: 'Sortie falaise découverte', club: 'Club Alpin Lyon', date: 'Samedi 18 mai', capacity: '8 places' },
-  { title: 'Contest bloc local', club: 'Spity Crew', date: 'Mercredi 22 mai', capacity: '24 places' },
-  { title: 'Initiation grandes voies', club: 'Verticale FFME', date: 'Dimanche 26 mai', capacity: '6 places' },
-]
 
 const popularPlaces = [
   { name: 'Arkose Lyon', type: 'Salle', detail: 'Bloc · 2.4 km' },
@@ -82,12 +75,21 @@ const getDisplayName = (grimpeurProfile: GrimpeurProfile | null, clubProfile: Cl
   return grimpeurProfile?.displayName ?? user.email.split('@')[0]
 }
 
-export default function AppDashboard({ user, grimpeurProfile, clubProfile, equipment }: AppDashboardProps) {
+export default function AppDashboard({
+  user,
+  grimpeurProfile,
+  clubProfile,
+  equipment,
+  events,
+  matchingClimbers,
+}: AppDashboardProps) {
   const displayName = getDisplayName(grimpeurProfile, clubProfile, user)
   const isClub = user.role === 'club'
   const disciplineCount = grimpeurProfile?.disciplines.length ?? 0
   const detailedGearCount = equipment.reduce((total, item) => total + item.quantity, 0)
   const gearCount = detailedGearCount || grimpeurProfile?.materiel.length || 0
+  const ownedEventCount = events.filter((event) => event.isOwner).length
+  const upcomingEvents = events.filter((event) => event.status === 'scheduled').slice(0, 3)
 
   return (
     <AppShell activeItem="feed" user={user}>
@@ -105,8 +107,8 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile, equip
 
       <div className="mb-6 grid gap-4 md:grid-cols-3">
         <StatCard value={isClub ? 'Club' : String(disciplineCount)} label={isClub ? 'Type de compte' : 'Disciplines'} icon={Mountain} />
-          <StatCard value={isClub ? '0' : String(gearCount)} label={isClub ? 'Événements publiés' : 'Objets déclarés'} icon={Route} />
-        <StatCard value="3" label="Suggestions locales" icon={Compass} />
+          <StatCard value={isClub ? String(ownedEventCount) : String(gearCount)} label={isClub ? 'Événements publiés' : 'Objets déclarés'} icon={Route} />
+        <StatCard value={isClub ? String(upcomingEvents.length) : String(matchingClimbers.length)} label={isClub ? 'Événements à venir' : 'Profils disponibles'} icon={Compass} />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
@@ -170,26 +172,29 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile, equip
               <CardHeader>
                 <CardTitle>{isClub ? 'Demandes et activité locale' : 'Partenaires recommandés'}</CardTitle>
                 <CardDescription>
-                  {isClub ? 'Premiers signaux pour recruter et animer votre communauté.' : 'Suggestions statiques en attendant l’algorithme de matching.'}
+                  {isClub ? 'L’agenda permet de publier et suivre vos rendez-vous.' : 'Profils publics actuellement ouverts au matching.'}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
-                {nearbyPartners.map((partner) => (
-                  <div key={partner.name} className="flex flex-col gap-3 rounded-lg border border-border p-4 sm:flex-row sm:items-center sm:justify-between">
+                {(isClub ? [] : matchingClimbers.slice(0, 3)).map((partner) => (
+                  <div key={partner.userId} className="flex flex-col gap-3 rounded-lg border border-border p-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex items-center gap-3">
                       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-coral-light text-coral">
                         <Users size={18} />
                       </div>
                       <div>
-                        <p className="font-medium text-foreground">{partner.name}</p>
+                        <p className="font-medium text-foreground">{partner.displayName}</p>
                         <p className="text-sm text-muted-foreground">
-                          {partner.discipline} · {partner.grade} · {partner.place}
+                          {partner.disciplines.join(', ')} · {partner.location ?? 'Localisation à préciser'}
                         </p>
                       </div>
                     </div>
-                    <Badge variant="secondary">{partner.availability}</Badge>
+                    <Badge variant="secondary">{Object.values(partner.niveaux)[0] ?? 'Niveau libre'}</Badge>
                   </div>
                 ))}
+                <Link className="spity-btn spity-btn--primary" href={isClub ? '/app/events' : '/app/matching'}>
+                  {isClub ? 'Gérer les événements' : 'Voir tous les partenaires'}
+                </Link>
               </CardContent>
             </Card>
           </section>
@@ -252,19 +257,20 @@ export default function AppDashboard({ user, grimpeurProfile, clubProfile, equip
             <Card hover={false}>
               <CardHeader>
                 <CardTitle>Événements proches</CardTitle>
-                <CardDescription>Base statique avant le module calendrier clubs.</CardDescription>
+                <CardDescription>Prochains rendez-vous publiés par les clubs.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
                 {upcomingEvents.map((event) => (
-                  <div key={event.title} className="rounded-lg border border-border p-4">
+                  <div key={event.id} className="rounded-lg border border-border p-4">
                     <p className="font-medium text-foreground">{event.title}</p>
-                    <p className="mt-1 text-sm text-muted-foreground">{event.club}</p>
+                    <p className="mt-1 text-sm text-muted-foreground">{event.clubName}</p>
                     <div className="mt-3 flex items-center justify-between text-sm">
-                      <span>{event.date}</span>
-                      <Badge variant="secondary">{event.capacity}</Badge>
+                      <span>{new Date(event.startsAt).toLocaleDateString('fr-FR')}</span>
+                      <Badge variant="secondary">{event.remainingCapacity} places</Badge>
                     </div>
                   </div>
                 ))}
+                <Link className="spity-btn spity-btn--secondary" href="/app/events">Ouvrir l’agenda</Link>
               </CardContent>
             </Card>
 

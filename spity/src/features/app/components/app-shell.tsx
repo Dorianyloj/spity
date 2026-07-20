@@ -1,4 +1,4 @@
-import { Calendar, MapPin, MessageCircle, Search, UserRound } from 'lucide-react'
+import { Calendar, Handshake, MapPin, MessageCircle, Search, UserRound } from 'lucide-react'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import BrandMark from '@/components/brand/brand-mark'
@@ -7,7 +7,7 @@ import type { AuthUser } from '@/features/auth/schemas'
 import { demoClimbingAssets, makeDarkPanelBackground } from '@/lib/brand-assets'
 import LogoutButton from './logout-button'
 
-type AppShellNavItem = 'feed' | 'discover' | 'places' | 'events' | 'profile'
+type AppShellNavItem = 'feed' | 'matching' | 'partnerships' | 'places' | 'events' | 'profile'
 
 type AppShellProps = {
   activeItem: AppShellNavItem
@@ -20,11 +20,13 @@ const navigationItems: Array<{
   label: string
   href: string
   icon: typeof MessageCircle
+  role?: 'grimpeur' | 'club'
 }> = [
   { key: 'feed', label: 'Feed', href: '/app', icon: MessageCircle },
-  { key: 'discover', label: 'Découvrir', href: '/app', icon: Search },
+  { key: 'matching', label: 'Partenaires', href: '/app/matching', icon: Search, role: 'grimpeur' },
+  { key: 'partnerships', label: 'Demandes', href: '/app/partnerships', icon: Handshake, role: 'grimpeur' },
   { key: 'places', label: 'Lieux', href: '/app/places', icon: MapPin },
-  { key: 'events', label: 'Événements', href: '/app', icon: Calendar },
+  { key: 'events', label: 'Événements', href: '/app/events', icon: Calendar },
   { key: 'profile', label: 'Profil', href: '/profile/me', icon: UserRound },
 ]
 
@@ -54,7 +56,7 @@ export default function AppShell({ activeItem, children, user }: AppShellProps) 
           </div>
 
           <nav className="flex gap-1 overflow-x-auto pb-1 lg:pb-0" aria-label="Navigation principale">
-            {navigationItems.map((item) => {
+            {navigationItems.filter((item) => !item.role || item.role === user.role).map((item) => {
               const Icon = item.icon
               const isActive = item.key === activeItem
 
