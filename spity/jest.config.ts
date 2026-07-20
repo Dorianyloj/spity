@@ -12,6 +12,8 @@ const config: Config = {
     'src/features/matching/lib/matching-rules.ts',
     'src/features/profile/lib/equipment-parser.ts',
     'src/features/profile/schemas.ts',
+    'src/lib/rate-limit.ts',
+    'src/lib/security-headers.ts',
     'src/lib/validators.ts',
   ],
   coverageDirectory: 'coverage',

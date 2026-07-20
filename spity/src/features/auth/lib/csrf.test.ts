@@ -7,7 +7,7 @@ jest.mock('./responses', () => ({
   }),
 }))
 
-const createRequest = (origin?: string, host?: string) => {
+const createRequest = (origin?: string, host?: string, fetchSite?: string) => {
   const headers = new Headers()
 
   if (origin) {
@@ -16,6 +16,10 @@ const createRequest = (origin?: string, host?: string) => {
 
   if (host) {
     headers.set('host', host)
+  }
+
+  if (fetchSite) {
+    headers.set('sec-fetch-site', fetchSite)
   }
 
   return { headers } as Request
@@ -32,6 +36,10 @@ describe('hasValidOrigin', () => {
 
   it('rejects a cross-site origin', () => {
     expect(hasValidOrigin(createRequest('https://attacker.test', 'spity.test'))).toBe(false)
+  })
+
+  it('rejects Fetch Metadata marked as cross-site even without an Origin header', () => {
+    expect(hasValidOrigin(createRequest(undefined, 'spity.test', 'cross-site'))).toBe(false)
   })
 
   it('rejects an origin when the host is missing', () => {

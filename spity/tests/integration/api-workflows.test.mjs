@@ -33,6 +33,10 @@ const request = async (path, options = {}) => {
     headers.Cookie = options.cookie
   }
 
+  if (options.forwardedFor) {
+    headers['X-Forwarded-For'] = options.forwardedFor
+  }
+
   if (options.body !== undefined) {
     headers['Content-Type'] = 'application/json'
   }
@@ -381,5 +385,27 @@ test('parcours BC02 matching et événements avec MariaDB', async (context) => {
       cookie: registrationWinner.cookie,
     })
     assert.equal(blockedRegistration.response.status, 409)
+  })
+
+  await context.test('la limitation renforcée bloque la onzième tentative d’authentification', async () => {
+    const attempts = []
+
+    for (let attempt = 0; attempt < 11; attempt += 1) {
+      attempts.push(await request('/api/auth/login', {
+        method: 'POST',
+        forwardedFor: '198.51.100.250',
+        body: {
+          email: 'unknown@spity.test',
+          password: 'Invalid2026!',
+        },
+      }))
+    }
+
+    assert.equal(attempts[0].response.status, 401)
+    assert.equal(attempts[9].response.status, 401)
+    assert.equal(attempts[10].response.status, 429)
+    assert.equal(attempts[10].body.error, 'Trop de requêtes. Veuillez réessayer plus tard.')
+    assert.equal(attempts[10].response.headers.get('x-ratelimit-remaining'), '0')
+    assert.ok(Number(attempts[10].response.headers.get('retry-after')) > 0)
   })
 })

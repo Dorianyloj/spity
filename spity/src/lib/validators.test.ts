@@ -32,6 +32,15 @@ describe('authentication validators', () => {
   it('requires a password to log in', () => {
     expect(loginSchema.safeParse({ email: 'test@spity.test', password: '' }).success).toBe(false)
   })
+
+  it('rejects authentication inputs exceeding storage or bcrypt limits', () => {
+    const longEmail = `${'a'.repeat(250)}@spity.test`
+    const longPassword = `Spity-test1!${'a'.repeat(72)}`
+
+    expect(registerSchema.safeParse({ email: longEmail, password: 'Spity-test1!', role: 'grimpeur' }).success).toBe(false)
+    expect(registerSchema.safeParse({ email: 'test@spity.test', password: longPassword, role: 'grimpeur' }).success).toBe(false)
+    expect(loginSchema.safeParse({ email: 'test@spity.test', password: longPassword }).success).toBe(false)
+  })
 })
 
 describe('climbing domain validators', () => {

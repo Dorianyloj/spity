@@ -2,10 +2,30 @@ import { z } from 'zod'
 
 // === AUTH VALIDATORS ===
 
+const utf8ByteLength = (value: string) => {
+  return Array.from(value).reduce((length, character) => {
+    const codePoint = character.codePointAt(0) ?? 0
+
+    if (codePoint <= 0x7f) {
+      return length + 1
+    }
+
+    if (codePoint <= 0x7ff) {
+      return length + 2
+    }
+
+    return length + (codePoint <= 0xffff ? 3 : 4)
+  }, 0)
+}
+
+const bcryptInputSchema = z.string().refine(
+  (value) => utf8ByteLength(value) <= 72,
+  'Le mot de passe ne doit pas dépasser 72 octets'
+)
+
 export const registerSchema = z.object({
-  email: z.string().email('Email invalide'),
-  password: z
-    .string()
+  email: z.string().max(255, 'Email trop long').email('Email invalide'),
+  password: bcryptInputSchema
     .min(8, 'Le mot de passe doit contenir au moins 8 caractères')
     .regex(/[A-Z]/, 'Le mot de passe doit contenir au moins une majuscule')
     .regex(/[a-z]/, 'Le mot de passe doit contenir au moins une minuscule')
@@ -17,8 +37,8 @@ export const registerSchema = z.object({
 })
 
 export const loginSchema = z.object({
-  email: z.string().email('Email invalide'),
-  password: z.string().min(1, 'Mot de passe requis'),
+  email: z.string().max(255, 'Email trop long').email('Email invalide'),
+  password: bcryptInputSchema.min(1, 'Mot de passe requis'),
 })
 
 export const resetPasswordSchema = z.object({

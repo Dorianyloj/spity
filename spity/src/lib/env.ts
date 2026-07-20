@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { logger } from './logger'
 
 const envSchema = z.object({
   DATABASE_URL: z.string().refine((val) => val.startsWith('mysql://'), {
@@ -25,9 +26,11 @@ const parseEnv = () => {
     return envSchema.parse(getBuildEnvironment())
   } catch (error) {
     if (error instanceof z.ZodError) {
-      console.error('❌ Variables d\'environnement invalides:')
-      error.issues.forEach((issue: z.ZodIssue) => {
-        console.error(`  - ${issue.path.join('.')}: ${issue.message}`)
+      logger.error('config.environment_invalid', {
+        issues: error.issues.map((issue: z.ZodIssue) => ({
+          path: issue.path.join('.'),
+          message: issue.message,
+        })),
       })
       throw new Error('Configuration d\'environnement invalide')
     }
