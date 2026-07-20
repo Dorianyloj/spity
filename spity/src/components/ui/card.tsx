@@ -48,13 +48,13 @@ export type CardTitleProps = HTMLAttributes<HTMLHeadingElement>
 const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(
   ({ className = '', children, ...props }, ref) => {
     return (
-      <h3
+      <h2
         ref={ref}
         className={cn('text-lg font-bold leading-tight sm:text-xl', className)}
         {...props}
       >
         {children}
-      </h3>
+      </h2>
     )
   }
 )

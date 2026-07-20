@@ -36,7 +36,7 @@
 
   /* États neutres */
   --muted: #e5eddf;
-  --muted-foreground: #65736b;
+  --muted-foreground: #55645b;
 
   /* Accent - Forêt douce */
   --accent: #d8ead0;
@@ -45,7 +45,7 @@
   /* Feedback */
   --destructive: #c84b43;
   --destructive-foreground: #ffffff;
-  --success: #5f8f50;
+  --success: #376b31;
   --success-foreground: #ffffff;
   --warning: #c79a42;
   --warning-foreground: #173236;
@@ -78,7 +78,7 @@
   /* Tokens Spity personnalisés */
   --spity-coral: #8bb957;
   --spity-coral-light: #dfeecf;
-  --spity-coral-dark: #5f8f50;
+  --spity-coral-dark: #376b31;
   --spity-slate: #173236;
   --spity-slate-light: #27494b;
   --spity-stone: #fbfdf8;
@@ -274,6 +274,21 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    Composants Spity
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -459,7 +474,7 @@
   }
 
   .spity-tab-row {
-    @apply flex w-fit gap-1 overflow-x-auto rounded-lg border border-white/70 bg-[#fbfdf8]/88 p-1 backdrop-blur-xl;
+    @apply flex w-full max-w-full gap-1 overflow-x-auto rounded-lg border border-white/70 bg-[#fbfdf8]/88 p-1 backdrop-blur-xl sm:w-fit;
   }
 
   .spity-tab-row__item {

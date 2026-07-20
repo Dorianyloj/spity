@@ -16,7 +16,7 @@ const pages = [
 
 const thresholds = {
   performance: 0.85,
-  accessibility: 0.95,
+  accessibility: 1,
   'best-practices': 0.9,
   seo: 0.9,
 }

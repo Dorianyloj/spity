@@ -935,7 +935,11 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
   const settingsTabContent = (
     <section className="space-y-6">
       {feedback && (
-        <div className="rounded-lg border border-border bg-card p-4 text-sm font-medium text-foreground">
+        <div
+          className="rounded-lg border border-border bg-card p-4 text-sm font-medium text-foreground"
+          role="status"
+          aria-live="polite"
+        >
           {feedback}
         </div>
       )}
@@ -985,7 +989,11 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
       <section className="space-y-6">
         {feedback && (
-          <div className="rounded-lg border border-border bg-card p-4 text-sm font-medium text-foreground">
+          <div
+            className="rounded-lg border border-border bg-card p-4 text-sm font-medium text-foreground"
+            role="status"
+            aria-live="polite"
+          >
             {feedback}
           </div>
         )}
@@ -1049,7 +1057,7 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
               >
-                <Icon size={17} />
+                <Icon size={17} aria-hidden="true" />
                 {tab.label}
               </button>
             )

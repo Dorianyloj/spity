@@ -118,12 +118,25 @@ jobs:
           mkdir -p .integration-results
           npm run test:integration | tee .integration-results/results.tap
 
+      - name: Audit authenticated accessibility
+        run: npm run accessibility:audit
+
       - name: Upload integration report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: integration-${{ github.sha }}
           path: spity/.integration-results
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Upload authenticated accessibility reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: accessibility-${{ github.sha }}
+          path: spity/.accessibility
           include-hidden-files: true
           if-no-files-found: warn
           retention-days: 30

@@ -74,7 +74,12 @@ export default function FilterToolbar({
           </div>
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-white/10 pt-4 text-sm text-muted-foreground">
+        <div
+          className="mt-4 flex flex-wrap items-center gap-2 border-t border-white/10 pt-4 text-sm text-muted-foreground"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        >
           <Filter size={16} aria-hidden="true" />
           <span>{countLabel}</span>
         </div>

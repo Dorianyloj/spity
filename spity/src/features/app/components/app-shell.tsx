@@ -51,7 +51,7 @@ export default function AppShell({ activeItem, children, user }: AppShellProps) 
               <Badge className="bg-white/10 text-white" variant="default">{isClub ? 'Club' : 'Grimpeur'}</Badge>
             </div>
             <div className="flex items-center gap-2 lg:hidden">
-              <LogoutButton className={navActionClass} />
+              <LogoutButton className={navActionClass} compact />
             </div>
           </div>
 
@@ -69,7 +69,7 @@ export default function AppShell({ activeItem, children, user }: AppShellProps) 
                     isActive ? 'bg-primary text-primary-foreground' : 'text-white/70 hover:bg-white/10 hover:text-white'
                   }`}
                 >
-                  <Icon size={18} />
+                  <Icon size={18} aria-hidden="true" />
                   {item.label}
                 </Link>
               )
@@ -79,7 +79,7 @@ export default function AppShell({ activeItem, children, user }: AppShellProps) 
           <div className="hidden items-center gap-3 lg:flex">
             {showProfileShortcut && (
               <Link href="/profile/me" className={`spity-btn spity-btn--ghost ${navActionClass}`}>
-                <UserRound size={18} />
+                <UserRound size={18} aria-hidden="true" />
                 Profil
               </Link>
             )}

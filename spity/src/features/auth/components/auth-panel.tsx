@@ -167,7 +167,7 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
               </CardHeader>
               <CardContent>
                 {isLogin ? (
-                  <form className="space-y-4" onSubmit={loginForm.handleSubmit(submitLogin)}>
+                  <form className="space-y-4" onSubmit={loginForm.handleSubmit(submitLogin)} noValidate>
                     <Input
                       label="Email"
                       type="email"
@@ -177,6 +177,7 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
                       {...loginForm.register('email')}
                     />
                     <Input
+                      id="login-password"
                       label="Mot de passe"
                       type={passwordType}
                       autoComplete="current-password"
@@ -188,20 +189,22 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
                           className="inline-flex h-11 w-11 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
                           onClick={() => setShowPassword((value) => !value)}
                           aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+                          aria-controls="login-password"
+                          aria-pressed={showPassword}
                         >
                           {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                         </button>
                       }
                       {...loginForm.register('password')}
                     />
-                    {feedback && <p className="text-sm text-destructive">{feedback}</p>}
+                    {feedback && <p className="text-sm text-destructive" role="alert">{feedback}</p>}
                     <Button type="submit" className="w-full" isLoading={loginForm.formState.isSubmitting}>
                       <LogIn size={18} />
                       Se connecter
                     </Button>
                   </form>
                 ) : (
-                  <form className="space-y-4" onSubmit={registerForm.handleSubmit(submitRegister)}>
+                  <form className="space-y-4" onSubmit={registerForm.handleSubmit(submitRegister)} noValidate>
                     <Input
                       label="Email"
                       type="email"
@@ -211,6 +214,7 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
                       {...registerForm.register('email')}
                     />
                     <Input
+                      id="register-password"
                       label="Mot de passe"
                       type={passwordType}
                       autoComplete="new-password"
@@ -222,6 +226,8 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
                           className="inline-flex h-11 w-11 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
                           onClick={() => setShowPassword((value) => !value)}
                           aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+                          aria-controls="register-password"
+                          aria-pressed={showPassword}
                         >
                           {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                         </button>
@@ -241,7 +247,7 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
                         </label>
                       </div>
                     </fieldset>
-                    {feedback && <p className="text-sm text-destructive">{feedback}</p>}
+                    {feedback && <p className="text-sm text-destructive" role="alert">{feedback}</p>}
                     <Button type="submit" className="w-full" isLoading={registerForm.formState.isSubmitting}>
                       <UserPlus size={18} />
                       Créer mon compte

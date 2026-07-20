@@ -337,7 +337,11 @@ export default function EquipmentInventorySection({ equipment, onEquipmentChange
       </CardHeader>
       <CardContent className="space-y-6">
         {feedback && (
-          <div className="rounded-lg border border-border bg-muted p-3 text-sm font-medium text-foreground">
+          <div
+            className="rounded-lg border border-border bg-muted p-3 text-sm font-medium text-foreground"
+            role="status"
+            aria-live="polite"
+          >
             {feedback}
           </div>
         )}

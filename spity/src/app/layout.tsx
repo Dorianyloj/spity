@@ -29,7 +29,15 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} ${jetbrainsMono.variable} antialiased`}
       >
-        {children}
+        <a
+          href="#contenu-principal"
+          className="fixed left-4 top-0 z-[100] -translate-y-full rounded-md bg-primary px-4 py-3 font-bold text-primary-foreground shadow-lg transition-transform focus:top-4 focus:translate-y-0"
+        >
+          Aller au contenu principal
+        </a>
+        <div id="contenu-principal" tabIndex={-1}>
+          {children}
+        </div>
       </body>
     </html>
   );
