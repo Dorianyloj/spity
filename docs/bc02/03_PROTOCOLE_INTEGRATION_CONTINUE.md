@@ -98,7 +98,19 @@ Contrôles locaux exécutés le 20 juillet 2026 :
 | Healthcheck avec MariaDB migrée | HTTP 200, statut `ok` |
 | Lighthouse | Seuils réussis sur accueil, connexion et inscription |
 
-L'exécution GitHub Actions associée au premier push de ce workflow devra être ajoutée à l'index des preuves avec son URL, son SHA et une capture du résumé.
+### Preuve GitHub Actions
+
+L'[exécution GitHub Actions no 29733455501](https://github.com/Dorianyloj/spity/actions/runs/29733455501) a été réalisée sur le SHA `25d0de5a3ee5167e6cba5299dce0196a4bb0d188` le 20 juillet 2026.
+
+| Élément distant | Résultat |
+| --- | --- |
+| Job `Quality gates` | Succès |
+| Job `Lighthouse thresholds` | Succès |
+| Artefact de couverture | `coverage-25d0de5a3ee5167e6cba5299dce0196a4bb0d188`, 38 041 octets |
+| Artefact Lighthouse | `lighthouse-25d0de5a3ee5167e6cba5299dce0196a4bb0d188`, 328 684 octets |
+| Durée de conservation | 30 jours |
+
+Cette exécution constitue la preuve reproductible initiale de C2.1.2. Une capture du résumé des deux jobs sera intégrée au dossier final afin que la preuve reste lisible après expiration des artefacts.
 
 ## 8. Limites et évolutions prévues
 

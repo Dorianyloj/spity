@@ -74,7 +74,7 @@ Document de référence : [Environnements, qualité et protocole de déploiement
 - [x] Créer le pipeline CI.
 - [x] Exécuter lint, typecheck, tests, couverture, build et contrôles de dépendances.
 - [x] Définir la stratégie de branches, revues et fusion.
-- [ ] Conserver une exécution GitHub Actions réussie comme preuve.
+- [x] Conserver une exécution GitHub Actions réussie comme preuve.
 
 ### Étape 4 - Prototype maintenable (C2.2.1)
 
@@ -128,4 +128,4 @@ Chaque compétence sera considérée prête uniquement si les quatre éléments 
 
 ## Prochaine action
 
-Conserver la première exécution réussie de la CI comme preuve externe, puis poursuivre l'étape 4 : compléter le prototype fonctionnel retenu et documenter son architecture.
+Poursuivre l'étape 4 : compléter le prototype fonctionnel retenu et documenter son architecture.
