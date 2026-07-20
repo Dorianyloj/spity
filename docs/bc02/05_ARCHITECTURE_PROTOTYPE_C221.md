@@ -125,6 +125,7 @@ Ajouter un nouveau type d'événement demande une évolution coordonnée de l'en
 | Tests unitaires | 69 tests réussis sur 69. |
 | ESLint | Succès, aucune erreur ni avertissement. |
 | TypeScript strict | Succès. |
+| GitHub Actions | [Exécution 29739778393](https://github.com/Dorianyloj/spity/actions/runs/29739778393) réussie sur le SHA `1db84b8e1058aea6c4785fa5b14a9fdcde533541`. |
 
 Les comptes du seed permettent une démonstration immédiate avec le mot de passe documenté dans le script : Lina envoie les demandes, Nassim possède une demande entrante, et Club Alpin Lyon administre les événements.
 

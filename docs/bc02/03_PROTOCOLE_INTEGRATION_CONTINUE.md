@@ -112,6 +112,18 @@ L'[exécution GitHub Actions no 29733455501](https://github.com/Dorianyloj/spity
 
 Cette exécution constitue la preuve reproductible initiale de C2.1.2. Une capture du résumé des deux jobs sera intégrée au dossier final afin que la preuve reste lisible après expiration des artefacts.
 
+### Validation du lot prototype C2.2.1
+
+L'[exécution GitHub Actions no 29739778393](https://github.com/Dorianyloj/spity/actions/runs/29739778393) a validé le SHA `1db84b8e1058aea6c4785fa5b14a9fdcde533541` le 20 juillet 2026 après l'ajout des parcours matching et événements.
+
+| Élément distant | Résultat |
+| --- | --- |
+| Job `Quality gates` | Succès : lint, TypeScript, 69 tests, couverture, audit, configurations Docker et build |
+| Job `Lighthouse thresholds` | Succès |
+| Statut global | Succès |
+
+Cette seconde exécution prouve que le prototype décrit dans le document C2.2.1 est reproductible sur l'environnement d'intégration, et pas uniquement sur le poste de développement.
+
 ## 8. Limites et évolutions prévues
 
 - La CI prouve actuellement la qualité du périmètre unitaire ciblé, pas encore la majorité de l'application complète.
