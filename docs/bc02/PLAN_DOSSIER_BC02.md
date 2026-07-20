@@ -8,7 +8,7 @@ Le livrable final devra associer :
 
 - une version stable et manipulable de Spity ;
 - le code source et l'historique Git ;
-- un dossier écrit répondant explicitement aux huit compétences ;
+- un dossier écrit répondant explicitement aux neuf compétences ;
 - des preuves vérifiables : configurations, captures, rapports, scénarios, résultats et historique des corrections.
 
 ## Sources officielles
@@ -20,10 +20,10 @@ Le livrable final devra associer :
 
 | Compétence | Livrable attendu | État initial de Spity | Travail nécessaire |
 | --- | --- | --- | --- |
-| C2.1.1 | Protocole de déploiement continu et critères de qualité/performance | Partiel | Décrire les environnements, fiabiliser Docker, définir les séquences de déploiement et les seuils qualité/performance. |
-| C2.1.2 | Protocole d'intégration continue | Non couvert | Créer la CI, documenter les déclencheurs, contrôles, branches et conditions de fusion. |
+| C2.1.1 | Protocole de déploiement continu et critères de qualité/performance | Couvert techniquement | Conserver les preuves d'un déploiement distant et d'un exercice de retour arrière. |
+| C2.1.2 | Protocole d'intégration continue | Couvert techniquement | Collecter une exécution GitHub Actions réussie et la configuration des protections de branches. |
 | C2.2.1 | Architecture maintenable, prototype, frameworks et paradigmes | Partiel | Définir le périmètre fonctionnel BC02, compléter le prototype et documenter architecture, choix et user stories. |
-| C2.2.2 | Jeu de tests unitaires couvrant une fonctionnalité | Non couvert | Installer le harnais de test, tester les domaines principaux et produire un rapport de couverture majoritaire. |
+| C2.2.2 | Jeu de tests unitaires couvrant une fonctionnalité | Partiel | Le harnais et 49 tests sont présents ; étendre la couverture à la majorité du périmètre applicatif. |
 | C2.2.3 | Mesures de sécurité et d'accessibilité | Partiel | Réaliser les audits OWASP Top 10 et RGAA, corriger les écarts et conserver les preuves. |
 | C2.2.4 | Historique des versions et dernière version fiable | Partiel | Mettre en place versions/releases, déploiement progressif, contrôles de stabilité et retours utilisateurs. |
 | C2.3.1 | Cahier de recettes | Non couvert | Couvrir toutes les fonctionnalités retenues avec scénarios, préconditions, résultats attendus et résultats obtenus. |
@@ -64,17 +64,17 @@ Document de référence : [Périmètre fonctionnel et user stories](./01_PERIMET
 
 Document de référence : [Environnements, qualité et protocole de déploiement](./02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md).
 
-- [x] Corriger et documenter les configurations d'environnement.
+- [x] Corriger la configuration locale et créer les configurations Docker de test et de production.
 - [x] Définir les environnements développement, test et production.
 - [x] Définir les seuils de lint, typage, tests, couverture, sécurité et performance.
 - [x] Rédiger le protocole de déploiement continu.
 
 ### Étape 3 - Intégration continue (C2.1.2)
 
-- Créer le pipeline CI.
-- Exécuter lint, typecheck, tests, couverture, build et contrôles de dépendances.
-- Définir la stratégie de branches, revues et fusion.
-- Conserver une exécution réussie comme preuve.
+- [x] Créer le pipeline CI.
+- [x] Exécuter lint, typecheck, tests, couverture, build et contrôles de dépendances.
+- [x] Définir la stratégie de branches, revues et fusion.
+- [ ] Conserver une exécution GitHub Actions réussie comme preuve.
 
 ### Étape 4 - Prototype maintenable (C2.2.1)
 
@@ -85,9 +85,11 @@ Document de référence : [Environnements, qualité et protocole de déploiement
 
 ### Étape 5 - Tests unitaires (C2.2.2)
 
-- Mettre en place le harnais de test.
-- Tester les validateurs, services métier, authentification et composants critiques.
-- Atteindre une couverture majoritaire et archiver le rapport.
+- [x] Mettre en place le harnais de test.
+- [x] Tester les validateurs, le parseur de matériel, le contrôle d'origine et un composant critique.
+- [x] Dépasser les seuils sur le périmètre déclaré et générer le rapport.
+- [ ] Étendre les tests aux routes, dépôts de données, formulaires et nouveaux domaines.
+- [ ] Atteindre une couverture majoritaire du périmètre applicatif évalué.
 
 ### Étape 6 - Sécurité et accessibilité (C2.2.3)
 
@@ -126,4 +128,4 @@ Chaque compétence sera considérée prête uniquement si les quatre éléments 
 
 ## Prochaine action
 
-Commencer par l'étape 1 : définir le périmètre exact du prototype BC02 et écrire les user stories assorties de critères d'acceptation.
+Conserver la première exécution réussie de la CI comme preuve externe, puis poursuivre l'étape 4 : compléter le prototype fonctionnel retenu et documenter son architecture.

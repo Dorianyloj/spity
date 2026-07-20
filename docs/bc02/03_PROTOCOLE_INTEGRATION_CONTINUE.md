@@ -1,0 +1,108 @@
+# Protocole d'intégration continue - C2.1.2
+
+## 1. Objectif et compétence couverte
+
+Ce document décrit le système d'intégration continue de Spity. Il répond à la compétence C2.1.2 du bloc BC02 : fusionner régulièrement le code source et tester les blocs de code afin de réduire les risques de régression.
+
+La réalisation technique est versionnée dans [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml).
+
+La configuration suit les recommandations officielles :
+
+- [construire et tester une application Node.js avec GitHub Actions](https://docs.github.com/actions/automating-builds-and-tests/building-and-testing-nodejs) ;
+- [configurer Jest avec Next.js](https://nextjs.org/docs/app/guides/testing/jest).
+
+## 2. Déclencheurs du pipeline
+
+Le workflow `Continuous integration` est déclenché lors :
+
+- d'un `push` vers `develop` ou `main` ;
+- de l'ouverture ou de la mise à jour d'une pull request ciblant `develop` ou `main`.
+
+Une seule exécution est conservée par branche. Lorsqu'un nouveau commit est poussé, l'exécution obsolète est annulée afin de ne pas produire de résultat portant sur une ancienne révision.
+
+Le workflow dispose uniquement de l'autorisation `contents: read`. Il ne peut ni modifier le dépôt ni publier une version.
+
+## 3. Environnement d'intégration
+
+| Élément | Configuration |
+| --- | --- |
+| Exécuteur | GitHub-hosted runner `ubuntu-latest` |
+| Runtime | Version Node.js déclarée dans `spity/.nvmrc` |
+| Gestionnaire | npm et installation déterministe avec `npm ci` |
+| Verrou de dépendances | `spity/package-lock.json` |
+| Cache | Cache npm indexé par le fichier de verrouillage |
+| Dossier d'exécution | `spity/` |
+| Durée maximale | 20 minutes |
+| Secrets de build | Valeurs de test non sensibles injectées dans le job |
+
+La base MariaDB n'est pas démarrée dans ce premier job. Les tests actuels sont unitaires et le build Next.js n'ouvre pas de connexion à la base. Un job d'intégration avec MariaDB sera ajouté lorsque les routes et dépôts de données seront couverts.
+
+## 4. Séquence d'intégration
+
+Les étapes s'exécutent dans l'ordre suivant. Une étape en échec bloque toutes les étapes suivantes, sauf la publication du rapport de couverture configurée avec `if: always()`.
+
+| Ordre | Étape | Commande ou action | Critère de succès |
+| ---: | --- | --- | --- |
+| 1 | Récupération des sources | `actions/checkout@v6` | SHA demandé disponible sur le runner |
+| 2 | Installation de Node.js | `actions/setup-node@v4` | Version de `.nvmrc` active |
+| 3 | Installation déterministe | `npm ci` | Dépendances conformes au lockfile |
+| 4 | Analyse statique | `npm run lint` | Aucune erreur ou avertissement |
+| 5 | Vérification du typage | `npm run typecheck` | Aucune erreur TypeScript |
+| 6 | Tests et couverture | `npm run test:coverage` | Tous les tests et seuils réussis |
+| 7 | Audit des dépendances | `npm run security:audit` | Aucune alerte haute ou critique de production |
+| 8 | Validation de l'infrastructure | Trois commandes `docker compose ... config --quiet` | Configurations développement, test et production valides |
+| 9 | Construction | `npm run build` | Build de production Next.js réussi |
+| 10 | Conservation de la preuve | `actions/upload-artifact@v4` | Rapport `coverage-<SHA>` conservé 30 jours |
+
+## 5. Protocole de contribution et de fusion
+
+1. Mettre à jour `develop` avant de créer une branche courte `feat/...`, `fix/...`, `test/...` ou `docs/...`.
+2. Réaliser un changement logique et l'accompagner des tests adaptés au risque.
+3. Exécuter localement `npm run quality` avant le push.
+4. Pousser la branche et ouvrir une pull request vers `develop`.
+5. Vérifier que le périmètre, les migrations éventuelles et les risques de sécurité sont décrits dans la pull request.
+6. Attendre le succès du contrôle `Quality gates`.
+7. Faire relire le changement et traiter chaque commentaire bloquant.
+8. Fusionner uniquement lorsque la revue et la CI sont validées.
+9. Réserver `main` aux versions stables promues depuis `develop`.
+10. Identifier chaque version livrée avec un tag et reporter son SHA dans le journal des versions.
+
+Les protections de branches GitHub devront rendre le contrôle `Quality gates` et une revue obligatoires avant fusion vers `main`. Une capture de cette configuration sera conservée comme preuve externe au dépôt.
+
+## 6. Traitement d'un échec
+
+Lorsqu'une étape échoue :
+
+1. la fusion ou la promotion est suspendue ;
+2. le journal de l'étape permet d'identifier la commande et le fichier concernés ;
+3. une anomalie est créée si l'échec révèle une régression ou un défaut du produit ;
+4. la correction est réalisée sur la même branche ou sur une branche `fix/...` dédiée ;
+5. le pipeline complet est rejoué depuis l'installation déterministe ;
+6. aucun contrôle n'est désactivé pour rendre artificiellement la CI verte.
+
+Une dépendance vulnérable ne peut être ignorée que si son périmètre, son exploitabilité, la mesure compensatoire, le responsable et la date de réévaluation sont documentés.
+
+## 7. Résultats initiaux
+
+Contrôles locaux exécutés le 20 juillet 2026 :
+
+| Contrôle | Résultat |
+| --- | --- |
+| ESLint | Succès, aucune erreur |
+| TypeScript | Succès, aucune erreur |
+| Jest | 49 tests réussis sur 49 |
+| Couverture ciblée | 97,5 % lignes, 87,91 % branches, 100 % fonctions |
+| Audit de production au niveau `high` | Succès, aucune alerte haute ou critique |
+| Configurations Compose | Trois configurations valides |
+| Build Docker standalone | Succès sous Node.js 22, exécution avec l'utilisateur `nextjs` |
+| Healthcheck avec MariaDB migrée | HTTP 200, statut `ok` |
+| Lighthouse | Seuils réussis sur accueil, connexion et inscription |
+
+L'exécution GitHub Actions associée au premier push de ce workflow devra être ajoutée à l'index des preuves avec son URL, son SHA et une capture du résumé.
+
+## 8. Limites et évolutions prévues
+
+- La CI prouve actuellement la qualité du périmètre unitaire ciblé, pas encore la majorité de l'application complète.
+- Les tests avec MariaDB et les tests de migrations ne sont pas encore intégrés.
+- Lighthouse et les tests de bout en bout seront ajoutés dans des jobs séparés afin de conserver des diagnostics lisibles.
+- Le déploiement continu restera séparé de la CI : une version ne sera promue qu'après le succès des contrôles et une validation explicite de l'environnement cible.

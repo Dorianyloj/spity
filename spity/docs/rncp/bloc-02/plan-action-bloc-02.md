@@ -58,10 +58,10 @@ Légende :
 
 | Compétence | État initial | Éléments déjà présents | Écart à traiter pour le jury |
 |---|---|---|---|
-| C2.1.1 | Partiel | Environnement local documenté, Docker Compose, ESLint, TypeScript strict, build Next.js | Formaliser les environnements, le protocole de déploiement continu, les outils de performance et les seuils qualité |
-| C2.1.2 | Absent | Dépôt Git et historique de commits | Ajouter une CI versionnée et documenter les séquences d'intégration |
+| C2.1.1 | Présent | Environnements séparés, image standalone, protocole, healthcheck et seuils Lighthouse vérifiés | Conserver la preuve d'un déploiement distant et d'un exercice de retour arrière |
+| C2.1.2 | Présent | CI versionnée et protocole d'intégration documenté | Conserver une exécution GitHub Actions réussie et configurer les protections de branches |
 | C2.2.1 | Partiel | Prototype fonctionnel, App Router, architecture par fonctionnalités, composants UI, ORM | Produire les schémas d'architecture, relier les user stories aux écrans et démontrer les choix de conception |
-| C2.2.2 | Absent | Aucun harnais de tests applicatifs versionné | Installer et configurer le framework de test, couvrir une fonctionnalité critique et mesurer la couverture |
+| C2.2.2 | Partiel | Jest configuré, 49 tests et couverture ciblée mesurée | Étendre la couverture à la majorité du périmètre applicatif évalué |
 | C2.2.3 | Partiel | Zod, bcrypt, cookies `httpOnly`, contrôle d'origine, verrouillage de compte, en-têtes HTTP, attributs ARIA | Réaliser une analyse OWASP Top 10, corriger les écarts, choisir le référentiel RGAA, auditer et documenter les résultats |
 | C2.2.4 | Partiel | Gestion de versions Git et historique lisible ; build de production fonctionnel | Mettre en place un environnement déployé, tracer les versions et fournir des preuves de stabilité et de manipulation autonome |
 | C2.3.1 | Absent | Vérifications techniques ponctuelles uniquement | Rédiger un cahier de recette complet et exécuter les tests fonctionnels, structurels et de sécurité |
@@ -233,14 +233,14 @@ Le document maître sera maintenu dans un format source versionné, puis export�
 
 | ID | Compétence | Preuve cible | Emplacement prévu | État |
 |---|---|---|---|---|
-| P01 | C2.1.1 | Description des environnements | `docs/rncp/bloc-02/environnements.md` | À produire |
-| P02 | C2.1.1 | Protocole de déploiement continu | `docs/rncp/bloc-02/protocole-deploiement.md` | À produire |
-| P03 | C2.1.1 | Critères qualité et performance | `docs/rncp/bloc-02/criteres-qualite-performance.md` | À produire |
-| P04 | C2.1.2 | Workflow d'intégration continue | `.github/workflows/ci.yml` | À produire |
-| P05 | C2.1.2 | Protocole d'intégration | `docs/rncp/bloc-02/protocole-integration.md` | À produire |
+| P01 | C2.1.1 | Description des environnements | `docs/bc02/02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md` | Présent |
+| P02 | C2.1.1 | Protocole de déploiement continu | `docs/bc02/02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md` | Présent |
+| P03 | C2.1.1 | Critères qualité et performance | `docs/bc02/02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md` | Présent |
+| P04 | C2.1.2 | Workflow d'intégration continue | `.github/workflows/ci.yml` | Présent |
+| P05 | C2.1.2 | Protocole d'intégration | `docs/bc02/03_PROTOCOLE_INTEGRATION_CONTINUE.md` | Présent |
 | P06 | C2.2.1 | Architecture structurée | `docs/rncp/bloc-02/architecture.md` | À produire |
 | P07 | C2.2.1 | Présentation du prototype | Dossier maître et captures | À produire |
-| P08 | C2.2.2 | Jeu de tests et couverture | Tests source et rapport CI | À produire |
+| P08 | C2.2.2 | Jeu de tests et couverture | Tests source et rapport CI | Partiel |
 | P09 | C2.2.3 | Matrice OWASP Top 10 | `docs/rncp/bloc-02/securite-owasp.md` | À produire |
 | P10 | C2.2.3 | Audit d'accessibilité RGAA | `docs/rncp/bloc-02/accessibilite-rgaa.md` | À produire |
 | P11 | C2.2.4 | Historique des versions | `CHANGELOG.md` et historique Git | Partiel |
@@ -263,4 +263,3 @@ Le bloc 2 sera considéré prêt pour le rendu lorsque :
 - les trois manuels ont été testés ;
 - le dossier PDF contient un index reliant chaque critère de la grille à ses preuves ;
 - les sources du dossier, les annexes et le code correspondent au même commit et à la même version.
-

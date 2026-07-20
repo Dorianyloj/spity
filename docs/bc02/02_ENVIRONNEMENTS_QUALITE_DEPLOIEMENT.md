@@ -107,11 +107,11 @@ node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
 | TypeScript | `npm run typecheck` | Aucune erreur de type. |
 | Next.js | `npm run build` | Build de production réussi. |
 | npm audit | `npm run security:audit` | Aucune vulnérabilité haute ou critique en production. |
-| Lighthouse CI | `npm run perf:audit` | Respect des seuils des pages principales. |
+| Lighthouse | `npm run perf:audit` | Respect des seuils des pages principales. |
 | Docker Compose | `docker compose ... config --quiet` | Configuration valide pour les trois environnements. |
 | Healthcheck | `GET /api/health` | Réponse HTTP 200 après déploiement. |
 
-Les tests et la couverture automatisée seront ajoutés dans le cadre de C2.2.2 puis intégrés aux mêmes portes qualité.
+Les tests et la couverture automatisée sont exécutés par `npm run test:coverage`. Lighthouse mesure les pages d'accueil, de connexion et d'inscription, vérifie chaque seuil et enregistre les rapports JSON dans `.lighthouseci`.
 
 ## 7. Critères de qualité et de performance
 
@@ -208,12 +208,22 @@ Les preuves à conserver pour le dossier final sont :
 
 ## 10. Résultats de validation initiaux
 
-À la création de ce protocole :
+État vérifié le 20 juillet 2026 :
 
 - les configurations Compose développement, test et production sont syntaxiquement valides ;
-- l'audit des dépendances de production ne signale aucune vulnérabilité ;
-- l'audit complet conserve quatre alertes modérées dans la chaîne de développement `drizzle-kit/esbuild` ;
-- ces alertes ne concernent pas l'image d'exécution et le serveur de développement ne doit jamais être exposé à un réseau non maîtrisé ;
+- l'audit des dépendances de production ne signale aucune vulnérabilité haute ou critique et conserve deux alertes modérées liées à `postcss` dans Next.js ;
+- l'audit complet conserve six alertes modérées, dont la chaîne de développement `drizzle-kit/esbuild` ;
+- le seuil CI est volontairement bloquant à partir du niveau `high` ; les alertes modérées restent suivies et ne sont pas masquées ;
 - leur évolution reste suivie et une mise à jour non cassante devra être appliquée dès sa disponibilité.
 
-Les résultats du build de l'image, du healthcheck et de Lighthouse doivent être actualisés à chaque version livrée.
+L'image standalone a été construite sous Node.js 22, lancée sous l'utilisateur non privilégié `nextjs` et vérifiée avec une MariaDB de test migrée. La route `/api/health` a répondu `200 { "status": "ok" }`. Les résultats Lighthouse doivent être actualisés à chaque version livrée.
+
+Résultats Lighthouse 12.6.1 obtenus sur le build de production :
+
+| Page | Performance | Accessibilité | Bonnes pratiques | SEO |
+| --- | ---: | ---: | ---: | ---: |
+| Accueil | 98 | 100 | 100 | 100 |
+| Connexion | 97 | 100 | 100 | 100 |
+| Inscription | 99 | 100 | 100 | 100 |
+
+Le premier audit avait détecté une performance de 77 sur l'accueil et une accessibilité de 90 sur les formulaires. L'optimisation des images, la correction du contraste, de la hiérarchie des titres et de la taille des cibles tactiles ont permis de franchir les seuils.
