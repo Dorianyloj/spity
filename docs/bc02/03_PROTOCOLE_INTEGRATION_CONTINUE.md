@@ -165,6 +165,19 @@ L'[exécution GitHub Actions no 29743712530](https://github.com/Dorianyloj/spity
 
 Cette exécution prouve sur une base et un runner neufs le quota HTTP, les corrections RGAA, les scores Lighthouse et la génération des captures mobiles décrites dans les documents C2.2.3.
 
+### Validation du runtime GitHub Actions Node.js 24
+
+L'[exécution GitHub Actions no 29744313577](https://github.com/Dorianyloj/spity/actions/runs/29744313577) a validé le SHA `8be8a29445d9eaa07b6e703c45b0b4622f5464e4` le 20 juillet 2026 après la migration vers `actions/setup-node@v6` et `actions/upload-artifact@v6`.
+
+| Contrôle | Résultat |
+| --- | --- |
+| `Quality gates` | Succès, aucune annotation |
+| `MariaDB integration tests` | Succès, aucune annotation |
+| `Lighthouse thresholds` | Succès, aucune annotation |
+| Runtime des actions JavaScript concernées | Node.js 24 natif |
+
+Cette exécution confirme la disparition de l'avertissement de dépréciation Node.js 20 sans régression sur les contrôles ni sur la publication des quatre artefacts.
+
 ## 8. Limites et évolutions prévues
 
 - La CI prouve actuellement la qualité du périmètre unitaire ciblé, pas encore la majorité de l'application complète.
