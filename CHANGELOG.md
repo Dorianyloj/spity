@@ -16,6 +16,7 @@ Les évolutions notables de Spity sont consignées dans ce fichier. Le projet su
 - Structure sémantique des titres d'états vides pour la navigation assistée.
 - Séparation des suites Jest, intégration et Playwright dans les harnais de test.
 - Procédure de sauvegarde MariaDB et prérequis locaux de la documentation d'exploitation.
+- Recette CI exécutée sur le build standalone livré dans l'image Docker.
 
 ## [0.1.0] - 2026-07-20
 

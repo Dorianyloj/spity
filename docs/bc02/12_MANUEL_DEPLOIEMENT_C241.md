@@ -317,5 +317,6 @@ La configuration d'environnement et les contrôles qualité sont décrits dans [
 | Sauvegarde avec `mariadb-dump` et variables évaluées dans le conteneur | Succès, fichier SQL non vide de 33 005 octets sur la base locale de démonstration. |
 | `npm run release:verify -- v0.1.0` | Succès, tag et version `0.1.0` concordants. |
 | `GET /api/health` sur l'application locale | HTTP réussi, `status` égal à `ok`, version `0.1.0`. |
+| CI et staging du SHA `689e59d` | Run `29750556481` réussi : cinq jobs verts, images standalone migrées et testées avant publication. |
 
 Les secrets et le contenu de la sauvegarde ne sont pas intégrés au dépôt. La restauration, destructive par nature, est documentée mais n'a pas été exécutée sur la base de travail.

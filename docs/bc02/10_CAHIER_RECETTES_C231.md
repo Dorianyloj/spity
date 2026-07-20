@@ -108,6 +108,22 @@ L'[exécution GitHub Actions no 29747713909](https://github.com/Dorianyloj/spity
 
 Cette exécution sur un runner et une base neufs confirme les résultats locaux, la génération des preuves et le caractère bloquant de la recette avant staging.
 
+### Consolidation sur l'artefact standalone
+
+L'[exécution GitHub Actions no 29750556481](https://github.com/Dorianyloj/spity/actions/runs/29750556481) a ensuite validé le SHA `689e59dccf15dc611dbddccea9cf81ccc187c40c` contre le build standalone réellement utilisé dans l'image Docker :
+
+| Job | Résultat distant |
+| --- | --- |
+| `Quality gates` | Succès en 1 min 10 s |
+| `MariaDB integration tests` | Succès en 3 min 33 s |
+| `Lighthouse thresholds` | Succès en 1 min 18 s |
+| `BC02 acceptance recipe` | Succès en 1 min 48 s, build inclus, sans retry |
+| `Deploy verified staging images` | Succès en 2 min 38 s |
+| Artefact de recette | `acceptance-689e59d...`, 210 744 octets |
+| Artefact staging | `staging-689e59d...`, 3 664 octets |
+
+Le run précédent `29749715001` avait échoué uniquement sur la recette et le staging avait été ignoré. Le passage au serveur standalone a donc été retesté sur un runner neuf tout en confirmant que la dépendance bloquante fonctionne dans les deux sens.
+
 ## 7. Preuves conservées
 
 | Preuve | Emplacement ou nom |
