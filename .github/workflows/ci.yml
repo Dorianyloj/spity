@@ -69,6 +69,65 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
+  integration:
+    name: MariaDB integration tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: spity
+    env:
+      DATABASE_URL: mysql://spity:spity_ci_password@127.0.0.1:3306/spity
+      JWT_SECRET: ci_only_secret_with_at_least_32_characters
+      INTEGRATION_PORT: 3102
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_ROOT_PASSWORD: spity_ci_root_password
+          MARIADB_DATABASE: spity
+          MARIADB_USER: spity
+          MARIADB_PASSWORD: spity_ci_password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd "healthcheck.sh --connect --innodb_initialized"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: spity/.nvmrc
+          cache: npm
+          cache-dependency-path: spity/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Apply Drizzle migrations
+        run: npm run db:migrate
+
+      - name: Run MariaDB integration tests
+        run: |
+          mkdir -p .integration-results
+          npm run test:integration | tee .integration-results/results.tap
+
+      - name: Upload integration report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-${{ github.sha }}
+          path: spity/.integration-results
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30
+
   performance:
     name: Lighthouse thresholds
     runs-on: ubuntu-latest
