@@ -62,10 +62,12 @@ Document de référence : [Périmètre fonctionnel et user stories](./01_PERIMET
 
 ### Étape 2 - Environnements et qualité (C2.1.1)
 
-- Corriger et documenter les configurations d'environnement.
-- Définir les environnements développement, test et production.
-- Définir les seuils de lint, typage, tests, couverture, sécurité et performance.
-- Rédiger le protocole de déploiement continu.
+Document de référence : [Environnements, qualité et protocole de déploiement](./02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md).
+
+- [x] Corriger et documenter les configurations d'environnement.
+- [x] Définir les environnements développement, test et production.
+- [x] Définir les seuils de lint, typage, tests, couverture, sécurité et performance.
+- [x] Rédiger le protocole de déploiement continu.
 
 ### Étape 3 - Intégration continue (C2.1.2)
 
