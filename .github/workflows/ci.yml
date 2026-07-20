@@ -176,9 +176,72 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
+  acceptance:
+    name: BC02 acceptance recipe
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: spity
+    env:
+      DATABASE_URL: mysql://spity:spity_ci_password@127.0.0.1:3306/spity
+      JWT_SECRET: ci_only_secret_with_at_least_32_characters
+      ACCEPTANCE_PORT: 3103
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_ROOT_PASSWORD: spity_ci_root_password
+          MARIADB_DATABASE: spity
+          MARIADB_USER: spity
+          MARIADB_PASSWORD: spity_ci_password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd "healthcheck.sh --connect --innodb_initialized"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: spity/.nvmrc
+          cache: npm
+          cache-dependency-path: spity/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Apply Drizzle migrations
+        run: npm run db:migrate
+
+      - name: Run BC02 acceptance recipe
+        run: npm run test:acceptance
+
+      - name: Upload acceptance reports
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: acceptance-${{ github.sha }}
+          path: |
+            spity/.acceptance-results
+            spity/playwright-report
+            spity/test-results
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30
+
   staging:
     name: Deploy verified staging images
-    needs: [quality, integration, performance]
+    needs: [quality, integration, performance, acceptance]
     if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     timeout-minutes: 20

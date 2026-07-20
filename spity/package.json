@@ -16,6 +16,8 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --runInBand",
     "test:integration": "node --env-file-if-exists=.env.local --test --test-concurrency=1 tests/integration/*.test.mjs",
+    "test:acceptance": "node --env-file-if-exists=.env.local node_modules/@playwright/test/cli.js test",
+    "test:acceptance:report": "playwright show-report",
     "accessibility:audit": "node --env-file-if-exists=.env.local scripts/run-authenticated-accessibility.mjs",
     "security:audit": "npm audit --omit=dev --audit-level=high",
     "perf:audit": "npm run build && node scripts/run-lighthouse.mjs",
@@ -45,6 +47,7 @@
     "zod": "^4.3.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
