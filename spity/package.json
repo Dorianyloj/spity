@@ -19,6 +19,7 @@
     "accessibility:audit": "node --env-file-if-exists=.env.local scripts/run-authenticated-accessibility.mjs",
     "security:audit": "npm audit --omit=dev --audit-level=high",
     "perf:audit": "npm run build && node scripts/run-lighthouse.mjs",
+    "release:verify": "node scripts/verify-release.mjs",
     "quality": "npm run lint && npm run typecheck && npm run test:coverage && npm run security:audit && npm run build",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",

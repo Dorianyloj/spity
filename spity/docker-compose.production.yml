@@ -19,6 +19,7 @@ services:
     restart: unless-stopped
 
   migrate:
+    image: ${SPITY_MIGRATION_IMAGE:-spity-migrate}:${IMAGE_TAG:-local}
     build:
       context: .
       target: migration
@@ -31,16 +32,21 @@ services:
     restart: "no"
 
   app:
-    image: spity:${IMAGE_TAG:-local}
+    image: ${SPITY_IMAGE:-spity}:${IMAGE_TAG:-local}
     build:
       context: .
       target: runner
+      args:
+        APP_VERSION: ${APP_VERSION:-0.1.0-local}
+        APP_REVISION: ${APP_REVISION:-unknown}
     environment:
       DATABASE_URL: ${DATABASE_URL:?DATABASE_URL is required}
       JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
       NODE_ENV: production
       HOSTNAME: 0.0.0.0
       PORT: 3000
+      APP_VERSION: ${APP_VERSION:-0.1.0-local}
+      APP_REVISION: ${APP_REVISION:-unknown}
     ports:
       - "127.0.0.1:${APP_PORT:-3000}:3000"
     depends_on:

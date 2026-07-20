@@ -70,6 +70,8 @@ const waitForServer = async () => {
       const { response, body } = await request('/api/health')
 
       if (response.status === 200 && body?.status === 'ok') {
+        assert.match(body.version, /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/)
+        assert.match(body.revision, /^.{7,64}$/)
         return
       }
     } catch {
