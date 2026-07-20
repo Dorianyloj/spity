@@ -139,6 +139,15 @@ Profil 360 px   : scrollWidth 360, aucun débordement
 
 Les captures `dashboard-mobile.png` et `profile-mobile.png` sont générées dans l'artefact `.accessibility`. Leur inspection confirme l'absence de chevauchement incohérent ; la navigation et les onglets utilisent un scroll interne lorsque tous les items ne tiennent pas sur une seule ligne.
 
+### Preuve GitHub Actions
+
+L'[exécution no 29743712530](https://github.com/Dorianyloj/spity/actions/runs/29743712530) est réussie sur le SHA `3779eee23e86f013c76e54f8f96a44a87a80b31c` :
+
+- audit authentifié exécuté avec succès en 2 min 24 s ;
+- job `Lighthouse thresholds` réussi sur les pages publiques ;
+- artefact `accessibility-3779eee23e86f013c76e54f8f96a44a87a80b31c` de 1 509 342 octets ;
+- rapports JSON, synthèse et deux captures mobiles conservés jusqu'au 19 août 2026.
+
 ### Tests de composants
 
 Les tests `jest-axe` couvrent :

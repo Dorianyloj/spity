@@ -148,6 +148,23 @@ L'[exécution GitHub Actions no 29740751753](https://github.com/Dorianyloj/spity
 
 Cette exécution est la preuve distante que les migrations et les parcours critiques fonctionnent ensemble sur une base créée à neuf.
 
+### Validation sécurité et accessibilité C2.2.3
+
+L'[exécution GitHub Actions no 29743712530](https://github.com/Dorianyloj/spity/actions/runs/29743712530) a validé le SHA `3779eee23e86f013c76e54f8f96a44a87a80b31c` le 20 juillet 2026.
+
+| Job | Résultat |
+| --- | --- |
+| `Quality gates` | Succès : 83 tests, couverture, audit de dépendances, lint, TypeScript et build |
+| `MariaDB integration tests` | Succès : 11 résultats TAP puis audit authentifié sur dix états |
+| `Lighthouse thresholds` | Succès : accessibilité 100 % sur les trois pages publiques |
+| Artefact de couverture | `coverage-3779eee23e86f013c76e54f8f96a44a87a80b31c`, 53 385 octets |
+| Artefact d'intégration | `integration-3779eee23e86f013c76e54f8f96a44a87a80b31c`, 961 octets |
+| Artefact Lighthouse public | `lighthouse-3779eee23e86f013c76e54f8f96a44a87a80b31c`, 327 941 octets |
+| Artefact accessibilité authentifiée | `accessibility-3779eee23e86f013c76e54f8f96a44a87a80b31c`, 1 509 342 octets |
+| Expiration des artefacts | 19 août 2026 |
+
+Cette exécution prouve sur une base et un runner neufs le quota HTTP, les corrections RGAA, les scores Lighthouse et la génération des captures mobiles décrites dans les documents C2.2.3.
+
 ## 8. Limites et évolutions prévues
 
 - La CI prouve actuellement la qualité du périmètre unitaire ciblé, pas encore la majorité de l'application complète.

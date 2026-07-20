@@ -91,7 +91,7 @@ npm run build
 Résultats :
 
 - lint et TypeScript strict sans erreur ;
-- tests Jest et seuils de couverture réussis ;
+- 83 tests Jest réussis ; couverture de 96 % des lignes et instructions, 89,69 % des branches et 100 % des fonctions sur le périmètre déclaré ;
 - 11 résultats TAP réussis, dont le contrôle de quota HTTP et la concurrence MariaDB ;
 - aucune vulnérabilité de production critique ou haute signalée par `npm audit` ;
 - build de production réussi ;
@@ -105,6 +105,8 @@ tentative 11      : 429 Too Many Requests
 X-RateLimit-Remaining: 0
 Retry-After: valeur strictement positive
 ```
+
+La preuve distante est l'[exécution GitHub Actions no 29743712530](https://github.com/Dorianyloj/spity/actions/runs/29743712530), réussie sur le SHA `3779eee23e86f013c76e54f8f96a44a87a80b31c`. Les jobs `Quality gates`, `MariaDB integration tests` et `Lighthouse thresholds` sont tous réussis ; les rapports sont conservés jusqu'au 19 août 2026.
 
 ## 7. Risques résiduels et décisions
 
