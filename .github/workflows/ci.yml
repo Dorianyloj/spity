@@ -100,5 +100,6 @@ jobs:
         with:
           name: lighthouse-${{ github.sha }}
           path: spity/.lighthouseci
+          include-hidden-files: true
           if-no-files-found: warn
           retention-days: 30
