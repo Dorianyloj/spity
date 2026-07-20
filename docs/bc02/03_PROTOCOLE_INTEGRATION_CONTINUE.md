@@ -44,7 +44,7 @@ Les étapes s'exécutent dans l'ordre suivant. Une étape en échec bloque toute
 | Ordre | Étape | Commande ou action | Critère de succès |
 | ---: | --- | --- | --- |
 | 1 | Récupération des sources | `actions/checkout@v6` | SHA demandé disponible sur le runner |
-| 2 | Installation de Node.js | `actions/setup-node@v4` | Version de `.nvmrc` active |
+| 2 | Installation de Node.js | `actions/setup-node@v6` | Version de `.nvmrc` active |
 | 3 | Installation déterministe | `npm ci` | Dépendances conformes au lockfile |
 | 4 | Analyse statique | `npm run lint` | Aucune erreur ou avertissement |
 | 5 | Vérification du typage | `npm run typecheck` | Aucune erreur TypeScript |
@@ -52,7 +52,7 @@ Les étapes s'exécutent dans l'ordre suivant. Une étape en échec bloque toute
 | 7 | Audit des dépendances | `npm run security:audit` | Aucune alerte haute ou critique de production |
 | 8 | Validation de l'infrastructure | Trois commandes `docker compose ... config --quiet` | Configurations développement, test et production valides |
 | 9 | Construction | `npm run build` | Build de production Next.js réussi |
-| 10 | Conservation de la preuve | `actions/upload-artifact@v4` | Rapport `coverage-<SHA>` conservé 30 jours |
+| 10 | Conservation de la preuve | `actions/upload-artifact@v6` | Rapport `coverage-<SHA>` conservé 30 jours |
 
 ### Job d'intégration MariaDB
 

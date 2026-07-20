@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: spity/.nvmrc
           cache: npm
@@ -62,7 +62,7 @@ jobs:
 
       - name: Upload coverage report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: coverage-${{ github.sha }}
           path: spity/coverage
@@ -101,7 +101,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: spity/.nvmrc
           cache: npm
@@ -123,7 +123,7 @@ jobs:
 
       - name: Upload integration report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: integration-${{ github.sha }}
           path: spity/.integration-results
@@ -133,7 +133,7 @@ jobs:
 
       - name: Upload authenticated accessibility reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: accessibility-${{ github.sha }}
           path: spity/.accessibility
@@ -154,7 +154,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: spity/.nvmrc
           cache: npm
@@ -168,7 +168,7 @@ jobs:
 
       - name: Upload Lighthouse reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: lighthouse-${{ github.sha }}
           path: spity/.lighthouseci
