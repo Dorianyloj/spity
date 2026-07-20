@@ -10,6 +10,7 @@ Les évolutions notables de Spity sont consignées dans ce fichier. Le projet su
 - Porte CI de recette navigateur bloquant le déploiement staging en cas d'échec.
 - Registre d'anomalies et traçabilité des corrections avant/après.
 - Manuels C2.4.1 séparés pour le déploiement, l'utilisation et la mise à jour de Spity.
+- Dossier BC02 assemblé avec index des critères, captures, export PDF et manifeste d'intégrité.
 
 ### Fixed
 

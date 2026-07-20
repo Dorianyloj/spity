@@ -88,9 +88,19 @@ npm run db:studio    # Ouvre Drizzle Studio
 
 ## Documentation d'exploitation
 
+- [Dossier BC02 final au format PDF](../docs/bc02/livrable/DOSSIER_BC02_SPITY.pdf)
+- [Index exhaustif des critères et preuves](../docs/bc02/15_INDEX_PREUVES_GRILLE_BC02.md)
 - [Manuel de déploiement](../docs/bc02/12_MANUEL_DEPLOIEMENT_C241.md)
 - [Manuel d'utilisation](../docs/bc02/13_MANUEL_UTILISATION_C241.md)
 - [Manuel de mise à jour et maintenance](../docs/bc02/14_MANUEL_MISE_A_JOUR_C241.md)
 - [Procédure autonome incluse dans chaque bundle de release](DEPLOYMENT.md)
+
+Pour régénérer les captures puis le dossier HTML/PDF depuis une base locale de démonstration :
+
+```bash
+npm run db:seed
+npm run docs:capture
+npm run docs:build
+```
 
 Avant une contribution, consulter les consignes du dépôt dans [`../AGENTS.md`](../AGENTS.md).

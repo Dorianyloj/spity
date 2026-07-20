@@ -22,7 +22,7 @@ Le livrable final devra associer :
 | --- | --- | --- | --- |
 | C2.1.1 | Protocole de déploiement continu et critères de qualité/performance | Couvert techniquement | Conserver les preuves d'un déploiement distant et d'un exercice de retour arrière. |
 | C2.1.2 | Protocole d'intégration continue | Couvert techniquement | Collecter une exécution GitHub Actions réussie et la configuration des protections de branches. |
-| C2.2.1 | Architecture maintenable, prototype, frameworks et paradigmes | Présent | Prototype matching/événements livré, migration validée et architecture reliée aux user stories. Captures finales à ajouter en annexe. |
+| C2.2.1 | Architecture maintenable, prototype, frameworks et paradigmes | Couvert | Prototype matching/événements livré, migration validée, architecture reliée aux user stories et quatre captures desktop/mobile ajoutées. |
 | C2.2.2 | Jeu de tests unitaires couvrant une fonctionnalité | Couvert | 85 tests Jest et 11 résultats d'intégration HTTP/MariaDB ; les parcours visuels complets seront étendus dans la recette. |
 | C2.2.3 | Mesures de sécurité et d'accessibilité | Couvert sur le prototype | Matrice OWASP 2025, audit RGAA 4.1.2, corrections, quota HTTP, axe, Lighthouse authentifié et preuves mobiles produits. |
 | C2.2.4 | Historique des versions et dernière version fiable | Couvert techniquement | Release `v0.1.0`, changelog, staging continu, images immuables, bundle et manifeste validés ; session de retours utilisateurs réelle à organiser. |
@@ -82,7 +82,7 @@ Document de référence : [Environnements, qualité et protocole de déploiement
 - [x] Développer les parcours fonctionnels retenus.
 - [x] Vérifier le rendu des routes et la conception responsive des interfaces.
 - [x] Documenter architecture, frameworks, paradigmes et décisions techniques.
-- [ ] Ajouter les captures desktop et mobile à l'annexe visuelle finale.
+- [x] Ajouter les captures desktop et mobile à l'annexe visuelle finale.
 
 ### Étape 5 - Tests unitaires (C2.2.2)
 
@@ -129,9 +129,9 @@ Documents de référence : [manuel de déploiement](./12_MANUEL_DEPLOIEMENT_C241
 - [x] Finaliser le manuel d'utilisation pour les rôles grimpeur et club.
 - [x] Finaliser le manuel de mise à jour, de versionnement et de maintenance.
 - [x] Décrire les choix de technologies et de langages demandés par la grille.
-- [ ] Assembler le dossier final et ses annexes.
-- [ ] Vérifier que chaque ligne de la grille possède au moins une preuve explicite.
-- [ ] Exporter et contrôler visuellement la version PDF remise au jury.
+- [x] Assembler le dossier final et ses annexes.
+- [x] Vérifier que chaque ligne de la grille possède au moins une preuve explicite.
+- [x] Exporter et contrôler visuellement la version PDF remise au jury.
 
 ## Règle de preuve
 
@@ -144,4 +144,4 @@ Chaque compétence sera considérée prête uniquement si les quatre éléments 
 
 ## Prochaine action
 
-Poursuivre l'étape 9 : assembler le dossier final, créer l'index des preuves et préparer l'export PDF. La session pilote réelle de l'étape 7 et les captures finales de l'étape 4 restent à organiser.
+Le dossier BC02, son index de preuves, ses captures et son export PDF sont assemblés. La prochaine action est d'organiser et documenter la session pilote réelle de l'étape 7, puis de figer la version remise après les éventuelles corrections issues de cette session.
