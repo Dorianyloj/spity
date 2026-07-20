@@ -78,6 +78,15 @@ Les dix résultats TAP correspondent au scénario parent et à neuf sous-scénar
 
 Après l'exécution sur la base initialement vide, les tables `users`, `events`, `partnership_requests` et `event_registrations` contenaient chacune zéro ligne. Ce contrôle confirme le nettoyage des données éphémères.
 
+### Résultat GitHub Actions
+
+L'[exécution no 29740751753](https://github.com/Dorianyloj/spity/actions/runs/29740751753) a réussi sur le SHA `1e1cb16a9908257dba9b2e8f8e251c672ac0a6d4` :
+
+- job `MariaDB integration tests` réussi ;
+- migrations appliquées sur le service `mariadb:11.4` neuf ;
+- 10 résultats TAP réussis ;
+- artefact `integration-1e1cb16a9908257dba9b2e8f8e251c672ac0a6d4` de 898 octets conservé jusqu'au 19 août 2026.
+
 ## 6. Traçabilité et couverture
 
 | User story | Preuve d'intégration |
@@ -96,6 +105,6 @@ Après l'exécution sur la base initialement vide, les tables `users`, `events`,
 - Le test exerce les dépôts au travers des API, sans mesurer séparément leur couverture de lignes.
 - Les formulaires React et le rendu visuel ne sont pas pilotés dans un navigateur ; Playwright restera nécessaire pour la recette d'interface.
 - Le scénario vérifie une seule instance Next.js et MariaDB. Un test de charge distribué dépasse le périmètre du prototype.
-- L'artefact GitHub Actions prouvera l'exécution distante après le premier push du job.
+- La preuve distante dépend d'un artefact conservé 30 jours ; une capture du résumé du job sera ajoutée à l'annexe finale.
 
 Ces limites n'empêchent pas la validation des règles critiques de C2.2.2 : elles identifient les contrôles complémentaires à traiter dans le cahier de recette C2.3.1.

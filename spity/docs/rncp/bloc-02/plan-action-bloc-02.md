@@ -240,7 +240,7 @@ Le document maître sera maintenu dans un format source versionné, puis export�
 | P05 | C2.1.2 | Protocole d'intégration | `docs/bc02/03_PROTOCOLE_INTEGRATION_CONTINUE.md` | Présent |
 | P06 | C2.2.1 | Architecture structurée | `docs/bc02/05_ARCHITECTURE_PROTOTYPE_C221.md` | Présent |
 | P07 | C2.2.1 | Présentation du prototype | Dossier d'architecture et parcours locaux vérifiés | Présent, captures finales à ajouter |
-| P08 | C2.2.2 | Jeu de tests et couverture | `docs/bc02/04_HARNAIS_TESTS_UNITAIRES.md` et `06_TESTS_INTEGRATION_C222.md` | Présent, preuve CI à actualiser |
+| P08 | C2.2.2 | Jeu de tests et couverture | `docs/bc02/04_HARNAIS_TESTS_UNITAIRES.md`, `06_TESTS_INTEGRATION_C222.md` et run CI 29740751753 | Présent |
 | P09 | C2.2.3 | Matrice OWASP Top 10 | `docs/rncp/bloc-02/securite-owasp.md` | À produire |
 | P10 | C2.2.3 | Audit d'accessibilité RGAA | `docs/rncp/bloc-02/accessibilite-rgaa.md` | À produire |
 | P11 | C2.2.4 | Historique des versions | `CHANGELOG.md` et historique Git | Partiel |

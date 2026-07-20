@@ -134,6 +134,19 @@ L'[exécution GitHub Actions no 29739778393](https://github.com/Dorianyloj/spity
 
 Cette seconde exécution prouve que le prototype décrit dans le document C2.2.1 est reproductible sur l'environnement d'intégration, et pas uniquement sur le poste de développement.
 
+### Validation des tests d'intégration C2.2.2
+
+L'[exécution GitHub Actions no 29740751753](https://github.com/Dorianyloj/spity/actions/runs/29740751753) a validé le SHA `1e1cb16a9908257dba9b2e8f8e251c672ac0a6d4` le 20 juillet 2026.
+
+| Job | Résultat |
+| --- | --- |
+| `Quality gates` | Succès |
+| `MariaDB integration tests` | Succès : service sain, migrations complètes et 10 résultats TAP |
+| `Lighthouse thresholds` | Succès |
+| Artefact d'intégration | `integration-1e1cb16a9908257dba9b2e8f8e251c672ac0a6d4`, 898 octets, conservé 30 jours |
+
+Cette exécution est la preuve distante que les migrations et les parcours critiques fonctionnent ensemble sur une base créée à neuf.
+
 ## 8. Limites et évolutions prévues
 
 - La CI prouve actuellement la qualité du périmètre unitaire ciblé, pas encore la majorité de l'application complète.
