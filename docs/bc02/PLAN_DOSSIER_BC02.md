@@ -23,7 +23,7 @@ Le livrable final devra associer :
 | C2.1.1 | Protocole de déploiement continu et critères de qualité/performance | Couvert techniquement | Conserver les preuves d'un déploiement distant et d'un exercice de retour arrière. |
 | C2.1.2 | Protocole d'intégration continue | Couvert techniquement | Collecter une exécution GitHub Actions réussie et la configuration des protections de branches. |
 | C2.2.1 | Architecture maintenable, prototype, frameworks et paradigmes | Présent | Prototype matching/événements livré, migration validée et architecture reliée aux user stories. Captures finales à ajouter en annexe. |
-| C2.2.2 | Jeu de tests unitaires couvrant une fonctionnalité | Partiel | Le harnais et 69 tests sont présents ; étendre la couverture aux routes et dépôts. |
+| C2.2.2 | Jeu de tests unitaires couvrant une fonctionnalité | Présent sur le prototype | 69 tests unitaires et 10 résultats d'intégration HTTP/MariaDB ; pilotage visuel restant pour la recette. |
 | C2.2.3 | Mesures de sécurité et d'accessibilité | Partiel | Réaliser les audits OWASP Top 10 et RGAA, corriger les écarts et conserver les preuves. |
 | C2.2.4 | Historique des versions et dernière version fiable | Partiel | Mettre en place versions/releases, déploiement progressif, contrôles de stabilité et retours utilisateurs. |
 | C2.3.1 | Cahier de recettes | Non couvert | Couvrir toutes les fonctionnalités retenues avec scénarios, préconditions, résultats attendus et résultats obtenus. |
@@ -89,8 +89,9 @@ Document de référence : [Environnements, qualité et protocole de déploiement
 - [x] Mettre en place le harnais de test.
 - [x] Tester les validateurs, le parseur de matériel, le contrôle d'origine et un composant critique.
 - [x] Dépasser les seuils sur le périmètre déclaré et générer le rapport.
-- [ ] Étendre les tests aux routes, dépôts de données, formulaires et nouveaux domaines.
-- [ ] Atteindre une couverture majoritaire du périmètre applicatif évalué.
+- [x] Étendre les tests aux routes et dépôts matching, partenariats et événements.
+- [x] Vérifier les migrations et les parcours critiques avec une MariaDB isolée.
+- [ ] Piloter les formulaires et parcours visuels avec Playwright dans le cahier de recette.
 
 ### Étape 6 - Sécurité et accessibilité (C2.2.3)
 
@@ -129,4 +130,4 @@ Chaque compétence sera considérée prête uniquement si les quatre éléments 
 
 ## Prochaine action
 
-Poursuivre l'étape 5 : automatiser les tests d'intégration des routes et dépôts avec MariaDB, puis étendre la couverture du périmètre applicatif.
+Poursuivre l'étape 6 : établir la matrice OWASP Top 10 et l'audit d'accessibilité RGAA, puis corriger les écarts constatés.

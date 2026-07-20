@@ -61,7 +61,7 @@ Légende :
 | C2.1.1 | Présent | Environnements séparés, image standalone, protocole, healthcheck et seuils Lighthouse vérifiés | Conserver la preuve d'un déploiement distant et d'un exercice de retour arrière |
 | C2.1.2 | Présent | CI versionnée et protocole d'intégration documenté | Conserver une exécution GitHub Actions réussie et configurer les protections de branches |
 | C2.2.1 | Présent | Parcours matching et événements complets, App Router, architecture par fonctionnalités, Drizzle et schéma documenté | Ajouter les captures desktop/mobile à l'annexe finale |
-| C2.2.2 | Partiel | Jest configuré, 69 tests et couverture ciblée mesurée | Étendre la couverture aux routes et dépôts avec MariaDB |
+| C2.2.2 | Présent sur le prototype | 69 tests Jest, 10 résultats HTTP/MariaDB, concurrence et autorisations vérifiées | Ajouter les parcours visuels Playwright au cahier de recette |
 | C2.2.3 | Partiel | Zod, bcrypt, cookies `httpOnly`, contrôle d'origine, verrouillage de compte, en-têtes HTTP, attributs ARIA | Réaliser une analyse OWASP Top 10, corriger les écarts, choisir le référentiel RGAA, auditer et documenter les résultats |
 | C2.2.4 | Partiel | Gestion de versions Git et historique lisible ; build de production fonctionnel | Mettre en place un environnement déployé, tracer les versions et fournir des preuves de stabilité et de manipulation autonome |
 | C2.3.1 | Absent | Vérifications techniques ponctuelles uniquement | Rédiger un cahier de recette complet et exécuter les tests fonctionnels, structurels et de sécurité |
@@ -240,7 +240,7 @@ Le document maître sera maintenu dans un format source versionné, puis export�
 | P05 | C2.1.2 | Protocole d'intégration | `docs/bc02/03_PROTOCOLE_INTEGRATION_CONTINUE.md` | Présent |
 | P06 | C2.2.1 | Architecture structurée | `docs/bc02/05_ARCHITECTURE_PROTOTYPE_C221.md` | Présent |
 | P07 | C2.2.1 | Présentation du prototype | Dossier d'architecture et parcours locaux vérifiés | Présent, captures finales à ajouter |
-| P08 | C2.2.2 | Jeu de tests et couverture | Tests source et rapport CI | Partiel |
+| P08 | C2.2.2 | Jeu de tests et couverture | `docs/bc02/04_HARNAIS_TESTS_UNITAIRES.md` et `06_TESTS_INTEGRATION_C222.md` | Présent, preuve CI à actualiser |
 | P09 | C2.2.3 | Matrice OWASP Top 10 | `docs/rncp/bloc-02/securite-owasp.md` | À produire |
 | P10 | C2.2.3 | Audit d'accessibilité RGAA | `docs/rncp/bloc-02/accessibilite-rgaa.md` | À produire |
 | P11 | C2.2.4 | Historique des versions | `CHANGELOG.md` et historique Git | Partiel |

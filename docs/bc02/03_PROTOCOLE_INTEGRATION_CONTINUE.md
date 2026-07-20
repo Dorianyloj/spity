@@ -35,7 +35,7 @@ Le workflow dispose uniquement de l'autorisation `contents: read`. Il ne peut ni
 | Durée maximale | 20 minutes |
 | Secrets de build | Valeurs de test non sensibles injectées dans le job |
 
-La base MariaDB n'est pas démarrée dans ce premier job. Les tests actuels sont unitaires et le build Next.js n'ouvre pas de connexion à la base. Un job d'intégration avec MariaDB sera ajouté lorsque les routes et dépôts de données seront couverts.
+Le job `Quality gates` ne démarre pas MariaDB : ses tests sont unitaires et le build Next.js n'ouvre pas de connexion à la base. Un job indépendant `MariaDB integration tests` démarre toutefois une base vide, applique les migrations et vérifie les routes et dépôts du prototype.
 
 ## 4. Séquence d'intégration
 
@@ -53,6 +53,16 @@ Les étapes s'exécutent dans l'ordre suivant. Une étape en échec bloque toute
 | 8 | Validation de l'infrastructure | Trois commandes `docker compose ... config --quiet` | Configurations développement, test et production valides |
 | 9 | Construction | `npm run build` | Build de production Next.js réussi |
 | 10 | Conservation de la preuve | `actions/upload-artifact@v4` | Rapport `coverage-<SHA>` conservé 30 jours |
+
+### Job d'intégration MariaDB
+
+| Ordre | Étape | Critère de succès |
+| ---: | --- | --- |
+| 1 | Démarrer `mariadb:11.4` | Healthcheck MariaDB réussi |
+| 2 | Installer avec `npm ci` | Lockfile respecté |
+| 3 | Exécuter `npm run db:migrate` | Toutes les migrations s'appliquent sur une base vide |
+| 4 | Exécuter `npm run test:integration` | 10 résultats TAP réussis, aucune fuite de capacité ou d'autorisation |
+| 5 | Publier `integration-<SHA>` | Rapport TAP conservé 30 jours |
 
 ## 5. Protocole de contribution et de fusion
 
@@ -127,6 +137,6 @@ Cette seconde exécution prouve que le prototype décrit dans le document C2.2.1
 ## 8. Limites et évolutions prévues
 
 - La CI prouve actuellement la qualité du périmètre unitaire ciblé, pas encore la majorité de l'application complète.
-- Les tests avec MariaDB et les tests de migrations ne sont pas encore intégrés.
+- Les formulaires React et les parcours visuels ne sont pas encore pilotés par un navigateur dans la CI.
 - Lighthouse et les tests de bout en bout seront ajoutés dans des jobs séparés afin de conserver des diagnostics lisibles.
 - Le déploiement continu restera séparé de la CI : une version ne sera promue qu'après le succès des contrôles et une validation explicite de l'environnement cible.

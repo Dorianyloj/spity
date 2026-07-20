@@ -133,7 +133,7 @@ Les comptes du seed permettent une démonstration immédiate avec le mot de pass
 
 - La recherche par localité est textuelle ; le rayon géographique et la cartographie sont reportés.
 - La limite de 100 profils convient au prototype. Une pagination et des index de recherche seront nécessaires à plus grande échelle.
-- Les contrôles HTTP ont été exécutés localement ; leur automatisation dans la CI avec MariaDB relève de l'étape C2.2.2 suivante.
+- Les contrôles HTTP et la concurrence d'inscription sont automatisés avec MariaDB dans le job d'intégration C2.2.2.
 - Les captures desktop et mobile seront ajoutées à l'annexe visuelle du dossier final.
 - Un audit RGAA complet et la matrice OWASP restent traités dans C2.2.3 ; ce document ne revendique pas une conformité globale.
 

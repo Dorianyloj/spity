@@ -72,7 +72,13 @@ Tests:       69 passed, 69 total
 
 Le rapport HTML est généré dans `spity/coverage/lcov-report/`. Ce dossier est ignoré par Git ; la CI conserve le rapport comme artefact pendant 30 jours.
 
-## 5. Régression détectée par le harnais
+## 5. Complément d'intégration MariaDB
+
+Les 69 tests Jest restent des tests unitaires rapides. Ils sont complétés par le scénario HTTP décrit dans [`06_TESTS_INTEGRATION_C222.md`](./06_TESTS_INTEGRATION_C222.md), qui applique les migrations sur MariaDB et traverse les Route Handlers, la session, les dépôts Drizzle et les contraintes de base.
+
+Le résultat local de référence est de 10 contrôles TAP réussis, dont deux inscriptions concurrentes sur la dernière place d'un événement.
+
+## 6. Régression détectée par le harnais
 
 Identifiant provisoire : `BUG-TEST-001`.
 
@@ -88,7 +94,7 @@ Identifiant provisoire : `BUG-TEST-001`.
 
 Cet exemple alimentera le plan de correction C2.3.2 avec le SHA du commit et la preuve avant/après.
 
-## 6. Limites de la couverture actuelle
+## 7. Limites de la couverture actuelle
 
 La grille demande que les tests couvrent la majorité du code développé. Ce résultat n'est pas encore atteint à l'échelle des 8 000 lignes du projet.
 
@@ -96,10 +102,10 @@ Les prochains lots devront couvrir :
 
 1. la création et la vérification des sessions ;
 2. le verrouillage après échecs de connexion ;
-3. les dépôts de profils et de matériel avec une base de test ;
-4. les autorisations de chaque Route Handler ;
+3. les dépôts de matériel avec une base de test ;
+4. les routes du matériel et les formulaires non inclus dans le prototype BC02 ;
 5. les formulaires d'authentification et de profil ;
-6. les dépôts matching, partenariats et événements avec MariaDB ;
-7. les parcours complets avec Playwright, en complément des tests unitaires.
+6. la mesure de couverture de lignes des dépôts matching, partenariats et événements ;
+7. les parcours visuels avec Playwright, en complément des tests HTTP.
 
 Les Server Components asynchrones seront vérifiés par des tests de bout en bout, conformément à la recommandation actuelle de Next.js.
