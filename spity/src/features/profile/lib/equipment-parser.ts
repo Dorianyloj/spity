@@ -62,7 +62,7 @@ const colors = [
 
 const splitLines = (text: string) => {
   return text
-    .split(/\n|;|,/)
+    .split(/\n|;|,(?!\d)/)
     .map((line) => line.trim())
     .filter(Boolean)
 }
@@ -136,9 +136,13 @@ const buildModel = (line: string, category: EquipmentCategory, brand: string | n
     .trim()
 
   const withoutBrand = brand ? cleanedLine.replace(new RegExp(brand.replace(/\s+/g, '\\s+'), 'i'), '').trim() : cleanedLine
-  const withoutCategory = categoryKeywords
-    .find((entry) => entry.category === category)
-    ?.keywords.reduce((value, keyword) => value.replace(new RegExp(`\\b${keyword}\\b`, 'i'), '').trim(), withoutBrand)
+  const categoryEntry = categoryKeywords.find((entry) => entry.category === category)
+  const withoutCategory = categoryEntry
+    ? categoryEntry.keywords.reduce(
+        (value, keyword) => value.replace(new RegExp(`\\b${keyword}\\b`, 'i'), '').trim(),
+        withoutBrand
+      )
+    : withoutBrand
 
   return withoutCategory && withoutCategory.length > 0 ? withoutCategory : 'Matériel à préciser'
 }

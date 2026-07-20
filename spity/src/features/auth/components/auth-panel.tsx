@@ -8,7 +8,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import BrandMark from '@/components/brand/brand-mark'
-import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input } from '@/components/ui'
+import { Badge, Button, Card, CardContent, CardDescription, CardHeader, Input } from '@/components/ui'
 import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
 import { loginSchema, registerSchema, type LoginInput, type RegisterInput } from '@/lib/validators'
 import { authSuccessResponseSchema } from '../schemas'
@@ -116,9 +116,9 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
 
             <div className="max-w-xl space-y-6">
               <Badge className="bg-primary text-primary-foreground" variant="default">Communauté escalade</Badge>
-              <h1 className="text-5xl font-bold leading-tight">
+              <p className="text-5xl font-bold leading-tight">
                 Trouvez vos partenaires et gardez vos sessions au même endroit.
-              </h1>
+              </p>
               <p className="text-lg text-white/78">
                 Profils grimpeurs, clubs, lieux et événements structurés pour une pratique plus simple.
               </p>
@@ -148,14 +148,19 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
                 <BrandMark className="bg-white/6 ring-1 ring-white/12" size={36} tone="dark" />
                 <span>Spity</span>
               </Link>
-              <Link href={isLogin ? '/register' : '/login'} className="text-sm font-medium text-primary">
+              <Link
+                href={isLogin ? '/register' : '/login'}
+                className="text-sm font-semibold text-[#376b31] underline-offset-4 hover:underline"
+              >
                 {isLogin ? 'Créer un compte' : 'Se connecter'}
               </Link>
             </div>
 
             <Card hover={false}>
               <CardHeader>
-                <CardTitle>{isLogin ? 'Connexion' : 'Inscription'}</CardTitle>
+                <h1 className="text-lg font-bold leading-tight sm:text-xl">
+                  {isLogin ? 'Connexion' : 'Inscription'}
+                </h1>
                 <CardDescription>
                   {isLogin ? 'Accédez à votre compte Spity.' : 'Créez votre compte et complétez votre profil.'}
                 </CardDescription>
@@ -180,7 +185,7 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
                       action={
                         <button
                           type="button"
-                          className="text-muted-foreground transition-colors hover:text-foreground"
+                          className="inline-flex h-11 w-11 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
                           onClick={() => setShowPassword((value) => !value)}
                           aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
                         >
@@ -214,7 +219,7 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
                       action={
                         <button
                           type="button"
-                          className="text-muted-foreground transition-colors hover:text-foreground"
+                          className="inline-flex h-11 w-11 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
                           onClick={() => setShowPassword((value) => !value)}
                           aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
                         >

@@ -1,0 +1,104 @@
+name: Continuous integration
+
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: [develop, main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Quality gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: spity
+    env:
+      DATABASE_URL: mysql://spity:spity_ci_password@127.0.0.1:3306/spity
+      JWT_SECRET: ci_only_secret_with_at_least_32_characters
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: spity/.nvmrc
+          cache: npm
+          cache-dependency-path: spity/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Lint source code
+        run: npm run lint
+
+      - name: Check TypeScript
+        run: npm run typecheck
+
+      - name: Run tests with coverage
+        run: npm run test:coverage
+
+      - name: Audit production dependencies
+        run: npm run security:audit
+
+      - name: Validate Docker Compose configurations
+        run: |
+          docker compose --env-file .env.example config --quiet
+          docker compose --env-file .env.test.example -f docker-compose.test.yml config --quiet
+          docker compose --env-file .env.production.example -f docker-compose.production.yml config --quiet
+
+      - name: Build production application
+        run: npm run build
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ github.sha }}
+          path: spity/coverage
+          if-no-files-found: warn
+          retention-days: 30
+
+  performance:
+    name: Lighthouse thresholds
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: spity
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: spity/.nvmrc
+          cache: npm
+          cache-dependency-path: spity/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Run Lighthouse thresholds
+        run: npm run perf:audit
+
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-${{ github.sha }}
+          path: spity/.lighthouseci
+          if-no-files-found: warn
+          retention-days: 30

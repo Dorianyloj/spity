@@ -1,28 +1,38 @@
 services:
   mariadb:
-    image: mariadb:11
+    image: mariadb:11.4
     container_name: spity-mariadb
     environment:
-      MARIADB_ROOT_PASSWORD: q15ZiNTea5E1YOmll2nx16u10dFIb1s45xX9yqBSQUg
-      MARIADB_DATABASE: spity
-      MARIADB_USER: spity
-      MARIADB_PASSWORD: q15ZiNTea5E1YOmll2nx16u10dFIb1s45xX9yqBSQUg
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:?MARIADB_ROOT_PASSWORD is required}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-spity}
+      MARIADB_USER: ${MARIADB_USER:-spity}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:?MARIADB_PASSWORD is required}
     ports:
-      - "3306:3306"
+      - "127.0.0.1:${MARIADB_PORT:-3306}:3306"
     volumes:
       - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
 
   phpmyadmin:
-    image: phpmyadmin
+    image: phpmyadmin:5.2
     container_name: spity-phpmyadmin
+    profiles: ["tools"]
     ports:
-      - "8083:80"
+      - "127.0.0.1:${PHPMYADMIN_PORT:-8083}:80"
     environment:
       PMA_HOST: mariadb
-      PMA_USER: spity
-      PMA_PASSWORD: q15ZiNTea5E1YOmll2nx16u10dFIb1s45xX9yqBSQUg
+      PMA_USER: ${MARIADB_USER:-spity}
+      PMA_PASSWORD: ${MARIADB_PASSWORD:?MARIADB_PASSWORD is required}
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
+    restart: unless-stopped
 
 volumes:
   mariadb_data:

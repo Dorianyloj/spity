@@ -14,9 +14,10 @@ import {
   Users,
 } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRef, type ReactNode } from 'react'
 import BrandMark from '@/components/brand/brand-mark'
-import { brandAssets, makeImmersiveBackground, makePanelBackground } from '@/lib/brand-assets'
+import { brandAssets } from '@/lib/brand-assets'
 
 type AnimatedSectionProps = {
   children: ReactNode
@@ -45,8 +46,6 @@ type FeedItem = {
   meta: string
   tag: string
 }
-
-const heroBackground = makeImmersiveBackground(brandAssets.heroSunset)
 
 const features: Feature[] = [
   {
@@ -132,10 +131,23 @@ function AnimatedSection({ children, className = '', delay = 0, id }: AnimatedSe
 export default function LandingPage() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#173236] text-white">
-      <section
-        className="relative flex min-h-[92svh] flex-col overflow-hidden bg-cover bg-center"
-        style={{ backgroundImage: heroBackground }}
-      >
+      <section className="relative flex min-h-[92svh] flex-col overflow-hidden">
+        <Image
+          src={brandAssets.heroSunset}
+          alt=""
+          fill
+          preload
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              'linear-gradient(180deg, rgba(23, 50, 54, 0.08) 0%, rgba(23, 50, 54, 0.62) 58%, #173236 100%), linear-gradient(110deg, rgba(23, 50, 54, 0.78) 0%, rgba(47, 111, 78, 0.2) 48%, rgba(239, 246, 239, 0.16) 100%)',
+          }}
+          aria-hidden="true"
+        />
         <nav className="relative z-20 mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-6 text-sm text-white/[0.78] md:px-8">
           <Link href="/" className="flex items-center gap-3" aria-label="Accueil Spity">
             <BrandMark className="bg-white/6 shadow-lg shadow-black/20 ring-1 ring-white/12" priority size={42} tone="dark" />
@@ -281,18 +293,18 @@ export default function LandingPage() {
                   className="group relative min-h-[330px] overflow-hidden rounded-lg bg-[#463fc0] p-6 shadow-2xl shadow-black/20"
                 >
                   <div className={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${adventure.accent}`} />
-                  <div
-                    className="absolute inset-0 bg-cover bg-center opacity-[0.18] mix-blend-luminosity transition-opacity group-hover:opacity-[0.28]"
-                    style={{
-                      backgroundImage: `url(${
-                        adventure.number === '01'
-                          ? brandAssets.indoor
-                          : adventure.number === '02'
-                            ? brandAssets.crag
-                            : brandAssets.trad
-                      })`,
-                    }}
-                    aria-hidden="true"
+                  <Image
+                    src={
+                      adventure.number === '01'
+                        ? brandAssets.indoor
+                        : adventure.number === '02'
+                          ? brandAssets.crag
+                          : brandAssets.trad
+                    }
+                    alt=""
+                    fill
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    className="object-cover object-center opacity-[0.18] mix-blend-luminosity transition-opacity group-hover:opacity-[0.28]"
                   />
                   <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/[0.08]" />
                   <div className="relative z-10 flex h-full flex-col justify-between">
@@ -333,11 +345,22 @@ export default function LandingPage() {
         </div>
 
         <div className="grid overflow-hidden rounded-lg border border-white/10 bg-[#27494b] md:grid-cols-[1.05fr_0.95fr]">
-          <div
-            className="min-h-[360px] bg-cover bg-center"
-            style={{ backgroundImage: makePanelBackground(brandAssets.crag) }}
-            aria-hidden="true"
-          />
+          <div className="relative min-h-[360px] overflow-hidden" aria-hidden="true">
+            <Image
+              src={brandAssets.crag}
+              alt=""
+              fill
+              sizes="(min-width: 768px) 45vw, 100vw"
+              className="object-cover object-center"
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  'linear-gradient(180deg, rgba(23, 50, 54, 0.08) 0%, rgba(23, 50, 54, 0.58) 100%), linear-gradient(110deg, rgba(23, 50, 54, 0.56), rgba(223, 238, 207, 0.18))',
+              }}
+            />
+          </div>
           <div className="p-6 md:p-8">
             <div className="mb-8 flex items-start justify-between gap-4">
               <div>
