@@ -22,8 +22,8 @@ Le livrable final devra associer :
 | --- | --- | --- | --- |
 | C2.1.1 | Protocole de déploiement continu et critères de qualité/performance | Couvert techniquement | Conserver les preuves d'un déploiement distant et d'un exercice de retour arrière. |
 | C2.1.2 | Protocole d'intégration continue | Couvert techniquement | Collecter une exécution GitHub Actions réussie et la configuration des protections de branches. |
-| C2.2.1 | Architecture maintenable, prototype, frameworks et paradigmes | Partiel | Définir le périmètre fonctionnel BC02, compléter le prototype et documenter architecture, choix et user stories. |
-| C2.2.2 | Jeu de tests unitaires couvrant une fonctionnalité | Partiel | Le harnais et 49 tests sont présents ; étendre la couverture à la majorité du périmètre applicatif. |
+| C2.2.1 | Architecture maintenable, prototype, frameworks et paradigmes | Présent | Prototype matching/événements livré, migration validée et architecture reliée aux user stories. Captures finales à ajouter en annexe. |
+| C2.2.2 | Jeu de tests unitaires couvrant une fonctionnalité | Partiel | Le harnais et 69 tests sont présents ; étendre la couverture aux routes et dépôts. |
 | C2.2.3 | Mesures de sécurité et d'accessibilité | Partiel | Réaliser les audits OWASP Top 10 et RGAA, corriger les écarts et conserver les preuves. |
 | C2.2.4 | Historique des versions et dernière version fiable | Partiel | Mettre en place versions/releases, déploiement progressif, contrôles de stabilité et retours utilisateurs. |
 | C2.3.1 | Cahier de recettes | Non couvert | Couvrir toutes les fonctionnalités retenues avec scénarios, préconditions, résultats attendus et résultats obtenus. |
@@ -78,10 +78,11 @@ Document de référence : [Environnements, qualité et protocole de déploiement
 
 ### Étape 4 - Prototype maintenable (C2.2.1)
 
-- Corriger les défauts structurants existants.
-- Développer les parcours fonctionnels retenus.
-- Vérifier les interfaces desktop et mobile.
-- Documenter architecture, frameworks, paradigmes et décisions techniques.
+- [x] Corriger les défauts structurants existants.
+- [x] Développer les parcours fonctionnels retenus.
+- [x] Vérifier le rendu des routes et la conception responsive des interfaces.
+- [x] Documenter architecture, frameworks, paradigmes et décisions techniques.
+- [ ] Ajouter les captures desktop et mobile à l'annexe visuelle finale.
 
 ### Étape 5 - Tests unitaires (C2.2.2)
 
@@ -128,4 +129,4 @@ Chaque compétence sera considérée prête uniquement si les quatre éléments 
 
 ## Prochaine action
 
-Poursuivre l'étape 4 : compléter le prototype fonctionnel retenu et documenter son architecture.
+Poursuivre l'étape 5 : automatiser les tests d'intégration des routes et dépôts avec MariaDB, puis étendre la couverture du périmètre applicatif.
