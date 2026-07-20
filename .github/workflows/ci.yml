@@ -223,6 +223,13 @@ jobs:
       - name: Apply Drizzle migrations
         run: npm run db:migrate
 
+      - name: Build production acceptance application
+        run: |
+          npm run build
+          mkdir -p .next/standalone/public .next/standalone/.next/static
+          cp -R public/. .next/standalone/public/
+          cp -R .next/static/. .next/standalone/.next/static/
+
       - name: Run BC02 acceptance recipe
         run: npm run test:acceptance
 

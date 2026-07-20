@@ -3,7 +3,8 @@ import { expect, request, test, type APIRequestContext, type Browser, type Locat
 import mysql from 'mysql2/promise'
 
 const port = Number(process.env.ACCEPTANCE_PORT ?? 3103)
-const baseURL = process.env.ACCEPTANCE_BASE_URL ?? `http://127.0.0.1:${port}`
+const localHostname = process.env.CI ? 'localhost' : '127.0.0.1'
+const baseURL = process.env.ACCEPTANCE_BASE_URL ?? `http://${localHostname}:${port}`
 const databaseUrl = process.env.DATABASE_URL
 const runId = randomUUID().slice(0, 8)
 const password = 'Recette2026!'
