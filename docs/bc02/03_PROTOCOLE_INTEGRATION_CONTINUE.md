@@ -61,8 +61,9 @@ Les étapes s'exécutent dans l'ordre suivant. Une étape en échec bloque toute
 | 1 | Démarrer `mariadb:11.4` | Healthcheck MariaDB réussi |
 | 2 | Installer avec `npm ci` | Lockfile respecté |
 | 3 | Exécuter `npm run db:migrate` | Toutes les migrations s'appliquent sur une base vide |
-| 4 | Exécuter `npm run test:integration` | 10 résultats TAP réussis, aucune fuite de capacité ou d'autorisation |
-| 5 | Publier `integration-<SHA>` | Rapport TAP conservé 30 jours |
+| 4 | Exécuter `npm run test:integration` | 11 résultats TAP réussis, aucune fuite de capacité, d'autorisation ou de quota d'authentification |
+| 5 | Exécuter `npm run accessibility:audit` | Dix états authentifiés à 100 %, lien d'évitement, mouvement réduit et reflow mobile validés |
+| 6 | Publier les artefacts | Rapports TAP, Lighthouse authentifié et captures mobiles conservés 30 jours |
 
 ## 5. Protocole de contribution et de fusion
 
@@ -150,6 +151,6 @@ Cette exécution est la preuve distante que les migrations et les parcours criti
 ## 8. Limites et évolutions prévues
 
 - La CI prouve actuellement la qualité du périmètre unitaire ciblé, pas encore la majorité de l'application complète.
-- Les formulaires React et les parcours visuels ne sont pas encore pilotés par un navigateur dans la CI.
-- Lighthouse et les tests de bout en bout seront ajoutés dans des jobs séparés afin de conserver des diagnostics lisibles.
+- Les composants critiques et l'échantillon RGAA sont pilotés par axe, Lighthouse et Puppeteer ; le cahier de recette devra encore couvrir l'ensemble des parcours visuels nominaux et alternatifs.
+- Les contrôles d'accessibilité restent séparés des tests métier afin de conserver des diagnostics lisibles.
 - Le déploiement continu restera séparé de la CI : une version ne sera promue qu'après le succès des contrôles et une validation explicite de l'environnement cible.

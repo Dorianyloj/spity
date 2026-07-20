@@ -295,7 +295,7 @@ Les exclusions de couverture devront être rares, justifiées et documentées.
 ### Performance et compatibilité
 
 - interface responsive de 360 à 1 440 pixels de largeur ;
-- score Lighthouse cible d'au moins 85 en performance et 95 en accessibilité sur les pages principales ;
+- score Lighthouse cible d'au moins 85 en performance et 100 en accessibilité sur les pages principales ;
 - temps de réponse cible inférieur à 500 ms au 95e percentile pour les routes API principales dans l'environnement de référence, hors latence réseau externe ;
 - absence de requête non bornée sur les listes ;
 - prise en charge des versions récentes de Chromium et Firefox ;

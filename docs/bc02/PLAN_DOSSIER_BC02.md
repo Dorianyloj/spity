@@ -23,8 +23,8 @@ Le livrable final devra associer :
 | C2.1.1 | Protocole de déploiement continu et critères de qualité/performance | Couvert techniquement | Conserver les preuves d'un déploiement distant et d'un exercice de retour arrière. |
 | C2.1.2 | Protocole d'intégration continue | Couvert techniquement | Collecter une exécution GitHub Actions réussie et la configuration des protections de branches. |
 | C2.2.1 | Architecture maintenable, prototype, frameworks et paradigmes | Présent | Prototype matching/événements livré, migration validée et architecture reliée aux user stories. Captures finales à ajouter en annexe. |
-| C2.2.2 | Jeu de tests unitaires couvrant une fonctionnalité | Présent sur le prototype | 69 tests unitaires et 10 résultats d'intégration HTTP/MariaDB ; pilotage visuel restant pour la recette. |
-| C2.2.3 | Mesures de sécurité et d'accessibilité | Partiel | Réaliser les audits OWASP Top 10 et RGAA, corriger les écarts et conserver les preuves. |
+| C2.2.2 | Jeu de tests unitaires couvrant une fonctionnalité | Couvert | 83 tests Jest et 11 résultats d'intégration HTTP/MariaDB ; les parcours visuels complets seront étendus dans la recette. |
+| C2.2.3 | Mesures de sécurité et d'accessibilité | Couvert sur le prototype | Matrice OWASP 2025, audit RGAA 4.1.2, corrections, quota HTTP, axe, Lighthouse authentifié et preuves mobiles produits. |
 | C2.2.4 | Historique des versions et dernière version fiable | Partiel | Mettre en place versions/releases, déploiement progressif, contrôles de stabilité et retours utilisateurs. |
 | C2.3.1 | Cahier de recettes | Non couvert | Couvrir toutes les fonctionnalités retenues avec scénarios, préconditions, résultats attendus et résultats obtenus. |
 | C2.3.2 | Plan de correction des bogues | Non couvert | Tenir un registre des anomalies, les qualifier, analyser les échecs et tracer les corrections/retests. |
@@ -95,9 +95,13 @@ Document de référence : [Environnements, qualité et protocole de déploiement
 
 ### Étape 6 - Sécurité et accessibilité (C2.2.3)
 
-- Établir une matrice OWASP Top 10 : risque, mesure, preuve, test et reste à faire.
-- Choisir et justifier le référentiel d'accessibilité.
-- Réaliser l'audit, corriger les écarts et documenter les résultats.
+Documents de référence : [matrice OWASP](./07_SECURITE_OWASP_C223.md) et [audit RGAA](./08_ACCESSIBILITE_RGAA_C223.md).
+
+- [x] Établir une matrice OWASP Top 10 : risque, mesure, preuve, test et reste à faire.
+- [x] Choisir et justifier le RGAA 4.1.2 comme référentiel d'accessibilité.
+- [x] Corriger les écarts de sécurité détectés et vérifier le quota au niveau HTTP.
+- [x] Corriger les écarts de titres, contrastes, annonces, mouvement et reflow.
+- [x] Auditer treize pages ou états publics/authentifiés et conserver rapports et captures CI.
 
 ### Étape 7 - Versions et déploiements (C2.2.4)
 
@@ -130,4 +134,4 @@ Chaque compétence sera considérée prête uniquement si les quatre éléments 
 
 ## Prochaine action
 
-Poursuivre l'étape 6 : établir la matrice OWASP Top 10 et l'audit d'accessibilité RGAA, puis corriger les écarts constatés.
+Poursuivre l'étape 7 : définir le versionnement, produire une version fiable identifiable et documenter le déploiement progressif pour C2.2.4.

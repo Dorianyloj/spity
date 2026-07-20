@@ -125,13 +125,13 @@ Les tests et la couverture automatisée sont exécutés par `npm run test:covera
 | Couverture branches | Au moins 70 % |
 | Vulnérabilités critiques ou hautes de production | 0 non justifiée |
 | Lighthouse performance | Au moins 85/100 |
-| Lighthouse accessibilité | Au moins 95/100 |
+| Lighthouse accessibilité | 100/100 |
 | Lighthouse bonnes pratiques | Au moins 90/100 |
 | Lighthouse SEO | Au moins 90/100 |
 | API principales dans l'environnement de référence | 95e percentile inférieur à 500 ms |
 | Healthcheck après déploiement | HTTP 200 |
 
-Les seuils Lighthouse sont codés dans `spity/lighthouserc.js`. Une mesure est réalisée localement afin d'éviter un verrou temporaire observé avec Chrome sous Windows. La CI Linux réalise trois mesures par page afin de limiter l'effet des variations ponctuelles.
+Les seuils Lighthouse sont codés dans `spity/scripts/run-lighthouse.mjs`. Une mesure reproductible est réalisée sur chaque page publique ; l'audit authentifié séparé vérifie dix états supplémentaires et le reflow mobile.
 
 ## 8. Protocole de déploiement continu
 
