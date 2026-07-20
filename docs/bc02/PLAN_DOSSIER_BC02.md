@@ -23,9 +23,9 @@ Le livrable final devra associer :
 | C2.1.1 | Protocole de déploiement continu et critères de qualité/performance | Couvert techniquement | Conserver les preuves d'un déploiement distant et d'un exercice de retour arrière. |
 | C2.1.2 | Protocole d'intégration continue | Couvert techniquement | Collecter une exécution GitHub Actions réussie et la configuration des protections de branches. |
 | C2.2.1 | Architecture maintenable, prototype, frameworks et paradigmes | Présent | Prototype matching/événements livré, migration validée et architecture reliée aux user stories. Captures finales à ajouter en annexe. |
-| C2.2.2 | Jeu de tests unitaires couvrant une fonctionnalité | Couvert | 83 tests Jest et 11 résultats d'intégration HTTP/MariaDB ; les parcours visuels complets seront étendus dans la recette. |
+| C2.2.2 | Jeu de tests unitaires couvrant une fonctionnalité | Couvert | 85 tests Jest et 11 résultats d'intégration HTTP/MariaDB ; les parcours visuels complets seront étendus dans la recette. |
 | C2.2.3 | Mesures de sécurité et d'accessibilité | Couvert sur le prototype | Matrice OWASP 2025, audit RGAA 4.1.2, corrections, quota HTTP, axe, Lighthouse authentifié et preuves mobiles produits. |
-| C2.2.4 | Historique des versions et dernière version fiable | Partiel | Mettre en place versions/releases, déploiement progressif, contrôles de stabilité et retours utilisateurs. |
+| C2.2.4 | Historique des versions et dernière version fiable | Couvert techniquement | Release `v0.1.0`, changelog, staging continu, images immuables, bundle et manifeste validés ; session de retours utilisateurs réelle à organiser. |
 | C2.3.1 | Cahier de recettes | Non couvert | Couvrir toutes les fonctionnalités retenues avec scénarios, préconditions, résultats attendus et résultats obtenus. |
 | C2.3.2 | Plan de correction des bogues | Non couvert | Tenir un registre des anomalies, les qualifier, analyser les échecs et tracer les corrections/retests. |
 | C2.4.1 | Manuels de déploiement, d'utilisation et de mise à jour | Partiel | Produire trois manuels clairs et documenter les choix techniques. |
@@ -108,7 +108,7 @@ Documents de référence : [matrice OWASP](./07_SECURITE_OWASP_C223.md) et [audi
 Document de référence : [Gestion des versions et déploiements progressifs](./09_VERSIONS_DEPLOIEMENTS_C224.md).
 
 - [x] Définir une convention de version.
-- [ ] Produire une première release traçable après validation distante.
+- [x] Produire une première release traçable après validation distante.
 - [x] Automatiser le déploiement progressif avec contrôles fonctionnels et techniques.
 - [ ] Recueillir et documenter des retours utilisateurs réels.
 
@@ -136,4 +136,4 @@ Chaque compétence sera considérée prête uniquement si les quatre éléments 
 
 ## Prochaine action
 
-Poursuivre l'étape 7 : définir le versionnement, produire une version fiable identifiable et documenter le déploiement progressif pour C2.2.4.
+Finaliser l'étape 7 avec une session pilote réelle, puis poursuivre l'étape 8 : automatiser et exécuter le cahier de recettes C2.3.1, enregistrer les anomalies et tracer leurs corrections pour C2.3.2.

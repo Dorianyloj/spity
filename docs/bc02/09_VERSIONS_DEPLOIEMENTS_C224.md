@@ -103,9 +103,39 @@ L'historique fonctionnel lisible est tenu dans [`CHANGELOG.md`](../../CHANGELOG.
 
 | Version | Date | SHA | État | Preuves |
 | --- | --- | --- | --- | --- |
-| `0.1.0` | 20 juillet 2026 | À renseigner après promotion | Candidate MVP BC02 | CI, staging, release et manifeste à renseigner |
+| [`0.1.0`](https://github.com/Dorianyloj/spity/releases/tag/v0.1.0) | 20 juillet 2026 | `0bdd4e7a350094657b8037ee0714ca0ee0617310` | Dernière version stable du MVP BC02 | CI, staging, release, bundle et manifeste validés |
 
 La version `0.1.0` couvre les parcours inscription, connexion, profil, lieux, matching, partenariats et événements. Le prototype peut être démarré localement avec Docker ou depuis ses images de release en suivant [`spity/DEPLOYMENT.md`](../../spity/DEPLOYMENT.md).
+
+### Preuve du déploiement continu
+
+L'[exécution CI no 29745444314](https://github.com/Dorianyloj/spity/actions/runs/29745444314) a validé et déployé le SHA de release sur staging le 20 juillet 2026.
+
+| Job | Résultat |
+| --- | --- |
+| `Quality gates` | Succès en 1 min 08 s : 85 tests, couverture, audit, lint, typage et build |
+| `MariaDB integration tests` | Succès en 3 min 50 s : migrations, 11 résultats TAP et accessibilité authentifiée |
+| `Lighthouse thresholds` | Succès en 1 min 28 s |
+| `Deploy verified staging images` | Succès en 3 min 12 s : construction, migration, smoke test et publication GHCR |
+| Artefact staging | `staging-0bdd4e7a350094657b8037ee0714ca0ee0617310`, digest `sha256:afcd504b63272840cd5aab52e3759dba39b2943480397f3c2a816c6d9302a1a2` |
+
+### Preuve de la promotion stable
+
+L'[exécution Release no 29745993383](https://github.com/Dorianyloj/spity/actions/runs/29745993383) a publié [`Spity v0.1.0`](https://github.com/Dorianyloj/spity/releases/tag/v0.1.0) en 6 min 40 s.
+
+| Niveau | Résultat |
+| --- | --- |
+| Validation du candidat | Succès en 4 min 56 s |
+| Promotion du candidat immuable | Succès en 1 min 01 s |
+| Publication stable | Succès en 34 s |
+| Image applicative | `ghcr.io/dorianyloj/spity:0.1.0` |
+| Digest applicatif | `sha256:bd110f5ade8f6014da186e38cda99e662bbf59575cca514322aa4bede860c105` |
+| Image de migration | `ghcr.io/dorianyloj/spity-migrations:0.1.0` |
+| Digest de migration | `sha256:641e3c74e82e9e9138034154b26a73f59830fc224e7708f213bc0c6b985c1ca7` |
+| Bundle | `spity-0.1.0.tar.gz`, 3 212 octets |
+| Somme du bundle | `sha256:31f2bbbb419e9767bc2d8eb258bed08b04a135516be3d3c5fd13bb848ba6a1e4` vérifiée après téléchargement |
+
+Les deux digests du manifeste correspondent aux images d'abord publiées sous le tag immuable `sha-0bdd4e7...`, puis promues sans reconstruction. Les trois artefacts de release sont conservés 90 jours ; le bundle et sa somme restent également attachés à la GitHub Release.
 
 ## 8. Retour arrière
 
@@ -149,7 +179,7 @@ Aucun retour réel n'est inventé dans ce dossier. Cette preuve restera indiqué
 | --- | --- | --- |
 | Système de gestion de versions | Git, SemVer, tags, changelog et validateur | Réalisé |
 | Évolutions tracées | Commits conventionnels et changelog `0.1.0` | Réalisé |
-| Déploiement progressif | CI vers staging puis promotion des mêmes digests | Réalisé techniquement, preuve distante à ajouter |
-| Dernière version fiable | Release `v0.1.0` avec bundle et manifeste | À publier après validation distante |
+| Déploiement progressif | CI vers staging puis promotion des mêmes digests | Réalisé et validé à distance |
+| Dernière version fiable | Release `v0.1.0` avec bundle et manifeste | Publiée et vérifiée |
 | Manipulation autonome | Compose et guide de déploiement versionné | Réalisé techniquement |
 | Performance auprès des utilisateurs | Protocole défini | Session pilote réelle à organiser |
