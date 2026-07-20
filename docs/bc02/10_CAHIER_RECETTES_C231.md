@@ -92,6 +92,22 @@ La recette locale du SHA `2941a44` est acceptée : toutes les fonctions F01 à F
 
 L'anomalie d'accessibilité détectée pendant la première exécution a été corrigée et retestée. Les échecs liés aux sélecteurs Playwright ont été qualifiés comme défauts du harnais, puis rendus déterministes. Le détail avant/après se trouve dans le [plan de correction C2.3.2](./11_PLAN_CORRECTION_BOGUES_C232.md).
 
+### Preuve distante
+
+L'[exécution GitHub Actions no 29747713909](https://github.com/Dorianyloj/spity/actions/runs/29747713909) a validé le SHA `f384a21136fdaff73810cecefafb24951b82d42e` le 20 juillet 2026 :
+
+| Job | Résultat |
+| --- | --- |
+| `Quality gates` | Succès en 1 min 15 s |
+| `MariaDB integration tests` | Succès en 4 min 01 s |
+| `Lighthouse thresholds` | Succès en 1 min 46 s |
+| `BC02 acceptance recipe` | Succès en 2 min 07 s |
+| `Deploy verified staging images` | Succès en 3 min 19 s, déclenché seulement après les quatre portes précédentes |
+| Artefact de recette | `acceptance-f384a21136fdaff73810cecefafb24951b82d42e`, 206 Ko, conservé 30 jours |
+| Artefact staging | `staging-f384a21136fdaff73810cecefafb24951b82d42e`, 3,58 Ko, conservé 30 jours |
+
+Cette exécution sur un runner et une base neufs confirme les résultats locaux, la génération des preuves et le caractère bloquant de la recette avant staging.
+
 ## 7. Preuves conservées
 
 | Preuve | Emplacement ou nom |

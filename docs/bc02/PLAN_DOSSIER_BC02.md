@@ -26,7 +26,7 @@ Le livrable final devra associer :
 | C2.2.2 | Jeu de tests unitaires couvrant une fonctionnalité | Couvert | 85 tests Jest et 11 résultats d'intégration HTTP/MariaDB ; les parcours visuels complets seront étendus dans la recette. |
 | C2.2.3 | Mesures de sécurité et d'accessibilité | Couvert sur le prototype | Matrice OWASP 2025, audit RGAA 4.1.2, corrections, quota HTTP, axe, Lighthouse authentifié et preuves mobiles produits. |
 | C2.2.4 | Historique des versions et dernière version fiable | Couvert techniquement | Release `v0.1.0`, changelog, staging continu, images immuables, bundle et manifeste validés ; session de retours utilisateurs réelle à organiser. |
-| C2.3.1 | Cahier de recettes | Couvert techniquement | Recette Playwright F01 à F10 réussie localement et ajoutée comme porte CI bloquante avant staging. |
+| C2.3.1 | Cahier de recettes | Couvert | Recette Playwright F01 à F10 réussie localement et dans la CI `29747713909`, avec artefact et staging bloqué par son résultat. |
 | C2.3.2 | Plan de correction des bogues | Couvert | Six anomalies réelles qualifiées, corrigées et retestées ; échecs du harnais analysés sans baisse des seuils. |
 | C2.4.1 | Manuels de déploiement, d'utilisation et de mise à jour | Partiel | Produire trois manuels clairs et documenter les choix techniques. |
 
@@ -139,4 +139,4 @@ Chaque compétence sera considérée prête uniquement si les quatre éléments 
 
 ## Prochaine action
 
-Collecter la preuve distante du nouveau job de recette, puis poursuivre l'étape 9 : finaliser les manuels de déploiement, d'utilisation et de mise à jour. La session pilote réelle de l'étape 7 reste à organiser.
+Poursuivre l'étape 9 : finaliser les manuels de déploiement, d'utilisation et de mise à jour. La session pilote réelle de l'étape 7 reste à organiser.
