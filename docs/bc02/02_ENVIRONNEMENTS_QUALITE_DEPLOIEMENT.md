@@ -74,10 +74,10 @@ Le fichier `docker-compose.production.yml` définit trois responsabilités :
 
 L'application est liée à `127.0.0.1:3000` par défaut. En exploitation, un reverse proxy termine HTTPS et transmet les requêtes à ce port local.
 
-La route `GET /api/health` vérifie réellement l'accès à MariaDB. Elle retourne :
+La route `GET /api/health` vérifie réellement l'accès à MariaDB et identifie le binaire déployé. Elle retourne :
 
-- `200 { "status": "ok" }` lorsque l'application et la base sont disponibles ;
-- `503 { "status": "unavailable" }` lorsqu'une dépendance est indisponible.
+- `200 { "status": "ok", "version": "X.Y.Z", "revision": "SHA" }` lorsque l'application et la base sont disponibles ;
+- `503 { "status": "unavailable", "version": "X.Y.Z", "revision": "SHA" }` lorsqu'une dépendance est indisponible.
 
 Aucun détail de connexion ou message interne n'est exposé par cette route.
 
@@ -148,7 +148,7 @@ Un déploiement ne peut commencer que si :
 
 ### 8.2 Séquence de déploiement
 
-1. Construire l'image avec la cible `runner` du `Dockerfile`.
+1. Construire les images avec les cibles `runner` et `migration` du `Dockerfile`.
 2. Étiqueter l'image avec le numéro de version et le SHA Git, sans réutiliser uniquement `latest` comme preuve.
 3. Démarrer ou vérifier MariaDB et attendre son état `healthy`.
 4. Sauvegarder la base avant toute migration de schéma en production.
@@ -156,17 +156,17 @@ Un déploiement ne peut commencer que si :
 6. Démarrer la nouvelle version de `app` sur l'environnement de validation.
 7. Attendre le healthcheck puis exécuter les smoke tests et le cahier de recettes ciblé.
 8. Exécuter Lighthouse sur les pages représentatives.
-9. Promouvoir la même image validée vers la production.
+9. Promouvoir les mêmes digests validés vers la production, sans reconstruction.
 10. Vérifier le healthcheck, les journaux, les parcours critiques et les indicateurs de performance.
 11. Enregistrer la version, la date, le SHA, l'opérateur et les résultats dans l'historique de déploiement.
 
 Commandes de référence :
 
 ```bash
-docker compose --env-file .env.production -f docker-compose.production.yml build
+docker compose --env-file .env.production -f docker-compose.production.yml pull app migrate
 docker compose --env-file .env.production -f docker-compose.production.yml up -d mariadb
-docker compose --env-file .env.production -f docker-compose.production.yml --profile migration run --rm migrate
-docker compose --env-file .env.production -f docker-compose.production.yml up -d app
+docker compose --env-file .env.production -f docker-compose.production.yml --profile migration run --rm --no-build migrate
+docker compose --env-file .env.production -f docker-compose.production.yml up -d --no-build app
 docker compose --env-file .env.production -f docker-compose.production.yml ps
 ```
 

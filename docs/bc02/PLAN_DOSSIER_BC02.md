@@ -105,10 +105,12 @@ Documents de référence : [matrice OWASP](./07_SECURITE_OWASP_C223.md) et [audi
 
 ### Étape 7 - Versions et déploiements (C2.2.4)
 
-- Définir une convention de version.
-- Produire des releases traçables.
-- Déployer progressivement avec contrôles fonctionnels et techniques.
-- Recueillir et documenter des retours utilisateurs.
+Document de référence : [Gestion des versions et déploiements progressifs](./09_VERSIONS_DEPLOIEMENTS_C224.md).
+
+- [x] Définir une convention de version.
+- [ ] Produire une première release traçable après validation distante.
+- [x] Automatiser le déploiement progressif avec contrôles fonctionnels et techniques.
+- [ ] Recueillir et documenter des retours utilisateurs réels.
 
 ### Étape 8 - Recette et corrections (C2.3.1 et C2.3.2)
 
