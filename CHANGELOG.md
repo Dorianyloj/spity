@@ -4,10 +4,16 @@ Les évolutions notables de Spity sont consignées dans ce fichier. Le projet su
 
 ## [Unreleased]
 
-### Planned
+### Added
 
-- Cahier de recettes automatisé avec parcours navigateur complets.
-- Registre d'anomalies et traçabilité des corrections de recette.
+- Cahier de recettes Playwright couvrant les fonctions F01 à F10 avec rapports HTML, JSON et JUnit.
+- Porte CI de recette navigateur bloquant le déploiement staging en cas d'échec.
+- Registre d'anomalies et traçabilité des corrections avant/après.
+
+### Fixed
+
+- Structure sémantique des titres d'états vides pour la navigation assistée.
+- Séparation des suites Jest, intégration et Playwright dans les harnais de test.
 
 ## [0.1.0] - 2026-07-20
 

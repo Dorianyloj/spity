@@ -26,8 +26,8 @@ Le livrable final devra associer :
 | C2.2.2 | Jeu de tests unitaires couvrant une fonctionnalité | Couvert | 85 tests Jest et 11 résultats d'intégration HTTP/MariaDB ; les parcours visuels complets seront étendus dans la recette. |
 | C2.2.3 | Mesures de sécurité et d'accessibilité | Couvert sur le prototype | Matrice OWASP 2025, audit RGAA 4.1.2, corrections, quota HTTP, axe, Lighthouse authentifié et preuves mobiles produits. |
 | C2.2.4 | Historique des versions et dernière version fiable | Couvert techniquement | Release `v0.1.0`, changelog, staging continu, images immuables, bundle et manifeste validés ; session de retours utilisateurs réelle à organiser. |
-| C2.3.1 | Cahier de recettes | Non couvert | Couvrir toutes les fonctionnalités retenues avec scénarios, préconditions, résultats attendus et résultats obtenus. |
-| C2.3.2 | Plan de correction des bogues | Non couvert | Tenir un registre des anomalies, les qualifier, analyser les échecs et tracer les corrections/retests. |
+| C2.3.1 | Cahier de recettes | Couvert techniquement | Recette Playwright F01 à F10 réussie localement et ajoutée comme porte CI bloquante avant staging. |
+| C2.3.2 | Plan de correction des bogues | Couvert | Six anomalies réelles qualifiées, corrigées et retestées ; échecs du harnais analysés sans baisse des seuils. |
 | C2.4.1 | Manuels de déploiement, d'utilisation et de mise à jour | Partiel | Produire trois manuels clairs et documenter les choix techniques. |
 
 ## Structure cible du dossier final
@@ -91,7 +91,7 @@ Document de référence : [Environnements, qualité et protocole de déploiement
 - [x] Dépasser les seuils sur le périmètre déclaré et générer le rapport.
 - [x] Étendre les tests aux routes et dépôts matching, partenariats et événements.
 - [x] Vérifier les migrations et les parcours critiques avec une MariaDB isolée.
-- [ ] Piloter les formulaires et parcours visuels avec Playwright dans le cahier de recette.
+- [x] Piloter les formulaires et parcours visuels avec Playwright dans le cahier de recette.
 
 ### Étape 6 - Sécurité et accessibilité (C2.2.3)
 
@@ -114,9 +114,12 @@ Document de référence : [Gestion des versions et déploiements progressifs](./
 
 ### Étape 8 - Recette et corrections (C2.3.1 et C2.3.2)
 
-- Exécuter le cahier de recettes complet.
-- Enregistrer chaque anomalie avec sévérité, cause et priorité.
-- Corriger, retester et conserver les résultats avant/après.
+Documents de référence : [cahier de recettes](./10_CAHIER_RECETTES_C231.md) et [plan de correction](./11_PLAN_CORRECTION_BOGUES_C232.md).
+
+- [x] Exécuter le cahier de recettes complet sur F01 à F10.
+- [x] Enregistrer chaque anomalie avec sévérité, cause et priorité.
+- [x] Corriger, retester et conserver les résultats avant/après.
+- [x] Bloquer le staging si la recette navigateur échoue.
 
 ### Étape 9 - Documentation finale (C2.4.1)
 
@@ -136,4 +139,4 @@ Chaque compétence sera considérée prête uniquement si les quatre éléments 
 
 ## Prochaine action
 
-Finaliser l'étape 7 avec une session pilote réelle, puis poursuivre l'étape 8 : automatiser et exécuter le cahier de recettes C2.3.1, enregistrer les anomalies et tracer leurs corrections pour C2.3.2.
+Collecter la preuve distante du nouveau job de recette, puis poursuivre l'étape 9 : finaliser les manuels de déploiement, d'utilisation et de mise à jour. La session pilote réelle de l'étape 7 reste à organiser.
