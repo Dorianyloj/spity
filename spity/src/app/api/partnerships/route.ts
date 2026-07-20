@@ -2,8 +2,8 @@ import { getCurrentUser } from '@/features/auth/lib/current-user'
 import { rejectInvalidOrigin } from '@/features/auth/lib/csrf'
 import {
   createOrRestartPartnership,
+  findMatchingClimberByUserId,
   findPartnershipByPair,
-  findPublicClimberByUserId,
   listPartnershipsForUser,
 } from '@/features/matching/lib/matching-repository'
 import {
@@ -70,7 +70,7 @@ export async function POST(request: Request) {
 
   const [senderProfile, recipient, existing] = await Promise.all([
     findGrimpeurProfileByUserId(user.id),
-    findPublicClimberByUserId(parsedBody.data.recipientId),
+    findMatchingClimberByUserId(parsedBody.data.recipientId),
     findPartnershipByPair(user.id, parsedBody.data.recipientId),
   ])
 
