@@ -92,7 +92,7 @@ Action attendue : faire exécuter le parcours de recette à au moins deux utilis
 
 ## 8. Risque de remise hors ligne
 
-Le PDF synthétique contient la synthèse, l'index des vingt-six critères et sept annexes visuelles. Les documents techniques détaillés restent accessibles par les liens GitHub et dans `docs/bc02/`. Pour une remise sans accès réseau, il faut transmettre le PDF avec ce dossier ou une archive du dépôt.
+Le PDF contient la synthèse rédigée à la première personne, mon retour d'expérience technique, l'index des vingt-six critères et sept annexes visuelles. Les documents techniques détaillés restent accessibles par les liens GitHub et dans `docs/bc02/`. Pour une remise sans accès réseau, il faut transmettre le PDF avec ce dossier ou une archive du dépôt.
 
 ## 9. Preuve technique la plus récente
 

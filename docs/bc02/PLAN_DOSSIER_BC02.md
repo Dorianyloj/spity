@@ -134,7 +134,7 @@ Documents de référence : [manuel de déploiement](./12_MANUEL_DEPLOIEMENT_C241
 - [x] Assembler le dossier final et ses annexes.
 - [x] Vérifier que chaque ligne de la grille possède au moins une preuve explicite.
 - [x] Exporter et contrôler visuellement la version PDF remise au jury.
-- [x] Réduire le PDF à 19 pages en séparant synthèse, index et annexes visuelles.
+- [x] Produire un PDF personnel d'environ 30 pages en séparant synthèse, retour d'expérience, index et annexes visuelles.
 
 ## Règle de preuve
 
