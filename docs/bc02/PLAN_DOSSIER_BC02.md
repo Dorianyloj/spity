@@ -144,4 +144,4 @@ Chaque compétence sera considérée prête uniquement si les quatre éléments 
 
 ## Prochaine action
 
-Le dossier BC02, son index de preuves, ses captures et son export PDF sont assemblés. La prochaine action est d'organiser et documenter la session pilote réelle de l'étape 7, puis de figer la version remise après les éventuelles corrections issues de cette session.
+Le dossier BC02, son index de preuves, ses captures et son export PDF synthétique sont assemblés. Le PDF de remise conserve huit parties essentielles et renvoie vers les documents techniques détaillés afin d'éviter les répétitions. La prochaine action est d'organiser et documenter la session pilote réelle de l'étape 7, puis de figer la version remise après les éventuelles corrections issues de cette session.

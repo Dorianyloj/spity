@@ -16,19 +16,11 @@ const sourceNames = [
   '16_DOSSIER_FINAL_BC02.md',
   '15_INDEX_PREUVES_GRILLE_BC02.md',
   '01_PERIMETRE_FONCTIONNEL_ET_USER_STORIES.md',
-  '02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md',
-  '03_PROTOCOLE_INTEGRATION_CONTINUE.md',
-  '04_HARNAIS_TESTS_UNITAIRES.md',
   '05_ARCHITECTURE_PROTOTYPE_C221.md',
-  '06_TESTS_INTEGRATION_C222.md',
   '07_SECURITE_OWASP_C223.md',
   '08_ACCESSIBILITE_RGAA_C223.md',
-  '09_VERSIONS_DEPLOIEMENTS_C224.md',
   '10_CAHIER_RECETTES_C231.md',
-  '11_PLAN_CORRECTION_BOGUES_C232.md',
   '12_MANUEL_DEPLOIEMENT_C241.md',
-  '13_MANUEL_UTILISATION_C241.md',
-  '14_MANUEL_MISE_A_JOUR_C241.md',
 ]
 const sourcePaths = sourceNames.map((name) => resolve(docsRoot, name))
 const sourceIdByName = new Map(sourceNames.map((name) => [name, `doc-${name.replace(/\.md$/, '').toLowerCase()}`]))
@@ -187,11 +179,11 @@ const stylesheet = `
   h1 { margin: 8mm 0 6mm; padding-bottom: 3mm; border-bottom: 3px solid var(--green); font-size: 22pt; line-height: 1.12; }
   h2 { margin: 8mm 0 3mm; font-size: 15pt; line-height: 1.2; color: var(--green-dark); }
   h3 { margin: 6mm 0 2mm; font-size: 11.5pt; line-height: 1.25; color: var(--blue); }
-  p { margin: 0 0 3mm; orphans: 3; widows: 3; }
-  ul, ol { margin: 0 0 4mm; padding-left: 6mm; }
-  li { margin-bottom: 1.2mm; }
+  p { margin: 0 0 2.4mm; orphans: 3; widows: 3; }
+  ul, ol { margin: 0 0 3.2mm; padding-left: 6mm; }
+  li { margin-bottom: 1mm; }
   a { color: var(--blue); text-decoration-thickness: .2mm; text-underline-offset: .5mm; }
-  table { width: 100%; margin: 4mm 0 6mm; border-collapse: collapse; table-layout: auto; font-size: 8.2pt; }
+  table { width: 100%; margin: 3.5mm 0 5mm; border-collapse: collapse; table-layout: auto; font-size: 8.2pt; }
   thead { display: table-header-group; }
   tr { break-inside: avoid; }
   th { padding: 2.2mm; background: var(--ink); color: white; text-align: left; vertical-align: top; }
@@ -213,7 +205,7 @@ const documentHtml = `<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dossier BC02 Spity - Dorian Joly</title>
+  <title>Dossier synthétique BC02 Spity - Dorian Joly</title>
   <style>${stylesheet}</style>
 </head>
 <body>
@@ -225,19 +217,19 @@ const documentHtml = `<!doctype html>
       <div class="cover__meta">
         <strong>Candidat</strong><span>Dorian Joly</span>
         <strong>Version</strong><span>Spity 0.1.0</span>
-        <strong>Livrable</strong><span>Dossier BC02 et documentation d'exploitation</span>
-        <strong>Date</strong><span>20 juillet 2026</span>
+        <strong>Livrable</strong><span>Dossier synthétique BC02</span>
+        <strong>Date</strong><span>21 juillet 2026</span>
       </div>
     </section>
     <section class="toc">
-      <h1>Sommaire des livrables</h1>
-      <p class="document-note">Le dossier commence par une synthèse et l'index exhaustif de la grille. Les chapitres suivants conservent le détail reproductible de chaque compétence.</p>
+      <h1>Sommaire du dossier</h1>
+      <p class="document-note">Cette version destinée au jury conserve la synthèse, les 26 critères officiels et six annexes essentielles. Les documents techniques complémentaires restent accessibles par les liens du dossier et dans <code>docs/bc02/</code>.</p>
       <ol>${tableOfContents}</ol>
     </section>
     ${chapters}
     <section class="closing">
       <h2>Clôture du livrable</h2>
-      <p>Ce document rassemble la synthèse, l'index exhaustif des critères et les quatorze livrables détaillés du bloc BC02. Les empreintes des sources, du HTML et du PDF sont conservées dans le manifeste joint.</p>
+      <p>Ce dossier synthétique rassemble la couverture exhaustive des critères et les annexes essentielles à la soutenance. Les quatorze documents techniques détaillés restent versionnés dans <code>docs/bc02/</code>. Les empreintes des sources incluses, du HTML et du PDF sont conservées dans le manifeste joint.</p>
       <table>
         <tbody>
           <tr><th>Candidat</th><td>Dorian Joly</td></tr>

@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-07-20T14:45:35.357Z",
+  "generatedAt": "2026-07-21T09:37:58.079Z",
   "internalNavigation": {
-    "anchors": 261,
-    "links": 97,
+    "anchors": 142,
+    "links": 38,
     "missingTargets": 0
   },
   "outputs": {
     "html": {
       "file": "DOSSIER_BC02_SPITY.html",
-      "bytes": 262756,
-      "sha256": "0d6799dc174e987ed31e945d95f337ac7383104fc797c2744f4ddce8c01430ce"
+      "bytes": 149108,
+      "sha256": "84c6bad53b901f28cd18445e776dbf21cb365e9b1e0d53b9903bbd1848345756"
     },
     "pdf": {
       "file": "DOSSIER_BC02_SPITY.pdf",
-      "bytes": 8036290,
-      "sha256": "0b2157b9169d2a7d9532548503cc81a7fc4d820eb8aa08e2baf9ca68eaeb8f3d"
+      "bytes": 7038499,
+      "sha256": "b9c73663b45b30db256b3c0d481fcaae77d11f34f6c1b78dd5adee28204b6c8c"
     }
   },
   "sources": [
@@ -31,24 +31,8 @@
       "sha256": "51023fd1056ddc2a664d0e40845e8601b711610574d8f319a84d39fd7f04a367"
     },
     {
-      "file": "02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md",
-      "sha256": "088ad0da25ab5b0e1c151b604920291571ddcf99f11e5f223322b94684add0bc"
-    },
-    {
-      "file": "03_PROTOCOLE_INTEGRATION_CONTINUE.md",
-      "sha256": "2abe2423f7c627bfe9e61e28718468b786b455cef99010745a8cbe5fc070d566"
-    },
-    {
-      "file": "04_HARNAIS_TESTS_UNITAIRES.md",
-      "sha256": "6f0e2027084c195bf62d7a13b514c5b6fa2f0ced7cc84d0926f39cbb57fefd04"
-    },
-    {
       "file": "05_ARCHITECTURE_PROTOTYPE_C221.md",
       "sha256": "d7e83203a8b02f13a84abf197d8d7eb6716d16ad4665bc6a427993784c8a100a"
-    },
-    {
-      "file": "06_TESTS_INTEGRATION_C222.md",
-      "sha256": "5783cb88db4b3d1f0ec3471465c1f4a223b6ea4cea5cdfcfae0fdef572e09174"
     },
     {
       "file": "07_SECURITE_OWASP_C223.md",
@@ -59,28 +43,12 @@
       "sha256": "667a0f2e534c2a07b3d438d6abfa9cbbe452f49db759230bab28d7833bd0e158"
     },
     {
-      "file": "09_VERSIONS_DEPLOIEMENTS_C224.md",
-      "sha256": "1e5be3137a04e08e1d7dfbeb97418270506d39fdedf855281ec41e0be74641d1"
-    },
-    {
       "file": "10_CAHIER_RECETTES_C231.md",
       "sha256": "5f4fff3ebec9c0cacc9fd04ec0b9e5c2062eecc5fec2ca80181199726ecc3cfe"
     },
     {
-      "file": "11_PLAN_CORRECTION_BOGUES_C232.md",
-      "sha256": "3cd4754c6e63a1fbe541e501a644d4b4d985feef0ad8641ee02ee174831ce324"
-    },
-    {
       "file": "12_MANUEL_DEPLOIEMENT_C241.md",
       "sha256": "27ac96aba9574ba670be6f354eb5a597fdec06108fd5e88824e5dbc25a69d042"
-    },
-    {
-      "file": "13_MANUEL_UTILISATION_C241.md",
-      "sha256": "9a1cab6fb4bb06fd4a99bcdd7853d2b499ff1412d35649e2ec6c71d035d8404b"
-    },
-    {
-      "file": "14_MANUEL_MISE_A_JOUR_C241.md",
-      "sha256": "57f6efe317096f2bf7f3a9c2b9f6d3852f1cc957b41c20e71616eab03aa16557"
     }
   ]
 }
