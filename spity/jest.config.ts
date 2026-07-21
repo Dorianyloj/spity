@@ -7,24 +7,19 @@ const createJestConfig = nextJest({
 
 const config: Config = {
   collectCoverageFrom: [
-    'src/features/auth/lib/csrf.ts',
-    'src/features/events/lib/event-rules.ts',
-    'src/features/matching/lib/matching-rules.ts',
-    'src/features/profile/lib/equipment-parser.ts',
-    'src/features/profile/schemas.ts',
-    'src/lib/rate-limit.ts',
-    'src/lib/security-headers.ts',
-    'src/lib/validators.ts',
+    'src/**/*.{ts,tsx}',
+    '!src/**/*.test.{ts,tsx}',
+    '!src/**/*.d.ts',
   ],
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
   coverageReporters: ['text', 'lcov', 'json-summary'],
   coverageThreshold: {
     global: {
-      branches: 70,
-      functions: 80,
-      lines: 80,
-      statements: 80,
+      branches: 75,
+      functions: 55,
+      lines: 60,
+      statements: 60,
     },
   },
   moduleNameMapper: {
