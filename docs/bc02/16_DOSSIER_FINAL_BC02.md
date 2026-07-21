@@ -84,6 +84,7 @@ L'application utilise TypeScript strict de bout en bout. Next.js rassemble pages
 | Responsive | Reflow vérifié à 360 px sans défilement horizontal incohérent. |
 | Livraison | Release `v0.1.0`, images immuables, bundle, manifeste et SHA-256. |
 | Dernière CI probante | Run `29827790355`, cinq jobs réussis dont staging et couverture globale. |
+| Annexes visuelles | Sept captures : produit desktop/mobile, historique Git, pipeline CI et release. |
 
 ## Couverture des compétences
 
@@ -171,4 +172,6 @@ Les priorités suivantes sont la validation utilisateur, les parcours RGPD, la r
 
 Spity démontre une chaîne cohérente de conception et de développement : besoin cadré, architecture structurée, fonctionnalités cohérentes, contrôles automatisés, correction d'anomalies, version stable et documentation d'exploitation. Le dossier ne repose pas uniquement sur une description : chaque compétence renvoie à du code versionné, une commande ou un résultat distant. La dernière preuve partielle à formaliser est un essai utilisateur autonome avec des personnes externes au développement.
 
-L'[index des critères](./15_INDEX_PREUVES_GRILLE_BC02.md) constitue le point d'entrée pour l'évaluation. Les chapitres détaillés qui suivent fournissent les explications et preuves nécessaires à chaque ligne de la grille.
+L'[index des critères](./15_INDEX_PREUVES_GRILLE_BC02.md) constitue le point d'entrée pour l'évaluation. Les documents techniques liés fournissent les explications et preuves nécessaires à chaque ligne de la grille.
+
+Les [annexes visuelles](./18_ANNEXES_VISUELLES_BC02.md) regroupent les captures produit et GitHub utilisées pendant la soutenance.

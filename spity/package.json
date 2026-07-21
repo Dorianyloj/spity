@@ -20,6 +20,7 @@
     "test:acceptance:report": "playwright show-report",
     "docs:build": "node scripts/build-bc02-dossier.mjs",
     "docs:capture": "node --env-file-if-exists=.env.local scripts/capture-bc02-evidence.mjs",
+    "docs:capture:github": "node scripts/capture-bc02-github-evidence.mjs",
     "accessibility:audit": "node --env-file-if-exists=.env.local scripts/run-authenticated-accessibility.mjs",
     "security:audit": "npm audit --omit=dev --audit-level=high",
     "perf:audit": "npm run build && node scripts/run-lighthouse.mjs",

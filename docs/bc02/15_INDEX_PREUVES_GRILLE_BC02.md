@@ -102,15 +102,7 @@ Limite déclarée : la recette automatisée et la manipulation par le développe
 
 ## 12. Preuves visuelles
 
-Les captures suivantes sont générées par `npm run docs:capture` depuis les comptes de démonstration locaux :
-
-![Tableau de bord grimpeur sur écran desktop](./annexes/captures/01-dashboard-grimpeur-desktop.png)
-
-![Recherche de partenaires sur écran desktop](./annexes/captures/02-matching-grimpeur-desktop.png)
-
-![Gestion des événements par un club](./annexes/captures/03-evenements-club-desktop.png)
-
-![Profil grimpeur sur écran mobile](./annexes/captures/04-profil-grimpeur-mobile.png)
+Les sept [annexes visuelles](./18_ANNEXES_VISUELLES_BC02.md) rassemblent quatre captures du prototype et trois preuves GitHub : historique des commits, pipeline CI complet et release stable. Ce regroupement évite de répéter les mêmes images dans le corps du dossier.
 
 ## 13. Preuves distantes pérennes
 

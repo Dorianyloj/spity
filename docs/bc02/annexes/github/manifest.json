@@ -1,0 +1,23 @@
+{
+  "generatedAt": "2026-07-21T12:29:55.962Z",
+  "captures": [
+    {
+      "file": "01-historique-commits-develop.png",
+      "label": "Historique des commits de la branche develop",
+      "url": "https://github.com/Dorianyloj/spity/commits/develop/",
+      "title": "Commits · Dorianyloj/spity · GitHub"
+    },
+    {
+      "file": "02-pipeline-ci-global-vert.png",
+      "label": "Pipeline CI complet avec staging",
+      "url": "https://github.com/Dorianyloj/spity/actions/runs/29828300315",
+      "title": "docs(bc02): record successful coverage pipeline · Dorianyloj/spity@dd49932 · GitHub"
+    },
+    {
+      "file": "03-release-v0.1.0.png",
+      "label": "Release stable Spity v0.1.0",
+      "url": "https://github.com/Dorianyloj/spity/releases/tag/v0.1.0",
+      "title": "Release Spity v0.1.0 · Dorianyloj/spity · GitHub"
+    }
+  ]
+}

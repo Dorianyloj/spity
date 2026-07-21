@@ -101,6 +101,7 @@ Pour régénérer les captures puis le dossier HTML/PDF depuis une base locale d
 ```bash
 npm run db:seed
 npm run docs:capture
+npm run docs:capture:github
 npm run docs:build
 ```
 

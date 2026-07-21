@@ -13,6 +13,7 @@ Les évolutions notables de Spity sont consignées dans ce fichier. Le projet su
 - Dossier BC02 synthétique assemblé avec index des critères, annexes essentielles, captures, export PDF et manifeste d'intégrité.
 - Audit officiel BC02 ajouté avec contrôle des 16 livrables, des 26 critères et des écarts de preuve.
 - Couverture Jest étendue à tout `src/` avec 126 tests, 62,56 % des lignes et seuils globaux bloquants.
+- Dossier BC02 réduit à 19 pages avec annexes produit, historique Git, pipeline CI et release.
 
 ### Fixed
 

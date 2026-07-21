@@ -15,12 +15,7 @@ const coverImagePath = resolve(docsRoot, 'annexes/captures/01-dashboard-grimpeur
 const sourceNames = [
   '16_DOSSIER_FINAL_BC02.md',
   '15_INDEX_PREUVES_GRILLE_BC02.md',
-  '01_PERIMETRE_FONCTIONNEL_ET_USER_STORIES.md',
-  '05_ARCHITECTURE_PROTOTYPE_C221.md',
-  '07_SECURITE_OWASP_C223.md',
-  '08_ACCESSIBILITE_RGAA_C223.md',
-  '10_CAHIER_RECETTES_C231.md',
-  '12_MANUEL_DEPLOIEMENT_C241.md',
+  '18_ANNEXES_VISUELLES_BC02.md',
 ]
 const sourcePaths = sourceNames.map((name) => resolve(docsRoot, name))
 const sourceIdByName = new Map(sourceNames.map((name) => [name, `doc-${name.replace(/\.md$/, '').toLowerCase()}`]))
@@ -175,6 +170,13 @@ const stylesheet = `
   .toc a { color: var(--ink); text-decoration: none; }
   .chapter { break-before: page; }
   .chapter > h1:first-child { margin-top: 0; }
+  .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a1-"],
+  .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a2-"],
+  .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a3-"],
+  .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a4-"],
+  .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a5-"],
+  .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a6-"],
+  .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a7-"] { break-before: page; }
   h1, h2, h3 { break-after: avoid; color: var(--ink); letter-spacing: 0; }
   h1 { margin: 8mm 0 6mm; padding-bottom: 3mm; border-bottom: 3px solid var(--green); font-size: 22pt; line-height: 1.12; }
   h2 { margin: 8mm 0 3mm; font-size: 15pt; line-height: 1.2; color: var(--green-dark); }
@@ -197,8 +199,6 @@ const stylesheet = `
   img { display: block; max-width: 100%; max-height: 170mm; margin: 5mm auto 8mm; object-fit: contain; break-inside: avoid; border: .3mm solid var(--line); }
   hr { margin: 8mm 0; border: 0; border-top: .3mm solid var(--line); }
   .document-note { padding: 4mm; background: var(--soft); border-left: 1.2mm solid var(--blue); }
-  .closing { margin-top: 12mm; padding: 8mm; break-inside: avoid; border-top: 1.5mm solid var(--green); background: var(--soft); }
-  .closing h2 { margin-top: 0; }
 `
 const documentHtml = `<!doctype html>
 <html lang="fr">
@@ -223,22 +223,10 @@ const documentHtml = `<!doctype html>
     </section>
     <section class="toc">
       <h1>Sommaire du dossier</h1>
-      <p class="document-note">Cette version destinée au jury conserve la synthèse, les 26 critères officiels et six annexes essentielles. Les documents techniques complémentaires restent accessibles par les liens du dossier et dans <code>docs/bc02/</code>.</p>
+      <p class="document-note">Cette version destinée au jury conserve la synthèse, les 26 critères officiels et sept annexes visuelles. Les documents techniques complémentaires restent accessibles par les liens du dossier et dans <code>docs/bc02/</code>.</p>
       <ol>${tableOfContents}</ol>
     </section>
     ${chapters}
-    <section class="closing">
-      <h2>Clôture du livrable</h2>
-      <p>Ce dossier synthétique rassemble la couverture exhaustive des critères et les annexes essentielles à la soutenance. Les quatorze documents techniques détaillés restent versionnés dans <code>docs/bc02/</code>. Les empreintes des sources incluses, du HTML et du PDF sont conservées dans le manifeste joint.</p>
-      <table>
-        <tbody>
-          <tr><th>Candidat</th><td>Dorian Joly</td></tr>
-          <tr><th>Projet</th><td>Spity 0.1.0</td></tr>
-          <tr><th>Bloc</th><td>BC02 · RNCP39583</td></tr>
-          <tr><th>Document</th><td>DOSSIER_BC02_SPITY.pdf</td></tr>
-        </tbody>
-      </table>
-    </section>
   </main>
 </body>
 </html>`

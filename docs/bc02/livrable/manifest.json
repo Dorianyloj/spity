@@ -1,54 +1,34 @@
 {
-  "generatedAt": "2026-07-21T11:59:02.975Z",
+  "generatedAt": "2026-07-21T12:32:55.028Z",
   "internalNavigation": {
-    "anchors": 142,
-    "links": 38,
+    "anchors": 45,
+    "links": 8,
     "missingTargets": 0
   },
   "outputs": {
     "html": {
       "file": "DOSSIER_BC02_SPITY.html",
-      "bytes": 150410,
-      "sha256": "46e217da2c9388fbb72f2602f5cd1e158abdec32d5ca616e65b67df88cde5ffa"
+      "bytes": 48572,
+      "sha256": "92916c743f63790808b57b90f3713b9a83a70632e1859f2544d38ba61bada895"
     },
     "pdf": {
       "file": "DOSSIER_BC02_SPITY.pdf",
-      "bytes": 7046186,
-      "sha256": "1711c19bd1c64d38ca2fa41bd5e006ceeb3e414e38f87cbb7199f045b9b29fca"
+      "bytes": 6561557,
+      "sha256": "a77ca3068319ead60f4fd756a711b3320540f61d6f213d3d24a35b9ee0e1ad57"
     }
   },
   "sources": [
     {
       "file": "16_DOSSIER_FINAL_BC02.md",
-      "sha256": "a9f435f2e5f43dfb13b43995a7559e9c8b08f5cc876affcc66e3de2ce2d1cace"
+      "sha256": "cdb1d2241a14ac1b80b31e237ce56c954f43020296890ab4925b2e9f0af464c8"
     },
     {
       "file": "15_INDEX_PREUVES_GRILLE_BC02.md",
-      "sha256": "53563df376505ba16e27dcd5337b1160230ab07cbfa249b475f70db9025dc72b"
+      "sha256": "1f3ca0d345d5817631ea19e0cf578dc6af996e5c507f4e2ee325625a2be46e68"
     },
     {
-      "file": "01_PERIMETRE_FONCTIONNEL_ET_USER_STORIES.md",
-      "sha256": "7b68c0ab21460d6a7340e993ba52ad520ec7d7c0f14b5b25c8e3fe2c12a38946"
-    },
-    {
-      "file": "05_ARCHITECTURE_PROTOTYPE_C221.md",
-      "sha256": "d7e83203a8b02f13a84abf197d8d7eb6716d16ad4665bc6a427993784c8a100a"
-    },
-    {
-      "file": "07_SECURITE_OWASP_C223.md",
-      "sha256": "2aa071adb476db2872f8bdb4ed3b05c4f030d4b465b53dfa46890bf91c1dd732"
-    },
-    {
-      "file": "08_ACCESSIBILITE_RGAA_C223.md",
-      "sha256": "667a0f2e534c2a07b3d438d6abfa9cbbe452f49db759230bab28d7833bd0e158"
-    },
-    {
-      "file": "10_CAHIER_RECETTES_C231.md",
-      "sha256": "c0dc0208dc675fff9f9098cae3ee2a36181742def2f8dce7b9bcf6ec7a8023a6"
-    },
-    {
-      "file": "12_MANUEL_DEPLOIEMENT_C241.md",
-      "sha256": "27ac96aba9574ba670be6f354eb5a597fdec06108fd5e88824e5dbc25a69d042"
+      "file": "18_ANNEXES_VISUELLES_BC02.md",
+      "sha256": "e5db06854f989df00f73e4176f813005931ae28c5affbc96180983ed7922f188"
     }
   ]
 }

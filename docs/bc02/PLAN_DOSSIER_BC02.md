@@ -83,6 +83,7 @@ Document de référence : [Environnements, qualité et protocole de déploiement
 - [x] Vérifier le rendu des routes et la conception responsive des interfaces.
 - [x] Documenter architecture, frameworks, paradigmes et décisions techniques.
 - [x] Ajouter les captures desktop et mobile à l'annexe visuelle finale.
+- [x] Ajouter les captures GitHub de l'historique, de la CI et de la release.
 
 ### Étape 5 - Tests unitaires (C2.2.2)
 
@@ -133,6 +134,7 @@ Documents de référence : [manuel de déploiement](./12_MANUEL_DEPLOIEMENT_C241
 - [x] Assembler le dossier final et ses annexes.
 - [x] Vérifier que chaque ligne de la grille possède au moins une preuve explicite.
 - [x] Exporter et contrôler visuellement la version PDF remise au jury.
+- [x] Réduire le PDF à 19 pages en séparant synthèse, index et annexes visuelles.
 
 ## Règle de preuve
 
