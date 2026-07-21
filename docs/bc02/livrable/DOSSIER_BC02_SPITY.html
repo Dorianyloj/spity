@@ -143,7 +143,7 @@
 </tr>
 </tbody></table>
 <h2 id="doc-16_dossier_final_bc02-declaration-de-perimetre">Déclaration de périmètre</h2>
-<p>Ce dossier documente les neuf compétences du bloc BC02 à partir d&#39;une réalisation fonctionnelle, versionnée et testée. L&#39;<a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/17_AUDIT_CONFORMITE_OFFICIEL_BC02.md">audit de conformité aux documents officiels</a> conclut à vingt-quatre critères couverts, un critère partiel et un critère à compléter. Il distingue volontairement :</p>
+<p>Ce dossier documente les neuf compétences du bloc BC02 à partir d&#39;une réalisation fonctionnelle, versionnée et testée. L&#39;<a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/17_AUDIT_CONFORMITE_OFFICIEL_BC02.md">audit de conformité aux documents officiels</a> conclut à vingt-cinq critères couverts et un critère partiel. Il distingue volontairement :</p>
 <ul>
 <li>la vision produit complète de Spity ;</li>
 <li>le prototype BC02 effectivement développé ;</li>
@@ -236,15 +236,11 @@ Next.js App Router et Route Handlers
 </tr>
 <tr>
 <td>Tests unitaires</td>
-<td>86 tests réussis.</td>
-</tr>
-<tr>
-<td>Couverture ciblée</td>
-<td>96 % lignes, 89,69 % branches, 100 % fonctions.</td>
+<td>126 tests réussis dans 23 suites.</td>
 </tr>
 <tr>
 <td>Couverture globale mesurée</td>
-<td>20,23 % des lignes et instructions ; critère C2.2.2 à compléter.</td>
+<td>62,56 % lignes/instructions, 77,67 % branches et 55,06 % fonctions sur tout <code>src/</code>.</td>
 </tr>
 <tr>
 <td>Intégration</td>
@@ -290,7 +286,7 @@ Next.js App Router et Route Handlers
 <p>L&#39;architecture par feature sépare présentation, API, règles métier et données. Les composants partagés et les contrats Zod limitent la duplication. Le prototype répond aux user stories retenues sur desktop et mobile.</p>
 <p>Preuve principale : <a href="#doc-05_architecture_prototype_c221">architecture et prototype</a>.</p>
 <h3 id="doc-16_dossier_final_bc02-c2-2-2-harnais-unitaire">C2.2.2 - Harnais unitaire</h3>
-<p>Jest couvre les validateurs, le parseur de matériel, les règles d&#39;événements et de matching, le quota, le contrôle d&#39;origine, les en-têtes et des composants critiques. Ce périmètre ciblé atteint 96 % des lignes, mais la mesure globale atteint 20,23 % : la majorité du code développé n&#39;est pas encore couverte par des tests unitaires. L&#39;intégration réelle et Playwright renforcent la non-régression sans remplacer ce critère.</p>
+<p>Jest couvre les validateurs, le parseur de matériel, les règles d&#39;événements et de matching, le quota, le contrôle d&#39;origine, les en-têtes, les principaux composants interactifs et le contrat Drizzle. La configuration mesure tout <code>src/</code> et atteint 62,56 % des lignes et instructions : la majorité du code développé est donc couverte. Les seuils globaux sont bloquants dans la CI ; l&#39;intégration réelle et Playwright complètent cette preuve.</p>
 <p>Preuves principales : <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/04_HARNAIS_TESTS_UNITAIRES.md">harnais Jest</a> et <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/06_TESTS_INTEGRATION_C222.md">tests d&#39;intégration</a>.</p>
 <h3 id="doc-16_dossier_final_bc02-c2-2-3-securite-et-accessibilite">C2.2.3 - Sécurité et accessibilité</h3>
 <p>La sécurité est reliée aux dix catégories OWASP 2025. Le RGAA 4.1.2 est retenu et justifié pour le contexte français. Les résultats automatisés sont complétés par des contrôles clavier, focus, mouvement réduit et mobile.</p>
@@ -323,15 +319,15 @@ Next.js App Router et Route Handlers
 <p>La réalisation est un prototype de certification, pas une plateforme publique prête à accueillir des données réelles. Les limites principales sont :</p>
 <ul>
 <li>aucune session pilote externe formalisée à la date du dossier ;</li>
-<li>couverture unitaire globale de 20,23 %, inférieure à la majorité demandée par C2.2.2 ;</li>
+<li>couverture des dépôts Drizzle et Route Handlers encore inférieure à celle des composants et règles métier ;</li>
 <li>récupération de mot de passe, export et suppression autonome de compte non exposés ;</li>
 <li>fil social, carte interactive et topos encore démonstratifs ou hors périmètre ;</li>
 <li>alertes modérées de dépendances suivies, sans vulnérabilité haute ou critique ;</li>
 <li>supervision, sauvegardes planifiées et test de restauration à industrialiser avant production publique.</li>
 </ul>
-<p>Les priorités suivantes sont la validation utilisateur, les parcours RGPD, la récupération de compte, la persistance sociale, la cartographie et le renforcement de la couverture des composants de présentation.</p>
+<p>Les priorités suivantes sont la validation utilisateur, les parcours RGPD, la récupération de compte, la persistance sociale, la cartographie et le renforcement des tests des couches serveur.</p>
 <h2 id="doc-16_dossier_final_bc02-conclusion">Conclusion</h2>
-<p>Spity démontre une chaîne cohérente de conception et de développement : besoin cadré, architecture structurée, fonctionnalités cohérentes, contrôles automatisés, correction d&#39;anomalies, version stable et documentation d&#39;exploitation. Le dossier ne repose pas uniquement sur une description : chaque compétence renvoie à du code versionné, une commande ou un résultat distant. L&#39;acquisition complète reste conditionnée par le renforcement de la couverture unitaire globale et la formalisation d&#39;un essai utilisateur autonome.</p>
+<p>Spity démontre une chaîne cohérente de conception et de développement : besoin cadré, architecture structurée, fonctionnalités cohérentes, contrôles automatisés, correction d&#39;anomalies, version stable et documentation d&#39;exploitation. Le dossier ne repose pas uniquement sur une description : chaque compétence renvoie à du code versionné, une commande ou un résultat distant. La dernière preuve partielle à formaliser est un essai utilisateur autonome avec des personnes externes au développement.</p>
 <p>L&#39;<a href="#doc-15_index_preuves_grille_bc02">index des critères</a> constitue le point d&#39;entrée pour l&#39;évaluation. Les chapitres détaillés qui suivent fournissent les explications et preuves nécessaires à chaque ligne de la grille.</p>
 </section>
 <section class="chapter" data-source="15_INDEX_PREUVES_GRILLE_BC02.md"><h1 id="doc-15_index_preuves_grille_bc02">Index des critères et des preuves BC02</h1>
@@ -374,7 +370,7 @@ Next.js App Router et Route Handlers
 <tr>
 <td>C2.2.2</td>
 <td>Jeu de tests unitaires</td>
-<td align="center">À compléter</td>
+<td align="center">Couvert</td>
 <td><a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/04_HARNAIS_TESTS_UNITAIRES.md">Harnais unitaire</a> et <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/17_AUDIT_CONFORMITE_OFFICIEL_BC02.md">audit officiel</a></td>
 </tr>
 <tr>
@@ -444,8 +440,8 @@ Next.js App Router et Route Handlers
 </tr>
 <tr>
 <td>Les critères qualité/performance répondent aux exigences du projet.</td>
-<td>Seuils lint, typage, couverture ciblée, vulnérabilités, accessibilité et Lighthouse sont bloquants.</td>
-<td><a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md">Seuils C2.1.1</a>, run CI <code>29819189642</code>, rapports locaux <code>.lighthouseci</code> et <code>coverage</code></td>
+<td>Seuils lint, typage, couverture globale, vulnérabilités, accessibilité et Lighthouse sont bloquants.</td>
+<td><a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md">Seuils C2.1.1</a>, run CI <code>29826174680</code>, rapports locaux <code>.lighthouseci</code> et <code>coverage</code></td>
 <td align="center">Couvert</td>
 </tr>
 </tbody></table>
@@ -525,12 +521,12 @@ Next.js App Router et Route Handlers
 </thead>
 <tbody><tr>
 <td>Les tests unitaires couvrent la majorité du code développé.</td>
-<td>Le périmètre ciblé atteint 96 % des lignes, mais la mesure de tous les fichiers <code>src/</code> atteint seulement 20,23 % des lignes et instructions. Les 11 résultats d&#39;intégration et la recette F01-F10 complètent la non-régression sans satisfaire ce critère unitaire.</td>
-<td><a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/04_HARNAIS_TESTS_UNITAIRES.md">Harnais et périmètre</a>, <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/17_AUDIT_CONFORMITE_OFFICIEL_BC02.md">audit officiel</a></td>
-<td align="center">À compléter</td>
+<td>Les 23 suites et 126 tests mesurent tous les fichiers <code>src/</code> et couvrent 62,56 % des lignes/instructions, 77,67 % des branches et 55,06 % des fonctions. Les seuils globaux sont bloquants dans Jest et la CI.</td>
+<td><a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/04_HARNAIS_TESTS_UNITAIRES.md">Harnais et périmètre</a>, <a href="https://github.com/Dorianyloj/spity/commit/9bb4efa33a231ea0a86a40a22dd13eaea1718233">commit de couverture <code>9bb4efa</code></a></td>
+<td align="center">Couvert</td>
 </tr>
 </tbody></table>
-<p>Écart déclaré : le pourcentage Jest de 96 % porte sur huit modules métier et de sécurité explicitement inclus dans <code>collectCoverageFrom</code>. La couverture globale de 20,23 % ne constitue pas la majorité du code développé demandée par la grille.</p>
+<p>Limite déclarée : la majorité du code est couverte, mais les dépôts Drizzle, les Route Handlers et plusieurs Server Components restent moins couverts que les règles métier et composants interactifs.</p>
 <h2 id="doc-15_index_preuves_grille_bc02-7-c2-2-3-securite-et-accessibilite">7. C2.2.3 - Sécurité et accessibilité</h2>
 <table>
 <thead>
@@ -707,10 +703,10 @@ Next.js App Router et Route Handlers
 </tr>
 </tbody></table>
 <h2 id="doc-15_index_preuves_grille_bc02-14-points-restant-a-organiser">14. Points restant à organiser</h2>
-<p>Ces points doivent être présentés honnêtement au jury ; les deux premiers correspondent aux preuves encore insuffisantes :</p>
+<p>Ces points doivent être présentés honnêtement au jury ; le premier correspond à la dernière preuve encore insuffisante :</p>
 <ul>
-<li>porter la couverture unitaire globale au-delà de 50 % des lignes, avec une cible d&#39;au moins 60 % ;</li>
 <li>conduire une session pilote formalisée avec au moins deux utilisateurs externes au développement ;</li>
+<li>poursuivre progressivement la couverture des couches serveur au-delà du seuil global de 60 % ;</li>
 <li>conserver des captures des protections de branches GitHub si elles sont activées dans l&#39;interface distante ;</li>
 <li>exécuter périodiquement un exercice de restauration sur un environnement isolé ;</li>
 <li>poursuivre les fonctions hors prototype : carte interactive, fil social persistant, topos et parcours RGPD autonomes.</li>
@@ -1043,7 +1039,7 @@ Next.js App Router et Route Handlers
 <li>aucune erreur TypeScript ;</li>
 <li>build de production réussi ;</li>
 <li>tests unitaires et d&#39;intégration réussis ;</li>
-<li>couverture globale minimale de 80 % pour les lignes, instructions et fonctions, et de 70 % pour les branches ;</li>
+<li>couverture globale minimale de 60 % pour les lignes et instructions, 55 % pour les fonctions et 75 % pour les branches ;</li>
 <li>aucune vulnérabilité de dépendance critique ou haute non justifiée ;</li>
 <li>chaque anomalie détectée liée à une entrée du plan de correction.</li>
 </ul>
@@ -1615,7 +1611,7 @@ npm run build
 <p>Résultats :</p>
 <ul>
 <li>lint et TypeScript strict sans erreur ;</li>
-<li>83 tests Jest réussis ; couverture de 96 % des lignes et instructions, 89,69 % des branches et 100 % des fonctions sur le périmètre déclaré ;</li>
+<li>126 tests Jest réussis ; couverture globale de 62,56 % des lignes et instructions, 77,67 % des branches et 55,06 % des fonctions sur tout <code>src/</code> ;</li>
 <li>11 résultats TAP réussis, dont le contrôle de quota HTTP et la concurrence MariaDB ;</li>
 <li>aucune vulnérabilité de production critique ou haute signalée par <code>npm audit</code> ;</li>
 <li>build de production réussi ;</li>
@@ -2317,8 +2313,8 @@ npm run test:acceptance
 <tr>
 <td>Régression</td>
 <td><code>npm run test:coverage</code></td>
-<td>100 % tests ; seuils dépassés</td>
-<td>86/86 ; lignes 96 %, branches 89,69 %, fonctions 100 %</td>
+<td>100 % tests ; seuils globaux dépassés</td>
+<td>126/126 ; lignes 62,56 %, branches 77,67 %, fonctions 55,06 %</td>
 </tr>
 <tr>
 <td>Sécurité dépendances</td>

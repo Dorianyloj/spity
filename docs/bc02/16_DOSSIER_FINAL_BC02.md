@@ -16,7 +16,7 @@
 
 ## Déclaration de périmètre
 
-Ce dossier documente les neuf compétences du bloc BC02 à partir d'une réalisation fonctionnelle, versionnée et testée. L'[audit de conformité aux documents officiels](./17_AUDIT_CONFORMITE_OFFICIEL_BC02.md) conclut à vingt-quatre critères couverts, un critère partiel et un critère à compléter. Il distingue volontairement :
+Ce dossier documente les neuf compétences du bloc BC02 à partir d'une réalisation fonctionnelle, versionnée et testée. L'[audit de conformité aux documents officiels](./17_AUDIT_CONFORMITE_OFFICIEL_BC02.md) conclut à vingt-cinq critères couverts et un critère partiel. Il distingue volontairement :
 
 - la vision produit complète de Spity ;
 - le prototype BC02 effectivement développé ;
@@ -74,9 +74,8 @@ L'application utilise TypeScript strict de bout en bout. Next.js rassemble pages
 | Axe | Résultat de référence |
 | --- | --- |
 | Analyse statique | ESLint et TypeScript réussis. |
-| Tests unitaires | 86 tests réussis. |
-| Couverture ciblée | 96 % lignes, 89,69 % branches, 100 % fonctions. |
-| Couverture globale mesurée | 20,23 % des lignes et instructions ; critère C2.2.2 à compléter. |
+| Tests unitaires | 126 tests réussis dans 23 suites. |
+| Couverture globale mesurée | 62,56 % lignes/instructions, 77,67 % branches et 55,06 % fonctions sur tout `src/`. |
 | Intégration | 11 résultats HTTP/MariaDB réussis sur une base migrée à neuf. |
 | Recette | 6 scénarios Playwright couvrant F01 à F10, sans retry ni skip. |
 | Sécurité | 0 vulnérabilité haute ou critique de production ; dix catégories OWASP analysées. |
@@ -108,7 +107,7 @@ Preuve principale : [architecture et prototype](./05_ARCHITECTURE_PROTOTYPE_C221
 
 ### C2.2.2 - Harnais unitaire
 
-Jest couvre les validateurs, le parseur de matériel, les règles d'événements et de matching, le quota, le contrôle d'origine, les en-têtes et des composants critiques. Ce périmètre ciblé atteint 96 % des lignes, mais la mesure globale atteint 20,23 % : la majorité du code développé n'est pas encore couverte par des tests unitaires. L'intégration réelle et Playwright renforcent la non-régression sans remplacer ce critère.
+Jest couvre les validateurs, le parseur de matériel, les règles d'événements et de matching, le quota, le contrôle d'origine, les en-têtes, les principaux composants interactifs et le contrat Drizzle. La configuration mesure tout `src/` et atteint 62,56 % des lignes et instructions : la majorité du code développé est donc couverte. Les seuils globaux sont bloquants dans la CI ; l'intégration réelle et Playwright complètent cette preuve.
 
 Preuves principales : [harnais Jest](./04_HARNAIS_TESTS_UNITAIRES.md) et [tests d'intégration](./06_TESTS_INTEGRATION_C222.md).
 
@@ -160,16 +159,16 @@ Preuves principales : [manuel de déploiement](./12_MANUEL_DEPLOIEMENT_C241.md),
 La réalisation est un prototype de certification, pas une plateforme publique prête à accueillir des données réelles. Les limites principales sont :
 
 - aucune session pilote externe formalisée à la date du dossier ;
-- couverture unitaire globale de 20,23 %, inférieure à la majorité demandée par C2.2.2 ;
+- couverture des dépôts Drizzle et Route Handlers encore inférieure à celle des composants et règles métier ;
 - récupération de mot de passe, export et suppression autonome de compte non exposés ;
 - fil social, carte interactive et topos encore démonstratifs ou hors périmètre ;
 - alertes modérées de dépendances suivies, sans vulnérabilité haute ou critique ;
 - supervision, sauvegardes planifiées et test de restauration à industrialiser avant production publique.
 
-Les priorités suivantes sont la validation utilisateur, les parcours RGPD, la récupération de compte, la persistance sociale, la cartographie et le renforcement de la couverture des composants de présentation.
+Les priorités suivantes sont la validation utilisateur, les parcours RGPD, la récupération de compte, la persistance sociale, la cartographie et le renforcement des tests des couches serveur.
 
 ## Conclusion
 
-Spity démontre une chaîne cohérente de conception et de développement : besoin cadré, architecture structurée, fonctionnalités cohérentes, contrôles automatisés, correction d'anomalies, version stable et documentation d'exploitation. Le dossier ne repose pas uniquement sur une description : chaque compétence renvoie à du code versionné, une commande ou un résultat distant. L'acquisition complète reste conditionnée par le renforcement de la couverture unitaire globale et la formalisation d'un essai utilisateur autonome.
+Spity démontre une chaîne cohérente de conception et de développement : besoin cadré, architecture structurée, fonctionnalités cohérentes, contrôles automatisés, correction d'anomalies, version stable et documentation d'exploitation. Le dossier ne repose pas uniquement sur une description : chaque compétence renvoie à du code versionné, une commande ou un résultat distant. La dernière preuve partielle à formaliser est un essai utilisateur autonome avec des personnes externes au développement.
 
 L'[index des critères](./15_INDEX_PREUVES_GRILLE_BC02.md) constitue le point d'entrée pour l'évaluation. Les chapitres détaillés qui suivent fournissent les explications et preuves nécessaires à chaque ligne de la grille.

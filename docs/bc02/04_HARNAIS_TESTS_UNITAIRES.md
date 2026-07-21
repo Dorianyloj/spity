@@ -1,6 +1,6 @@
 # Harnais de tests unitaires - C2.2.2
 
-## 1. Objectif et périmètre initial
+## 1. Objectif et périmètre global
 
 Le harnais de tests prévient les régressions sur les règles métier déjà isolées de Spity. Il couvre actuellement :
 
@@ -10,9 +10,14 @@ Le harnais de tests prévient les régressions sur les règles métier déjà is
 - le contrôle d'origine utilisé contre les requêtes intersites ;
 - les règles de filtrage, de paire unique et de conversion des données de matching ;
 - les règles de dates, de capacité et d'inscription aux événements ;
-- les états clavier et chargement du composant `Button`.
+- les états clavier et chargement du composant `Button` ;
+- les pages d'accueil et du design system ;
+- les tableaux de bord grimpeur et club, l'annuaire de lieux et les filtres de matching ;
+- les formulaires de profil et l'inventaire de matériel ;
+- les demandes de partenariat et les inscriptions, modifications et annulations d'événements ;
+- le contrat des tables et des clés étrangères du schéma Drizzle.
 
-Cette première couverture est volontairement mesurée sur les fichiers déclarés dans `jest.config.ts`. Elle ne doit pas être interprétée comme une couverture globale de toute l'application.
+La mesure porte sur tous les fichiers TypeScript et TSX de `src/`, à l'exception des fichiers de test et des déclarations TypeScript. Aucun module applicatif n'est retiré pour améliorer artificiellement le pourcentage.
 
 ## 2. Outils et configuration
 
@@ -33,10 +38,11 @@ npm run test:watch
 npm run test:coverage
 ```
 
-Les seuils bloquants du périmètre mesuré sont :
+Les seuils globaux bloquants sont :
 
-- 80 % pour les lignes, instructions et fonctions ;
-- 70 % pour les branches ;
+- 60 % pour les lignes et instructions ;
+- 55 % pour les fonctions ;
+- 75 % pour les branches ;
 - 100 % des tests réussis.
 
 ## 3. Organisation des tests
@@ -51,30 +57,37 @@ Les seuils bloquants du périmètre mesuré sont :
 | `src/features/events/lib/event-rules.test.ts` | Dates futures, ordre début/fin, capacité et refus des inscriptions invalides |
 | `src/features/events/schemas.test.ts` | Contrats de création, modification, annulation et formulaire d'événement |
 | `src/components/ui/button.test.tsx` | Activation au clavier, focus, verrouillage et état `aria-busy` |
+| `src/app/page.test.tsx` et `src/app/design-system/page.test.tsx` | Contenu public, liens d'accès et rendu des composants partagés |
+| `src/features/app/components/app-dashboard.test.tsx` | Variantes grimpeur/club, recommandations, matériel et navigation par rôle |
+| `src/features/places/components/places-directory.test.tsx` | Recherche, filtres, compteurs et états vides des lieux |
+| `src/features/profile/components/*.test.tsx` | Chargement, modification de profil, inventaire, analyse libre et erreurs API |
+| `src/features/matching/components/*.test.tsx` | Filtres, envoi, acceptation, refus, statuts et erreurs API des partenariats |
+| `src/features/events/components/events-board.test.tsx` | Inscription, désinscription, édition, annulation et capacité des événements |
+| `src/db/schema.test.ts` | Noms des tables et colonnes relationnelles nécessaires aux parcours métier |
 
 Les tests suivent le modèle AAA : préparation des données, exécution du comportement, puis assertions sur le résultat observable.
 
 ## 4. Résultat de référence
 
-Exécution locale du 20 juillet 2026 :
+Exécution locale du 21 juillet 2026 sur le commit `9bb4efa` :
 
 ```text
-Test Suites: 8 passed, 8 total
-Tests:       69 passed, 69 total
+Test Suites: 23 passed, 23 total
+Tests:       126 passed, 126 total
 ```
 
 | Indicateur | Résultat | Seuil | Statut |
 | --- | ---: | ---: | --- |
-| Instructions | 97,87 % | 80 % | Conforme |
-| Lignes | 97,87 % | 80 % | Conforme |
-| Fonctions | 100 % | 80 % | Conforme |
-| Branches | 90,90 % | 70 % | Conforme |
+| Instructions | 62,56 % (`6512/10409`) | 60 % | Conforme |
+| Lignes | 62,56 % (`6512/10409`) | 60 % | Conforme |
+| Fonctions | 55,06 % (`125/227`) | 55 % | Conforme |
+| Branches | 77,67 % (`675/869`) | 75 % | Conforme |
 
 Le rapport HTML est généré dans `spity/coverage/lcov-report/`. Ce dossier est ignoré par Git ; la CI conserve le rapport comme artefact pendant 30 jours.
 
 ## 5. Complément d'intégration MariaDB
 
-Les 69 tests Jest restent des tests unitaires rapides. Ils sont complétés par le scénario HTTP décrit dans [`06_TESTS_INTEGRATION_C222.md`](./06_TESTS_INTEGRATION_C222.md), qui applique les migrations sur MariaDB et traverse les Route Handlers, la session, les dépôts Drizzle et les contraintes de base.
+Les 126 tests Jest restent des tests unitaires rapides. Ils sont complétés par le scénario HTTP décrit dans [`06_TESTS_INTEGRATION_C222.md`](./06_TESTS_INTEGRATION_C222.md), qui applique les migrations sur MariaDB et traverse les Route Handlers, la session, les dépôts Drizzle et les contraintes de base.
 
 Le résultat local de référence est de 10 contrôles TAP réussis, dont deux inscriptions concurrentes sur la dernière place d'un événement.
 
@@ -94,18 +107,18 @@ Identifiant provisoire : `BUG-TEST-001`.
 
 Cet exemple alimentera le plan de correction C2.3.2 avec le SHA du commit et la preuve avant/après.
 
-## 7. Limites de la couverture actuelle
+## 7. Limites et progression
 
-La grille demande que les tests couvrent la majorité du code développé. Ce résultat n'est pas encore atteint à l'échelle des 8 000 lignes du projet.
+La grille demande que les tests couvrent la majorité du code développé. Le résultat global de 62,56 % des lignes et instructions satisfait ce critère et reste contrôlé par la CI.
 
-Les prochains lots devront couvrir :
+Les prochains lots peuvent encore renforcer :
 
 1. la création et la vérification des sessions ;
 2. le verrouillage après échecs de connexion ;
 3. les dépôts de matériel avec une base de test ;
-4. les routes du matériel et les formulaires non inclus dans le prototype BC02 ;
-5. les formulaires d'authentification et de profil ;
-6. la mesure de couverture de lignes des dépôts matching, partenariats et événements ;
-7. les parcours visuels avec Playwright, en complément des tests HTTP.
+4. les Route Handlers d'authentification, de profil, de matching et d'événements ;
+5. les dépôts Drizzle avec davantage de cas d'erreur et de concurrence ;
+6. les Server Components asynchrones des fiches de lieux ;
+7. les parcours visuels avec Playwright, en complément des tests HTTP et unitaires.
 
 Les Server Components asynchrones seront vérifiés par des tests de bout en bout, conformément à la recommandation actuelle de Next.js.

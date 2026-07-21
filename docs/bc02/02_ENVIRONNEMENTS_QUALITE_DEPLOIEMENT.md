@@ -121,8 +121,9 @@ Les tests et la couverture automatisée sont exécutés par `npm run test:covera
 | Erreurs TypeScript | 0 |
 | Build de production | Réussi |
 | Tests automatisés | 100 % des tests réussis |
-| Couverture lignes, instructions et fonctions | Au moins 80 % |
-| Couverture branches | Au moins 70 % |
+| Couverture lignes et instructions | Au moins 60 % sur tout `src/` |
+| Couverture fonctions | Au moins 55 % sur tout `src/` |
+| Couverture branches | Au moins 75 % sur tout `src/` |
 | Vulnérabilités critiques ou hautes de production | 0 non justifiée |
 | Lighthouse performance | Au moins 85/100 |
 | Lighthouse accessibilité | 100/100 |

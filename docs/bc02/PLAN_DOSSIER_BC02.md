@@ -23,7 +23,7 @@ Le livrable final devra associer :
 | C2.1.1 | Protocole de déploiement continu et critères de qualité/performance | Couvert techniquement | Conserver les preuves d'un déploiement distant et d'un exercice de retour arrière. |
 | C2.1.2 | Protocole d'intégration continue | Couvert techniquement | Collecter une exécution GitHub Actions réussie et la configuration des protections de branches. |
 | C2.2.1 | Architecture maintenable, prototype, frameworks et paradigmes | Couvert | Prototype matching/événements livré, migration validée, architecture reliée aux user stories et quatre captures desktop/mobile ajoutées. |
-| C2.2.2 | Jeu de tests unitaires couvrant la majorité du code | À compléter | 86 tests Jest, mais 20,23 % de couverture globale des lignes ; étendre les tests et mesurer tout `src/`. |
+| C2.2.2 | Jeu de tests unitaires couvrant la majorité du code | Couvert | 126 tests dans 23 suites ; 62,56 % des lignes/instructions de tout `src/`, seuil global de 60 % bloquant. |
 | C2.2.3 | Mesures de sécurité et d'accessibilité | Couvert sur le prototype | Matrice OWASP 2025, audit RGAA 4.1.2, corrections, quota HTTP, axe, Lighthouse authentifié et preuves mobiles produits. |
 | C2.2.4 | Historique des versions et dernière version fiable | Couvert techniquement | Release `v0.1.0`, changelog, staging continu, images immuables, bundle et manifeste validés ; session de retours utilisateurs réelle à organiser. |
 | C2.3.1 | Cahier de recettes | Couvert | Recette Playwright F01 à F10 réussie localement et sur le build standalone dans la CI `29750556481`, avec artefact et staging bloqué par son résultat. |
@@ -92,7 +92,7 @@ Document de référence : [Environnements, qualité et protocole de déploiement
 - [x] Étendre les tests aux routes et dépôts matching, partenariats et événements.
 - [x] Vérifier les migrations et les parcours critiques avec une MariaDB isolée.
 - [x] Piloter les formulaires et parcours visuels avec Playwright dans le cahier de recette.
-- [ ] Étendre la couverture unitaire globale au-delà de 50 % des lignes, avec une cible d'au moins 60 %.
+- [x] Étendre la couverture unitaire globale au-delà de 50 % des lignes, avec une cible d'au moins 60 %.
 
 ### Étape 6 - Sécurité et accessibilité (C2.2.3)
 
@@ -145,4 +145,4 @@ Chaque compétence sera considérée prête uniquement si les quatre éléments 
 
 ## Prochaine action
 
-Le dossier BC02, son index de preuves, ses captures et son export PDF synthétique sont assemblés. L'audit officiel recense 16/16 livrables et 26/26 critères, dont 24 couverts, un partiel et un à compléter. Les prochaines actions sont d'étendre la couverture unitaire globale, d'organiser la session pilote réelle de l'étape 7, puis de préparer une archive de remise hors ligne.
+Le dossier BC02, son index de preuves, ses captures et son export PDF synthétique sont assemblés. L'audit officiel recense 16/16 livrables et 26/26 critères, dont 25 couverts et un partiel. Les prochaines actions sont d'organiser la session pilote réelle de l'étape 7, puis de préparer une archive de remise hors ligne.

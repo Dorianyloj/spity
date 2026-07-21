@@ -22,11 +22,11 @@ Le bloc 2 comporte neuf compétences, seize livrables attendus et vingt-six crit
 | Compétences recensées | 9/9 |
 | Livrables présents dans `docs/bc02/` | 16/16 |
 | Critères repris dans l'index du dossier | 26/26 |
-| Critères couverts par une preuve suffisante | 24/26 |
+| Critères couverts par une preuve suffisante | 25/26 |
 | Critère partiellement prouvé | 1/26 : autonomie utilisateur de C2.2.4 |
-| Critère à compléter | 1/26 : majorité du code couverte par des tests unitaires en C2.2.2 |
+| Critère à compléter | 0/26 |
 
-Conclusion : le dossier contient toutes les rubriques et tous les livrables demandés, mais il ne faut pas annoncer vingt-six critères acquis en l'état. Deux preuves doivent encore être renforcées.
+Conclusion : le dossier contient toutes les rubriques et tous les livrables demandés. Vingt-cinq critères disposent d'une preuve suffisante ; seule l'autonomie utilisateur de C2.2.4 reste partiellement prouvée.
 
 ## 4. Contrôle des seize livrables
 
@@ -38,7 +38,7 @@ Conclusion : le dossier contient toutes les rubriques et tous les livrables dema
 | C2.2.1 | Architecture structurée et maintenable | [`05_ARCHITECTURE_PROTOTYPE_C221.md`](./05_ARCHITECTURE_PROTOTYPE_C221.md) | Oui |
 | C2.2.1 | Présentation d'un prototype | [captures](./annexes/captures) et [`01_PERIMETRE_FONCTIONNEL_ET_USER_STORIES.md`](./01_PERIMETRE_FONCTIONNEL_ET_USER_STORIES.md) | Oui |
 | C2.2.1 | Frameworks et paradigmes de développement | [`05_ARCHITECTURE_PROTOTYPE_C221.md`](./05_ARCHITECTURE_PROTOTYPE_C221.md) | Oui |
-| C2.2.2 | Jeu de tests unitaires | [`04_HARNAIS_TESTS_UNITAIRES.md`](./04_HARNAIS_TESTS_UNITAIRES.md) et treize suites Jest | Oui |
+| C2.2.2 | Jeu de tests unitaires | [`04_HARNAIS_TESTS_UNITAIRES.md`](./04_HARNAIS_TESTS_UNITAIRES.md) et vingt-trois suites Jest | Oui |
 | C2.2.3 | Présentation des mesures de sécurité | [`07_SECURITE_OWASP_C223.md`](./07_SECURITE_OWASP_C223.md) | Oui |
 | C2.2.3 | Actions d'accessibilité | [`08_ACCESSIBILITE_RGAA_C223.md`](./08_ACCESSIBILITE_RGAA_C223.md) | Oui |
 | C2.2.4 | Historique des versions | [`09_VERSIONS_DEPLOIEMENTS_C224.md`](./09_VERSIONS_DEPLOIEMENTS_C224.md), Git et [`CHANGELOG.md`](../../CHANGELOG.md) | Oui |
@@ -56,33 +56,33 @@ Conclusion : le dossier contient toutes les rubriques et tous les livrables dema
 | C2.1.1 | 5 | 5 | 0 | 0 |
 | C2.1.2 | 2 | 2 | 0 | 0 |
 | C2.2.1 | 5 | 5 | 0 | 0 |
-| C2.2.2 | 1 | 0 | 0 | 1 |
+| C2.2.2 | 1 | 1 | 0 | 0 |
 | C2.2.3 | 3 | 3 | 0 | 0 |
 | C2.2.4 | 3 | 2 | 1 | 0 |
 | C2.3.1 | 2 | 2 | 0 | 0 |
 | C2.3.2 | 3 | 3 | 0 | 0 |
 | C2.4.1 | 2 | 2 | 0 | 0 |
-| **Total** | **26** | **24** | **1** | **1** |
+| **Total** | **26** | **25** | **1** | **0** |
 
 Le détail ligne par ligne est conservé dans [`15_INDEX_PREUVES_GRILLE_BC02.md`](./15_INDEX_PREUVES_GRILLE_BC02.md).
 
-## 6. Écart C2.2.2 - Couverture unitaire globale
+## 6. Validation C2.2.2 - Couverture unitaire globale
 
-La couverture de 96 % annoncée dans le dossier porte sur huit modules explicitement sélectionnés dans `jest.config.ts`. Le document du harnais précise déjà qu'elle n'est pas globale.
+La configuration Jest mesure désormais tous les fichiers TypeScript et TSX de `src/`, hors tests et déclarations. Les seuils globaux sont bloquants dans `npm run test:coverage` et dans la CI.
 
-La mesure contradictoire exécutée sur tous les fichiers TypeScript et TSX de `src/`, hors tests et déclarations, donne :
+La mesure exhaustive donne :
 
 | Mesure globale | Résultat du 21 juillet 2026 |
 | --- | ---: |
-| Instructions | 20,23 % (`2106/10409`) |
-| Lignes | 20,23 % (`2106/10409`) |
-| Fonctions | 36,58 % (`45/123`) |
-| Branches | 68,23 % (`217/318`) |
-| Suites et tests réussis | 13 suites, 86 tests |
+| Instructions | 62,56 % (`6512/10409`) |
+| Lignes | 62,56 % (`6512/10409`) |
+| Fonctions | 55,06 % (`125/227`) |
+| Branches | 77,67 % (`675/869`) |
+| Suites et tests réussis | 23 suites, 126 tests |
 
-La majorité du code développé n'est donc pas couverte par des tests unitaires au sens littéral du critère. Les tests d'intégration et Playwright renforcent la non-régression, mais ne remplacent pas cette exigence.
+La majorité du code développé est couverte au sens littéral du critère. Les tests d'intégration MariaDB et la recette Playwright restent complémentaires : ils contrôlent les assemblages HTTP, la persistance réelle et les parcours navigateur.
 
-Action attendue : mesurer tout le périmètre applicatif dans la configuration Jest et atteindre au minimum plus de 50 % des lignes, avec une cible de soutenance fixée à 60 % ou davantage.
+Le seuil de 60 % des lignes et instructions empêche une régression sous la cible retenue pour la soutenance.
 
 ## 7. Écart C2.2.4 - Autonomie utilisateur
 
@@ -97,4 +97,3 @@ Le PDF synthétique contient l'index des vingt-six critères et six annexes esse
 ## 9. Preuve technique la plus récente
 
 L'[exécution GitHub Actions no 29819189642](https://github.com/Dorianyloj/spity/actions/runs/29819189642), sur le commit `c1cb0f1`, a réussi les cinq jobs : qualité, intégration MariaDB, recette BC02, Lighthouse et images staging.
-

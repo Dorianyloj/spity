@@ -180,7 +180,7 @@ Cette exécution confirme la disparition de l'avertissement de dépréciation No
 
 ## 8. Limites et évolutions prévues
 
-- La CI prouve actuellement la qualité du périmètre unitaire ciblé, pas encore la majorité de l'application complète.
-- Les composants critiques et l'échantillon RGAA sont pilotés par axe, Lighthouse et Puppeteer ; le cahier de recette devra encore couvrir l'ensemble des parcours visuels nominaux et alternatifs.
+- La CI mesure désormais tout `src/` : 23 suites et 126 tests couvrent 62,56 % des lignes et instructions, au-dessus du seuil global bloquant de 60 %.
+- Les composants critiques et l'échantillon RGAA sont pilotés par Jest, axe, Lighthouse et Puppeteer ; la recette Playwright couvre les parcours F01 à F10.
 - Les contrôles d'accessibilité restent séparés des tests métier afin de conserver des diagnostics lisibles.
 - Le déploiement continu restera séparé de la CI : une version ne sera promue qu'après le succès des contrôles et une validation explicite de l'environnement cible.

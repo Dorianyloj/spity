@@ -78,7 +78,7 @@ La CI exécute la même commande sur une MariaDB vide. Le job de staging dépend
 | Fonctionnel HTTP/DB | `npm run test:integration` | Toutes les étapes TAP réussies | 11 résultats réussis sur la release de référence |
 | Structure | `npm run lint` | Aucune erreur ESLint | Réussi |
 | Structure | `npm run typecheck` | Aucune erreur TypeScript | Réussi |
-| Régression | `npm run test:coverage` | 100 % tests ; seuils dépassés | 86/86 ; lignes 96 %, branches 89,69 %, fonctions 100 % |
+| Régression | `npm run test:coverage` | 100 % tests ; seuils globaux dépassés | 126/126 ; lignes 62,56 %, branches 77,67 %, fonctions 55,06 % |
 | Sécurité dépendances | `npm run security:audit` | Aucune alerte haute ou critique | Réussi ; 2 alertes modérées suivies |
 | Construction | `npm run build` | Build production complet | 28 routes générées |
 | Accessibilité | `npm run accessibility:audit` | Aucune violation axe sur l'échantillon | Réussi sur la release de référence |

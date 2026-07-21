@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-21T11:26:03.275Z",
+  "generatedAt": "2026-07-21T11:51:09.028Z",
   "internalNavigation": {
     "anchors": 142,
     "links": 38,
@@ -8,27 +8,27 @@
   "outputs": {
     "html": {
       "file": "DOSSIER_BC02_SPITY.html",
-      "bytes": 150389,
-      "sha256": "2bd67a2da01ea0a30c79047df783b0c8bd48cedb1cc5da6866cb52991f5c028d"
+      "bytes": 150206,
+      "sha256": "07bb514007988c15ec1540e71f1262d57e4e9bbe874fea8d35d18fc2a180c825"
     },
     "pdf": {
       "file": "DOSSIER_BC02_SPITY.pdf",
-      "bytes": 7044689,
-      "sha256": "ab31fbe2a6cd1e76dcb5207e4cb41de94b4529694075df70a7341cd0912bac74"
+      "bytes": 7045818,
+      "sha256": "86e55c4766854ea6e55b6c9ba9109573ec2a6f8dadad9da7cafe8f8b3ccfb154"
     }
   },
   "sources": [
     {
       "file": "16_DOSSIER_FINAL_BC02.md",
-      "sha256": "1b479d8f25f2b2045c90c604e370d2fcfe4860b13f53d3f9a9606431fc19d7ba"
+      "sha256": "f349ae43d47c32f5f35e866f1b69e83b14e1c6ff2c07de22d42127e7a6c2216c"
     },
     {
       "file": "15_INDEX_PREUVES_GRILLE_BC02.md",
-      "sha256": "9e8d75aaf7f135560b4b060a90e9f01c199cf31ecda96716031059307d1c6399"
+      "sha256": "083c58f721d220ba4b3d23e8ff42aca1437873d8ce57a79f16370d99162eb813"
     },
     {
       "file": "01_PERIMETRE_FONCTIONNEL_ET_USER_STORIES.md",
-      "sha256": "51023fd1056ddc2a664d0e40845e8601b711610574d8f319a84d39fd7f04a367"
+      "sha256": "7b68c0ab21460d6a7340e993ba52ad520ec7d7c0f14b5b25c8e3fe2c12a38946"
     },
     {
       "file": "05_ARCHITECTURE_PROTOTYPE_C221.md",
@@ -36,7 +36,7 @@
     },
     {
       "file": "07_SECURITE_OWASP_C223.md",
-      "sha256": "8ed1c16e0b68681ee1204a575485f379ea9c21cfc2ae79e856f3022586ab4167"
+      "sha256": "2aa071adb476db2872f8bdb4ed3b05c4f030d4b465b53dfa46890bf91c1dd732"
     },
     {
       "file": "08_ACCESSIBILITE_RGAA_C223.md",
@@ -44,7 +44,7 @@
     },
     {
       "file": "10_CAHIER_RECETTES_C231.md",
-      "sha256": "5f4fff3ebec9c0cacc9fd04ec0b9e5c2062eecc5fec2ca80181199726ecc3cfe"
+      "sha256": "c0dc0208dc675fff9f9098cae3ee2a36181742def2f8dce7b9bcf6ec7a8023a6"
     },
     {
       "file": "12_MANUEL_DEPLOIEMENT_C241.md",

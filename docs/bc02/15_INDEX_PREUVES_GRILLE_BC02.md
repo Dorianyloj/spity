@@ -18,7 +18,7 @@ Statuts : **couvert** signifie que l'explication, la réalisation et une vérifi
 | C2.1.1 | Protocole de déploiement continu et critères qualité/performance | Couvert | [Environnements et déploiement](./02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md) |
 | C2.1.2 | Protocole d'intégration continue | Couvert | [Protocole CI](./03_PROTOCOLE_INTEGRATION_CONTINUE.md) |
 | C2.2.1 | Architecture maintenable et prototype fonctionnel | Couvert | [Architecture du prototype](./05_ARCHITECTURE_PROTOTYPE_C221.md) |
-| C2.2.2 | Jeu de tests unitaires | À compléter | [Harnais unitaire](./04_HARNAIS_TESTS_UNITAIRES.md) et [audit officiel](./17_AUDIT_CONFORMITE_OFFICIEL_BC02.md) |
+| C2.2.2 | Jeu de tests unitaires | Couvert | [Harnais unitaire](./04_HARNAIS_TESTS_UNITAIRES.md) et [audit officiel](./17_AUDIT_CONFORMITE_OFFICIEL_BC02.md) |
 | C2.2.3 | Sécurité et accessibilité | Couvert | [OWASP](./07_SECURITE_OWASP_C223.md) et [RGAA](./08_ACCESSIBILITE_RGAA_C223.md) |
 | C2.2.4 | Historique et dernière version fiable | Partiel | [Versions et déploiements](./09_VERSIONS_DEPLOIEMENTS_C224.md) |
 | C2.3.1 | Cahier de recettes | Couvert | [Cahier F01 à F10](./10_CAHIER_RECETTES_C231.md) |
@@ -33,7 +33,7 @@ Statuts : **couvert** signifie que l'explication, la réalisation et une vérifi
 | L'environnement de développement est détaillé. | Node.js 22, npm 10, Next.js, TypeScript, MariaDB, Docker Compose, variables et commandes de démarrage sont précisés. | [Document C2.1.1](./02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md), [`package.json`](../../spity/package.json), [Compose local](../../spity/docker-compose.yml) | Couvert |
 | Les outils permettent d'identifier compilateur, serveur d'application et gestion de sources. | TypeScript est vérifié par `tsc`, Next.js/Node fournit le serveur, Git et GitHub assurent les sources ; Drizzle, Jest, Playwright, Lighthouse et Docker complètent la chaîne. | [Table des outils](./02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md), [README](../../spity/README.md) | Couvert |
 | Le protocole définit les différentes séquences de déploiement. | Conditions d'entrée, sauvegarde, migration one-shot, démarrage, contrôle, promotion et rollback sont ordonnés. | [Manuel de déploiement](./12_MANUEL_DEPLOIEMENT_C241.md), [runbook de release](../../spity/DEPLOYMENT.md) | Couvert |
-| Les critères qualité/performance répondent aux exigences du projet. | Seuils lint, typage, couverture ciblée, vulnérabilités, accessibilité et Lighthouse sont bloquants. | [Seuils C2.1.1](./02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md), run CI `29819189642`, rapports locaux `.lighthouseci` et `coverage` | Couvert |
+| Les critères qualité/performance répondent aux exigences du projet. | Seuils lint, typage, couverture globale, vulnérabilités, accessibilité et Lighthouse sont bloquants. | [Seuils C2.1.1](./02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md), run CI `29826174680`, rapports locaux `.lighthouseci` et `coverage` | Couvert |
 
 ## 4. C2.1.2 - Intégration continue
 
@@ -56,9 +56,9 @@ Statuts : **couvert** signifie que l'explication, la réalisation et une vérifi
 
 | Critère officiel | Explication et réalisation | Preuve vérifiable | Statut |
 | --- | --- | --- | :---: |
-| Les tests unitaires couvrent la majorité du code développé. | Le périmètre ciblé atteint 96 % des lignes, mais la mesure de tous les fichiers `src/` atteint seulement 20,23 % des lignes et instructions. Les 11 résultats d'intégration et la recette F01-F10 complètent la non-régression sans satisfaire ce critère unitaire. | [Harnais et périmètre](./04_HARNAIS_TESTS_UNITAIRES.md), [audit officiel](./17_AUDIT_CONFORMITE_OFFICIEL_BC02.md) | À compléter |
+| Les tests unitaires couvrent la majorité du code développé. | Les 23 suites et 126 tests mesurent tous les fichiers `src/` et couvrent 62,56 % des lignes/instructions, 77,67 % des branches et 55,06 % des fonctions. Les seuils globaux sont bloquants dans Jest et la CI. | [Harnais et périmètre](./04_HARNAIS_TESTS_UNITAIRES.md), [commit de couverture `9bb4efa`](https://github.com/Dorianyloj/spity/commit/9bb4efa33a231ea0a86a40a22dd13eaea1718233) | Couvert |
 
-Écart déclaré : le pourcentage Jest de 96 % porte sur huit modules métier et de sécurité explicitement inclus dans `collectCoverageFrom`. La couverture globale de 20,23 % ne constitue pas la majorité du code développé demandée par la grille.
+Limite déclarée : la majorité du code est couverte, mais les dépôts Drizzle, les Route Handlers et plusieurs Server Components restent moins couverts que les règles métier et composants interactifs.
 
 ## 7. C2.2.3 - Sécurité et accessibilité
 
@@ -124,10 +124,10 @@ Les captures suivantes sont générées par `npm run docs:capture` depuis les co
 
 ## 14. Points restant à organiser
 
-Ces points doivent être présentés honnêtement au jury ; les deux premiers correspondent aux preuves encore insuffisantes :
+Ces points doivent être présentés honnêtement au jury ; le premier correspond à la dernière preuve encore insuffisante :
 
-- porter la couverture unitaire globale au-delà de 50 % des lignes, avec une cible d'au moins 60 % ;
 - conduire une session pilote formalisée avec au moins deux utilisateurs externes au développement ;
+- poursuivre progressivement la couverture des couches serveur au-delà du seuil global de 60 % ;
 - conserver des captures des protections de branches GitHub si elles sont activées dans l'interface distante ;
 - exécuter périodiquement un exercice de restauration sur un environnement isolé ;
 - poursuivre les fonctions hors prototype : carte interactive, fil social persistant, topos et parcours RGPD autonomes.

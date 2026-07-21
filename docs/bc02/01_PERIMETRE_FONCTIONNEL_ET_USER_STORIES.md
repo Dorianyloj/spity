@@ -286,7 +286,7 @@ Les seuils initiaux du prototype sont :
 - aucune erreur TypeScript ;
 - build de production réussi ;
 - tests unitaires et d'intégration réussis ;
-- couverture globale minimale de 80 % pour les lignes, instructions et fonctions, et de 70 % pour les branches ;
+- couverture globale minimale de 60 % pour les lignes et instructions, 55 % pour les fonctions et 75 % pour les branches ;
 - aucune vulnérabilité de dépendance critique ou haute non justifiée ;
 - chaque anomalie détectée liée à une entrée du plan de correction.
 

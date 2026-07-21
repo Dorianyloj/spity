@@ -91,7 +91,7 @@ npm run build
 Résultats :
 
 - lint et TypeScript strict sans erreur ;
-- 83 tests Jest réussis ; couverture de 96 % des lignes et instructions, 89,69 % des branches et 100 % des fonctions sur le périmètre déclaré ;
+- 126 tests Jest réussis ; couverture globale de 62,56 % des lignes et instructions, 77,67 % des branches et 55,06 % des fonctions sur tout `src/` ;
 - 11 résultats TAP réussis, dont le contrôle de quota HTTP et la concurrence MariaDB ;
 - aucune vulnérabilité de production critique ou haute signalée par `npm audit` ;
 - build de production réussi ;
