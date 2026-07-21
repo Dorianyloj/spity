@@ -11,6 +11,7 @@ Les évolutions notables de Spity sont consignées dans ce fichier. Le projet su
 - Registre d'anomalies et traçabilité des corrections avant/après.
 - Manuels C2.4.1 séparés pour le déploiement, l'utilisation et la mise à jour de Spity.
 - Dossier BC02 synthétique assemblé avec index des critères, annexes essentielles, captures, export PDF et manifeste d'intégrité.
+- Audit officiel BC02 ajouté avec contrôle des 16 livrables, des 26 critères et des écarts de preuve.
 
 ### Fixed
 

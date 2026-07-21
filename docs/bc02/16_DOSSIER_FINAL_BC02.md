@@ -11,12 +11,12 @@
 | Prototype évalué | Application web responsive, version `0.1.0` |
 | Branche de travail | `develop` |
 | Release stable | `v0.1.0` |
-| Date du dossier | 20 juillet 2026 |
+| Date du dossier | 21 juillet 2026 |
 | Dépôt | [github.com/Dorianyloj/spity](https://github.com/Dorianyloj/spity) |
 
 ## Déclaration de périmètre
 
-Ce dossier démontre les neuf compétences du bloc BC02 à partir d'une réalisation fonctionnelle, versionnée et testée. Il distingue volontairement :
+Ce dossier documente les neuf compétences du bloc BC02 à partir d'une réalisation fonctionnelle, versionnée et testée. L'[audit de conformité aux documents officiels](./17_AUDIT_CONFORMITE_OFFICIEL_BC02.md) conclut à vingt-quatre critères couverts, un critère partiel et un critère à compléter. Il distingue volontairement :
 
 - la vision produit complète de Spity ;
 - le prototype BC02 effectivement développé ;
@@ -76,6 +76,7 @@ L'application utilise TypeScript strict de bout en bout. Next.js rassemble pages
 | Analyse statique | ESLint et TypeScript réussis. |
 | Tests unitaires | 86 tests réussis. |
 | Couverture ciblée | 96 % lignes, 89,69 % branches, 100 % fonctions. |
+| Couverture globale mesurée | 20,23 % des lignes et instructions ; critère C2.2.2 à compléter. |
 | Intégration | 11 résultats HTTP/MariaDB réussis sur une base migrée à neuf. |
 | Recette | 6 scénarios Playwright couvrant F01 à F10, sans retry ni skip. |
 | Sécurité | 0 vulnérabilité haute ou critique de production ; dix catégories OWASP analysées. |
@@ -83,7 +84,7 @@ L'application utilise TypeScript strict de bout en bout. Next.js rassemble pages
 | Lighthouse public | Performance 97 à 99, accessibilité 100, SEO 100. |
 | Responsive | Reflow vérifié à 360 px sans défilement horizontal incohérent. |
 | Livraison | Release `v0.1.0`, images immuables, bundle, manifeste et SHA-256. |
-| Dernière CI probante | Run `29750556481`, cinq jobs réussis dont staging. |
+| Dernière CI probante | Run `29819189642`, cinq jobs réussis dont staging. |
 
 ## Couverture des compétences
 
@@ -107,7 +108,7 @@ Preuve principale : [architecture et prototype](./05_ARCHITECTURE_PROTOTYPE_C221
 
 ### C2.2.2 - Harnais unitaire
 
-Jest couvre les validateurs, le parseur de matériel, les règles d'événements et de matching, le quota, le contrôle d'origine, les en-têtes et des composants critiques. L'intégration réelle et Playwright complètent les limites du périmètre unitaire.
+Jest couvre les validateurs, le parseur de matériel, les règles d'événements et de matching, le quota, le contrôle d'origine, les en-têtes et des composants critiques. Ce périmètre ciblé atteint 96 % des lignes, mais la mesure globale atteint 20,23 % : la majorité du code développé n'est pas encore couverte par des tests unitaires. L'intégration réelle et Playwright renforcent la non-régression sans remplacer ce critère.
 
 Preuves principales : [harnais Jest](./04_HARNAIS_TESTS_UNITAIRES.md) et [tests d'intégration](./06_TESTS_INTEGRATION_C222.md).
 
@@ -120,6 +121,8 @@ Preuves principales : [sécurité OWASP](./07_SECURITE_OWASP_C223.md) et [access
 ### C2.2.4 - Versions et déploiements
 
 Git, Semantic Versioning, le changelog et les images par SHA relient le besoin à l'artefact. La release stable promeut le même candidat testé et fournit un bundle de déploiement autonome.
+
+La manipulation technique est documentée, mais une session autonome formalisée avec des utilisateurs distincts du développeur reste nécessaire pour rendre la preuve complète.
 
 Preuve principale : [versions et déploiements](./09_VERSIONS_DEPLOIEMENTS_C224.md).
 
@@ -157,6 +160,7 @@ Preuves principales : [manuel de déploiement](./12_MANUEL_DEPLOIEMENT_C241.md),
 La réalisation est un prototype de certification, pas une plateforme publique prête à accueillir des données réelles. Les limites principales sont :
 
 - aucune session pilote externe formalisée à la date du dossier ;
+- couverture unitaire globale de 20,23 %, inférieure à la majorité demandée par C2.2.2 ;
 - récupération de mot de passe, export et suppression autonome de compte non exposés ;
 - fil social, carte interactive et topos encore démonstratifs ou hors périmètre ;
 - alertes modérées de dépendances suivies, sans vulnérabilité haute ou critique ;
@@ -166,6 +170,6 @@ Les priorités suivantes sont la validation utilisateur, les parcours RGPD, la r
 
 ## Conclusion
 
-Spity démontre une chaîne complète de conception et de développement : besoin cadré, architecture structurée, fonctionnalités cohérentes, contrôles automatisés, correction d'anomalies, version stable et documentation d'exploitation. Le dossier ne repose pas uniquement sur une description : chaque compétence renvoie à du code versionné, une commande ou un résultat distant.
+Spity démontre une chaîne cohérente de conception et de développement : besoin cadré, architecture structurée, fonctionnalités cohérentes, contrôles automatisés, correction d'anomalies, version stable et documentation d'exploitation. Le dossier ne repose pas uniquement sur une description : chaque compétence renvoie à du code versionné, une commande ou un résultat distant. L'acquisition complète reste conditionnée par le renforcement de la couverture unitaire globale et la formalisation d'un essai utilisateur autonome.
 
 L'[index des critères](./15_INDEX_PREUVES_GRILLE_BC02.md) constitue le point d'entrée pour l'évaluation. Les chapitres détaillés qui suivent fournissent les explications et preuves nécessaires à chaque ligne de la grille.

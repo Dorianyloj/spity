@@ -90,6 +90,7 @@ npm run db:studio    # Ouvre Drizzle Studio
 
 - [Dossier synthétique BC02 au format PDF](../docs/bc02/livrable/DOSSIER_BC02_SPITY.pdf)
 - [Index exhaustif des critères et preuves](../docs/bc02/15_INDEX_PREUVES_GRILLE_BC02.md)
+- [Audit de conformité aux documents officiels](../docs/bc02/17_AUDIT_CONFORMITE_OFFICIEL_BC02.md)
 - [Manuel de déploiement](../docs/bc02/12_MANUEL_DEPLOIEMENT_C241.md)
 - [Manuel d'utilisation](../docs/bc02/13_MANUEL_UTILISATION_C241.md)
 - [Manuel de mise à jour et maintenance](../docs/bc02/14_MANUEL_MISE_A_JOUR_C241.md)

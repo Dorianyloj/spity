@@ -135,7 +135,7 @@
 </tr>
 <tr>
 <td>Date du dossier</td>
-<td>20 juillet 2026</td>
+<td>21 juillet 2026</td>
 </tr>
 <tr>
 <td>Dépôt</td>
@@ -143,7 +143,7 @@
 </tr>
 </tbody></table>
 <h2 id="doc-16_dossier_final_bc02-declaration-de-perimetre">Déclaration de périmètre</h2>
-<p>Ce dossier démontre les neuf compétences du bloc BC02 à partir d&#39;une réalisation fonctionnelle, versionnée et testée. Il distingue volontairement :</p>
+<p>Ce dossier documente les neuf compétences du bloc BC02 à partir d&#39;une réalisation fonctionnelle, versionnée et testée. L&#39;<a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/17_AUDIT_CONFORMITE_OFFICIEL_BC02.md">audit de conformité aux documents officiels</a> conclut à vingt-quatre critères couverts, un critère partiel et un critère à compléter. Il distingue volontairement :</p>
 <ul>
 <li>la vision produit complète de Spity ;</li>
 <li>le prototype BC02 effectivement développé ;</li>
@@ -243,6 +243,10 @@ Next.js App Router et Route Handlers
 <td>96 % lignes, 89,69 % branches, 100 % fonctions.</td>
 </tr>
 <tr>
+<td>Couverture globale mesurée</td>
+<td>20,23 % des lignes et instructions ; critère C2.2.2 à compléter.</td>
+</tr>
+<tr>
 <td>Intégration</td>
 <td>11 résultats HTTP/MariaDB réussis sur une base migrée à neuf.</td>
 </tr>
@@ -272,7 +276,7 @@ Next.js App Router et Route Handlers
 </tr>
 <tr>
 <td>Dernière CI probante</td>
-<td>Run <code>29750556481</code>, cinq jobs réussis dont staging.</td>
+<td>Run <code>29819189642</code>, cinq jobs réussis dont staging.</td>
 </tr>
 </tbody></table>
 <h2 id="doc-16_dossier_final_bc02-couverture-des-competences">Couverture des compétences</h2>
@@ -286,13 +290,14 @@ Next.js App Router et Route Handlers
 <p>L&#39;architecture par feature sépare présentation, API, règles métier et données. Les composants partagés et les contrats Zod limitent la duplication. Le prototype répond aux user stories retenues sur desktop et mobile.</p>
 <p>Preuve principale : <a href="#doc-05_architecture_prototype_c221">architecture et prototype</a>.</p>
 <h3 id="doc-16_dossier_final_bc02-c2-2-2-harnais-unitaire">C2.2.2 - Harnais unitaire</h3>
-<p>Jest couvre les validateurs, le parseur de matériel, les règles d&#39;événements et de matching, le quota, le contrôle d&#39;origine, les en-têtes et des composants critiques. L&#39;intégration réelle et Playwright complètent les limites du périmètre unitaire.</p>
+<p>Jest couvre les validateurs, le parseur de matériel, les règles d&#39;événements et de matching, le quota, le contrôle d&#39;origine, les en-têtes et des composants critiques. Ce périmètre ciblé atteint 96 % des lignes, mais la mesure globale atteint 20,23 % : la majorité du code développé n&#39;est pas encore couverte par des tests unitaires. L&#39;intégration réelle et Playwright renforcent la non-régression sans remplacer ce critère.</p>
 <p>Preuves principales : <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/04_HARNAIS_TESTS_UNITAIRES.md">harnais Jest</a> et <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/06_TESTS_INTEGRATION_C222.md">tests d&#39;intégration</a>.</p>
 <h3 id="doc-16_dossier_final_bc02-c2-2-3-securite-et-accessibilite">C2.2.3 - Sécurité et accessibilité</h3>
 <p>La sécurité est reliée aux dix catégories OWASP 2025. Le RGAA 4.1.2 est retenu et justifié pour le contexte français. Les résultats automatisés sont complétés par des contrôles clavier, focus, mouvement réduit et mobile.</p>
 <p>Preuves principales : <a href="#doc-07_securite_owasp_c223">sécurité OWASP</a> et <a href="#doc-08_accessibilite_rgaa_c223">accessibilité RGAA</a>.</p>
 <h3 id="doc-16_dossier_final_bc02-c2-2-4-versions-et-deploiements">C2.2.4 - Versions et déploiements</h3>
 <p>Git, Semantic Versioning, le changelog et les images par SHA relient le besoin à l&#39;artefact. La release stable promeut le même candidat testé et fournit un bundle de déploiement autonome.</p>
+<p>La manipulation technique est documentée, mais une session autonome formalisée avec des utilisateurs distincts du développeur reste nécessaire pour rendre la preuve complète.</p>
 <p>Preuve principale : <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/09_VERSIONS_DEPLOIEMENTS_C224.md">versions et déploiements</a>.</p>
 <h3 id="doc-16_dossier_final_bc02-c2-3-1-cahier-de-recettes">C2.3.1 - Cahier de recettes</h3>
 <p>Le cahier couvre toutes les fonctions F01 à F10, les rôles, les cas alternatifs, la sécurité, la structure et le mobile. Les scénarios sont automatisés et exécutés sur une MariaDB migrée.</p>
@@ -318,6 +323,7 @@ Next.js App Router et Route Handlers
 <p>La réalisation est un prototype de certification, pas une plateforme publique prête à accueillir des données réelles. Les limites principales sont :</p>
 <ul>
 <li>aucune session pilote externe formalisée à la date du dossier ;</li>
+<li>couverture unitaire globale de 20,23 %, inférieure à la majorité demandée par C2.2.2 ;</li>
 <li>récupération de mot de passe, export et suppression autonome de compte non exposés ;</li>
 <li>fil social, carte interactive et topos encore démonstratifs ou hors périmètre ;</li>
 <li>alertes modérées de dépendances suivies, sans vulnérabilité haute ou critique ;</li>
@@ -325,7 +331,7 @@ Next.js App Router et Route Handlers
 </ul>
 <p>Les priorités suivantes sont la validation utilisateur, les parcours RGPD, la récupération de compte, la persistance sociale, la cartographie et le renforcement de la couverture des composants de présentation.</p>
 <h2 id="doc-16_dossier_final_bc02-conclusion">Conclusion</h2>
-<p>Spity démontre une chaîne complète de conception et de développement : besoin cadré, architecture structurée, fonctionnalités cohérentes, contrôles automatisés, correction d&#39;anomalies, version stable et documentation d&#39;exploitation. Le dossier ne repose pas uniquement sur une description : chaque compétence renvoie à du code versionné, une commande ou un résultat distant.</p>
+<p>Spity démontre une chaîne cohérente de conception et de développement : besoin cadré, architecture structurée, fonctionnalités cohérentes, contrôles automatisés, correction d&#39;anomalies, version stable et documentation d&#39;exploitation. Le dossier ne repose pas uniquement sur une description : chaque compétence renvoie à du code versionné, une commande ou un résultat distant. L&#39;acquisition complète reste conditionnée par le renforcement de la couverture unitaire globale et la formalisation d&#39;un essai utilisateur autonome.</p>
 <p>L&#39;<a href="#doc-15_index_preuves_grille_bc02">index des critères</a> constitue le point d&#39;entrée pour l&#39;évaluation. Les chapitres détaillés qui suivent fournissent les explications et preuves nécessaires à chaque ligne de la grille.</p>
 </section>
 <section class="chapter" data-source="15_INDEX_PREUVES_GRILLE_BC02.md"><h1 id="doc-15_index_preuves_grille_bc02">Index des critères et des preuves BC02</h1>
@@ -333,10 +339,10 @@ Next.js App Router et Route Handlers
 <p>Cet index reprend chaque critère de la grille d&#39;évaluation du bloc 2 du titre Expert en développement logiciel RNCP39583. Il indique où le jury peut trouver l&#39;explication, la réalisation technique et le résultat vérifié.</p>
 <p>Sources officielles utilisées :</p>
 <ul>
-<li>Référentiel Expert en développement logiciel RNCP39583, bloc 2, pages 7 à 10 ;</li>
+<li>Référentiel Expert en développement logiciel RNCP39583, bloc 2, pages 7 à 9 ;</li>
 <li>grille d&#39;évaluation BC02 datée du 10 octobre 2024.</li>
 </ul>
-<p>Statuts : <strong>couvert</strong> signifie que l&#39;explication, la réalisation et une vérification sont présentes ; <strong>couvert avec limite</strong> signale une preuve complète sur le périmètre déclaré mais une extension encore possible.</p>
+<p>Statuts : <strong>couvert</strong> signifie que l&#39;explication, la réalisation et une vérification suffisante sont présentes ; <strong>partiel</strong> signale une preuve existante mais incomplète ; <strong>à compléter</strong> signifie que le seuil littéral de la grille n&#39;est pas encore atteint.</p>
 <h2 id="doc-15_index_preuves_grille_bc02-2-resultat-global">2. Résultat global</h2>
 <table>
 <thead>
@@ -368,8 +374,8 @@ Next.js App Router et Route Handlers
 <tr>
 <td>C2.2.2</td>
 <td>Jeu de tests unitaires</td>
-<td align="center">Couvert avec limite</td>
-<td><a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/04_HARNAIS_TESTS_UNITAIRES.md">Harnais unitaire</a> et <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/06_TESTS_INTEGRATION_C222.md">intégration</a></td>
+<td align="center">À compléter</td>
+<td><a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/04_HARNAIS_TESTS_UNITAIRES.md">Harnais unitaire</a> et <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/17_AUDIT_CONFORMITE_OFFICIEL_BC02.md">audit officiel</a></td>
 </tr>
 <tr>
 <td>C2.2.3</td>
@@ -380,7 +386,7 @@ Next.js App Router et Route Handlers
 <tr>
 <td>C2.2.4</td>
 <td>Historique et dernière version fiable</td>
-<td align="center">Couvert avec limite</td>
+<td align="center">Partiel</td>
 <td><a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/09_VERSIONS_DEPLOIEMENTS_C224.md">Versions et déploiements</a></td>
 </tr>
 <tr>
@@ -438,8 +444,8 @@ Next.js App Router et Route Handlers
 </tr>
 <tr>
 <td>Les critères qualité/performance répondent aux exigences du projet.</td>
-<td>Seuils lint, typage, couverture, vulnérabilités, accessibilité et Lighthouse sont bloquants.</td>
-<td><a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md">Seuils C2.1.1</a>, run CI <code>29750556481</code>, rapports locaux <code>.lighthouseci</code> et <code>coverage</code></td>
+<td>Seuils lint, typage, couverture ciblée, vulnérabilités, accessibilité et Lighthouse sont bloquants.</td>
+<td><a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md">Seuils C2.1.1</a>, run CI <code>29819189642</code>, rapports locaux <code>.lighthouseci</code> et <code>coverage</code></td>
 <td align="center">Couvert</td>
 </tr>
 </tbody></table>
@@ -462,7 +468,7 @@ Next.js App Router et Route Handlers
 <tr>
 <td>Le protocole définit les séquences d&#39;intégration.</td>
 <td>Les jobs qualité, MariaDB/accessibilité, Lighthouse et recette standalone précèdent obligatoirement le staging.</td>
-<td><a href="https://github.com/Dorianyloj/spity/blob/develop/.github/workflows/ci.yml">Workflow CI</a>, <a href="https://github.com/Dorianyloj/spity/actions/runs/29750556481">run réussi 29750556481</a></td>
+<td><a href="https://github.com/Dorianyloj/spity/blob/develop/.github/workflows/ci.yml">Workflow CI</a>, <a href="https://github.com/Dorianyloj/spity/actions/runs/29819189642">run réussi 29819189642</a></td>
 <td align="center">Couvert</td>
 </tr>
 </tbody></table>
@@ -519,12 +525,12 @@ Next.js App Router et Route Handlers
 </thead>
 <tbody><tr>
 <td>Les tests unitaires couvrent la majorité du code développé.</td>
-<td>Le périmètre unitaire déclaré atteint 96 % des lignes, 89,69 % des branches et 100 % des fonctions ; les routes et contrats inter-modules sont complétés par 11 résultats d&#39;intégration et la recette F01-F10.</td>
-<td><a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/04_HARNAIS_TESTS_UNITAIRES.md">Harnais et périmètre</a>, <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/06_TESTS_INTEGRATION_C222.md">tests d&#39;intégration</a>, <code>coverage/coverage-summary.json</code></td>
-<td align="center">Couvert avec limite</td>
+<td>Le périmètre ciblé atteint 96 % des lignes, mais la mesure de tous les fichiers <code>src/</code> atteint seulement 20,23 % des lignes et instructions. Les 11 résultats d&#39;intégration et la recette F01-F10 complètent la non-régression sans satisfaire ce critère unitaire.</td>
+<td><a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/04_HARNAIS_TESTS_UNITAIRES.md">Harnais et périmètre</a>, <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/17_AUDIT_CONFORMITE_OFFICIEL_BC02.md">audit officiel</a></td>
+<td align="center">À compléter</td>
 </tr>
 </tbody></table>
-<p>Limite déclarée : le pourcentage Jest porte sur les modules métier et de sécurité explicitement inclus dans <code>collectCoverageFrom</code>, pas sur chaque composant de présentation. Les parcours non unitaires sont couverts par intégration et Playwright ; l&#39;extension de la couverture composant par composant reste possible.</p>
+<p>Écart déclaré : le pourcentage Jest de 96 % porte sur huit modules métier et de sécurité explicitement inclus dans <code>collectCoverageFrom</code>. La couverture globale de 20,23 % ne constitue pas la majorité du code développé demandée par la grille.</p>
 <h2 id="doc-15_index_preuves_grille_bc02-7-c2-2-3-securite-et-accessibilite">7. C2.2.3 - Sécurité et accessibilité</h2>
 <table>
 <thead>
@@ -578,9 +584,9 @@ Next.js App Router et Route Handlers
 </tr>
 <tr>
 <td>Le logiciel est fonctionnel et manipulable en autonomie.</td>
-<td>Une release <code>v0.1.0</code>, un bundle, trois manuels et des comptes de démonstration permettent le démarrage et les parcours sans assistance au code.</td>
+<td>Une release <code>v0.1.0</code>, un bundle, trois manuels et des comptes de démonstration permettent le démarrage et les parcours sans assistance au code. Aucune observation indépendante n&#39;est encore consignée.</td>
 <td><a href="https://github.com/Dorianyloj/spity/releases/tag/v0.1.0">Release v0.1.0</a>, <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/13_MANUEL_UTILISATION_C241.md">manuel utilisateur</a></td>
-<td align="center">Couvert avec limite</td>
+<td align="center">Partiel</td>
 </tr>
 </tbody></table>
 <p>Limite déclarée : la recette automatisée et la manipulation par le développeur sont prouvées. Une session pilote formalisée avec des utilisateurs externes au projet reste recommandée avant une exploitation publique.</p>
@@ -603,7 +609,7 @@ Next.js App Router et Route Handlers
 <tr>
 <td>Les tests fonctionnels, structurels et de sécurité sont conformes au plan.</td>
 <td>Six scénarios Playwright vérifient rôles, données, capacité, sécurité, clavier et mobile sur MariaDB migrée.</td>
-<td>Run <code>29750556481</code>, artefact <code>acceptance-689e59d...</code>, <a href="#doc-10_cahier_recettes_c231">résultats</a></td>
+<td>Run <code>29819189642</code>, artefact <code>acceptance-c1cb0f1...</code>, <a href="#doc-10_cahier_recettes_c231">résultats</a></td>
 <td align="center">Couvert</td>
 </tr>
 </tbody></table>
@@ -694,14 +700,19 @@ Next.js App Router et Route Handlers
 <td><a href="https://github.com/Dorianyloj/spity/releases/tag/v0.1.0">Spity v0.1.0</a></td>
 <td>Bundle, manifeste, somme SHA-256 et images versionnées.</td>
 </tr>
+<tr>
+<td>Audit final du dossier</td>
+<td><a href="https://github.com/Dorianyloj/spity/actions/runs/29819189642">Run 29819189642</a></td>
+<td>Cinq jobs réussis sur le commit du PDF synthétique.</td>
+</tr>
 </tbody></table>
 <h2 id="doc-15_index_preuves_grille_bc02-14-points-restant-a-organiser">14. Points restant à organiser</h2>
-<p>Ces points ne remettent pas en cause les critères techniques démontrés, mais doivent être présentés honnêtement au jury :</p>
+<p>Ces points doivent être présentés honnêtement au jury ; les deux premiers correspondent aux preuves encore insuffisantes :</p>
 <ul>
+<li>porter la couverture unitaire globale au-delà de 50 % des lignes, avec une cible d&#39;au moins 60 % ;</li>
 <li>conduire une session pilote formalisée avec au moins deux utilisateurs externes au développement ;</li>
 <li>conserver des captures des protections de branches GitHub si elles sont activées dans l&#39;interface distante ;</li>
 <li>exécuter périodiquement un exercice de restauration sur un environnement isolé ;</li>
-<li>étendre la couverture Jest aux composants de présentation qui évoluent le plus ;</li>
 <li>poursuivre les fonctions hors prototype : carte interactive, fil social persistant, topos et parcours RGPD autonomes.</li>
 </ul>
 </section>

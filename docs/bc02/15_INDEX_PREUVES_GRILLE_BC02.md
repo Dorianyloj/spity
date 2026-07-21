@@ -6,10 +6,10 @@ Cet index reprend chaque critère de la grille d'évaluation du bloc 2 du titre 
 
 Sources officielles utilisées :
 
-- Référentiel Expert en développement logiciel RNCP39583, bloc 2, pages 7 à 10 ;
+- Référentiel Expert en développement logiciel RNCP39583, bloc 2, pages 7 à 9 ;
 - grille d'évaluation BC02 datée du 10 octobre 2024.
 
-Statuts : **couvert** signifie que l'explication, la réalisation et une vérification sont présentes ; **couvert avec limite** signale une preuve complète sur le périmètre déclaré mais une extension encore possible.
+Statuts : **couvert** signifie que l'explication, la réalisation et une vérification suffisante sont présentes ; **partiel** signale une preuve existante mais incomplète ; **à compléter** signifie que le seuil littéral de la grille n'est pas encore atteint.
 
 ## 2. Résultat global
 
@@ -18,9 +18,9 @@ Statuts : **couvert** signifie que l'explication, la réalisation et une vérifi
 | C2.1.1 | Protocole de déploiement continu et critères qualité/performance | Couvert | [Environnements et déploiement](./02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md) |
 | C2.1.2 | Protocole d'intégration continue | Couvert | [Protocole CI](./03_PROTOCOLE_INTEGRATION_CONTINUE.md) |
 | C2.2.1 | Architecture maintenable et prototype fonctionnel | Couvert | [Architecture du prototype](./05_ARCHITECTURE_PROTOTYPE_C221.md) |
-| C2.2.2 | Jeu de tests unitaires | Couvert avec limite | [Harnais unitaire](./04_HARNAIS_TESTS_UNITAIRES.md) et [intégration](./06_TESTS_INTEGRATION_C222.md) |
+| C2.2.2 | Jeu de tests unitaires | À compléter | [Harnais unitaire](./04_HARNAIS_TESTS_UNITAIRES.md) et [audit officiel](./17_AUDIT_CONFORMITE_OFFICIEL_BC02.md) |
 | C2.2.3 | Sécurité et accessibilité | Couvert | [OWASP](./07_SECURITE_OWASP_C223.md) et [RGAA](./08_ACCESSIBILITE_RGAA_C223.md) |
-| C2.2.4 | Historique et dernière version fiable | Couvert avec limite | [Versions et déploiements](./09_VERSIONS_DEPLOIEMENTS_C224.md) |
+| C2.2.4 | Historique et dernière version fiable | Partiel | [Versions et déploiements](./09_VERSIONS_DEPLOIEMENTS_C224.md) |
 | C2.3.1 | Cahier de recettes | Couvert | [Cahier F01 à F10](./10_CAHIER_RECETTES_C231.md) |
 | C2.3.2 | Plan de correction des bogues | Couvert | [Registre des anomalies](./11_PLAN_CORRECTION_BOGUES_C232.md) |
 | C2.4.1 | Trois manuels d'exploitation | Couvert | [Déploiement](./12_MANUEL_DEPLOIEMENT_C241.md), [utilisation](./13_MANUEL_UTILISATION_C241.md), [maintenance](./14_MANUEL_MISE_A_JOUR_C241.md) |
@@ -33,14 +33,14 @@ Statuts : **couvert** signifie que l'explication, la réalisation et une vérifi
 | L'environnement de développement est détaillé. | Node.js 22, npm 10, Next.js, TypeScript, MariaDB, Docker Compose, variables et commandes de démarrage sont précisés. | [Document C2.1.1](./02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md), [`package.json`](../../spity/package.json), [Compose local](../../spity/docker-compose.yml) | Couvert |
 | Les outils permettent d'identifier compilateur, serveur d'application et gestion de sources. | TypeScript est vérifié par `tsc`, Next.js/Node fournit le serveur, Git et GitHub assurent les sources ; Drizzle, Jest, Playwright, Lighthouse et Docker complètent la chaîne. | [Table des outils](./02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md), [README](../../spity/README.md) | Couvert |
 | Le protocole définit les différentes séquences de déploiement. | Conditions d'entrée, sauvegarde, migration one-shot, démarrage, contrôle, promotion et rollback sont ordonnés. | [Manuel de déploiement](./12_MANUEL_DEPLOIEMENT_C241.md), [runbook de release](../../spity/DEPLOYMENT.md) | Couvert |
-| Les critères qualité/performance répondent aux exigences du projet. | Seuils lint, typage, couverture, vulnérabilités, accessibilité et Lighthouse sont bloquants. | [Seuils C2.1.1](./02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md), run CI `29750556481`, rapports locaux `.lighthouseci` et `coverage` | Couvert |
+| Les critères qualité/performance répondent aux exigences du projet. | Seuils lint, typage, couverture ciblée, vulnérabilités, accessibilité et Lighthouse sont bloquants. | [Seuils C2.1.1](./02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md), run CI `29819189642`, rapports locaux `.lighthouseci` et `coverage` | Couvert |
 
 ## 4. C2.1.2 - Intégration continue
 
 | Critère officiel | Explication et réalisation | Preuve vérifiable | Statut |
 | --- | --- | --- | :---: |
 | Le protocole d'intégration continue est explicité clairement. | Déclencheurs, environnement, permissions, stratégie de branches, revue et traitement d'échec sont documentés. | [Protocole CI](./03_PROTOCOLE_INTEGRATION_CONTINUE.md) | Couvert |
-| Le protocole définit les séquences d'intégration. | Les jobs qualité, MariaDB/accessibilité, Lighthouse et recette standalone précèdent obligatoirement le staging. | [Workflow CI](../../.github/workflows/ci.yml), [run réussi 29750556481](https://github.com/Dorianyloj/spity/actions/runs/29750556481) | Couvert |
+| Le protocole définit les séquences d'intégration. | Les jobs qualité, MariaDB/accessibilité, Lighthouse et recette standalone précèdent obligatoirement le staging. | [Workflow CI](../../.github/workflows/ci.yml), [run réussi 29819189642](https://github.com/Dorianyloj/spity/actions/runs/29819189642) | Couvert |
 
 ## 5. C2.2.1 - Architecture et prototype
 
@@ -56,9 +56,9 @@ Statuts : **couvert** signifie que l'explication, la réalisation et une vérifi
 
 | Critère officiel | Explication et réalisation | Preuve vérifiable | Statut |
 | --- | --- | --- | :---: |
-| Les tests unitaires couvrent la majorité du code développé. | Le périmètre unitaire déclaré atteint 96 % des lignes, 89,69 % des branches et 100 % des fonctions ; les routes et contrats inter-modules sont complétés par 11 résultats d'intégration et la recette F01-F10. | [Harnais et périmètre](./04_HARNAIS_TESTS_UNITAIRES.md), [tests d'intégration](./06_TESTS_INTEGRATION_C222.md), `coverage/coverage-summary.json` | Couvert avec limite |
+| Les tests unitaires couvrent la majorité du code développé. | Le périmètre ciblé atteint 96 % des lignes, mais la mesure de tous les fichiers `src/` atteint seulement 20,23 % des lignes et instructions. Les 11 résultats d'intégration et la recette F01-F10 complètent la non-régression sans satisfaire ce critère unitaire. | [Harnais et périmètre](./04_HARNAIS_TESTS_UNITAIRES.md), [audit officiel](./17_AUDIT_CONFORMITE_OFFICIEL_BC02.md) | À compléter |
 
-Limite déclarée : le pourcentage Jest porte sur les modules métier et de sécurité explicitement inclus dans `collectCoverageFrom`, pas sur chaque composant de présentation. Les parcours non unitaires sont couverts par intégration et Playwright ; l'extension de la couverture composant par composant reste possible.
+Écart déclaré : le pourcentage Jest de 96 % porte sur huit modules métier et de sécurité explicitement inclus dans `collectCoverageFrom`. La couverture globale de 20,23 % ne constitue pas la majorité du code développé demandée par la grille.
 
 ## 7. C2.2.3 - Sécurité et accessibilité
 
@@ -74,7 +74,7 @@ Limite déclarée : le pourcentage Jest porte sur les modules métier et de séc
 | --- | --- | --- | :---: |
 | Un système de gestion de versions est utilisé. | Git, branches `develop`/`main`, Conventional Commits, SemVer, tags et images par SHA sont utilisés. | [Gestion des versions](./09_VERSIONS_DEPLOIEMENTS_C224.md), [`CHANGELOG.md`](../../CHANGELOG.md), historique Git | Couvert |
 | Les évolutions du prototype sont tracées. | Le changelog, les commits, les migrations et le registre d'anomalies relient chaque évolution à une preuve. | [`CHANGELOG.md`](../../CHANGELOG.md), [`drizzle`](../../spity/drizzle), [bogues](./11_PLAN_CORRECTION_BOGUES_C232.md) | Couvert |
-| Le logiciel est fonctionnel et manipulable en autonomie. | Une release `v0.1.0`, un bundle, trois manuels et des comptes de démonstration permettent le démarrage et les parcours sans assistance au code. | [Release v0.1.0](https://github.com/Dorianyloj/spity/releases/tag/v0.1.0), [manuel utilisateur](./13_MANUEL_UTILISATION_C241.md) | Couvert avec limite |
+| Le logiciel est fonctionnel et manipulable en autonomie. | Une release `v0.1.0`, un bundle, trois manuels et des comptes de démonstration permettent le démarrage et les parcours sans assistance au code. Aucune observation indépendante n'est encore consignée. | [Release v0.1.0](https://github.com/Dorianyloj/spity/releases/tag/v0.1.0), [manuel utilisateur](./13_MANUEL_UTILISATION_C241.md) | Partiel |
 
 Limite déclarée : la recette automatisée et la manipulation par le développeur sont prouvées. Une session pilote formalisée avec des utilisateurs externes au projet reste recommandée avant une exploitation publique.
 
@@ -83,7 +83,7 @@ Limite déclarée : la recette automatisée et la manipulation par le développe
 | Critère officiel | Explication et réalisation | Preuve vérifiable | Statut |
 | --- | --- | --- | :---: |
 | Le cahier reprend l'ensemble des fonctionnalités attendues. | Les fonctions F01 à F10 sont toutes reliées à un scénario, des préconditions, des actions et des résultats. | [Cahier de recettes](./10_CAHIER_RECETTES_C231.md), [`bc02-recipe.spec.ts`](../../spity/tests/acceptance/bc02-recipe.spec.ts) | Couvert |
-| Les tests fonctionnels, structurels et de sécurité sont conformes au plan. | Six scénarios Playwright vérifient rôles, données, capacité, sécurité, clavier et mobile sur MariaDB migrée. | Run `29750556481`, artefact `acceptance-689e59d...`, [résultats](./10_CAHIER_RECETTES_C231.md) | Couvert |
+| Les tests fonctionnels, structurels et de sécurité sont conformes au plan. | Six scénarios Playwright vérifient rôles, données, capacité, sécurité, clavier et mobile sur MariaDB migrée. | Run `29819189642`, artefact `acceptance-c1cb0f1...`, [résultats](./10_CAHIER_RECETTES_C231.md) | Couvert |
 
 ## 10. C2.3.2 - Correction des bogues
 
@@ -120,13 +120,14 @@ Les captures suivantes sont générées par `npm run docs:capture` depuis les co
 | Blocage réel du staging | [Run 29749715001](https://github.com/Dorianyloj/spity/actions/runs/29749715001) | Recette en échec, staging ignoré. |
 | Retest standalone | [Run 29750556481](https://github.com/Dorianyloj/spity/actions/runs/29750556481) | Cinq jobs réussis et images publiées. |
 | Release stable | [Spity v0.1.0](https://github.com/Dorianyloj/spity/releases/tag/v0.1.0) | Bundle, manifeste, somme SHA-256 et images versionnées. |
+| Audit final du dossier | [Run 29819189642](https://github.com/Dorianyloj/spity/actions/runs/29819189642) | Cinq jobs réussis sur le commit du PDF synthétique. |
 
 ## 14. Points restant à organiser
 
-Ces points ne remettent pas en cause les critères techniques démontrés, mais doivent être présentés honnêtement au jury :
+Ces points doivent être présentés honnêtement au jury ; les deux premiers correspondent aux preuves encore insuffisantes :
 
+- porter la couverture unitaire globale au-delà de 50 % des lignes, avec une cible d'au moins 60 % ;
 - conduire une session pilote formalisée avec au moins deux utilisateurs externes au développement ;
 - conserver des captures des protections de branches GitHub si elles sont activées dans l'interface distante ;
 - exécuter périodiquement un exercice de restauration sur un environnement isolé ;
-- étendre la couverture Jest aux composants de présentation qui évoluent le plus ;
 - poursuivre les fonctions hors prototype : carte interactive, fil social persistant, topos et parcours RGPD autonomes.
