@@ -122,10 +122,10 @@ Ajouter un nouveau type d'événement demande une évolution coordonnée de l'en
 | Migration complète sur MariaDB temporaire | Succès, migrations `0000` à `0004` appliquées. |
 | Seed reproductible | Succès, 2 événements, 1 demande et 2 inscriptions actives. |
 | Routes des trois écrans connectés | HTTP 200. |
-| Tests unitaires | 69 tests réussis sur 69. |
+| Tests unitaires | 126 tests réussis dans 23 suites, avec mesure globale de tout `src/`. |
 | ESLint | Succès, aucune erreur ni avertissement. |
 | TypeScript strict | Succès. |
-| GitHub Actions | [Exécution 29739778393](https://github.com/Dorianyloj/spity/actions/runs/29739778393) réussie sur le SHA `1db84b8e1058aea6c4785fa5b14a9fdcde533541`. |
+| GitHub Actions | [Exécution 29831871915](https://github.com/Dorianyloj/spity/actions/runs/29831871915) réussie avec les cinq jobs, dont le staging. |
 
 Les comptes du seed permettent une démonstration immédiate avec le mot de passe documenté dans le script : Lina envoie les demandes, Nassim possède une demande entrante, et Club Alpin Lyon administre les événements.
 

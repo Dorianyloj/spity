@@ -1,6 +1,6 @@
 {
-  "baseURL": "http://127.0.0.1:3000",
-  "generatedAt": "2026-07-20T14:40:47.386Z",
+  "baseURL": "http://localhost:3000",
+  "generatedAt": "2026-07-21T13:29:09.381Z",
   "captures": [
     {
       "account": "climber",
@@ -40,6 +40,24 @@
       "viewport": {
         "width": 390,
         "height": 844
+      }
+    },
+    {
+      "file": "05-couverture-jest-globale.png",
+      "source": "coverage/lcov-report/index.html",
+      "title": "Rapport de couverture globale Jest",
+      "viewport": {
+        "width": 1000,
+        "height": 260
+      }
+    },
+    {
+      "file": "06-recette-playwright.png",
+      "source": "playwright-report/index.html",
+      "title": "Rapport de recette Playwright",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
       }
     }
   ]

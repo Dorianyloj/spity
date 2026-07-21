@@ -83,8 +83,8 @@ J'ai utilisé TypeScript strict de bout en bout. J'ai retenu Next.js pour réuni
 | Lighthouse public | Performance 97 à 99, accessibilité 100, SEO 100. |
 | Responsive | Reflow vérifié à 360 px sans défilement horizontal incohérent. |
 | Livraison | Release `v0.1.0`, images immuables, bundle, manifeste et SHA-256. |
-| Dernière CI probante | Run `29827790355`, cinq jobs réussis dont staging et couverture globale. |
-| Annexes visuelles | Sept captures : produit desktop/mobile, historique Git, pipeline CI et release. |
+| Dernière CI probante | Run `29831871915`, cinq jobs réussis dont staging et couverture globale. |
+| Annexes visuelles | Neuf captures : produit desktop/mobile, rapports Jest/Playwright, historique Git, pipeline CI et release. |
 
 ## Couverture des compétences
 
@@ -174,4 +174,4 @@ Avec Spity, je montre une chaîne complète de conception et de développement :
 
 L'[index des critères](./15_INDEX_PREUVES_GRILLE_BC02.md) constitue le point d'entrée pour l'évaluation. Les documents techniques liés fournissent les explications et preuves nécessaires à chaque ligne de la grille.
 
-Les [annexes visuelles](./18_ANNEXES_VISUELLES_BC02.md) regroupent les captures produit et GitHub utilisées pendant la soutenance.
+Les [annexes visuelles](./18_ANNEXES_VISUELLES_BC02.md) regroupent les captures produit, les rapports de tests et les preuves GitHub utilisées pendant la soutenance.

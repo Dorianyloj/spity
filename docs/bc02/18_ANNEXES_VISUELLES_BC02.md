@@ -2,7 +2,7 @@
 
 ## Objet des annexes
 
-Ces annexes regroupent les preuves visuelles essentielles sans alourdir le corps du dossier. Les captures produit sont générées depuis les comptes de démonstration avec `npm run docs:capture`. Les captures GitHub publiques sont régénérables avec `npm run docs:capture:github`.
+Ces annexes regroupent les preuves visuelles essentielles sans alourdir le corps du dossier. Les captures produit et les rapports locaux sont générés avec `npm run docs:capture`. Les captures GitHub publiques sont régénérables avec `npm run docs:capture:github`.
 
 | Annexe | Preuve | Critères principalement concernés |
 | --- | --- | --- |
@@ -13,6 +13,8 @@ Ces annexes regroupent les preuves visuelles essentielles sans alourdir le corps
 | A5 | Historique Git de `develop` | C2.2.4, C2.3.2 |
 | A6 | Pipeline CI et staging réussis | C2.1.2, C2.2.2, C2.2.3, C2.3.1 |
 | A7 | Release stable `v0.1.0` | C2.2.4, C2.4.1 |
+| A8 | Rapport de couverture globale Jest | C2.2.2 |
+| A9 | Rapport de recette Playwright | C2.3.1 |
 
 ## A1 - Tableau de bord grimpeur
 
@@ -56,6 +58,18 @@ La [release `v0.1.0`](https://github.com/Dorianyloj/spity/releases/tag/v0.1.0) r
 
 ![Release GitHub Spity v0.1.0](./annexes/github/03-release-v0.1.0.png)
 
+## A8 - Couverture globale du code avec Jest
+
+Le rapport HTML mesure tout `src/`, y compris les fichiers sans test. Il confirme une couverture majoritaire avec 62,56 % des lignes et instructions, 77,67 % des branches et 55,06 % des fonctions.
+
+![Rapport Jest de couverture globale du code source](./annexes/captures/05-couverture-jest-globale.png)
+
+## A9 - Recette Playwright F01 à F10
+
+Le rapport Playwright présente les six scénarios de recette exécutés, sans échec, retry ni test ignoré. Ces scénarios couvrent les fonctions F01 à F10 ainsi que les contrôles fonctionnels, structurels, de sécurité et d'accessibilité.
+
+![Rapport Playwright des six scénarios de recette BC02](./annexes/captures/06-recette-playwright.png)
+
 ## Traçabilité des fichiers
 
-Les manifestes [`annexes/captures/manifest.json`](./annexes/captures/manifest.json) et [`annexes/github/manifest.json`](./annexes/github/manifest.json) enregistrent la date, la source et le fichier de chaque capture. Le manifeste du livrable conserve séparément les empreintes SHA-256 du HTML, du PDF et des trois documents assemblés.
+Les manifestes [`annexes/captures/manifest.json`](./annexes/captures/manifest.json) et [`annexes/github/manifest.json`](./annexes/github/manifest.json) enregistrent la date, la source et le fichier de chaque capture. Le manifeste du livrable conserve séparément les empreintes SHA-256 du HTML, du PDF et des documents assemblés.

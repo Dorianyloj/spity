@@ -92,8 +92,8 @@ Action attendue : faire exécuter le parcours de recette à au moins deux utilis
 
 ## 8. Risque de remise hors ligne
 
-Le PDF contient la synthèse rédigée à la première personne, mon retour d'expérience technique, l'index des vingt-six critères et sept annexes visuelles. Les documents techniques détaillés restent accessibles par les liens GitHub et dans `docs/bc02/`. Pour une remise sans accès réseau, il faut transmettre le PDF avec ce dossier ou une archive du dépôt.
+Le PDF contient la synthèse rédigée à la première personne, un chapitre renforcé sur les quatre compétences déterminantes, mon retour d'expérience technique, l'index des vingt-six critères et neuf annexes visuelles. Les documents techniques détaillés restent accessibles par les liens GitHub et dans `docs/bc02/`. Pour une remise sans accès réseau, il faut transmettre le PDF avec ce dossier ou une archive du dépôt.
 
 ## 9. Preuve technique la plus récente
 
-L'[exécution GitHub Actions no 29827790355](https://github.com/Dorianyloj/spity/actions/runs/29827790355), sur le commit `b9e34c2`, a réussi les cinq jobs : qualité avec couverture globale, intégration MariaDB, recette BC02, Lighthouse et images staging. L'artefact `coverage-b9e34c2...` conserve le rapport Jest complet jusqu'au 20 août 2026.
+L'[exécution GitHub Actions no 29831871915](https://github.com/Dorianyloj/spity/actions/runs/29831871915), sur le commit `6bddda4`, a réussi les cinq jobs : qualité avec couverture globale, intégration MariaDB, recette BC02, Lighthouse et images staging.

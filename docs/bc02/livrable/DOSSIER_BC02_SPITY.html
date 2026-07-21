@@ -51,8 +51,9 @@
   .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a4-"],
   .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a5-"],
   .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a6-"],
-  .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a7-"] { break-before: page; }
-  .chapter[data-source="19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES.md"] h2 ~ h2 { break-before: page; }
+  .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a7-"],
+  .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a8-"],
+  .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a9-"] { break-before: page; }
   h1, h2, h3 { break-after: avoid; color: var(--ink); letter-spacing: 0; }
   h1 { margin: 8mm 0 6mm; padding-bottom: 3mm; border-bottom: 3px solid var(--green); font-size: 22pt; line-height: 1.12; }
   h2 { margin: 8mm 0 3mm; font-size: 15pt; line-height: 1.2; color: var(--green-dark); }
@@ -92,11 +93,12 @@
     </section>
     <section class="toc">
       <h1>Sommaire du dossier</h1>
-      <p class="document-note">Cette version destinée au jury conserve ma synthèse, mon retour d'expérience, les 26 critères officiels et sept annexes visuelles. Les documents techniques complémentaires restent accessibles par les liens du dossier et dans <code>docs/bc02/</code>.</p>
+      <p class="document-note">Cette version destinée au jury met en avant mes quatre compétences déterminantes, puis conserve mon retour d'expérience, les 26 critères officiels et neuf annexes visuelles. Les documents techniques complémentaires restent accessibles par les liens du dossier et dans <code>docs/bc02/</code>.</p>
       <ol><li><span>01</span><a href="#doc-16_dossier_final_bc02">Mon dossier de validation BC02 - Spity</a></li>
-<li><span>02</span><a href="#doc-19_retour_experience_et_choix_techniques">Mon retour d'expérience et mes choix techniques - BC02</a></li>
-<li><span>03</span><a href="#doc-15_index_preuves_grille_bc02">Index des critères et des preuves BC02</a></li>
-<li><span>04</span><a href="#doc-18_annexes_visuelles_bc02">Annexes visuelles et preuves d'exécution - BC02</a></li></ol>
+<li><span>02</span><a href="#doc-20_focus_competences_determinantes_bc02">Mes quatre compétences déterminantes du bloc 2</a></li>
+<li><span>03</span><a href="#doc-19_retour_experience_et_choix_techniques">Mon retour d'expérience et mes choix techniques - BC02</a></li>
+<li><span>04</span><a href="#doc-15_index_preuves_grille_bc02">Index des critères et des preuves BC02</a></li>
+<li><span>05</span><a href="#doc-18_annexes_visuelles_bc02">Annexes visuelles et preuves d'exécution - BC02</a></li></ol>
     </section>
     <section class="chapter" data-source="16_DOSSIER_FINAL_BC02.md"><h1 id="doc-16_dossier_final_bc02">Mon dossier de validation BC02 - Spity</h1>
 <h2 id="doc-16_dossier_final_bc02-identification">Identification</h2>
@@ -274,11 +276,11 @@ Next.js App Router et Route Handlers
 </tr>
 <tr>
 <td>Dernière CI probante</td>
-<td>Run <code>29827790355</code>, cinq jobs réussis dont staging et couverture globale.</td>
+<td>Run <code>29831871915</code>, cinq jobs réussis dont staging et couverture globale.</td>
 </tr>
 <tr>
 <td>Annexes visuelles</td>
-<td>Sept captures : produit desktop/mobile, historique Git, pipeline CI et release.</td>
+<td>Neuf captures : produit desktop/mobile, rapports Jest/Playwright, historique Git, pipeline CI et release.</td>
 </tr>
 </tbody></table>
 <h2 id="doc-16_dossier_final_bc02-couverture-des-competences">Couverture des compétences</h2>
@@ -335,7 +337,255 @@ Next.js App Router et Route Handlers
 <h2 id="doc-16_dossier_final_bc02-conclusion">Conclusion</h2>
 <p>Avec Spity, je montre une chaîne complète de conception et de développement : j&#39;ai cadré le besoin, structuré l&#39;architecture, développé un ensemble cohérent de fonctions, automatisé les contrôles, corrigé les anomalies, produit une version stable et rédigé la documentation d&#39;exploitation. Je ne veux pas que ce dossier repose uniquement sur mes explications : chaque compétence renvoie à du code versionné, une commande ou un résultat distant. La dernière preuve partielle que je dois encore formaliser est un essai utilisateur autonome avec des personnes externes au développement.</p>
 <p>L&#39;<a href="#doc-15_index_preuves_grille_bc02">index des critères</a> constitue le point d&#39;entrée pour l&#39;évaluation. Les documents techniques liés fournissent les explications et preuves nécessaires à chaque ligne de la grille.</p>
-<p>Les <a href="#doc-18_annexes_visuelles_bc02">annexes visuelles</a> regroupent les captures produit et GitHub utilisées pendant la soutenance.</p>
+<p>Les <a href="#doc-18_annexes_visuelles_bc02">annexes visuelles</a> regroupent les captures produit, les rapports de tests et les preuves GitHub utilisées pendant la soutenance.</p>
+</section>
+<section class="chapter" data-source="20_FOCUS_COMPETENCES_DETERMINANTES_BC02.md"><h1 id="doc-20_focus_competences_determinantes_bc02">Mes quatre compétences déterminantes du bloc 2</h1>
+<p>Les compétences C2.2.1, C2.2.2, C2.2.3 et C2.3.1 sont déterminantes pour la validation de mon bloc 2. Je ne veux donc pas seulement renvoyer vers du code ou annoncer qu&#39;un contrôle est « conforme ». Dans ce chapitre, je reprends les indicateurs de la grille et j&#39;explique ce que j&#39;ai réellement réalisé, le résultat que j&#39;ai obtenu et la preuve que je peux présenter au jury.</p>
+<h2 id="doc-20_focus_competences_determinantes_bc02-c2-2-1-concevoir-un-prototype-fonctionnel-maintenable-et-securise">C2.2.1 - Concevoir un prototype fonctionnel, maintenable et sécurisé</h2>
+<h3 id="doc-20_focus_competences_determinantes_bc02-ce-que-je-dois-demontrer">Ce que je dois démontrer</h3>
+<p>La grille attend une architecture structurée, un prototype présenté et l&#39;utilisation justifiée de frameworks et de paradigmes de développement. Elle vérifie aussi cinq résultats : le respect des bonnes pratiques, la réponse au besoin, la cohérence des fonctionnalités et des user stories, le fonctionnement des composants d&#39;interface et la prise en compte de la sécurité.</p>
+<h3 id="doc-20_focus_competences_determinantes_bc02-ce-que-j-39-ai-concu">Ce que j&#39;ai conçu</h3>
+<p>J&#39;ai conçu Spity comme une application web responsive utilisable sur ordinateur et mobile. J&#39;ai volontairement limité le prototype à dix fonctions démontrables, de F01 à F10, plutôt que de simuler toute la vision produit. Le parcours principal relie l&#39;inscription, le profil grimpeur, la recherche d&#39;un partenaire, les demandes de partenariat et l&#39;inscription à un événement. Le parcours club permet de créer son profil, publier un événement, suivre les participants, modifier la capacité et annuler l&#39;événement.</p>
+<p>J&#39;ai retenu une architecture en couches dans un seul projet TypeScript :</p>
+<ol>
+<li>les pages Next.js et les composants React présentent les données et les actions ;</li>
+<li>les Route Handlers contrôlent la session, le rôle, l&#39;origine et les entrées Zod ;</li>
+<li>les fonctions métier TypeScript portent les règles de matching, d&#39;événement et de capacité ;</li>
+<li>les repositories Drizzle isolent la persistance ;</li>
+<li>MariaDB garantit les relations, les contraintes uniques et les transactions.</li>
+</ol>
+<p>Next.js et React répondent au besoin web et responsive. Tailwind et mon design system évitent de dupliquer les composants. React Hook Form et Zod donnent une validation cohérente entre les formulaires et l&#39;API. Drizzle me permet de conserver des requêtes typées et des migrations versionnées. Je sépare les fonctionnalités dans <code>src/features/</code> afin qu&#39;un changement sur les événements n&#39;oblige pas à modifier le matching ou les profils.</p>
+<h3 id="doc-20_focus_competences_determinantes_bc02-correspondance-avec-les-indicateurs-officiels">Correspondance avec les indicateurs officiels</h3>
+<table>
+<thead>
+<tr>
+<th>Indicateur de la grille</th>
+<th>Ma réalisation vérifiable</th>
+<th align="center">Résultat</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Bonnes pratiques, frameworks et paradigmes</td>
+<td>TypeScript strict, App Router, composants réutilisables, validation Zod, règles métier pures, repositories Drizzle et migrations additives.</td>
+<td align="center">Couvert</td>
+</tr>
+<tr>
+<td>Prototype fonctionnel répondant aux besoins</td>
+<td>Deux rôles et dix fonctions F01-F10 reliés dans des parcours de bout en bout.</td>
+<td align="center">Couvert</td>
+</tr>
+<tr>
+<td>Ensemble cohérent de fonctions et de user stories</td>
+<td>F01-F04 couvrent l&#39;accès et le matching ; F05-F08 couvrent les événements ; F09-F10 portent les exigences transverses.</td>
+<td align="center">Couvert</td>
+</tr>
+<tr>
+<td>Composants d&#39;interface présents et fonctionnels</td>
+<td>Formulaires, navigation, filtres, cartes, états vides, boutons et retours d&#39;erreur testés sur desktop et à 360 px.</td>
+<td align="center">Couvert</td>
+</tr>
+<tr>
+<td>Exigences de sécurité</td>
+<td>Session signée, rôles, contrôle du propriétaire, CSRF, quota, Zod, requêtes paramétrées, transactions et en-têtes HTTP.</td>
+<td align="center">Couvert</td>
+</tr>
+</tbody></table>
+<p>Je peux démontrer ce résultat sans préparation spéciale : je me connecte comme grimpeur, je filtre les partenaires et je m&#39;inscris à un événement ; je passe ensuite sur le compte club pour retrouver le participant et administrer l&#39;événement. Les captures A1 à A4 montrent les interfaces desktop et mobile. L&#39;<a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/05_ARCHITECTURE_PROTOTYPE_C221.md">architecture détaillée</a> relie chaque user story à sa route, sa règle et sa preuve.</p>
+<h2 id="doc-20_focus_competences_determinantes_bc02-c2-2-2-developper-un-harnais-de-tests-couvrant-la-majorite-du-code">C2.2.2 - Développer un harnais de tests couvrant la majorité du code</h2>
+<h3 id="doc-20_focus_competences_determinantes_bc02-ce-que-je-dois-demontrer-2">Ce que je dois démontrer</h3>
+<p>La grille demande un jeu de tests unitaires portant sur les fonctionnalités demandées et couvrant la majorité du code développé. Pour éviter une couverture artificielle, ma configuration mesure tout <code>src/</code>, y compris les fichiers sans test, et pas seulement les modules faciles à tester.</p>
+<h3 id="doc-20_focus_competences_determinantes_bc02-mon-harnais-de-tests">Mon harnais de tests</h3>
+<p>J&#39;utilise Jest, jsdom et React Testing Library. Mes 23 suites regroupent 126 tests. Elles contrôlent notamment :</p>
+<ul>
+<li>les schémas Zod et les entrées invalides ;</li>
+<li>les règles de matching et d&#39;événements, dont les limites de capacité ;</li>
+<li>le contrôle CSRF, le quota et les en-têtes de sécurité ;</li>
+<li>le parseur de matériel et ses cas limites ;</li>
+<li>les composants partagés, les formulaires et la navigation clavier ;</li>
+<li>les tableaux de bord, profils, lieux, partenariats et événements ;</li>
+<li>le contrat des tables Drizzle nécessaires au prototype.</li>
+</ul>
+<p>Le fichier <a href="https://github.com/Dorianyloj/spity/blob/develop/spity/jest.config.ts"><code>jest.config.ts</code></a> impose quatre seuils globaux. Si un seuil baisse, <code>npm run test:coverage</code> échoue et le job <code>Quality gates</code> bloque le staging.</p>
+<table>
+<thead>
+<tr>
+<th>Indicateur mesuré sur tout <code>src/</code></th>
+<th align="right">Résultat</th>
+<th align="right">Seuil bloquant</th>
+<th align="center">Décision</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Lignes</td>
+<td align="right">62,56 %</td>
+<td align="right">60 %</td>
+<td align="center">Conforme</td>
+</tr>
+<tr>
+<td>Instructions</td>
+<td align="right">62,56 %</td>
+<td align="right">60 %</td>
+<td align="center">Conforme</td>
+</tr>
+<tr>
+<td>Branches</td>
+<td align="right">77,67 %</td>
+<td align="right">75 %</td>
+<td align="center">Conforme</td>
+</tr>
+<tr>
+<td>Fonctions</td>
+<td align="right">55,06 %</td>
+<td align="right">55 %</td>
+<td align="center">Conforme</td>
+</tr>
+<tr>
+<td>Exécution</td>
+<td align="right">126 tests dans 23 suites</td>
+<td align="right">100 % des tests réussis</td>
+<td align="center">Conforme</td>
+</tr>
+</tbody></table>
+<p>La couverture des lignes, instructions, branches et fonctions dépasse donc la moitié du code mesuré. La capture A8 montre le rapport global produit par Jest. Je complète les tests unitaires avec une intégration HTTP/MariaDB et une recette Playwright, mais je ne les additionne pas artificiellement au pourcentage unitaire.</p>
+<p>Le harnais a déjà détecté une vraie régression : la virgule décimale de <code>9,1 mm</code> était interprétée comme un séparateur de matériel. J&#39;ai ajouté le cas de test, corrigé le découpage puis exécuté toute la suite. Cette anomalie montre que les tests protègent un comportement métier concret et ne servent pas uniquement à produire un chiffre. Le détail des suites et de la progression se trouve dans le <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/04_HARNAIS_TESTS_UNITAIRES.md">document du harnais</a>.</p>
+<p>Je garde une limite explicite : plusieurs Route Handlers et repositories sont moins couverts que les règles et composants. Le seuil global officiel est atteint, mais ma prochaine étape technique consiste à isoler davantage ces dépendances pour augmenter la couverture serveur sans remplacer les tests d&#39;intégration.</p>
+<h2 id="doc-20_focus_competences_determinantes_bc02-c2-2-3-garantir-l-39-evolutivite-la-securite-et-l-39-accessibilite">C2.2.3 - Garantir l&#39;évolutivité, la sécurité et l&#39;accessibilité</h2>
+<h3 id="doc-20_focus_competences_determinantes_bc02-ce-que-je-dois-demontrer-3">Ce que je dois démontrer</h3>
+<p>La grille demande une présentation des mesures de sécurité couvrant les dix risques OWASP, le choix justifié d&#39;un référentiel d&#39;accessibilité et la preuve que le prototype respecte les exigences applicables de ce référentiel. J&#39;ai aussi relié ces contrôles aux spécifications techniques et fonctionnelles du projet.</p>
+<h3 id="doc-20_focus_competences_determinantes_bc02-securite-mise-en-uvre">Sécurité mise en œuvre</h3>
+<p>J&#39;ai utilisé l&#39;OWASP Top 10:2025, version la plus récente au moment du dossier. La matrice complète est disponible dans mon <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/07_SECURITE_OWASP_C223.md">audit de sécurité</a>. Les mesures ne sont pas seulement documentées : elles se retrouvent dans le code, les tests unitaires, les tests HTTP/MariaDB et la CI.</p>
+<table>
+<thead>
+<tr>
+<th>Catégorie OWASP</th>
+<th>Mesure principale que j&#39;ai mise en œuvre</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A01 Contrôle d&#39;accès</td>
+<td>Session serveur, rôles, propriétaire/destinataire vérifiés, réponses 401/403 et contrôle CSRF.</td>
+</tr>
+<tr>
+<td>A02 Mauvaise configuration</td>
+<td>Variables validées, CSP, HSTS, <code>nosniff</code>, anti-frame et suppression de l&#39;en-tête de technologie.</td>
+</tr>
+<tr>
+<td>A03 Chaîne logicielle</td>
+<td>Lockfile, <code>npm ci</code>, audit bloquant sur haut/critique et Dependabot npm/Actions.</td>
+</tr>
+<tr>
+<td>A04 Cryptographie</td>
+<td>bcrypt facteur 12, secret HMAC borné, comparaison constante et cookie <code>HttpOnly</code>/<code>Secure</code>.</td>
+</tr>
+<tr>
+<td>A05 Injection</td>
+<td>Zod, Drizzle paramétré, rendu React échappé et absence de SQL ou HTML concaténé.</td>
+</tr>
+<tr>
+<td>A06 Conception non sûre</td>
+<td>Transitions métier bornées, paire unique, transaction et verrou lors de la dernière place.</td>
+</tr>
+<tr>
+<td>A07 Authentification</td>
+<td>Erreur neutre, verrouillage du compte, quota 10/15 min et session signée expirante.</td>
+</tr>
+<tr>
+<td>A08 Intégrité</td>
+<td>Migrations et dépendances versionnées, réponses API typées, artefacts reliés au SHA.</td>
+</tr>
+<tr>
+<td>A09 Journalisation</td>
+<td>Événements JSON sans email, mot de passe ni jeton ; conservation des résultats CI.</td>
+</tr>
+<tr>
+<td>A10 Cas exceptionnels</td>
+<td>JSON invalide géré, réponses sans stack, transactions, healthcheck et error boundary.</td>
+</tr>
+</tbody></table>
+<p>J&#39;annonce aussi les risques résiduels : quota mémoire mono-instance, alerting non centralisé, session non révocable avant expiration et deux alertes PostCSS modérées. Je préfère présenter ces limites et leur plan de traitement plutôt que revendiquer une sécurité de production que le prototype n&#39;a pas encore.</p>
+<h3 id="doc-20_focus_competences_determinantes_bc02-accessibilite-mise-en-uvre">Accessibilité mise en œuvre</h3>
+<p>J&#39;ai choisi le RGAA 4.1.2 parce qu&#39;il s&#39;agit du référentiel français directement applicable à une interface web et qu&#39;il donne des critères vérifiables sur la structure, le clavier, les formulaires, les couleurs et la consultation. Mon échantillon contient les pages publiques, huit états authentifiés et deux vues mobiles à 360 px.</p>
+<p>Mon premier audit a révélé des défauts concrets : absence de lien d&#39;évitement, retours non annoncés, contrastes insuffisants, hiérarchie de titres incorrecte et débordements sur mobile. J&#39;ai corrigé ces points avec un lien vers le contenu principal, <code>role=&quot;alert&quot;</code> et <code>aria-live</code>, des couleurs à plus de 4,5:1, des titres ordonnés, une commande mobile de 44 x 44 px, un reflow sans largeur parasite et la prise en charge de <code>prefers-reduced-motion</code>.</p>
+<p>Les résultats après correction sont les suivants : aucune violation axe sur l&#39;échantillon, accessibilité Lighthouse à 100 % sur les trois pages publiques, huit états authentifiés et deux vues mobiles, et aucun débordement du document à 360 px. Ces contrôles sont bloquants dans la CI. Le <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/08_ACCESSIBILITE_RGAA_C223.md">rapport RGAA</a> reprend les treize thèmes, les critères applicables, les corrections avant/après et les limites des outils automatiques.</p>
+<p>L&#39;évolutivité est assurée par la séparation des fonctionnalités, les composants partagés, les contrats Zod et les migrations additives. La conformité fonctionnelle est vérifiée par les mêmes fonctions F01-F10 que celles annoncées dans le périmètre : je ne teste pas un produit différent de celui que je présente.</p>
+<h2 id="doc-20_focus_competences_determinantes_bc02-c2-3-1-elaborer-et-executer-le-cahier-de-recettes">C2.3.1 - Élaborer et exécuter le cahier de recettes</h2>
+<h3 id="doc-20_focus_competences_determinantes_bc02-ce-que-je-dois-demontrer-4">Ce que je dois démontrer</h3>
+<p>La grille vérifie que le cahier reprend toutes les fonctionnalités attendues et que les tests fonctionnels, structurels et de sécurité ont réellement été exécutés conformément au plan. Mon cahier ne se limite donc pas à une liste de scénarios futurs : il contient les préconditions, les actions, les résultats attendus, les résultats obtenus et la décision de recette.</p>
+<h3 id="doc-20_focus_competences_determinantes_bc02-ma-recette-executee">Ma recette exécutée</h3>
+<p>J&#39;ai relié les dix fonctions du périmètre à six scénarios Playwright exécutés sur le build standalone avec une MariaDB créée et migrée pour la recette.</p>
+<table>
+<thead>
+<tr>
+<th>Scénario</th>
+<th>Fonctions et risques vérifiés</th>
+<th align="center">Résultat obtenu</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>REC-F01-001</td>
+<td>Mot de passe faible, inscription, onboarding, session, déconnexion et reconnexion.</td>
+<td align="center">Conforme</td>
+</tr>
+<tr>
+<td>REC-F02-001</td>
+<td>Consultation et modification du profil grimpeur, puis création d&#39;un profil club.</td>
+<td align="center">Conforme</td>
+</tr>
+<tr>
+<td>REC-F03-F04-001</td>
+<td>Filtres combinés, état vide, demandes, acceptation, refus et historique.</td>
+<td align="center">Conforme</td>
+</tr>
+<tr>
+<td>REC-F05-F08-001</td>
+<td>Création d&#39;un événement, dernière place, confidentialité, capacité, désinscription et annulation.</td>
+<td align="center">Conforme</td>
+</tr>
+<tr>
+<td>REC-F09-001</td>
+<td>Accès anonyme, mauvais rôle, origine étrangère, UUID invalide, CSP et réponses sûres.</td>
+<td align="center">Conforme</td>
+</tr>
+<tr>
+<td>REC-F10-001</td>
+<td>Navigation clavier, titre, nom accessible, mouvement réduit et reflow à 360 px.</td>
+<td align="center">Conforme</td>
+</tr>
+</tbody></table>
+<p>La couverture fonctionnelle est complète pour le périmètre annoncé : F01 à F10 possèdent toutes une preuve navigateur et une preuve complémentaire unitaire ou d&#39;intégration. Les contrôles structurels ajoutent ESLint, TypeScript strict et le build de 28 routes. Les contrôles de sécurité ajoutent l&#39;audit des dépendances, les tests CSRF/quota et les autorisations HTTP. L&#39;accessibilité ajoute axe et Lighthouse.</p>
+<p>Le résultat de référence est de 6 scénarios réussis sur 6, sans test ignoré, instable ou rejoué. Les 126 tests unitaires, les 11 résultats d&#39;intégration et les cinq jobs de la CI sont également réussis. La capture A9 montre le rapport Playwright et le run GitHub Actions 29831871915 confirme que le staging n&#39;a commencé qu&#39;après la réussite des quatre portes précédentes.</p>
+<p>Les scénarios exécutables sont conservés dans <a href="https://github.com/Dorianyloj/spity/blob/develop/spity/tests/acceptance/bc02-recipe.spec.ts"><code>tests/acceptance/bc02-recipe.spec.ts</code></a>. Le <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/10_CAHIER_RECETTES_C231.md">cahier de recettes complet</a> documente les critères d&#39;entrée, les données, la matrice F01-F10, les résultats et les artefacts. Ma décision de recette est donc « favorable pour le périmètre BC02 », avec les fonctions hors périmètre toujours annoncées comme telles.</p>
+<h2 id="doc-20_focus_competences_determinantes_bc02-synthese-de-validation">Synthèse de validation</h2>
+<table>
+<thead>
+<tr>
+<th>Compétence déterminante</th>
+<th>Preuve centrale</th>
+<th align="center">Résultat</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>C2.2.1</td>
+<td>Prototype desktop/mobile, architecture et parcours F01-F10</td>
+<td align="center">Couvert</td>
+</tr>
+<tr>
+<td>C2.2.2</td>
+<td>126 tests, couverture globale majoritaire et seuils CI</td>
+<td align="center">Couvert</td>
+</tr>
+<tr>
+<td>C2.2.3</td>
+<td>Matrices OWASP/RGAA, corrections et audits automatisés</td>
+<td align="center">Couvert sur le prototype</td>
+</tr>
+<tr>
+<td>C2.3.1</td>
+<td>Cahier F01-F10 et six scénarios Playwright exécutés</td>
+<td align="center">Couvert</td>
+</tr>
+</tbody></table>
+<p>Pendant la soutenance, je commencerai par ces quatre compétences. Pour chacune, je présenterai d&#39;abord le besoin, puis une manipulation ou un résultat, et enfin le fichier de preuve. Cela me permet de montrer que le prototype, les tests, la sécurité, l&#39;accessibilité et la recette correspondent au même périmètre fonctionnel.</p>
 </section>
 <section class="chapter" data-source="19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES.md"><h1 id="doc-19_retour_experience_et_choix_techniques">Mon retour d&#39;expérience et mes choix techniques - BC02</h1>
 <p>Ce chapitre complète la synthèse et l&#39;index officiel. J&#39;y explique comment j&#39;ai réellement construit Spity, les décisions que j&#39;ai prises et les problèmes que j&#39;ai rencontrés. Mon objectif n&#39;est pas de reprendre toute la documentation fichier par fichier, mais de montrer ma démarche de développeur et la manière dont j&#39;ai relié le besoin, le code, les tests et la livraison.</p>
@@ -909,7 +1159,7 @@ src/features/events/
 </tr>
 </tbody></table>
 <h2 id="doc-15_index_preuves_grille_bc02-12-preuves-visuelles">12. Preuves visuelles</h2>
-<p>Les sept <a href="#doc-18_annexes_visuelles_bc02">annexes visuelles</a> rassemblent quatre captures du prototype et trois preuves GitHub : historique des commits, pipeline CI complet et release stable. Ce regroupement évite de répéter les mêmes images dans le corps du dossier.</p>
+<p>Les neuf <a href="#doc-18_annexes_visuelles_bc02">annexes visuelles</a> rassemblent quatre captures du prototype, les rapports Jest et Playwright, puis trois preuves GitHub : historique des commits, pipeline CI complet et release stable. Ce regroupement évite de répéter les mêmes images dans le corps du dossier.</p>
 <h2 id="doc-15_index_preuves_grille_bc02-13-preuves-distantes-perennes">13. Preuves distantes pérennes</h2>
 <table>
 <thead>
@@ -962,7 +1212,7 @@ src/features/events/
 </section>
 <section class="chapter" data-source="18_ANNEXES_VISUELLES_BC02.md"><h1 id="doc-18_annexes_visuelles_bc02">Annexes visuelles et preuves d&#39;exécution - BC02</h1>
 <h2 id="doc-18_annexes_visuelles_bc02-objet-des-annexes">Objet des annexes</h2>
-<p>Ces annexes regroupent les preuves visuelles essentielles sans alourdir le corps du dossier. Les captures produit sont générées depuis les comptes de démonstration avec <code>npm run docs:capture</code>. Les captures GitHub publiques sont régénérables avec <code>npm run docs:capture:github</code>.</p>
+<p>Ces annexes regroupent les preuves visuelles essentielles sans alourdir le corps du dossier. Les captures produit et les rapports locaux sont générés avec <code>npm run docs:capture</code>. Les captures GitHub publiques sont régénérables avec <code>npm run docs:capture:github</code>.</p>
 <table>
 <thead>
 <tr>
@@ -1006,6 +1256,16 @@ src/features/events/
 <td>Release stable <code>v0.1.0</code></td>
 <td>C2.2.4, C2.4.1</td>
 </tr>
+<tr>
+<td>A8</td>
+<td>Rapport de couverture globale Jest</td>
+<td>C2.2.2</td>
+</tr>
+<tr>
+<td>A9</td>
+<td>Rapport de recette Playwright</td>
+<td>C2.3.1</td>
+</tr>
 </tbody></table>
 <h2 id="doc-18_annexes_visuelles_bc02-a1-tableau-de-bord-grimpeur">A1 - Tableau de bord grimpeur</h2>
 <p>La vue d&#39;accueil authentifiée centralise le profil, les recommandations de partenaires, le matériel et les événements. Elle prouve l&#39;intégration cohérente des fonctions F02, F03, F06 et F07.</p>
@@ -1028,8 +1288,14 @@ src/features/events/
 <h2 id="doc-18_annexes_visuelles_bc02-a7-release-stable-spity-v0-1-0">A7 - Release stable Spity v0.1.0</h2>
 <p>La <a href="https://github.com/Dorianyloj/spity/releases/tag/v0.1.0">release <code>v0.1.0</code></a> relie un tag, un SHA, un changelog et quatre artefacts téléchargeables. Elle constitue la version stable du prototype présenté.</p>
 <p><img src="file:///home/dorianjoly/Bureau/COURS_YNOV/Titre_RNCP/spity/docs/bc02/annexes/github/03-release-v0.1.0.png" alt="Release GitHub Spity v0.1.0"></p>
+<h2 id="doc-18_annexes_visuelles_bc02-a8-couverture-globale-du-code-avec-jest">A8 - Couverture globale du code avec Jest</h2>
+<p>Le rapport HTML mesure tout <code>src/</code>, y compris les fichiers sans test. Il confirme une couverture majoritaire avec 62,56 % des lignes et instructions, 77,67 % des branches et 55,06 % des fonctions.</p>
+<p><img src="file:///home/dorianjoly/Bureau/COURS_YNOV/Titre_RNCP/spity/docs/bc02/annexes/captures/05-couverture-jest-globale.png" alt="Rapport Jest de couverture globale du code source"></p>
+<h2 id="doc-18_annexes_visuelles_bc02-a9-recette-playwright-f01-a-f10">A9 - Recette Playwright F01 à F10</h2>
+<p>Le rapport Playwright présente les six scénarios de recette exécutés, sans échec, retry ni test ignoré. Ces scénarios couvrent les fonctions F01 à F10 ainsi que les contrôles fonctionnels, structurels, de sécurité et d&#39;accessibilité.</p>
+<p><img src="file:///home/dorianjoly/Bureau/COURS_YNOV/Titre_RNCP/spity/docs/bc02/annexes/captures/06-recette-playwright.png" alt="Rapport Playwright des six scénarios de recette BC02"></p>
 <h2 id="doc-18_annexes_visuelles_bc02-tracabilite-des-fichiers">Traçabilité des fichiers</h2>
-<p>Les manifestes <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/annexes/captures/manifest.json"><code>annexes/captures/manifest.json</code></a> et <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/annexes/github/manifest.json"><code>annexes/github/manifest.json</code></a> enregistrent la date, la source et le fichier de chaque capture. Le manifeste du livrable conserve séparément les empreintes SHA-256 du HTML, du PDF et des trois documents assemblés.</p>
+<p>Les manifestes <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/annexes/captures/manifest.json"><code>annexes/captures/manifest.json</code></a> et <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/annexes/github/manifest.json"><code>annexes/github/manifest.json</code></a> enregistrent la date, la source et le fichier de chaque capture. Le manifeste du livrable conserve séparément les empreintes SHA-256 du HTML, du PDF et des documents assemblés.</p>
 </section>
   </main>
 </body>

@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict'
-import { mkdir, rm, writeFile } from 'node:fs/promises'
+import { mkdir, rm, stat, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
+import { pathToFileURL } from 'node:url'
 import { chromium, request } from '@playwright/test'
 
-const baseURL = process.env.EVIDENCE_BASE_URL ?? 'http://127.0.0.1:3000'
+const baseURL = process.env.EVIDENCE_BASE_URL ?? 'http://localhost:3000'
 const outputDirectory = resolve('../docs/bc02/annexes/captures')
 const password = 'SpityDemo2026!'
 const captures = [
@@ -36,6 +37,22 @@ const accounts = {
   climber: 'lina.demo@spity.local',
   club: 'club.demo@spity.local',
 }
+const reportCaptures = [
+  {
+    file: '05-couverture-jest-globale.png',
+    path: 'coverage/lcov-report/index.html',
+    source: resolve('coverage/lcov-report/index.html'),
+    title: 'Rapport de couverture globale Jest',
+    viewport: { width: 1000, height: 260 },
+  },
+  {
+    file: '06-recette-playwright.png',
+    path: 'playwright-report/index.html',
+    source: resolve('playwright-report/index.html'),
+    title: 'Rapport de recette Playwright',
+    viewport: { width: 1440, height: 1000 },
+  },
+]
 
 const createStorageState = async (email) => {
   const api = await request.newContext({
@@ -89,7 +106,10 @@ try {
     await page.locator('main').waitFor({ state: 'visible' })
     await page.evaluate(() => document.fonts.ready)
 
-    const heading = await page.locator('h1, h2').first().textContent() ?? await page.title()
+    const headingLocator = page.locator('h1, h2').first()
+    const heading = await headingLocator.count() > 0
+      ? await headingLocator.textContent()
+      : await page.title()
     await page.screenshot({
       animations: 'disabled',
       path: resolve(outputDirectory, capture.file),
@@ -100,6 +120,31 @@ try {
       file: capture.file,
       heading,
       path: capture.path,
+      viewport: capture.viewport,
+    })
+    await context.close()
+  }
+
+  for (const capture of reportCaptures) {
+    await stat(capture.source)
+    const context = await browser.newContext({
+      viewport: capture.viewport,
+      locale: 'fr-FR',
+      timezoneId: 'Europe/Paris',
+    })
+    const page = await context.newPage()
+
+    await page.goto(pathToFileURL(capture.source).href, { waitUntil: 'load' })
+    await page.evaluate(() => document.fonts.ready)
+    await page.screenshot({
+      animations: 'disabled',
+      path: resolve(outputDirectory, capture.file),
+      fullPage: false,
+    })
+    results.push({
+      file: capture.file,
+      source: capture.path,
+      title: capture.title,
       viewport: capture.viewport,
     })
     await context.close()

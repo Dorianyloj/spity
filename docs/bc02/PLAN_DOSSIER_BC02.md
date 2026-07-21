@@ -135,6 +135,8 @@ Documents de référence : [manuel de déploiement](./12_MANUEL_DEPLOIEMENT_C241
 - [x] Vérifier que chaque ligne de la grille possède au moins une preuve explicite.
 - [x] Exporter et contrôler visuellement la version PDF remise au jury.
 - [x] Produire un PDF personnel d'environ 30 pages en séparant synthèse, retour d'expérience, index et annexes visuelles.
+- [x] Renforcer C2.2.1, C2.2.2, C2.2.3 et C2.3.1 avec une réponse explicite à chaque indicateur officiel.
+- [x] Ajouter les captures des rapports de couverture Jest et de recette Playwright.
 
 ## Règle de preuve
 

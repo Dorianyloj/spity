@@ -14,6 +14,7 @@ const manifestPath = resolve(outputDirectory, 'manifest.json')
 const coverImagePath = resolve(docsRoot, 'annexes/captures/01-dashboard-grimpeur-desktop.png')
 const sourceNames = [
   '16_DOSSIER_FINAL_BC02.md',
+  '20_FOCUS_COMPETENCES_DETERMINANTES_BC02.md',
   '19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES.md',
   '15_INDEX_PREUVES_GRILLE_BC02.md',
   '18_ANNEXES_VISUELLES_BC02.md',
@@ -177,8 +178,9 @@ const stylesheet = `
   .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a4-"],
   .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a5-"],
   .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a6-"],
-  .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a7-"] { break-before: page; }
-  .chapter[data-source="19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES.md"] h2 ~ h2 { break-before: page; }
+  .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a7-"],
+  .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a8-"],
+  .chapter[data-source="18_ANNEXES_VISUELLES_BC02.md"] h2[id*="-a9-"] { break-before: page; }
   h1, h2, h3 { break-after: avoid; color: var(--ink); letter-spacing: 0; }
   h1 { margin: 8mm 0 6mm; padding-bottom: 3mm; border-bottom: 3px solid var(--green); font-size: 22pt; line-height: 1.12; }
   h2 { margin: 8mm 0 3mm; font-size: 15pt; line-height: 1.2; color: var(--green-dark); }
@@ -225,7 +227,7 @@ const documentHtml = `<!doctype html>
     </section>
     <section class="toc">
       <h1>Sommaire du dossier</h1>
-      <p class="document-note">Cette version destinée au jury conserve ma synthèse, mon retour d'expérience, les 26 critères officiels et sept annexes visuelles. Les documents techniques complémentaires restent accessibles par les liens du dossier et dans <code>docs/bc02/</code>.</p>
+      <p class="document-note">Cette version destinée au jury met en avant mes quatre compétences déterminantes, puis conserve mon retour d'expérience, les 26 critères officiels et neuf annexes visuelles. Les documents techniques complémentaires restent accessibles par les liens du dossier et dans <code>docs/bc02/</code>.</p>
       <ol>${tableOfContents}</ol>
     </section>
     ${chapters}

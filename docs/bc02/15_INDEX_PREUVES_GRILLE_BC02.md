@@ -102,7 +102,7 @@ Limite déclarée : la recette automatisée et la manipulation par le développe
 
 ## 12. Preuves visuelles
 
-Les sept [annexes visuelles](./18_ANNEXES_VISUELLES_BC02.md) rassemblent quatre captures du prototype et trois preuves GitHub : historique des commits, pipeline CI complet et release stable. Ce regroupement évite de répéter les mêmes images dans le corps du dossier.
+Les neuf [annexes visuelles](./18_ANNEXES_VISUELLES_BC02.md) rassemblent quatre captures du prototype, les rapports Jest et Playwright, puis trois preuves GitHub : historique des commits, pipeline CI complet et release stable. Ce regroupement évite de répéter les mêmes images dans le corps du dossier.
 
 ## 13. Preuves distantes pérennes
 
