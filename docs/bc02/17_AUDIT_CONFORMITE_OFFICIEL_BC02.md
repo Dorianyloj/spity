@@ -96,4 +96,4 @@ Le PDF synthétique contient l'index des vingt-six critères et six annexes esse
 
 ## 9. Preuve technique la plus récente
 
-L'[exécution GitHub Actions no 29819189642](https://github.com/Dorianyloj/spity/actions/runs/29819189642), sur le commit `c1cb0f1`, a réussi les cinq jobs : qualité, intégration MariaDB, recette BC02, Lighthouse et images staging.
+L'[exécution GitHub Actions no 29827790355](https://github.com/Dorianyloj/spity/actions/runs/29827790355), sur le commit `b9e34c2`, a réussi les cinq jobs : qualité avec couverture globale, intégration MariaDB, recette BC02, Lighthouse et images staging. L'artefact `coverage-b9e34c2...` conserve le rapport Jest complet jusqu'au 20 août 2026.

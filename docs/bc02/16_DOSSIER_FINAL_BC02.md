@@ -83,7 +83,7 @@ L'application utilise TypeScript strict de bout en bout. Next.js rassemble pages
 | Lighthouse public | Performance 97 à 99, accessibilité 100, SEO 100. |
 | Responsive | Reflow vérifié à 360 px sans défilement horizontal incohérent. |
 | Livraison | Release `v0.1.0`, images immuables, bundle, manifeste et SHA-256. |
-| Dernière CI probante | Run `29819189642`, cinq jobs réussis dont staging. |
+| Dernière CI probante | Run `29827790355`, cinq jobs réussis dont staging et couverture globale. |
 
 ## Couverture des compétences
 

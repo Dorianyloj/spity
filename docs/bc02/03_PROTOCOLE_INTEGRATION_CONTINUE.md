@@ -178,6 +178,21 @@ L'[exécution GitHub Actions no 29744313577](https://github.com/Dorianyloj/spity
 
 Cette exécution confirme la disparition de l'avertissement de dépréciation Node.js 20 sans régression sur les contrôles ni sur la publication des quatre artefacts.
 
+### Validation de la couverture globale C2.2.2
+
+L'[exécution GitHub Actions no 29827790355](https://github.com/Dorianyloj/spity/actions/runs/29827790355) a validé le SHA `b9e34c2127cd23edcc002569bd02ae8306bf2e19` le 21 juillet 2026 après l'extension de Jest à tout `src/`.
+
+| Job | Résultat |
+| --- | --- |
+| `Quality gates` | Succès : 23 suites, 126 tests et seuils globaux atteints |
+| `MariaDB integration tests` | Succès : migrations, 11 résultats TAP et audit authentifié |
+| `Lighthouse thresholds` | Succès sur les trois pages publiques |
+| `BC02 acceptance recipe` | Succès sur F01 à F10 |
+| `Deploy verified staging images` | Succès : images et manifeste publiés |
+| Artefact de couverture | `coverage-b9e34c2...`, 426 856 octets, conservé jusqu'au 20 août 2026 |
+
+Ce run prouve que le seuil de majorité n'est pas seulement obtenu localement : il est contrôlé sur un runner neuf avant la construction des images staging.
+
 ## 8. Limites et évolutions prévues
 
 - La CI mesure désormais tout `src/` : 23 suites et 126 tests couvrent 62,56 % des lignes et instructions, au-dessus du seuil global bloquant de 60 %.

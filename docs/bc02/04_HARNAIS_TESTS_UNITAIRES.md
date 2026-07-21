@@ -85,6 +85,8 @@ Tests:       126 passed, 126 total
 
 Le rapport HTML est généré dans `spity/coverage/lcov-report/`. Ce dossier est ignoré par Git ; la CI conserve le rapport comme artefact pendant 30 jours.
 
+La [CI no 29827790355](https://github.com/Dorianyloj/spity/actions/runs/29827790355) reproduit ce résultat sur le commit `b9e34c2` : le job `Quality gates` réussit et publie l'artefact `coverage-b9e34c2...` de 426 856 octets.
+
 ## 5. Complément d'intégration MariaDB
 
 Les 126 tests Jest restent des tests unitaires rapides. Ils sont complétés par le scénario HTTP décrit dans [`06_TESTS_INTEGRATION_C222.md`](./06_TESTS_INTEGRATION_C222.md), qui applique les migrations sur MariaDB et traverse les Route Handlers, la session, les dépôts Drizzle et les contraintes de base.

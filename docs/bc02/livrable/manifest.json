@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-21T11:51:09.028Z",
+  "generatedAt": "2026-07-21T11:59:02.975Z",
   "internalNavigation": {
     "anchors": 142,
     "links": 38,
@@ -8,23 +8,23 @@
   "outputs": {
     "html": {
       "file": "DOSSIER_BC02_SPITY.html",
-      "bytes": 150206,
-      "sha256": "07bb514007988c15ec1540e71f1262d57e4e9bbe874fea8d35d18fc2a180c825"
+      "bytes": 150410,
+      "sha256": "46e217da2c9388fbb72f2602f5cd1e158abdec32d5ca616e65b67df88cde5ffa"
     },
     "pdf": {
       "file": "DOSSIER_BC02_SPITY.pdf",
-      "bytes": 7045818,
-      "sha256": "86e55c4766854ea6e55b6c9ba9109573ec2a6f8dadad9da7cafe8f8b3ccfb154"
+      "bytes": 7046186,
+      "sha256": "1711c19bd1c64d38ca2fa41bd5e006ceeb3e414e38f87cbb7199f045b9b29fca"
     }
   },
   "sources": [
     {
       "file": "16_DOSSIER_FINAL_BC02.md",
-      "sha256": "f349ae43d47c32f5f35e866f1b69e83b14e1c6ff2c07de22d42127e7a6c2216c"
+      "sha256": "a9f435f2e5f43dfb13b43995a7559e9c8b08f5cc876affcc66e3de2ce2d1cace"
     },
     {
       "file": "15_INDEX_PREUVES_GRILLE_BC02.md",
-      "sha256": "083c58f721d220ba4b3d23e8ff42aca1437873d8ce57a79f16370d99162eb813"
+      "sha256": "53563df376505ba16e27dcd5337b1160230ab07cbfa249b475f70db9025dc72b"
     },
     {
       "file": "01_PERIMETRE_FONCTIONNEL_ET_USER_STORIES.md",

@@ -33,14 +33,14 @@ Statuts : **couvert** signifie que l'explication, la réalisation et une vérifi
 | L'environnement de développement est détaillé. | Node.js 22, npm 10, Next.js, TypeScript, MariaDB, Docker Compose, variables et commandes de démarrage sont précisés. | [Document C2.1.1](./02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md), [`package.json`](../../spity/package.json), [Compose local](../../spity/docker-compose.yml) | Couvert |
 | Les outils permettent d'identifier compilateur, serveur d'application et gestion de sources. | TypeScript est vérifié par `tsc`, Next.js/Node fournit le serveur, Git et GitHub assurent les sources ; Drizzle, Jest, Playwright, Lighthouse et Docker complètent la chaîne. | [Table des outils](./02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md), [README](../../spity/README.md) | Couvert |
 | Le protocole définit les différentes séquences de déploiement. | Conditions d'entrée, sauvegarde, migration one-shot, démarrage, contrôle, promotion et rollback sont ordonnés. | [Manuel de déploiement](./12_MANUEL_DEPLOIEMENT_C241.md), [runbook de release](../../spity/DEPLOYMENT.md) | Couvert |
-| Les critères qualité/performance répondent aux exigences du projet. | Seuils lint, typage, couverture globale, vulnérabilités, accessibilité et Lighthouse sont bloquants. | [Seuils C2.1.1](./02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md), run CI `29826174680`, rapports locaux `.lighthouseci` et `coverage` | Couvert |
+| Les critères qualité/performance répondent aux exigences du projet. | Seuils lint, typage, couverture globale, vulnérabilités, accessibilité et Lighthouse sont bloquants. | [Seuils C2.1.1](./02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md), run CI `29827790355`, rapports locaux `.lighthouseci` et `coverage` | Couvert |
 
 ## 4. C2.1.2 - Intégration continue
 
 | Critère officiel | Explication et réalisation | Preuve vérifiable | Statut |
 | --- | --- | --- | :---: |
 | Le protocole d'intégration continue est explicité clairement. | Déclencheurs, environnement, permissions, stratégie de branches, revue et traitement d'échec sont documentés. | [Protocole CI](./03_PROTOCOLE_INTEGRATION_CONTINUE.md) | Couvert |
-| Le protocole définit les séquences d'intégration. | Les jobs qualité, MariaDB/accessibilité, Lighthouse et recette standalone précèdent obligatoirement le staging. | [Workflow CI](../../.github/workflows/ci.yml), [run réussi 29819189642](https://github.com/Dorianyloj/spity/actions/runs/29819189642) | Couvert |
+| Le protocole définit les séquences d'intégration. | Les jobs qualité, MariaDB/accessibilité, Lighthouse et recette standalone précèdent obligatoirement le staging. | [Workflow CI](../../.github/workflows/ci.yml), [run réussi 29827790355](https://github.com/Dorianyloj/spity/actions/runs/29827790355) | Couvert |
 
 ## 5. C2.2.1 - Architecture et prototype
 
@@ -56,7 +56,7 @@ Statuts : **couvert** signifie que l'explication, la réalisation et une vérifi
 
 | Critère officiel | Explication et réalisation | Preuve vérifiable | Statut |
 | --- | --- | --- | :---: |
-| Les tests unitaires couvrent la majorité du code développé. | Les 23 suites et 126 tests mesurent tous les fichiers `src/` et couvrent 62,56 % des lignes/instructions, 77,67 % des branches et 55,06 % des fonctions. Les seuils globaux sont bloquants dans Jest et la CI. | [Harnais et périmètre](./04_HARNAIS_TESTS_UNITAIRES.md), [commit de couverture `9bb4efa`](https://github.com/Dorianyloj/spity/commit/9bb4efa33a231ea0a86a40a22dd13eaea1718233) | Couvert |
+| Les tests unitaires couvrent la majorité du code développé. | Les 23 suites et 126 tests mesurent tous les fichiers `src/` et couvrent 62,56 % des lignes/instructions, 77,67 % des branches et 55,06 % des fonctions. Les seuils globaux sont bloquants dans Jest et la CI. | [Harnais et périmètre](./04_HARNAIS_TESTS_UNITAIRES.md), [run CI 29827790355](https://github.com/Dorianyloj/spity/actions/runs/29827790355) | Couvert |
 
 Limite déclarée : la majorité du code est couverte, mais les dépôts Drizzle, les Route Handlers et plusieurs Server Components restent moins couverts que les règles métier et composants interactifs.
 
@@ -121,6 +121,7 @@ Les captures suivantes sont générées par `npm run docs:capture` depuis les co
 | Retest standalone | [Run 29750556481](https://github.com/Dorianyloj/spity/actions/runs/29750556481) | Cinq jobs réussis et images publiées. |
 | Release stable | [Spity v0.1.0](https://github.com/Dorianyloj/spity/releases/tag/v0.1.0) | Bundle, manifeste, somme SHA-256 et images versionnées. |
 | Audit final du dossier | [Run 29819189642](https://github.com/Dorianyloj/spity/actions/runs/29819189642) | Cinq jobs réussis sur le commit du PDF synthétique. |
+| Couverture globale et dossier actualisé | [Run 29827790355](https://github.com/Dorianyloj/spity/actions/runs/29827790355) | 126 tests, seuils globaux, cinq jobs et staging réussis. |
 
 ## 14. Points restant à organiser
 
