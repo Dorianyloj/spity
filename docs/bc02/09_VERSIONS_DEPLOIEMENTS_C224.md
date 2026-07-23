@@ -156,9 +156,11 @@ Le retour arrière utilise le tag de version précédent ou, de préférence, so
 
 Les suppressions de colonnes ou de données sont différées afin de conserver une fenêtre de compatibilité avec la version précédente.
 
-## 9. Retours utilisateurs
+## 9. Manipulation autonome et futurs retours utilisateurs
 
-Les contrôles automatisés prouvent la stabilité technique mais ne remplacent pas l'observation d'utilisateurs. Une session pilote doit réunir au moins trois profils : un grimpeur cherchant un partenaire, un grimpeur organisant une sortie et un représentant de club.
+L'instance [spity.fr](https://spity.fr), les comptes de démonstration et le [manuel utilisateur](./13_MANUEL_UTILISATION_C241.md) permettent de manipuler les parcours grimpeur et club sans installation, accès au code ou intervention d'un exploitant. Le 23 juillet 2026, les contrôles ont confirmé la connexion, la conservation de session, la navigation vers le tableau de bord et le reflow sur des écrans de 1 440 et 390 pixels.
+
+Ces preuves répondent au critère de logiciel fonctionnel et manipulable en autonomie. Elles ne remplacent cependant pas une étude ergonomique avec des utilisateurs représentatifs. Une future session pilote réunira idéalement trois profils : un grimpeur cherchant un partenaire, un grimpeur organisant une sortie et un représentant de club.
 
 Chaque participant exécute sans assistance les tâches suivantes :
 
@@ -177,7 +179,7 @@ Chaque participant exécute sans assistance les tâches suivantes :
 | Retour | Commentaire reformulé et niveau de sévérité |
 | Décision | Accepté, correction planifiée ou hors périmètre justifié |
 
-Aucun retour réel n'est inventé dans ce dossier. Cette preuve restera indiquée comme manquante jusqu'à l'exécution documentée d'une session avec des participants distincts du développeur.
+Aucun retour réel n'est inventé dans ce dossier. La future session servira à mesurer les difficultés d'usage et à alimenter le registre d'améliorations, sans remettre en cause la disponibilité autonome déjà vérifiée.
 
 ## 10. État de couverture C2.2.4
 
@@ -187,5 +189,5 @@ Aucun retour réel n'est inventé dans ce dossier. Cette preuve restera indiqué
 | Évolutions tracées | Commits conventionnels et changelog `0.1.0` | Réalisé |
 | Déploiement progressif | CI vers staging puis promotion des mêmes digests | Réalisé et validé à distance |
 | Dernière version fiable | Release `v0.1.0` avec bundle et manifeste | Publiée et vérifiée |
-| Manipulation autonome | Compose et guide de déploiement versionné | Réalisé techniquement |
-| Performance auprès des utilisateurs | Protocole défini | Session pilote réelle à organiser |
+| Manipulation autonome | Instance HTTPS, comptes jury, manuel pas à pas et contrôles desktop/mobile | Réalisé et vérifiable |
+| Performance auprès des utilisateurs | Protocole de session défini | Étude ergonomique complémentaire à organiser |

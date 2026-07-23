@@ -30,7 +30,7 @@ Cette instance est réservée à la démonstration : elle ne contient que des do
 
 ## Déclaration de périmètre
 
-Dans ce dossier, je présente le travail que j'ai réalisé sur Spity pour les neuf compétences du bloc BC02. Je me suis appuyé sur une version fonctionnelle, versionnée et testée du projet. Mon [audit de conformité aux documents officiels](./17_AUDIT_CONFORMITE_OFFICIEL_BC02.md) aboutit à vingt-cinq critères couverts et un critère partiel. J'ai volontairement séparé :
+Dans ce dossier, je présente le travail que j'ai réalisé sur Spity pour les neuf compétences du bloc BC02. Je me suis appuyé sur une version fonctionnelle, versionnée et testée du projet. Mon [audit de conformité aux documents officiels](./17_AUDIT_CONFORMITE_OFFICIEL_BC02.md) recense neuf compétences sur neuf, seize livrables sur seize et vingt-six critères sur vingt-six couverts par une preuve. J'ai volontairement séparé :
 
 - la vision produit complète de Spity ;
 - le prototype BC02 effectivement développé ;
@@ -97,7 +97,7 @@ J'ai utilisé TypeScript strict de bout en bout. J'ai retenu Next.js pour réuni
 | Lighthouse public | Performance 97 à 99, accessibilité 100, SEO 100. |
 | Responsive | Reflow vérifié à 360 px sans défilement horizontal incohérent. |
 | Livraison | Release `v0.1.0`, images immuables, bundle, manifeste et SHA-256. |
-| Dernière CI probante | Run `29831871915`, cinq jobs réussis dont staging et couverture globale. |
+| Dernière CI probante | [Run `29988586736`](https://github.com/Dorianyloj/spity/actions/runs/29988586736), cinq jobs réussis dont staging, couverture globale et audit de production. |
 | Annexes visuelles | Neuf captures : produit desktop/mobile, rapports Jest/Playwright, historique Git, pipeline CI et release. |
 
 ## Couverture des compétences
@@ -136,7 +136,7 @@ Preuves principales : [sécurité OWASP](./07_SECURITE_OWASP_C223.md) et [access
 
 J'utilise Git, Semantic Versioning, un changelog et des images identifiées par SHA pour relier une évolution à l'artefact livré. La release stable reprend le même candidat que celui testé et fournit un bundle de déploiement autonome.
 
-J'ai documenté la manipulation technique, mais je n'ai pas encore formalisé une session autonome avec des utilisateurs distincts de moi. C'est la raison pour laquelle je conserve ce critère comme partiel.
+Depuis le 23 juillet 2026, le jury peut manipuler la version déployée sur `spity.fr` sans installer le projet ni accéder au serveur. Le manuel, les comptes grimpeur et club prêts à l'emploi, la route de santé et les contrôles navigateur desktop/mobile rendent le parcours autonome et vérifiable.
 
 Preuve principale : [versions et déploiements](./09_VERSIONS_DEPLOIEMENTS_C224.md).
 
@@ -173,7 +173,7 @@ Preuves principales : [manuel de déploiement](./12_MANUEL_DEPLOIEMENT_C241.md),
 
 Je présente Spity comme un prototype de certification, pas comme une plateforme publique déjà prête à accueillir des données réelles. Les principales limites que j'ai identifiées sont :
 
-- aucune session pilote externe formalisée à la date du dossier ;
+- une session pilote externe reste à organiser pour mesurer plus finement l'ergonomie réelle ;
 - couverture des dépôts Drizzle et Route Handlers encore inférieure à celle des composants et règles métier ;
 - récupération de mot de passe, export et suppression autonome de compte non exposés ;
 - fil social, carte interactive et topos encore démonstratifs ou hors périmètre ;
@@ -184,7 +184,7 @@ Mes prochaines priorités sont la validation utilisateur, les parcours RGPD, la 
 
 ## Conclusion
 
-Avec Spity, je montre une chaîne complète de conception et de développement : j'ai cadré le besoin, structuré l'architecture, développé un ensemble cohérent de fonctions, automatisé les contrôles, corrigé les anomalies, produit une version stable et rédigé la documentation d'exploitation. Je ne veux pas que ce dossier repose uniquement sur mes explications : chaque compétence renvoie à du code versionné, une commande ou un résultat distant. La dernière preuve partielle que je dois encore formaliser est un essai utilisateur autonome avec des personnes externes au développement.
+Avec Spity, je montre une chaîne complète de conception et de développement : j'ai cadré le besoin, structuré l'architecture, développé un ensemble cohérent de fonctions, automatisé les contrôles, corrigé les anomalies, produit une version stable et rédigé la documentation d'exploitation. Je ne veux pas que ce dossier repose uniquement sur mes explications : chacune des neuf compétences et chacun des vingt-six critères renvoient à du code versionné, une commande, un livrable ou un résultat distant. Une future session avec des utilisateurs externes renforcera l'évaluation ergonomique sans remplacer les preuves déjà fournies.
 
 L'[index des critères](./15_INDEX_PREUVES_GRILLE_BC02.md) constitue le point d'entrée pour l'évaluation. Les documents techniques liés fournissent les explications et preuves nécessaires à chaque ligne de la grille.
 

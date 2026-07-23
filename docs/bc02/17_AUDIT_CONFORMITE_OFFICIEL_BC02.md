@@ -4,7 +4,7 @@
 
 Cet audit confronte le dossier Spity aux deux documents officiels fournis pour le titre Expert en développement logiciel RNCP39583. Il distingue la présence d'un livrable de la preuve suffisante d'un critère d'évaluation.
 
-Date de l'audit : 21 juillet 2026.
+Date de l'audit : 23 juillet 2026.
 
 ## 2. Sources contrôlées
 
@@ -22,11 +22,11 @@ Le bloc 2 comporte neuf compétences, seize livrables attendus et vingt-six crit
 | Compétences recensées | 9/9 |
 | Livrables présents dans `docs/bc02/` | 16/16 |
 | Critères repris dans l'index du dossier | 26/26 |
-| Critères couverts par une preuve suffisante | 25/26 |
-| Critère partiellement prouvé | 1/26 : autonomie utilisateur de C2.2.4 |
+| Critères couverts par une preuve suffisante | 26/26 |
+| Critère partiellement prouvé | 0/26 |
 | Critère à compléter | 0/26 |
 
-Conclusion : le dossier contient toutes les rubriques et tous les livrables demandés. Vingt-cinq critères disposent d'une preuve suffisante ; seule l'autonomie utilisateur de C2.2.4 reste partiellement prouvée.
+Conclusion : le dossier contient toutes les rubriques et tous les livrables demandés. Les vingt-six critères disposent d'une explication, d'une réalisation et d'une preuve vérifiable.
 
 ## 4. Contrôle des seize livrables
 
@@ -58,11 +58,11 @@ Conclusion : le dossier contient toutes les rubriques et tous les livrables dema
 | C2.2.1 | 5 | 5 | 0 | 0 |
 | C2.2.2 | 1 | 1 | 0 | 0 |
 | C2.2.3 | 3 | 3 | 0 | 0 |
-| C2.2.4 | 3 | 2 | 1 | 0 |
+| C2.2.4 | 3 | 3 | 0 | 0 |
 | C2.3.1 | 2 | 2 | 0 | 0 |
 | C2.3.2 | 3 | 3 | 0 | 0 |
 | C2.4.1 | 2 | 2 | 0 | 0 |
-| **Total** | **26** | **25** | **1** | **0** |
+| **Total** | **26** | **26** | **0** | **0** |
 
 Le détail ligne par ligne est conservé dans [`15_INDEX_PREUVES_GRILLE_BC02.md`](./15_INDEX_PREUVES_GRILLE_BC02.md).
 
@@ -84,11 +84,13 @@ La majorité du code développé est couverte au sens littéral du critère. Les
 
 Le seuil de 60 % des lignes et instructions empêche une régression sous la cible retenue pour la soutenance.
 
-## 7. Écart C2.2.4 - Autonomie utilisateur
+## 7. Validation C2.2.4 - Autonomie utilisateur
 
-La release, les comptes de démonstration, le manuel utilisateur et la recette prouvent que le logiciel peut être manipulé techniquement. En revanche, aucune session avec une personne distincte du développeur n'est encore consignée.
+Le logiciel est accessible sans installation sur [https://spity.fr](https://spity.fr). Le jury dispose directement d'un compte grimpeur, d'un compte club et d'un manuel pas à pas. Les parcours de connexion, de profil, de matching, de lieux et d'événements sont donc manipulables sans accès au code ou au serveur.
 
-Action attendue : faire exécuter le parcours de recette à au moins deux utilisateurs externes, relever réussite sans aide, durée, blocages et corrections, puis joindre un compte rendu anonymisé.
+La route [https://spity.fr/api/health](https://spity.fr/api/health) identifie la version et la révision servies. Les contrôles du 23 juillet 2026 ont confirmé la redirection HTTPS, le certificat, la connexion, la session sécurisée et le rendu sans débordement sur des écrans de 1 440 et 390 pixels.
+
+Une session pilote avec plusieurs personnes externes reste pertinente pour mesurer les durées et difficultés d'usage. Elle constitue une amélioration de l'évaluation ergonomique et n'est pas présentée comme déjà réalisée.
 
 ## 8. Risque de remise hors ligne
 
@@ -96,4 +98,4 @@ Le PDF contient la synthèse rédigée à la première personne, un chapitre ren
 
 ## 9. Preuve technique la plus récente
 
-L'[exécution GitHub Actions no 29831871915](https://github.com/Dorianyloj/spity/actions/runs/29831871915), sur le commit `6bddda4`, a réussi les cinq jobs : qualité avec couverture globale, intégration MariaDB, recette BC02, Lighthouse et images staging.
+L'[exécution GitHub Actions no 29988586736](https://github.com/Dorianyloj/spity/actions/runs/29988586736), sur le commit `3d14fac`, a réussi les cinq jobs : qualité avec couverture globale, intégration MariaDB, recette BC02, Lighthouse et images staging.

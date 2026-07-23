@@ -13,6 +13,8 @@ Statuts : **couvert** signifie que l'explication, la réalisation et une vérifi
 
 ## 2. Résultat global
 
+**Verdict : 9 compétences sur 9, 16 livrables sur 16 et 26 critères sur 26 sont couverts par une preuve vérifiable.**
+
 | Compétence | Livrable | Statut | Preuve principale |
 | --- | --- | :---: | --- |
 | C2.1.1 | Protocole de déploiement continu et critères qualité/performance | Couvert | [Environnements et déploiement](./02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md) |
@@ -20,7 +22,7 @@ Statuts : **couvert** signifie que l'explication, la réalisation et une vérifi
 | C2.2.1 | Architecture maintenable et prototype fonctionnel | Couvert | [Architecture du prototype](./05_ARCHITECTURE_PROTOTYPE_C221.md) |
 | C2.2.2 | Jeu de tests unitaires | Couvert | [Harnais unitaire](./04_HARNAIS_TESTS_UNITAIRES.md) et [audit officiel](./17_AUDIT_CONFORMITE_OFFICIEL_BC02.md) |
 | C2.2.3 | Sécurité et accessibilité | Couvert | [OWASP](./07_SECURITE_OWASP_C223.md) et [RGAA](./08_ACCESSIBILITE_RGAA_C223.md) |
-| C2.2.4 | Historique et dernière version fiable | Partiel | [Versions et déploiements](./09_VERSIONS_DEPLOIEMENTS_C224.md) |
+| C2.2.4 | Historique et dernière version fiable | Couvert | [Versions et déploiements](./09_VERSIONS_DEPLOIEMENTS_C224.md) |
 | C2.3.1 | Cahier de recettes | Couvert | [Cahier F01 à F10](./10_CAHIER_RECETTES_C231.md) |
 | C2.3.2 | Plan de correction des bogues | Couvert | [Registre des anomalies](./11_PLAN_CORRECTION_BOGUES_C232.md) |
 | C2.4.1 | Trois manuels d'exploitation | Couvert | [Déploiement](./12_MANUEL_DEPLOIEMENT_C241.md), [utilisation](./13_MANUEL_UTILISATION_C241.md), [maintenance](./14_MANUEL_MISE_A_JOUR_C241.md) |
@@ -74,9 +76,9 @@ Limite déclarée : la majorité du code est couverte, mais les dépôts Drizzle
 | --- | --- | --- | :---: |
 | Un système de gestion de versions est utilisé. | Git, branches `develop`/`main`, Conventional Commits, SemVer, tags et images par SHA sont utilisés. | [Gestion des versions](./09_VERSIONS_DEPLOIEMENTS_C224.md), [`CHANGELOG.md`](../../CHANGELOG.md), historique Git | Couvert |
 | Les évolutions du prototype sont tracées. | Le changelog, les commits, les migrations et le registre d'anomalies relient chaque évolution à une preuve. | [`CHANGELOG.md`](../../CHANGELOG.md), [`drizzle`](../../spity/drizzle), [bogues](./11_PLAN_CORRECTION_BOGUES_C232.md) | Couvert |
-| Le logiciel est fonctionnel et manipulable en autonomie. | Une release `v0.1.0`, un bundle, trois manuels et des comptes de démonstration permettent le démarrage et les parcours sans assistance au code. Aucune observation indépendante n'est encore consignée. | [Release v0.1.0](https://github.com/Dorianyloj/spity/releases/tag/v0.1.0), [manuel utilisateur](./13_MANUEL_UTILISATION_C241.md) | Partiel |
+| Le logiciel est fonctionnel et manipulable en autonomie. | L'instance HTTPS publique, deux comptes de démonstration prêts à l'emploi et le manuel pas à pas permettent de réaliser les parcours grimpeur et club sans installation ni accès au code. La connexion, la session, le rendu desktop/mobile et la santé de la révision déployée ont été vérifiés. | [Application jury](https://spity.fr), [santé](https://spity.fr/api/health), [manuel utilisateur](./13_MANUEL_UTILISATION_C241.md) | Couvert |
 
-Limite déclarée : la recette automatisée et la manipulation par le développeur sont prouvées. Une session pilote formalisée avec des utilisateurs externes au projet reste recommandée avant une exploitation publique.
+Une session pilote formalisée avec des utilisateurs externes reste recommandée pour mesurer la facilité d'usage et ouvrir d'éventuelles améliorations. Elle complète la preuve de manipulation autonome, mais n'est pas présentée comme une session déjà réalisée.
 
 ## 9. C2.3.1 - Cahier de recettes
 
@@ -114,12 +116,13 @@ Les neuf [annexes visuelles](./18_ANNEXES_VISUELLES_BC02.md) rassemblent quatre 
 | Release stable | [Spity v0.1.0](https://github.com/Dorianyloj/spity/releases/tag/v0.1.0) | Bundle, manifeste, somme SHA-256 et images versionnées. |
 | Audit final du dossier | [Run 29819189642](https://github.com/Dorianyloj/spity/actions/runs/29819189642) | Cinq jobs réussis sur le commit du PDF synthétique. |
 | Couverture globale et dossier actualisé | [Run 29827790355](https://github.com/Dorianyloj/spity/actions/runs/29827790355) | 126 tests, seuils globaux, cinq jobs et staging réussis. |
+| Instance jury et audit de production | [Run 29988586736](https://github.com/Dorianyloj/spity/actions/runs/29988586736) | Cinq jobs réussis, dépendances de production sans vulnérabilité et images staging publiées. |
 
 ## 14. Points restant à organiser
 
-Ces points doivent être présentés honnêtement au jury ; le premier correspond à la dernière preuve encore insuffisante :
+Ces améliorations ne remettent pas en cause la couverture des vingt-six critères, mais doivent être présentées honnêtement au jury :
 
-- conduire une session pilote formalisée avec au moins deux utilisateurs externes au développement ;
+- conduire une session pilote formalisée avec au moins deux utilisateurs externes pour mesurer l'ergonomie réelle ;
 - poursuivre progressivement la couverture des couches serveur au-delà du seuil global de 60 % ;
 - conserver des captures des protections de branches GitHub si elles sont activées dans l'interface distante ;
 - exécuter périodiquement un exercice de restauration sur un environnement isolé ;

@@ -149,4 +149,4 @@ Chaque compétence sera considérée prête uniquement si les quatre éléments 
 
 ## Prochaine action
 
-Le dossier BC02, son index de preuves, ses captures et son export PDF synthétique sont assemblés. L'audit officiel recense 16/16 livrables et 26/26 critères, dont 25 couverts et un partiel. Les prochaines actions sont d'organiser la session pilote réelle de l'étape 7, puis de préparer une archive de remise hors ligne.
+Le dossier BC02, son index de preuves, ses captures et son export PDF synthétique sont assemblés. L'audit officiel recense 9/9 compétences, 16/16 livrables et 26/26 critères couverts. Les prochaines actions d'amélioration sont d'organiser la session pilote réelle de l'étape 7, puis de préparer une archive de remise hors ligne.

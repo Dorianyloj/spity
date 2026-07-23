@@ -208,7 +208,7 @@ Je garde aussi un regard critique sur le résultat. Spity n'est pas encore prêt
 - la persistance complète du fil social, de la carte et des topos ;
 - davantage de tests sur la couche serveur.
 
-Ma prochaine étape prioritaire est la session utilisateur, car c'est le seul critère de la grille que je conserve comme partiel. Je veux faire exécuter le parcours à deux personnes sans les guider, mesurer les blocages et ouvrir de nouvelles anomalies si nécessaire.
+Ma prochaine étape prioritaire est une session utilisateur complémentaire. L'instance publique, les comptes de démonstration et le manuel rendent déjà le logiciel manipulable en autonomie ; je veux maintenant faire exécuter le parcours à deux personnes sans les guider, mesurer les blocages et ouvrir de nouvelles anomalies si nécessaire.
 
 Ensuite, je renforcerai les parcours RGPD et les tests des Route Handlers avant d'ajouter de nouvelles fonctions. Pour la partie produit, la carte et les topos sont les évolutions les plus cohérentes avec le sujet, mais elles devront être accompagnées d'une stratégie de modération et de fiabilité des informations.
 

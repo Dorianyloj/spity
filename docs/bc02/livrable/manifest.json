@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-23T07:32:26.536Z",
+  "generatedAt": "2026-07-23T07:50:54.334Z",
   "internalNavigation": {
     "anchors": 75,
     "links": 10,
@@ -8,19 +8,19 @@
   "outputs": {
     "html": {
       "file": "DOSSIER_BC02_SPITY.html",
-      "bytes": 96531,
-      "sha256": "9f9ea1f639427da73b0b5b445f3b8f8c3450fbca0fa26cfb13ad4cb14d67d745"
+      "bytes": 97548,
+      "sha256": "2cad60cf6e5aaab48262613fb7c77f99ad302decc16596b8adddd922fe3b6865"
     },
     "pdf": {
       "file": "DOSSIER_BC02_SPITY.pdf",
-      "bytes": 6972044,
-      "sha256": "2c91845e8bd82253dd0623656e44266e0e3f606397589911951240ed3b8faa8c"
+      "bytes": 6981088,
+      "sha256": "6507b2b8936e3c3ed0977ae7181191e6662286fdfae4fcfa6ea32234e5c2923b"
     }
   },
   "sources": [
     {
       "file": "16_DOSSIER_FINAL_BC02.md",
-      "sha256": "82013eac23b6b6c7abe4dad038726d713498def4c614ae9c60065db1fa64ef16"
+      "sha256": "9bd6e824ff886eb579d6d1c449db08bd5be9dbdb31d32dec2a67214332104038"
     },
     {
       "file": "20_FOCUS_COMPETENCES_DETERMINANTES_BC02.md",
@@ -28,11 +28,11 @@
     },
     {
       "file": "19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES.md",
-      "sha256": "51509162219cc23607049ab29ef3cd3eb0c8679d802f1d0b54b0be5698a9c98d"
+      "sha256": "6a7dc81381a892473a3b735b912f76016021b01437f15b52eefe13825afda09d"
     },
     {
       "file": "15_INDEX_PREUVES_GRILLE_BC02.md",
-      "sha256": "2c4b051599a17ff2ca39288ccb2c17e37e8beff989f0f07e75f7253f1114770e"
+      "sha256": "adce6c4a2273ec2a558f75a2095b7d994ad6c8fe34657c5048d0ed761ae96543"
     },
     {
       "file": "18_ANNEXES_VISUELLES_BC02.md",

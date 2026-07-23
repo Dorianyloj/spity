@@ -185,7 +185,7 @@
 </tbody></table>
 <p>Cette instance est réservée à la démonstration : elle ne contient que des données fictives et peut être réinitialisée. Les deux comptes permettent au jury de manipuler les parcours principaux sans créer de compte ni accéder à l&#39;administration du serveur.</p>
 <h2 id="doc-16_dossier_final_bc02-declaration-de-perimetre">Déclaration de périmètre</h2>
-<p>Dans ce dossier, je présente le travail que j&#39;ai réalisé sur Spity pour les neuf compétences du bloc BC02. Je me suis appuyé sur une version fonctionnelle, versionnée et testée du projet. Mon <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/17_AUDIT_CONFORMITE_OFFICIEL_BC02.md">audit de conformité aux documents officiels</a> aboutit à vingt-cinq critères couverts et un critère partiel. J&#39;ai volontairement séparé :</p>
+<p>Dans ce dossier, je présente le travail que j&#39;ai réalisé sur Spity pour les neuf compétences du bloc BC02. Je me suis appuyé sur une version fonctionnelle, versionnée et testée du projet. Mon <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/17_AUDIT_CONFORMITE_OFFICIEL_BC02.md">audit de conformité aux documents officiels</a> recense neuf compétences sur neuf, seize livrables sur seize et vingt-six critères sur vingt-six couverts par une preuve. J&#39;ai volontairement séparé :</p>
 <ul>
 <li>la vision produit complète de Spity ;</li>
 <li>le prototype BC02 effectivement développé ;</li>
@@ -314,7 +314,7 @@ Next.js App Router et Route Handlers
 </tr>
 <tr>
 <td>Dernière CI probante</td>
-<td>Run <code>29831871915</code>, cinq jobs réussis dont staging et couverture globale.</td>
+<td><a href="https://github.com/Dorianyloj/spity/actions/runs/29988586736">Run <code>29988586736</code></a>, cinq jobs réussis dont staging, couverture globale et audit de production.</td>
 </tr>
 <tr>
 <td>Annexes visuelles</td>
@@ -339,7 +339,7 @@ Next.js App Router et Route Handlers
 <p>Preuves principales : <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/07_SECURITE_OWASP_C223.md">sécurité OWASP</a> et <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/08_ACCESSIBILITE_RGAA_C223.md">accessibilité RGAA</a>.</p>
 <h3 id="doc-16_dossier_final_bc02-c2-2-4-versions-et-deploiements">C2.2.4 - Versions et déploiements</h3>
 <p>J&#39;utilise Git, Semantic Versioning, un changelog et des images identifiées par SHA pour relier une évolution à l&#39;artefact livré. La release stable reprend le même candidat que celui testé et fournit un bundle de déploiement autonome.</p>
-<p>J&#39;ai documenté la manipulation technique, mais je n&#39;ai pas encore formalisé une session autonome avec des utilisateurs distincts de moi. C&#39;est la raison pour laquelle je conserve ce critère comme partiel.</p>
+<p>Depuis le 23 juillet 2026, le jury peut manipuler la version déployée sur <code>spity.fr</code> sans installer le projet ni accéder au serveur. Le manuel, les comptes grimpeur et club prêts à l&#39;emploi, la route de santé et les contrôles navigateur desktop/mobile rendent le parcours autonome et vérifiable.</p>
 <p>Preuve principale : <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/09_VERSIONS_DEPLOIEMENTS_C224.md">versions et déploiements</a>.</p>
 <h3 id="doc-16_dossier_final_bc02-c2-3-1-cahier-de-recettes">C2.3.1 - Cahier de recettes</h3>
 <p>J&#39;ai construit le cahier de recettes autour des fonctions F01 à F10, des deux rôles, des cas alternatifs, de la sécurité, de la structure et du mobile. Les scénarios sont automatisés et exécutés sur une MariaDB créée puis migrée à neuf.</p>
@@ -364,7 +364,7 @@ Next.js App Router et Route Handlers
 <h2 id="doc-16_dossier_final_bc02-limites-et-perspectives">Limites et perspectives</h2>
 <p>Je présente Spity comme un prototype de certification, pas comme une plateforme publique déjà prête à accueillir des données réelles. Les principales limites que j&#39;ai identifiées sont :</p>
 <ul>
-<li>aucune session pilote externe formalisée à la date du dossier ;</li>
+<li>une session pilote externe reste à organiser pour mesurer plus finement l&#39;ergonomie réelle ;</li>
 <li>couverture des dépôts Drizzle et Route Handlers encore inférieure à celle des composants et règles métier ;</li>
 <li>récupération de mot de passe, export et suppression autonome de compte non exposés ;</li>
 <li>fil social, carte interactive et topos encore démonstratifs ou hors périmètre ;</li>
@@ -373,7 +373,7 @@ Next.js App Router et Route Handlers
 </ul>
 <p>Mes prochaines priorités sont la validation utilisateur, les parcours RGPD, la récupération de compte, la persistance sociale, la cartographie et le renforcement des tests des couches serveur.</p>
 <h2 id="doc-16_dossier_final_bc02-conclusion">Conclusion</h2>
-<p>Avec Spity, je montre une chaîne complète de conception et de développement : j&#39;ai cadré le besoin, structuré l&#39;architecture, développé un ensemble cohérent de fonctions, automatisé les contrôles, corrigé les anomalies, produit une version stable et rédigé la documentation d&#39;exploitation. Je ne veux pas que ce dossier repose uniquement sur mes explications : chaque compétence renvoie à du code versionné, une commande ou un résultat distant. La dernière preuve partielle que je dois encore formaliser est un essai utilisateur autonome avec des personnes externes au développement.</p>
+<p>Avec Spity, je montre une chaîne complète de conception et de développement : j&#39;ai cadré le besoin, structuré l&#39;architecture, développé un ensemble cohérent de fonctions, automatisé les contrôles, corrigé les anomalies, produit une version stable et rédigé la documentation d&#39;exploitation. Je ne veux pas que ce dossier repose uniquement sur mes explications : chacune des neuf compétences et chacun des vingt-six critères renvoient à du code versionné, une commande, un livrable ou un résultat distant. Une future session avec des utilisateurs externes renforcera l&#39;évaluation ergonomique sans remplacer les preuves déjà fournies.</p>
 <p>L&#39;<a href="#doc-15_index_preuves_grille_bc02">index des critères</a> constitue le point d&#39;entrée pour l&#39;évaluation. Les documents techniques liés fournissent les explications et preuves nécessaires à chaque ligne de la grille.</p>
 <p>Les <a href="#doc-18_annexes_visuelles_bc02">annexes visuelles</a> regroupent les captures produit, les rapports de tests et les preuves GitHub utilisées pendant la soutenance.</p>
 </section>
@@ -861,7 +861,7 @@ src/features/events/
 <li>la persistance complète du fil social, de la carte et des topos ;</li>
 <li>davantage de tests sur la couche serveur.</li>
 </ul>
-<p>Ma prochaine étape prioritaire est la session utilisateur, car c&#39;est le seul critère de la grille que je conserve comme partiel. Je veux faire exécuter le parcours à deux personnes sans les guider, mesurer les blocages et ouvrir de nouvelles anomalies si nécessaire.</p>
+<p>Ma prochaine étape prioritaire est une session utilisateur complémentaire. L&#39;instance publique, les comptes de démonstration et le manuel rendent déjà le logiciel manipulable en autonomie ; je veux maintenant faire exécuter le parcours à deux personnes sans les guider, mesurer les blocages et ouvrir de nouvelles anomalies si nécessaire.</p>
 <p>Ensuite, je renforcerai les parcours RGPD et les tests des Route Handlers avant d&#39;ajouter de nouvelles fonctions. Pour la partie produit, la carte et les topos sont les évolutions les plus cohérentes avec le sujet, mais elles devront être accompagnées d&#39;une stratégie de modération et de fiabilité des informations.</p>
 <p>Pour conclure, ce dossier représente le travail que j&#39;ai réellement réalisé et les décisions que je peux expliquer. Les résultats chiffrés, les commits, les captures et les runs CI sont présents pour permettre au jury de vérifier mes affirmations. Je préfère conserver une limite explicite plutôt que de présenter comme terminé un élément que je n&#39;ai pas encore validé.</p>
 </section>
@@ -875,6 +875,7 @@ src/features/events/
 </ul>
 <p>Statuts : <strong>couvert</strong> signifie que l&#39;explication, la réalisation et une vérification suffisante sont présentes ; <strong>partiel</strong> signale une preuve existante mais incomplète ; <strong>à compléter</strong> signifie que le seuil littéral de la grille n&#39;est pas encore atteint.</p>
 <h2 id="doc-15_index_preuves_grille_bc02-2-resultat-global">2. Résultat global</h2>
+<p><strong>Verdict : 9 compétences sur 9, 16 livrables sur 16 et 26 critères sur 26 sont couverts par une preuve vérifiable.</strong></p>
 <table>
 <thead>
 <tr>
@@ -917,7 +918,7 @@ src/features/events/
 <tr>
 <td>C2.2.4</td>
 <td>Historique et dernière version fiable</td>
-<td align="center">Partiel</td>
+<td align="center">Couvert</td>
 <td><a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/09_VERSIONS_DEPLOIEMENTS_C224.md">Versions et déploiements</a></td>
 </tr>
 <tr>
@@ -1115,12 +1116,12 @@ src/features/events/
 </tr>
 <tr>
 <td>Le logiciel est fonctionnel et manipulable en autonomie.</td>
-<td>Une release <code>v0.1.0</code>, un bundle, trois manuels et des comptes de démonstration permettent le démarrage et les parcours sans assistance au code. Aucune observation indépendante n&#39;est encore consignée.</td>
-<td><a href="https://github.com/Dorianyloj/spity/releases/tag/v0.1.0">Release v0.1.0</a>, <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/13_MANUEL_UTILISATION_C241.md">manuel utilisateur</a></td>
-<td align="center">Partiel</td>
+<td>L&#39;instance HTTPS publique, deux comptes de démonstration prêts à l&#39;emploi et le manuel pas à pas permettent de réaliser les parcours grimpeur et club sans installation ni accès au code. La connexion, la session, le rendu desktop/mobile et la santé de la révision déployée ont été vérifiés.</td>
+<td><a href="https://spity.fr">Application jury</a>, <a href="https://spity.fr/api/health">santé</a>, <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/13_MANUEL_UTILISATION_C241.md">manuel utilisateur</a></td>
+<td align="center">Couvert</td>
 </tr>
 </tbody></table>
-<p>Limite déclarée : la recette automatisée et la manipulation par le développeur sont prouvées. Une session pilote formalisée avec des utilisateurs externes au projet reste recommandée avant une exploitation publique.</p>
+<p>Une session pilote formalisée avec des utilisateurs externes reste recommandée pour mesurer la facilité d&#39;usage et ouvrir d&#39;éventuelles améliorations. Elle complète la preuve de manipulation autonome, mais n&#39;est pas présentée comme une session déjà réalisée.</p>
 <h2 id="doc-15_index_preuves_grille_bc02-9-c2-3-1-cahier-de-recettes">9. C2.3.1 - Cahier de recettes</h2>
 <table>
 <thead>
@@ -1237,11 +1238,16 @@ src/features/events/
 <td><a href="https://github.com/Dorianyloj/spity/actions/runs/29827790355">Run 29827790355</a></td>
 <td>126 tests, seuils globaux, cinq jobs et staging réussis.</td>
 </tr>
+<tr>
+<td>Instance jury et audit de production</td>
+<td><a href="https://github.com/Dorianyloj/spity/actions/runs/29988586736">Run 29988586736</a></td>
+<td>Cinq jobs réussis, dépendances de production sans vulnérabilité et images staging publiées.</td>
+</tr>
 </tbody></table>
 <h2 id="doc-15_index_preuves_grille_bc02-14-points-restant-a-organiser">14. Points restant à organiser</h2>
-<p>Ces points doivent être présentés honnêtement au jury ; le premier correspond à la dernière preuve encore insuffisante :</p>
+<p>Ces améliorations ne remettent pas en cause la couverture des vingt-six critères, mais doivent être présentées honnêtement au jury :</p>
 <ul>
-<li>conduire une session pilote formalisée avec au moins deux utilisateurs externes au développement ;</li>
+<li>conduire une session pilote formalisée avec au moins deux utilisateurs externes pour mesurer l&#39;ergonomie réelle ;</li>
 <li>poursuivre progressivement la couverture des couches serveur au-delà du seuil global de 60 % ;</li>
 <li>conserver des captures des protections de branches GitHub si elles sont activées dans l&#39;interface distante ;</li>
 <li>exécuter périodiquement un exercice de restauration sur un environnement isolé ;</li>
