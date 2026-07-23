@@ -110,7 +110,26 @@ Vérifier ensuite via l'URL HTTPS publique :
 
 N'ouvrir le trafic général qu'après ces contrôles. Ne jamais exécuter le script `db:seed` en production.
 
-## 5. Exploitation courante
+## 5. Instance isolée de démonstration jury
+
+Cette étape est réservée à une instance éphémère identifiée comme environnement de démonstration. Elle ne doit jamais être exécutée sur une base contenant des comptes ou des contenus réels.
+
+Renseigner l'URL publique dans le fichier d'environnement :
+
+```dotenv
+NEXT_PUBLIC_APP_URL="https://spity.fr"
+```
+
+Après les migrations et avant d'ouvrir l'accès au jury, charger le jeu de données déterministe :
+
+```bash
+docker compose --env-file .env.production -f docker-compose.production.yml \
+  --profile demo run --rm --no-build seed-demo
+```
+
+Le script ne manipule que les identifiants et adresses réservés à la démonstration. Il peut être rejoué pour réinitialiser ces données sans supprimer le volume MariaDB.
+
+## 6. Exploitation courante
 
 ```bash
 # État des services
@@ -131,7 +150,7 @@ docker compose --env-file .env.production -f docker-compose.production.yml stop 
 
 Ne pas utiliser `down --volumes` : cette option supprime le volume de données.
 
-## 6. Revenir à la version précédente
+## 7. Revenir à la version précédente
 
 1. Conserver les journaux et noter l'heure, la version, le symptôme et l'impact.
 2. Remettre dans `.env.production` les valeurs `IMAGE_TAG`, `APP_VERSION` et `APP_REVISION` de la dernière release validée.
@@ -157,7 +176,7 @@ docker compose --env-file .env.production -f docker-compose.production.yml up -d
 
 La restauration écrase l'état courant de la base : vérifier le fichier, sa date et son intégrité avant exécution. Les migrations destructives doivent être séparées en plusieurs releases afin que l'ancienne version applicative reste exploitable pendant la période de retour arrière.
 
-## 7. Diagnostic rapide
+## 8. Diagnostic rapide
 
 | Symptôme | Contrôle | Action sûre |
 | --- | --- | --- |

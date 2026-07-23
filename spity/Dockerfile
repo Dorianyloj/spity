@@ -27,6 +27,7 @@ FROM base AS migration
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY package.json package-lock.json drizzle.config.ts tsconfig.json ./
 COPY drizzle ./drizzle
+COPY scripts/seed-demo.mjs ./scripts/seed-demo.mjs
 COPY src/db ./src/db
 CMD ["npm", "run", "db:migrate"]
 

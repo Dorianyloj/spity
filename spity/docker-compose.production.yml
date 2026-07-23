@@ -31,6 +31,21 @@ services:
         condition: service_healthy
     restart: "no"
 
+  seed-demo:
+    image: ${SPITY_MIGRATION_IMAGE:-spity-migrate}:${IMAGE_TAG:-local}
+    build:
+      context: .
+      target: migration
+    profiles: ["demo"]
+    command: ["npm", "run", "db:seed"]
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?DATABASE_URL is required}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    restart: "no"
+
   app:
     image: ${SPITY_IMAGE:-spity}:${IMAGE_TAG:-local}
     build:
