@@ -107,6 +107,12 @@ L'historique fonctionnel lisible est tenu dans [`CHANGELOG.md`](../../CHANGELOG.
 
 La version `0.1.0` couvre les parcours inscription, connexion, profil, lieux, matching, partenariats et événements. Le prototype peut être démarré localement avec Docker ou depuis ses images de release en suivant [`spity/DEPLOYMENT.md`](../../spity/DEPLOYMENT.md).
 
+### Instance de démonstration jury
+
+Le 23 juillet 2026, j'ai déployé une instance isolée sur [https://spity.fr](https://spity.fr). Nginx termine la connexion HTTPS et transmet les requêtes à l'application liée uniquement à `127.0.0.1:3100`. MariaDB reste limitée au réseau Docker privé. La route [`/api/health`](https://spity.fr/api/health) identifie la révision `49c4ea0ffa34b35e9ad5bc2e1a838eb82eb0b8ef` et la version `0.1.0-jury`.
+
+Cette instance ne contient que les données fictives du jeu de démonstration. Le compte grimpeur `lina.demo@spity.local` et le compte club `club.demo@spity.local`, avec le mot de passe commun `SpityDemo2026!`, permettent au jury de réaliser les deux parcours sans intervention technique.
+
 ### Preuve du déploiement continu
 
 L'[exécution CI no 29745444314](https://github.com/Dorianyloj/spity/actions/runs/29745444314) a validé et déployé le SHA de release sur staging le 20 juillet 2026.

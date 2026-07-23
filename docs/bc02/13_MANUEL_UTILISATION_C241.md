@@ -9,7 +9,7 @@
 | Public | Grimpeurs, responsables de club et évaluateurs |
 | Périmètre | Prototype BC02, fonctions F01 à F10 |
 | Recette associée | [Cahier de recettes](./10_CAHIER_RECETTES_C231.md) |
-| Dernière vérification | 20 juillet 2026 |
+| Dernière vérification | 23 juillet 2026 |
 
 ## 1. Présentation
 
@@ -40,9 +40,9 @@ Une fois connecté, la navigation principale contient :
 
 Tous les liens, champs et boutons des parcours critiques sont utilisables au clavier avec `Tab`, `Maj+Tab`, `Entrée` et `Espace`. Le focus visible indique l'élément actif. Les messages de réussite ou d'erreur sont annoncés après les actions.
 
-## 3. Comptes de démonstration locaux
+## 3. Comptes de démonstration jury et locaux
 
-Après exécution locale de `npm run db:seed`, les comptes suivants utilisent le mot de passe commun `SpityDemo2026!` :
+L'instance jury est accessible sur [https://spity.fr](https://spity.fr). Après chargement du jeu de démonstration sur une instance éphémère, les comptes suivants utilisent le mot de passe commun `SpityDemo2026!` :
 
 | Compte | Rôle | Usage de démonstration |
 | --- | --- | --- |
@@ -51,7 +51,7 @@ Après exécution locale de `npm run db:seed`, les comptes suivants utilisent le
 | `camille.demo@spity.local` | Grimpeur | Profil supplémentaire pour les filtres de matching. |
 | `club.demo@spity.local` | Club | Création et gestion d'événements. |
 
-Ces identifiants sont publics et destinés exclusivement à une base de démonstration locale ou éphémère. Ils ne doivent exister dans aucun environnement contenant de vraies données.
+Ces identifiants sont publics et destinés exclusivement à une base de démonstration locale ou éphémère. L'instance `spity.fr` ne contient que des données fictives et peut être réinitialisée. Ces comptes ne doivent exister dans aucun environnement contenant de vraies données.
 
 ## 4. Créer un compte et se connecter
 
@@ -227,7 +227,7 @@ Ne jamais communiquer son mot de passe ou son cookie de session dans une capture
 
 ## 12. Parcours de démonstration jury
 
-Le jeu local permet un parcours court et reproductible :
+Le jeu disponible sur `spity.fr`, ou chargé localement avec `npm run db:seed`, permet un parcours court et reproductible :
 
 1. se connecter avec Lina et présenter le profil, le matériel, les filtres de partenaires, les lieux et une inscription ;
 2. se déconnecter puis ouvrir le compte club ;

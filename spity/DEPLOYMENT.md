@@ -83,7 +83,7 @@ Stocker cette sauvegarde sur un support chiffré distinct du serveur, puis exéc
 
 ```bash
 docker compose --env-file .env.production -f docker-compose.production.yml \
-  --profile migration run --rm --no-build migrate
+  --profile migration run --rm migrate
 docker compose --env-file .env.production -f docker-compose.production.yml \
   up -d --no-build app
 ```
@@ -124,7 +124,7 @@ Après les migrations et avant d'ouvrir l'accès au jury, charger le jeu de donn
 
 ```bash
 docker compose --env-file .env.production -f docker-compose.production.yml \
-  --profile demo run --rm --no-build seed-demo
+  --profile demo run --rm seed-demo
 ```
 
 Le script ne manipule que les identifiants et adresses réservés à la démonstration. Il peut être rejoué pour réinitialiser ces données sans supprimer le volume MariaDB.

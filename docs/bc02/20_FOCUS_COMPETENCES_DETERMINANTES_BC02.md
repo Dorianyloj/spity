@@ -32,7 +32,7 @@ Next.js et React répondent au besoin web et responsive. Tailwind et mon design 
 | Composants d'interface présents et fonctionnels | Formulaires, navigation, filtres, cartes, états vides, boutons et retours d'erreur testés sur desktop et à 360 px. | Couvert |
 | Exigences de sécurité | Session signée, rôles, contrôle du propriétaire, CSRF, quota, Zod, requêtes paramétrées, transactions et en-têtes HTTP. | Couvert |
 
-Je peux démontrer ce résultat sans préparation spéciale : je me connecte comme grimpeur, je filtre les partenaires et je m'inscris à un événement ; je passe ensuite sur le compte club pour retrouver le participant et administrer l'événement. Les captures A1 à A4 montrent les interfaces desktop et mobile. L'[architecture détaillée](./05_ARCHITECTURE_PROTOTYPE_C221.md) relie chaque user story à sa route, sa règle et sa preuve.
+Je peux démontrer ce résultat sans préparation spéciale sur [spity.fr](https://spity.fr) : je me connecte comme grimpeur, je filtre les partenaires et je m'inscris à un événement ; je passe ensuite sur le compte club pour retrouver le participant et administrer l'événement. Les captures A1 à A4 montrent les interfaces desktop et mobile. L'[architecture détaillée](./05_ARCHITECTURE_PROTOTYPE_C221.md) relie chaque user story à sa route, sa règle et sa preuve.
 
 ## C2.2.2 - Développer un harnais de tests couvrant la majorité du code
 

@@ -222,7 +222,7 @@ const documentHtml = `<!doctype html>
         <strong>Candidat</strong><span>Dorian Joly</span>
         <strong>Version</strong><span>Spity 0.1.0</span>
         <strong>Livrable</strong><span>Dossier BC02 avec annexes</span>
-        <strong>Date</strong><span>21 juillet 2026</span>
+        <strong>Date</strong><span>23 juillet 2026</span>
       </div>
     </section>
     <section class="toc">

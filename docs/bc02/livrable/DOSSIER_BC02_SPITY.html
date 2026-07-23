@@ -88,7 +88,7 @@
         <strong>Candidat</strong><span>Dorian Joly</span>
         <strong>Version</strong><span>Spity 0.1.0</span>
         <strong>Livrable</strong><span>Dossier BC02 avec annexes</span>
-        <strong>Date</strong><span>21 juillet 2026</span>
+        <strong>Date</strong><span>23 juillet 2026</span>
       </div>
     </section>
     <section class="toc">
@@ -139,13 +139,51 @@
 </tr>
 <tr>
 <td>Date du dossier</td>
-<td>21 juillet 2026</td>
+<td>23 juillet 2026</td>
 </tr>
 <tr>
 <td>Dépôt</td>
 <td><a href="https://github.com/Dorianyloj/spity">github.com/Dorianyloj/spity</a></td>
 </tr>
 </tbody></table>
+<h2 id="doc-16_dossier_final_bc02-acces-direct-pour-le-jury">Accès direct pour le jury</h2>
+<table>
+<thead>
+<tr>
+<th>Accès</th>
+<th>Valeur</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Application</td>
+<td><a href="https://spity.fr">https://spity.fr</a></td>
+</tr>
+<tr>
+<td>Santé et version déployée</td>
+<td><a href="https://spity.fr/api/health">https://spity.fr/api/health</a></td>
+</tr>
+<tr>
+<td>Code source et historique Git</td>
+<td><a href="https://github.com/Dorianyloj/spity">github.com/Dorianyloj/spity</a></td>
+</tr>
+<tr>
+<td>Révision déployée</td>
+<td><code>49c4ea0ffa34b35e9ad5bc2e1a838eb82eb0b8ef</code></td>
+</tr>
+<tr>
+<td>Compte grimpeur</td>
+<td><code>lina.demo@spity.local</code></td>
+</tr>
+<tr>
+<td>Compte club</td>
+<td><code>club.demo@spity.local</code></td>
+</tr>
+<tr>
+<td>Mot de passe commun</td>
+<td><code>SpityDemo2026!</code></td>
+</tr>
+</tbody></table>
+<p>Cette instance est réservée à la démonstration : elle ne contient que des données fictives et peut être réinitialisée. Les deux comptes permettent au jury de manipuler les parcours principaux sans créer de compte ni accéder à l&#39;administration du serveur.</p>
 <h2 id="doc-16_dossier_final_bc02-declaration-de-perimetre">Déclaration de périmètre</h2>
 <p>Dans ce dossier, je présente le travail que j&#39;ai réalisé sur Spity pour les neuf compétences du bloc BC02. Je me suis appuyé sur une version fonctionnelle, versionnée et testée du projet. Mon <a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/17_AUDIT_CONFORMITE_OFFICIEL_BC02.md">audit de conformité aux documents officiels</a> aboutit à vingt-cinq critères couverts et un critère partiel. J&#39;ai volontairement séparé :</p>
 <ul>
@@ -390,7 +428,7 @@ Next.js App Router et Route Handlers
 <td align="center">Couvert</td>
 </tr>
 </tbody></table>
-<p>Je peux démontrer ce résultat sans préparation spéciale : je me connecte comme grimpeur, je filtre les partenaires et je m&#39;inscris à un événement ; je passe ensuite sur le compte club pour retrouver le participant et administrer l&#39;événement. Les captures A1 à A4 montrent les interfaces desktop et mobile. L&#39;<a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/05_ARCHITECTURE_PROTOTYPE_C221.md">architecture détaillée</a> relie chaque user story à sa route, sa règle et sa preuve.</p>
+<p>Je peux démontrer ce résultat sans préparation spéciale sur <a href="https://spity.fr">spity.fr</a> : je me connecte comme grimpeur, je filtre les partenaires et je m&#39;inscris à un événement ; je passe ensuite sur le compte club pour retrouver le participant et administrer l&#39;événement. Les captures A1 à A4 montrent les interfaces desktop et mobile. L&#39;<a href="https://github.com/Dorianyloj/spity/blob/develop/docs/bc02/05_ARCHITECTURE_PROTOTYPE_C221.md">architecture détaillée</a> relie chaque user story à sa route, sa règle et sa preuve.</p>
 <h2 id="doc-20_focus_competences_determinantes_bc02-c2-2-2-developper-un-harnais-de-tests-couvrant-la-majorite-du-code">C2.2.2 - Développer un harnais de tests couvrant la majorité du code</h2>
 <h3 id="doc-20_focus_competences_determinantes_bc02-ce-que-je-dois-demontrer-2">Ce que je dois démontrer</h3>
 <p>La grille demande un jeu de tests unitaires portant sur les fonctionnalités demandées et couvrant la majorité du code développé. Pour éviter une couverture artificielle, ma configuration mesure tout <code>src/</code>, y compris les fichiers sans test, et pas seulement les modules faciles à tester.</p>

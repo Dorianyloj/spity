@@ -11,8 +11,22 @@
 | Prototype évalué | Application web responsive, version `0.1.0` |
 | Branche de travail | `develop` |
 | Release stable | `v0.1.0` |
-| Date du dossier | 21 juillet 2026 |
+| Date du dossier | 23 juillet 2026 |
 | Dépôt | [github.com/Dorianyloj/spity](https://github.com/Dorianyloj/spity) |
+
+## Accès direct pour le jury
+
+| Accès | Valeur |
+| --- | --- |
+| Application | [https://spity.fr](https://spity.fr) |
+| Santé et version déployée | [https://spity.fr/api/health](https://spity.fr/api/health) |
+| Code source et historique Git | [github.com/Dorianyloj/spity](https://github.com/Dorianyloj/spity) |
+| Révision déployée | `49c4ea0ffa34b35e9ad5bc2e1a838eb82eb0b8ef` |
+| Compte grimpeur | `lina.demo@spity.local` |
+| Compte club | `club.demo@spity.local` |
+| Mot de passe commun | `SpityDemo2026!` |
+
+Cette instance est réservée à la démonstration : elle ne contient que des données fictives et peut être réinitialisée. Les deux comptes permettent au jury de manipuler les parcours principaux sans créer de compte ni accéder à l'administration du serveur.
 
 ## Déclaration de périmètre
 

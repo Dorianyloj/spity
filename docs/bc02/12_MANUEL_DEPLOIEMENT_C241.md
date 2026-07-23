@@ -10,7 +10,7 @@
 | Environnements | Développement local, recette CI, staging et production Docker |
 | Sources exécutables | [`spity/docker-compose.yml`](../../spity/docker-compose.yml), [`spity/docker-compose.production.yml`](../../spity/docker-compose.production.yml), [`spity/DEPLOYMENT.md`](../../spity/DEPLOYMENT.md) |
 | Compétence | C2.4.1 - documentation technique d'exploitation |
-| Dernière vérification | 20 juillet 2026 |
+| Dernière vérification | 23 juillet 2026 |
 
 ## 1. Objet et périmètre
 
@@ -209,7 +209,7 @@ Le `sh -c` est volontaire : les variables sont évaluées à l'intérieur du con
 
 ```bash
 docker compose --env-file .env.production -f docker-compose.production.yml \
-  --profile migration run --rm --no-build migrate
+  --profile migration run --rm migrate
 docker compose --env-file .env.production -f docker-compose.production.yml \
   up -d --no-build app
 ```
@@ -318,5 +318,8 @@ La configuration d'environnement et les contrôles qualité sont décrits dans [
 | `npm run release:verify -- v0.1.0` | Succès, tag et version `0.1.0` concordants. |
 | `GET /api/health` sur l'application locale | HTTP réussi, `status` égal à `ok`, version `0.1.0`. |
 | CI et staging du SHA `689e59d` | Run `29750556481` réussi : cinq jobs verts, images standalone migrées et testées avant publication. |
+| `https://spity.fr/api/health` | HTTP `200`, version `0.1.0-jury`, révision `49c4ea0ffa34b35e9ad5bc2e1a838eb82eb0b8ef`. |
+| Exposition de l'instance jury | Redirection HTTP vers HTTPS, certificat Let's Encrypt valide, application liée à `127.0.0.1:3100` et MariaDB non publiée. |
+| Connexion du compte Lina | HTTP `200`, session authentifiée et cookie `Secure` via le reverse proxy HTTPS. |
 
 Les secrets et le contenu de la sauvegarde ne sont pas intégrés au dépôt. La restauration, destructive par nature, est documentée mais n'a pas été exécutée sur la base de travail.
