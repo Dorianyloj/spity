@@ -4,7 +4,6 @@ import type { ReactNode } from 'react'
 import BrandMark from '@/components/brand/brand-mark'
 import { Badge } from '@/components/ui'
 import type { AuthUser } from '@/features/auth/schemas'
-import { demoClimbingAssets, makeDarkPanelBackground } from '@/lib/brand-assets'
 import LogoutButton from './logout-button'
 
 type AppShellNavItem = 'feed' | 'matching' | 'partnerships' | 'places' | 'events' | 'profile'
@@ -36,11 +35,8 @@ export default function AppShell({ activeItem, children, user }: AppShellProps) 
   const navActionClass = '!text-white/80 hover:!bg-white/10 hover:!text-white'
 
   return (
-    <main
-      className="min-h-screen bg-background bg-fixed bg-cover bg-center pb-10 text-foreground"
-      style={{ backgroundImage: makeDarkPanelBackground(demoClimbingAssets.verdonClimbers) }}
-    >
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-[#173236]/92 text-white backdrop-blur-xl">
+    <main className="min-h-dvh bg-zinc-950 pb-10 text-foreground">
+      <header className="sticky top-0 z-40 border-b border-zinc-800 bg-zinc-950/95 text-white backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
