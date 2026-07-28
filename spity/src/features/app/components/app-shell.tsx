@@ -35,8 +35,8 @@ export default function AppShell({ activeItem, children, user }: AppShellProps) 
   const navActionClass = '!text-white/80 hover:!bg-white/10 hover:!text-white'
 
   return (
-    <main className="min-h-dvh bg-zinc-950 pb-10 text-foreground">
-      <header className="sticky top-0 z-40 border-b border-zinc-800 bg-zinc-950/95 text-white backdrop-blur-xl">
+    <main className="min-h-dvh bg-zinc-800 pb-10 text-foreground">
+      <header className="sticky top-0 z-40 border-b border-zinc-700 bg-zinc-900/95 text-white backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
