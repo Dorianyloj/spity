@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import AppDashboard from '@/features/app/components/app-dashboard'
+import { listFeedPosts } from '@/features/feed/lib/feed-repository'
 import { getCurrentProfile } from '@/features/profile/lib/current-profile'
 
 export const metadata: Metadata = {
@@ -19,5 +20,7 @@ export default async function AppPage() {
     redirect('/profile/onboarding')
   }
 
-  return <AppDashboard user={currentProfile.user} />
+  const posts = await listFeedPosts(currentProfile.user.id)
+
+  return <AppDashboard posts={posts} user={currentProfile.user} />
 }

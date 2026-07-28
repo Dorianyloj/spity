@@ -206,11 +206,15 @@ export const comments = mysqlTable('comments', {
 })
 
 // === LIKE ===
-export const likes = mysqlTable('likes', {
-  id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
-  postId: varchar('post_id', { length: 36 }).notNull().references(() => posts.id, { onDelete: 'cascade' }),
-  userId: varchar('user_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
-})
+export const likes = mysqlTable(
+  'likes',
+  {
+    id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+    postId: varchar('post_id', { length: 36 }).notNull().references(() => posts.id, { onDelete: 'cascade' }),
+    userId: varchar('user_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
+  },
+  (table) => [uniqueIndex('likes_post_user_unique').on(table.postId, table.userId)]
+)
 
 // === EVENT ===
 export const events = mysqlTable(

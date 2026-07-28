@@ -1,0 +1,148 @@
+import { randomUUID } from 'crypto'
+import { and, desc, eq, inArray } from 'drizzle-orm'
+import { db } from '@/db'
+import {
+  clubProfiles,
+  comments,
+  falaises,
+  grimpeurProfiles,
+  likes,
+  medias,
+  posts,
+  salles,
+  users,
+} from '@/db/schema'
+import { feedPostSchema, type FeedPost, type PostLike } from '../schemas'
+
+export class FeedOperationError extends Error {
+  constructor(message: string, public readonly status: number) {
+    super(message)
+  }
+}
+
+const formatFeedDate = (date: Date) => {
+  const elapsedMinutes = Math.floor((Date.now() - date.getTime()) / 60_000)
+
+  if (elapsedMinutes < 1) return 'À l’instant'
+  if (elapsedMinutes < 60) return `Il y a ${elapsedMinutes} min`
+
+  const elapsedHours = Math.floor(elapsedMinutes / 60)
+  if (elapsedHours < 24) return `Il y a ${elapsedHours} h`
+  if (elapsedHours < 48) return 'Hier'
+
+  return new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium' }).format(date)
+}
+
+export const listFeedPosts = async (viewerId: string): Promise<FeedPost[]> => {
+  const rows = await db
+    .select({
+      post: posts,
+      authorEmail: users.email,
+      avatarUrl: users.avatarUrl,
+      climberName: grimpeurProfiles.displayName,
+      clubName: clubProfiles.nom,
+      salleName: salles.nom,
+      falaiseName: falaises.nom,
+    })
+    .from(posts)
+    .innerJoin(users, eq(users.id, posts.authorId))
+    .leftJoin(grimpeurProfiles, eq(grimpeurProfiles.userId, posts.authorId))
+    .leftJoin(clubProfiles, eq(clubProfiles.id, posts.clubId))
+    .leftJoin(salles, eq(salles.id, posts.salleId))
+    .leftJoin(falaises, eq(falaises.id, posts.falaiseId))
+    .orderBy(desc(posts.createdAt))
+    .limit(50)
+
+  const postIds = rows.map((row) => row.post.id)
+
+  if (postIds.length === 0) {
+    return []
+  }
+
+  const [mediaRows, likeRows, commentRows] = await Promise.all([
+    db.select({ postId: medias.postId, url: medias.url }).from(medias).where(inArray(medias.postId, postIds)),
+    db.select({ postId: likes.postId, userId: likes.userId }).from(likes).where(inArray(likes.postId, postIds)),
+    db.select({ postId: comments.postId }).from(comments).where(inArray(comments.postId, postIds)),
+  ])
+
+  const mediaByPost = new Map<string, string>()
+  const likeCounts = new Map<string, number>()
+  const commentCounts = new Map<string, number>()
+  const likedPostIds = new Set<string>()
+
+  for (const media of mediaRows) {
+    if (!mediaByPost.has(media.postId)) {
+      mediaByPost.set(media.postId, media.url)
+    }
+  }
+
+  for (const like of likeRows) {
+    likeCounts.set(like.postId, (likeCounts.get(like.postId) ?? 0) + 1)
+    if (like.userId === viewerId) {
+      likedPostIds.add(like.postId)
+    }
+  }
+
+  for (const comment of commentRows) {
+    commentCounts.set(comment.postId, (commentCounts.get(comment.postId) ?? 0) + 1)
+  }
+
+  return rows.map((row) => {
+    const location = row.salleName ?? row.falaiseName ?? row.clubName ?? 'Communauté Spity'
+    const author = row.climberName ?? row.clubName ?? row.authorEmail.split('@')[0]
+    const tag = row.post.clubId ? 'Événement' : row.post.isStory ? 'Topo' : 'Session'
+
+    return feedPostSchema.parse({
+      id: row.post.id,
+      author: { name: author, avatarUrl: row.avatarUrl },
+      context: [location, row.post.cotation].filter(Boolean).join(' · '),
+      content: row.post.contenu ?? 'Publication sans texte',
+      tag,
+      meta: formatFeedDate(row.post.createdAt),
+      imageUrl: mediaByPost.get(row.post.id) ?? null,
+      likeCount: likeCounts.get(row.post.id) ?? 0,
+      commentCount: commentCounts.get(row.post.id) ?? 0,
+      likedByViewer: likedPostIds.has(row.post.id),
+    })
+  })
+}
+
+export const setPostLike = async (postId: string, userId: string, liked: boolean): Promise<PostLike> => {
+  return db.transaction(async (transaction) => {
+    const [post] = await transaction
+      .select({ id: posts.id })
+      .from(posts)
+      .where(eq(posts.id, postId))
+      .limit(1)
+
+    if (!post) {
+      throw new FeedOperationError('Publication introuvable', 404)
+    }
+
+    const condition = and(eq(likes.postId, postId), eq(likes.userId, userId))
+    const [existingLike] = await transaction
+      .select({ id: likes.id })
+      .from(likes)
+      .where(condition)
+      .limit(1)
+
+    if (liked && !existingLike) {
+      await transaction.insert(likes).values({
+        id: randomUUID(),
+        postId,
+        userId,
+      })
+    }
+
+    if (!liked && existingLike) {
+      await transaction.delete(likes).where(eq(likes.id, existingLike.id))
+    }
+
+    const postLikes = await transaction
+      .select({ id: likes.id })
+      .from(likes)
+      .where(eq(likes.postId, postId))
+
+    return { postId, liked, likeCount: postLikes.length }
+  })
+}
