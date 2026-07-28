@@ -2,12 +2,20 @@
   "name": "spity",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22 <25",
+    "npm": ">=10"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "quality:static": "npm run lint && npm run typecheck",
+    "quality": "npm run quality:static && npm run build",
+    "security:audit": "npm audit --omit=dev --audit-level=high",
+    "perf:audit": "lhci autorun",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
@@ -30,6 +38,7 @@
     "zod": "^4.3.5"
   },
   "devDependencies": {
+    "@lhci/cli": "^0.15.1",
     "@tailwindcss/postcss": "^4",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
@@ -41,5 +50,10 @@
     "eslint-config-next": "^16.2.4",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "8.5.20",
+    "tmp": "0.2.7",
+    "uuid": "11.1.1"
   }
 }

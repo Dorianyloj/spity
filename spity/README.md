@@ -15,20 +15,26 @@ Le projet est développé dans le cadre d'une certification Titre RNCP. Le cadra
 
 ## Prérequis
 
-- Node.js 20+
-- npm
-- Docker et Docker Compose
+- Node.js 22 (voir `.nvmrc`)
+- npm 10+
+- Docker Desktop avec Docker Compose
 
 ## Installation
 
 ```bash
-npm install
+npm ci
 cp .env.example .env.local
-docker compose up -d
+docker compose --env-file .env.local up -d
 npm run db:migrate
 ```
 
-Adaptez `DATABASE_URL` et `JWT_SECRET` dans `.env.local` si nécessaire.
+Remplacez au minimum `JWT_SECRET`, `MYSQL_PASSWORD` et `MYSQL_ROOT_PASSWORD` dans `.env.local`. `DATABASE_URL` doit utiliser le même mot de passe que `MYSQL_PASSWORD`.
+
+phpMyAdmin est un outil optionnel du profil `tools` :
+
+```bash
+docker compose --env-file .env.local --profile tools up -d
+```
 
 ## Développement
 
@@ -40,6 +46,8 @@ Application : http://localhost:3000
 
 phpMyAdmin : http://localhost:8081
 
+État de l'application et de MariaDB : http://localhost:3000/api/health
+
 ## Commandes
 
 ```bash
@@ -48,7 +56,35 @@ npm run build        # Build production
 npm start            # Serveur production après build
 npm run lint         # ESLint
 npm run typecheck    # Vérification TypeScript
+npm run quality      # Lint, TypeScript et build
+npm run security:audit # Vulnérabilités des dépendances de production
+npm run perf:audit   # Audit Lighthouse des pages principales
 ```
+
+## Environnements
+
+### Tests
+
+La base de test est isolée, exposée uniquement sur `127.0.0.1:3307` et stockée en mémoire :
+
+```bash
+cp .env.test.example .env.test
+docker compose --env-file .env.test -f docker-compose.test.yml up -d --wait
+docker compose --env-file .env.test -f docker-compose.test.yml down
+```
+
+### Production Docker
+
+```bash
+cp .env.production.example .env.production
+# Remplacer toutes les valeurs CHANGE_ME.
+docker compose --env-file .env.production -f docker-compose.production.yml build
+docker compose --env-file .env.production -f docker-compose.production.yml up -d mariadb
+docker compose --env-file .env.production -f docker-compose.production.yml --profile migration run --rm migrate
+docker compose --env-file .env.production -f docker-compose.production.yml up -d app
+```
+
+La configuration de production lie l'application à `127.0.0.1:3000` par défaut afin qu'elle soit publiée derrière un reverse proxy HTTPS.
 
 ## Base de données
 
@@ -105,5 +141,10 @@ Pages locales :
 Avant commit, lancer :
 
 ```bash
-npm run lint && npm run typecheck && npm run build
+npm run quality
+npm run security:audit
 ```
+
+Après un build réussi, `npm run perf:audit` lance l'application et vérifie les seuils Lighthouse définis dans `lighthouserc.js`.
+
+Le protocole complet des environnements, contrôles qualité, déploiements et retours arrière est documenté dans [`../docs/bc02/02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md`](../docs/bc02/02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md).
