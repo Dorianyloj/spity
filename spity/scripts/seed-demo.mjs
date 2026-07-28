@@ -69,11 +69,10 @@ const demoEmails = [
   'club.demo@spity.local',
 ]
 
-const publicBaseUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'
-const demoImage = (fileName) => `${publicBaseUrl}/images/demo/climbing/${fileName}`
+const demoImage = (fileName) => `/images/demo/climbing/${fileName}`
 
 const imageUrls = {
-  logo: `${publicBaseUrl}/images/brand/logo-spity.png`,
+  logo: '/images/brand/logo-spity.png',
   indoor: demoImage('indoor-gym-overview.jpg'),
   indoorAlt: demoImage('indoor-crack-training.jpg'),
   indoorWall: demoImage('indoor-climbing-wall.jpg'),

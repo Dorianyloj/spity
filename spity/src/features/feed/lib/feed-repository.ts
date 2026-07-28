@@ -33,6 +33,22 @@ const formatFeedDate = (date: Date) => {
   return new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium' }).format(date)
 }
 
+const toImageSource = (value: string | null) => {
+  if (!value) {
+    return null
+  }
+
+  try {
+    const url = new URL(value)
+
+    return url.pathname.startsWith('/images/')
+      ? `${url.pathname}${url.search}`
+      : value
+  } catch {
+    return value
+  }
+}
+
 export const listFeedPosts = async (viewerId: string): Promise<FeedPost[]> => {
   const rows = await db
     .select({
@@ -71,8 +87,10 @@ export const listFeedPosts = async (viewerId: string): Promise<FeedPost[]> => {
   const likedPostIds = new Set<string>()
 
   for (const media of mediaRows) {
-    if (!mediaByPost.has(media.postId)) {
-      mediaByPost.set(media.postId, media.url)
+    const imageSource = toImageSource(media.url)
+
+    if (imageSource && !mediaByPost.has(media.postId)) {
+      mediaByPost.set(media.postId, imageSource)
     }
   }
 
@@ -94,7 +112,7 @@ export const listFeedPosts = async (viewerId: string): Promise<FeedPost[]> => {
 
     return feedPostSchema.parse({
       id: row.post.id,
-      author: { name: author, avatarUrl: row.avatarUrl },
+      author: { name: author, avatarUrl: toImageSource(row.avatarUrl) },
       context: [location, row.post.cotation].filter(Boolean).join(' · '),
       content: row.post.contenu ?? 'Publication sans texte',
       tag,

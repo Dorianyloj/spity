@@ -70,4 +70,13 @@ describe('FeedTimeline', () => {
     expect(await screen.findByRole('alert')).toHaveTextContent('Publication introuvable')
     expect(screen.getByText('24 J’aime')).toBeInTheDocument()
   })
+
+  it('renders a first-party image from a local path', () => {
+    render(<FeedTimeline initialPosts={[{
+      ...post,
+      imageUrl: '/images/demo/climbing/indoor-gym-overview.jpg',
+    }]} />)
+
+    expect(screen.getByRole('img', { name: 'Publication de Lina M.' })).toBeInTheDocument()
+  })
 })
