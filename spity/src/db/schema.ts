@@ -199,11 +199,18 @@ export const medias = mysqlTable('medias', {
 })
 
 // === COMMENT ===
-export const comments = mysqlTable('comments', {
-  id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
-  postId: varchar('post_id', { length: 36 }).notNull().references(() => posts.id, { onDelete: 'cascade' }),
-  authorId: varchar('author_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
-})
+export const comments = mysqlTable(
+  'comments',
+  {
+    id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+    postId: varchar('post_id', { length: 36 }).notNull().references(() => posts.id, { onDelete: 'cascade' }),
+    authorId: varchar('author_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
+    contenu: varchar('contenu', { length: 500 }).notNull().default('Commentaire'),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),
+  },
+  (table) => [index('comments_post_created_idx').on(table.postId, table.createdAt)]
+)
 
 // === LIKE ===
 export const likes = mysqlTable(

@@ -26,6 +26,7 @@ const posts: FeedPost[] = [
     imageUrl: null,
     likeCount: 24,
     commentCount: 6,
+    comments: [],
     likedByViewer: false,
   },
   {
@@ -38,6 +39,7 @@ const posts: FeedPost[] = [
     imageUrl: null,
     likeCount: 48,
     commentCount: 12,
+    comments: [],
     likedByViewer: false,
   },
 ]

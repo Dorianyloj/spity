@@ -20,6 +20,7 @@ const post: FeedPost = {
   imageUrl: null,
   likeCount: 24,
   commentCount: 6,
+  comments: [],
   likedByViewer: false,
 }
 

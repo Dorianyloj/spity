@@ -43,6 +43,13 @@
       "when": 1785239256203,
       "tag": "0005_enforce_unique_post_likes",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1785241056143,
+      "tag": "0006_add_post_comment_content",
+      "breakpoints": true
     }
   ]
 }

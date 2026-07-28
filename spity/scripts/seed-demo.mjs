@@ -551,8 +551,18 @@ const main = async () => {
     ])
 
     await insert(connection, 'comments', [
-      { id: 'eeeeeeee-eeee-4eee-8eee-eeeeeeeeeee1', post_id: ids.posts.partner, author_id: ids.users.nassim },
-      { id: 'eeeeeeee-eeee-4eee-8eee-eeeeeeeeeee2', post_id: ids.posts.event, author_id: ids.users.camille },
+      {
+        id: 'eeeeeeee-eeee-4eee-8eee-eeeeeeeeeee1',
+        post_id: ids.posts.partner,
+        author_id: ids.users.nassim,
+        contenu: 'Partant ! Je peux assurer et filmer quelques essais.',
+      },
+      {
+        id: 'eeeeeeee-eeee-4eee-8eee-eeeeeeeeeee2',
+        post_id: ids.posts.event,
+        author_id: ids.users.camille,
+        contenu: 'Je m’inscris, merci pour l’organisation.',
+      },
     ])
 
     await connection.commit()

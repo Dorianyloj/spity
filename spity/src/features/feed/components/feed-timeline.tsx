@@ -14,6 +14,7 @@ import { z } from 'zod'
 import { Avatar, Badge, Card, EmptyState } from '@/components/ui'
 import type { FeedPost } from '../schemas'
 import { postLikeResponseSchema } from '../schemas'
+import PostComments from './post-comments'
 
 type FeedTimelineProps = {
   initialPosts: FeedPost[]
@@ -67,6 +68,10 @@ export default function FeedTimeline({ initialPosts }: FeedTimelineProps) {
     } finally {
       setPendingId(null)
     }
+  }
+
+  const focusCommentField = (postId: string) => {
+    document.getElementById(`comment-${postId}`)?.focus()
   }
 
   if (posts.length === 0) {
@@ -148,6 +153,7 @@ export default function FeedTimeline({ initialPosts }: FeedTimelineProps) {
                   <button
                     aria-label={`Commenter la publication de ${post.author.name}`}
                     className="rounded-full p-2 text-foreground transition-colors hover:bg-muted"
+                    onClick={() => focusCommentField(post.id)}
                     type="button"
                   >
                     <MessageCircle className="size-5" aria-hidden="true" />
@@ -171,10 +177,11 @@ export default function FeedTimeline({ initialPosts }: FeedTimelineProps) {
 
               <div className="px-4 pb-4 pt-1">
                 <p className="text-sm font-semibold text-foreground tabular-nums">{post.likeCount} J’aime</p>
-                <p className="mt-1 text-sm text-muted-foreground tabular-nums">{post.commentCount} commentaires</p>
                 <p className="mt-2 text-xs text-muted-foreground">{post.meta}</p>
                 {errors[post.id] && <p className="mt-2 text-sm text-destructive" role="alert">{errors[post.id]}</p>}
               </div>
+
+              <PostComments initialComments={post.comments} postId={post.id} />
             </Card>
           </article>
         )
