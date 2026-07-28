@@ -31,6 +31,7 @@ export default function FeedTimeline({ initialPosts }: FeedTimelineProps) {
   const [posts, setPosts] = useState(initialPosts)
   const [pendingId, setPendingId] = useState<string | null>(null)
   const [errors, setErrors] = useState<Record<string, string | undefined>>({})
+  const [openCommentComposerId, setOpenCommentComposerId] = useState<string | null>(null)
 
   const toggleLike = async (post: FeedPost) => {
     setPendingId(post.id)
@@ -70,10 +71,6 @@ export default function FeedTimeline({ initialPosts }: FeedTimelineProps) {
     }
   }
 
-  const focusCommentField = (postId: string) => {
-    document.getElementById(`comment-${postId}`)?.focus()
-  }
-
   if (posts.length === 0) {
     return (
       <EmptyState
@@ -88,6 +85,7 @@ export default function FeedTimeline({ initialPosts }: FeedTimelineProps) {
     <div className="space-y-4">
       {posts.map((post) => {
         const isPending = pendingId === post.id
+        const isCommentComposerOpen = openCommentComposerId === post.id
         const likeLabel = post.likedByViewer
           ? `Retirer le like de la publication de ${post.author.name}`
           : `Aimer la publication de ${post.author.name}`
@@ -152,8 +150,10 @@ export default function FeedTimeline({ initialPosts }: FeedTimelineProps) {
                   </button>
                   <button
                     aria-label={`Commenter la publication de ${post.author.name}`}
+                    aria-controls={`comment-composer-${post.id}`}
+                    aria-expanded={isCommentComposerOpen}
                     className="rounded-full p-2 text-foreground transition-colors hover:bg-muted"
-                    onClick={() => focusCommentField(post.id)}
+                    onClick={() => setOpenCommentComposerId(isCommentComposerOpen ? null : post.id)}
                     type="button"
                   >
                     <MessageCircle className="size-5" aria-hidden="true" />
@@ -181,7 +181,12 @@ export default function FeedTimeline({ initialPosts }: FeedTimelineProps) {
                 {errors[post.id] && <p className="mt-2 text-sm text-destructive" role="alert">{errors[post.id]}</p>}
               </div>
 
-              <PostComments initialComments={post.comments} postId={post.id} />
+              <PostComments
+                composerOpen={isCommentComposerOpen}
+                initialComments={post.comments}
+                onComposerClose={() => setOpenCommentComposerId(null)}
+                postId={post.id}
+              />
             </Card>
           </article>
         )

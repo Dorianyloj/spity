@@ -62,6 +62,18 @@ describe('FeedTimeline', () => {
     expect(await screen.findByText('24 J’aime')).toBeInTheDocument()
   })
 
+  it('opens the comment composer from the comment button', async () => {
+    render(<FeedTimeline initialPosts={[post]} />)
+
+    expect(screen.queryByLabelText('Ajouter un commentaire')).not.toBeInTheDocument()
+
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Commenter la publication de Lina M.' }),
+    )
+
+    expect(await screen.findByLabelText('Ajouter un commentaire')).toHaveFocus()
+  })
+
   it('shows an actionable error next to the affected like button', async () => {
     fetchMock.mockResolvedValueOnce(jsonResponse({ error: 'Publication introuvable' }, 404))
 

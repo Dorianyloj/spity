@@ -51,7 +51,9 @@ describe('PostComments', () => {
     }
     fetchMock.mockResolvedValueOnce(jsonResponse({ comment: createdComment }, 201))
 
-    render(<PostComments initialComments={[]} postId={postId} />)
+    render(
+      <PostComments composerOpen initialComments={[]} onComposerClose={jest.fn()} postId={postId} />,
+    )
     fireEvent.change(screen.getByLabelText('Ajouter un commentaire'), {
       target: { value: createdComment.content },
     })
@@ -75,7 +77,14 @@ describe('PostComments', () => {
     }
     fetchMock.mockResolvedValueOnce(jsonResponse({ comment: editedComment }))
 
-    render(<PostComments initialComments={[comment]} postId={postId} />)
+    render(
+      <PostComments
+        composerOpen={false}
+        initialComments={[comment]}
+        onComposerClose={jest.fn()}
+        postId={postId}
+      />,
+    )
     fireEvent.click(screen.getByRole('button', { name: 'Modifier' }))
     fireEvent.change(screen.getByLabelText('Modifier le commentaire de Lina M.'), {
       target: { value: editedComment.content },
@@ -96,7 +105,14 @@ describe('PostComments', () => {
   it('confirms then deletes a comment authored by the current user', async () => {
     fetchMock.mockResolvedValueOnce(jsonResponse({ deletedCommentId: comment.id }))
 
-    render(<PostComments initialComments={[comment]} postId={postId} />)
+    render(
+      <PostComments
+        composerOpen={false}
+        initialComments={[comment]}
+        onComposerClose={jest.fn()}
+        postId={postId}
+      />,
+    )
     fireEvent.click(screen.getByRole('button', { name: 'Supprimer' }))
     fireEvent.click(screen.getByRole('button', { name: 'Supprimer le commentaire' }))
 

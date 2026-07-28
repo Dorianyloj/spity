@@ -1,6 +1,6 @@
 'use client'
 
-import { type FormEvent, useState } from 'react'
+import { type FormEvent, useEffect, useRef, useState } from 'react'
 import { z } from 'zod'
 import { Avatar, Button, Textarea } from '@/components/ui'
 import type { FeedComment } from '../schemas'
@@ -11,7 +11,9 @@ import {
 import CommentDeleteDialog from './comment-delete-dialog'
 
 type PostCommentsProps = {
+  composerOpen: boolean
   initialComments: FeedComment[]
+  onComposerClose: () => void
   postId: string
 }
 
@@ -22,7 +24,12 @@ const parseError = async (response: Response) => {
   return parsedPayload.success ? parsedPayload.data.error : 'Le commentaire n’a pas pu être enregistré'
 }
 
-export default function PostComments({ initialComments, postId }: PostCommentsProps) {
+export default function PostComments({
+  composerOpen,
+  initialComments,
+  onComposerClose,
+  postId,
+}: PostCommentsProps) {
   const [comments, setComments] = useState(initialComments)
   const [draft, setDraft] = useState('')
   const [draftError, setDraftError] = useState<string | undefined>()
@@ -32,7 +39,14 @@ export default function PostComments({ initialComments, postId }: PostCommentsPr
   const [pendingAction, setPendingAction] = useState<string | null>(null)
   const [commentToDelete, setCommentToDelete] = useState<FeedComment | null>(null)
   const [deleteError, setDeleteError] = useState<string | null>(null)
+  const commentTextareaRef = useRef<HTMLTextAreaElement>(null)
   const commentFieldId = `comment-${postId}`
+
+  useEffect(() => {
+    if (composerOpen) {
+      commentTextareaRef.current?.focus()
+    }
+  }, [composerOpen])
 
   const createComment = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -68,6 +82,7 @@ export default function PostComments({ initialComments, postId }: PostCommentsPr
 
       setComments((current) => [...current, parsedPayload.data.comment])
       setDraft('')
+      onComposerClose()
     } catch {
       setDraftError('Le commentaire n’a pas pu être enregistré')
     } finally {
@@ -153,6 +168,12 @@ export default function PostComments({ initialComments, postId }: PostCommentsPr
     } finally {
       setPendingAction(null)
     }
+  }
+
+  const closeComposer = () => {
+    setDraft('')
+    setDraftError(undefined)
+    onComposerClose()
   }
 
   return (
@@ -244,7 +265,12 @@ export default function PostComments({ initialComments, postId }: PostCommentsPr
 
       {deleteError && <p className="mt-3 text-sm text-destructive" role="alert">{deleteError}</p>}
 
-      <form className="mt-4 border-t border-border pt-4" onSubmit={(event) => void createComment(event)}>
+      {composerOpen ? (
+        <form
+          className="mt-4 border-t border-border pt-4"
+          id={`comment-composer-${postId}`}
+          onSubmit={(event) => void createComment(event)}
+        >
         <Textarea
           error={draftError}
           id={commentFieldId}
@@ -252,15 +278,25 @@ export default function PostComments({ initialComments, postId }: PostCommentsPr
           maxLength={500}
           onChange={(event) => setDraft(event.target.value)}
           placeholder="Partagez votre avis…"
+          ref={commentTextareaRef}
           required
           value={draft}
         />
-        <div className="mt-3 flex justify-end">
+        <div className="mt-3 flex justify-end gap-2">
+          <Button
+            disabled={pendingAction === 'create'}
+            onClick={closeComposer}
+            type="button"
+            variant="ghost"
+          >
+            Annuler
+          </Button>
           <Button isLoading={pendingAction === 'create'} loadingText="Publication…" type="submit">
             Publier le commentaire
           </Button>
         </div>
-      </form>
+        </form>
+      ) : null}
 
       <CommentDeleteDialog
         authorName={commentToDelete?.author.name ?? ''}
