@@ -1,14 +1,17 @@
 import { z } from 'zod'
 import { imageSourceSchema } from '@/lib/image-source'
 
+export const feedAuthorSchema = z.object({
+  userId: z.string().uuid(),
+  name: z.string(),
+  avatarUrl: imageSourceSchema.nullable(),
+})
+
 export const feedCommentSchema = z.object({
   id: z.string().uuid(),
   postId: z.string().uuid(),
   content: z.string().min(1).max(500),
-  author: z.object({
-    name: z.string(),
-    avatarUrl: imageSourceSchema.nullable(),
-  }),
+  author: feedAuthorSchema,
   meta: z.string(),
   isAuthor: z.boolean(),
   isEdited: z.boolean(),
@@ -16,10 +19,7 @@ export const feedCommentSchema = z.object({
 
 export const feedPostSchema = z.object({
   id: z.string().uuid(),
-  author: z.object({
-    name: z.string(),
-    avatarUrl: imageSourceSchema.nullable(),
-  }),
+  author: feedAuthorSchema,
   context: z.string(),
   content: z.string(),
   tag: z.string(),

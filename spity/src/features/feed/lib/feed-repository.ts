@@ -70,7 +70,7 @@ const toFeedComment = (row: CommentRow, viewerId: string): FeedComment => {
     id: row.comment.id,
     postId: row.comment.postId,
     content: row.comment.contenu,
-    author: { name: author, avatarUrl: toImageSource(row.avatarUrl) },
+    author: { userId: row.comment.authorId, name: author, avatarUrl: toImageSource(row.avatarUrl) },
     meta: formatFeedDate(row.comment.createdAt),
     isAuthor: row.comment.authorId === viewerId,
     isEdited: row.comment.updatedAt.getTime() !== row.comment.createdAt.getTime(),
@@ -174,7 +174,7 @@ export const listFeedPosts = async (viewerId: string): Promise<FeedPost[]> => {
 
     return feedPostSchema.parse({
       id: row.post.id,
-      author: { name: author, avatarUrl: toImageSource(row.avatarUrl) },
+      author: { userId: row.post.authorId, name: author, avatarUrl: toImageSource(row.avatarUrl) },
       context: [location, row.post.cotation].filter(Boolean).join(' · '),
       content: row.post.contenu ?? 'Publication sans texte',
       tag,

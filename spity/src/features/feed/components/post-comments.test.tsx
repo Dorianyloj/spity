@@ -15,7 +15,7 @@ const comment: FeedComment = {
   id: '22222222-2222-4222-8222-222222222222',
   postId,
   content: 'Partant pour la session !',
-  author: { name: 'Lina M.', avatarUrl: null },
+  author: { userId: '22222222-2222-4222-8222-222222222222', name: 'Lina M.', avatarUrl: null },
   meta: 'Il y a 4 min',
   isAuthor: true,
   isEdited: false,

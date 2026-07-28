@@ -202,13 +202,27 @@ export default function MatchingDirectory({ climbers, initialStatuses }: Matchin
               <Card key={climber.userId} hover={false} className="overflow-hidden">
                 <CardContent className="p-5">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-black text-primary-foreground">
-                      {climber.displayName.slice(0, 1).toLocaleUpperCase('fr')}
-                    </div>
+                    <Link
+                      aria-label={`Voir le profil de ${climber.displayName}`}
+                      className="shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+                      href={`/app/profiles/${climber.userId}`}
+                    >
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-lg font-black text-primary-foreground">
+                        {climber.displayName.slice(0, 1).toLocaleUpperCase('fr')}
+                      </div>
+                    </Link>
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-start justify-between gap-2">
                         <div>
-                          <h2 className="text-lg font-bold text-foreground">{climber.displayName}</h2>
+                          <h2 className="text-lg font-bold text-foreground">
+                            <Link
+                              aria-label={`Voir le profil de ${climber.displayName}`}
+                              className="rounded underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                              href={`/app/profiles/${climber.userId}`}
+                            >
+                              {climber.displayName}
+                            </Link>
+                          </h2>
                           <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
                             <MapPin size={15} aria-hidden="true" />
                             {climber.location ?? 'Localisation non renseignée'}

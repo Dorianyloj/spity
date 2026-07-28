@@ -1,6 +1,7 @@
 'use client'
 
 import { type FormEvent, useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 import { z } from 'zod'
 import { Avatar, Button, Textarea } from '@/components/ui'
 import type { FeedComment } from '../schemas'
@@ -188,13 +189,19 @@ export default function PostComments({
 
           return (
             <li key={comment.id} className="flex gap-3">
-              <Avatar
-                alt={`Avatar de ${comment.author.name}`}
-                className="bg-secondary text-secondary-foreground"
-                fallback={comment.author.name}
-                size="sm"
-                src={comment.author.avatarUrl ?? undefined}
-              />
+              <Link
+                aria-label={`Voir le profil de ${comment.author.name}`}
+                className="shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+                href={`/app/profiles/${comment.author.userId}`}
+              >
+                <Avatar
+                  alt={`Avatar de ${comment.author.name}`}
+                  className="bg-secondary text-secondary-foreground"
+                  fallback={comment.author.name}
+                  size="sm"
+                  src={comment.author.avatarUrl ?? undefined}
+                />
+              </Link>
               <div className="min-w-0 flex-1">
                 {isEditing ? (
                   <form onSubmit={(event) => void saveComment(event, comment.id)}>
@@ -227,7 +234,13 @@ export default function PostComments({
                 ) : (
                   <>
                     <div className="rounded-lg bg-muted px-3 py-2">
-                      <p className="text-sm font-semibold text-foreground">{comment.author.name}</p>
+                      <Link
+                        aria-label={`Voir le profil de ${comment.author.name}`}
+                        className="rounded text-sm font-semibold text-foreground underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                        href={`/app/profiles/${comment.author.userId}`}
+                      >
+                        {comment.author.name}
+                      </Link>
                       <p className="mt-1 text-pretty text-sm text-foreground">{comment.content}</p>
                     </div>
                     <div className="mt-1 flex items-center gap-3 text-xs text-muted-foreground">

@@ -12,7 +12,7 @@ const jsonResponse = (body: unknown, status = 200) => ({
 
 const post: FeedPost = {
   id: '11111111-1111-4111-8111-111111111111',
-  author: { name: 'Lina M.', avatarUrl: null },
+  author: { userId: '22222222-2222-4222-8222-222222222222', name: 'Lina M.', avatarUrl: null },
   context: 'Arkose Lyon · 6b',
   content: 'Session bloc ce soir.',
   tag: 'Session',
@@ -72,6 +72,15 @@ describe('FeedTimeline', () => {
     )
 
     expect(await screen.findByLabelText('Ajouter un commentaire')).toHaveFocus()
+  })
+
+  it('links the post author to their public profile', () => {
+    render(<FeedTimeline initialPosts={[post]} />)
+
+    expect(screen.getAllByRole('link', { name: 'Voir le profil de Lina M.' })[0]).toHaveAttribute(
+      'href',
+      `/app/profiles/${post.author.userId}`,
+    )
   })
 
   it('shows an actionable error next to the affected like button', async () => {

@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import {
   Bookmark,
   Heart,
@@ -94,17 +95,28 @@ export default function FeedTimeline({ initialPosts }: FeedTimelineProps) {
           <article key={post.id} aria-labelledby={`${post.id}-author`}>
             <Card hover={false} className="overflow-hidden rounded-xl border-border/80 bg-card">
               <div className="flex items-center gap-3 px-4 py-3">
-                <Avatar
-                  alt={`Avatar de ${post.author.name}`}
-                  className="bg-secondary text-secondary-foreground"
-                  fallback={post.author.name}
-                  size="md"
-                  src={post.author.avatarUrl ?? undefined}
-                />
+                <Link
+                  aria-label={`Voir le profil de ${post.author.name}`}
+                  className="shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+                  href={`/app/profiles/${post.author.userId}`}
+                >
+                  <Avatar
+                    alt={`Avatar de ${post.author.name}`}
+                    className="bg-secondary text-secondary-foreground"
+                    fallback={post.author.name}
+                    size="md"
+                    src={post.author.avatarUrl ?? undefined}
+                  />
+                </Link>
                 <div className="min-w-0 flex-1">
-                  <p id={`${post.id}-author`} className="truncate text-sm font-semibold text-foreground">
-                    {post.author.name}
-                  </p>
+                  <Link
+                    aria-label={`Voir le profil de ${post.author.name}`}
+                    className="block w-fit max-w-full rounded text-sm font-semibold text-foreground underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    href={`/app/profiles/${post.author.userId}`}
+                    id={`${post.id}-author`}
+                  >
+                    <span className="block truncate">{post.author.name}</span>
+                  </Link>
                   <p className="flex items-center gap-1 truncate text-xs text-muted-foreground">
                     <MapPin className="size-3 shrink-0" aria-hidden="true" />
                     {post.context}
