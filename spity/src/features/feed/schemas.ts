@@ -1,16 +1,17 @@
 import { z } from 'zod'
+import { imageSourceSchema } from '@/lib/image-source'
 
 export const feedPostSchema = z.object({
   id: z.string().uuid(),
   author: z.object({
     name: z.string(),
-    avatarUrl: z.string().min(1).nullable(),
+    avatarUrl: imageSourceSchema.nullable(),
   }),
   context: z.string(),
   content: z.string(),
   tag: z.string(),
   meta: z.string(),
-  imageUrl: z.string().min(1).nullable(),
+  imageUrl: imageSourceSchema.nullable(),
   likeCount: z.number().int().nonnegative(),
   commentCount: z.number().int().nonnegative(),
   likedByViewer: z.boolean(),

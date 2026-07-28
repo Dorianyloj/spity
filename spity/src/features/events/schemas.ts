@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { imageSourceSchema } from '@/lib/image-source'
 
 export const eventTypeSchema = z.enum(['outing', 'contest', 'coaching', 'initiation'])
 export const eventStatusSchema = z.enum(['scheduled', 'cancelled'])
@@ -73,7 +74,7 @@ export const updateEventBodySchema = z.object({
 export const eventParticipantSchema = z.object({
   userId: z.string().uuid(),
   displayName: z.string(),
-  avatarUrl: z.string().url().nullable(),
+  avatarUrl: imageSourceSchema.nullable(),
 })
 
 export const eventSchema = z.object({

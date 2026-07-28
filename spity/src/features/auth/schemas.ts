@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { imageSourceSchema } from '@/lib/image-source'
 
 export const authRoleSchema = z.enum(['grimpeur', 'club'])
 
@@ -6,7 +7,7 @@ export const authUserSchema = z.object({
   id: z.string().uuid(),
   email: z.string().email(),
   role: authRoleSchema,
-  avatarUrl: z.string().url().nullable(),
+  avatarUrl: imageSourceSchema.nullable(),
   emailVerified: z.boolean(),
 })
 

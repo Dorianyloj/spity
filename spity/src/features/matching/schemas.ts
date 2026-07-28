@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { imageSourceSchema } from '@/lib/image-source'
 import { disciplinesEnum, gradeSchema } from '@/lib/validators'
 import {
   availabilitySlotSchema,
@@ -19,7 +20,7 @@ export const matchingFiltersSchema = z.object({
 export const publicClimberSchema = z.object({
   userId: z.string().uuid(),
   displayName: z.string(),
-  avatarUrl: z.string().url().nullable(),
+  avatarUrl: imageSourceSchema.nullable(),
   bio: z.string().nullable(),
   location: z.string().nullable(),
   climbingEnvironment: climbingEnvironmentSchema.nullable(),
