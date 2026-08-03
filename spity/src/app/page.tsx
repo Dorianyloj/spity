@@ -1,498 +1,445 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
-import Button from '@/components/ui/button'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
-import Badge from '@/components/ui/badge'
 import {
-  Users,
-  MapPin,
-  Calendar,
-  Mountain,
-  Smartphone,
-  CheckCircle2,
   ArrowRight,
-  Share2,
-  Shield
+  Bell,
+  CalendarDays,
+  Camera,
+  Compass,
+  MapPin,
+  Mountain,
+  Route,
+  ShieldCheck,
+  Users,
 } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
+import { useRef, type ReactNode } from 'react'
+import BrandMark from '@/components/brand/brand-mark'
+import { brandAssets } from '@/lib/brand-assets'
 
-// Composant pour animer les sections au scroll
-function AnimatedSection({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+type AnimatedSectionProps = {
+  children: ReactNode
+  className?: string
+  delay?: number
+  id?: string
+}
+
+type Feature = {
+  eyebrow: string
+  title: string
+  description: string
+  icon: typeof Users
+}
+
+type Adventure = {
+  number: string
+  title: string
+  description: string
+  icon: typeof Mountain
+  accent: string
+}
+
+type FeedItem = {
+  title: string
+  meta: string
+  tag: string
+}
+
+const features: Feature[] = [
+  {
+    eyebrow: 'Matching',
+    title: 'Trouver le bon partenaire',
+    description: 'Discipline, niveau, lieu et disponibilités pour éviter les groupes désordonnés.',
+    icon: Users,
+  },
+  {
+    eyebrow: 'Topos',
+    title: 'Lire le terrain en direct',
+    description: 'Cotations par consensus, état des voies, alertes sécurité et retours de session.',
+    icon: Route,
+  },
+  {
+    eyebrow: 'Agenda',
+    title: 'Rejoindre les sorties locales',
+    description: 'Clubs, contests, initiations et coaching visibles au même endroit.',
+    icon: CalendarDays,
+  },
+]
+
+const adventures: Adventure[] = [
+  {
+    number: '01',
+    title: 'Sessions',
+    description: 'Organisez une sortie bloc, voie ou falaise avec des grimpeurs compatibles.',
+    icon: Users,
+    accent: 'from-[#8bb957] to-[#5f8f50]',
+  },
+  {
+    number: '02',
+    title: 'Spots',
+    description: 'Explorez salles, falaises et clubs avec des filtres utiles pour la pratique.',
+    icon: MapPin,
+    accent: 'from-[#4f7fb5] to-[#264653]',
+  },
+  {
+    number: '03',
+    title: 'Topos',
+    description: 'Contribuez aux voies, signalez les infos critiques et gagnez du karma.',
+    icon: Mountain,
+    accent: 'from-[#5a9a6f] to-[#2f5f42]',
+  },
+]
+
+const feedItems: FeedItem[] = [
+  {
+    title: 'Sortie Curis-au-Mont-d’Or',
+    meta: 'Voie · 6a conseillé · 8 places',
+    tag: 'Club',
+  },
+  {
+    title: 'Bêta vidéo sur le 7a rouge',
+    meta: 'Arkose Lyon · Bloc · il y a 18 min',
+    tag: 'Topo',
+  },
+  {
+    title: 'Partenaire dispo ce soir',
+    meta: 'MROC · voie · assurage ok',
+    tag: 'Match',
+  },
+]
+
+function AnimatedSection({ children, className = '', delay = 0, id }: AnimatedSectionProps) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <motion.div
+    <motion.section
       ref={ref}
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      id={id}
+      className={className}
+      initial={{ opacity: 0, y: 36 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 36 }}
       transition={{ duration: 0.6, delay, ease: 'easeOut' }}
     >
       {children}
-    </motion.div>
-  )
-}
-
-// Composant pour animer les enfants avec des délais progressifs
-function StaggeredChildren({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
-      variants={{
-        visible: {
-          transition: {
-            staggerChildren: 0.1
-          }
-        }
-      }}
-    >
-      {children}
-    </motion.div>
-  )
-}
-
-function StaggeredItem({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return (
-    <motion.div
-      className={className}
-      variants={{
-        hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } }
-      }}
-    >
-      {children}
-    </motion.div>
+    </motion.section>
   )
 }
 
 export default function LandingPage() {
-  const features = [
-    {
-      icon: Users,
-      title: 'Matching Intelligent',
-      description: 'Trouvez des partenaires adaptés à votre niveau et discipline en quelques secondes'
-    },
-    {
-      icon: Mountain,
-      title: 'Topos Collaboratifs',
-      description: 'Accédez à des informations à jour sur les falaises avec cotations réelles et alertes sécurité'
-    },
-    {
-      icon: Calendar,
-      title: 'Événements Clubs',
-      description: 'Découvrez sorties, contests et initiations organisés par les clubs FFME près de chez vous'
-    },
-    {
-      icon: MapPin,
-      title: 'Répertoire Géolocalisé',
-      description: 'Explorez salles, falaises et clubs sur une carte interactive avec filtres intelligents'
-    },
-    {
-      icon: Share2,
-      title: 'Partage Contextualisé',
-      description: 'Partagez vos exploits avec cotation, lieu et matériel pour inspirer la communauté'
-    },
-    {
-      icon: Shield,
-      title: 'Communauté Sécurisée',
-      description: 'Profils vérifiés, signalements équipement et modération active pour grimper en toute confiance'
-    }
-  ]
-
-  const stats = [
-    { value: '300K+', label: 'Licenciés FFME' },
-    { value: '1200+', label: 'Clubs affiliés' },
-    { value: '800+', label: 'Salles indoor' },
-    { value: '1000+', label: 'Falaises répertoriées' }
-  ]
-
-  const benefits = [
-    {
-      title: 'Pour Grimpeurs',
-      items: [
-        'Une seule app pour salles, falaises et clubs',
-        'Matching 20x plus rapide qu\'avant',
-        'Topos vivants avec état temps réel',
-        'Événements à portée de main'
-      ]
-    },
-    {
-      title: 'Pour Clubs FFME',
-      items: [
-        'Visibilité maximale auprès des grimpeurs locaux',
-        '+35% d\'inscriptions aux événements',
-        'Dashboard complet et gratuit',
-        'Recrutement facilité de nouveaux membres'
-      ]
-    },
-    {
-      title: 'Pour Salles',
-      items: [
-        'Présence sur l\'annuaire géolocalisé',
-        'Recommandations algorithmiques',
-        'Planning et tarifs centralisés',
-        'Acquisition de nouveaux clients'
-      ]
-    }
-  ]
-
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-deep via-slate-light to-slate-deep spity-texture">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--spity-coral)_0%,_transparent_50%)] opacity-10" />
+    <main className="min-h-screen overflow-hidden bg-[#173236] text-white">
+      <section className="relative flex min-h-[92svh] flex-col overflow-hidden">
+        <Image
+          src={brandAssets.heroSunset}
+          alt=""
+          fill
+          preload
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              'linear-gradient(180deg, rgba(23, 50, 54, 0.08) 0%, rgba(23, 50, 54, 0.62) 58%, #173236 100%), linear-gradient(110deg, rgba(23, 50, 54, 0.78) 0%, rgba(47, 111, 78, 0.2) 48%, rgba(239, 246, 239, 0.16) 100%)',
+          }}
+          aria-hidden="true"
+        />
+        <nav className="relative z-20 mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-6 text-sm text-white/[0.78] md:px-8">
+          <Link href="/" className="flex items-center gap-3" aria-label="Accueil Spity">
+            <BrandMark className="bg-white/6 shadow-lg shadow-black/20 ring-1 ring-white/12" priority size={42} tone="dark" />
+            <span className="text-lg font-bold text-white">Spity</span>
+          </Link>
+          <div className="hidden items-center gap-10 md:flex">
+            <a href="#activites" className="transition-colors hover:text-white">
+              Activités
+            </a>
+            <a href="#galerie" className="transition-colors hover:text-white">
+              Topos
+            </a>
+            <a href="#communaute" className="transition-colors hover:text-white">
+              Communauté
+            </a>
+          </div>
+          <Link
+            href="/login"
+            className="rounded-lg border border-white/30 px-4 py-2 font-semibold text-white transition-colors hover:bg-white hover:text-[#173236]"
+          >
+            Connexion
+          </Link>
+        </nav>
 
-        <div className="relative max-w-7xl mx-auto px-4 py-20 md:py-32">
-          <div className="text-center space-y-8">
-            {/* Logo/Brand */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20"
-            >
-              <div className="w-2 h-2 rounded-full bg-coral animate-pulse" />
-              <span className="text-sm font-medium text-white">Nouvelle ère de l&apos;escalade sociale</span>
-            </motion.div>
-
-            {/* Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-5xl md:text-7xl font-bold --accent-foreground max-w-4xl mx-auto leading-tight drop-shadow-lg"
-            >
-              Toute la communauté escalade
-              <span className="block mt-2 text-coral">
-                en une seule app
-              </span>
-            </motion.h1>
-
-            {/* Subheadline */}
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-16 pt-8 md:px-8">
+          <div className="max-w-4xl">
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/[0.18] bg-white/10 px-4 py-2 text-sm font-semibold text-white/[0.86] backdrop-blur"
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto leading-relaxed"
+              transition={{ duration: 0.5 }}
             >
-              Matching intelligent, topos collaboratifs, événements clubs et partage social.
-              Spity réunit tout ce dont vous avez besoin pour grimper.
+              <span className="h-2 w-2 rounded-full bg-[#8bb957]" />
+              Réseau social pour grimpeurs, clubs et salles
             </motion.p>
 
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
+            <motion.h1
+              className="max-w-3xl text-6xl font-black leading-[0.9] text-white drop-shadow-2xl sm:text-7xl md:text-8xl lg:text-9xl"
+              initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
+              transition={{ duration: 0.7, delay: 0.1 }}
+            >
+              SPITY
+              <span className="ml-2 align-top text-4xl text-[#8bb957] md:text-6xl">*</span>
+            </motion.h1>
+
+            <motion.p
+              className="mt-7 max-w-2xl text-base leading-8 text-white/[0.82] md:text-lg"
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+            >
+              Une expérience immersive pour trouver des partenaires, suivre les topos vivants, découvrir
+              les lieux proches et rejoindre les événements clubs sans changer d&apos;application.
+            </motion.p>
+
+            <motion.div
+              className="mt-8 flex flex-col gap-3 sm:flex-row"
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
             >
               <Link
                 href="/register"
-                className="spity-btn spity-btn--primary px-6 py-3 text-base spity-shadow-coral group"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-5 py-3 font-bold text-[#173236] transition-transform hover:-translate-y-0.5"
               >
                 Rejoindre Spity
-                <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+                <ArrowRight size={18} aria-hidden="true" />
               </Link>
               <Link
                 href="/login"
-                className="spity-btn px-6 py-3 text-base bg-white/10 hover:bg-white/20 text-white border border-white/20"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/[0.28] bg-white/10 px-5 py-3 font-bold text-white backdrop-blur transition-colors hover:bg-white/[0.18]"
               >
-                <Smartphone size={20} />
                 Voir la démo
+                <Compass size={18} aria-hidden="true" />
               </Link>
             </motion.div>
-
-            {/* Social Proof */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex flex-wrap items-center justify-center gap-6 pt-8"
-            >
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
-                  className="text-center"
-                >
-                  <div className="text-2xl font-bold text-coral">{stat.value}</div>
-                  <div className="text-sm text-white/70">{stat.label}</div>
-                </motion.div>
-              ))}
-            </motion.div>
           </div>
         </div>
 
-        {/* Decorative bottom wave */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M0 0L60 10C120 20 240 40 360 46.7C480 53 600 47 720 43.3C840 40 960 40 1080 46.7C1200 53 1320 67 1380 73.3L1440 80V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V0Z"
-              fill="currentColor"
-              className="text-background"
-            />
-          </svg>
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-px px-5 pb-8 md:grid-cols-4 md:px-8">
+          {[
+            ['300K+', 'licenciés FFME'],
+            ['1200+', 'clubs affiliés'],
+            ['800+', 'salles indoor'],
+            ['1 app', 'pour tout connecter'],
+          ].map(([value, label]) => (
+            <div key={label} className="border-t border-white/[0.18] bg-[#173236]/[0.28] py-4 backdrop-blur-sm md:px-5">
+              <p className="text-2xl font-black text-[#8bb957]">{value}</p>
+              <p className="mt-1 text-xs font-semibold uppercase text-white/[0.62]">{label}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Problem Section */}
-      <section className="py-20 max-w-7xl mx-auto px-4">
-        <AnimatedSection>
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <Badge variant="primary" className="mb-4">Le problème</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a] mb-6">
-              5 apps différentes pour une seule passion
-            </h2>
-            <p className="text-xl text-[#4a4a4a]">
-              Facebook pour trouver des partenaires, Camptocamp pour les topos, Instagram pour partager,
-              des sites web disparates pour les salles... et des groupes WhatsApp pour tout coordonner.
+      <AnimatedSection className="mx-auto grid max-w-7xl gap-8 px-5 py-20 md:grid-cols-[0.8fr_1.2fr] md:px-8 lg:py-24">
+        <div>
+          <p className="text-sm font-bold uppercase text-[#8bb957]">01 / Expérience</p>
+          <h2 className="mt-4 max-w-md text-4xl font-black leading-tight md:text-5xl">
+            Choisir sa prochaine session devient simple.
+          </h2>
+        </div>
+        <div className="grid gap-4 md:grid-cols-3">
+          {features.map((feature) => {
+            const Icon = feature.icon
+
+            return (
+              <article key={feature.title} className="rounded-lg border border-white/10 bg-white/[0.06] p-5">
+                <div className="mb-6 flex h-11 w-11 items-center justify-center rounded-lg bg-[#8bb957] text-[#173236]">
+                  <Icon size={21} aria-hidden="true" />
+                </div>
+                <p className="text-xs font-bold uppercase text-[#8bb957]">{feature.eyebrow}</p>
+                <h3 className="mt-2 text-xl font-black">{feature.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-white/[0.68]">{feature.description}</p>
+              </article>
+            )
+          })}
+        </div>
+      </AnimatedSection>
+
+      <AnimatedSection id="activites" className="bg-[#111a55] py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
+          <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              <p className="text-sm font-bold uppercase text-[#8bb957]">02 / Activités</p>
+              <h2 className="mt-4 max-w-xl text-4xl font-black leading-tight md:text-5xl">
+                Les blocs clés du MVP en premier plan.
+              </h2>
+            </div>
+            <p className="max-w-md text-sm leading-6 text-white/[0.66]">
+              Le style reprend le rythme aventure de la référence, mais l&apos;information reste orientée démo RNCP :
+              trouver, organiser, contribuer.
             </p>
           </div>
-        </AnimatedSection>
 
-        <StaggeredChildren className="grid md:grid-cols-3 gap-6">
-          <StaggeredItem>
-            <Card className="text-center h-full">
-              <CardContent className="pt-6">
-                <div className="w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center mx-auto mb-4">
-                  <Users className="text-destructive" size={24} />
-                </div>
-                <h3 className="font-bold text-[#1a1a1a] mb-2">Matching inefficace</h3>
-                <p className="text-sm text-[#4a4a4a]">
-                  Groupes Facebook chaotiques sans filtrage par niveau ou discipline
-                </p>
-              </CardContent>
-            </Card>
-          </StaggeredItem>
+          <div className="grid gap-5 md:grid-cols-3">
+            {adventures.map((adventure) => {
+              const Icon = adventure.icon
 
-          <StaggeredItem>
-            <Card className="text-center h-full">
-              <CardContent className="pt-6">
-                <div className="w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center mx-auto mb-4">
-                  <Mountain className="text-destructive" size={24} />
-                </div>
-                <h3 className="font-bold text-[#1a1a1a] mb-2">Topos obsolètes</h3>
-                <p className="text-sm text-[#4a4a4a]">
-                  Guides datés de 2015 sans info temps réel sur l&apos;état des voies
-                </p>
-              </CardContent>
-            </Card>
-          </StaggeredItem>
-
-          <StaggeredItem>
-            <Card className="text-center h-full">
-              <CardContent className="pt-6">
-                <div className="w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center mx-auto mb-4">
-                  <Calendar className="text-destructive" size={24} />
-                </div>
-                <h3 className="font-bold text-[#1a1a1a] mb-2">Événements éparpillés</h3>
-                <p className="text-sm text-[#4a4a4a]">
-                  Sites clubs obsolètes, événements perdus entre Facebook et emails
-                </p>
-              </CardContent>
-            </Card>
-          </StaggeredItem>
-        </StaggeredChildren>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4">
-          <AnimatedSection>
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <Badge variant="primary" className="mb-4">La solution</Badge>
-              <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a] mb-6">
-                Tout ce dont vous avez besoin, au même endroit
-              </h2>
-              <p className="text-xl text-[#4a4a4a]">
-                Spity centralise salles, falaises, clubs et communauté dans une expérience fluide et moderne.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          <StaggeredChildren className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => {
-              const Icon = feature.icon
               return (
-                <StaggeredItem key={index}>
-                  <Card className="group hover:border-primary/50 transition-all h-full">
-                    <CardHeader>
-                      <div className="w-12 h-12 rounded-xl spity-gradient-coral flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <Icon className="text-white" size={24} />
+                <article
+                  key={adventure.title}
+                  className="group relative min-h-[330px] overflow-hidden rounded-lg bg-[#463fc0] p-6 shadow-2xl shadow-black/20"
+                >
+                  <div className={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${adventure.accent}`} />
+                  <Image
+                    src={
+                      adventure.number === '01'
+                        ? brandAssets.indoor
+                        : adventure.number === '02'
+                          ? brandAssets.crag
+                          : brandAssets.trad
+                    }
+                    alt=""
+                    fill
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    className="object-cover object-center opacity-[0.18] mix-blend-luminosity transition-opacity group-hover:opacity-[0.28]"
+                  />
+                  <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/[0.08]" />
+                  <div className="relative z-10 flex h-full flex-col justify-between">
+                    <div>
+                      <p className="font-mono text-lg font-bold text-white">
+                        {adventure.number}
+                        <span className="ml-1 text-xs text-[#8bb957]">/ Spity</span>
+                      </p>
+                      <div className="mt-10 flex h-24 w-24 items-center justify-center rounded-lg bg-[#173236]/[0.35] text-[#8bb957] transition-transform group-hover:scale-105">
+                        <Icon size={44} aria-hidden="true" />
                       </div>
-                      <CardTitle className="text-xl text-[#1a1a1a]">{feature.title}</CardTitle>
-                      <CardDescription className="text-base text-[#4a4a4a]">
-                        {feature.description}
-                      </CardDescription>
-                    </CardHeader>
-                  </Card>
-                </StaggeredItem>
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-black">{adventure.title}</h3>
+                      <p className="mt-3 text-sm leading-6 text-white/[0.72]">{adventure.description}</p>
+                    </div>
+                  </div>
+                </article>
               )
             })}
-          </StaggeredChildren>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <AnimatedSection>
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <Badge variant="primary" className="mb-4">Bénéfices</Badge>
-              <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a] mb-6">
-                Conçu pour toute la communauté
-              </h2>
-              <p className="text-xl text-[#4a4a4a]">
-                Que vous soyez grimpeur, club FFME ou salle d&apos;escalade, Spity vous apporte de la valeur.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          <StaggeredChildren className="grid md:grid-cols-3 gap-8">
-            {benefits.map((benefit, index) => (
-              <StaggeredItem key={index}>
-                <Card className="h-full">
-                  <CardHeader>
-                    <CardTitle className="text-2xl mb-4 text-[#1a1a1a]">{benefit.title}</CardTitle>
-                    <div className="space-y-3">
-                      {benefit.items.map((item, itemIndex) => (
-                        <div key={itemIndex} className="flex items-start gap-3">
-                          <CheckCircle2 className="text-success flex-shrink-0 mt-0.5" size={20} />
-                          <span className="text-sm text-[#4a4a4a]">{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </CardHeader>
-                </Card>
-              </StaggeredItem>
-            ))}
-          </StaggeredChildren>
-        </div>
-      </section>
-
-      {/* How it Works */}
-      <section className="py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4">
-          <AnimatedSection>
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <Badge variant="primary" className="mb-4">Comment ça marche</Badge>
-              <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a] mb-6">
-                Simple, rapide, efficace
-              </h2>
-            </div>
-          </AnimatedSection>
-
-          <StaggeredChildren className="grid md:grid-cols-4 gap-6">
-            {[
-              { step: '01', title: 'Créez votre profil', desc: 'Renseignez vos disciplines, niveaux et matériel' },
-              { step: '02', title: 'Explorez', desc: 'Découvrez salles, falaises et clubs près de vous' },
-              { step: '03', title: 'Connectez', desc: 'Trouvez des partenaires et rejoignez des événements' },
-              { step: '04', title: 'Partagez', desc: 'Postez vos sessions et progressez ensemble' }
-            ].map((item, index) => (
-              <StaggeredItem key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full spity-gradient-coral text-white font-bold text-xl mb-4">
-                  {item.step}
-                </div>
-                <h3 className="font-bold text-lg mb-2 text-[#1a1a1a]">{item.title}</h3>
-                <p className="text-sm text-[#4a4a4a]">{item.desc}</p>
-              </StaggeredItem>
-            ))}
-          </StaggeredChildren>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20">
-        <div className="max-w-4xl mx-auto px-4">
-          <AnimatedSection>
-            <Card className="relative overflow-hidden">
-              <div className="absolute inset-0 spity-gradient-coral opacity-5" />
-              <CardContent className="relative py-16 text-center">
-                <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a] mb-6">
-                  Prêt à rejoindre la communauté ?
-                </h2>
-                <p className="text-xl text-[#4a4a4a] mb-8 max-w-2xl mx-auto">
-                  Rejoignez les milliers de grimpeurs qui utilisent déjà Spity pour améliorer leur pratique.
-                </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    className="spity-shadow-coral group"
-                  >
-                    Créer mon compte gratuitement
-                    <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="lg"
-                  >
-                    En savoir plus
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-border bg-card py-12">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="font-bold text-lg mb-4 text-[#1a1a1a]">Spity</h3>
-              <p className="text-sm text-[#4a4a4a]">
-                La plateforme sociale complète pour la communauté d&apos;escalade.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-[#1a1a1a]">Produit</h4>
-              <ul className="space-y-2 text-sm text-[#4a4a4a]">
-                <li><Link href="#" className="hover:text-primary transition-colors">Fonctionnalités</Link></li>
-                <li><Link href="#" className="hover:text-primary transition-colors">Tarifs</Link></li>
-                <li><Link href="#" className="hover:text-primary transition-colors">FAQ</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-[#1a1a1a]">Communauté</h4>
-              <ul className="space-y-2 text-sm text-[#4a4a4a]">
-                <li><Link href="#" className="hover:text-primary transition-colors">Clubs</Link></li>
-                <li><Link href="#" className="hover:text-primary transition-colors">Salles</Link></li>
-                <li><Link href="#" className="hover:text-primary transition-colors">Blog</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-[#1a1a1a]">Légal</h4>
-              <ul className="space-y-2 text-sm text-[#4a4a4a]">
-                <li><Link href="#" className="hover:text-primary transition-colors">CGU</Link></li>
-                <li><Link href="#" className="hover:text-primary transition-colors">Confidentialité</Link></li>
-                <li><Link href="#" className="hover:text-primary transition-colors">Contact</Link></li>
-              </ul>
-            </div>
           </div>
-          <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-[#4a4a4a]">
-              © 2026 Spity. Tous droits réservés.
-            </p>
-            <div className="flex items-center gap-4">
-              <Badge variant="secondary">FFME</Badge>
-              <Badge variant="secondary">RGPD Compliant</Badge>
-              <Badge variant="secondary">Made in France</Badge>
+        </div>
+      </AnimatedSection>
+
+      <AnimatedSection
+        id="galerie"
+        className="mx-auto grid max-w-7xl gap-10 px-5 py-20 md:grid-cols-[0.9fr_1.1fr] md:px-8 lg:py-24"
+      >
+        <div>
+          <p className="text-sm font-bold uppercase text-[#8bb957]">03 / Topos vivants</p>
+          <h2 className="mt-4 text-4xl font-black leading-tight md:text-5xl">
+            Une galerie utile, pas juste belle.
+          </h2>
+          <p className="mt-5 max-w-lg text-sm leading-7 text-white/[0.68]">
+            Photos de secteur, bêta vidéo, niveau, matériel, état des voies et signalements deviennent
+            des informations sociales exploitables pour préparer la session.
+          </p>
+        </div>
+
+        <div className="grid overflow-hidden rounded-lg border border-white/10 bg-[#27494b] md:grid-cols-[1.05fr_0.95fr]">
+          <div className="relative min-h-[360px] overflow-hidden" aria-hidden="true">
+            <Image
+              src={brandAssets.crag}
+              alt=""
+              fill
+              sizes="(min-width: 768px) 45vw, 100vw"
+              className="object-cover object-center"
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  'linear-gradient(180deg, rgba(23, 50, 54, 0.08) 0%, rgba(23, 50, 54, 0.58) 100%), linear-gradient(110deg, rgba(23, 50, 54, 0.56), rgba(223, 238, 207, 0.18))',
+              }}
+            />
+          </div>
+          <div className="p-6 md:p-8">
+            <div className="mb-8 flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs font-bold uppercase text-[#8bb957]">Falaise</p>
+                <h3 className="mt-2 text-3xl font-black">Curis Solitude</h3>
+              </div>
+              <p className="font-mono text-sm text-white/[0.58]">2026</p>
             </div>
+
+            <div className="space-y-4">
+              {feedItems.map((item) => (
+                <div key={item.title} className="rounded-lg border border-white/10 bg-white/[0.06] p-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <h4 className="font-bold">{item.title}</h4>
+                    <span className="rounded-full bg-[#8bb957] px-2 py-1 text-xs font-bold text-[#173236]">
+                      {item.tag}
+                    </span>
+                  </div>
+                  <p className="mt-2 text-sm text-white/60">{item.meta}</p>
+                </div>
+              ))}
+            </div>
+
+            <Link
+              href="/register"
+              className="mt-7 inline-flex items-center gap-2 rounded-lg bg-[#5f8f50] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#8bb957] hover:text-[#173236]"
+            >
+              Explorer les topos
+              <ArrowRight size={17} aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </AnimatedSection>
+
+      <AnimatedSection id="communaute" className="bg-[#080d38] py-20 lg:py-24">
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 md:grid-cols-3 md:px-8">
+          {[
+            {
+              title: 'Sécurité visible',
+              description: 'Profils, niveau, matériel et alertes équipement rendent les sorties plus lisibles.',
+              icon: ShieldCheck,
+            },
+            {
+              title: 'Signal local',
+              description: 'Le fil remonte les partenaires, lieux et événements qui comptent autour de vous.',
+              icon: Bell,
+            },
+            {
+              title: 'Partage contextualisé',
+              description: 'Chaque post peut porter un lieu, une cotation, une discipline et un média utile.',
+              icon: Camera,
+            },
+          ].map((item) => {
+            const Icon = item.icon
+
+            return (
+              <article key={item.title} className="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+                <Icon className="text-[#8bb957]" size={26} aria-hidden="true" />
+                <h3 className="mt-5 text-2xl font-black">{item.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-white/[0.64]">{item.description}</p>
+              </article>
+            )
+          })}
+        </div>
+      </AnimatedSection>
+
+      <footer className="border-t border-white/10 bg-[#173236] px-5 py-8 md:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-white/[0.55] md:flex-row md:items-center md:justify-between">
+          <p>© 2026 Spity. Plateforme sociale pour la communauté escalade.</p>
+          <div className="flex flex-wrap gap-4">
+            <Link href="/register" className="hover:text-white">
+              Inscription
+            </Link>
+            <Link href="/login" className="hover:text-white">
+              Connexion
+            </Link>
           </div>
         </div>
       </footer>
-    </div>
+    </main>
   )
 }

@@ -1,0 +1,20 @@
+flowchart TB
+  U[Grimpeur ou club]
+  UI[Pages App Router et composants React]
+  API[Route Handlers /api]
+  AUTH[Session, role et controle d'origine]
+  ZOD[Contrats Zod entree et sortie]
+  RULES[Regles metier pures]
+  REPO[Depots Drizzle]
+  DB[(MariaDB)]
+  CI[GitHub Actions]
+
+  U --> UI
+  UI --> API
+  API --> AUTH
+  API --> ZOD
+  API --> RULES
+  API --> REPO
+  REPO --> DB
+  RULES -. testes par Jest .-> CI
+  ZOD -. valide par lint, typecheck et tests .-> CI

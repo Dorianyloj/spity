@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>C1.3.2 - Étude comparative des solutions techniques - Spity</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 16mm 14mm 18mm;
+      }
+
+      :root {
+        --ink: #16201b;
+        --muted: #5c6760;
+        --line: #d8e2dc;
+        --paper: #fbfdfb;
+        --accent: #1f7a4d;
+        --accent-2: #245b75;
+        --accent-soft: #e8f4ed;
+        --sky-soft: #e7f1f5;
+        --warn-soft: #fff3df;
+        --danger-soft: #fdecea;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        font-size: 10.2pt;
+        line-height: 1.45;
+      }
+
+      .cover {
+        min-height: 263mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        page-break-after: always;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cover::before {
+        content: "";
+        position: absolute;
+        inset: -40mm -20mm auto auto;
+        width: 150mm;
+        height: 150mm;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(31, 122, 77, 0.18), transparent 62%);
+      }
+
+      .cover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 58mm;
+        background:
+          linear-gradient(135deg, rgba(36, 91, 117, 0.1), rgba(31, 122, 77, 0.16)),
+          repeating-linear-gradient(
+            135deg,
+            rgba(22, 32, 27, 0.08) 0,
+            rgba(22, 32, 27, 0.08) 1px,
+            transparent 1px,
+            transparent 9px
+          );
+        clip-path: polygon(0 38%, 100% 0, 100% 100%, 0% 100%);
+      }
+
+      .cover-content {
+        position: relative;
+        z-index: 1;
+        padding-top: 12mm;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--accent);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 8.5pt;
+      }
+
+      .eyebrow::before {
+        content: "";
+        display: inline-block;
+        width: 24px;
+        height: 3px;
+        border-radius: 99px;
+        background: var(--accent);
+      }
+
+      h1 {
+        margin: 18mm 0 5mm;
+        max-width: 165mm;
+        font-size: 30pt;
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        max-width: 150mm;
+        color: var(--muted);
+        font-size: 13.5pt;
+        line-height: 1.35;
+        margin: 0;
+      }
+
+      .cover-meta {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5mm;
+        margin-bottom: 22mm;
+      }
+
+      .meta-card {
+        border: 1px solid rgba(22, 32, 27, 0.14);
+        background: rgba(255, 255, 255, 0.84);
+        border-radius: 7px;
+        padding: 5mm;
+      }
+
+      .meta-label {
+        color: var(--muted);
+        font-size: 8pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .meta-value {
+        margin-top: 2mm;
+        font-size: 11pt;
+        font-weight: 800;
+      }
+
+      main {
+        background: white;
+      }
+
+      section {
+        page-break-inside: avoid;
+        margin-bottom: 9mm;
+      }
+
+      h2 {
+        margin: 0 0 4mm;
+        color: var(--accent);
+        font-size: 15pt;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 0 0 3mm;
+        color: var(--accent-2);
+        font-size: 11.5pt;
+      }
+
+      p {
+        margin: 0 0 3.5mm;
+      }
+
+      .lead {
+        padding: 5mm 6mm;
+        border-left: 4px solid var(--accent);
+        background: var(--accent-soft);
+        border-radius: 0 7px 7px 0;
+        font-size: 10.8pt;
+      }
+
+      .criteria,
+      .two-cols,
+      .three-cols {
+        display: grid;
+        gap: 4mm;
+        margin-top: 4mm;
+      }
+
+      .criteria,
+      .two-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .three-cols {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .panel,
+      .criteria-item {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        padding: 4.5mm;
+        background: #ffffff;
+      }
+
+      .criteria-item {
+        min-height: 25mm;
+      }
+
+      .criteria-item strong,
+      .panel strong {
+        display: block;
+        margin-bottom: 2mm;
+        color: var(--accent-2);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 3mm 0 0;
+        table-layout: fixed;
+        page-break-inside: auto;
+      }
+
+      thead {
+        display: table-header-group;
+      }
+
+      tr {
+        page-break-inside: avoid;
+      }
+
+      th {
+        background: var(--accent);
+        color: white;
+        font-size: 8.2pt;
+        text-align: left;
+        padding: 3mm 2.4mm;
+        vertical-align: top;
+      }
+
+      th:first-child {
+        border-top-left-radius: 6px;
+      }
+
+      th:last-child {
+        border-top-right-radius: 6px;
+      }
+
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 3mm 2.4mm;
+        vertical-align: top;
+        font-size: 8.5pt;
+      }
+
+      tbody tr:nth-child(even) td {
+        background: #f7faf8;
+      }
+
+      .comparison th:nth-child(1) {
+        width: 17%;
+      }
+
+      .comparison th:nth-child(2) {
+        width: 19%;
+      }
+
+      .comparison th:nth-child(3) {
+        width: 24%;
+      }
+
+      .comparison th:nth-child(4) {
+        width: 24%;
+      }
+
+      .comparison th:nth-child(5) {
+        width: 16%;
+      }
+
+      .matrix th:nth-child(1) {
+        width: 20%;
+      }
+
+      .matrix th:nth-child(2) {
+        width: 24%;
+      }
+
+      .matrix th:nth-child(3) {
+        width: 28%;
+      }
+
+      .matrix th:nth-child(4) {
+        width: 28%;
+      }
+
+      .badge {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 1mm 2.3mm;
+        max-width: 100%;
+        font-size: 7.2pt;
+        font-weight: 800;
+        line-height: 1.1;
+        text-align: center;
+      }
+
+      .badge-selected {
+        color: #0f5e39;
+        background: #dff3e8;
+      }
+
+      .badge-option {
+        color: #245b75;
+        background: var(--sky-soft);
+      }
+
+      .badge-watch {
+        color: #7a4b00;
+        background: var(--warn-soft);
+      }
+
+      .summary {
+        border-radius: 7px;
+        padding: 6mm;
+        color: white;
+        background: linear-gradient(135deg, #1f7a4d, #245b75);
+      }
+
+      .summary h2 {
+        color: white;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 4.5mm;
+      }
+
+      li {
+        margin: 0 0 1.7mm;
+      }
+
+      .footer-note {
+        margin-top: 7mm;
+        color: var(--muted);
+        font-size: 8.3pt;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="cover">
+      <div class="cover-content">
+        <div class="eyebrow">Bloc de compétences 1</div>
+        <h1>C1.3.2 - Étude comparative des solutions techniques</h1>
+        <p class="subtitle">
+          Projet Spity : comparaison des architectures possibles, sélection de
+          la solution cible et identification des ressources nécessaires.
+        </p>
+      </div>
+
+      <div class="cover-meta">
+        <div class="meta-card">
+          <div class="meta-label">Projet</div>
+          <div class="meta-value">Spity</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Commanditaire</div>
+          <div class="meta-value">Collectif Altitude Grimpe</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Certification</div>
+          <div class="meta-value">Titre RNCP</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Livrable</div>
+          <div class="meta-value">Comparatif technique</div>
+        </div>
+      </div>
+    </article>
+
+    <main>
+      <section>
+        <h2>Objectif de la compétence</h2>
+        <p class="lead">
+          Sélectionner l'architecture technique adaptée en réalisant une étude
+          comparative des solutions techniques, en évaluant les options en termes
+          de sécurité, d'environnements systèmes, de réseaux, d'accessibilité et
+          d'impact environnemental.
+        </p>
+
+        <div class="criteria">
+          <div class="criteria-item">
+            <strong>Livrable attendu</strong>
+            Une étude comparative des solutions techniques envisagées et une
+            identification des ressources matérielles et techniques nécessaires.
+          </div>
+          <div class="criteria-item">
+            <strong>Critères couverts</strong>
+            Avantages, inconvénients, sécurité, systèmes, réseaux,
+            accessibilité, impact environnemental et justification des choix.
+          </div>
+          <div class="criteria-item">
+            <strong>Périmètre</strong>
+            Architecture web du MVP : frontend, backend, base de données,
+            hébergement, médias, cartographie, qualité et déploiement.
+          </div>
+          <div class="criteria-item">
+            <strong>Principe de décision</strong>
+            Privilégier une solution démontrable, maintenable, sécurisable,
+            compatible RNCP et proportionnée au périmètre MVP.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Critères de comparaison</h2>
+        <div class="three-cols">
+          <div class="panel">
+            <strong>Sécurité</strong>
+            Protection des comptes, validation des données, secrets, isolation
+            serveur, conformité RGPD et limitation de la surface d'attaque.
+          </div>
+          <div class="panel">
+            <strong>Maintenabilité</strong>
+            Typage, structure du code, migrations, documentation, simplicité de
+            débogage et capacité d'évolution après le MVP.
+          </div>
+          <div class="panel">
+            <strong>Impact environnemental</strong>
+            Sobriété fonctionnelle, limitation des services, cache, compression,
+            poids des pages et volume de données transférées.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Comparatif des architectures applicatives</h2>
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Domaine</th>
+              <th>Solution étudiée</th>
+              <th>Avantages</th>
+              <th>Inconvénients / risques</th>
+              <th>Décision</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Architecture générale</strong></td>
+              <td>Next.js full-stack avec App Router</td>
+              <td>Frontend et API dans un même projet, démo rapide, typage partagé, cohérent avec Route Handlers.</td>
+              <td>Monolithe applicatif à surveiller si le projet grossit fortement.</td>
+              <td><span class="badge badge-selected">Retenue</span></td>
+            </tr>
+            <tr>
+              <td><strong>Architecture générale</strong></td>
+              <td>Frontend Next.js + API Express/Nest séparée</td>
+              <td>Séparation claire des responsabilités, extensible pour grande équipe.</td>
+              <td>Complexité, double déploiement, plus de configuration réseau et CORS.</td>
+              <td><span class="badge badge-option">Écartée MVP</span></td>
+            </tr>
+            <tr>
+              <td><strong>Frontend</strong></td>
+              <td>Next.js + React + Tailwind CSS</td>
+              <td>Stack déjà en place, composants réutilisables, responsive, compatible accessibilité.</td>
+              <td>Discipline nécessaire sur composants client pour limiter le JavaScript envoyé.</td>
+              <td><span class="badge badge-selected">Retenue</span></td>
+            </tr>
+            <tr>
+              <td><strong>Frontend</strong></td>
+              <td>SPA React + Vite</td>
+              <td>Très rapide en développement, architecture front simple.</td>
+              <td>Nécessite une API séparée, SEO et rendu serveur moins intégrés.</td>
+              <td><span class="badge badge-option">Écartée MVP</span></td>
+            </tr>
+            <tr>
+              <td><strong>Backend</strong></td>
+              <td>Route Handlers Next.js</td>
+              <td>API colocalisée, faible coût d'infrastructure, adaptée aux formulaires et parcours MVP.</td>
+              <td>À structurer strictement pour éviter la dispersion de logique métier.</td>
+              <td><span class="badge badge-selected">Retenue</span></td>
+            </tr>
+            <tr>
+              <td><strong>Backend</strong></td>
+              <td>Backend serverless externe</td>
+              <td>Scalabilité automatique, peu d'administration serveur.</td>
+              <td>Verrou fournisseur, coûts variables, debugging plus complexe.</td>
+              <td><span class="badge badge-watch">À réévaluer V2</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Comparatif données et persistance</h2>
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Domaine</th>
+              <th>Solution étudiée</th>
+              <th>Avantages</th>
+              <th>Inconvénients / risques</th>
+              <th>Décision</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Base relationnelle</strong></td>
+              <td>MariaDB</td>
+              <td>Déjà configurée, compatible Docker, adaptée aux relations users, clubs, lieux, posts, events.</td>
+              <td>Fonctions géographiques moins avancées que PostgreSQL/PostGIS.</td>
+              <td><span class="badge badge-selected">Retenue</span></td>
+            </tr>
+            <tr>
+              <td><strong>Base relationnelle</strong></td>
+              <td>PostgreSQL + PostGIS</td>
+              <td>Excellent pour géolocalisation avancée et requêtes spatiales.</td>
+              <td>Migration de stack, coût temps, complexité inutile pour MVP local.</td>
+              <td><span class="badge badge-watch">Possible V2</span></td>
+            </tr>
+            <tr>
+              <td><strong>ORM</strong></td>
+              <td>Drizzle ORM</td>
+              <td>Typage TypeScript, migrations, contrôle fin SQL, déjà en place.</td>
+              <td>Demande discipline dans la définition des relations et migrations.</td>
+              <td><span class="badge badge-selected">Retenue</span></td>
+            </tr>
+            <tr>
+              <td><strong>ORM</strong></td>
+              <td>Prisma</td>
+              <td>Très productif, génération client mature, écosystème large.</td>
+              <td>Ajout d'un nouvel outil, migration non nécessaire, abstraction plus lourde.</td>
+              <td><span class="badge badge-option">Écartée MVP</span></td>
+            </tr>
+            <tr>
+              <td><strong>Médias</strong></td>
+              <td>Cloudinary ou S3</td>
+              <td>Stockage externe, transformations images, allège le serveur applicatif.</td>
+              <td>Coût variable, conformité, dépendance fournisseur.</td>
+              <td><span class="badge badge-selected">Retenue cible</span></td>
+            </tr>
+            <tr>
+              <td><strong>Médias</strong></td>
+              <td>Stockage local</td>
+              <td>Simple en démonstration locale, pas de service tiers.</td>
+              <td>Non adapté production, sauvegardes et volumétrie problématiques.</td>
+              <td><span class="badge badge-option">Démo uniquement</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Comparatif services et infrastructure</h2>
+        <table class="comparison">
+          <thead>
+            <tr>
+              <th>Domaine</th>
+              <th>Solution étudiée</th>
+              <th>Avantages</th>
+              <th>Inconvénients / risques</th>
+              <th>Décision</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Cartographie</strong></td>
+              <td>Leaflet + tuiles libres</td>
+              <td>Open source, coût maîtrisé, adapté à une vue carte MVP.</td>
+              <td>Qualité et quotas selon fournisseur de tuiles.</td>
+              <td><span class="badge badge-selected">Retenue MVP</span></td>
+            </tr>
+            <tr>
+              <td><strong>Cartographie</strong></td>
+              <td>Mapbox</td>
+              <td>Rendu riche, API puissantes, géocodage et UX avancés.</td>
+              <td>Coût, clé API, dépendance fournisseur.</td>
+              <td><span class="badge badge-watch">Possible V2</span></td>
+            </tr>
+            <tr>
+              <td><strong>Développement local</strong></td>
+              <td>Docker Compose</td>
+              <td>MariaDB/phpMyAdmin reproductibles, proche des contraintes d'exploitation.</td>
+              <td>Secrets à externaliser, ports à documenter précisément.</td>
+              <td><span class="badge badge-selected">Retenue</span></td>
+            </tr>
+            <tr>
+              <td><strong>Déploiement</strong></td>
+              <td>VPS ou PaaS Node.js + base managée</td>
+              <td>Déploiement réaliste, contrôle des variables, évolutif après MVP.</td>
+              <td>Coût mensuel, sauvegardes, supervision à prévoir.</td>
+              <td><span class="badge badge-selected">Cible</span></td>
+            </tr>
+            <tr>
+              <td><strong>Déploiement</strong></td>
+              <td>Hébergement mutualisé classique</td>
+              <td>Peu coûteux.</td>
+              <td>Peu adapté à Next.js, Docker, API et tâches serveur modernes.</td>
+              <td><span class="badge badge-option">Écartée</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Évaluation transversale</h2>
+        <table class="matrix">
+          <thead>
+            <tr>
+              <th>Critère</th>
+              <th>Architecture retenue</th>
+              <th>Points forts</th>
+              <th>Points de vigilance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Sécurité</strong></td>
+              <td>Next.js API + Drizzle + MariaDB + Zod</td>
+              <td>Validation serveur, ORM, séparation serveur/client, secrets côté serveur.</td>
+              <td>Ajouter rate limiting, headers sécurité, contrôle upload et RGPD.</td>
+            </tr>
+            <tr>
+              <td><strong>Environnement système</strong></td>
+              <td>Node.js 20+, Docker Compose, Linux compatible</td>
+              <td>Reproductible en local, cohérent avec le poste de développement.</td>
+              <td>Prévoir une cible cloud stable et sauvegardée.</td>
+            </tr>
+            <tr>
+              <td><strong>Réseau</strong></td>
+              <td>Application web + DB + services externes</td>
+              <td>Architecture simple, peu de flux internes, démo facile.</td>
+              <td>Sécuriser HTTPS, CORS si API séparée future, quotas cartes/médias.</td>
+            </tr>
+            <tr>
+              <td><strong>Accessibilité</strong></td>
+              <td>React + composants UI contrôlés</td>
+              <td>Composants réutilisables, labels, focus et contrastes centralisables.</td>
+              <td>Tester formulaires, carte, médias et composants interactifs.</td>
+            </tr>
+            <tr>
+              <td><strong>Impact environnemental</strong></td>
+              <td>Monolithe web sobre + médias externalisés</td>
+              <td>Moins de services à maintenir, cache possible, limitation du MVP.</td>
+              <td>Surveiller images, vidéos, carte, feed infini et requêtes répétées.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Architecture technique retenue</h2>
+        <div class="two-cols">
+          <div class="panel">
+            <strong>Solution cible MVP</strong>
+            <ul>
+              <li>Next.js App Router pour pages, layout et routes API.</li>
+              <li>React et Tailwind CSS pour l'interface responsive.</li>
+              <li>Drizzle ORM et MariaDB pour les données relationnelles.</li>
+              <li>Zod pour validation des formulaires et entrées API.</li>
+              <li>Docker Compose pour MariaDB et phpMyAdmin en local.</li>
+              <li>Leaflet pour la cartographie MVP.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <strong>Raisons du choix</strong>
+            <ul>
+              <li>Stack déjà en place et maîtrisée.</li>
+              <li>Périmètre compatible avec une démonstration RNCP.</li>
+              <li>Architecture simple, maintenable et sécurisable.</li>
+              <li>Faible coût d'exploitation au démarrage.</li>
+              <li>Évolutions possibles vers services dédiés en V2.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Ressources nécessaires</h2>
+        <table class="matrix">
+          <thead>
+            <tr>
+              <th>Ressource</th>
+              <th>Besoin</th>
+              <th>Configuration minimale MVP</th>
+              <th>Évolution possible</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Poste développeur</strong></td>
+              <td>Développement, tests, génération migrations et PDF RNCP.</td>
+              <td>Linux, Node.js 20+, npm, Docker, Chrome headless.</td>
+              <td>CI GitHub pour automatiser build et checks.</td>
+            </tr>
+            <tr>
+              <td><strong>Base de données</strong></td>
+              <td>Stockage utilisateurs, profils, lieux, posts, events et topos.</td>
+              <td>MariaDB 11 en Docker avec volume persistant.</td>
+              <td>Base managée avec sauvegardes automatiques.</td>
+            </tr>
+            <tr>
+              <td><strong>Serveur applicatif</strong></td>
+              <td>Exécution Next.js, API et rendu web.</td>
+              <td>Local pour développement, PaaS/VPS Node.js pour démo en ligne.</td>
+              <td>Scalabilité horizontale si usage réel.</td>
+            </tr>
+            <tr>
+              <td><strong>Stockage médias</strong></td>
+              <td>Images de profils, posts et lieux.</td>
+              <td>Mock ou stockage externe limité en MVP.</td>
+              <td>Cloudinary/S3 avec transformations et quotas.</td>
+            </tr>
+            <tr>
+              <td><strong>Services externes</strong></td>
+              <td>Cartes, email transactionnel, éventuelles notifications.</td>
+              <td>Leaflet, fournisseur SMTP simple, notifications hors MVP strict.</td>
+              <td>Mapbox, push notifications, monitoring applicatif.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="summary">
+        <h2>Synthèse et décision</h2>
+        <p>
+          L'étude comparative confirme que l'architecture la plus adaptée au MVP
+          Spity est une application full-stack Next.js avec App Router, Route
+          Handlers, MariaDB et Drizzle ORM. Cette solution couvre les besoins du
+          commanditaire tout en limitant la complexité technique et les coûts.
+        </p>
+        <p>
+          Les solutions plus distribuées ou plus spécialisées, comme un backend
+          séparé, PostgreSQL/PostGIS ou Mapbox, restent pertinentes pour une V2
+          si la plateforme dépasse le périmètre pilote. Pour la soutenance RNCP,
+          la priorité est de livrer un système démontrable, sécurisé,
+          accessible, maintenable et sobre.
+        </p>
+      </section>
+
+      <p class="footer-note">
+        Document produit pour le dossier RNCP - Bloc C1 - Projet Spity.
+      </p>
+    </main>
+  </body>
+</html>

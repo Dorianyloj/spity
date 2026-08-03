@@ -1,0 +1,64 @@
+{
+  "baseURL": "http://localhost:3000",
+  "generatedAt": "2026-07-21T13:29:09.381Z",
+  "captures": [
+    {
+      "account": "climber",
+      "file": "01-dashboard-grimpeur-desktop.png",
+      "heading": "Bonjour Lina M.",
+      "path": "/app",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "account": "climber",
+      "file": "02-matching-grimpeur-desktop.png",
+      "heading": "Trouver un partenaire",
+      "path": "/app/matching",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "account": "club",
+      "file": "03-evenements-club-desktop.png",
+      "heading": "Événements Spity",
+      "path": "/app/events",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "account": "climber",
+      "file": "04-profil-grimpeur-mobile.png",
+      "heading": "Lina M.",
+      "path": "/profile/me",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "05-couverture-jest-globale.png",
+      "source": "coverage/lcov-report/index.html",
+      "title": "Rapport de couverture globale Jest",
+      "viewport": {
+        "width": 1000,
+        "height": 260
+      }
+    },
+    {
+      "file": "06-recette-playwright.png",
+      "source": "playwright-report/index.html",
+      "title": "Rapport de recette Playwright",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      }
+    }
+  ]
+}

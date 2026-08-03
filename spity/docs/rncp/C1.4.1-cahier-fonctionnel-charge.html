@@ -1,0 +1,1032 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>C1.4.1 - Cahier fonctionnel et estimation de charge - Spity</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 16mm 14mm 18mm;
+      }
+
+      :root {
+        --ink: #16201b;
+        --muted: #5c6760;
+        --line: #d8e2dc;
+        --paper: #fbfdfb;
+        --accent: #1f7a4d;
+        --accent-2: #245b75;
+        --accent-soft: #e8f4ed;
+        --sky-soft: #e7f1f5;
+        --warn-soft: #fff3df;
+        --danger-soft: #fdecea;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        font-size: 10.2pt;
+        line-height: 1.45;
+      }
+
+      .cover {
+        min-height: 263mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        page-break-after: always;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cover::before {
+        content: "";
+        position: absolute;
+        inset: -40mm -20mm auto auto;
+        width: 150mm;
+        height: 150mm;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(31, 122, 77, 0.18), transparent 62%);
+      }
+
+      .cover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 58mm;
+        background:
+          linear-gradient(135deg, rgba(36, 91, 117, 0.1), rgba(31, 122, 77, 0.16)),
+          repeating-linear-gradient(
+            135deg,
+            rgba(22, 32, 27, 0.08) 0,
+            rgba(22, 32, 27, 0.08) 1px,
+            transparent 1px,
+            transparent 9px
+          );
+        clip-path: polygon(0 38%, 100% 0, 100% 100%, 0% 100%);
+      }
+
+      .cover-content {
+        position: relative;
+        z-index: 1;
+        padding-top: 12mm;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--accent);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 8.5pt;
+      }
+
+      .eyebrow::before {
+        content: "";
+        display: inline-block;
+        width: 24px;
+        height: 3px;
+        border-radius: 99px;
+        background: var(--accent);
+      }
+
+      h1 {
+        margin: 18mm 0 5mm;
+        max-width: 165mm;
+        font-size: 30pt;
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        max-width: 150mm;
+        color: var(--muted);
+        font-size: 13.5pt;
+        line-height: 1.35;
+        margin: 0;
+      }
+
+      .cover-meta {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5mm;
+        margin-bottom: 22mm;
+      }
+
+      .meta-card {
+        border: 1px solid rgba(22, 32, 27, 0.14);
+        background: rgba(255, 255, 255, 0.84);
+        border-radius: 7px;
+        padding: 5mm;
+      }
+
+      .meta-label {
+        color: var(--muted);
+        font-size: 8pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .meta-value {
+        margin-top: 2mm;
+        font-size: 11pt;
+        font-weight: 800;
+      }
+
+      main {
+        background: white;
+      }
+
+      section {
+        page-break-inside: avoid;
+        margin-bottom: 9mm;
+      }
+
+      h2 {
+        margin: 0 0 4mm;
+        color: var(--accent);
+        font-size: 15pt;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 0 0 3mm;
+        color: var(--accent-2);
+        font-size: 11.5pt;
+      }
+
+      p {
+        margin: 0 0 3.5mm;
+      }
+
+      .lead {
+        padding: 5mm 6mm;
+        border-left: 4px solid var(--accent);
+        background: var(--accent-soft);
+        border-radius: 0 7px 7px 0;
+        font-size: 10.8pt;
+      }
+
+      .criteria,
+      .two-cols,
+      .three-cols {
+        display: grid;
+        gap: 4mm;
+        margin-top: 4mm;
+      }
+
+      .criteria,
+      .two-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .three-cols {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .panel,
+      .criteria-item {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        padding: 4.5mm;
+        background: #ffffff;
+      }
+
+      .criteria-item {
+        min-height: 25mm;
+      }
+
+      .criteria-item strong,
+      .panel strong {
+        display: block;
+        margin-bottom: 2mm;
+        color: var(--accent-2);
+      }
+
+      .map {
+        display: grid;
+        grid-template-columns: 1.05fr 1.15fr 1fr;
+        gap: 3mm;
+        align-items: stretch;
+        margin-top: 4mm;
+      }
+
+      .map-column {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        overflow: hidden;
+      }
+
+      .map-title {
+        padding: 3mm;
+        color: white;
+        background: var(--accent);
+        font-weight: 800;
+        font-size: 9pt;
+      }
+
+      .map-list {
+        padding: 3mm;
+        background: #ffffff;
+      }
+
+      .map-item {
+        border-left: 3px solid var(--accent-2);
+        padding: 0 0 3mm 3mm;
+        margin-bottom: 3mm;
+      }
+
+      .map-item:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .map-item strong {
+        display: block;
+        color: var(--accent-2);
+        font-size: 8.8pt;
+      }
+
+      .map-item span {
+        color: var(--muted);
+        font-size: 8.1pt;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 3mm 0 0;
+        table-layout: fixed;
+        page-break-inside: auto;
+      }
+
+      thead {
+        display: table-header-group;
+      }
+
+      tr {
+        page-break-inside: avoid;
+      }
+
+      th {
+        background: var(--accent);
+        color: white;
+        font-size: 8.2pt;
+        text-align: left;
+        padding: 3mm 2.4mm;
+        vertical-align: top;
+      }
+
+      th:first-child {
+        border-top-left-radius: 6px;
+      }
+
+      th:last-child {
+        border-top-right-radius: 6px;
+      }
+
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 3mm 2.4mm;
+        vertical-align: top;
+        font-size: 8.45pt;
+      }
+
+      tbody tr:nth-child(even) td {
+        background: #f7faf8;
+      }
+
+      .functional th:nth-child(1) {
+        width: 19%;
+      }
+
+      .functional th:nth-child(2) {
+        width: 12%;
+      }
+
+      .functional th:nth-child(3) {
+        width: 30%;
+      }
+
+      .functional th:nth-child(4) {
+        width: 22%;
+      }
+
+      .functional th:nth-child(5) {
+        width: 17%;
+      }
+
+      .coverage th:nth-child(1) {
+        width: 21%;
+      }
+
+      .coverage th:nth-child(2) {
+        width: 27%;
+      }
+
+      .coverage th:nth-child(3) {
+        width: 28%;
+      }
+
+      .coverage th:nth-child(4) {
+        width: 24%;
+      }
+
+      .workload th:nth-child(1) {
+        width: 22%;
+      }
+
+      .workload th:nth-child(2) {
+        width: 38%;
+      }
+
+      .workload th:nth-child(3) {
+        width: 15%;
+      }
+
+      .workload th:nth-child(4) {
+        width: 25%;
+      }
+
+      .badge {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 1mm 2.3mm;
+        max-width: 100%;
+        font-size: 7.2pt;
+        font-weight: 800;
+        line-height: 1.1;
+        text-align: center;
+      }
+
+      .badge-core {
+        color: #0f5e39;
+        background: #dff3e8;
+      }
+
+      .badge-secondary {
+        color: #245b75;
+        background: var(--sky-soft);
+      }
+
+      .badge-extra {
+        color: #7a4b00;
+        background: var(--warn-soft);
+      }
+
+      .badge-risk {
+        color: #8c2f22;
+        background: var(--danger-soft);
+      }
+
+      .total-row td {
+        color: white;
+        background: linear-gradient(135deg, #1f7a4d, #245b75) !important;
+        font-weight: 800;
+      }
+
+      .summary {
+        border-radius: 7px;
+        padding: 6mm;
+        color: white;
+        background: linear-gradient(135deg, #1f7a4d, #245b75);
+      }
+
+      .summary h2 {
+        color: white;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 4.5mm;
+      }
+
+      li {
+        margin: 0 0 1.7mm;
+      }
+
+      .footer-note {
+        margin-top: 7mm;
+        color: var(--muted);
+        font-size: 8.3pt;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="cover">
+      <div class="cover-content">
+        <div class="eyebrow">Bloc de compétences 1</div>
+        <h1>C1.4.1 - Cahier fonctionnel et estimation de charge</h1>
+        <p class="subtitle">
+          Projet Spity : recensement, caractérisation et hiérarchisation des
+          fonctionnalités du MVP, couverture technique et estimation en
+          jours-homme.
+        </p>
+      </div>
+
+      <div class="cover-meta">
+        <div class="meta-card">
+          <div class="meta-label">Projet</div>
+          <div class="meta-value">Spity</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Commanditaire</div>
+          <div class="meta-value">Collectif Altitude Grimpe</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Certification</div>
+          <div class="meta-value">Titre RNCP</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Livrable</div>
+          <div class="meta-value">Cahier fonctionnel + charge</div>
+        </div>
+      </div>
+    </article>
+
+    <main>
+      <section>
+        <h2>Objectif de la compétence</h2>
+        <p class="lead">
+          Réaliser un cahier des charges fonctionnel permettant de recenser les
+          fonctions principales, secondaires et complémentaires du projet, de les
+          ordonner selon leur valeur métier, de justifier leur couverture
+          technique et d'estimer la charge de réalisation en jours-homme.
+        </p>
+
+        <div class="criteria">
+          <div class="criteria-item">
+            <strong>Livrable attendu</strong>
+            Un référentiel fonctionnel exploitable par le commanditaire et par
+            l'équipe projet pour piloter le MVP Spity.
+          </div>
+          <div class="criteria-item">
+            <strong>Critères couverts</strong>
+            Fonctions recensées, classées, caractérisées, hiérarchisées,
+            estimées et reliées aux choix techniques.
+          </div>
+          <div class="criteria-item">
+            <strong>Périmètre retenu</strong>
+            MVP web Rhône-Alpes : profils, matching, répertoire, topos,
+            événements, feed social et socle sécurité.
+          </div>
+          <div class="criteria-item">
+            <strong>Hypothèse de charge</strong>
+            Estimation en jours-homme pour un développeur principal, incluant
+            conception, développement, intégration et validation.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Outil d'analyse fonctionnelle choisi</h2>
+        <p>
+          L'analyse s'appuie sur une combinaison <strong>MoSCoW</strong> et
+          <strong>story mapping</strong>. MoSCoW permet d'arbitrer le périmètre
+          en séparant l'indispensable du différable. Le story mapping ordonne les
+          fonctionnalités selon les parcours réels des utilisateurs : créer son
+          profil, trouver un lieu ou un partenaire, consulter une information
+          terrain, participer à un événement et publier un retour social.
+        </p>
+        <div class="three-cols">
+          <div class="panel">
+            <strong>Pourquoi MoSCoW</strong>
+            Le délai RNCP impose un MVP démontrable. La méthode distingue les
+            besoins critiques, utiles et différables sans perdre la vision long
+            terme du réseau social escalade.
+          </div>
+          <div class="panel">
+            <strong>Pourquoi le story mapping</strong>
+            Spity dépend de parcours transverses. L'outil évite de prioriser des
+            modules isolés qui ne formeraient pas une expérience complète.
+          </div>
+          <div class="panel">
+            <strong>Critères de priorité</strong>
+            Valeur pour grimpeurs et clubs, sécurité de pratique, faisabilité
+            technique, impact démo, risque RGPD et dépendance aux autres modules.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Diagramme fonctionnel synthétique</h2>
+        <p>
+          La carte suivante représente l'organisation fonctionnelle du MVP. Les
+          fonctions principales portent la valeur d'usage directe, les fonctions
+          secondaires structurent la qualité du service et les fonctions
+          complémentaires préparent l'évolution après la soutenance.
+        </p>
+        <div class="map">
+          <div class="map-column">
+            <div class="map-title">Fonctions principales</div>
+            <div class="map-list">
+              <div class="map-item">
+                <strong>Comptes et profils</strong>
+                <span>Inscription, connexion, profil grimpeur et profil club.</span>
+              </div>
+              <div class="map-item">
+                <strong>Répertoire géolocalisé</strong>
+                <span>Salles, falaises, clubs, carte, liste et filtres escalade.</span>
+              </div>
+              <div class="map-item">
+                <strong>Matching grimpeurs</strong>
+                <span>Recherche par niveau, discipline, distance et matériel.</span>
+              </div>
+              <div class="map-item">
+                <strong>Événements clubs</strong>
+                <span>Création, consultation, inscription et suivi capacité.</span>
+              </div>
+              <div class="map-item">
+                <strong>Topos collaboratifs</strong>
+                <span>Voies, cotations, états, signalements et contributions.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="map-column">
+            <div class="map-title">Fonctions secondaires</div>
+            <div class="map-list">
+              <div class="map-item">
+                <strong>Feed social contextualisé</strong>
+                <span>Posts, médias, tags lieu/cotation/matériel, likes et commentaires.</span>
+              </div>
+              <div class="map-item">
+                <strong>Recherche et filtres</strong>
+                <span>Tri par discipline, niveau, distance, type de lieu et date.</span>
+              </div>
+              <div class="map-item">
+                <strong>Modération et qualité</strong>
+                <span>Rôles, validation clubs, contrôle des contributions sensibles.</span>
+              </div>
+              <div class="map-item">
+                <strong>Expérience mobile</strong>
+                <span>Navigation responsive, cartes lisibles, formulaires courts.</span>
+              </div>
+              <div class="map-item">
+                <strong>Sécurité applicative</strong>
+                <span>Validation Zod, permissions, protection auth et données personnelles.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="map-column">
+            <div class="map-title">Fonctions complémentaires</div>
+            <div class="map-list">
+              <div class="map-item">
+                <strong>Notifications</strong>
+                <span>Rappels d'événements, alertes proximité et activité sociale.</span>
+              </div>
+              <div class="map-item">
+                <strong>Stories 24 h</strong>
+                <span>Partage éphémère des sessions du jour.</span>
+              </div>
+              <div class="map-item">
+                <strong>Analytics club</strong>
+                <span>Suivi remplissage, profils participants et activité événementielle.</span>
+              </div>
+              <div class="map-item">
+                <strong>Export RGPD</strong>
+                <span>Export, suppression de compte et consentements détaillés.</span>
+              </div>
+              <div class="map-item">
+                <strong>Services externes avancés</strong>
+                <span>Cloud médias, email transactionnel et intégration carte complète.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Recensement et hiérarchisation des fonctionnalités</h2>
+        <table class="functional">
+          <thead>
+            <tr>
+              <th>Fonction</th>
+              <th>Nature</th>
+              <th>Caractérisation fonctionnelle</th>
+              <th>Critère d'acceptation</th>
+              <th>Priorité MVP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Authentification</strong></td>
+              <td><span class="badge badge-core">Principale</span></td>
+              <td>Créer un compte, se connecter, se déconnecter et maintenir une session utilisateur.</td>
+              <td>Un utilisateur accède à son espace après validation des champs et mot de passe sécurisé.</td>
+              <td>Must have</td>
+            </tr>
+            <tr>
+              <td><strong>Profil grimpeur</strong></td>
+              <td><span class="badge badge-core">Principale</span></td>
+              <td>Renseigner disciplines, niveaux, matériel, bio, avatar et localisation approximative.</td>
+              <td>Le profil permet d'être trouvé dans le matching et d'afficher les informations utiles.</td>
+              <td>Must have</td>
+            </tr>
+            <tr>
+              <td><strong>Profil club</strong></td>
+              <td><span class="badge badge-core">Principale</span></td>
+              <td>Présenter un club, son logo, sa localisation, ses coachs et son statut vérifié.</td>
+              <td>Un club identifié peut être consulté et associé à des événements.</td>
+              <td>Must have</td>
+            </tr>
+            <tr>
+              <td><strong>Répertoire lieux</strong></td>
+              <td><span class="badge badge-core">Principale</span></td>
+              <td>Consulter salles, falaises et clubs en liste ou carte avec fiches détaillées.</td>
+              <td>Un grimpeur filtre les lieux par type, discipline, niveau et distance.</td>
+              <td>Must have</td>
+            </tr>
+            <tr>
+              <td><strong>Matching grimpeurs</strong></td>
+              <td><span class="badge badge-core">Principale</span></td>
+              <td>Proposer des profils compatibles selon niveau, discipline, distance et matériel.</td>
+              <td>La page découverte affiche des partenaires classés avec raisons de compatibilité.</td>
+              <td>Must have</td>
+            </tr>
+            <tr>
+              <td><strong>Événements clubs</strong></td>
+              <td><span class="badge badge-core">Principale</span></td>
+              <td>Créer, lister, filtrer et rejoindre des sorties, contests, initiations ou coachings.</td>
+              <td>Un club publie un événement et un grimpeur peut s'inscrire dans la limite de capacité.</td>
+              <td>Must have</td>
+            </tr>
+            <tr>
+              <td><strong>Topos voies</strong></td>
+              <td><span class="badge badge-core">Principale</span></td>
+              <td>Afficher voies, secteurs, cotations, longueurs, nombre de points et état courant.</td>
+              <td>Une fiche falaise montre les voies et les informations de sécurité essentielles.</td>
+              <td>Must have</td>
+            </tr>
+            <tr>
+              <td><strong>Contributions topos</strong></td>
+              <td><span class="badge badge-secondary">Secondaire</span></td>
+              <td>Permettre votes de cotation, commentaires terrain et signalements sécurité.</td>
+              <td>Une contribution est enregistrée avec auteur, date et statut de modération.</td>
+              <td>Should have</td>
+            </tr>
+            <tr>
+              <td><strong>Feed social</strong></td>
+              <td><span class="badge badge-secondary">Secondaire</span></td>
+              <td>Publier posts texte/médias avec tags salle, falaise, club, cotation et matériel.</td>
+              <td>Le fil affiche des contenus contextualisés et les interactions de base.</td>
+              <td>Should have</td>
+            </tr>
+            <tr>
+              <td><strong>Recherche globale</strong></td>
+              <td><span class="badge badge-secondary">Secondaire</span></td>
+              <td>Rechercher lieux, clubs, événements et profils depuis des critères métier.</td>
+              <td>Les résultats restent filtrables et cohérents avec la zone pilote.</td>
+              <td>Should have</td>
+            </tr>
+            <tr>
+              <td><strong>Modération</strong></td>
+              <td><span class="badge badge-secondary">Secondaire</span></td>
+              <td>Contrôler contenus, signalements, contributions topos et validation des clubs.</td>
+              <td>Un administrateur peut accepter, masquer ou prioriser les contenus sensibles.</td>
+              <td>Should have</td>
+            </tr>
+            <tr>
+              <td><strong>Notifications</strong></td>
+              <td><span class="badge badge-extra">Complémentaire</span></td>
+              <td>Alerter sur événement proche, rappel d'inscription ou activité sociale.</td>
+              <td>Un utilisateur reçoit une information utile sans devoir consulter manuellement.</td>
+              <td>Could have</td>
+            </tr>
+            <tr>
+              <td><strong>Stories 24 h</strong></td>
+              <td><span class="badge badge-extra">Complémentaire</span></td>
+              <td>Partager des sessions éphémères liées à un lieu ou une sortie.</td>
+              <td>Le contenu expire automatiquement après 24 heures.</td>
+              <td>Could have</td>
+            </tr>
+            <tr>
+              <td><strong>Analytics club</strong></td>
+              <td><span class="badge badge-extra">Complémentaire</span></td>
+              <td>Mesurer inscriptions, fréquentation, profils de niveaux et taux de remplissage.</td>
+              <td>Le tableau club synthétise les indicateurs utiles à l'animation locale.</td>
+              <td>Could have</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Ordonnancement par parcours utilisateur</h2>
+        <table class="coverage">
+          <thead>
+            <tr>
+              <th>Parcours</th>
+              <th>Fonctions mobilisées</th>
+              <th>Valeur pour l'utilisateur</th>
+              <th>Position dans le MVP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Démarrer sur Spity</strong></td>
+              <td>Authentification, profil grimpeur, préférences et localisation.</td>
+              <td>Rendre l'application personnalisable et exploitable dès la première session.</td>
+              <td>Parcours socle à livrer en premier.</td>
+            </tr>
+            <tr>
+              <td><strong>Trouver où grimper</strong></td>
+              <td>Répertoire, carte, filtres, fiches salles, falaises et clubs.</td>
+              <td>Centraliser les informations actuellement dispersées.</td>
+              <td>Parcours de valeur immédiate pour la démo.</td>
+            </tr>
+            <tr>
+              <td><strong>Trouver avec qui grimper</strong></td>
+              <td>Matching, profil public, niveaux, matériel et distance.</td>
+              <td>Répondre au problème principal de mise en relation fiable.</td>
+              <td>Fonction différenciante prioritaire.</td>
+            </tr>
+            <tr>
+              <td><strong>Préparer une sortie</strong></td>
+              <td>Topos, état voie, signalements, événements et inscriptions.</td>
+              <td>Réduire les incertitudes terrain et améliorer la sécurité.</td>
+              <td>Parcours démontrable sur données pilotes.</td>
+            </tr>
+            <tr>
+              <td><strong>Partager son activité</strong></td>
+              <td>Feed, médias, tags contextuels, likes et commentaires.</td>
+              <td>Transformer le réseau en communauté active et qualifiée.</td>
+              <td>À intégrer après les données métier socles.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Couverture technique des besoins fonctionnels</h2>
+        <table class="coverage">
+          <thead>
+            <tr>
+              <th>Besoin fonctionnel</th>
+              <th>Couverture technique prévue</th>
+              <th>Justification</th>
+              <th>Point de vigilance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Comptes et profils</strong></td>
+              <td>Next.js App Router, route handlers, Zod, bcryptjs/JWT, Drizzle, MariaDB.</td>
+              <td>Le modèle relationnel convient aux profils, équipements, clubs et permissions.</td>
+              <td>Durcir sessions, rate limiting et récupération de compte.</td>
+            </tr>
+            <tr>
+              <td><strong>Lieux et carte</strong></td>
+              <td>Tables typées pour gyms, crags, clubs, coordonnées GPS et filtres serveur.</td>
+              <td>Les critères escalade sont structurés et réutilisables en liste comme en carte.</td>
+              <td>Limiter le coût carte et prévoir un mode liste performant.</td>
+            </tr>
+            <tr>
+              <td><strong>Matching</strong></td>
+              <td>Algorithme V1 côté serveur fondé sur discipline, niveau, distance et matériel.</td>
+              <td>Un scoring simple suffit pour prouver la valeur sans moteur complexe.</td>
+              <td>Expliquer les résultats et éviter les données de localisation trop précises.</td>
+            </tr>
+            <tr>
+              <td><strong>Topos collaboratifs</strong></td>
+              <td>Schéma voies, votes, reports, auteurs, statut et modération via Drizzle.</td>
+              <td>La traçabilité est indispensable pour les informations terrain sensibles.</td>
+              <td>Encadrer les signalements sécurité et la responsabilité éditoriale.</td>
+            </tr>
+            <tr>
+              <td><strong>Événements</strong></td>
+              <td>Route handlers CRUD, relations club/participants, contrôle capacité et dates.</td>
+              <td>Le flux événementiel est relationnel et démontrable avec MariaDB.</td>
+              <td>Gérer annulations, niveau requis et équipement obligatoire.</td>
+            </tr>
+            <tr>
+              <td><strong>Feed social</strong></td>
+              <td>Posts, médias, tags contextuels, likes et commentaires, stockage externe à terme.</td>
+              <td>Les tags rendent le contenu exploitable par lieu, niveau et discipline.</td>
+              <td>Modération, limitation des uploads et protection des médias.</td>
+            </tr>
+            <tr>
+              <td><strong>Qualité et conformité</strong></td>
+              <td>TypeScript strict, Zod input/output, ESLint, tests ciblés, headers sécurité.</td>
+              <td>La démonstration RNCP doit être stable, maintenable et conforme OWASP/RGPD/RGAA.</td>
+              <td>Prioriser tests des parcours critiques plutôt qu'une couverture exhaustive.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Prise en compte de l'expérience utilisateur</h2>
+        <div class="two-cols">
+          <div class="panel">
+            <strong>Principes UX retenus</strong>
+            <ul>
+              <li>Interface mobile-first car les usages ont lieu en salle, en club ou en falaise.</li>
+              <li>Filtres visibles et courts : discipline, niveau, distance, type de lieu, date.</li>
+              <li>Cartes et listes complémentaires pour ne pas bloquer l'utilisateur sans carte.</li>
+              <li>Information terrain hiérarchisée : sécurité, accès, cotation, conditions, médias.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <strong>Accessibilité et confiance</strong>
+            <ul>
+              <li>Navigation clavier, contrastes AA et libellés explicites sur les actions critiques.</li>
+              <li>Formulaires guidés avec validation immédiate et messages d'erreur compréhensibles.</li>
+              <li>Localisation approximative par défaut pour respecter la vie privée.</li>
+              <li>Statuts de modération visibles sur les contenus sensibles et signalements terrain.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Estimation de charge en jours-homme</h2>
+        <p>
+          L'estimation inclut conception détaillée, développement frontend et
+          backend, intégration base de données, validation manuelle, corrections
+          et documentation minimale de démonstration. Elle ne couvre pas une
+          industrialisation complète production ni une application mobile native.
+        </p>
+        <table class="workload">
+          <thead>
+            <tr>
+              <th>Lot fonctionnel</th>
+              <th>Contenu estimé</th>
+              <th>Charge</th>
+              <th>Hypothèse</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Cadrage fonctionnel détaillé</strong></td>
+              <td>Backlog, user stories, critères d'acceptation, parcours et priorisation.</td>
+              <td>3 j-h</td>
+              <td>Reprise des livrables RNCP existants.</td>
+            </tr>
+            <tr>
+              <td><strong>Socle UI et navigation</strong></td>
+              <td>Layout, design system, navigation responsive, états vides et erreurs.</td>
+              <td>5 j-h</td>
+              <td>Composants UI existants réutilisés.</td>
+            </tr>
+            <tr>
+              <td><strong>Authentification et profils</strong></td>
+              <td>Inscription, connexion, session, profil grimpeur, profil club et permissions.</td>
+              <td>8 j-h</td>
+              <td>Socle auth déjà partiellement présent, durcissement inclus.</td>
+            </tr>
+            <tr>
+              <td><strong>Répertoire lieux</strong></td>
+              <td>Salles, falaises, clubs, fiches, filtres, données pilotes et vue carte/liste.</td>
+              <td>9 j-h</td>
+              <td>Carte simplifiée acceptable pour MVP.</td>
+            </tr>
+            <tr>
+              <td><strong>Matching grimpeurs</strong></td>
+              <td>Scoring V1, page découverte, filtres, profil public et explication de compatibilité.</td>
+              <td>6 j-h</td>
+              <td>Algorithme simple sans messagerie temps réel.</td>
+            </tr>
+            <tr>
+              <td><strong>Topos collaboratifs</strong></td>
+              <td>Fiches voies, cotations, état, reports sécurité, votes et modération minimale.</td>
+              <td>10 j-h</td>
+              <td>Périmètre limité à la consultation et contribution contrôlée.</td>
+            </tr>
+            <tr>
+              <td><strong>Événements clubs</strong></td>
+              <td>CRUD événements, inscriptions, capacité, niveau requis et dashboard club simple.</td>
+              <td>7 j-h</td>
+              <td>Notifications différées hors MVP strict.</td>
+            </tr>
+            <tr>
+              <td><strong>Feed social contextualisé</strong></td>
+              <td>Posts, tags, médias limités, likes, commentaires et agrégation du fil.</td>
+              <td>8 j-h</td>
+              <td>Uploads limités ou mockés selon disponibilité Cloudinary/S3.</td>
+            </tr>
+            <tr>
+              <td><strong>Sécurité, RGPD, RGAA</strong></td>
+              <td>Validation Zod, contrôle accès, headers, minimisation, contrastes et formulaires accessibles.</td>
+              <td>6 j-h</td>
+              <td>Couverture priorisée sur parcours critiques.</td>
+            </tr>
+            <tr>
+              <td><strong>Tests et recette</strong></td>
+              <td>Tests ciblés, jeux de données, recette démo, corrections et stabilisation.</td>
+              <td>7 j-h</td>
+              <td>Tests unitaires et scénarios manuels documentés.</td>
+            </tr>
+            <tr>
+              <td><strong>Documentation de livraison</strong></td>
+              <td>README, commandes, données de démo, limites MVP et support soutenance.</td>
+              <td>3 j-h</td>
+              <td>Documentation concise centrée déploiement local.</td>
+            </tr>
+            <tr>
+              <td><strong>Marge de risque</strong></td>
+              <td>Aléas intégration, données, carte, médias, sécurité et corrections tardives.</td>
+              <td>7 j-h</td>
+              <td>Environ 10 % de la charge fonctionnelle.</td>
+            </tr>
+            <tr class="total-row">
+              <td><strong>Total estimé</strong></td>
+              <td>Charge prévisionnelle MVP démontrable.</td>
+              <td>79 j-h</td>
+              <td>Environ 16 semaines à 5 j-h/semaine pour un développeur principal.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Découpage recommandé par jalons</h2>
+        <table class="workload">
+          <thead>
+            <tr>
+              <th>Jalon</th>
+              <th>Objectif</th>
+              <th>Charge</th>
+              <th>Résultat attendu</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>J1 - Socle</strong></td>
+              <td>Backlog, UI, auth, profils et données de base.</td>
+              <td>16 j-h</td>
+              <td>Utilisateur connecté avec profil exploitable.</td>
+            </tr>
+            <tr>
+              <td><strong>J2 - Découverte</strong></td>
+              <td>Répertoire, fiches, filtres et matching simple.</td>
+              <td>15 j-h</td>
+              <td>Recherche de lieux et partenaires démontrable.</td>
+            </tr>
+            <tr>
+              <td><strong>J3 - Organisation</strong></td>
+              <td>Topos, signalements et événements clubs.</td>
+              <td>17 j-h</td>
+              <td>Préparation d'une sortie avec données terrain et inscription.</td>
+            </tr>
+            <tr>
+              <td><strong>J4 - Communauté</strong></td>
+              <td>Feed social, médias limités, interactions et modération minimale.</td>
+              <td>14 j-h</td>
+              <td>Activité sociale contextualisée autour des lieux et cotations.</td>
+            </tr>
+            <tr>
+              <td><strong>J5 - Stabilisation</strong></td>
+              <td>Sécurité, RGPD, RGAA, tests, recette, documentation et marge risque.</td>
+              <td>17 j-h</td>
+              <td>MVP prêt pour soutenance et démonstration guidée.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="summary">
+        <h2>Synthèse et décision fonctionnelle</h2>
+        <p>
+          Le périmètre prioritaire retenu couvre les fonctions indispensables à
+          la promesse de Spity : centraliser la pratique de l'escalade, permettre
+          la mise en relation, rendre les lieux et topos consultables, soutenir
+          les événements clubs et animer un feed social contextualisé. Les
+          fonctions complémentaires, comme les notifications, stories et
+          analytics avancés, sont identifiées mais doivent rester différées si
+          elles menacent la stabilité du MVP RNCP.
+        </p>
+        <p>
+          La charge globale est estimée à <strong>79 jours-homme</strong>. Cette
+          estimation est cohérente avec un MVP ambitieux mais démontrable, sous
+          réserve de maintenir une modération simple, un matching V1 explicable,
+          des médias limités et une carte maîtrisée sur la zone pilote.
+        </p>
+      </section>
+
+      <p class="footer-note">
+        Document produit pour le dossier RNCP - Bloc C1 - Projet Spity.
+      </p>
+    </main>
+  </body>
+</html>

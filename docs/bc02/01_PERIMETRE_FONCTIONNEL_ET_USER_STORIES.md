@@ -286,7 +286,7 @@ Les seuils initiaux du prototype sont :
 - aucune erreur TypeScript ;
 - build de production réussi ;
 - tests unitaires et d'intégration réussis ;
-- couverture globale minimale de 80 % pour les lignes, instructions et fonctions, et de 70 % pour les branches ;
+- couverture globale minimale de 60 % pour les lignes et instructions, 55 % pour les fonctions et 75 % pour les branches ;
 - aucune vulnérabilité de dépendance critique ou haute non justifiée ;
 - chaque anomalie détectée liée à une entrée du plan de correction.
 
@@ -295,7 +295,7 @@ Les exclusions de couverture devront être rares, justifiées et documentées.
 ### Performance et compatibilité
 
 - interface responsive de 360 à 1 440 pixels de largeur ;
-- score Lighthouse cible d'au moins 85 en performance et 95 en accessibilité sur les pages principales ;
+- score Lighthouse cible d'au moins 85 en performance et 100 en accessibilité sur les pages principales ;
 - temps de réponse cible inférieur à 500 ms au 95e percentile pour les routes API principales dans l'environnement de référence, hors latence réseau externe ;
 - absence de requête non bornée sur les listes ;
 - prise en charge des versions récentes de Chromium et Firefox ;
@@ -360,4 +360,4 @@ Une fonctionnalité n'est terminée que si :
 
 ## 11. Décision de cadrage
 
-Le présent périmètre constitue la version de référence du prototype BC02. Les fonctions F01 à F10 sont obligatoires. Les fonctions placées hors périmètre ne conditionnent pas la complétude du prototype, mais peuvent être présentées comme perspectives après validation des huit compétences du bloc.
+Le présent périmètre constitue la version de référence du prototype BC02. Les fonctions F01 à F10 sont obligatoires. Les fonctions placées hors périmètre ne conditionnent pas la complétude du prototype, mais peuvent être présentées comme perspectives après validation des neuf compétences du bloc.

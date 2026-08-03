@@ -1,150 +1,108 @@
 # Spity
 
-Spity est un réseau social pour la communauté escalade : matching entre grimpeurs, répertoire de salles/falaises/clubs, topos collaboratifs, événements clubs et contenu social contextualisé.
+Spity est le prototype fonctionnel d'un réseau social pour la communauté escalade : profils grimpeurs et clubs, inventaire de matériel, recherche de partenaires, événements et répertoire de lieux.
 
-Le projet est développé dans le cadre d'une certification Titre RNCP. Le cadrage produit complet est disponible dans `../CADRAGE_PROJET.md`.
+Le cadrage produit complet se trouve dans [`../CADRAGE_PROJET.md`](../CADRAGE_PROJET.md). Les preuves et livrables du bloc de compétences BC02 se trouvent dans [`../docs/bc02`](../docs/bc02).
 
 ## Stack
 
-- Next.js App Router
-- React
-- Tailwind CSS
-- Drizzle ORM
-- MariaDB
-- Zod
+- TypeScript strict, Next.js App Router et React ;
+- Tailwind CSS et composants accessibles internes ;
+- Route Handlers Next.js, Zod et Drizzle ORM ;
+- MariaDB 11.4 ;
+- Jest, Node Test Runner, Playwright, axe et Lighthouse ;
+- Docker Compose, GitHub Actions et GitHub Container Registry.
 
 ## Prérequis
 
-- Node.js 22 (voir `.nvmrc`)
-- npm 10+
-- Docker Desktop avec Docker Compose
+- Node.js 22.x, conformément à [`.nvmrc`](.nvmrc) ;
+- npm 10 ou supérieur ;
+- Docker Engine avec Docker Compose v2.
 
-## Installation
+## Installation locale
+
+Depuis ce dossier `spity/` :
 
 ```bash
-npm ci
 cp .env.example .env.local
-docker compose --env-file .env.local up -d
+docker compose --env-file .env.local up -d mariadb
+npm ci
 npm run db:migrate
+npm run dev
 ```
 
-Remplacez au minimum `JWT_SECRET`, `MYSQL_PASSWORD` et `MYSQL_ROOT_PASSWORD` dans `.env.local`. `DATABASE_URL` doit utiliser le même mot de passe que `MYSQL_PASSWORD`.
+Renseigner un `JWT_SECRET` aléatoire d'au moins 64 octets dans `.env.local`. L'application est ensuite disponible sur <http://localhost:3000>.
 
-phpMyAdmin est un outil optionnel du profil `tools` :
+phpMyAdmin est un outil local facultatif. Il n'est pas démarré par défaut :
 
 ```bash
 docker compose --env-file .env.local --profile tools up -d
 ```
 
-## Développement
+Il est alors disponible sur <http://localhost:8083>. Le port est modifiable avec `PHPMYADMIN_PORT`.
+
+Pour charger les comptes et données de démonstration dans une base locale uniquement :
 
 ```bash
-npm run dev
+npm run db:seed
 ```
-
-Application : http://localhost:3000
-
-phpMyAdmin : http://localhost:8081
-
-État de l'application et de MariaDB : http://localhost:3000/api/health
 
 ## Commandes
 
 ```bash
-npm run dev          # Serveur de développement
-npm run build        # Build production
-npm start            # Serveur production après build
-npm run lint         # ESLint
-npm run typecheck    # Vérification TypeScript
-npm run quality      # Lint, TypeScript et build
-npm run security:audit # Vulnérabilités des dépendances de production
-npm run perf:audit   # Audit Lighthouse des pages principales
+npm run dev                  # Serveur de développement
+npm run build                # Build de production
+npm start                    # Serveur après build
+npm run lint                 # ESLint
+npm run typecheck            # Vérification TypeScript
+npm run test:coverage        # Tests unitaires et couverture
+npm run test:integration     # Tests HTTP avec MariaDB
+npm run test:acceptance      # Recette Playwright F01 à F10
+npm run accessibility:audit # Audit axe authentifié
+npm run perf:audit           # Build et audit Lighthouse
+npm run security:audit       # Audit des dépendances de production
 ```
 
-## Environnements
-
-### Tests
-
-La base de test est isolée, exposée uniquement sur `127.0.0.1:3307` et stockée en mémoire :
-
-```bash
-cp .env.test.example .env.test
-docker compose --env-file .env.test -f docker-compose.test.yml up -d --wait
-docker compose --env-file .env.test -f docker-compose.test.yml down
-```
-
-### Production Docker
-
-```bash
-cp .env.production.example .env.production
-# Remplacer toutes les valeurs CHANGE_ME.
-docker compose --env-file .env.production -f docker-compose.production.yml build
-docker compose --env-file .env.production -f docker-compose.production.yml up -d mariadb
-docker compose --env-file .env.production -f docker-compose.production.yml --profile migration run --rm migrate
-docker compose --env-file .env.production -f docker-compose.production.yml up -d app
-```
-
-La configuration de production lie l'application à `127.0.0.1:3000` par défaut afin qu'elle soit publiée derrière un reverse proxy HTTPS.
+Les tests d'intégration et d'acceptation nécessitent une MariaDB disponible via `DATABASE_URL`. Playwright nécessite aussi Chromium, installable avec `npx playwright install chromium`.
 
 ## Base de données
 
 ```bash
-npm run db:generate  # Génère une migration Drizzle
-npm run db:migrate   # Applique les migrations
-npm run db:push      # Synchronise le schéma sans migration
-npm run db:studio    # Lance Drizzle Studio
+npm run db:generate  # Génère une nouvelle migration Drizzle
+npm run db:migrate   # Applique les migrations existantes
+npm run db:studio    # Ouvre Drizzle Studio
 ```
+
+`db:push` est réservé aux expérimentations locales. Une mise à jour partagée ou de production passe toujours par une nouvelle migration versionnée ; une migration existante n'est jamais modifiée.
 
 ## Structure
 
-- `src/app` : routes App Router
-- `src/components/ui` : design system réutilisable
-- `src/db` : client et schéma Drizzle
-- `src/lib` : configuration et validateurs partagés
-- `drizzle` : migrations SQL générées
+- `src/app` : pages et Route Handlers App Router ;
+- `src/features` : composants, schémas et logique par fonctionnalité ;
+- `src/components/ui` : design system réutilisable ;
+- `src/db` : client et schéma Drizzle ;
+- `src/lib` : services et validateurs partagés ;
+- `drizzle` : migrations SQL générées ;
+- `tests` : intégration et recette navigateur ;
+- `scripts` : audits, données de démonstration et validation de release.
 
-## Authentification
+## Documentation d'exploitation
 
-Routes disponibles :
+- [Dossier synthétique BC02 au format PDF](../docs/bc02/livrable/DOSSIER_BC02_SPITY.pdf)
+- [Index exhaustif des critères et preuves](../docs/bc02/15_INDEX_PREUVES_GRILLE_BC02.md)
+- [Audit de conformité aux documents officiels](../docs/bc02/17_AUDIT_CONFORMITE_OFFICIEL_BC02.md)
+- [Manuel de déploiement](../docs/bc02/12_MANUEL_DEPLOIEMENT_C241.md)
+- [Manuel d'utilisation](../docs/bc02/13_MANUEL_UTILISATION_C241.md)
+- [Manuel de mise à jour et maintenance](../docs/bc02/14_MANUEL_MISE_A_JOUR_C241.md)
+- [Procédure autonome incluse dans chaque bundle de release](DEPLOYMENT.md)
 
-```bash
-POST /api/auth/register  # Crée un compte et pose le cookie de session
-POST /api/auth/login     # Connecte un utilisateur
-POST /api/auth/logout    # Supprime le cookie de session
-GET  /api/auth/me        # Retourne la session active
-```
-
-Pages locales :
-
-- http://localhost:3000/login
-- http://localhost:3000/register
-
-## Profils
-
-Routes disponibles :
+Pour régénérer les captures puis le dossier HTML/PDF depuis une base locale de démonstration :
 
 ```bash
-GET   /api/profile/me        # Retourne le profil de l'utilisateur connecté
-POST  /api/profile/grimpeur  # Crée le profil grimpeur
-PATCH /api/profile/grimpeur  # Met à jour le profil grimpeur
-POST  /api/profile/club      # Crée le profil club
-PATCH /api/profile/club      # Met à jour le profil club
+npm run db:seed
+npm run docs:capture
+npm run docs:capture:github
+npm run docs:build
 ```
 
-Pages locales :
-
-- http://localhost:3000/profile/onboarding
-- http://localhost:3000/profile/me
-
-## Qualité
-
-Avant commit, lancer :
-
-```bash
-npm run quality
-npm run security:audit
-```
-
-Après un build réussi, `npm run perf:audit` lance l'application et vérifie les seuils Lighthouse définis dans `lighthouserc.js`.
-
-Le protocole complet des environnements, contrôles qualité, déploiements et retours arrière est documenté dans [`../docs/bc02/02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md`](../docs/bc02/02_ENVIRONNEMENTS_QUALITE_DEPLOIEMENT.md).
+Avant une contribution, consulter les consignes du dépôt dans [`../AGENTS.md`](../AGENTS.md).

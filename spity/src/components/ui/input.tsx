@@ -1,4 +1,5 @@
-import { forwardRef, InputHTMLAttributes, ReactNode } from 'react'
+import { forwardRef, type InputHTMLAttributes, type ReactNode, useId } from 'react'
+import { cn } from '@/lib/class-names'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string
@@ -9,14 +10,16 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className = '', error, label, id, icon, action, ...props }, ref) => {
-    const inputId = id || label?.toLowerCase().replace(/\s+/g, '-')
+    const generatedId = useId()
+    const inputId = id ?? `input-${generatedId}`
+    const errorId = error ? `${inputId}-error` : undefined
 
     return (
       <div className="w-full">
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-sm font-medium text-foreground mb-1.5"
+            className="mb-1.5 block text-sm font-medium text-foreground"
           >
             {label}
           </label>
@@ -30,13 +33,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           <input
             ref={ref}
             id={inputId}
-            className={`
-              spity-input
-              ${icon ? 'pl-10' : ''}
-              ${action ? 'pr-10' : ''}
-              ${error ? 'border-destructive ring-destructive/20' : ''}
-              ${className}
-            `}
+            className={cn(
+              'spity-input min-h-11',
+              Boolean(icon) && 'pl-10',
+              Boolean(action) && 'pr-11',
+              error && 'border-destructive ring-2 ring-destructive/20',
+              className
+            )}
+            aria-invalid={error ? true : undefined}
+            aria-describedby={errorId}
             {...props}
           />
           {action && (
@@ -46,7 +51,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         {error && (
-          <p className="text-xs text-destructive mt-1.5">{error}</p>
+          <p id={errorId} className="mt-1.5 text-xs font-medium text-destructive" role="alert">
+            {error}
+          </p>
         )}
       </div>
     )

@@ -1,5 +1,6 @@
-import { forwardRef, HTMLAttributes } from 'react'
+import { forwardRef, type HTMLAttributes } from 'react'
 import { Loader2 } from 'lucide-react'
+import { cn } from '@/lib/class-names'
 
 export interface SpinnerProps extends HTMLAttributes<HTMLDivElement> {
   size?: 'sm' | 'md' | 'lg'
@@ -17,7 +18,7 @@ const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
     return (
       <div
         ref={ref}
-        className={`flex flex-col items-center justify-center gap-2 ${className}`}
+        className={cn('flex flex-col items-center justify-center gap-2 text-center', className)}
         role="status"
         aria-label={label || 'Chargement'}
         {...props}
@@ -25,6 +26,7 @@ const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
         <Loader2
           className="animate-spin text-primary"
           size={sizeClasses[size]}
+          aria-hidden="true"
         />
         {label && (
           <p className="text-sm text-muted-foreground">{label}</p>

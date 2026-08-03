@@ -1,0 +1,128 @@
+[
+  {
+    "localFile": "indoor-gym-overview.jpg",
+    "file": "Gorliz sports center climbing gym.jpg",
+    "category": "Salle indoor",
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Gorliz_sports_center_climbing_gym.jpg",
+    "author": "Vatealyo",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  {
+    "localFile": "indoor-crack-training.jpg",
+    "file": "Crack Climbing Indoor.jpg",
+    "category": "Salle indoor",
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Crack_Climbing_Indoor.jpg",
+    "author": "Bondarev.gal",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  {
+    "localFile": "indoor-climbing-wall.jpg",
+    "file": "REI rock climbing wall.jpg",
+    "category": "Salle indoor",
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:REI_rock_climbing_wall.jpg",
+    "author": "Runner1928",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  {
+    "localFile": "indoor-wall-area.jpg",
+    "file": "REI rock climbing wall area.jpg",
+    "category": "Salle indoor",
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:REI_rock_climbing_wall_area.jpg",
+    "author": "Runner1928",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  {
+    "localFile": "bouldering-dead-bug.jpg",
+    "file": "Bouldering.jpg",
+    "category": "Bloc outdoor",
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Bouldering.jpg",
+    "author": "Ram Sripracha (talk · contribs)",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "localFile": "bouldering-joshua-tree.jpg",
+    "file": "Bouldering (53483096154).jpg",
+    "category": "Bloc outdoor",
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Bouldering_(53483096154).jpg",
+    "author": "Joshua Tree National Park",
+    "license": "Public domain",
+    "licenseUrl": ""
+  },
+  {
+    "localFile": "fontainebleau-bouldering.jpg",
+    "file": "Forest of Fontainebleau, Bouldering.jpg",
+    "category": "Bloc outdoor",
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Forest_of_Fontainebleau,_Bouldering.jpg",
+    "author": "Protolanguage17",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "localFile": "fontainebleau-boulders.jpg",
+    "file": "Fontainebleau Boulders -001.jpg",
+    "category": "Paysage falaise",
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Fontainebleau_Boulders_-001.jpg",
+    "author": "Amada44",
+    "license": "Public domain",
+    "licenseUrl": ""
+  },
+  {
+    "localFile": "verdon-climber-route.jpg",
+    "file": "Rock Climbing Verdon.jpg",
+    "category": "Falaise",
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Rock_Climbing_Verdon.jpg",
+    "author": "fran-42",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+  },
+  {
+    "localFile": "verdon-wall-climber.jpg",
+    "file": "Escalade Verdon.jpg",
+    "category": "Falaise",
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Escalade_Verdon.jpg",
+    "author": "This illustration was made by (User:Royonx) and released under the license(s) stated above. You are free to use it for any purpose as long as you credit me and follow the terms of the license. Example : © Michel Royon / Wikimedia Commons If you use this image outside of the Wikimedia projects, I would be happy to hear from you par courriel ( royonx gmail.com). Thanks ! Ce message en français",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  {
+    "localFile": "verdon-climbers.jpg",
+    "file": "Climbers verdon gorge.jpg",
+    "category": "Falaise",
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Climbers_verdon_gorge.jpg",
+    "author": "maarjaara",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  {
+    "localFile": "verdon-cliff.jpg",
+    "file": "Verdon-cliff-eperon-Sublime-vude-Trescaire.jpg",
+    "category": "Paysage falaise",
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Verdon-cliff-eperon-Sublime-vude-Trescaire.jpg",
+    "author": "Denis E. Corpet",
+    "license": "CC BY-SA 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5"
+  },
+  {
+    "localFile": "calanques-landscape.jpg",
+    "file": "Les calanques.jpg",
+    "category": "Paysage falaise",
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Les_calanques.jpg",
+    "author": "davric",
+    "license": "Public domain",
+    "licenseUrl": ""
+  },
+  {
+    "localFile": "rock-climber-wall.jpg",
+    "file": "Rock climber on the wall.jpg",
+    "category": "Falaise",
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Rock_climber_on_the_wall.jpg",
+    "author": "Leon Brooks",
+    "license": "Public domain",
+    "licenseUrl": ""
+  }
+]

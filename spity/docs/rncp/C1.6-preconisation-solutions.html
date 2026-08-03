@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>C1.6 - Préconisation des axes de solutions - Spity</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 16mm 14mm 18mm;
+      }
+
+      :root {
+        --ink: #16201b;
+        --muted: #5c6760;
+        --line: #d8e2dc;
+        --paper: #fbfdfb;
+        --accent: #1f7a4d;
+        --accent-2: #245b75;
+        --accent-soft: #e8f4ed;
+        --sky-soft: #e7f1f5;
+        --warn-soft: #fff3df;
+        --danger-soft: #fdecea;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        font-size: 10.2pt;
+        line-height: 1.45;
+      }
+
+      .cover {
+        min-height: 263mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        page-break-after: always;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cover::before {
+        content: "";
+        position: absolute;
+        inset: -40mm -20mm auto auto;
+        width: 150mm;
+        height: 150mm;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(31, 122, 77, 0.18), transparent 62%);
+      }
+
+      .cover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 58mm;
+        background:
+          linear-gradient(135deg, rgba(36, 91, 117, 0.1), rgba(31, 122, 77, 0.16)),
+          repeating-linear-gradient(
+            135deg,
+            rgba(22, 32, 27, 0.08) 0,
+            rgba(22, 32, 27, 0.08) 1px,
+            transparent 1px,
+            transparent 9px
+          );
+        clip-path: polygon(0 38%, 100% 0, 100% 100%, 0% 100%);
+      }
+
+      .cover-content {
+        position: relative;
+        z-index: 1;
+        padding-top: 12mm;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--accent);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 8.5pt;
+      }
+
+      .eyebrow::before {
+        content: "";
+        display: inline-block;
+        width: 24px;
+        height: 3px;
+        border-radius: 99px;
+        background: var(--accent);
+      }
+
+      h1 {
+        margin: 18mm 0 5mm;
+        max-width: 165mm;
+        font-size: 30pt;
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        max-width: 150mm;
+        color: var(--muted);
+        font-size: 13.5pt;
+        line-height: 1.35;
+        margin: 0;
+      }
+
+      .cover-meta {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5mm;
+        margin-bottom: 22mm;
+      }
+
+      .meta-card {
+        border: 1px solid rgba(22, 32, 27, 0.14);
+        background: rgba(255, 255, 255, 0.84);
+        border-radius: 7px;
+        padding: 5mm;
+      }
+
+      .meta-label {
+        color: var(--muted);
+        font-size: 8pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .meta-value {
+        margin-top: 2mm;
+        font-size: 11pt;
+        font-weight: 800;
+      }
+
+      main {
+        background: white;
+      }
+
+      section {
+        page-break-inside: avoid;
+        margin-bottom: 9mm;
+      }
+
+      h2 {
+        margin: 0 0 4mm;
+        color: var(--accent);
+        font-size: 15pt;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 0 0 3mm;
+        color: var(--accent-2);
+        font-size: 11.5pt;
+      }
+
+      p {
+        margin: 0 0 3.5mm;
+      }
+
+      .lead {
+        padding: 5mm 6mm;
+        border-left: 4px solid var(--accent);
+        background: var(--accent-soft);
+        border-radius: 0 7px 7px 0;
+        font-size: 10.8pt;
+      }
+
+      .criteria,
+      .two-cols,
+      .three-cols {
+        display: grid;
+        gap: 4mm;
+        margin-top: 4mm;
+      }
+
+      .criteria,
+      .two-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .three-cols {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .panel,
+      .criteria-item {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        padding: 4.5mm;
+        background: #ffffff;
+      }
+
+      .criteria-item strong,
+      .panel strong {
+        display: block;
+        margin-bottom: 2mm;
+        color: var(--accent-2);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 3mm 0 0;
+        table-layout: fixed;
+        page-break-inside: auto;
+      }
+
+      thead {
+        display: table-header-group;
+      }
+
+      tr {
+        page-break-inside: avoid;
+      }
+
+      th {
+        background: var(--accent);
+        color: white;
+        font-size: 8.2pt;
+        text-align: left;
+        padding: 3mm 2.4mm;
+        vertical-align: top;
+      }
+
+      th:first-child {
+        border-top-left-radius: 6px;
+      }
+
+      th:last-child {
+        border-top-right-radius: 6px;
+      }
+
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 3mm 2.4mm;
+        vertical-align: top;
+        font-size: 8.5pt;
+      }
+
+      tbody tr:nth-child(even) td {
+        background: #f7faf8;
+      }
+
+      .decision th:nth-child(1) {
+        width: 21%;
+      }
+
+      .decision th:nth-child(2) {
+        width: 31%;
+      }
+
+      .decision th:nth-child(3) {
+        width: 24%;
+      }
+
+      .decision th:nth-child(4) {
+        width: 24%;
+      }
+
+      .badge {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 1mm 2.3mm;
+        max-width: 100%;
+        font-size: 7.2pt;
+        font-weight: 800;
+        line-height: 1.1;
+        text-align: center;
+      }
+
+      .badge-core {
+        color: #0f5e39;
+        background: #dff3e8;
+      }
+
+      .badge-watch {
+        color: #7a4b00;
+        background: var(--warn-soft);
+      }
+
+      .summary {
+        border-radius: 7px;
+        padding: 6mm;
+        color: white;
+        background: linear-gradient(135deg, #1f7a4d, #245b75);
+      }
+
+      .summary h2 {
+        color: white;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 4.5mm;
+      }
+
+      li {
+        margin: 0 0 1.7mm;
+      }
+
+      .footer-note {
+        margin-top: 7mm;
+        color: var(--muted);
+        font-size: 8.3pt;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="cover">
+      <div class="cover-content">
+        <div class="eyebrow">Bloc de compétences 1</div>
+        <h1>C1.6 - Préconisation des axes de solutions</h1>
+        <p class="subtitle">
+          Projet Spity : synthèse décisionnelle destinée au client, argumentaire
+          de validation et traitement des objections principales.
+        </p>
+      </div>
+
+      <div class="cover-meta">
+        <div class="meta-card">
+          <div class="meta-label">Projet</div>
+          <div class="meta-value">Spity</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Commanditaire</div>
+          <div class="meta-value">Collectif Altitude Grimpe</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Certification</div>
+          <div class="meta-value">Titre RNCP</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Livrable</div>
+          <div class="meta-value">Préconisation client</div>
+        </div>
+      </div>
+    </article>
+
+    <main>
+      <section>
+        <h2>Objectif de la compétence</h2>
+        <p class="lead">
+          Proposer les décisions et axes de solutions recommandés au
+          commanditaire, structurer l'argumentaire, vulgariser les choix
+          techniques et traiter les objections afin d'obtenir l'adhésion et la
+          validation du lancement du MVP Spity.
+        </p>
+
+        <div class="criteria">
+          <div class="criteria-item">
+            <strong>Public cible</strong>
+            Claire Martin, présidente du Collectif Altitude Grimpe, accompagnée
+            de représentants grimpeurs, clubs et contributeurs terrain.
+          </div>
+          <div class="criteria-item">
+            <strong>Décision attendue</strong>
+            Validation du périmètre MVP, du budget prévisionnel, de
+            l'architecture technique et du calendrier de réalisation.
+          </div>
+          <div class="criteria-item">
+            <strong>Posture de discours</strong>
+            Vocabulaire professionnel mais vulgarisé : chaque choix technique
+            est relié à un bénéfice métier concret.
+          </div>
+          <div class="criteria-item">
+            <strong>Support conseillé</strong>
+            Présentation courte avec schéma d'architecture, budget, planning,
+            risques résiduels et décision formalisée en fin de réunion.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Rappel de la problématique client</h2>
+        <p>
+          Les grimpeurs utilisent aujourd'hui plusieurs canaux dispersés pour
+          trouver un partenaire, consulter des informations de falaise, suivre
+          les clubs, repérer une salle et partager une réalisation. Cette
+          dispersion provoque une perte de temps, une information terrain parfois
+          obsolète et une visibilité insuffisante des clubs locaux.
+        </p>
+        <p>
+          La réponse proposée est un MVP web unique, centré sur les usages les
+          plus fréquents : profil grimpeur, répertoire géolocalisé, topos
+          collaboratifs, calendrier club, contenu social contextualisé et socle
+          de sécurité.
+        </p>
+      </section>
+
+      <section>
+        <h2>Décisions préconisées</h2>
+        <table class="decision">
+          <thead>
+            <tr>
+              <th>Axe</th>
+              <th>Préconisation</th>
+              <th>Argument client</th>
+              <th>Condition de réussite</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Périmètre MVP</strong></td>
+              <td>Conserver un périmètre web centré sur profils, lieux, topos, événements et feed contextualisé.</td>
+              <td>Le client obtient une démonstration complète sans disperser le budget dans des options non critiques.</td>
+              <td>Geler les fonctionnalités V2 jusqu'à la fin de la recette MVP.</td>
+            </tr>
+            <tr>
+              <td><strong>Architecture</strong></td>
+              <td>Retenir Next.js full-stack, Drizzle ORM, MariaDB, stockage médias externe et cartographie légère.</td>
+              <td>La solution est rapide à développer, lisible, moins coûteuse à exploiter et compatible avec l'existant.</td>
+              <td>Maintenir une séparation claire entre composants UI, API, logique métier et données.</td>
+            </tr>
+            <tr>
+              <td><strong>Sécurité</strong></td>
+              <td>Intégrer validation Zod, contrôle des rôles, rate limiting, sanitation, RGPD et sauvegardes.</td>
+              <td>Les données personnelles et contributions terrain sont protégées dès le lancement.</td>
+              <td>Traiter la sécurité comme une exigence de base, pas comme une option de fin de projet.</td>
+            </tr>
+            <tr>
+              <td><strong>Budget</strong></td>
+              <td>Valider un budget prévisionnel de 38 126 EUR HT pour le MVP et sa première année légère.</td>
+              <td>Le budget reste proportionné aux objectifs et inclut une marge pour les retours de recette.</td>
+              <td>Suivre les arbitrages par lots et documenter tout changement de périmètre.</td>
+            </tr>
+            <tr>
+              <td><strong>Déploiement</strong></td>
+              <td>Livrer par itérations : socle, annuaire, social, topos, événements, sécurité et recette.</td>
+              <td>Le client voit une progression régulière et peut valider les parcours clés avant la soutenance.</td>
+              <td>Organiser des points courts de validation à chaque jalon.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Argumentaire adapté au commanditaire</h2>
+        <div class="two-cols">
+          <div class="panel">
+            <strong>Arguments métier</strong>
+            <ul>
+              <li>Spity centralise les usages dispersés dans un parcours unique.</li>
+              <li>Les clubs gagnent en visibilité locale sans gérer plusieurs outils.</li>
+              <li>Les informations terrain deviennent plus vivantes grâce aux contributions.</li>
+              <li>Le MVP donne une base testable pour mesurer l'adoption réelle.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <strong>Arguments techniques vulgarisés</strong>
+            <ul>
+              <li>Une seule application web réduit les coûts et accélère les corrections.</li>
+              <li>La base relationnelle sécurise les liens entre personnes, lieux et contenus.</li>
+              <li>Les médias externes évitent de surcharger le serveur principal.</li>
+              <li>Les contrôles de sécurité limitent les abus et protègent les comptes.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Traitement des objections probables</h2>
+        <table class="decision">
+          <thead>
+            <tr>
+              <th>Objection</th>
+              <th>Réponse proposée</th>
+              <th>Preuve ou garantie</th>
+              <th>Décision</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Le budget est-il trop élevé pour un MVP ?</strong></td>
+              <td>Le budget finance un produit complet, sécurisé et démontrable, pas une simple maquette.</td>
+              <td>Chaque poste est relié à la charge C1.4.1 et aux risques C1.2.3.</td>
+              <td><span class="badge badge-core">Maintenir</span></td>
+            </tr>
+            <tr>
+              <td><strong>Pourquoi ne pas créer une app mobile native ?</strong></td>
+              <td>Le web responsive couvre mobile et desktop avec un coût inférieur au lancement.</td>
+              <td>La V2 mobile pourra s'appuyer sur les mêmes API si l'usage est confirmé.</td>
+              <td><span class="badge badge-watch">Différer V2</span></td>
+            </tr>
+            <tr>
+              <td><strong>Les topos collaboratifs peuvent-ils être fiables ?</strong></td>
+              <td>Le MVP prévoit modération, karma contributeur, signalements et historique des rapports.</td>
+              <td>Les contributions sensibles sont contrôlées avant d'impacter les informations terrain.</td>
+              <td><span class="badge badge-core">Encadrer</span></td>
+            </tr>
+            <tr>
+              <td><strong>Le projet peut-il évoluer après la soutenance ?</strong></td>
+              <td>L'architecture sépare les modules pour ajouter notifications, mobile, partenariat FFME ou paiement.</td>
+              <td>Le découpage feature-based limite les régressions lors des évolutions.</td>
+              <td><span class="badge badge-core">Prévoir roadmap</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Supports de communication recommandés</h2>
+        <div class="three-cols">
+          <div class="panel">
+            <strong>Support décisionnel</strong>
+            Une présentation de 8 à 10 diapositives : problème, solution, MVP,
+            architecture, budget, risques, planning et décision attendue.
+          </div>
+          <div class="panel">
+            <strong>Démonstration produit</strong>
+            Parcours réel : créer un profil, chercher une salle ou falaise,
+            publier une contribution, s'inscrire à un événement.
+          </div>
+          <div class="panel">
+            <strong>Annexes RNCP</strong>
+            Joindre les livrables C1.1.1 à C1.5 pour prouver la cohérence entre
+            besoin, faisabilité, risque, architecture et budget.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Plan de validation client</h2>
+        <table class="decision">
+          <thead>
+            <tr>
+              <th>Étape</th>
+              <th>Objectif</th>
+              <th>Livrable associé</th>
+              <th>Critère de validation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Validation périmètre</strong></td>
+              <td>Confirmer les fonctionnalités MVP et les éléments différés.</td>
+              <td>C1.4.1</td>
+              <td>Liste fonctionnelle acceptée sans ajout bloquant.</td>
+            </tr>
+            <tr>
+              <td><strong>Validation technique</strong></td>
+              <td>Confirmer l'architecture et les services retenus.</td>
+              <td>C1.3.2 et C1.5</td>
+              <td>Accord sur la solution Next.js, MariaDB, médias et cartographie.</td>
+            </tr>
+            <tr>
+              <td><strong>Validation budget</strong></td>
+              <td>Acter le budget initial et les coûts récurrents.</td>
+              <td>C1.4.2</td>
+              <td>Budget prévisionnel approuvé avec réserve d'aléas.</td>
+            </tr>
+            <tr>
+              <td><strong>Validation lancement</strong></td>
+              <td>Autoriser le développement du MVP démontrable.</td>
+              <td>Synthèse C1.6</td>
+              <td>Décision formalisée, jalons et responsabilités actés.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="summary">
+        <h2>Préconisation finale</h2>
+        <p>
+          Il est recommandé de lancer le MVP Spity selon le périmètre validé, avec
+          une architecture full-stack Next.js, une base MariaDB, des services
+          externes maîtrisés pour les médias et les emails, et un budget
+          prévisionnel de 38 126 EUR HT. Cette solution répond à la problématique
+          du client tout en conservant une trajectoire réaliste, sécurisée et
+          extensible après la soutenance.
+        </p>
+      </section>
+
+      <p class="footer-note">
+        Document RNCP - C1.6 - Projet Spity - Collectif Altitude Grimpe
+      </p>
+    </main>
+  </body>
+</html>

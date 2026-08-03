@@ -1,4 +1,5 @@
-import { forwardRef, HTMLAttributes } from 'react'
+import { forwardRef, type HTMLAttributes } from 'react'
+import { cn } from '@/lib/class-names'
 
 export interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
   variant?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'destructive'
@@ -18,12 +19,11 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>(
     return (
       <div
         ref={ref}
-        className={`
-          inline-flex items-center px-2.5 py-0.5 rounded-full
-          text-xs font-medium
-          ${variantClasses[variant]}
-          ${className}
-        `}
+        className={cn(
+          'inline-flex max-w-full items-center rounded-full px-2.5 py-0.5 text-xs font-semibold leading-5',
+          variantClasses[variant],
+          className
+        )}
         {...props}
       >
         {children}

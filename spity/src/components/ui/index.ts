@@ -30,7 +30,22 @@ export type { StatCardProps } from './stat-card'
 export { default as StoryAvatar } from './story-avatar'
 export type { StoryAvatarProps } from './story-avatar'
 
+export { default as AppHero } from './app-hero'
+export type { AppHeroProps } from './app-hero'
+
+export { default as FilterToolbar } from './filter-toolbar'
+export type { FilterToolbarProps } from './filter-toolbar'
+
+export { default as MediaHeader } from './media-header'
+export type { MediaHeaderProps } from './media-header'
+
+export { default as InfoTile } from './info-tile'
+export type { InfoTileProps } from './info-tile'
+
 // Composants d'état
+export { default as EmptyState } from './empty-state'
+export type { EmptyStateProps } from './empty-state'
+
 export { default as Spinner } from './spinner'
 export type { SpinnerProps } from './spinner'
 

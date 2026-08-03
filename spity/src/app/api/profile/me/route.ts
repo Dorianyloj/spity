@@ -8,5 +8,5 @@ export async function GET() {
     return profileUnauthorizedResponse()
   }
 
-  return profileMeResponse(currentProfile.user, currentProfile.grimpeurProfile, currentProfile.clubProfile)
+  return profileMeResponse(currentProfile.user, currentProfile.grimpeurProfile, currentProfile.clubProfile, currentProfile.equipment)
 }

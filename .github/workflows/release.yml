@@ -1,0 +1,283 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  APP_IMAGE: ghcr.io/dorianyloj/spity
+  MIGRATION_IMAGE: ghcr.io/dorianyloj/spity-migrations
+
+jobs:
+  validate:
+    name: Validate release candidate
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    outputs:
+      version: ${{ steps.metadata.outputs.version }}
+    defaults:
+      run:
+        working-directory: spity
+    env:
+      DATABASE_URL: mysql://spity:spity_release_password@127.0.0.1:3306/spity
+      JWT_SECRET: release_only_secret_with_at_least_32_characters
+      INTEGRATION_PORT: 3102
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_ROOT_PASSWORD: spity_release_root_password
+          MARIADB_DATABASE: spity
+          MARIADB_USER: spity
+          MARIADB_PASSWORD: spity_release_password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd "healthcheck.sh --connect --innodb_initialized"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    steps:
+      - name: Checkout tagged sources
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: spity/.nvmrc
+          cache: npm
+          cache-dependency-path: spity/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Verify release metadata
+        id: metadata
+        run: |
+          npm run release:verify -- "$GITHUB_REF_NAME"
+          echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Run quality gates
+        run: npm run quality
+
+      - name: Apply migrations
+        run: npm run db:migrate
+
+      - name: Run MariaDB integration tests
+        run: |
+          mkdir -p .integration-results
+          npm run test:integration | tee .integration-results/results.tap
+
+      - name: Audit authenticated accessibility
+        run: npm run accessibility:audit
+
+      - name: Verify Lighthouse thresholds
+        run: npm run perf:audit
+
+      - name: Upload release validation evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: release-validation-${{ github.ref_name }}
+          path: |
+            spity/coverage
+            spity/.integration-results
+            spity/.accessibility
+            spity/.lighthouseci
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 90
+
+  staging:
+    name: Promote immutable candidate
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: staging
+    permissions:
+      contents: read
+      packages: write
+    env:
+      VERSION: ${{ needs.validate.outputs.version }}
+      DATABASE_CONTAINER: spity-release-db-${{ github.run_id }}
+      APP_CONTAINER: spity-release-app-${{ github.run_id }}
+      RELEASE_NETWORK: spity-release-${{ github.run_id }}
+
+    steps:
+      - name: Pull continuously deployed images
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "$GHCR_TOKEN" | docker login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+          docker pull "$APP_IMAGE:sha-$GITHUB_SHA"
+          docker pull "$MIGRATION_IMAGE:sha-$GITHUB_SHA"
+          docker tag "$APP_IMAGE:sha-$GITHUB_SHA" "$APP_IMAGE:candidate-$VERSION"
+          docker tag "$MIGRATION_IMAGE:sha-$GITHUB_SHA" "$MIGRATION_IMAGE:candidate-$VERSION"
+
+      - name: Smoke test candidate images
+        run: |
+          mkdir -p release-evidence
+          docker network create "$RELEASE_NETWORK"
+          docker run --detach \
+            --name "$DATABASE_CONTAINER" \
+            --network "$RELEASE_NETWORK" \
+            --env MARIADB_ROOT_PASSWORD=spity_release_root_password \
+            --env MARIADB_DATABASE=spity \
+            --env MARIADB_USER=spity \
+            --env MARIADB_PASSWORD=spity_release_password \
+            mariadb:11.4
+
+          for attempt in $(seq 1 40); do
+            if docker exec "$DATABASE_CONTAINER" healthcheck.sh --connect --innodb_initialized; then
+              break
+            fi
+            if [ "$attempt" -eq 40 ]; then
+              docker logs "$DATABASE_CONTAINER"
+              exit 1
+            fi
+            sleep 3
+          done
+
+          docker run --rm \
+            --network "$RELEASE_NETWORK" \
+            --env DATABASE_URL=mysql://spity:spity_release_password@"$DATABASE_CONTAINER":3306/spity \
+            "$MIGRATION_IMAGE:candidate-$VERSION"
+          docker run --detach \
+            --name "$APP_CONTAINER" \
+            --network "$RELEASE_NETWORK" \
+            --publish 127.0.0.1:3000:3000 \
+            --env DATABASE_URL=mysql://spity:spity_release_password@"$DATABASE_CONTAINER":3306/spity \
+            --env JWT_SECRET=release_only_secret_with_at_least_32_characters \
+            "$APP_IMAGE:candidate-$VERSION"
+
+          for attempt in $(seq 1 40); do
+            if payload=$(curl --fail --silent http://127.0.0.1:3000/api/health); then
+              printf '%s\n' "$payload" | jq --exit-status \
+                --arg version "$VERSION" \
+                --arg revision "$GITHUB_SHA" \
+                '.status == "ok" and .version == $version and .revision == $revision'
+              printf '%s\n' "$payload" | jq . > release-evidence/health.json
+              break
+            fi
+            if [ "$attempt" -eq 40 ]; then
+              docker logs "$APP_CONTAINER"
+              exit 1
+            fi
+            sleep 3
+          done
+
+          docker image inspect "$APP_IMAGE:candidate-$VERSION" > release-evidence/app-image.json
+          docker image inspect "$MIGRATION_IMAGE:candidate-$VERSION" > release-evidence/migration-image.json
+
+      - name: Stop smoke test environment
+        if: always()
+        run: |
+          docker rm --force "$APP_CONTAINER" "$DATABASE_CONTAINER" 2>/dev/null || true
+          docker network rm "$RELEASE_NETWORK" 2>/dev/null || true
+
+      - name: Publish candidate images
+        run: |
+          docker push "$APP_IMAGE:candidate-$VERSION"
+          docker push "$MIGRATION_IMAGE:candidate-$VERSION"
+
+      - name: Upload staging evidence
+        uses: actions/upload-artifact@v6
+        with:
+          name: release-staging-${{ github.ref_name }}
+          path: release-evidence
+          if-no-files-found: error
+          retention-days: 90
+
+  production:
+    name: Publish stable release
+    needs: [validate, staging]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      packages: write
+    environment:
+      name: production
+      url: ${{ steps.release.outputs.url }}
+    env:
+      VERSION: ${{ needs.validate.outputs.version }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout tagged sources
+        uses: actions/checkout@v6
+
+      - name: Authenticate to GitHub Container Registry
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "$GHCR_TOKEN" | docker login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+
+      - name: Promote the tested image digests
+        run: |
+          docker pull "$APP_IMAGE:candidate-$VERSION"
+          docker pull "$MIGRATION_IMAGE:candidate-$VERSION"
+          docker tag "$APP_IMAGE:candidate-$VERSION" "$APP_IMAGE:$VERSION"
+          docker tag "$APP_IMAGE:candidate-$VERSION" "$APP_IMAGE:latest"
+          docker tag "$MIGRATION_IMAGE:candidate-$VERSION" "$MIGRATION_IMAGE:$VERSION"
+          docker tag "$MIGRATION_IMAGE:candidate-$VERSION" "$MIGRATION_IMAGE:latest"
+          docker push "$APP_IMAGE:$VERSION"
+          docker push "$APP_IMAGE:latest"
+          docker push "$MIGRATION_IMAGE:$VERSION"
+          docker push "$MIGRATION_IMAGE:latest"
+
+      - name: Create deployment bundle and manifest
+        run: |
+          bundle="spity-$VERSION"
+          mkdir -p "dist/$bundle"
+          cp spity/docker-compose.production.yml "dist/$bundle/"
+          cp spity/.env.production.example "dist/$bundle/"
+          cp spity/DEPLOYMENT.md "dist/$bundle/"
+          cp CHANGELOG.md "dist/$bundle/"
+
+          app_digest=$(docker image inspect "$APP_IMAGE:$VERSION" --format '{{index .RepoDigests 0}}')
+          migration_digest=$(docker image inspect "$MIGRATION_IMAGE:$VERSION" --format '{{index .RepoDigests 0}}')
+          jq --null-input \
+            --arg version "$VERSION" \
+            --arg tag "$GITHUB_REF_NAME" \
+            --arg revision "$GITHUB_SHA" \
+            --arg appImage "$APP_IMAGE:$VERSION" \
+            --arg appDigest "$app_digest" \
+            --arg migrationImage "$MIGRATION_IMAGE:$VERSION" \
+            --arg migrationDigest "$migration_digest" \
+            '{version: $version, tag: $tag, revision: $revision, appImage: $appImage, appDigest: $appDigest, migrationImage: $migrationImage, migrationDigest: $migrationDigest}' \
+            > "dist/$bundle/release-manifest.json"
+
+          tar --directory dist --create --gzip --file "dist/$bundle.tar.gz" "$bundle"
+          (cd dist && sha256sum "$bundle.tar.gz" > "$bundle.tar.gz.sha256")
+
+      - name: Upload deployment bundle
+        uses: actions/upload-artifact@v6
+        with:
+          name: deployment-${{ github.ref_name }}
+          path: |
+            dist/*.tar.gz
+            dist/*.sha256
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Publish GitHub Release
+        id: release
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" dist/*.tar.gz dist/*.sha256 --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" dist/*.tar.gz dist/*.sha256 \
+              --title "Spity $GITHUB_REF_NAME" \
+              --generate-notes \
+              --latest \
+              --verify-tag
+          fi
+          echo "url=$(gh release view "$GITHUB_REF_NAME" --json url --jq .url)" >> "$GITHUB_OUTPUT"

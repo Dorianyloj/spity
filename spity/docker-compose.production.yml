@@ -3,51 +3,67 @@ name: spity-production
 services:
   mariadb:
     image: mariadb:11.4
-    restart: unless-stopped
     environment:
-      MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?MYSQL_ROOT_PASSWORD is required}
-      MARIADB_DATABASE: ${MYSQL_DATABASE:-spity}
-      MARIADB_USER: ${MYSQL_USER:-spity}
-      MARIADB_PASSWORD: ${MYSQL_PASSWORD:?MYSQL_PASSWORD is required}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:?MARIADB_ROOT_PASSWORD is required}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-spity}
+      MARIADB_USER: ${MARIADB_USER:-spity}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:?MARIADB_PASSWORD is required}
     volumes:
       - mariadb_production_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD-SHELL", "healthcheck.sh --connect --innodb_initialized"]
-      interval: 10s
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
       timeout: 5s
-      retries: 12
-      start_period: 30s
+      retries: 20
+      start_period: 20s
+    restart: unless-stopped
 
   migrate:
-    profiles: ["migration"]
+    image: ${SPITY_MIGRATION_IMAGE:-spity-migrate}:${IMAGE_TAG:-local}
     build:
       context: .
-      dockerfile: Dockerfile
       target: migration
+    profiles: ["migration"]
     environment:
       DATABASE_URL: ${DATABASE_URL:?DATABASE_URL is required}
-      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
-      NODE_ENV: production
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    restart: "no"
+
+  seed-demo:
+    image: ${SPITY_MIGRATION_IMAGE:-spity-migrate}:${IMAGE_TAG:-local}
+    build:
+      context: .
+      target: migration
+    profiles: ["demo"]
+    command: ["npm", "run", "db:seed"]
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?DATABASE_URL is required}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
     depends_on:
       mariadb:
         condition: service_healthy
     restart: "no"
 
   app:
-    image: spity-app:${APP_VERSION:-latest}
+    image: ${SPITY_IMAGE:-spity}:${IMAGE_TAG:-local}
     build:
       context: .
-      dockerfile: Dockerfile
       target: runner
-    restart: unless-stopped
+      args:
+        APP_VERSION: ${APP_VERSION:-0.1.0-local}
+        APP_REVISION: ${APP_REVISION:-unknown}
     environment:
       DATABASE_URL: ${DATABASE_URL:?DATABASE_URL is required}
       JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
       NODE_ENV: production
       HOSTNAME: 0.0.0.0
       PORT: 3000
+      APP_VERSION: ${APP_VERSION:-0.1.0-local}
+      APP_REVISION: ${APP_REVISION:-unknown}
     ports:
-      - "${APP_HOST:-127.0.0.1}:${APP_PORT:-3000}:3000"
+      - "127.0.0.1:${APP_PORT:-3000}:3000"
     depends_on:
       mariadb:
         condition: service_healthy
@@ -57,12 +73,13 @@ services:
           "CMD",
           "node",
           "-e",
-          "fetch('http://127.0.0.1:3000/api/health').then((response) => { if (!response.ok) process.exit(1) }).catch(() => process.exit(1))",
+          "fetch('http://127.0.0.1:3000/api/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))",
         ]
-      interval: 30s
+      interval: 10s
       timeout: 5s
-      retries: 5
-      start_period: 30s
+      retries: 10
+      start_period: 20s
+    restart: unless-stopped
 
 volumes:
   mariadb_production_data:

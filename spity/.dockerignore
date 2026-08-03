@@ -1,11 +1,9 @@
 .git
 .github
 .next
-.lighthouseci
 coverage
 docs
 node_modules
 npm-debug.log*
 .env*
-docker-compose*.yml
-README.md
+!.env.example

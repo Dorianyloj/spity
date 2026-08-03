@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>C1.5 - Architecture logicielle proposée - Spity</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 16mm 14mm 18mm;
+      }
+
+      @page wide {
+        size: A4 landscape;
+        margin: 12mm;
+      }
+
+      :root {
+        --ink: #16201b;
+        --muted: #5c6760;
+        --line: #d8e2dc;
+        --paper: #fbfdfb;
+        --accent: #1f7a4d;
+        --accent-2: #245b75;
+        --accent-soft: #e8f4ed;
+        --sky-soft: #e7f1f5;
+        --warn-soft: #fff3df;
+        --danger-soft: #fdecea;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        font-size: 10.2pt;
+        line-height: 1.45;
+      }
+
+      .cover {
+        min-height: 263mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        page-break-after: always;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cover::before {
+        content: "";
+        position: absolute;
+        inset: -40mm -20mm auto auto;
+        width: 150mm;
+        height: 150mm;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(31, 122, 77, 0.18), transparent 62%);
+      }
+
+      .cover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 58mm;
+        background:
+          linear-gradient(135deg, rgba(36, 91, 117, 0.1), rgba(31, 122, 77, 0.16)),
+          repeating-linear-gradient(
+            135deg,
+            rgba(22, 32, 27, 0.08) 0,
+            rgba(22, 32, 27, 0.08) 1px,
+            transparent 1px,
+            transparent 9px
+          );
+        clip-path: polygon(0 38%, 100% 0, 100% 100%, 0% 100%);
+      }
+
+      .cover-content {
+        position: relative;
+        z-index: 1;
+        padding-top: 12mm;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--accent);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 8.5pt;
+      }
+
+      .eyebrow::before {
+        content: "";
+        display: inline-block;
+        width: 24px;
+        height: 3px;
+        border-radius: 99px;
+        background: var(--accent);
+      }
+
+      h1 {
+        margin: 18mm 0 5mm;
+        max-width: 165mm;
+        font-size: 30pt;
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        max-width: 150mm;
+        color: var(--muted);
+        font-size: 13.5pt;
+        line-height: 1.35;
+        margin: 0;
+      }
+
+      .cover-meta {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5mm;
+        margin-bottom: 22mm;
+      }
+
+      .meta-card {
+        border: 1px solid rgba(22, 32, 27, 0.14);
+        background: rgba(255, 255, 255, 0.84);
+        border-radius: 7px;
+        padding: 5mm;
+      }
+
+      .meta-label {
+        color: var(--muted);
+        font-size: 8pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .meta-value {
+        margin-top: 2mm;
+        font-size: 11pt;
+        font-weight: 800;
+      }
+
+      main {
+        background: white;
+      }
+
+      section {
+        page-break-inside: avoid;
+        margin-bottom: 9mm;
+      }
+
+      h2 {
+        margin: 0 0 4mm;
+        color: var(--accent);
+        font-size: 15pt;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 0 0 3mm;
+        color: var(--accent-2);
+        font-size: 11.5pt;
+      }
+
+      p {
+        margin: 0 0 3.5mm;
+      }
+
+      .lead {
+        padding: 5mm 6mm;
+        border-left: 4px solid var(--accent);
+        background: var(--accent-soft);
+        border-radius: 0 7px 7px 0;
+        font-size: 10.8pt;
+      }
+
+      .criteria,
+      .two-cols,
+      .three-cols {
+        display: grid;
+        gap: 4mm;
+        margin-top: 4mm;
+      }
+
+      .criteria,
+      .two-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .three-cols {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .panel,
+      .criteria-item {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        padding: 4.5mm;
+        background: #ffffff;
+      }
+
+      .criteria-item strong,
+      .panel strong {
+        display: block;
+        margin-bottom: 2mm;
+        color: var(--accent-2);
+      }
+
+      .diagram {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 5mm;
+        background: #f8fbf9;
+      }
+
+      .diagram-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 4mm;
+        align-items: stretch;
+        margin-bottom: 4mm;
+      }
+
+      .diagram-row:last-child {
+        margin-bottom: 0;
+      }
+
+      .node {
+        min-height: 25mm;
+        border: 1.5px solid var(--accent);
+        border-radius: 7px;
+        padding: 3.5mm;
+        background: white;
+      }
+
+      .node strong {
+        display: block;
+        color: var(--accent);
+        margin-bottom: 1.5mm;
+      }
+
+      .node span {
+        color: var(--muted);
+        font-size: 8.3pt;
+      }
+
+      .node.client {
+        border-color: #245b75;
+        background: var(--sky-soft);
+      }
+
+      .node.core {
+        border-color: #1f7a4d;
+        background: var(--accent-soft);
+      }
+
+      .node.data {
+        border-color: #7a4b00;
+        background: var(--warn-soft);
+      }
+
+      .arrow {
+        text-align: center;
+        color: var(--muted);
+        font-size: 8.2pt;
+        font-weight: 800;
+        margin: -1mm 0 3mm;
+      }
+
+      .mermaid-code {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        padding: 4mm;
+        background: #101815;
+        color: #eef7f1;
+        font-family:
+          "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        font-size: 6.8pt;
+        line-height: 1.36;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .wide-page {
+        page: wide;
+        page-break-before: always;
+        page-break-after: always;
+      }
+
+      .architecture-png {
+        width: 100%;
+        display: block;
+        border: 1px solid #101815;
+        border-radius: 8px;
+        background: #000000;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 3mm 0 0;
+        table-layout: fixed;
+        page-break-inside: auto;
+      }
+
+      thead {
+        display: table-header-group;
+      }
+
+      tr {
+        page-break-inside: avoid;
+      }
+
+      th {
+        background: var(--accent);
+        color: white;
+        font-size: 8.2pt;
+        text-align: left;
+        padding: 3mm 2.4mm;
+        vertical-align: top;
+      }
+
+      th:first-child {
+        border-top-left-radius: 6px;
+      }
+
+      th:last-child {
+        border-top-right-radius: 6px;
+      }
+
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 3mm 2.4mm;
+        vertical-align: top;
+        font-size: 8.5pt;
+      }
+
+      tbody tr:nth-child(even) td {
+        background: #f7faf8;
+      }
+
+      .architecture th:nth-child(1) {
+        width: 21%;
+      }
+
+      .architecture th:nth-child(2) {
+        width: 27%;
+      }
+
+      .architecture th:nth-child(3) {
+        width: 26%;
+      }
+
+      .architecture th:nth-child(4) {
+        width: 26%;
+      }
+
+      .summary {
+        border-radius: 7px;
+        padding: 6mm;
+        color: white;
+        background: linear-gradient(135deg, #1f7a4d, #245b75);
+      }
+
+      .summary h2 {
+        color: white;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 4.5mm;
+      }
+
+      li {
+        margin: 0 0 1.7mm;
+      }
+
+      .footer-note {
+        margin-top: 7mm;
+        color: var(--muted);
+        font-size: 8.3pt;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="cover">
+      <div class="cover-content">
+        <div class="eyebrow">Bloc de compétences 1</div>
+        <h1>C1.5 - Modélisation de l'architecture logicielle</h1>
+        <p class="subtitle">
+          Projet Spity : schéma d'architecture, interactions systèmes,
+          exigences de sécurité, maintenabilité et sobriété numérique.
+        </p>
+      </div>
+
+      <div class="cover-meta">
+        <div class="meta-card">
+          <div class="meta-label">Projet</div>
+          <div class="meta-value">Spity</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Commanditaire</div>
+          <div class="meta-value">Collectif Altitude Grimpe</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Certification</div>
+          <div class="meta-value">Titre RNCP</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Livrable</div>
+          <div class="meta-value">Architecture logicielle</div>
+        </div>
+      </div>
+    </article>
+
+    <main>
+      <section>
+        <h2>Objectif de la compétence</h2>
+        <p class="lead">
+          Modéliser une architecture logicielle à partir du scénario projet, en
+          respectant les spécifications fonctionnelles, les exigences de
+          sécurité et les principes de réduction d'impact écologique afin de
+          faciliter le développement, l'évolution, le déploiement et la
+          maintenance de Spity.
+        </p>
+
+        <div class="criteria">
+          <div class="criteria-item">
+            <strong>Formalisme retenu</strong>
+            Modèle inspiré C4 et diagramme de composants. Ce choix rend
+            l'architecture lisible pour un client non technique tout en restant
+            exploitable par l'équipe de développement.
+          </div>
+          <div class="criteria-item">
+            <strong>Périmètre</strong>
+            Application web MVP : interface, API, authentification, base de
+            données, médias, cartographie, emails et supervision.
+          </div>
+          <div class="criteria-item">
+            <strong>Contraintes couvertes</strong>
+            Sécurité OWASP, RGPD, accessibilité, montée en charge progressive,
+            données relationnelles et contribution communautaire.
+          </div>
+          <div class="criteria-item">
+            <strong>Orientation écologique</strong>
+            Limitation des services, optimisation médias, pagination, cache,
+            mutualisation du runtime et suivi des volumes stockés.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Schéma d'architecture logicielle proposé</h2>
+        <div class="diagram">
+          <div class="diagram-row">
+            <div class="node client">
+              <strong>Utilisateurs</strong>
+              <span>Grimpeurs, clubs, administrateurs, visiteurs connectés depuis navigateur mobile ou desktop.</span>
+            </div>
+            <div class="node client">
+              <strong>Interface Next.js</strong>
+              <span>App Router, React, Tailwind, composants UI, formulaires React Hook Form et validation client.</span>
+            </div>
+            <div class="node core">
+              <strong>Route Handlers</strong>
+              <span>API interne pour profils, posts, lieux, topos, événements, modération et compte utilisateur.</span>
+            </div>
+          </div>
+          <div class="arrow">Flux HTTPS, sessions sécurisées, validation Zod, erreurs typées</div>
+          <div class="diagram-row">
+            <div class="node core">
+              <strong>Authentification</strong>
+              <span>Sessions, email OTP, contrôle des rôles, protection CSRF et limitation des tentatives sensibles.</span>
+            </div>
+            <div class="node core">
+              <strong>Services métier</strong>
+              <span>Matching, consensus de cotation, inscriptions événements, règles de contribution et notifications.</span>
+            </div>
+            <div class="node data">
+              <strong>Drizzle ORM</strong>
+              <span>Schémas typés, migrations, accès MariaDB sans SQL brut et traçabilité des évolutions.</span>
+            </div>
+          </div>
+          <div class="arrow">Accès serveur uniquement, secrets hors client, permissions par rôle</div>
+          <div class="diagram-row">
+            <div class="node data">
+              <strong>MariaDB</strong>
+              <span>Utilisateurs, profils, lieux, voies, posts, commentaires, likes, événements et rapports terrain.</span>
+            </div>
+            <div class="node data">
+              <strong>Stockage médias</strong>
+              <span>Cloudinary ou S3 pour images et vidéos courtes, formats optimisés, quotas et nettoyage.</span>
+            </div>
+            <div class="node data">
+              <strong>Services externes</strong>
+              <span>Email transactionnel, tuiles cartographiques, monitoring, sauvegarde et journalisation.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="wide-page">
+        <img
+          class="architecture-png"
+          src="C1.5-architecture-logicielle.png"
+          alt="Diagramme Mermaid de l'architecture logicielle Spity"
+        />
+      </section>
+
+      <section>
+        <h2>Légende du schéma</h2>
+        <div class="three-cols">
+          <div class="panel">
+            <strong>Bleu</strong>
+            Interfaces et acteurs humains. Ces éléments portent l'expérience
+            utilisateur, l'accessibilité et les parcours métier visibles.
+          </div>
+          <div class="panel">
+            <strong>Vert</strong>
+            Coeur applicatif. Ces composants appliquent les règles métier,
+            contrôlent les droits et exposent les API internes.
+          </div>
+          <div class="panel">
+            <strong>Jaune</strong>
+            Données et services externes. Ces blocs stockent, transportent ou
+            enrichissent les informations utilisées par Spity.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Code Mermaid de l'architecture</h2>
+        <p>
+          Le diagramme ci-dessus peut être reproduit dans un outil compatible
+          Mermaid avec le code suivant.
+        </p>
+        <pre class="mermaid-code">flowchart LR
+  U["Utilisateurs&lt;br/&gt;Grimpeurs, clubs,&lt;br/&gt;administrateurs"]
+  WEB["Interface Web&lt;br/&gt;Next.js App Router&lt;br/&gt;React + TailwindCSS"]
+  UI["Composants UI&lt;br/&gt;src/components/ui&lt;br/&gt;React Hook Form"]
+  API["API Next.js&lt;br/&gt;Route Handlers"]
+  ZOD["Schémas Zod&lt;br/&gt;Validation systématique"]
+  DOMAIN["Services métier Spity&lt;br/&gt;Matching, profils, posts,&lt;br/&gt;topos, événements,&lt;br/&gt;modération"]
+  AUTH["Authentification&lt;br/&gt;NextAuth ou Lucia&lt;br/&gt;OTP email, CSRF, rôles"]
+  ORM["Drizzle ORM&lt;br/&gt;Schémas typés + migrations"]
+  MAP["Cartographie&lt;br/&gt;Leaflet ou Mapbox&lt;br/&gt;Salles, falaises, clubs"]
+  MONITOR["Monitoring&lt;br/&gt;Logs, erreurs,&lt;br/&gt;métriques simples"]
+  MEDIA["Stockage médias&lt;br/&gt;Cloudinary ou S3&lt;br/&gt;Images, vidéos, avatars"]
+  EMAIL["Email transactionnel&lt;br/&gt;OTP, alertes compte,&lt;br/&gt;événements proches"]
+  DB[("MariaDB&lt;br/&gt;Users, profils, lieux,&lt;br/&gt;posts, voies, events")]
+  BACKUP["Sauvegardes&lt;br/&gt;Restauration testée"]
+  SEC["Sécurité transversale&lt;br/&gt;OWASP, RGPD, rate limiting,&lt;br/&gt;sanitization, headers HTTP"]
+  ECO["Sobriété numérique&lt;br/&gt;pagination, cache,&lt;br/&gt;compression médias,&lt;br/&gt;services limités"]
+
+  U --&gt;|"HTTPS"| WEB
+  WEB --&gt;|"Formulaires + navigation"| UI
+  WEB --&gt;|"Requêtes internes"| API
+  WEB --&gt;|"Affichage carte"| MAP
+
+  API --&gt;|"Validation input/output"| ZOD
+  API --&gt;|"Sessions + rôles"| AUTH
+  API --&gt;|"Règles métier"| DOMAIN
+  API --&gt;|"Logs techniques"| MONITOR
+
+  DOMAIN --&gt;|"Accès typé"| ORM
+  DOMAIN --&gt;|"Upload / lecture médias"| MEDIA
+  DOMAIN --&gt;|"Notifications"| EMAIL
+  ORM --&gt;|"SQL généré"| DB
+  DB --&gt;|"Sauvegardes planifiées"| BACKUP
+
+  SEC -.-&gt; API
+  SEC -.-&gt; AUTH
+  SEC -.-&gt; DB
+  SEC -.-&gt; MEDIA
+
+  ECO -.-&gt; WEB
+  ECO -.-&gt; MEDIA
+  ECO -.-&gt; DB
+
+  classDef interface fill:#e7f1f5,stroke:#245b75,color:#16201b;
+  classDef app fill:#e8f4ed,stroke:#1f7a4d,color:#16201b;
+  classDef data fill:#fff3df,stroke:#7a4b00,color:#16201b;
+  classDef control fill:#fdecea,stroke:#8c2f22,color:#16201b;
+
+  class U,WEB,UI,MAP interface;
+  class API,ZOD,DOMAIN,AUTH,ORM app;
+  class MONITOR,MEDIA,EMAIL,DB,BACKUP data;
+  class SEC,ECO control;</pre>
+      </section>
+
+      <section>
+        <h2>Découpage applicatif</h2>
+        <table class="architecture">
+          <thead>
+            <tr>
+              <th>Couche</th>
+              <th>Responsabilité</th>
+              <th>Choix technique</th>
+              <th>Justification</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Présentation</strong></td>
+              <td>Pages, composants, responsive, accessibilité, états de formulaires.</td>
+              <td>Next.js App Router, React, Tailwind CSS.</td>
+              <td>Stack déjà en place, rendu web performant et composants réutilisables.</td>
+            </tr>
+            <tr>
+              <td><strong>API</strong></td>
+              <td>Contrats applicatifs, validation des entrées, réponses typées, erreurs contrôlées.</td>
+              <td>Route Handlers Next.js et schémas Zod.</td>
+              <td>Réduit la complexité réseau et sécurise les échanges dès le serveur.</td>
+            </tr>
+            <tr>
+              <td><strong>Métier</strong></td>
+              <td>Règles Spity : profils, matching, topos, événements, karma, modération.</td>
+              <td>Services colocalisés dans les features ou dans src/lib.</td>
+              <td>Architecture feature-based adaptée à l'évolution du produit.</td>
+            </tr>
+            <tr>
+              <td><strong>Données</strong></td>
+              <td>Persistance relationnelle, migrations, relations entre entités.</td>
+              <td>Drizzle ORM et MariaDB.</td>
+              <td>Typage, migrations maîtrisées et compatibilité avec l'infrastructure Docker.</td>
+            </tr>
+            <tr>
+              <td><strong>Intégrations</strong></td>
+              <td>Médias, emails, carte, monitoring et sauvegarde.</td>
+              <td>Cloudinary ou S3, provider email, Leaflet ou Mapbox.</td>
+              <td>Services spécialisés pour limiter le code spécifique et accélérer le MVP.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Exigences de sécurité intégrées</h2>
+        <div class="two-cols">
+          <div class="panel">
+            <strong>Protection applicative</strong>
+            <ul>
+              <li>Validation Zod de toutes les entrées API.</li>
+              <li>Contrôle d'autorisation par rôle : grimpeur, club, administrateur.</li>
+              <li>Rate limiting sur authentification, upload et endpoints sensibles.</li>
+              <li>Sanitization des contenus générés par les utilisateurs.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <strong>Protection infrastructure</strong>
+            <ul>
+              <li>Secrets stockés côté serveur et jamais exposés au client.</li>
+              <li>HTTPS, HSTS, X-Frame-Options et politique CSP.</li>
+              <li>Sauvegardes de la base et restauration testée.</li>
+              <li>Logs techniques sans données personnelles excessives.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Interactions avec les systèmes informatiques</h2>
+        <table class="architecture">
+          <thead>
+            <tr>
+              <th>Système</th>
+              <th>Interaction</th>
+              <th>Données échangées</th>
+              <th>Points de contrôle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>MariaDB</strong></td>
+              <td>Lecture et écriture via Drizzle ORM.</td>
+              <td>Comptes, lieux, posts, voies, événements, commentaires.</td>
+              <td>Migrations versionnées, transactions, sauvegardes.</td>
+            </tr>
+            <tr>
+              <td><strong>Stockage médias</strong></td>
+              <td>Upload serveur, récupération CDN, suppression contrôlée.</td>
+              <td>Images, vidéos courtes, avatars, couvertures club.</td>
+              <td>Formats autorisés, poids maximum, nettoyage des médias orphelins.</td>
+            </tr>
+            <tr>
+              <td><strong>Email</strong></td>
+              <td>Envoi OTP, notifications, alertes de compte.</td>
+              <td>Email utilisateur, jeton temporaire, contenu transactionnel.</td>
+              <td>Expiration des jetons, limitation des tentatives, journal d'envoi.</td>
+            </tr>
+            <tr>
+              <td><strong>Cartographie</strong></td>
+              <td>Affichage de tuiles et géolocalisation des lieux.</td>
+              <td>Coordonnées publiques de salles, falaises et clubs.</td>
+              <td>Cache, limitation appels, pas d'exposition inutile de localisation privée.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Maintenabilité, évolutivité et sobriété</h2>
+        <div class="three-cols">
+          <div class="panel">
+            <strong>Maintenable</strong>
+            Découpage feature-based, composants UI réutilisables, schémas Zod
+            colocalisés, Drizzle pour éviter les divergences entre code et base.
+          </div>
+          <div class="panel">
+            <strong>Extensible</strong>
+            Les modules matching, topos, clubs et événements peuvent évoluer
+            séparément. Une API mobile native pourra être ajoutée après le MVP.
+          </div>
+          <div class="panel">
+            <strong>Sobre</strong>
+            Rendu serveur quand pertinent, pagination du feed, compression des
+            médias, cache cartographique et suppression des données inutiles.
+          </div>
+        </div>
+      </section>
+
+      <section class="summary">
+        <h2>Architecture retenue</h2>
+        <p>
+          L'architecture proposée répond aux exigences de production du MVP
+          Spity : elle est sécurisée, maintenable, extensible et proportionnée
+          au budget. Le choix d'un monolithe full-stack Next.js limite les coûts
+          et la complexité, tout en conservant une structure modulaire capable
+          d'accueillir de futures évolutions.
+        </p>
+      </section>
+
+      <p class="footer-note">
+        Document RNCP - C1.5 - Projet Spity - Collectif Altitude Grimpe
+      </p>
+    </main>
+  </body>
+</html>

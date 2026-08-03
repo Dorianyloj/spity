@@ -1,0 +1,377 @@
+name: Continuous integration
+
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: [develop, main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Quality gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: spity
+    env:
+      DATABASE_URL: mysql://spity:spity_ci_password@127.0.0.1:3306/spity
+      JWT_SECRET: ci_only_secret_with_at_least_32_characters
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: spity/.nvmrc
+          cache: npm
+          cache-dependency-path: spity/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Lint source code
+        run: npm run lint
+
+      - name: Check TypeScript
+        run: npm run typecheck
+
+      - name: Run tests with coverage
+        run: npm run test:coverage
+
+      - name: Audit production dependencies
+        run: npm run security:audit
+
+      - name: Validate Docker Compose configurations
+        run: |
+          docker compose --env-file .env.example config --quiet
+          docker compose --env-file .env.test.example -f docker-compose.test.yml config --quiet
+          docker compose --env-file .env.production.example -f docker-compose.production.yml config --quiet
+
+      - name: Build production application
+        run: npm run build
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: coverage-${{ github.sha }}
+          path: spity/coverage
+          if-no-files-found: warn
+          retention-days: 30
+
+  integration:
+    name: MariaDB integration tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: spity
+    env:
+      DATABASE_URL: mysql://spity:spity_ci_password@127.0.0.1:3306/spity
+      JWT_SECRET: ci_only_secret_with_at_least_32_characters
+      INTEGRATION_PORT: 3102
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_ROOT_PASSWORD: spity_ci_root_password
+          MARIADB_DATABASE: spity
+          MARIADB_USER: spity
+          MARIADB_PASSWORD: spity_ci_password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd "healthcheck.sh --connect --innodb_initialized"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: spity/.nvmrc
+          cache: npm
+          cache-dependency-path: spity/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Apply Drizzle migrations
+        run: npm run db:migrate
+
+      - name: Run MariaDB integration tests
+        run: |
+          mkdir -p .integration-results
+          npm run test:integration | tee .integration-results/results.tap
+
+      - name: Audit authenticated accessibility
+        run: npm run accessibility:audit
+
+      - name: Upload integration report
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: integration-${{ github.sha }}
+          path: spity/.integration-results
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Upload authenticated accessibility reports
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: accessibility-${{ github.sha }}
+          path: spity/.accessibility
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30
+
+  performance:
+    name: Lighthouse thresholds
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: spity
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: spity/.nvmrc
+          cache: npm
+          cache-dependency-path: spity/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Run Lighthouse thresholds
+        run: npm run perf:audit
+
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: lighthouse-${{ github.sha }}
+          path: spity/.lighthouseci
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30
+
+  acceptance:
+    name: BC02 acceptance recipe
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: spity
+    env:
+      DATABASE_URL: mysql://spity:spity_ci_password@127.0.0.1:3306/spity
+      JWT_SECRET: ci_only_secret_with_at_least_32_characters
+      ACCEPTANCE_PORT: 3103
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_ROOT_PASSWORD: spity_ci_root_password
+          MARIADB_DATABASE: spity
+          MARIADB_USER: spity
+          MARIADB_PASSWORD: spity_ci_password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd "healthcheck.sh --connect --innodb_initialized"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: spity/.nvmrc
+          cache: npm
+          cache-dependency-path: spity/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Apply Drizzle migrations
+        run: npm run db:migrate
+
+      - name: Build production acceptance application
+        run: |
+          npm run build
+          mkdir -p .next/standalone/public .next/standalone/.next/static
+          cp -R public/. .next/standalone/public/
+          cp -R .next/static/. .next/standalone/.next/static/
+
+      - name: Run BC02 acceptance recipe
+        run: npm run test:acceptance
+
+      - name: Upload acceptance reports
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: acceptance-${{ github.sha }}
+          path: |
+            spity/.acceptance-results
+            spity/playwright-report
+            spity/test-results
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30
+
+  staging:
+    name: Deploy verified staging images
+    needs: [quality, integration, performance, acceptance]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: staging
+    permissions:
+      contents: read
+      packages: write
+    env:
+      APP_IMAGE: ghcr.io/dorianyloj/spity
+      MIGRATION_IMAGE: ghcr.io/dorianyloj/spity-migrations
+      DATABASE_CONTAINER: spity-staging-db-${{ github.run_id }}
+      APP_CONTAINER: spity-staging-app-${{ github.run_id }}
+      STAGING_NETWORK: spity-staging-${{ github.run_id }}
+
+    steps:
+      - name: Checkout verified sources
+        uses: actions/checkout@v6
+
+      - name: Define staging version
+        id: metadata
+        run: |
+          base_version=$(jq --raw-output .version spity/package.json)
+          echo "version=$base_version" >> "$GITHUB_OUTPUT"
+
+      - name: Build immutable images
+        env:
+          VERSION: ${{ steps.metadata.outputs.version }}
+        run: |
+          docker build \
+            --target migration \
+            --label "org.opencontainers.image.version=$VERSION" \
+            --label "org.opencontainers.image.revision=$GITHUB_SHA" \
+            --label "org.opencontainers.image.source=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" \
+            --tag "$MIGRATION_IMAGE:sha-$GITHUB_SHA" \
+            spity
+          docker build \
+            --target runner \
+            --build-arg "APP_VERSION=$VERSION" \
+            --build-arg "APP_REVISION=$GITHUB_SHA" \
+            --tag "$APP_IMAGE:sha-$GITHUB_SHA" \
+            spity
+
+      - name: Smoke test staging images
+        env:
+          VERSION: ${{ steps.metadata.outputs.version }}
+        run: |
+          mkdir -p staging-evidence
+          docker network create "$STAGING_NETWORK"
+          docker run --detach \
+            --name "$DATABASE_CONTAINER" \
+            --network "$STAGING_NETWORK" \
+            --env MARIADB_ROOT_PASSWORD=spity_staging_root_password \
+            --env MARIADB_DATABASE=spity \
+            --env MARIADB_USER=spity \
+            --env MARIADB_PASSWORD=spity_staging_password \
+            mariadb:11.4
+
+          for attempt in $(seq 1 40); do
+            if docker exec "$DATABASE_CONTAINER" healthcheck.sh --connect --innodb_initialized; then
+              break
+            fi
+            if [ "$attempt" -eq 40 ]; then
+              docker logs "$DATABASE_CONTAINER"
+              exit 1
+            fi
+            sleep 3
+          done
+
+          docker run --rm \
+            --network "$STAGING_NETWORK" \
+            --env DATABASE_URL=mysql://spity:spity_staging_password@"$DATABASE_CONTAINER":3306/spity \
+            "$MIGRATION_IMAGE:sha-$GITHUB_SHA"
+          docker run --detach \
+            --name "$APP_CONTAINER" \
+            --network "$STAGING_NETWORK" \
+            --publish 127.0.0.1:3000:3000 \
+            --env DATABASE_URL=mysql://spity:spity_staging_password@"$DATABASE_CONTAINER":3306/spity \
+            --env JWT_SECRET=staging_only_secret_with_at_least_32_characters \
+            "$APP_IMAGE:sha-$GITHUB_SHA"
+
+          for attempt in $(seq 1 40); do
+            if payload=$(curl --fail --silent http://127.0.0.1:3000/api/health); then
+              printf '%s\n' "$payload" | jq --exit-status \
+                --arg version "$VERSION" \
+                --arg revision "$GITHUB_SHA" \
+                '.status == "ok" and .version == $version and .revision == $revision'
+              printf '%s\n' "$payload" | jq . > staging-evidence/health.json
+              break
+            fi
+            if [ "$attempt" -eq 40 ]; then
+              docker logs "$APP_CONTAINER"
+              exit 1
+            fi
+            sleep 3
+          done
+
+          docker image inspect "$APP_IMAGE:sha-$GITHUB_SHA" > staging-evidence/app-image.json
+          docker image inspect "$MIGRATION_IMAGE:sha-$GITHUB_SHA" > staging-evidence/migration-image.json
+
+      - name: Stop staging smoke test
+        if: always()
+        run: |
+          docker rm --force "$APP_CONTAINER" "$DATABASE_CONTAINER" 2>/dev/null || true
+          docker network rm "$STAGING_NETWORK" 2>/dev/null || true
+
+      - name: Authenticate to GitHub Container Registry
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "$GHCR_TOKEN" | docker login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+
+      - name: Publish staging images
+        run: |
+          docker tag "$APP_IMAGE:sha-$GITHUB_SHA" "$APP_IMAGE:staging"
+          docker tag "$MIGRATION_IMAGE:sha-$GITHUB_SHA" "$MIGRATION_IMAGE:staging"
+          docker push "$APP_IMAGE:sha-$GITHUB_SHA"
+          docker push "$APP_IMAGE:staging"
+          docker push "$MIGRATION_IMAGE:sha-$GITHUB_SHA"
+          docker push "$MIGRATION_IMAGE:staging"
+
+      - name: Upload staging deployment evidence
+        uses: actions/upload-artifact@v6
+        with:
+          name: staging-${{ github.sha }}
+          path: staging-evidence
+          if-no-files-found: error
+          retention-days: 30

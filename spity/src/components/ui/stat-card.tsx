@@ -1,5 +1,6 @@
-import { forwardRef, HTMLAttributes } from 'react'
-import { LucideIcon } from 'lucide-react'
+import { forwardRef, type HTMLAttributes } from 'react'
+import type { LucideIcon } from 'lucide-react'
+import { cn } from '@/lib/class-names'
 
 export interface StatCardProps extends HTMLAttributes<HTMLDivElement> {
   value: string | number
@@ -14,17 +15,16 @@ export interface StatCardProps extends HTMLAttributes<HTMLDivElement> {
 const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
   ({ className = '', value, label, icon: Icon, trend, ...props }, ref) => {
     return (
-      <div ref={ref} className={`spity-stat ${className}`} {...props}>
-        {Icon && <Icon className="text-primary mb-2" size={20} />}
+      <div ref={ref} className={cn('spity-stat', className)} {...props}>
+        {Icon && <Icon className="mb-2 text-primary" size={20} aria-hidden="true" />}
         <div className="spity-stat__value">{value}</div>
         <div className="spity-stat__label">{label}</div>
         {trend && (
           <div
-            className={`text-xs font-medium mt-1 ${
-              trend.isPositive ? 'text-success' : 'text-destructive'
-            }`}
+            className={cn('mt-1 text-xs font-semibold', trend.isPositive ? 'text-success' : 'text-destructive')}
+            aria-label={`${trend.isPositive ? 'Hausse' : 'Baisse'} de ${Math.abs(trend.value)} pour cent`}
           >
-            {trend.isPositive ? '↑' : '↓'} {Math.abs(trend.value)}%
+            <span aria-hidden="true">{trend.isPositive ? '↑' : '↓'}</span> {Math.abs(trend.value)}%
           </div>
         )}
       </div>

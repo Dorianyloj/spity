@@ -8,133 +8,135 @@
    Application sociale pour la communauté escalade
 
    Palette:
-   - Slate profond (#1a1f2e) : Ancrage, confiance, profondeur comme la roche
-   - Corail vivant (#e8614d) : Énergie, passion, la magnésie sur les prises
-   - Crème pierre (#f5f2ed) : Légèreté, naturel, le calcaire des falaises
-   - Gris granite (#6b7280) : Équilibre, technique, la texture du rocher
+   - Brume alpine (#eff6ef) : fond clair et respirant
+   - Sapin profond (#173236) : texte et navigation
+   - Mousse active (#8bb957) : action principale
+   - Givre végétal (#dfeecf) : surfaces secondaires
 
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
   /* Couleurs principales */
-  --background: #f5f2ed;
-  --foreground: #1a1f2e;
+  --background: #eff6ef;
+  --foreground: #173236;
 
   /* Surfaces */
-  --card: #ffffff;
-  --card-foreground: #1a1f2e;
-  --popover: #ffffff;
-  --popover-foreground: #1a1f2e;
+  --card: #fbfdf8;
+  --card-foreground: #173236;
+  --popover: #fbfdf8;
+  --popover-foreground: #173236;
 
-  /* Action primaire - Corail */
-  --primary: #e8614d;
-  --primary-foreground: #ffffff;
+  /* Action primaire - Vert mousse */
+  --primary: #8bb957;
+  --primary-foreground: #132d2f;
 
-  /* Secondaire - Slate */
-  --secondary: #1a1f2e;
-  --secondary-foreground: #f5f2ed;
+  /* Secondaire - Givre végétal */
+  --secondary: #dfeecf;
+  --secondary-foreground: #244331;
 
   /* États neutres */
-  --muted: #e8e4de;
-  --muted-foreground: #6b7280;
+  --muted: #e5eddf;
+  --muted-foreground: #55645b;
 
-  /* Accent - Corail clair */
-  --accent: #fef0ed;
-  --accent-foreground: #e8614d;
+  /* Accent - Forêt douce */
+  --accent: #d8ead0;
+  --accent-foreground: #2f6f4e;
 
   /* Feedback */
-  --destructive: #dc2626;
+  --destructive: #c84b43;
   --destructive-foreground: #ffffff;
-  --success: #059669;
+  --success: #376b31;
   --success-foreground: #ffffff;
-  --warning: #d97706;
-  --warning-foreground: #ffffff;
+  --warning: #c79a42;
+  --warning-foreground: #173236;
 
   /* Bordures et inputs */
-  --border: #d6d0c7;
-  --input: #e8e4de;
-  --ring: #e8614d;
+  --border: #ccd9c7;
+  --input: #f8fbf5;
+  --ring: #8bb957;
 
   /* Graphiques - Palette étendue */
-  --chart-1: #e8614d;
-  --chart-2: #1a1f2e;
-  --chart-3: #059669;
-  --chart-4: #d97706;
-  --chart-5: #6b7280;
+  --chart-1: #8bb957;
+  --chart-2: #2f6f4e;
+  --chart-3: #6d8f9f;
+  --chart-4: #c79a42;
+  --chart-5: #173236;
 
   /* Rayons */
   --radius: 0.625rem;
 
   /* Sidebar */
-  --sidebar: #1a1f2e;
-  --sidebar-foreground: #f5f2ed;
-  --sidebar-primary: #e8614d;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #2d3548;
-  --sidebar-accent-foreground: #f5f2ed;
-  --sidebar-border: #2d3548;
-  --sidebar-ring: #e8614d;
+  --sidebar: #173236;
+  --sidebar-foreground: #f8fbf5;
+  --sidebar-primary: #8bb957;
+  --sidebar-primary-foreground: #132d2f;
+  --sidebar-accent: #27494b;
+  --sidebar-accent-foreground: #f8fbf5;
+  --sidebar-border: #3b5b5b;
+  --sidebar-ring: #8bb957;
 
   /* Tokens Spity personnalisés */
-  --spity-coral: #e8614d;
-  --spity-coral-light: #fef0ed;
-  --spity-coral-dark: #c24a39;
-  --spity-slate: #1a1f2e;
-  --spity-slate-light: #2d3548;
-  --spity-stone: #f5f2ed;
-  --spity-stone-dark: #e8e4de;
-  --spity-granite: #6b7280;
+  --spity-coral: #8bb957;
+  --spity-coral-light: #dfeecf;
+  --spity-coral-dark: #376b31;
+  --spity-slate: #173236;
+  --spity-slate-light: #27494b;
+  --spity-stone: #fbfdf8;
+  --spity-stone-dark: #65736b;
+  --spity-granite: #8d9b91;
+  --spity-primary-muted: #e5eddf;
+  --spity-info: #6d8f9f;
 
   /* Niveaux de cotation escalade */
-  --grade-beginner: #22c55e;
-  --grade-intermediate: #3b82f6;
-  --grade-advanced: #f59e0b;
-  --grade-expert: #ef4444;
-  --grade-elite: #1a1f2e;
+  --grade-beginner: #6fa65b;
+  --grade-intermediate: #6d8f9f;
+  --grade-advanced: #c79a42;
+  --grade-expert: #b96f55;
+  --grade-elite: #173236;
 }
 
 .dark {
-  --background: #0f1219;
-  --foreground: #f5f2ed;
+  --background: #132d2f;
+  --foreground: #f8fbf5;
 
-  --card: #1a1f2e;
-  --card-foreground: #f5f2ed;
-  --popover: #1a1f2e;
-  --popover-foreground: #f5f2ed;
+  --card: #173236;
+  --card-foreground: #f8fbf5;
+  --popover: #173236;
+  --popover-foreground: #f8fbf5;
 
-  --primary: #e8614d;
-  --primary-foreground: #ffffff;
+  --primary: #8bb957;
+  --primary-foreground: #132d2f;
 
-  --secondary: #2d3548;
-  --secondary-foreground: #f5f2ed;
+  --secondary: #27494b;
+  --secondary-foreground: #f8fbf5;
 
-  --muted: #2d3548;
-  --muted-foreground: #9ca3af;
+  --muted: #27494b;
+  --muted-foreground: #cbd8c7;
 
-  --accent: #2d1f1c;
-  --accent-foreground: #e8614d;
+  --accent: #203f3f;
+  --accent-foreground: #dfeecf;
 
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
 
-  --border: #2d3548;
-  --input: #2d3548;
-  --ring: #e8614d;
+  --border: #3b5b5b;
+  --input: #203f3f;
+  --ring: #8bb957;
 
-  --chart-1: #e8614d;
-  --chart-2: #f5f2ed;
-  --chart-3: #10b981;
-  --chart-4: #f59e0b;
-  --chart-5: #9ca3af;
+  --chart-1: #8bb957;
+  --chart-2: #dfeecf;
+  --chart-3: #6d8f9f;
+  --chart-4: #c79a42;
+  --chart-5: #f8fbf5;
 
-  --sidebar: #0f1219;
-  --sidebar-foreground: #f5f2ed;
-  --sidebar-primary: #e8614d;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #1a1f2e;
-  --sidebar-accent-foreground: #f5f2ed;
-  --sidebar-border: #2d3548;
-  --sidebar-ring: #e8614d;
+  --sidebar: #132d2f;
+  --sidebar-foreground: #f8fbf5;
+  --sidebar-primary: #8bb957;
+  --sidebar-primary-foreground: #132d2f;
+  --sidebar-accent: #203f3f;
+  --sidebar-accent-foreground: #f8fbf5;
+  --sidebar-border: #3b5b5b;
+  --sidebar-ring: #8bb957;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -143,9 +145,9 @@
 
 @theme inline {
   /* Typographie - utilise les variables CSS injectées par Next.js */
-  --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
+  --font-sans: var(--font-outfit), 'Outfit', system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), 'JetBrains Mono', monospace;
-  --font-display: var(--font-jakarta), 'Plus Jakarta Sans', sans-serif;
+  --font-display: var(--font-outfit), 'Outfit', system-ui, sans-serif;
 
   /* Couleurs système */
   --color-background: var(--background);
@@ -227,11 +229,13 @@
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     text-rendering: optimizeLegibility;
+    letter-spacing: 0;
   }
 
   /* Typographie fluide */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight text-balance;
+    @apply font-display text-balance;
+    letter-spacing: 0;
   }
 
   p {
@@ -270,6 +274,21 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    Composants Spity
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -277,7 +296,7 @@
 @layer components {
   /* Badge de cotation */
   .grade-badge {
-    @apply inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold rounded-md;
+    @apply inline-flex items-center justify-center rounded-md px-2 py-0.5 font-mono text-xs font-bold;
   }
 
   .grade-badge--beginner {
@@ -307,40 +326,41 @@
 
   /* Carte avec effet de profondeur */
   .spity-card {
-    @apply bg-card rounded-xl border border-border;
+    @apply rounded-lg border border-white/70 bg-[#fbfdf8]/92 text-card-foreground backdrop-blur-xl;
     box-shadow:
-      0 1px 2px 0 rgb(0 0 0 / 0.03),
-      0 1px 3px 0 rgb(0 0 0 / 0.05);
+      0 1px 0 0 rgb(255 255 255 / 0.8),
+      0 20px 46px -34px rgb(23 50 54 / 0.36);
     transition: box-shadow 0.2s ease, transform 0.2s ease;
   }
 
   .spity-card:hover {
     box-shadow:
-      0 4px 6px -1px rgb(0 0 0 / 0.05),
-      0 2px 4px -2px rgb(0 0 0 / 0.05);
+      0 1px 0 0 rgb(255 255 255 / 0.86),
+      0 24px 56px -34px rgb(23 50 54 / 0.42);
     transform: translateY(-1px);
   }
 
   /* Bouton primaire Spity */
   .spity-btn {
     @apply inline-flex items-center justify-center gap-2 px-4 py-2.5
-           font-medium text-sm rounded-lg transition-all duration-200;
+           text-sm font-semibold rounded-lg transition-all duration-200;
   }
 
   .spity-btn--primary {
     @apply bg-primary text-primary-foreground;
-    box-shadow: 0 1px 2px 0 rgb(232 97 77 / 0.3);
+    box-shadow: 0 1px 2px 0 rgb(95 143 80 / 0.3);
   }
 
   .spity-btn--primary:hover {
     background: var(--spity-coral-dark);
-    box-shadow: 0 4px 12px 0 rgb(232 97 77 / 0.35);
+    color: white;
+    box-shadow: 0 4px 12px 0 rgb(95 143 80 / 0.28);
     transform: translateY(-1px);
   }
 
   .spity-btn--primary:active {
     transform: translateY(0);
-    box-shadow: 0 1px 2px 0 rgb(232 97 77 / 0.3);
+    box-shadow: 0 1px 2px 0 rgb(95 143 80 / 0.3);
   }
 
   .spity-btn--secondary {
@@ -349,6 +369,7 @@
 
   .spity-btn--secondary:hover {
     background: var(--spity-slate-light);
+    color: white;
   }
 
   .spity-btn--ghost {
@@ -361,7 +382,7 @@
 
   /* Input Spity */
   .spity-input {
-    @apply w-full px-4 py-2.5 bg-input border border-border rounded-lg
+    @apply w-full rounded-lg border border-border bg-[#f8fbf5]/95 px-4 py-2.5
            text-foreground placeholder:text-muted-foreground
            transition-all duration-200;
   }
@@ -429,15 +450,17 @@
 
   /* Stat card */
   .spity-stat {
-    @apply flex flex-col items-center p-4 bg-muted/50 rounded-xl;
+    @apply flex flex-col items-center rounded-lg border border-white/70 bg-[#fbfdf8]/88 p-4 text-card-foreground backdrop-blur-xl;
+    box-shadow: 0 18px 42px -34px rgb(23 50 54 / 0.32);
   }
 
   .spity-stat__value {
-    @apply text-2xl font-bold text-foreground;
+    @apply font-mono text-2xl font-bold text-foreground;
   }
 
   .spity-stat__label {
-    @apply text-xs text-muted-foreground uppercase tracking-wider;
+    @apply text-xs font-semibold uppercase text-muted-foreground;
+    letter-spacing: 0.08em;
   }
 
   /* Pill badge */
@@ -449,6 +472,26 @@
   .spity-pill--coral {
     @apply bg-coral-light text-coral-dark;
   }
+
+  .spity-tab-row {
+    @apply flex w-full max-w-full gap-1 overflow-x-auto rounded-lg border border-white/70 bg-[#fbfdf8]/88 p-1 backdrop-blur-xl sm:w-fit;
+  }
+
+  .spity-tab-row__item {
+    @apply flex shrink-0 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors;
+  }
+
+  .spity-tab-row__item:hover {
+    @apply bg-secondary text-foreground;
+  }
+
+  .spity-tab-row__item--active {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  .spity-tab-row__item--disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -459,6 +502,24 @@
   /* Texture de fond subtile */
   .spity-texture {
     background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a1f2e' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .topo-lines {
+    background-image:
+      repeating-linear-gradient(60deg, rgb(255 255 255 / 0.04) 0 1px, transparent 1px 22px),
+      repeating-linear-gradient(120deg, rgb(255 255 255 / 0.03) 0 1px, transparent 1px 28px);
+  }
+
+  .rock-sunset {
+    background: linear-gradient(160deg, #dfeecf, #8bb957 42%, #2f6f4e);
+  }
+
+  .rock-granite {
+    background: linear-gradient(160deg, #8fa0a8, #4f6470 50%, #1f2a30);
+  }
+
+  .rock-forest {
+    background: linear-gradient(135deg, #4f6b5e, #2d4438 60%, #1a2820);
   }
 
   /* Dégradé corail */

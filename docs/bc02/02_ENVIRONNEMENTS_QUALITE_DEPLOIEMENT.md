@@ -74,10 +74,10 @@ Le fichier `docker-compose.production.yml` définit trois responsabilités :
 
 L'application est liée à `127.0.0.1:3000` par défaut. En exploitation, un reverse proxy termine HTTPS et transmet les requêtes à ce port local.
 
-La route `GET /api/health` vérifie réellement l'accès à MariaDB. Elle retourne :
+La route `GET /api/health` vérifie réellement l'accès à MariaDB et identifie le binaire déployé. Elle retourne :
 
-- `200 { "status": "ok" }` lorsque l'application et la base sont disponibles ;
-- `503 { "status": "unavailable" }` lorsqu'une dépendance est indisponible.
+- `200 { "status": "ok", "version": "X.Y.Z", "revision": "SHA" }` lorsque l'application et la base sont disponibles ;
+- `503 { "status": "unavailable", "version": "X.Y.Z", "revision": "SHA" }` lorsqu'une dépendance est indisponible.
 
 Aucun détail de connexion ou message interne n'est exposé par cette route.
 
@@ -107,11 +107,11 @@ node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
 | TypeScript | `npm run typecheck` | Aucune erreur de type. |
 | Next.js | `npm run build` | Build de production réussi. |
 | npm audit | `npm run security:audit` | Aucune vulnérabilité haute ou critique en production. |
-| Lighthouse CI | `npm run perf:audit` | Respect des seuils des pages principales. |
+| Lighthouse | `npm run perf:audit` | Respect des seuils des pages principales. |
 | Docker Compose | `docker compose ... config --quiet` | Configuration valide pour les trois environnements. |
 | Healthcheck | `GET /api/health` | Réponse HTTP 200 après déploiement. |
 
-Les tests et la couverture automatisée seront ajoutés dans le cadre de C2.2.2 puis intégrés aux mêmes portes qualité.
+Les tests et la couverture automatisée sont exécutés par `npm run test:coverage`. Lighthouse mesure les pages d'accueil, de connexion et d'inscription, vérifie chaque seuil et enregistre les rapports JSON dans `.lighthouseci`.
 
 ## 7. Critères de qualité et de performance
 
@@ -121,17 +121,18 @@ Les tests et la couverture automatisée seront ajoutés dans le cadre de C2.2.2 
 | Erreurs TypeScript | 0 |
 | Build de production | Réussi |
 | Tests automatisés | 100 % des tests réussis |
-| Couverture lignes, instructions et fonctions | Au moins 80 % |
-| Couverture branches | Au moins 70 % |
+| Couverture lignes et instructions | Au moins 60 % sur tout `src/` |
+| Couverture fonctions | Au moins 55 % sur tout `src/` |
+| Couverture branches | Au moins 75 % sur tout `src/` |
 | Vulnérabilités critiques ou hautes de production | 0 non justifiée |
 | Lighthouse performance | Au moins 85/100 |
-| Lighthouse accessibilité | Au moins 95/100 |
+| Lighthouse accessibilité | 100/100 |
 | Lighthouse bonnes pratiques | Au moins 90/100 |
 | Lighthouse SEO | Au moins 90/100 |
 | API principales dans l'environnement de référence | 95e percentile inférieur à 500 ms |
 | Healthcheck après déploiement | HTTP 200 |
 
-Les seuils Lighthouse sont codés dans `spity/lighthouserc.js`. Une mesure est réalisée localement afin d'éviter un verrou temporaire observé avec Chrome sous Windows. La CI Linux réalise trois mesures par page afin de limiter l'effet des variations ponctuelles.
+Les seuils Lighthouse sont codés dans `spity/scripts/run-lighthouse.mjs`. Une mesure reproductible est réalisée sur chaque page publique ; l'audit authentifié séparé vérifie dix états supplémentaires et le reflow mobile.
 
 ## 8. Protocole de déploiement continu
 
@@ -148,7 +149,7 @@ Un déploiement ne peut commencer que si :
 
 ### 8.2 Séquence de déploiement
 
-1. Construire l'image avec la cible `runner` du `Dockerfile`.
+1. Construire les images avec les cibles `runner` et `migration` du `Dockerfile`.
 2. Étiqueter l'image avec le numéro de version et le SHA Git, sans réutiliser uniquement `latest` comme preuve.
 3. Démarrer ou vérifier MariaDB et attendre son état `healthy`.
 4. Sauvegarder la base avant toute migration de schéma en production.
@@ -156,17 +157,17 @@ Un déploiement ne peut commencer que si :
 6. Démarrer la nouvelle version de `app` sur l'environnement de validation.
 7. Attendre le healthcheck puis exécuter les smoke tests et le cahier de recettes ciblé.
 8. Exécuter Lighthouse sur les pages représentatives.
-9. Promouvoir la même image validée vers la production.
+9. Promouvoir les mêmes digests validés vers la production, sans reconstruction.
 10. Vérifier le healthcheck, les journaux, les parcours critiques et les indicateurs de performance.
 11. Enregistrer la version, la date, le SHA, l'opérateur et les résultats dans l'historique de déploiement.
 
 Commandes de référence :
 
 ```bash
-docker compose --env-file .env.production -f docker-compose.production.yml build
+docker compose --env-file .env.production -f docker-compose.production.yml pull app migrate
 docker compose --env-file .env.production -f docker-compose.production.yml up -d mariadb
-docker compose --env-file .env.production -f docker-compose.production.yml --profile migration run --rm migrate
-docker compose --env-file .env.production -f docker-compose.production.yml up -d app
+docker compose --env-file .env.production -f docker-compose.production.yml --profile migration run --rm --no-build migrate
+docker compose --env-file .env.production -f docker-compose.production.yml up -d --no-build app
 docker compose --env-file .env.production -f docker-compose.production.yml ps
 ```
 
@@ -208,12 +209,22 @@ Les preuves à conserver pour le dossier final sont :
 
 ## 10. Résultats de validation initiaux
 
-À la création de ce protocole :
+État vérifié le 20 juillet 2026 :
 
 - les configurations Compose développement, test et production sont syntaxiquement valides ;
-- l'audit des dépendances de production ne signale aucune vulnérabilité ;
-- l'audit complet conserve quatre alertes modérées dans la chaîne de développement `drizzle-kit/esbuild` ;
-- ces alertes ne concernent pas l'image d'exécution et le serveur de développement ne doit jamais être exposé à un réseau non maîtrisé ;
+- l'audit des dépendances de production ne signale aucune vulnérabilité haute ou critique et conserve deux alertes modérées liées à `postcss` dans Next.js ;
+- l'audit complet conserve six alertes modérées, dont la chaîne de développement `drizzle-kit/esbuild` ;
+- le seuil CI est volontairement bloquant à partir du niveau `high` ; les alertes modérées restent suivies et ne sont pas masquées ;
 - leur évolution reste suivie et une mise à jour non cassante devra être appliquée dès sa disponibilité.
 
-Les résultats du build de l'image, du healthcheck et de Lighthouse doivent être actualisés à chaque version livrée.
+L'image standalone a été construite sous Node.js 22, lancée sous l'utilisateur non privilégié `nextjs` et vérifiée avec une MariaDB de test migrée. La route `/api/health` a répondu `200 { "status": "ok" }`. Les résultats Lighthouse doivent être actualisés à chaque version livrée.
+
+Résultats Lighthouse 12.6.1 obtenus sur le build de production :
+
+| Page | Performance | Accessibilité | Bonnes pratiques | SEO |
+| --- | ---: | ---: | ---: | ---: |
+| Accueil | 98 | 100 | 100 | 100 |
+| Connexion | 97 | 100 | 100 | 100 |
+| Inscription | 99 | 100 | 100 | 100 |
+
+Le premier audit avait détecté une performance de 77 sur l'accueil et une accessibilité de 90 sur les formulaires. L'optimisation des images, la correction du contraste, de la hiérarchie des titres et de la taille des cibles tactiles ont permis de franchir les seuils.

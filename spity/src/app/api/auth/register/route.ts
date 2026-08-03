@@ -8,12 +8,20 @@ import { authErrorResponse, authUserResponse } from '@/features/auth/lib/respons
 import { createSessionToken, setSessionCookie } from '@/features/auth/lib/session'
 import { toAuthUser } from '@/features/auth/lib/current-user'
 import { rejectInvalidOrigin } from '@/features/auth/lib/csrf'
+import { logger } from '@/lib/logger'
+import { rejectExceededAuthRateLimit } from '@/features/auth/lib/rate-limit'
 
 export async function POST(request: Request) {
   const invalidOriginResponse = rejectInvalidOrigin(request)
 
   if (invalidOriginResponse) {
     return invalidOriginResponse
+  }
+
+  const rateLimitResponse = rejectExceededAuthRateLimit(request)
+
+  if (rateLimitResponse) {
+    return rateLimitResponse
   }
 
   let body: unknown
@@ -38,6 +46,7 @@ export async function POST(request: Request) {
   const [existingUser] = await db.select({ id: users.id }).from(users).where(eq(users.email, email)).limit(1)
 
   if (existingUser) {
+    logger.warn('auth.registration_rejected', { reason: 'duplicate_email' })
     return authErrorResponse('Un compte existe déjà avec cet email', 409)
   }
 
@@ -60,6 +69,7 @@ export async function POST(request: Request) {
   const user = toAuthUser(createdUser)
   const response = authUserResponse(user, 201)
   setSessionCookie(response, createSessionToken(user))
+  logger.info('auth.registration_succeeded', { userId: user.id, role: user.role })
 
   return response
 }

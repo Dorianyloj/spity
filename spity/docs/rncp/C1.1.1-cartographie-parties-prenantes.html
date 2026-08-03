@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>C1.1.1 - Cartographie des parties prenantes - Spity</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 16mm 14mm 18mm;
+      }
+
+      :root {
+        --ink: #16201b;
+        --muted: #5c6760;
+        --line: #d8e2dc;
+        --paper: #fbfdfb;
+        --accent: #1f7a4d;
+        --accent-2: #245b75;
+        --accent-soft: #e8f4ed;
+        --sky-soft: #e7f1f5;
+        --warn-soft: #fff3df;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        font-size: 10.2pt;
+        line-height: 1.45;
+      }
+
+      body {
+        counter-reset: page;
+      }
+
+      .cover {
+        min-height: 263mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        page-break-after: always;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cover::before {
+        content: "";
+        position: absolute;
+        inset: -40mm -20mm auto auto;
+        width: 150mm;
+        height: 150mm;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(31, 122, 77, 0.18), transparent 62%);
+      }
+
+      .cover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 58mm;
+        background:
+          linear-gradient(135deg, rgba(36, 91, 117, 0.1), rgba(31, 122, 77, 0.16)),
+          repeating-linear-gradient(
+            135deg,
+            rgba(22, 32, 27, 0.08) 0,
+            rgba(22, 32, 27, 0.08) 1px,
+            transparent 1px,
+            transparent 9px
+          );
+        clip-path: polygon(0 38%, 100% 0, 100% 100%, 0% 100%);
+      }
+
+      .cover-content {
+        position: relative;
+        z-index: 1;
+        padding-top: 12mm;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--accent);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 8.5pt;
+      }
+
+      .eyebrow::before {
+        content: "";
+        display: inline-block;
+        width: 24px;
+        height: 3px;
+        border-radius: 99px;
+        background: var(--accent);
+      }
+
+      h1 {
+        margin: 18mm 0 5mm;
+        max-width: 150mm;
+        font-size: 30pt;
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        max-width: 145mm;
+        color: var(--muted);
+        font-size: 13.5pt;
+        line-height: 1.35;
+        margin: 0;
+      }
+
+      .cover-meta {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5mm;
+        margin-bottom: 22mm;
+      }
+
+      .meta-card {
+        border: 1px solid rgba(22, 32, 27, 0.14);
+        background: rgba(255, 255, 255, 0.84);
+        border-radius: 7px;
+        padding: 5mm;
+      }
+
+      .meta-label {
+        color: var(--muted);
+        font-size: 8pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .meta-value {
+        margin-top: 2mm;
+        font-size: 11pt;
+        font-weight: 800;
+      }
+
+      main {
+        background: white;
+      }
+
+      section {
+        page-break-inside: avoid;
+        margin-bottom: 9mm;
+      }
+
+      h2 {
+        margin: 0 0 4mm;
+        color: var(--accent);
+        font-size: 15pt;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 6mm 0 3mm;
+        color: var(--ink);
+        font-size: 11.5pt;
+      }
+
+      p {
+        margin: 0 0 3.5mm;
+      }
+
+      .lead {
+        padding: 5mm 6mm;
+        border-left: 4px solid var(--accent);
+        background: var(--accent-soft);
+        border-radius: 0 7px 7px 0;
+        font-size: 10.8pt;
+      }
+
+      .criteria {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4mm;
+        margin-top: 4mm;
+      }
+
+      .criteria-item {
+        min-height: 26mm;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        padding: 4mm;
+        background: #ffffff;
+      }
+
+      .criteria-item strong {
+        display: block;
+        margin-bottom: 2mm;
+        color: var(--accent-2);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 3mm 0 0;
+        table-layout: fixed;
+        page-break-inside: auto;
+      }
+
+      thead {
+        display: table-header-group;
+      }
+
+      tr {
+        page-break-inside: avoid;
+      }
+
+      th {
+        background: var(--accent);
+        color: white;
+        font-size: 8.3pt;
+        text-align: left;
+        padding: 3mm 2.6mm;
+        vertical-align: top;
+      }
+
+      th:first-child {
+        border-top-left-radius: 6px;
+      }
+
+      th:last-child {
+        border-top-right-radius: 6px;
+      }
+
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 3mm 2.6mm;
+        vertical-align: top;
+        font-size: 8.6pt;
+      }
+
+      tbody tr:nth-child(even) td {
+        background: #f7faf8;
+      }
+
+      .stakeholders th:nth-child(1) {
+        width: 20%;
+      }
+
+      .stakeholders th:nth-child(2) {
+        width: 15%;
+      }
+
+      .stakeholders th:nth-child(3) {
+        width: 24%;
+      }
+
+      .stakeholders th:nth-child(4) {
+        width: 13%;
+      }
+
+      .stakeholders th:nth-child(5) {
+        width: 28%;
+      }
+
+      .users th:nth-child(1) {
+        width: 23%;
+      }
+
+      .users th:nth-child(2) {
+        width: 36%;
+      }
+
+      .users th:nth-child(3) {
+        width: 41%;
+      }
+
+      .badge {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 1mm 2.3mm;
+        max-width: 100%;
+        font-size: 7.4pt;
+        font-weight: 800;
+        line-height: 1.1;
+        text-align: center;
+        white-space: normal;
+      }
+
+      .badge-high {
+        color: #0f5e39;
+        background: #dff3e8;
+      }
+
+      .badge-medium {
+        color: #245b75;
+        background: var(--sky-soft);
+      }
+
+      .badge-core {
+        color: #7a4b00;
+        background: var(--warn-soft);
+      }
+
+      .two-cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5mm;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        padding: 5mm;
+        background: #ffffff;
+      }
+
+      .panel h3 {
+        margin-top: 0;
+        color: var(--accent-2);
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 4.5mm;
+      }
+
+      li {
+        margin: 0 0 1.7mm;
+      }
+
+      .summary {
+        border-radius: 7px;
+        padding: 6mm;
+        color: white;
+        background: linear-gradient(135deg, #1f7a4d, #245b75);
+      }
+
+      .summary h2 {
+        color: white;
+      }
+
+      .footer-note {
+        margin-top: 7mm;
+        color: var(--muted);
+        font-size: 8.3pt;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="cover">
+      <div class="cover-content">
+        <div class="eyebrow">Bloc de compétences 1</div>
+        <h1>C1.1.1 - Cartographie des parties prenantes</h1>
+        <p class="subtitle">
+          Projet Spity : réseau social pour la communauté escalade, combinant
+          profils grimpeurs, matching, topos collaboratifs, répertoire de lieux,
+          clubs et événements.
+        </p>
+      </div>
+
+      <div class="cover-meta">
+        <div class="meta-card">
+          <div class="meta-label">Projet</div>
+          <div class="meta-value">Spity</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Commanditaire</div>
+          <div class="meta-value">Collectif Altitude Grimpe</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Certification</div>
+          <div class="meta-value">Titre RNCP</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Livrable</div>
+          <div class="meta-value">Avant-projet</div>
+        </div>
+      </div>
+    </article>
+
+    <main>
+      <section>
+        <h2>Objectif de la compétence</h2>
+        <p class="lead">
+          Cartographier les différents acteurs du projet de développement
+          d'application logicielle, leurs rôles, leur niveau d'implication et les
+          futurs utilisateurs, afin de cadrer l'environnement et le périmètre du
+          projet Spity.
+        </p>
+
+        <div class="criteria">
+          <div class="criteria-item">
+            <strong>Livrable attendu</strong>
+            Une cartographie claire des parties prenantes du projet de
+            développement logiciel.
+          </div>
+          <div class="criteria-item">
+            <strong>Critères couverts</strong>
+            Identification des développeurs, architectes, administrateurs,
+            commanditaires, utilisateurs, clients et acteurs externes.
+          </div>
+          <div class="criteria-item">
+            <strong>Angle d'analyse</strong>
+            Rôle de chaque acteur, niveau d'implication, attentes principales et
+            impact sur le MVP.
+          </div>
+          <div class="criteria-item">
+            <strong>Utilisateurs futurs</strong>
+            Description des profils de grimpeurs, clubs, responsables et
+            contributeurs topo concernés par l'application.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Cadre du commanditaire</h2>
+        <p>
+          Le commanditaire retenu pour le projet est le
+          <strong>Collectif Altitude Grimpe</strong>, association régionale
+          fictive basée en Rhône-Alpes et représentée par
+          <strong>Claire Martin</strong>, sa présidente. Cette structure
+          souhaite tester une plateforme commune pour améliorer la mise en
+          relation entre grimpeurs, clubs, salles d'escalade et contributeurs
+          falaises sur une zone pilote Lyon-Grenoble.
+        </p>
+      </section>
+
+      <section>
+        <h2>Cartographie des parties prenantes</h2>
+        <table class="stakeholders">
+          <thead>
+            <tr>
+              <th>Acteur</th>
+              <th>Catégorie</th>
+              <th>Rôle dans le projet</th>
+              <th>Implication</th>
+              <th>Attentes et enjeux</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Collectif Altitude Grimpe</strong></td>
+              <td>Client / commanditaire</td>
+              <td>
+                Définit la vision produit, les besoins prioritaires, les
+                objectifs du MVP et valide les choix structurants par
+                l'intermédiaire de Claire Martin, présidente de l'association.
+              </td>
+              <td><span class="badge badge-core">Très forte</span></td>
+              <td>
+                Obtenir une application démontrable permettant de centraliser
+                les usages escalade locaux, avec un périmètre clair, réaliste et
+                cohérent avec la problématique métier.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Développeur full-stack</strong></td>
+              <td>Équipe projet</td>
+              <td>
+                Conçoit, développe, teste, documente et déploie l'application
+                Spity.
+              </td>
+              <td><span class="badge badge-core">Très forte</span></td>
+              <td>
+                Livrer un MVP fonctionnel, maintenable, sécurisé et aligné avec
+                les attendus de certification.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Architecte logiciel</strong></td>
+              <td>Rôle technique</td>
+              <td>
+                Définit l'architecture applicative, le modèle de données, les
+                flux techniques et les choix d'intégration.
+              </td>
+              <td><span class="badge badge-high">Forte</span></td>
+              <td>
+                Garantir une solution évolutive, sécurisée et adaptée aux
+                contraintes du projet.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Administrateur / exploitant</strong></td>
+              <td>Exploitation</td>
+              <td>
+                Gère l'hébergement, la base de données, les sauvegardes, les
+                accès, la supervision et la maintenance.
+              </td>
+              <td><span class="badge badge-medium">Moyenne</span></td>
+              <td>
+                Assurer la disponibilité, la sécurité, la sauvegarde et la
+                continuité de service.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Grimpeurs</strong></td>
+              <td>Utilisateurs finaux</td>
+              <td>
+                Créent un profil, publient du contenu, recherchent des
+                partenaires, consultent les lieux, topos et événements.
+              </td>
+              <td><span class="badge badge-core">Très forte</span></td>
+              <td>
+                Trouver rapidement des partenaires fiables, des informations de
+                terrain à jour et une expérience sociale adaptée à l'escalade.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Clubs d'escalade / FFME</strong></td>
+              <td>Parties prenantes métier</td>
+              <td>
+                Créent des événements, valorisent leur structure, communiquent
+                avec les grimpeurs et encadrent certaines activités.
+              </td>
+              <td><span class="badge badge-high">Forte</span></td>
+              <td>
+                Gagner en visibilité, attirer de nouveaux membres et simplifier
+                la communication autour des événements.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Salles d'escalade</strong></td>
+              <td>Partenaires métier</td>
+              <td>
+                Fournissent ou valident les informations sur leurs
+                infrastructures, horaires, disciplines et services.
+              </td>
+              <td><span class="badge badge-medium">Moyenne</span></td>
+              <td>
+                Être référencées auprès des grimpeurs et présenter des
+                informations fiables sur leurs équipements.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Équipeurs / contributeurs falaises</strong></td>
+              <td>Acteurs externes experts</td>
+              <td>
+                Contribuent aux informations de voies, aux cotations, aux accès
+                et aux signalements de sécurité.
+              </td>
+              <td><span class="badge badge-medium">Moyenne</span></td>
+              <td>
+                Maintenir des topos fiables, signaler les risques et améliorer
+                la qualité des informations terrain.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Modérateurs</strong></td>
+              <td>Support fonctionnel</td>
+              <td>
+                Contrôlent les contenus, les signalements, les contributions
+                topo et les comportements abusifs.
+              </td>
+              <td><span class="badge badge-high">Moyenne à forte</span></td>
+              <td>
+                Garantir la fiabilité des contenus, la sécurité des échanges et
+                la qualité de la communauté.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Jury RNCP</strong></td>
+              <td>Partie prenante institutionnelle</td>
+              <td>
+                Évalue le projet, les livrables, la démarche d'analyse et la
+                soutenance.
+              </td>
+              <td><span class="badge badge-high">Forte</span></td>
+              <td>
+                Vérifier la maîtrise des compétences du bloc et la cohérence
+                entre besoin, solution et réalisation.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Services externes</strong></td>
+              <td>Acteurs techniques externes</td>
+              <td>
+                Fournissent la cartographie, le stockage média, l'email,
+                l'authentification, l'hébergement ou la supervision.
+              </td>
+              <td><span class="badge badge-medium">Moyenne</span></td>
+              <td>
+                Assurer la disponibilité des fonctionnalités dépendantes de
+                services tiers et maîtriser les coûts associés.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Caractéristiques des futurs utilisateurs</h2>
+        <table class="users">
+          <thead>
+            <tr>
+              <th>Profil utilisateur</th>
+              <th>Besoins principaux</th>
+              <th>Caractéristiques</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Grimpeur débutant</strong></td>
+              <td>
+                Trouver des partenaires fiables, découvrir les salles et clubs,
+                progresser avec un cadre rassurant.
+              </td>
+              <td>
+                Peu autonome, besoin d'informations claires, sensible à
+                l'accompagnement, à la sécurité et à la lisibilité de
+                l'interface.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Grimpeur régulier</strong></td>
+              <td>
+                Organiser ses sessions, suivre ses performances, trouver des
+                partenaires de niveau proche.
+              </td>
+              <td>
+                Utilisation fréquente, recherche de rapidité, de pertinence et
+                de filtres efficaces par discipline, niveau et localisation.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Grimpeur outdoor</strong></td>
+              <td>
+                Consulter les falaises, voies, cotations, accès, conditions et
+                signalements sécurité.
+              </td>
+              <td>
+                Fort besoin de fiabilité terrain, d'informations actualisées et
+                de contributions communautaires modérées.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Membre de club</strong></td>
+              <td>
+                Participer à des événements, suivre les activités du club et
+                échanger avec la communauté locale.
+              </td>
+              <td>
+                Usage communautaire et événementiel, besoin d'inscription simple
+                et de notifications utiles.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Responsable de club</strong></td>
+              <td>
+                Publier des événements, gérer la visibilité du club, présenter
+                les coachs et attirer des membres.
+              </td>
+              <td>
+                Besoin d'outils simples de gestion, d'une fiche club claire et
+                d'un espace de communication fiable.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Contributeur topo</strong></td>
+              <td>
+                Ajouter, corriger ou signaler des informations sur les voies,
+                secteurs, accès et équipements.
+              </td>
+              <td>
+                Profil expert ou pratiquant avancé, attentif à la précision, à
+                la traçabilité et à la sécurité des données publiées.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="two-cols">
+        <div class="panel">
+          <h3>Niveaux d'implication</h3>
+          <ul>
+            <li>
+              <strong>Très forte :</strong> acteurs qui structurent directement
+              le MVP et valident sa valeur.
+            </li>
+            <li>
+              <strong>Forte :</strong> acteurs importants pour la pertinence
+              métier, la qualité ou la validation.
+            </li>
+            <li>
+              <strong>Moyenne :</strong> acteurs contributeurs, partenaires ou
+              dépendances techniques nécessaires à certaines fonctionnalités.
+            </li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Périmètre cadré</h3>
+          <ul>
+            <li>Profils grimpeurs et clubs.</li>
+            <li>Matching par niveau, discipline et localisation.</li>
+            <li>Répertoire géolocalisé des salles, falaises et clubs.</li>
+            <li>Topos collaboratifs avec signalements sécurité.</li>
+            <li>Événements clubs et fil social contextualisé.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="summary">
+        <h2>Synthèse</h2>
+        <p>
+          La cartographie montre que Spity implique des acteurs techniques,
+          métier, institutionnels et utilisateurs. Les grimpeurs constituent le
+          cœur du projet, car leurs usages déterminent les fonctionnalités
+          prioritaires du MVP : profils, matching, répertoire géolocalisé, topos
+          collaboratifs, événements et fil social.
+        </p>
+        <p>
+          Les clubs, salles d'escalade et contributeurs falaises enrichissent
+          l'écosystème en apportant des données, des événements, de la visibilité
+          locale et de la fiabilité terrain. Le cadrage des parties prenantes
+          permet donc de délimiter le périmètre du projet et de prioriser les
+          besoins qui seront traités dans les étapes suivantes du bloc de
+          compétences.
+        </p>
+      </section>
+
+      <p class="footer-note">
+        Document produit pour le dossier RNCP - Bloc C1 - Projet Spity.
+      </p>
+    </main>
+  </body>
+</html>
