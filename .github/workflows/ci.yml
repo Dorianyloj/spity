@@ -110,6 +110,11 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Install Chromium for authenticated accessibility
+        run: |
+          npx playwright install --with-deps chromium
+          node -e 'process.stdout.write("CHROME_PATH=" + require("playwright").chromium.executablePath() + "\n")' >> "$GITHUB_ENV"
+
       - name: Apply Drizzle migrations
         run: npm run db:migrate
 

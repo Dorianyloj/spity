@@ -25,6 +25,7 @@ Les évolutions notables de Spity sont consignées dans ce fichier. Le projet su
 - Contraste des états vides sur l'espace authentifié, avec un score Lighthouse accessibilité de 100 % sur les dix pages contrôlées.
 - Recette BC02 adaptée aux noms accessibles des nouveaux liens de profils publics ; les six scénarios Playwright passent à nouveau.
 - Audit Lighthouse rendu tolérant au verrouillage tardif du profil Chrome sous Windows lorsqu'un rapport valide a déjà été produit.
+- Navigateur de l'audit authentifié épinglé sur le Chromium Playwright verrouillé par le projet au lieu de dépendre du Chrome préinstallé sur le runner CI.
 - Mise à jour de Next.js, PostCSS et des dépendances transitives vulnérables sans changement cassant.
 - Couverture globale remise au-dessus des seuils avec 152 tests ciblant notamment l'environnement, les journaux, les métadonnées de release et le routage.
 - Structure sémantique des titres d'états vides pour la navigation assistée.
