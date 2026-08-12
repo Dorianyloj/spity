@@ -10,7 +10,7 @@ export interface EmptyStateProps extends Omit<HTMLAttributes<HTMLDivElement>, 't
 
 export default function EmptyState({ className = '', description, icon: Icon, title, ...props }: EmptyStateProps) {
   return (
-    <div className={cn('rounded-lg border border-border bg-white/[0.04] p-4 text-sm shadow-sm', className)} {...props}>
+    <div className={cn('rounded-lg border border-border bg-card p-4 text-sm text-card-foreground shadow-sm', className)} {...props}>
       <div className="flex items-start gap-3">
         {Icon && (
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
@@ -18,8 +18,8 @@ export default function EmptyState({ className = '', description, icon: Icon, ti
           </div>
         )}
         <div className="min-w-0">
-          <h2 className="font-semibold text-white">{title}</h2>
-          {description && <p className="mt-1 text-white/75">{description}</p>}
+          <h2 className="font-semibold text-card-foreground">{title}</h2>
+          {description && <p className="mt-1 text-muted-foreground">{description}</p>}
         </div>
       </div>
     </div>
