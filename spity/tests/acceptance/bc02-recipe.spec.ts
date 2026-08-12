@@ -121,7 +121,8 @@ const newAuthenticatedPage = async (browser: Browser, storageState: StorageState
 }
 
 const cardContainingHeading = (page: Page, heading: string): Locator => page
-  .getByRole('heading', { name: heading, exact: true })
+  .getByRole('heading')
+  .filter({ hasText: heading })
   .locator('xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " spity-card ")]')
 
 const toLocalDateTimeInput = (date: Date) => {

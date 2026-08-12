@@ -18,8 +18,8 @@ export default function EmptyState({ className = '', description, icon: Icon, ti
           </div>
         )}
         <div className="min-w-0">
-          <h2 className="font-semibold text-foreground">{title}</h2>
-          {description && <p className="mt-1 text-muted-foreground">{description}</p>}
+          <h2 className="font-semibold text-white">{title}</h2>
+          {description && <p className="mt-1 text-white/75">{description}</p>}
         </div>
       </div>
     </div>

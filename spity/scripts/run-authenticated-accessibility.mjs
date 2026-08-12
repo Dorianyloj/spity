@@ -307,17 +307,27 @@ const auditPage = async (page) => {
     ? ['--screenEmulation.width=360', '--screenEmulation.height=800', '--screenEmulation.deviceScaleFactor=1']
     : ['--preset=desktop']
 
-  await runCommand(process.execPath, [
-    lighthouseCli,
-    `${origin}${page.path}`,
-    '--quiet',
-    ...viewportArguments,
-    '--only-categories=accessibility',
-    '--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage',
-    `--extra-headers=${extraHeaders}`,
-    '--output=json',
-    `--output-path=${reportPath}`,
-  ])
+  try {
+    await runCommand(process.execPath, [
+      lighthouseCli,
+      `${origin}${page.path}`,
+      '--quiet',
+      ...viewportArguments,
+      '--only-categories=accessibility',
+      '--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage',
+      `--extra-headers=${extraHeaders}`,
+      '--output=json',
+      `--output-path=${reportPath}`,
+    ])
+  } catch (error) {
+    // Chrome Launcher can fail while removing its temporary profile on Windows
+    // after Lighthouse has already written a complete report.
+    try {
+      await readFile(reportPath, 'utf8')
+    } catch {
+      throw error
+    }
+  }
 
   const report = JSON.parse(await readFile(reportPath, 'utf8'))
 

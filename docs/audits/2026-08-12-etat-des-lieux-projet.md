@@ -49,6 +49,8 @@ La séparation retenue est désormais la suivante :
 | TypeScript | Réussi | `tsc --noEmit` passe. |
 | Tests Jest | 152/152 réussis | 33 suites réussies. |
 | Couverture | Réussi | 60,16 % lignes/instructions, 59,07 % fonctions et 77,56 % branches. |
+| Recette BC02 | 6/6 réussis après correction | Le sélecteur Playwright suit désormais le nom accessible des liens vers les profils publics. |
+| Accessibilité authentifiée | 10/10 pages à 100 % après correction | Contraste des états vides corrigé ; lien d'évitement, réduction des animations et reflow mobile validés. |
 | Audit production | Réussi après correction | 0 vulnérabilité avec `npm audit --omit=dev --audit-level=high`. |
 | Audit complet | À suivre | 4 alertes modérées dans l'outillage Drizzle/esbuild ; la correction forcée proposée serait cassante. |
 | Build Next.js | Réussi | Build de production validé avec Next.js 16.3.0, 28 pages statiques générées et routes dynamiques compilées. |
