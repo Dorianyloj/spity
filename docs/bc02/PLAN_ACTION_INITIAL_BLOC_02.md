@@ -5,6 +5,8 @@
 **Candidat :** Dorian Joly  
 **Document de travail :** version initiale du 20 juillet 2026
 
+> Archive de cadrage. Le dossier final et les preuves à jour se trouvent dans ce même répertoire `docs/bc02/`. Les mentions « à produire » ci-dessous décrivent l'état initial du 20 juillet 2026 et ne constituent plus le suivi courant.
+
 ## 1. Objet du livrable
 
 Le bloc 2, « Concevoir et développer des applications logicielles », est évalué à partir du code source d'un logiciel développé pendant le parcours et de sa documentation associée.

@@ -15,6 +15,9 @@
 # production
 /build
 
+# temporary workspace artifacts
+/tmp/
+
 # misc
 .DS_Store
 *.pem

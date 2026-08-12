@@ -1,0 +1,74 @@
+name: Incident de production
+description: Consigner une anomalie détectée sur l'environnement de production.
+title: "[Incident production] "
+labels:
+  - incident
+  - production
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ne jamais joindre de secret, mot de passe, jeton, donnée personnelle ou export de base non anonymisé.
+  - type: input
+    id: detected_at
+    attributes:
+      label: Date et heure de détection
+      description: Utiliser le fuseau Europe/Paris et préciser la source de la détection.
+      placeholder: 2026-08-12 15:30 - alerte GitHub Actions
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Sévérité
+      options:
+        - S1 - indisponibilité ou perte de données
+        - S2 - fonction critique dégradée
+        - S3 - fonction non critique dégradée
+        - S4 - anomalie mineure
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version et révision
+      placeholder: 0.1.0-jury / 49c4ea0
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Comportement observé
+      description: Décrire le résultat réel, l'impact utilisateur et le périmètre affecté.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Étapes de reproduction
+      description: Donner des étapes numérotées, les préconditions et la fréquence de reproduction.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportement attendu
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Preuves anonymisées
+      description: Journaux, captures, identifiant du workflow ou réponse HTTP sans donnée sensible.
+    validations:
+      required: true
+  - type: textarea
+    id: analysis
+    attributes:
+      label: Analyse et correctif préconisé
+      description: Cause confirmée ou hypothèses, risques, options et décision.
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation et clôture
+      description: Tests ajoutés, pull request, révision déployée, contrôle de production et retour arrière.

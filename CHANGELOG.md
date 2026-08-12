@@ -6,6 +6,10 @@ Les évolutions notables de Spity sont consignées dans ce fichier. Le projet su
 
 ### Added
 
+- Dossier de cadrage du bloc 4 avec matrice des sept compétences, état des preuves et plan d'action priorisé.
+- Supervision planifiée de la route de santé de production et formulaire structuré de consignation des incidents.
+- Modèle de pull request pour tracer la reproduction, la validation, le déploiement et le retour arrière des correctifs.
+- Index documentaire à la racine du dépôt et centralisation des livrables RNCP sous `docs/`.
 - Cahier de recettes Playwright couvrant les fonctions F01 à F10 avec rapports HTML, JSON et JUnit.
 - Porte CI de recette navigateur bloquant le déploiement staging en cas d'échec.
 - Registre d'anomalies et traçabilité des corrections avant/après.
@@ -18,6 +22,8 @@ Les évolutions notables de Spity sont consignées dans ce fichier. Le projet su
 
 ### Fixed
 
+- Mise à jour de Next.js, PostCSS et des dépendances transitives vulnérables sans changement cassant.
+- Couverture globale remise au-dessus des seuils avec 152 tests ciblant notamment l'environnement, les journaux, les métadonnées de release et le routage.
 - Structure sémantique des titres d'états vides pour la navigation assistée.
 - Séparation des suites Jest, intégration et Playwright dans les harnais de test.
 - Procédure de sauvegarde MariaDB et prérequis locaux de la documentation d'exploitation.

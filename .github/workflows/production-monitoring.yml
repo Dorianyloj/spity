@@ -1,0 +1,54 @@
+name: Production monitoring
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-monitoring
+  cancel-in-progress: false
+
+jobs:
+  health-check:
+    name: Check public health endpoint
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      HEALTH_URL: https://spity.fr/api/health
+
+    steps:
+      - name: Query production
+        id: health
+        shell: bash
+        run: |
+          payload=$(curl --fail --show-error --silent \
+            --connect-timeout 5 \
+            --max-time 15 \
+            --retry 2 \
+            --retry-all-errors \
+            "$HEALTH_URL")
+
+          printf '%s\n' "$payload" | jq --exit-status \
+            '.status == "ok"
+             and (.version | type == "string" and length > 0)
+             and (.revision | type == "string" and length > 0)'
+
+          version=$(printf '%s\n' "$payload" | jq --raw-output '.version')
+          revision=$(printf '%s\n' "$payload" | jq --raw-output '.revision')
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "revision=$revision" >> "$GITHUB_OUTPUT"
+
+      - name: Record successful check
+        run: |
+          {
+            echo "## Production health"
+            echo "- URL: $HEALTH_URL"
+            echo "- Status: ok"
+            echo "- Version: ${{ steps.health.outputs.version }}"
+            echo "- Revision: ${{ steps.health.outputs.revision }}"
+            echo "- Checked at: $(date --utc --iso-8601=seconds)"
+          } >> "$GITHUB_STEP_SUMMARY"

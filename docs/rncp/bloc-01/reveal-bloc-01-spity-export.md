@@ -5,7 +5,7 @@
 Fichier :
 
 ```text
-spity/docs/rncp/reveal-bloc-01-spity.html
+docs/rncp/bloc-01/reveal-bloc-01-spity.html
 ```
 
 Tu peux l'ouvrir directement dans un navigateur. La présentation utilise Reveal.js depuis CDN :
@@ -38,7 +38,7 @@ Il faut donc une connexion internet au moment de l'ouverture, sauf si Reveal.js 
 Exemple si le fichier est ouvert localement :
 
 ```text
-file:///.../spity/docs/rncp/reveal-bloc-01-spity.html?print-pdf
+file:///.../docs/rncp/bloc-01/reveal-bloc-01-spity.html?print-pdf
 ```
 
 ## Export HTML partageable
