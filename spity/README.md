@@ -2,6 +2,8 @@
 
 Spity est le prototype fonctionnel d'un réseau social pour la communauté escalade : profils grimpeurs et clubs, inventaire de matériel, recherche de partenaires, événements et répertoire de lieux.
 
+> **Accès jury :** [`../JURY.md`](../JURY.md) donne le parcours de lecture, les livrables et les commandes de vérification.
+
 Le cadrage produit complet se trouve dans [`../CADRAGE_PROJET.md`](../CADRAGE_PROJET.md). Les livrables de certification sont centralisés dans [`../docs`](../docs), notamment le dossier BC02 et le plan du bloc 4 consacré au maintien en condition opérationnelle.
 
 ## Stack
@@ -98,6 +100,7 @@ npm run db:studio    # Ouvre Drizzle Studio
 - [Manuel d'utilisation](../docs/bc02/13_MANUEL_UTILISATION_C241.md)
 - [Manuel de mise à jour et maintenance](../docs/bc02/14_MANUEL_MISE_A_JOUR_C241.md)
 - [État des lieux et plan d'action du bloc 4](../docs/rncp/bloc-04/PLAN_ACTION_BLOC_04.md)
+- [Dossier de remise Bloc 4 pour le jury](../docs/rncp/bloc-04/dossier-jury/README.md)
 - [Procédure autonome incluse dans chaque bundle de release](DEPLOYMENT.md)
 - [Journal des versions et correctifs déployés](RELEASE_JOURNAL.md)
 - [Collaboration support et registre de transmissions](SUPPORT.md)

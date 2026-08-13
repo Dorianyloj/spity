@@ -1,5 +1,11 @@
 # Changelog
 
+## Présentation jury du dépôt
+
+- ajout d'un point d'entrée `JURY.md` à la racine avec parcours de consultation, compétences, preuves et contrôles ;
+- clarification des README racine, documentation, application et exports ;
+- ajout des repères de remise au manifeste d'intégrité du Bloc 4.
+
 ## Dossier de remise Bloc 4
 
 - ajout d'un dossier jury structuré, d'une matrice de preuves, d'un glossaire et d'un guide de présentation ;

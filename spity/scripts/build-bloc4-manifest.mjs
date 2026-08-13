@@ -14,6 +14,9 @@ const evidenceFiles = (await readdir(evidenceDirectory, { withFileTypes: true })
 
 const files = [
   ...evidenceFiles,
+  resolve(repositoryRoot, 'README.md'),
+  resolve(repositoryRoot, 'JURY.md'),
+  resolve(repositoryRoot, 'docs/README.md'),
   resolve(repositoryRoot, 'docs/rncp/bloc-04/DOSSIER_BLOC_04.md'),
   resolve(repositoryRoot, 'docs/rncp/bloc-04/PLAN_ACTION_BLOC_04.md'),
   resolve(repositoryRoot, 'docs/rncp/bloc-04/REVUE_FINALE_BLOC_04.md'),
@@ -92,6 +95,7 @@ const files = [
   resolve(repositoryRoot, '.github/workflows/production-monitoring.yml'),
   resolve(repositoryRoot, '.github/workflows/ci.yml'),
   resolve(repositoryRoot, '.github/workflows/release.yml'),
+  resolve(repositoryRoot, 'output/README.md'),
   resolve(repositoryRoot, 'output/pdf/dossier-bloc-04-spity.pdf'),
 ].sort((left, right) => left.localeCompare(right, 'fr'))
 
