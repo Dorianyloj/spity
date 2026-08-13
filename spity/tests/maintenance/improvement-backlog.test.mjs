@@ -56,6 +56,16 @@ test('rejects personal data in a feedback input', async () => {
   assert.ok(report.errors.some((entry) => entry.code === 'sensitive-data'))
 })
 
+test('rejects a proof path that escapes the repository root', async () => {
+  const records = clone(canonicalRecords)
+  records[0].evidence[0].value = '../outside-repository.json'
+
+  const report = await auditImprovementBacklog({ policy, records })
+
+  assert.equal(report.compliant, false)
+  assert.ok(report.errors.some((entry) => entry.code === 'evidence-outside-repository'))
+})
+
 test('requires a verified outcome before an improvement can be completed', async () => {
   const records = clone(canonicalRecords)
   records[0].status = 'completed'

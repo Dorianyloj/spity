@@ -81,7 +81,7 @@ Les limites restantes sont explicites : l’historique de latence P95, les resso
 - [x] coût, délai, retour arrière et indicateurs de référence/cible obligatoires pour chaque proposition ;
 - [x] signaux opérationnels et retour support simulé clairement déclaré, sans inventer de données utilisateur réelles ;
 - [x] formulaire support enrichi pour qualifier les prochains retours anonymisés par zone, type de signal et bénéfice attendu ;
-- [x] workflow mensuel, artefact 90 jours, exercice local et 28 tests de maintenance couvrant les décisions de pilotage.
+- [x] workflow mensuel, artefact 90 jours, exercice local et 29 tests de maintenance couvrant les décisions de pilotage.
 
 La prochaine étape est C4.3.2 : relier les livraisons réellement observées à un journal de versions immuable et vérifiable.
 

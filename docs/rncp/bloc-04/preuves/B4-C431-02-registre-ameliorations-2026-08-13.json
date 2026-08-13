@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "criterion": "C4.3.1",
-  "capturedAt": "2026-08-13T09:13:36.840Z",
-  "repositoryRevision": "392e36c17e81fc850164f2b64e214012be574297",
+  "capturedAt": "2026-08-13T09:18:33.157Z",
+  "repositoryRevision": "d140f74c8a9c3a69d8bd065a74e769995dcf8a25",
   "policy": {
     "cadence": "monthly",
     "scoreFormula": "impact * 3 + riskReduction * 2 + confidence - effort",
@@ -19,7 +19,7 @@
   },
   "audit": {
     "schemaVersion": 1,
-    "checkedAt": "2026-08-13T09:13:36.839Z",
+    "checkedAt": "2026-08-13T09:18:33.156Z",
     "compliant": true,
     "recordCount": 4,
     "statusCounts": {

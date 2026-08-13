@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "criterion": "C4.3.1",
-  "executedAt": "2026-08-13T09:13:36.162Z",
-  "repositoryRevision": "392e36c17e81fc850164f2b64e214012be574297",
+  "executedAt": "2026-08-13T09:18:32.105Z",
+  "repositoryRevision": "d140f74c8a9c3a69d8bd065a74e769995dcf8a25",
   "safety": "In-memory review only. No user account, production endpoint, database, external issue or LXC was used.",
   "objective": "Verify a measurable prioritized improvement backlog, reject a formula mismatch, and reject personal data in a feedback source.",
   "result": "passed",
   "valid": {
     "schemaVersion": 1,
-    "checkedAt": "2026-08-13T09:13:36.158Z",
+    "checkedAt": "2026-08-13T09:18:32.096Z",
     "compliant": true,
     "recordCount": 4,
     "statusCounts": {
@@ -51,7 +51,7 @@
   },
   "invalidScore": {
     "schemaVersion": 1,
-    "checkedAt": "2026-08-13T09:13:36.160Z",
+    "checkedAt": "2026-08-13T09:18:32.100Z",
     "compliant": false,
     "recordCount": 4,
     "statusCounts": {
@@ -125,7 +125,7 @@
   },
   "sensitiveFeedback": {
     "schemaVersion": 1,
-    "checkedAt": "2026-08-13T09:13:36.162Z",
+    "checkedAt": "2026-08-13T09:18:32.105Z",
     "compliant": false,
     "recordCount": 4,
     "statusCounts": {

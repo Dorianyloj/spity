@@ -1,6 +1,6 @@
 import { access, mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
 import { constants } from 'node:fs'
-import { dirname, relative, resolve } from 'node:path'
+import { dirname, isAbsolute, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url))
@@ -80,7 +80,8 @@ const validateRepositoryPath = async (reference, path, errors, root, recordId) =
 
   const rootPath = resolve(root)
   const absolutePath = resolve(rootPath, reference.value)
-  if (absolutePath !== rootPath && !absolutePath.startsWith(`${rootPath}\\`)) {
+  const pathFromRoot = relative(rootPath, absolutePath)
+  if (pathFromRoot === '..' || pathFromRoot.startsWith('../') || pathFromRoot.startsWith('..\\') || isAbsolute(pathFromRoot)) {
     errors.push(issue('evidence-outside-repository', path, 'La preuve doit rester dans le dépôt.', recordId))
     return
   }

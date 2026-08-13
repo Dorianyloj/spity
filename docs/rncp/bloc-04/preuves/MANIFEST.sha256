@@ -5,8 +5,8 @@
 657b8f06b9420b1985d6fac072ba435b132164a47f2a124b33616c3b85ff6fc5  .github/workflows/incident-registry.yml
 813e41573071720fc44b137a025c558295a028383659eff8328ecdf1b91e606f  .github/workflows/production-monitoring.yml
 cd594f02cb9a597ce734ec1eb10a1dadbba4fffa36c982a116c34994eb8c2d35  .github/workflows/release.yml
-2cb79d5dbc965462c5c38a1bc187ac840777d6919a5648569b651cfaa540cfd1  docs/rncp/bloc-04/DOSSIER_BLOC_04.md
-7dc63ffa96fd3079b720f3c2dd2245025ef0665802045b55023a7e75efa2ea8f  docs/rncp/bloc-04/PLAN_ACTION_BLOC_04.md
+10aaf24ef8e0e05281a89bb18d2aa508477b32c10276b0f3c8a9ca2949c8590e  docs/rncp/bloc-04/DOSSIER_BLOC_04.md
+31ea02a0ff0e7a1df4e428da9fbeaf6239086ce66572a20b6f666153ae96597a  docs/rncp/bloc-04/PLAN_ACTION_BLOC_04.md
 ee5450a989d5063b9ea2833a8948f109dd2fc2a432b39c60c38ffd3be452b857  docs/rncp/bloc-04/preuves/B4-C411-01-audit-dependances-2026-08-13.json
 e3ec5e1dad00e8a27cd19bb606408eb0cca7cd63a48d49d1f3a26a78dd51c628  docs/rncp/bloc-04/preuves/B4-C411-02-decision-maintenance-2026-08-13.md
 76006687f6e55d540bbb46a3c284f02220ee46ceb813e5cf7678b68722e0da4f  docs/rncp/bloc-04/preuves/B4-C411-03-controle-dependances-2026-08-13.json
@@ -22,13 +22,13 @@ d76206b684bc95c22a7bec493ba527897103152ebf05e3dfb817b8f8689990a6  docs/rncp/bloc
 1c6e93ddbac99c1674b7d6d7c1f6b3415d2b67c9b421b34d4e63bf69b7021afa  docs/rncp/bloc-04/preuves/B4-C422-02-traitement-correctif-ci-cd-2026-08-13.md
 f6b9f425e300370c6b0d55866e083ad8d24a26307acec5deb302c69979757663  docs/rncp/bloc-04/preuves/B4-C422-03-exercice-verification-deploiement-2026-08-13.json
 7445960a655bd2c276378089cb6adee392744121acaed67cb3fbe9d394366af9  docs/rncp/bloc-04/preuves/B4-C431-01-recommandations-2026-08-13.md
-58e60fd6a9d4f3d8a04b6094d6906d4f83849e40987752718472daf1c56e2bb8  docs/rncp/bloc-04/preuves/B4-C431-02-registre-ameliorations-2026-08-13.json
-23089c1793c0d535d2d6319e337bc181a83dce34455f14d3c6cd7663e8510dd8  docs/rncp/bloc-04/preuves/B4-C431-03-exercice-revue-ameliorations-2026-08-13.json
+c578a22e14fd330661ad2ec7a889cc4ed5ce8ba6918027677762468bd43056b0  docs/rncp/bloc-04/preuves/B4-C431-02-registre-ameliorations-2026-08-13.json
+c632e7175d8f4a9b20282937307a96787cfba2df5a2b248ee59c88b5cbbbc1b8  docs/rncp/bloc-04/preuves/B4-C431-03-exercice-revue-ameliorations-2026-08-13.json
 70dea0c807aae8976e952379dba78aedbb38e01edf8d34611a0fa912c7d759f1  docs/rncp/bloc-04/preuves/B4-C432-01-journal-versions-deployees-2026-08-13.md
 7558c438fe7ef4097bdccdeda3398f2320872c851d07f1ceaa089b53c65cc861  docs/rncp/bloc-04/preuves/B4-C433-01-collaboration-support-2026-08-13.md
 97b48ad003ab6d74a4a3f671b1daa4f2fb6cabe462d501002b21b01ddcab5d2d  docs/rncp/bloc-04/preuves/README.md
 4892018d969edff4ea79dfd90b23ec0c37ab5bd618af0cd9b831ba878cfe4466  docs/rncp/referentiel/2024-referentiel-expert-developpement-logiciel-ynov.pdf
-af82eb8d8f9568cc17d3bcd8eb95bd29e4d4717739c2c0c94fc0ce86174f6fa8  output/pdf/dossier-bloc-04-spity.pdf
+8b3282c35713849f1404867ffb44dffbedeaa844472a7124f5ff92ae714a6838  output/pdf/dossier-bloc-04-spity.pdf
 2466e51b64d570105697835381ec14c244a7da2b72ae534a96490e54ec2bb93c  spity/IMPROVEMENT_MANAGEMENT.md
 1b85d556283d7ec35db522096579d926f1a4c6e1a090bce9757e3703fbb79247  spity/improvement-policy.json
 fcb849c191b4ff9b371508f0cf801f24ed8d4ed9f86d8bc5813c67f1c393a055  spity/improvement-schema.json
@@ -49,7 +49,7 @@ df4fd5d97c3426acc6cfa3122051670857388c5d8dab440e49c840d0b0220239  spity/scripts/
 468e61db5d69f6ab6b03d54f1afc90af2f10bd2d7241cd64897dbac8efa12e14  spity/scripts/capture-incident-registry-evidence.mjs
 01a74aa4ae2ad81220849c5347d87cbeff7e5ff2d0a97f5c77d7f3ce7bee3b1a  spity/scripts/capture-monitoring-slo.mjs
 1e0df2f162a21ec3a017d29e374c0d7b1bdc8248e03c859b9d4878c00a323a7d  spity/scripts/check-health.mjs
-3a6b041f5fa333a84c592a226e07e3d9b6f6075b0e03f4d6d8fed7b3cd08ec50  spity/scripts/check-improvement-backlog.mjs
+5eadd240ed303474ffe5b75edd92af89d15a89df0548d4eca2184aff6d0efcfe  spity/scripts/check-improvement-backlog.mjs
 712305173dbe2f3bd6369abb95524605449c17abbfae509e520eb3ad835e062e  spity/scripts/check-incident-registry.mjs
 526391df700a3a3e3a48f3fc88fc0db317212b29201771d1061be036d96061b6  spity/scripts/evaluate-monitoring-window.mjs
 93d7b08f634df3660a12e65730cdabe6db812ca7c60e477b358ca1ace3587a21  spity/scripts/run-deployment-verification-exercise.mjs
@@ -59,5 +59,5 @@ f3b31665a36fb57c0e4f6320546d740e6539be179fcefa0a4e9f0d6838007f40  spity/scripts/
 fd7bb17f2632287f7434a5a7eb392c55d4bafcacf8f59aad41c9adea71f3414c  spity/scripts/verify-deployment.mjs
 235e6b6edf35671ebced06b53671c443606ba98b2c2be8b8034316821987cbd9  spity/SUPPORT.md
 1180c1f529a2423da29e4637a3f72db13603cde7f887ff9840c1d83b7c5845db  spity/tests/maintenance/check-health.test.mjs
-b45e11c979ee663b82de9f8c70385621520cf363978260a779bb9c2087d32b1c  spity/tests/maintenance/improvement-backlog.test.mjs
+ac8e0588eac81e62d4bf3d68f7767dbfc918f55457773f0c3745e69fae47d06d  spity/tests/maintenance/improvement-backlog.test.mjs
 ebc44781fb40d9d0dd7dfdac499146fae3e6a506f624b38bf0508914c94b1fe7  spity/tests/maintenance/verify-deployment.test.mjs
