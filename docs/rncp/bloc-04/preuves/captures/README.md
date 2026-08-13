@@ -12,6 +12,8 @@ Ces captures sont produites par `npm run bloc4:visuals` depuis l'application Spi
 
 Le fichier `manifest.json` conserve la date de production, les dimensions et la taille de chaque capture. Il ne contient pas de mot de passe, de cookie, de jeton, d'export de base ou de donnée personnelle. Les captures utilisent uniquement les comptes de démonstration et les données locales prévues pour la recette.
 
+Les cinq images sont aussi intégrées directement dans l'annexe visuelle de l'[export PDF Bloc 4](../../../../../output/pdf/dossier-bloc-04-spity.pdf), avec une légende qui relie chaque écran à son parcours.
+
 ## Reproduction
 
 Depuis `spity/`, avec MariaDB locale démarrée, migrations appliquées, données de démonstration chargées et l'application disponible :

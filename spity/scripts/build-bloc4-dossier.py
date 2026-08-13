@@ -34,6 +34,44 @@ ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "docs" / "rncp" / "bloc-04" / "DOSSIER_BLOC_04.md"
 OUTPUT = ROOT / "output" / "pdf" / "dossier-bloc-04-spity.pdf"
 LOGO = ROOT / "spity" / "public" / "images" / "brand" / "logo-spity-transparent.png"
+VISUAL_EVIDENCE_DIR = ROOT / "docs" / "rncp" / "bloc-04" / "preuves" / "captures"
+VISUAL_EVIDENCE = [
+    {
+        "title": "A18.1 - Accueil public",
+        "description": "Page d'accueil publique : accès au produit, proposition de valeur et navigation initiale.",
+        "filename": "B4-VIS-01-accueil-public-spity-2026-08-13.png",
+        "max_width": 170 * mm,
+        "max_height": 145 * mm,
+    },
+    {
+        "title": "A18.2 - Fil d'actualité grimpeur",
+        "description": "Parcours authentifié grimpeur : navigation métier et consultation d'un contenu communautaire.",
+        "filename": "B4-VIS-02-tableau-de-bord-grimpeur-2026-08-13.png",
+        "max_width": 170 * mm,
+        "max_height": 145 * mm,
+    },
+    {
+        "title": "A18.3 - Matching de partenaires",
+        "description": "Recherche de partenaire : filtres, résultat disponible et statut de demande visible.",
+        "filename": "B4-VIS-03-matching-grimpeur-2026-08-13.png",
+        "max_width": 170 * mm,
+        "max_height": 145 * mm,
+    },
+    {
+        "title": "A18.4 - Gestion des événements club",
+        "description": "Parcours club : événements, participants, capacité et actions de gestion accessibles.",
+        "filename": "B4-VIS-04-evenements-club-2026-08-13.png",
+        "max_width": 170 * mm,
+        "max_height": 145 * mm,
+    },
+    {
+        "title": "A18.5 - Profil grimpeur mobile",
+        "description": "Affichage mobile : profil, disponibilités, objectifs et informations de matching.",
+        "filename": "B4-VIS-05-profil-grimpeur-mobile-2026-08-13.png",
+        "max_width": 90 * mm,
+        "max_height": 198 * mm,
+    },
+]
 
 SPITY_DARK = colors.HexColor("#173236")
 SPITY_GREEN = colors.HexColor("#8bb957")
@@ -374,6 +412,44 @@ def parse_markdown(content: str, available_width: float) -> list:
     return story
 
 
+def evidence_image(path: Path, max_width: float, max_height: float) -> Image:
+    image = Image(str(path))
+    scale = min(max_width / image.imageWidth, max_height / image.imageHeight)
+    image.drawWidth = image.imageWidth * scale
+    image.drawHeight = image.imageHeight * scale
+    image.hAlign = "CENTER"
+    return image
+
+
+def build_visual_evidence_appendix() -> list:
+    story = [
+        PageBreak(),
+        Paragraph("14. Annexe visuelle - parcours applicatifs", h2),
+        Paragraph(
+            "Les captures ci-dessous ont été produites depuis l'application locale avec des données de démonstration. "
+            "Le manifeste A18 précise pour chacune le scénario, le rôle, le viewport et le fichier source ; aucune donnée sensible n'est incluse.",
+            body,
+        ),
+    ]
+
+    for index, capture in enumerate(VISUAL_EVIDENCE):
+        path = VISUAL_EVIDENCE_DIR / capture["filename"]
+        if not path.exists():
+            raise FileNotFoundError(f"Capture visuelle absente : {path}")
+
+        if index:
+            story.append(PageBreak())
+
+        story.extend([
+            Paragraph(capture["title"], h3),
+            Paragraph(capture["description"], body),
+            Spacer(1, 2 * mm),
+            evidence_image(path, capture["max_width"], capture["max_height"]),
+        ])
+
+    return story
+
+
 def build_story(document: Bloc4Document) -> list:
     markdown = SOURCE.read_text(encoding="utf-8")
     story = [Spacer(1, 22 * mm)]
@@ -425,6 +501,7 @@ def build_story(document: Bloc4Document) -> list:
     ]
     story.extend([toc, PageBreak()])
     story.extend(parse_markdown(markdown, document.width))
+    story.extend(build_visual_evidence_appendix())
     return story
 
 

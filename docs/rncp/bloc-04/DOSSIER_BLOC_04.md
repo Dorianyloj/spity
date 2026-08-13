@@ -468,4 +468,6 @@ Le principal risque ouvert n'est pas masqué : la production est saine mais en r
 | A17 | Revue finale | `REVUE_FINALE_BLOC_04.md` et `preuves/B4-REVUE-FINALE-01-audit-transversal-2026-08-13.json` |
 | A18 | Parcours visuels | `preuves/captures/`, manifeste daté et procédure `npm run bloc4:visuals` |
 
+Les cinq captures de l'annexe A18 sont intégrées directement à la fin de l'export PDF. Elles présentent l'accueil public, le fil grimpeur, le matching, la gestion d'événements club et le profil mobile. Leur manifeste daté conserve le scénario, le rôle de démonstration, le viewport et le nom de chaque fichier ; elles restent donc vérifiables et reproductibles, sans donnée sensible.
+
 Les sources complémentaires regroupent les workflows et formulaires sous `.github/`, les politiques et scripts de maintenance sous `spity/`, les guides de déploiement, de release, de journal et d'amélioration, ainsi que le référentiel officiel archivé. Elles sont toutes reliées au manifeste d'intégrité.
