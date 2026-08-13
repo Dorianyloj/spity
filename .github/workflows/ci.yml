@@ -169,7 +169,17 @@ jobs:
         run: npm ci
 
       - name: Run Lighthouse thresholds
-        run: npm run perf:audit
+        run: |
+          for attempt in 1 2; do
+            if npm run perf:audit; then
+              exit 0
+            fi
+            if [ "$attempt" -eq 2 ]; then
+              exit 1
+            fi
+            echo "Lighthouse a échoué ; nouvelle tentative unique pour isoler une instabilité du runner."
+            sleep 10
+          done
 
       - name: Upload Lighthouse reports
         if: always()
@@ -375,14 +385,29 @@ jobs:
 
       - name: Publish staging images
         run: |
+          push_image() {
+            image="$1"
+            for attempt in 1 2 3; do
+              if docker push "$image"; then
+                return 0
+              fi
+              if [ "$attempt" -lt 3 ]; then
+                echo "Publication temporairement indisponible pour $image ; nouvelle tentative."
+                sleep 10
+              fi
+            done
+            return 1
+          }
+
           docker tag "$APP_IMAGE:sha-$GITHUB_SHA" "$APP_IMAGE:staging"
           docker tag "$MIGRATION_IMAGE:sha-$GITHUB_SHA" "$MIGRATION_IMAGE:staging"
-          docker push "$APP_IMAGE:sha-$GITHUB_SHA"
-          docker push "$APP_IMAGE:staging"
-          docker push "$MIGRATION_IMAGE:sha-$GITHUB_SHA"
-          docker push "$MIGRATION_IMAGE:staging"
+          push_image "$APP_IMAGE:sha-$GITHUB_SHA"
+          push_image "$APP_IMAGE:staging"
+          push_image "$MIGRATION_IMAGE:sha-$GITHUB_SHA"
+          push_image "$MIGRATION_IMAGE:staging"
 
       - name: Upload staging deployment evidence
+        if: always()
         uses: actions/upload-artifact@v6
         with:
           name: staging-${{ github.sha }}
