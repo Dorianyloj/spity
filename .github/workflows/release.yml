@@ -182,6 +182,15 @@ jobs:
           docker image inspect "$APP_IMAGE:candidate-$VERSION" > release-evidence/app-image.json
           docker image inspect "$MIGRATION_IMAGE:candidate-$VERSION" > release-evidence/migration-image.json
 
+      - name: Verify candidate deployment metadata
+        env:
+          DEPLOYMENT_ENVIRONMENT: staging
+          EXPECTED_REVISION: ${{ github.sha }}
+          EXPECTED_VERSION: ${{ needs.validate.outputs.version }}
+          HEALTH_OUTPUT_PATH: release-evidence/deployment-verification.json
+          HEALTH_URL: http://127.0.0.1:3000/api/health
+        run: node spity/scripts/verify-deployment.mjs
+
       - name: Stop smoke test environment
         if: always()
         run: |
@@ -246,6 +255,9 @@ jobs:
           cp spity/.env.production.example "dist/$bundle/"
           cp spity/DEPLOYMENT.md "dist/$bundle/"
           cp CHANGELOG.md "dist/$bundle/"
+          mkdir -p "dist/$bundle/scripts"
+          cp spity/scripts/check-health.mjs "dist/$bundle/scripts/"
+          cp spity/scripts/verify-deployment.mjs "dist/$bundle/scripts/"
 
           app_digest=$(docker image inspect "$APP_IMAGE:$VERSION" --format '{{index .RepoDigests 0}}')
           migration_digest=$(docker image inspect "$MIGRATION_IMAGE:$VERSION" --format '{{index .RepoDigests 0}}')

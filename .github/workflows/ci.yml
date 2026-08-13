@@ -353,6 +353,15 @@ jobs:
           docker image inspect "$APP_IMAGE:sha-$GITHUB_SHA" > staging-evidence/app-image.json
           docker image inspect "$MIGRATION_IMAGE:sha-$GITHUB_SHA" > staging-evidence/migration-image.json
 
+      - name: Verify deployed staging metadata
+        env:
+          DEPLOYMENT_ENVIRONMENT: staging
+          EXPECTED_REVISION: ${{ github.sha }}
+          EXPECTED_VERSION: ${{ steps.metadata.outputs.version }}
+          HEALTH_OUTPUT_PATH: staging-evidence/deployment-verification.json
+          HEALTH_URL: http://127.0.0.1:3000/api/health
+        run: node spity/scripts/verify-deployment.mjs
+
       - name: Stop staging smoke test
         if: always()
         run: |

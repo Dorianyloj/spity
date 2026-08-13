@@ -5,6 +5,7 @@ Cette procédure autonome est incluse dans chaque bundle de release. Elle déplo
 ## Prérequis
 
 - Docker Engine 24 ou supérieur avec Docker Compose v2 ;
+- Node.js 22 pour le contrôle de promotion fourni dans le bundle ;
 - accès en lecture à `ghcr.io/dorianyloj/spity` et `ghcr.io/dorianyloj/spity-migrations` ;
 - `curl` et `jq` pour contrôler la route de santé ;
 - un fichier `.env.production` non versionné contenant des secrets propres à l'environnement ;
@@ -92,13 +93,15 @@ docker compose --env-file .env.production -f docker-compose.production.yml \
 
 ```bash
 docker compose --env-file .env.production -f docker-compose.production.yml ps
-health="$(curl --fail --silent http://127.0.0.1:3000/api/health)"
-printf '%s\n' "$health" | jq .
-printf '%s\n' "$health" | jq --exit-status \
-  --arg version "$APP_VERSION" \
-  --arg revision "$APP_REVISION" \
-  '.status == "ok" and .version == $version and .revision == $revision'
+DEPLOYMENT_ENVIRONMENT=production \
+HEALTH_URL=http://127.0.0.1:3000/api/health \
+EXPECTED_VERSION="$APP_VERSION" \
+EXPECTED_REVISION="$APP_REVISION" \
+HEALTH_OUTPUT_PATH=deployment-verification.json \
+node scripts/verify-deployment.mjs
 ```
+
+Le rapport `deployment-verification.json` doit indiquer `result: passed`. Une version ou une révision différente bloque la promotion : conserver les journaux, revenir au tag immuable précédent si nécessaire, puis consigner l'anomalie.
 
 Vérifier ensuite via l'URL HTTPS publique :
 

@@ -77,3 +77,17 @@ test('keeps service availability when only the latency objective is breached', a
   assert.equal(report.classification.code, 'latency_threshold')
   assert.equal(report.classification.severity, 'S3')
 })
+
+test('rejects a healthy endpoint exposing an unexpected application version', async () => {
+  const report = await checkHealth({
+    expectedVersion: '0.1.1',
+    retries: 0,
+    url: `${origin}/healthy`,
+  })
+
+  assert.equal(report.status, 'degraded')
+  assert.equal(report.availability, true)
+  assert.equal(report.classification.code, 'version_mismatch')
+  assert.equal(report.classification.expectedVersion, '0.1.1')
+  assert.equal(report.classification.observedVersion, 'exercise')
+})

@@ -14,6 +14,8 @@ Ce répertoire est le chantier Bloc 4 de Spity selon le référentiel Ynov 2024,
 
 - [`../../../spity/INCIDENT_MANAGEMENT.md`](../../../spity/INCIDENT_MANAGEMENT.md) : cycle de gestion des anomalies, rôles et portes qualité ;
 
+- [`../../../spity/RELEASE_VERIFICATION.md`](../../../spity/RELEASE_VERIFICATION.md) : vérification version/révision avant promotion d'un candidat ;
+
 - [`../../../spity/MAINTENANCE.md`](../../../spity/MAINTENANCE.md) ;
 - [`../../../spity/OBSERVABILITY.md`](../../../spity/OBSERVABILITY.md) ;
 - [`../../../spity/SUPPORT.md`](../../../spity/SUPPORT.md) ;

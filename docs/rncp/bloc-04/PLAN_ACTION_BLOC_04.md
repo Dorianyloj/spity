@@ -15,7 +15,7 @@ Le Bloc 4 est développé comme un chantier produit, pas comme une simple rédac
 | 1 | C4.1.1 - Gérer les mises à jour | Dependabot, politique exécutable, audit planifié, SBOM, revue PR, lot compatible qualifié | **Industrialisée et vérifiée** |
 | 2 | C4.1.2 - Superviser et alerter | Politique versionnée, sondes qualifiées, alerte/rétablissement uniques, SLO 30 jours, couverture et exercice local | **Industrialisée et vérifiée** |
 | 3 | C4.2.1 - Consigner les anomalies | Registre JSON validé, cycle de vie, cause racine, confidentialité, formulaires et CI dédiée | **Industrialisée et vérifiée** |
-| 4 | C4.2.2 - Créer et déployer un correctif | CI complète, release par tag, rollback documenté | Base fonctionnelle à approfondir |
+| 4 | C4.2.2 - Créer et déployer un correctif | Correctif de contrôle de promotion, CI/release, artefacts de vérification et rollback documenté | **Industrialisée et vérifiée** |
 | 5 | C4.3.1 - Proposer des améliorations | Backlog chiffré et priorisé | Base documentaire à transformer en boucle de pilotage |
 | 6 | C4.3.2 - Tenir le journal des versions | Changelog, release et version/révision de santé | Base fonctionnelle à approfondir |
 | 7 | C4.3.3 - Collaborer avec le support | Formulaire support et exercice fictif déclaré | Base fonctionnelle à approfondir |
@@ -64,7 +64,17 @@ Les limites restantes sont explicites : l’historique de latence P95, les resso
 - [x] formulaires GitHub de signalement, rapport CI conservé 90 jours et 18 tests de maintenance ;
 - [x] exercice en mémoire validant le cas conforme, la transition interdite et le rejet d’un jeton simulé.
 
-La prochaine étape est C4.2.2 : relier ce registre à un correctif et à une promotion contrôlée, sans transformer une fiche `planned` en déploiement fictif.
+## C4.2.2 - Résultat obtenu
+
+- [x] traitement de la dérive `SPITY-INC-2026-0002` par un contrôle de promotion réutilisable, sans déploiement fictif ;
+- [x] contrôle de santé exigeant désormais la version **et** la révision Git attendues ;
+- [x] refus explicite des métadonnées incohérentes, classé `S3/deployment-verification` et documenté ;
+- [x] exécution automatique après le smoke test de staging et avant la promotion de la candidate de release ;
+- [x] rapport JSON conservé dans les artefacts CI/CD, scripts inclus dans le bundle de release ;
+- [x] exercice local en mémoire : candidat conforme accepté, version et révision erronées refusées ;
+- [x] 22 tests de maintenance couvrent la santé, les incidents, le SLO et les décisions de promotion.
+
+La prochaine étape est C4.3.1 : utiliser les indicateurs et les retours pour transformer les recommandations en décisions priorisées et mesurables.
 
 ## Règle de présentation
 

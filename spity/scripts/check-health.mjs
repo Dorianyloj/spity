@@ -28,6 +28,7 @@ const classifications = {
   network_error: { category: 'network-or-http', severity: 'S1', impactsAvailability: true, runbook: 'incident-production' },
   revision_mismatch: { category: 'deployment', severity: 'S3', impactsAvailability: false, runbook: 'deployment-verification' },
   timeout: { category: 'network-or-http', severity: 'S1', impactsAvailability: true, runbook: 'incident-production' },
+  version_mismatch: { category: 'deployment', severity: 'S3', impactsAvailability: false, runbook: 'deployment-verification' },
 }
 
 const classifyFailure = (error) => {
@@ -46,6 +47,7 @@ const errorMessage = (error) => error instanceof Error ? error.message : String(
 
 export const checkHealth = async ({
   expectedRevision,
+  expectedVersion,
   fetchImpl = fetch,
   maxLatencyMs = 3_000,
   retries = 2,
@@ -110,6 +112,14 @@ export const checkHealth = async ({
 
       if (typeof payload.revision !== 'string' || payload.revision.trim() === '') {
         throw new ProbeFailure('metadata_missing', 'La révision Git est absente de la réponse', { httpStatus: response.status })
+      }
+
+      if (expectedVersion && payload.version !== expectedVersion) {
+        throw new ProbeFailure(
+          'version_mismatch',
+          `La version déployée ${payload.version} diffère de la version attendue ${expectedVersion}`,
+          { expectedVersion, observedVersion: payload.version, httpStatus: response.status },
+        )
       }
 
       if (expectedRevision && payload.revision !== expectedRevision) {
@@ -195,6 +205,7 @@ const isMainModule = process.argv[1] && resolve(process.argv[1]) === fileURLToPa
 if (isMainModule) {
   const report = await checkHealth({
     expectedRevision: process.env.EXPECTED_REVISION || undefined,
+    expectedVersion: process.env.EXPECTED_VERSION || undefined,
     maxLatencyMs: asPositiveInteger(process.env.HEALTH_MAX_LATENCY_MS, 3_000),
     retries: asPositiveInteger(process.env.HEALTH_RETRIES, 2),
     retryDelayMs: asPositiveInteger(process.env.HEALTH_RETRY_DELAY_MS, 500),

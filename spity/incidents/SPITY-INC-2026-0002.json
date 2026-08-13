@@ -53,6 +53,13 @@
       "status": "planned",
       "description": "Préparer v0.1.1 avec SHA, digests, migrations, sauvegarde et contrôle /api/health.",
       "reference": "spity/DEPLOYMENT.md"
+    },
+    {
+      "id": "ACT-2026-0002-02",
+      "type": "delivery-control",
+      "status": "completed",
+      "description": "Vérifier automatiquement version et révision sur le candidat de staging puis sur la candidate de release avant toute promotion stable.",
+      "reference": "spity/RELEASE_VERIFICATION.md"
     }
   ],
   "history": [

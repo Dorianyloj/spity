@@ -96,6 +96,12 @@ small = ParagraphStyle(
     leading=9.5,
     spaceAfter=0,
 )
+table_header = ParagraphStyle(
+    "TableHeader",
+    parent=small,
+    fontName="Vera-Bold",
+    textColor=colors.white,
+)
 h1 = ParagraphStyle(
     "H1",
     parent=body,
@@ -238,7 +244,10 @@ def make_table(rows: list[list[str]], available_width: float) -> Table:
 
     total = sum(lengths)
     widths = [available_width * length / total for length in lengths]
-    data = [[Paragraph(inline_markup(cell), small) for cell in row] for row in normalized]
+    data = [
+        [Paragraph(inline_markup(cell), table_header if row_index == 0 else small) for cell in row]
+        for row_index, row in enumerate(normalized)
+    ]
     table = Table(data, colWidths=widths, repeatRows=1, hAlign="LEFT")
     table.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), SPITY_DARK),
