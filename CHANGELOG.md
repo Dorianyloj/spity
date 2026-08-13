@@ -1,5 +1,10 @@
 # Changelog
 
+## Dossier de remise Bloc 4
+
+- ajout d'un dossier jury structuré, d'une matrice de preuves, d'un glossaire et d'un guide de présentation ;
+- intégration de ces documents dans le manifeste d'intégrité Bloc 4.
+
 Les évolutions notables de Spity sont consignées dans ce fichier. Le projet suit [Semantic Versioning](https://semver.org/lang/fr/) et le format [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 
 ## [Unreleased]

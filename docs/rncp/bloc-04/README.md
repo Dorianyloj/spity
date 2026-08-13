@@ -4,6 +4,7 @@ Ce répertoire est le chantier Bloc 4 de Spity selon le référentiel Ynov 2024,
 
 ## Livrables
 
+- [`dossier-jury/`](dossier-jury/) : dossier de remise structuré, pédagogique et autonome pour le jury ;
 - [`DOSSIER_BLOC_04.md`](DOSSIER_BLOC_04.md) : dossier de travail couvrant C4.1.1 à C4.3.3 ;
 - [`PLAN_ACTION_BLOC_04.md`](PLAN_ACTION_BLOC_04.md) : état réel et feuille de route compétence par compétence ;
 - [`REVUE_FINALE_BLOC_04.md`](REVUE_FINALE_BLOC_04.md) : grille jury liant chaque attendu, mécanisme, commande et preuve ;
