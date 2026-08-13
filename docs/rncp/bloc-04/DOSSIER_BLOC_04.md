@@ -25,7 +25,7 @@ Spity dispose d'une chaîne de maintenance reproductible : Dependabot surveille 
 Le 13 août 2026, l'état vérifié est le suivant :
 
 - 0 vulnérabilité de production et 0 alerte haute/critique dans l'audit complet après mise à jour des outils ;
-- 152 tests Jest, 13 tests de maintenance, 11 scénarios MariaDB et 6 recettes Playwright ;
+- 152 tests Jest, 18 tests de maintenance, 11 scénarios MariaDB et 6 recettes Playwright ;
 - 10 pages authentifiées sur 10 à 100 % Lighthouse accessibilité ;
 - CI complète verte sur `e3784b7` ;
 - 29 exécutions de supervision historisées au moment de la collecte, avec production `ok` ;
@@ -40,7 +40,7 @@ La dérive n'a pas été corrigée par un déploiement non autorisé. Elle est t
 | --- | --- | --- | --- | --- |
 | C4.1.1 | Processus précis : fréquence, périmètre, type | Cadence hebdomadaire et mensuelle, politique exécutable, audit planifié, SBOM, revue PR et lot réel qualifié | `spity/MAINTENANCE.md`, C411-01 à C411-03 | Industrialisé et vérifié |
 | C4.1.2 | Supervision adaptée, sondes, critères qualité/performance, disponibilité | Politique versionnée, contrôle 15 min, qualification S1/S2/S3, artefacts 90 jours, incident/rétablissement unique et SLO 30 jours avec garde de couverture | `spity/OBSERVABILITY.md`, C412-01 à C412-04 | Industrialisé et vérifié |
-| C4.2.1 | Collecte structurée, fiche reproductible, analyse et préconisations | Formulaire incident, anomalie contraste complète et dérive production réelle | C421-01 et C421-02 | Base fonctionnelle à approfondir |
+| C4.2.1 | Collecte structurée, fiche reproductible, analyse et préconisations | Registre versionné, machine à états, confidentialité contrôlée, formulaires, CI dédiée et deux anomalies réelles | `spity/INCIDENT_MANAGEMENT.md`, C421-01 à C421-04 | Industrialisé et vérifié |
 | C4.2.2 | Correctif décrit utilisant intégration/déploiement continu | Correctif sécurité observé en production, correctif accessibilité validé par quatre jobs CI et workflow Release | C422-01 et C422-02 | Base fonctionnelle à approfondir |
 | C4.3.1 | Recommandations réalistes, argumentées, coûts/délais/gains | Cinq axes notés et chiffrés, priorisation et risques | C431-01 | Base de pilotage à approfondir |
 | C4.3.2 | Journal des versions et correctifs déployés | Release v0.1.0, instance jury 0.1.0-jury, SHA et règle de tenue | C432-01, `CHANGELOG.md` | Base fonctionnelle à approfondir |
@@ -108,15 +108,17 @@ La collecte publique a trouvé 29 runs de supervision, dont les plus récents so
 
 ## 6. C4.2.1 - Consigner les anomalies
 
-### 6.1 Collecte
+### 6.1 Collecte et cycle de vie
 
-Le formulaire d'incident impose : date/fuseau, sévérité, version/révision, comportement observé, reproduction, attendu, preuves anonymisées, analyse, correctif, validation et clôture. Le formulaire support ajoute contexte utilisateur, priorité, escalade et contrôle de confidentialité.
+Une issue GitHub recueille le signal initial ; elle impose date ISO, impact, version/révision, reproduction, preuves anonymisées et confirmation de confidentialité. Après triage, le mainteneur crée une fiche `SPITY-INC-YYYY-NNNN` versionnée dans `spity/incidents/`. Cette fiche est la source de vérité : sévérité, priorité, propriétaire, environnement, impact, préconditions, observé, attendu, cause, décision, actions, vérification et preuves y sont séparés.
 
-### 6.2 Anomalie rencontrée
+Le cycle ordonné passe par `reported`, `triaged`, `investigating`, `planned`, `resolving`, `validating`, `resolved` puis `closed`. Il est contrôlé par `incident-policy.json`. Les chemins de rejet et doublon restent possibles ; une fiche planifiée reste explicitement ouverte. Le script `check-incident-registry.mjs` refuse une transition interdite, un historique non chronologique, une clôture sans vérification, un identifiant dupliqué, une preuve absente ou un motif de secret, jeton, adresse privée, e-mail ou clé privée.
 
-L'audit authentifié échouait à 0,96 sur certains états vides. Le problème était reproductible sur une base vierge et variait selon la surface claire ou sombre. La cause était un composant partagé qui héritait de couleurs non adaptées. La première correction par texte blanc déplaçait le défaut vers les cartes claires ; la cause racine a donc été corrigée en rendant le composant autonome.
+### 6.2 Anomalies réelles et vérification
 
-La fiche C421-01 contient toutes les étapes, la cause, les préconisations, les commits et les résultats. Une seconde fiche consigne la dérive réelle de production : service disponible mais révision 19 commits derrière le code validé.
+`SPITY-INC-2026-0001` reprend l’échec d’accessibilité authentifiée : l’état vide était reproductible sur une base vierge et sur des surfaces claire/sombre. La cause racine est l’héritage de couleurs par un composant partagé ; la décision a consisté à le rendre autonome, avec validation Lighthouse, Playwright et CI. Elle est clôturée sans prétendre que sa promotion production a eu lieu.
+
+`SPITY-INC-2026-0002` consigne la dérive observée entre production et référence auditée. Elle reste `planned` : la décision est de préparer une release contrôlée, jamais de déployer uniquement pour fermer un écart documentaire. L’audit courant accepte les deux fiches ; l’exercice contrôlé refuse une clôture directe de `reported` vers `closed` et un jeton Bearer simulé, uniquement en mémoire.
 
 ## 7. C4.2.2 - Créer et déployer un correctif via CI/CD
 
@@ -168,7 +170,7 @@ Les actions destructives restent interdites dans les procédures courantes : auc
 
 ## 12. Conclusion
 
-Les sept compétences disposent désormais d'une base documentée, de sources exécutables, d'états publics figés ou d'une mise en situation fictive déclarée. C4.1.1 et C4.1.2 franchissent la définition renforcée de terminé : mécanisme réel, automatisation, cas d'échec testés, preuves reproductibles et exploitation décrite. Les cinq autres restent volontairement qualifiées comme bases à approfondir une par une.
+Les sept compétences disposent désormais d'une base documentée, de sources exécutables, d'états publics figés ou d'une mise en situation fictive déclarée. C4.1.1, C4.1.2 et C4.2.1 franchissent la définition renforcée de terminé : mécanisme réel, automatisation, cas d'échec testés, preuves reproductibles et exploitation décrite. Les quatre autres restent volontairement qualifiées comme bases à approfondir une par une.
 
 Le principal risque ouvert n'est pas masqué : la production est saine mais en retard sur `main`. La prochaine action opérationnelle est une release versionnée autorisée, pas un déploiement improvisé. Cette transparence garantit que le dossier décrit l'état réel du logiciel.
 
@@ -187,6 +189,9 @@ Le principal risque ouvert n'est pas masqué : la production est saine mais en r
 | A8b | C4.1.2 | `preuves/B4-C412-04-slo-supervision-2026-08-13.json` |
 | A9 | C4.2.1 | `preuves/B4-C421-01-fiche-anomalie-accessibilite-2026-08-13.md` |
 | A10 | C4.2.1 | `preuves/B4-C421-02-anomalie-derive-production-2026-08-13.md` |
+| A10b | C4.2.1 | `spity/INCIDENT_MANAGEMENT.md` et `spity/incidents/` |
+| A10c | C4.2.1 | `preuves/B4-C421-03-registre-anomalies-2026-08-13.json` |
+| A10d | C4.2.1 | `preuves/B4-C421-04-exercice-registre-2026-08-13.json` |
 | A11 | C4.2.2 | `preuves/B4-C422-01-correctif-et-ci-2026-08-13.json` |
 | A12 | C4.2.2 | `preuves/B4-C422-02-traitement-correctif-ci-cd-2026-08-13.md` |
 | A13 | C4.3.1 | `preuves/B4-C431-01-recommandations-2026-08-13.md` |
@@ -194,4 +199,4 @@ Le principal risque ouvert n'est pas masqué : la production est saine mais en r
 | A15 | C4.3.3 | `spity/SUPPORT.md` et `preuves/B4-C433-01-collaboration-support-2026-08-13.md` |
 | A16 | Intégrité | `preuves/MANIFEST.sha256` |
 
-Les sources complémentaires sont `.github/workflows/ci.yml`, `release.yml`, `production-monitoring.yml`, `availability-slo-report.yml`, `dependency-maintenance.yml`, `dependency-review.yml`, `dependabot.yml`, les deux formulaires d'issue, `CHANGELOG.md`, `spity/dependency-policy.json`, `spity/monitoring-policy.json`, les scripts de sonde/SLO, `spity/DEPLOYMENT.md` et le référentiel officiel archivé.
+Les sources complémentaires sont `.github/workflows/ci.yml`, `release.yml`, `production-monitoring.yml`, `availability-slo-report.yml`, `incident-registry.yml`, `dependency-maintenance.yml`, `dependency-review.yml`, `dependabot.yml`, les formulaires d'issue, `CHANGELOG.md`, `spity/dependency-policy.json`, `spity/monitoring-policy.json`, `spity/incident-policy.json`, les scripts de sonde/SLO/registre, `spity/DEPLOYMENT.md` et le référentiel officiel archivé.

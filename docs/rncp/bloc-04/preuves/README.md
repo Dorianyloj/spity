@@ -8,7 +8,7 @@ Les fichiers de ce répertoire sont datés, anonymisés et reliés à un critèr
 | --- | --- | --- |
 | C411 | C4.1.1 | Audit, décision de maintenance, politique exécutable et métadonnées SBOM. |
 | C412 | C4.1.2 | Historique de supervision, santé publique, calcul SLO/couverture et exercice d’alerte. |
-| C421 | C4.2.1 | Fiches d'anomalie avec reproduction, cause et décision. |
+| C421 | C4.2.1 | Registre d’anomalies validé, fiches reproductibles, audit, exercice de cycle de vie et confidentialité. |
 | C422 | C4.2.2 | État CI/déploiement et traitement du correctif. |
 | C431 | C4.3.1 | Recommandations chiffrées et priorisées. |
 | C432 | C4.3.2 | Journal des versions publiées/déployées. |

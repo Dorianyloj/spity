@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spity.fr/schemas/incident-record-v1.json",
+  "title": "Spity incident record",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "title",
+    "status",
+    "classification",
+    "detection",
+    "reproduction",
+    "investigation",
+    "decision",
+    "correctiveActions",
+    "history",
+    "evidence",
+    "sensitiveDataReview"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "pattern": "^SPITY-INC-\\d{4}-\\d{4}$" },
+    "status": {
+      "enum": ["reported", "triaged", "investigating", "planned", "resolving", "validating", "resolved", "closed", "rejected", "duplicate"]
+    },
+    "classification": {
+      "type": "object",
+      "required": ["severity", "priority", "category", "userImpact"],
+      "properties": {
+        "severity": { "enum": ["S1", "S2", "S3", "S4"] },
+        "priority": { "enum": ["P1", "P2", "P3", "P4"] }
+      }
+    },
+    "history": { "type": "array", "minItems": 1 },
+    "evidence": { "type": "array", "minItems": 1 }
+  },
+  "additionalProperties": true
+}

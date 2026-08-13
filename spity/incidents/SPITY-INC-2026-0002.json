@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "id": "SPITY-INC-2026-0002",
+  "title": "Dérive de révision entre production et branche validée",
+  "status": "planned",
+  "classification": {
+    "severity": "S3",
+    "priority": "P3",
+    "category": "release-governance",
+    "userImpact": "Le service reste disponible, mais des corrections validées ne sont pas encore présentes dans le binaire observé."
+  },
+  "detection": {
+    "detectedAt": "2026-08-13T07:00:00.000+02:00",
+    "source": "Comparaison de /api/health avec la référence Git auditée",
+    "environment": "Production publique, lecture seule"
+  },
+  "ownership": {
+    "reporterRole": "maintainer",
+    "ownerRole": "product-owner",
+    "validatorRole": "maintainer"
+  },
+  "release": {
+    "version": "0.1.0-jury",
+    "revisionAtDetection": "49c4ea0ffa34b35e9ad5bc2e1a838eb82eb0b8ef"
+  },
+  "reproduction": {
+    "reproducible": true,
+    "frequency": "Observé lors de la collecte du 13 août 2026.",
+    "prerequisites": ["Accès lecture seule à la route publique de santé et au dépôt Git."],
+    "steps": [
+      "Interroger GET https://spity.fr/api/health.",
+      "Comparer la révision renvoyée à la référence Git auditée.",
+      "Calculer le nombre de commits séparant les deux révisions."
+    ],
+    "observed": "La production répondait ok sur 49c4ea0 alors que la référence auditée était e3784b7, soit 19 commits supplémentaires.",
+    "expected": "Une release autorisée expose une version, une révision et des digests alignés avec l’artefact validé."
+  },
+  "investigation": {
+    "method": "Comparaison de métadonnées publiques, historique Git et procédure de release.",
+    "rootCause": "La promotion versionnée de la référence auditée n’avait pas encore été autorisée et exécutée.",
+    "contributingFactors": ["Absence de release promotionnée après la validation CI.", "Nécessité de préserver la séparation entre validé et déployé."],
+    "scope": "Traçabilité de production et disponibilité des correctifs validés."
+  },
+  "decision": {
+    "selected": "Préparer une release versionnée avec sauvegarde, vérification des images candidates et contrôle post-déploiement.",
+    "rationale": "Un déploiement ne doit pas être déclenché uniquement pour réduire un écart documentaire.",
+    "alternativesRejected": ["Déploiement direct de main sans release ni validation de rollback."]
+  },
+  "correctiveActions": [
+    {
+      "id": "ACT-2026-0002-01",
+      "type": "release",
+      "status": "planned",
+      "description": "Préparer v0.1.1 avec SHA, digests, migrations, sauvegarde et contrôle /api/health.",
+      "reference": "spity/DEPLOYMENT.md"
+    }
+  ],
+  "history": [
+    { "at": "2026-08-13T07:00:00.000+02:00", "from": null, "to": "reported", "actorRole": "maintainer", "reason": "Dérive détectée par métadonnées publiques." },
+    { "at": "2026-08-13T07:15:00.000+02:00", "from": "reported", "to": "triaged", "actorRole": "product-owner", "reason": "S3/P3, aucun impact immédiat sur la disponibilité." },
+    { "at": "2026-08-13T07:30:00.000+02:00", "from": "triaged", "to": "investigating", "actorRole": "maintainer", "reason": "Comparaison des révisions et de la procédure de release." },
+    { "at": "2026-08-13T08:00:00.000+02:00", "from": "investigating", "to": "planned", "actorRole": "product-owner", "reason": "Promotion planifiée seulement via une release autorisée." }
+  ],
+  "evidence": [
+    { "kind": "repository-path", "value": "docs/rncp/bloc-04/preuves/B4-C421-02-anomalie-derive-production-2026-08-13.md" },
+    { "kind": "repository-path", "value": "spity/DEPLOYMENT.md" }
+  ],
+  "sensitiveDataReview": {
+    "status": "passed",
+    "reviewedAt": "2026-08-13T08:00:00.000+02:00",
+    "reviewedByRole": "maintainer",
+    "statement": "La fiche ne contient que la route publique, des versions et des révisions Git."
+  }
+}

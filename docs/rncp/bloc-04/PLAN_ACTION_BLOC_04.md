@@ -14,7 +14,7 @@ Le Bloc 4 est développé comme un chantier produit, pas comme une simple rédac
 | --- | --- | --- | --- |
 | 1 | C4.1.1 - Gérer les mises à jour | Dependabot, politique exécutable, audit planifié, SBOM, revue PR, lot compatible qualifié | **Industrialisée et vérifiée** |
 | 2 | C4.1.2 - Superviser et alerter | Politique versionnée, sondes qualifiées, alerte/rétablissement uniques, SLO 30 jours, couverture et exercice local | **Industrialisée et vérifiée** |
-| 3 | C4.2.1 - Consigner les anomalies | Formulaire GitHub et deux fiches reproductibles | Base fonctionnelle à approfondir |
+| 3 | C4.2.1 - Consigner les anomalies | Registre JSON validé, cycle de vie, cause racine, confidentialité, formulaires et CI dédiée | **Industrialisée et vérifiée** |
 | 4 | C4.2.2 - Créer et déployer un correctif | CI complète, release par tag, rollback documenté | Base fonctionnelle à approfondir |
 | 5 | C4.3.1 - Proposer des améliorations | Backlog chiffré et priorisé | Base documentaire à transformer en boucle de pilotage |
 | 6 | C4.3.2 - Tenir le journal des versions | Changelog, release et version/révision de santé | Base fonctionnelle à approfondir |
@@ -53,6 +53,18 @@ Pour chaque ligne, les cinq conditions suivantes sont obligatoires :
 - [x] exercice local sain, indisponible et lent ; 13 tests de maintenance couvrant les décisions de la sonde et du SLO.
 
 Les limites restantes sont explicites : l’historique de latence P95, les ressources système et les Web Vitals devront rejoindre une plateforme de métriques persistantes. Aucun déploiement de production n’est déclenché par ces workflows.
+
+## C4.2.1 - Résultat obtenu
+
+- [x] registre versionné avec identifiants stables, sévérité, priorité, impact, propriétaire et preuves ;
+- [x] machine à états contrôlée de `reported` à `closed`, avec refus des sauts, retours non autorisés et historiques non chronologiques ;
+- [x] reproduction, cause racine, facteurs contributifs, décision, alternatives, actions et vérification obligatoires selon l’état ;
+- [x] détection automatique des jetons, secrets, adresses privées, e-mails et clés privées dans toute fiche ;
+- [x] deux anomalies réelles migrées honnêtement : une correction d’accessibilité clôturée, une dérive de release toujours planifiée ;
+- [x] formulaires GitHub de signalement, rapport CI conservé 90 jours et 18 tests de maintenance ;
+- [x] exercice en mémoire validant le cas conforme, la transition interdite et le rejet d’un jeton simulé.
+
+La prochaine étape est C4.2.2 : relier ce registre à un correctif et à une promotion contrôlée, sans transformer une fiche `planned` en déploiement fictif.
 
 ## Règle de présentation
 

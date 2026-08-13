@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "id": "SPITY-INC-2026-0001",
+  "title": "Contraste insuffisant des états vides authentifiés",
+  "status": "closed",
+  "classification": {
+    "severity": "S2",
+    "priority": "P2",
+    "category": "accessibility",
+    "userImpact": "Des informations restaient illisibles pour certains utilisateurs ; la release a été bloquée."
+  },
+  "detection": {
+    "detectedAt": "2026-08-12T09:00:00.000+02:00",
+    "source": "Pipeline CI GitHub Actions et audit d’accessibilité authentifié",
+    "environment": "MariaDB 11.4 vierge, comptes temporaires de test"
+  },
+  "ownership": {
+    "reporterRole": "automation",
+    "ownerRole": "maintainer",
+    "validatorRole": "maintainer"
+  },
+  "release": {
+    "version": "unreleased",
+    "revisionAtValidation": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b"
+  },
+  "reproduction": {
+    "reproducible": true,
+    "frequency": "Systématique sur les écrans concernés avec données vides.",
+    "prerequisites": [
+      "MariaDB 11.4 vierge avec migrations appliquées.",
+      "Comptes temporaires de test créés par le script d’audit."
+    ],
+    "steps": [
+      "Exécuter npm run accessibility:audit.",
+      "Ouvrir /app/partnerships, /app/events puis /app/places sans lieu personnalisé.",
+      "Contrôler les violations color-contrast relatives au composant EmptyState.",
+      "Exécuter npm run test:acceptance pour vérifier le sélecteur de carte de matching."
+    ],
+    "observed": "Le score Lighthouse authentifié était 0,96 et certains textes héritaient de couleurs incompatibles avec leur surface.",
+    "expected": "Les dix pages authentifiées atteignent le seuil d’accessibilité et les scénarios BC02 restent indépendants du libellé exact du lien."
+  },
+  "investigation": {
+    "method": "Reproduction sur base vierge et existante, inspection du composant partagé, analyse en cinq pourquoi.",
+    "rootCause": "EmptyState héritait des couleurs du parent alors qu’il était utilisé à la fois sur fond sombre et dans des cartes claires.",
+    "contributingFactors": [
+      "La première correction modifiait seulement la couleur de texte.",
+      "Le sélecteur Playwright dépendait du nom accessible complet d’un titre."
+    ],
+    "scope": "Partnerships, events, places et recette BC02 de matching."
+  },
+  "decision": {
+    "selected": "Rendre EmptyState autonome et assouplir le sélecteur de la recette.",
+    "rationale": "Une surface autonome protège tous les contextes d’utilisation et réduit le risque de régression sur les thèmes.",
+    "alternativesRejected": [
+      "Forcer le texte blanc sur tous les écrans, car cela dégradait les cartes claires.",
+      "Désactiver temporairement l’audit, car cela aurait masqué l’impact utilisateur."
+    ]
+  },
+  "correctiveActions": [
+    {
+      "id": "ACT-2026-0001-01",
+      "type": "code",
+      "status": "completed",
+      "description": "Appliquer bg-card, text-card-foreground et text-muted-foreground à EmptyState.",
+      "reference": "e3784b7"
+    },
+    {
+      "id": "ACT-2026-0001-02",
+      "type": "test",
+      "status": "completed",
+      "description": "Sélectionner la carte BC02 par le texte contenu dans le titre.",
+      "reference": "e3784b7"
+    }
+  ],
+  "verification": {
+    "status": "passed",
+    "commands": ["npm run accessibility:audit", "npm run test:acceptance"],
+    "result": "Dix pages authentifiées à 100 % d’accessibilité, six scénarios BC02 réussis et CI verte."
+  },
+  "closure": {
+    "closedAt": "2026-08-12T18:00:00.000+02:00",
+    "closedByRole": "maintainer",
+    "outcome": "Correctif validé en CI ; une promotion de production reste soumise au processus de release."
+  },
+  "history": [
+    { "at": "2026-08-12T09:00:00.000+02:00", "from": null, "to": "reported", "actorRole": "automation", "reason": "Échec de l’audit d’accessibilité." },
+    { "at": "2026-08-12T09:20:00.000+02:00", "from": "reported", "to": "triaged", "actorRole": "maintainer", "reason": "S2/P2 confirmé, release bloquée." },
+    { "at": "2026-08-12T10:00:00.000+02:00", "from": "triaged", "to": "investigating", "actorRole": "maintainer", "reason": "Reproduction sur base vierge et existante." },
+    { "at": "2026-08-12T13:00:00.000+02:00", "from": "investigating", "to": "resolving", "actorRole": "maintainer", "reason": "Cause racine confirmée et correction retenue." },
+    { "at": "2026-08-12T16:00:00.000+02:00", "from": "resolving", "to": "validating", "actorRole": "maintainer", "reason": "Correctif et recette ciblée prêts." },
+    { "at": "2026-08-12T17:30:00.000+02:00", "from": "validating", "to": "resolved", "actorRole": "maintainer", "reason": "Audits et recettes conformes." },
+    { "at": "2026-08-12T18:00:00.000+02:00", "from": "resolved", "to": "closed", "actorRole": "maintainer", "reason": "Preuves de CI reliées à la fiche." }
+  ],
+  "evidence": [
+    { "kind": "repository-path", "value": "docs/rncp/bloc-04/preuves/B4-C421-01-fiche-anomalie-accessibilite-2026-08-13.md" },
+    { "kind": "url", "value": "https://github.com/Dorianyloj/spity/actions/runs/31604246584" }
+  ],
+  "sensitiveDataReview": {
+    "status": "passed",
+    "reviewedAt": "2026-08-12T18:00:00.000+02:00",
+    "reviewedByRole": "maintainer",
+    "statement": "Seulement des comptes temporaires et des preuves anonymisées sont référencés."
+  }
+}

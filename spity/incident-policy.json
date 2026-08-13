@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "identifierPattern": "^SPITY-INC-\\d{4}-\\d{4}$",
+  "severities": ["S1", "S2", "S3", "S4"],
+  "priorities": ["P1", "P2", "P3", "P4"],
+  "statuses": ["reported", "triaged", "investigating", "planned", "resolving", "validating", "resolved", "closed", "rejected", "duplicate"],
+  "transitions": {
+    "initial": ["reported"],
+    "reported": ["triaged", "rejected", "duplicate"],
+    "triaged": ["investigating", "planned", "rejected", "duplicate"],
+    "investigating": ["planned", "resolving", "rejected", "duplicate"],
+    "planned": ["resolving", "rejected", "duplicate"],
+    "resolving": ["validating", "planned"],
+    "validating": ["resolved", "resolving", "planned"],
+    "resolved": ["closed", "resolving"],
+    "closed": [],
+    "rejected": [],
+    "duplicate": []
+  },
+  "closureRequirements": ["rootCause", "correctiveAction", "verification", "closure"],
+  "sensitiveDataRules": [
+    "No password, token, secret, private key, private IP address, email address or raw database export.",
+    "Evidence must be anonymised and limited to repository paths or public HTTPS URLs."
+  ]
+}

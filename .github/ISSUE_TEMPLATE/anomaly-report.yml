@@ -1,0 +1,44 @@
+name: Anomalie produit ou qualité
+description: Signaler une anomalie hors incident de production avec les éléments nécessaires à sa qualification.
+title: "[Anomalie] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ce formulaire crée un signal initial. Le mainteneur le relie à une fiche `SPITY-INC-YYYY-NNNN` lorsque l'analyse, une correction ou un suivi sont nécessaires. Ne jamais inclure d'information sensible.
+  - type: dropdown
+    id: origin
+    attributes:
+      label: Source de détection
+      options: [Utilisateur pilote, Support, CI, Test local, Supervision, Revue de code]
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexte reproductible
+      description: Version/révision, environnement, préconditions, fréquence et périmètre, tous anonymisés.
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observé et attendu
+      description: Distinguer clairement le résultat réel, l'impact et le résultat attendu.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Étapes minimales
+      description: Numéroter les étapes permettant la reproduction.
+    validations:
+      required: true
+  - type: checkboxes
+    id: confidentiality
+    attributes:
+      label: Contrôle de confidentialité
+      options:
+        - label: Je confirme que ce signal ne contient ni secret, ni donnée personnelle, ni adresse privée.
+          required: true

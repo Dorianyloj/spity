@@ -1,0 +1,87 @@
+name: Incident registry
+
+on:
+  pull_request:
+    paths:
+      - 'spity/incidents/**'
+      - 'spity/incident-policy.json'
+      - 'spity/incident-schema.json'
+      - 'spity/scripts/check-incident-registry.mjs'
+      - 'spity/tests/maintenance/incident-registry.test.mjs'
+      - '.github/ISSUE_TEMPLATE/**'
+      - 'docs/rncp/bloc-04/preuves/B4-C421-*'
+  push:
+    branches: [develop, main]
+    paths:
+      - 'spity/incidents/**'
+      - 'spity/incident-policy.json'
+      - 'spity/incident-schema.json'
+      - 'spity/scripts/check-incident-registry.mjs'
+      - 'spity/tests/maintenance/incident-registry.test.mjs'
+      - '.github/ISSUE_TEMPLATE/**'
+      - 'docs/rncp/bloc-04/preuves/B4-C421-*'
+  schedule:
+    - cron: '29 7 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: incident-registry-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    name: Validate incident lifecycle records
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: spity
+    env:
+      INCIDENT_REPORT_PATH: .incidents/incident-registry-report.json
+
+    steps:
+      - name: Checkout records
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: spity/.nvmrc
+          cache: npm
+          cache-dependency-path: spity/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Validate incident registry
+        run: npm run incidents:check
+
+      - name: Run lifecycle regression tests
+        run: node --test --test-concurrency=1 tests/maintenance/incident-registry.test.mjs
+
+      - name: Upload incident audit evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: incident-registry-${{ github.run_id }}
+          path: spity/.incidents/incident-registry-report.json
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 90
+
+      - name: Publish audit summary
+        if: always() && hashFiles('spity/.incidents/incident-registry-report.json') != ''
+        run: |
+          node --input-type=module <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          import { readFile } from 'node:fs/promises'
+          const report = JSON.parse(await readFile('.incidents/incident-registry-report.json', 'utf8'))
+          console.log('## Incident registry')
+          console.log(`- Compliant: ${report.compliant}`)
+          console.log(`- Records: ${report.recordCount}`)
+          console.log(`- Closed: ${report.statusCounts.closed}`)
+          console.log(`- Planned: ${report.statusCounts.planned}`)
+          console.log(`- Errors: ${report.errors.length}`)
+          NODE

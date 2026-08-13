@@ -1,20 +1,24 @@
 name: Incident de production
 description: Consigner une anomalie détectée sur l'environnement de production.
 title: "[Incident production] "
-labels:
-  - incident
-  - production
+labels: [bug]
 body:
   - type: markdown
     attributes:
       value: |
-        Ne jamais joindre de secret, mot de passe, jeton, donnée personnelle ou export de base non anonymisé.
+        Ne jamais joindre de secret, mot de passe, jeton, donnée personnelle, adresse privée ou export de base. Après qualification, créer ou relier une fiche versionnée `SPITY-INC-YYYY-NNNN`.
+  - type: input
+    id: incident_id
+    attributes:
+      label: Identifiant du registre
+      description: Laisser vide si le signal est nouveau ; le mainteneur attribue ensuite SPITY-INC-YYYY-NNNN.
+      placeholder: SPITY-INC-2026-0003
   - type: input
     id: detected_at
     attributes:
       label: Date et heure de détection
-      description: Utiliser le fuseau Europe/Paris et préciser la source de la détection.
-      placeholder: 2026-08-12 15:30 - alerte GitHub Actions
+      description: Utiliser ISO 8601, Europe/Paris, et préciser la source.
+      placeholder: 2026-08-13T10:30:00+02:00 - alerte GitHub Actions
     validations:
       required: true
   - type: dropdown
@@ -36,39 +40,37 @@ body:
     validations:
       required: true
   - type: textarea
-    id: observed
+    id: impact
     attributes:
-      label: Comportement observé
-      description: Décrire le résultat réel, l'impact utilisateur et le périmètre affecté.
+      label: Impact, périmètre et contournement
+      description: Indiquer les utilisateurs, parcours et données affectés sans donnée personnelle, ainsi que le contournement connu.
     validations:
       required: true
   - type: textarea
     id: reproduction
     attributes:
       label: Étapes de reproduction
-      description: Donner des étapes numérotées, les préconditions et la fréquence de reproduction.
-    validations:
-      required: true
-  - type: textarea
-    id: expected
-    attributes:
-      label: Comportement attendu
+      description: Donner les préconditions, étapes numérotées, résultat observé, attendu et fréquence.
     validations:
       required: true
   - type: textarea
     id: evidence
     attributes:
       label: Preuves anonymisées
-      description: Journaux, captures, identifiant du workflow ou réponse HTTP sans donnée sensible.
+      description: Utiliser un lien public, un chemin de dépôt, un identifiant de workflow ou une sortie strictement anonymisée.
     validations:
       required: true
   - type: textarea
-    id: analysis
+    id: triage
     attributes:
-      label: Analyse et correctif préconisé
-      description: Cause confirmée ou hypothèses, risques, options et décision.
-  - type: textarea
-    id: validation
+      label: Triage et décision initiale
+      description: Responsable, priorité, état du service, hypothèses, risque et prochaine action.
+    validations:
+      required: true
+  - type: checkboxes
+    id: confidentiality
     attributes:
-      label: Validation et clôture
-      description: Tests ajoutés, pull request, révision déployée, contrôle de production et retour arrière.
+      label: Contrôle de confidentialité
+      options:
+        - label: Je confirme que ce signal ne contient ni secret, ni donnée personnelle, ni adresse privée.
+          required: true

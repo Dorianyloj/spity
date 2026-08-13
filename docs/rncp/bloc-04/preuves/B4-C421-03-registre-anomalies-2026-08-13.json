@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "criterion": "C4.2.1",
+  "capturedAt": "2026-08-13T08:30:41.741Z",
+  "repositoryRevision": "95c01f79d176c1694447d68f43573138b732a78a",
+  "policy": {
+    "schemaVersion": 1,
+    "statuses": [
+      "reported",
+      "triaged",
+      "investigating",
+      "planned",
+      "resolving",
+      "validating",
+      "resolved",
+      "closed",
+      "rejected",
+      "duplicate"
+    ],
+    "closureRequirements": [
+      "rootCause",
+      "correctiveAction",
+      "verification",
+      "closure"
+    ]
+  },
+  "audit": {
+    "schemaVersion": 1,
+    "checkedAt": "2026-08-13T08:30:41.740Z",
+    "compliant": true,
+    "recordCount": 2,
+    "statusCounts": {
+      "reported": 0,
+      "triaged": 0,
+      "investigating": 0,
+      "planned": 1,
+      "resolving": 0,
+      "validating": 0,
+      "resolved": 0,
+      "closed": 1,
+      "rejected": 0,
+      "duplicate": 0
+    },
+    "errors": [],
+    "records": [
+      {
+        "file": "SPITY-INC-2026-0001.json",
+        "id": "SPITY-INC-2026-0001",
+        "severity": "S2",
+        "priority": "P2",
+        "status": "closed"
+      },
+      {
+        "file": "SPITY-INC-2026-0002.json",
+        "id": "SPITY-INC-2026-0002",
+        "severity": "S3",
+        "priority": "P3",
+        "status": "planned"
+      }
+    ]
+  }
+}
