@@ -16,6 +16,8 @@ Ce répertoire est le chantier Bloc 4 de Spity selon le référentiel Ynov 2024,
 
 - [`../../../spity/RELEASE_VERIFICATION.md`](../../../spity/RELEASE_VERIFICATION.md) : vérification version/révision avant promotion d'un candidat ;
 
+- [`../../../spity/RELEASE_JOURNAL.md`](../../../spity/RELEASE_JOURNAL.md) : registre des versions, correctifs documentés et preuve de déploiement ;
+
 - [`../../../spity/IMPROVEMENT_MANAGEMENT.md`](../../../spity/IMPROVEMENT_MANAGEMENT.md) : registre d'améliorations, priorisation et revue mensuelle ;
 
 - [`../../../spity/MAINTENANCE.md`](../../../spity/MAINTENANCE.md) ;
@@ -32,6 +34,7 @@ Depuis `spity/` :
 npm run bloc4:capture
 npm run bloc4:exercise
 npm run bloc4:improvements
+npm run bloc4:releases
 npm run quality
 ```
 

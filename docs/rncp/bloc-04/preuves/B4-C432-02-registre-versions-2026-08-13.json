@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "criterion": "C4.3.2",
+  "capturedAt": "2026-08-13T09:55:44.228Z",
+  "repositoryRevision": "db9339878d41a37511806ba693886d3e1ab49381",
+  "safety": "Repository-only validation. No production endpoint, deployment, database, external release mutation or LXC was used.",
+  "objective": "Verify that published, observed-production and candidate versions remain distinct and that deployed corrections are documented.",
+  "journal": {
+    "schemaVersion": 1,
+    "checkedAt": "2026-08-13T09:55:44.227Z",
+    "compliant": true,
+    "recordCount": 3,
+    "deployedRecordCount": 1,
+    "statusCounts": {
+      "published": 1,
+      "observed-production": 1,
+      "candidate": 1
+    },
+    "errors": [],
+    "records": [
+      {
+        "id": "SPITY-REL-2026-0001",
+        "status": "published",
+        "version": "0.1.0",
+        "revision": "0bdd4e7a350094657b8037ee0714ca0ee0617310",
+        "correctionCount": 0
+      },
+      {
+        "id": "SPITY-REL-2026-0002",
+        "status": "observed-production",
+        "version": "0.1.0-jury",
+        "revision": "49c4ea0ffa34b35e9ad5bc2e1a838eb82eb0b8ef",
+        "correctionCount": 1
+      },
+      {
+        "id": "SPITY-REL-2026-0003",
+        "status": "candidate",
+        "version": "0.1.0",
+        "revision": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b",
+        "correctionCount": 1
+      }
+    ]
+  }
+}

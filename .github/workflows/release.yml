@@ -65,6 +65,11 @@ jobs:
           npm run release:verify -- "$GITHUB_REF_NAME"
           echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
 
+      - name: Validate version journal
+        env:
+          RELEASE_JOURNAL_EXPECTED_VERSION: ${{ steps.metadata.outputs.version }}
+        run: npm run releases:check
+
       - name: Run quality gates
         run: npm run quality
 
@@ -254,7 +259,9 @@ jobs:
           cp spity/docker-compose.production.yml "dist/$bundle/"
           cp spity/.env.production.example "dist/$bundle/"
           cp spity/DEPLOYMENT.md "dist/$bundle/"
+          cp spity/RELEASE_JOURNAL.md "dist/$bundle/"
           cp CHANGELOG.md "dist/$bundle/"
+          cp -R spity/release-journal "dist/$bundle/release-journal"
           mkdir -p "dist/$bundle/scripts"
           cp spity/scripts/check-health.mjs "dist/$bundle/scripts/"
           cp spity/scripts/verify-deployment.mjs "dist/$bundle/scripts/"

@@ -1,20 +1,19 @@
 # B4-C432-01 - Journal des versions déployées
 
-## Versions publiées et observées
+## Exemplaire présenté
 
-| Date | Version | Révision | État | Contenu principal | Preuve |
-| --- | --- | --- | --- | --- | --- |
-| 20 juillet 2026 | `v0.1.0` | `0bdd4e7a350094657b8037ee0714ca0ee0617310` | Release GitHub publiée | Parcours d'inscription, profils, lieux, matching, événements, Docker, CI, sécurité et documentation BC02. | `https://github.com/Dorianyloj/spity/releases/tag/v0.1.0` |
-| 23 juillet 2026 | `0.1.0-jury` | `49c4ea0ffa34b35e9ad5bc2e1a838eb82eb0b8ef` | Observée en production le 13 août 2026 | Correctif des dépendances runtime vulnérables et instance jury disponible. | `https://spity.fr/api/health` et commit GitHub `49c4ea0` |
+La source de vérité est désormais `spity/release-journal/`, validée par `npm run releases:check`. Elle distingue les états sans les confondre :
 
-## Correctifs déployés documentés
+| Fiche | Identité | Statut | Évolutions ou correctifs | Preuve déterminante |
+| --- | --- | --- | --- | --- |
+| `SPITY-REL-2026-0001` | `v0.1.0` / `0bdd4e7` | `published` | Parcours escalade, Docker, CI et métadonnées de santé. | Release GitHub et `CHANGELOG.md`. |
+| `SPITY-REL-2026-0002` | `0.1.0-jury` / `49c4ea0` | `observed-production` | Correctif des dépendances runtime vulnérables. | Santé publique `ok`, version et SHA concordants. |
+| `SPITY-REL-2026-0003` | `0.1.0` / `e3784b7` | `candidate` | Correctif de contraste des états vides. | CI verte, explicitement insuffisante pour déclarer la production. |
 
-La révision de production `49c4ea0` correspond au commit `fix(security): update vulnerable runtime dependencies`. La réponse de santé contient simultanément `status`, `version` et `revision`, ce qui relie le logiciel exécuté à son historique Git.
+## Correctif déployé et documentation
 
-## Candidat non déployé
+La fiche observée rattache le correctif de sécurité à `CHANGELOG.md`, à la preuve `B4-C422-01` et à la santé `B4-C412-02`. Son rollback, son historique et les liens de preuve sont obligatoires. Un correctif déployé sans documentation est bloqué par le validateur.
 
-La révision `e3784b7` a une CI complète verte et corrige le contraste des états vides. Elle n'est pas ajoutée au tableau des versions déployées, car la production expose toujours `49c4ea0`. Une future entrée devra être créée uniquement après promotion et contrôle post-déploiement.
+## Tenue durable
 
-## Règle de tenue du journal
-
-Chaque release ajoute : date UTC/Europe-Paris, tag SemVer, SHA complet, digests d'images, migrations, anomalies corrigées, nouvelles fonctions, risques connus, procédure de retour arrière et lien de vérification. `CHANGELOG.md` décrit les changements produit ; ce journal atteste uniquement ce qui est effectivement publié ou observé.
+Chaque nouvelle promotion ajoute une fiche après contrôle post-déploiement, avec version SemVer, SHA complet, changements, corrections, risques, rollback et preuves. `published` et `candidate` sont utiles à la traçabilité, mais seul `observed-production` compte comme déployé. Le workflow mensuel et les preuves C432-02/C432-03 rendent cette règle vérifiable.

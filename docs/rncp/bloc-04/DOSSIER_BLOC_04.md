@@ -25,7 +25,7 @@ Spity dispose d'une chaîne de maintenance reproductible : Dependabot surveille 
 Le 13 août 2026, l'état vérifié est le suivant :
 
 - 0 vulnérabilité de production et 0 alerte haute/critique dans l'audit complet après mise à jour des outils ;
-- 152 tests Jest, 29 tests de maintenance, 11 scénarios MariaDB et 6 recettes Playwright ;
+- 152 tests Jest, 35 tests de maintenance, 11 scénarios MariaDB et 6 recettes Playwright ;
 - 10 pages authentifiées sur 10 à 100 % Lighthouse accessibilité ;
 - CI complète verte sur `e3784b7` ;
 - 29 exécutions de supervision historisées au moment de la collecte, avec production `ok` ;
@@ -43,7 +43,7 @@ La dérive n'a pas été corrigée par un déploiement non autorisé. Elle est t
 | C4.2.1 | Collecte structurée, fiche reproductible, analyse et préconisations | Registre versionné, machine à états, confidentialité contrôlée, formulaires, CI dédiée et deux anomalies réelles | `spity/INCIDENT_MANAGEMENT.md`, C421-01 à C421-04 | Industrialisé et vérifié |
 | C4.2.2 | Correctif décrit utilisant intégration/déploiement continu | Contrôle de promotion version/révision, staging CI, candidate de release, rapport conservé et exercice reproductible | `spity/RELEASE_VERIFICATION.md`, C422-01 à C422-03 | Industrialisé et vérifié |
 | C4.3.1 | Recommandations réalistes, argumentées, coûts/délais/gains | Registre mesurable, indicateurs, coûts/délais, retours qualifiés, revue mensuelle et CI dédiée | `spity/IMPROVEMENT_MANAGEMENT.md`, C431-01 à C431-03 | Industrialisé et vérifié |
-| C4.3.2 | Journal des versions et correctifs déployés | Release v0.1.0, instance jury 0.1.0-jury, SHA et règle de tenue | C432-01, `CHANGELOG.md` | Base fonctionnelle à approfondir |
+| C4.3.2 | Journal des versions et correctifs déployés | Registre versionné, identité SemVer/SHA, correctifs documentés, preuve de santé et revue mensuelle | `spity/RELEASE_JOURNAL.md`, C432-01 à C432-03 | Industrialisé et vérifié |
 | C4.3.3 | Problème résolu avec contexte, résolution et contributions | Mise en situation fictive support/mainteneur fondée sur une anomalie technique réelle | `spity/SUPPORT.md`, C433-01 | Base fonctionnelle à approfondir |
 
 ## 3. Contexte technique et responsabilités
@@ -168,13 +168,23 @@ Cette boucle reste réaliste pour Spity : elle ne déclenche ni déploiement ni 
 
 ## 9. C4.3.2 - Établir le journal des versions
 
-Le journal distingue ce qui est publié, observé et seulement candidat :
+### 9.1 Source de vérité et statuts
 
-- release GitHub `v0.1.0`, publiée le 20 juillet 2026, commit cible `0bdd4e7` ;
-- production `0.1.0-jury`, révision observée `49c4ea0`, correctif sécurité ;
-- candidat `e3784b7`, CI verte mais non déployé, donc absent des versions déployées.
+Le répertoire `spity/release-journal/` remplace la note manuelle par trois fiches JSON contrôlées. Une release `published` atteste le tag et la publication GitHub ; une fiche `observed-production` ne compte comme déployée que si la santé renvoie `ok` avec exactement la version et le SHA annoncés ; un `candidate` contient un résultat CI ou staging, mais reste explicitement hors du journal des déploiements effectifs. `CHANGELOG.md` explique les changements produit, tandis que le registre relie ces changements à l'identité d'un logiciel exécuté et à sa preuve.
 
-Chaque future entrée doit contenir tag, SHA, digests, migrations, correctifs, fonctionnalités, risques, rollback et preuve de santé. `CHANGELOG.md` décrit l'évolution produit ; le journal atteste le déploiement effectif.
+Les trois états retenus sont factuels : `v0.1.0` a été publiée le 20 juillet 2026 sur le commit `0bdd4e7` ; l'instance jury `0.1.0-jury` à la révision `49c4ea0` a été observée saine le 13 août ; le correctif de contraste `e3784b7` est un candidat CI vert, volontairement non déclaré déployé. Cette distinction évite de présenter une validation de pipeline comme une promotion de production.
+
+### 9.2 Correctifs et évolutions documentés
+
+Chaque fiche contient les fonctionnalités, les correctifs, leur type, leur résumé, leur documentation, les risques utiles, le rollback, l'historique attribué et les preuves. La version effectivement observée rattache le correctif de dépendances runtime à `CHANGELOG.md`, à la preuve de promotion C422-01 et à la capture de santé C412-02. Le candidat d'accessibilité lie de la même manière la fiche d'anomalie, sa reproduction et sa validation, sans prétendre à une mise en production.
+
+Le validateur `scripts/check-release-journal.mjs` exige des identifiants stables, une version SemVer, un SHA complet, des chemins internes ou URLs HTTPS lisibles, et refuse secrets, jetons, e-mails et adresses privées. Il rejette également un correctif déployé sans documentation, une preuve hors dépôt et toute différence entre l'identité de la fiche et la santé observée.
+
+### 9.3 Cadence, responsabilité et contrôle
+
+La commande `npm run releases:check` rejoint la porte de qualité et la validation de release : pour un tag, cette dernière exige aussi une fiche `candidate` ou `published` portant la même version. Le workflow `Release journal` s'exécute à chaque modification concernée, chaque premier jour du mois et conserve le rapport 90 jours. `npm run releases:exercise` accepte le registre sain puis refuse en mémoire un candidat CI promu sans santé, un correctif sans documentation et une révision de santé incohérente. L'exercice ne contacte ni production, ni base, ni LXC.
+
+Le mainteneur ajoute les changements et le rollback ; le responsable de release vérifie la chronologie, les preuves et les corrections ; la supervision atteste l'observation de production. Une future promotion devra donc être inscrite après son contrôle post-déploiement, jamais au seul passage de la CI.
 
 ## 10. C4.3.3 - Collaborer avec le support
 
@@ -192,7 +202,7 @@ Les actions destructives restent interdites dans les procédures courantes : auc
 
 ## 12. Conclusion
 
-Les sept compétences disposent désormais d'une base documentée, de sources exécutables, d'états publics figés ou d'une mise en situation fictive déclarée. C4.1.1, C4.1.2, C4.2.1, C4.2.2 et C4.3.1 franchissent la définition renforcée de terminé : mécanisme réel, automatisation, cas d'échec testés, preuves reproductibles et exploitation décrite. Les deux suivantes restent volontairement qualifiées comme bases à approfondir une par une.
+Les sept compétences disposent désormais d'une base documentée, de sources exécutables, d'états publics figés ou d'une mise en situation fictive déclarée. C4.1.1, C4.1.2, C4.2.1, C4.2.2, C4.3.1 et C4.3.2 franchissent la définition renforcée de terminé : mécanisme réel, automatisation, cas d'échec testés, preuves reproductibles et exploitation décrite. C4.3.3 reste volontairement qualifiée comme base à approfondir.
 
 Le principal risque ouvert n'est pas masqué : la production est saine mais en retard sur `main`. La prochaine action opérationnelle est une release versionnée autorisée, pas un déploiement improvisé. Cette transparence garantit que le dossier décrit l'état réel du logiciel.
 
@@ -223,7 +233,10 @@ Le principal risque ouvert n'est pas masqué : la production est saine mais en r
 | A13c | C4.3.1 | `preuves/B4-C431-03-exercice-revue-ameliorations-2026-08-13.json` |
 | A13d | C4.3.1 | `spity/IMPROVEMENT_MANAGEMENT.md` et `spity/improvements/` |
 | A14 | C4.3.2 | `preuves/B4-C432-01-journal-versions-deployees-2026-08-13.md` |
+| A14b | C4.3.2 | `preuves/B4-C432-02-registre-versions-2026-08-13.json` |
+| A14c | C4.3.2 | `preuves/B4-C432-03-exercice-journal-versions-2026-08-13.json` |
+| A14d | C4.3.2 | `spity/RELEASE_JOURNAL.md`, `release-journal/` et `check-release-journal.mjs` |
 | A15 | C4.3.3 | `spity/SUPPORT.md` et `preuves/B4-C433-01-collaboration-support-2026-08-13.md` |
 | A16 | Intégrité | `preuves/MANIFEST.sha256` |
 
-Les sources complémentaires sont `.github/workflows/ci.yml`, `release.yml`, `production-monitoring.yml`, `availability-slo-report.yml`, `incident-registry.yml`, `improvement-review.yml`, `dependency-maintenance.yml`, `dependency-review.yml`, `dependabot.yml`, les formulaires d'issue, `CHANGELOG.md`, `spity/dependency-policy.json`, `spity/monitoring-policy.json`, `spity/incident-policy.json`, `spity/improvement-policy.json`, les scripts de sonde/SLO/registre/promotion/amélioration, `spity/DEPLOYMENT.md`, `spity/RELEASE_VERIFICATION.md`, `spity/IMPROVEMENT_MANAGEMENT.md` et le référentiel officiel archivé.
+Les sources complémentaires sont `.github/workflows/ci.yml`, `release.yml`, `release-journal.yml`, `production-monitoring.yml`, `availability-slo-report.yml`, `incident-registry.yml`, `improvement-review.yml`, `dependency-maintenance.yml`, `dependency-review.yml`, `dependabot.yml`, les formulaires d'issue, `CHANGELOG.md`, `spity/dependency-policy.json`, `spity/monitoring-policy.json`, `spity/incident-policy.json`, `spity/improvement-policy.json`, `spity/release-journal-policy.json`, les scripts de sonde/SLO/registre/promotion/amélioration/journal, `spity/DEPLOYMENT.md`, `spity/RELEASE_VERIFICATION.md`, `spity/RELEASE_JOURNAL.md`, `spity/IMPROVEMENT_MANAGEMENT.md` et le référentiel officiel archivé.

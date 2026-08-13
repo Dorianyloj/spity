@@ -17,7 +17,7 @@ Le Bloc 4 est développé comme un chantier produit, pas comme une simple rédac
 | 3 | C4.2.1 - Consigner les anomalies | Registre JSON validé, cycle de vie, cause racine, confidentialité, formulaires et CI dédiée | **Industrialisée et vérifiée** |
 | 4 | C4.2.2 - Créer et déployer un correctif | Correctif de contrôle de promotion, CI/release, artefacts de vérification et rollback documenté | **Industrialisée et vérifiée** |
 | 5 | C4.3.1 - Proposer des améliorations | Registre mesurable, revue mensuelle, signaux qualifiés et CI dédiée | **Industrialisée et vérifiée** |
-| 6 | C4.3.2 - Tenir le journal des versions | Changelog, release et version/révision de santé | Base fonctionnelle à approfondir |
+| 6 | C4.3.2 - Tenir le journal des versions | Registre JSON, version/SHA, documentation des correctifs, preuve de santé, exercice et workflow mensuel | **Industrialisée et vérifiée** |
 | 7 | C4.3.3 - Collaborer avec le support | Formulaire support et exercice fictif déclaré | Base fonctionnelle à approfondir |
 
 ## Définition de terminé
@@ -83,7 +83,17 @@ Les limites restantes sont explicites : l’historique de latence P95, les resso
 - [x] formulaire support enrichi pour qualifier les prochains retours anonymisés par zone, type de signal et bénéfice attendu ;
 - [x] workflow mensuel, artefact 90 jours, exercice local et 29 tests de maintenance couvrant les décisions de pilotage.
 
-La prochaine étape est C4.3.2 : relier les livraisons réellement observées à un journal de versions immuable et vérifiable.
+## C4.3.2 - Résultat obtenu
+
+- [x] registre versionné à trois états : release publiée, version observée en production et candidat non déployé ;
+- [x] identité SemVer/SHA, historique, rollback, évolutions et preuves obligatoires pour chaque fiche ;
+- [x] documentation obligatoire de chaque correctif, avec lien vers la fiche d'anomalie ou le changelog ;
+- [x] preuve de production exigeant `status: ok`, version et révision Git strictement concordantes ;
+- [x] refus des chemins de preuve externes au dépôt, URLs non HTTPS et données sensibles ;
+- [x] porte de qualité, contrôle de fiche pour chaque tag, workflow mensuel avec artefact 90 jours, bundle de release enrichi et six tests dédiés, portant le total à 35 tests de maintenance ;
+- [x] exercice en mémoire : candidat CI faussement déployé, correctif sans documentation et santé incohérente refusés.
+
+La prochaine étape est C4.3.3 : structurer une collaboration support/mainteneur sur un cas réel, sans faire passer une simulation pour un retour utilisateur authentique.
 
 ## Règle de présentation
 

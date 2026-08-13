@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "criterion": "C4.3.2",
+  "executedAt": "2026-08-13T09:55:43.426Z",
+  "repositoryRevision": "db9339878d41a37511806ba693886d3e1ab49381",
+  "safety": "In-memory exercise only. No production endpoint, deployment, database, external release mutation or LXC was used.",
+  "objective": "Accept the canonical journal, reject a CI-only candidate declared as deployed, reject an undocumented deployed correction, reject a health revision mismatch and require a record for a tagged version.",
+  "result": "passed",
+  "cases": {
+    "canonical": {
+      "compliant": true,
+      "deployedRecordCount": 1
+    },
+    "candidateDeclaredDeployed": {
+      "compliant": false,
+      "errorCodes": [
+        "missing-deployment"
+      ]
+    },
+    "undocumentedCorrection": {
+      "compliant": false,
+      "errorCodes": [
+        "missing-correction-documentation"
+      ]
+    },
+    "mismatchedHealth": {
+      "compliant": false,
+      "errorCodes": [
+        "health-revision-mismatch"
+      ]
+    },
+    "missingReleaseEntry": {
+      "compliant": false,
+      "errorCodes": [
+        "missing-release-entry"
+      ]
+    }
+  }
+}

@@ -7,6 +7,7 @@ Les évolutions notables de Spity sont consignées dans ce fichier. Le projet su
 ### Added
 
 - Chantier Bloc 4 couvrant C4.1.1 à C4.3.3, preuves figées, procédures de maintenance, observabilité et support.
+- Journal des versions versionné : distinction entre release publiée, version observée en production et candidat CI, avec documentation obligatoire des correctifs.
 - C4.1.1 industrialisée avec politique exécutable, dérogations datées, SBOM CycloneDX, audit planifié, revue des dépendances en pull request et lot de mises à jour qualifié.
 - Sonde de santé Node.js testable avec seuil de latence, reprises, rapport JSON et exercice d'alerte local sans impact production.
 - Alerte GitHub automatique de supervision avec issue unique, artefact de contrôle et fermeture au retour à la normale.

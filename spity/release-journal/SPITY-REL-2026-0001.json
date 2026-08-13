@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "SPITY-REL-2026-0001",
+  "status": "published",
+  "title": "Release GitHub v0.1.0",
+  "identity": {
+    "version": "0.1.0",
+    "tag": "v0.1.0",
+    "revision": "0bdd4e7a350094657b8037ee0714ca0ee0617310"
+  },
+  "publishedAt": "2026-07-20T13:29:17.000Z",
+  "changes": {
+    "features": [
+      "Parcours d'inscription, connexion, profils et inventaire de matériel.",
+      "Répertoire de lieux, matching de partenaires et gestion d'événements.",
+      "Images Docker, CI et métadonnées de version exposées par la santé."
+    ],
+    "corrections": []
+  },
+  "documentation": [
+    {
+      "kind": "repository-path",
+      "value": "CHANGELOG.md",
+      "purpose": "Entrée produit datée de la version 0.1.0."
+    },
+    {
+      "kind": "url",
+      "value": "https://github.com/Dorianyloj/spity/releases/tag/v0.1.0",
+      "purpose": "Publication GitHub de la release."
+    }
+  ],
+  "rollback": "Revenir à l'image immuable validée précédente puis vérifier la version et la révision via le contrat de santé.",
+  "history": [
+    {
+      "at": "2026-07-20T13:29:17.000Z",
+      "to": "published",
+      "actorRole": "release-automation",
+      "reason": "Le tag v0.1.0 et la release GitHub ont été publiés."
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "repository-path",
+      "value": "CHANGELOG.md",
+      "purpose": "Contenu fonctionnel de la version."
+    },
+    {
+      "kind": "repository-path",
+      "value": "docs/rncp/bloc-04/preuves/B4-C422-01-correctif-et-ci-2026-08-13.json",
+      "purpose": "Trace de la release publiée et de son identité."
+    }
+  ]
+}

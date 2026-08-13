@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "SPITY-REL-2026-0003",
+  "status": "candidate",
+  "title": "Candidat CI du correctif d'accessibilité",
+  "identity": {
+    "version": "0.1.0",
+    "revision": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b"
+  },
+  "candidateAt": "2026-08-12T14:02:02.000Z",
+  "changes": {
+    "features": [],
+    "corrections": [
+      {
+        "id": "SPITY-INC-2026-0001",
+        "type": "accessibility",
+        "summary": "Correction du contraste des états vides sur les parcours authentifiés.",
+        "documentation": [
+          {
+            "kind": "repository-path",
+            "value": "spity/incidents/SPITY-INC-2026-0001.json",
+            "purpose": "Analyse, correctif et vérification de l'anomalie."
+          },
+          {
+            "kind": "repository-path",
+            "value": "docs/rncp/bloc-04/preuves/B4-C421-01-fiche-anomalie-accessibilite-2026-08-13.md",
+            "purpose": "Fiche de consignation reproductible."
+          }
+        ]
+      }
+    ]
+  },
+  "candidateVerification": {
+    "ciRun": "https://github.com/Dorianyloj/spity/actions/runs/31604246584",
+    "conclusion": "success",
+    "exclusionReason": "Une CI verte ne constitue pas une preuve de promotion ou de santé de production ; aucun déploiement n'est déclaré."
+  },
+  "documentation": [
+    {
+      "kind": "repository-path",
+      "value": "spity/incidents/SPITY-INC-2026-0001.json",
+      "purpose": "Correctif candidat et résultats de non-régression."
+    },
+    {
+      "kind": "repository-path",
+      "value": "spity/RELEASE_VERIFICATION.md",
+      "purpose": "Condition de promotion version/révision avant mise en production."
+    }
+  ],
+  "rollback": "Non applicable tant que le candidat n'est pas promu ; conserver le déploiement effectivement observé et ne pas modifier les tags stables.",
+  "history": [
+    {
+      "at": "2026-08-12T14:02:02.000Z",
+      "to": "candidate",
+      "actorRole": "ci-automation",
+      "reason": "La CI est verte mais aucune observation post-déploiement ne permet de le classer comme version déployée."
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "repository-path",
+      "value": "docs/rncp/bloc-04/preuves/B4-C422-01-correctif-et-ci-2026-08-13.json",
+      "purpose": "Résultat CI du candidat non déployé."
+    },
+    {
+      "kind": "repository-path",
+      "value": "spity/incidents/SPITY-INC-2026-0001.json",
+      "purpose": "Correctif d'accessibilité documenté."
+    }
+  ]
+}

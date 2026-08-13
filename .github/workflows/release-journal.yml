@@ -1,0 +1,76 @@
+name: Release journal
+
+on:
+  pull_request:
+    paths:
+      - 'CHANGELOG.md'
+      - 'spity/release-journal-policy.json'
+      - 'spity/release-journal-schema.json'
+      - 'spity/release-journal/**'
+      - 'spity/RELEASE_JOURNAL.md'
+      - 'spity/scripts/check-release-journal.mjs'
+      - 'spity/scripts/capture-release-journal-evidence.mjs'
+      - 'spity/tests/maintenance/release-journal.test.mjs'
+      - '.github/workflows/release-journal.yml'
+  push:
+    branches: [develop, main]
+    paths:
+      - 'CHANGELOG.md'
+      - 'spity/release-journal-policy.json'
+      - 'spity/release-journal-schema.json'
+      - 'spity/release-journal/**'
+      - 'spity/RELEASE_JOURNAL.md'
+      - 'spity/scripts/check-release-journal.mjs'
+      - 'spity/scripts/capture-release-journal-evidence.mjs'
+      - 'spity/tests/maintenance/release-journal.test.mjs'
+      - '.github/workflows/release-journal.yml'
+  schedule:
+    - cron: '15 9 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate version journal
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: spity
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: spity/.nvmrc
+          cache: npm
+          cache-dependency-path: spity/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Validate release journal
+        env:
+          RELEASE_JOURNAL_REPORT_PATH: .release-journal/report.json
+        run: npm run releases:check
+
+      - name: Run journal maintenance validation
+        run: node --test --test-concurrency=1 tests/maintenance/release-journal.test.mjs
+
+      - name: Publish journal summary
+        run: |
+          node -e 'const report=require("./.release-journal/report.json"); console.log(`## Journal des versions\n\n- Fiches : ${report.recordCount}\n- Versions observées en production : ${report.deployedRecordCount}\n- Conformité : ${report.compliant ? "oui" : "non"}`)' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload release journal evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: release-journal-${{ github.sha }}
+          path: spity/.release-journal/report.json
+          if-no-files-found: warn
+          retention-days: 90

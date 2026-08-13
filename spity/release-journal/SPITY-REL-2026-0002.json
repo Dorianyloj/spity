@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "id": "SPITY-REL-2026-0002",
+  "status": "observed-production",
+  "title": "Instance jury 0.1.0-jury observée en production",
+  "identity": {
+    "version": "0.1.0-jury",
+    "revision": "49c4ea0ffa34b35e9ad5bc2e1a838eb82eb0b8ef"
+  },
+  "changes": {
+    "features": [
+      "Instance jury disponible avec contrat de santé versionné."
+    ],
+    "corrections": [
+      {
+        "id": "SEC-2026-0001",
+        "type": "security",
+        "summary": "Mise à jour contrôlée des dépendances runtime vulnérables.",
+        "documentation": [
+          {
+            "kind": "repository-path",
+            "value": "CHANGELOG.md",
+            "purpose": "Correctif de sécurité consigné dans le changelog."
+          },
+          {
+            "kind": "repository-path",
+            "value": "docs/rncp/bloc-04/preuves/B4-C422-01-correctif-et-ci-2026-08-13.json",
+            "purpose": "Lien du correctif déployé avec la révision observée."
+          }
+        ]
+      }
+    ]
+  },
+  "deployment": {
+    "environment": "production",
+    "observedAt": "2026-08-13T07:14:12.088Z",
+    "health": {
+      "status": "ok",
+      "version": "0.1.0-jury",
+      "revision": "49c4ea0ffa34b35e9ad5bc2e1a838eb82eb0b8ef",
+      "source": "https://spity.fr/api/health"
+    }
+  },
+  "documentation": [
+    {
+      "kind": "repository-path",
+      "value": "CHANGELOG.md",
+      "purpose": "Historique produit et correctif de sécurité."
+    },
+    {
+      "kind": "repository-path",
+      "value": "spity/RELEASE_VERIFICATION.md",
+      "purpose": "Procédure de contrôle version/révision post-promotion."
+    }
+  ],
+  "rollback": "Promouvoir l'image immuable précédente, sauvegarder avant toute migration nécessaire puis vérifier sa version et sa révision avec le même contrat de santé.",
+  "history": [
+    {
+      "at": "2026-08-13T07:14:12.088Z",
+      "to": "observed-production",
+      "actorRole": "monitoring-automation",
+      "reason": "La santé publique a confirmé simultanément status ok, version 0.1.0-jury et la révision Git attendue."
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "repository-path",
+      "value": "docs/rncp/bloc-04/preuves/B4-C412-02-sante-production-2026-08-13.json",
+      "purpose": "Observation figée de santé production."
+    },
+    {
+      "kind": "repository-path",
+      "value": "docs/rncp/bloc-04/preuves/B4-C422-01-correctif-et-ci-2026-08-13.json",
+      "purpose": "Documentation du correctif de sécurité déployé."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "identifier": {
+    "pattern": "^SPITY-REL-\\d{4}-\\d{4}$"
+  },
+  "statuses": [
+    "published",
+    "observed-production",
+    "candidate"
+  ],
+  "deployedStatuses": [
+    "observed-production"
+  ],
+  "environments": [
+    "production",
+    "staging"
+  ],
+  "documentationReferenceKinds": [
+    "repository-path",
+    "url"
+  ],
+  "requiredRecordFields": [
+    "identity",
+    "changes",
+    "documentation",
+    "rollback",
+    "history",
+    "evidence"
+  ]
+}
