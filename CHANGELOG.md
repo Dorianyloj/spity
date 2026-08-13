@@ -1,5 +1,10 @@
 # Changelog
 
+## Preuves visuelles Bloc 4
+
+- ajout d'une procédure Playwright reproductible pour capturer les parcours réels de l'application ;
+- ajout d'un index de captures, d'un manifeste daté et d'une annexe visuelle dans le dossier Bloc 4.
+
 ## Dossier Bloc 4 version 1.1
 
 - développement détaillé de chaque compétence : attendu, processus, scénario, contrôles, preuves et limites ;

@@ -8,9 +8,23 @@ const repositoryRoot = resolve(scriptDirectory, '../..')
 const evidenceDirectory = resolve(repositoryRoot, 'docs/rncp/bloc-04/preuves')
 const manifestPath = resolve(evidenceDirectory, 'MANIFEST.sha256')
 
-const evidenceFiles = (await readdir(evidenceDirectory, { withFileTypes: true }))
-  .filter((entry) => entry.isFile() && entry.name !== 'MANIFEST.sha256')
-  .map((entry) => resolve(evidenceDirectory, entry.name))
+const collectEvidenceFiles = async (directory) => {
+  const entries = await readdir(directory, { withFileTypes: true })
+  const files = []
+
+  for (const entry of entries) {
+    const path = resolve(directory, entry.name)
+    if (entry.isDirectory()) {
+      files.push(...await collectEvidenceFiles(path))
+    } else if (entry.isFile() && path !== manifestPath) {
+      files.push(path)
+    }
+  }
+
+  return files
+}
+
+const evidenceFiles = await collectEvidenceFiles(evidenceDirectory)
 
 const files = [
   ...evidenceFiles,
@@ -62,6 +76,7 @@ const files = [
   resolve(repositoryRoot, 'spity/scripts/capture-release-journal-evidence.mjs'),
   resolve(repositoryRoot, 'spity/scripts/capture-support-collaboration-evidence.mjs'),
   resolve(repositoryRoot, 'spity/scripts/capture-bloc4-completeness-evidence.mjs'),
+  resolve(repositoryRoot, 'spity/scripts/capture-bloc4-visual-evidence.mjs'),
   resolve(repositoryRoot, 'spity/scripts/check-improvement-backlog.mjs'),
   resolve(repositoryRoot, 'spity/scripts/check-release-journal.mjs'),
   resolve(repositoryRoot, 'spity/scripts/check-support-collaborations.mjs'),

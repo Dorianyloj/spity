@@ -15,3 +15,7 @@ Cette matrice permet de passer rapidement d'un attendu à son mécanisme, sa com
 ## Contrôle transversal
 
 `npm run bloc4:check` vérifie toute la matrice à partir de `spity/bloc4-audit-policy.json`. Il exige l'existence des documents et sources listés, contrôle les assertions des preuves, audite les registres et valide le manifeste SHA-256.
+
+## Illustration des parcours applicatifs
+
+Les captures réelles de l'application sont regroupées dans [`../../preuves/captures/`](../../preuves/captures/). Elles montrent l'accueil, le tableau de bord grimpeur, le matching, la gestion d'événements club et le profil mobile. Leurs scénarios, dimensions et date de production sont conservés dans leur manifeste ; elles complètent les preuves de maintenance sans se substituer aux contrôles automatisés.

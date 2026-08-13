@@ -2,6 +2,10 @@
 
 Les fichiers de ce répertoire sont datés, anonymisés et reliés à un critère. Les fichiers JSON issus de sources publiques sont régénérés par `npm run bloc4:capture`. L'exercice local est régénéré par `npm run bloc4:exercise`.
 
+## Captures visuelles de l'application
+
+Le sous-répertoire [`captures/`](captures/) contient les écrans réels de démonstration produits par `npm run bloc4:visuals`, leur manifeste daté et leur protocole de reproduction. Ces images complètent les preuves structurées ; elles ne remplacent pas les contrôles automatisés.
+
 ## Inventaire
 
 | Préfixe | Critère | Preuve |

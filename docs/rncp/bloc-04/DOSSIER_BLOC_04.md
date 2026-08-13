@@ -466,5 +466,6 @@ Le principal risque ouvert n'est pas masqué : la production est saine mais en r
 | A15d | C4.3.3 | `spity/support-collaborations/` et `check-support-collaborations.mjs` |
 | A16 | Intégrité | `preuves/MANIFEST.sha256` |
 | A17 | Revue finale | `REVUE_FINALE_BLOC_04.md` et `preuves/B4-REVUE-FINALE-01-audit-transversal-2026-08-13.json` |
+| A18 | Parcours visuels | `preuves/captures/`, manifeste daté et procédure `npm run bloc4:visuals` |
 
 Les sources complémentaires regroupent les workflows et formulaires sous `.github/`, les politiques et scripts de maintenance sous `spity/`, les guides de déploiement, de release, de journal et d'amélioration, ainsi que le référentiel officiel archivé. Elles sont toutes reliées au manifeste d'intégrité.

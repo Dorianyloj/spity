@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-08-13T12:54:01.449Z",
+  "source": "local-demo",
+  "baseURL": "http://127.0.0.1:3000",
+  "sensitiveData": "Aucune donnée personnelle ou secret n’est inclus dans les captures.",
+  "captures": [
+    {
+      "id": "B4-VIS-01",
+      "label": "Accueil public Spity",
+      "accountType": "public",
+      "path": "/",
+      "file": "B4-VIS-01-accueil-public-spity-2026-08-13.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "byteSize": 684164
+    },
+    {
+      "id": "B4-VIS-02",
+      "label": "Tableau de bord grimpeur authentifié",
+      "accountType": "climber",
+      "path": "/app",
+      "file": "B4-VIS-02-tableau-de-bord-grimpeur-2026-08-13.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "byteSize": 671376
+    },
+    {
+      "id": "B4-VIS-03",
+      "label": "Matching de partenaires grimpeur",
+      "accountType": "climber",
+      "path": "/app/matching",
+      "file": "B4-VIS-03-matching-grimpeur-2026-08-13.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "byteSize": 552000
+    },
+    {
+      "id": "B4-VIS-04",
+      "label": "Gestion des événements par un club",
+      "accountType": "club",
+      "path": "/app/events",
+      "file": "B4-VIS-04-evenements-club-2026-08-13.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "byteSize": 518354
+    },
+    {
+      "id": "B4-VIS-05",
+      "label": "Profil grimpeur sur viewport mobile",
+      "accountType": "climber",
+      "path": "/profile/me",
+      "file": "B4-VIS-05-profil-grimpeur-mobile-2026-08-13.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "byteSize": 116547
+    }
+  ]
+}

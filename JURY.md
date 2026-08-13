@@ -25,7 +25,8 @@ Le [cadrage produit](CADRAGE_PROJET.md) présente le besoin, les utilisateurs, l
 
 1. Suivre le [dossier de remise](docs/rncp/bloc-04/dossier-jury/README.md).
 2. Utiliser la [matrice de preuves](docs/rncp/bloc-04/dossier-jury/annexes/MATRICE_DE_PREUVES.md).
-3. Vérifier l'intégrité dans [`preuves/MANIFEST.sha256`](docs/rncp/bloc-04/preuves/MANIFEST.sha256).
+3. Consulter les [captures des parcours applicatifs](docs/rncp/bloc-04/preuves/captures/README.md).
+4. Vérifier l'intégrité dans [`preuves/MANIFEST.sha256`](docs/rncp/bloc-04/preuves/MANIFEST.sha256).
 
 ### Parcours technique — 45 minutes
 
@@ -81,6 +82,7 @@ Le principal point ouvert est documenté sans être masqué : une production sai
 - [Revue finale des compétences](docs/rncp/bloc-04/REVUE_FINALE_BLOC_04.md)
 - [Feuille de route et état réel](docs/rncp/bloc-04/PLAN_ACTION_BLOC_04.md)
 - [Preuves et manifeste](docs/rncp/bloc-04/preuves/README.md)
+- [Captures réelles des parcours](docs/rncp/bloc-04/preuves/captures/README.md)
 - [Export PDF Bloc 4](output/pdf/dossier-bloc-04-spity.pdf)
 
 Le dépôt est volontairement organisé pour que ces fichiers restent consultables sans dépendre d'un environnement externe : le code exécutable est dans `spity/`, les livrables dans `docs/` et les exports dans `output/`.
