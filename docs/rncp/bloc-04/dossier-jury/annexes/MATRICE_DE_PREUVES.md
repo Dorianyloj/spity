@@ -19,3 +19,7 @@ Cette matrice permet de passer rapidement d'un attendu à son mécanisme, sa com
 ## Illustration des parcours applicatifs
 
 Les captures réelles de l'application sont regroupées dans [`../../preuves/captures/`](../../preuves/captures/). Elles montrent l'accueil, le tableau de bord grimpeur, le matching, la gestion d'événements club et le profil mobile. Leurs scénarios, dimensions et date de production sont conservés dans leur manifeste ; elles complètent les preuves de maintenance sans se substituer aux contrôles automatisés.
+
+## Illustration des preuves techniques
+
+Les captures techniques A19 sont également regroupées dans [`../../preuves/captures/`](../../preuves/captures/). Elles apportent une lecture visuelle complémentaire des éléments suivants : état Git local, historique de `main`, CI GitHub Actions réussie sur `main`, CI et staging vérifiés sur `develop`, puis audit conforme des sept compétences. Elles complètent notamment C4.1.1, C4.1.2, C4.2.2 et C4.3.2 ; l'audit transversal les relie aussi à C4.2.1, C4.3.1 et C4.3.3.

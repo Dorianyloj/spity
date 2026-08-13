@@ -3,7 +3,8 @@
 ## Preuves visuelles Bloc 4
 
 - ajout d'une procédure Playwright reproductible pour capturer les parcours réels de l'application ;
-- ajout d'un index de captures, d'un manifeste daté et d'une annexe visuelle intégrée directement à l'export PDF du dossier Bloc 4.
+- ajout d'un index de captures, de manifestes datés et d'annexes visuelles intégrées directement à l'export PDF du dossier Bloc 4 ;
+- ajout de captures techniques reproduisibles : état Git, historique GitHub, CI `main`, CI/staging `develop` et audit des sept compétences.
 
 ## Dossier Bloc 4 version 1.1
 

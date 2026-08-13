@@ -14,12 +14,27 @@ Le fichier `manifest.json` conserve la date de production, les dimensions et la 
 
 Les cinq images sont aussi intégrées directement dans l'annexe visuelle de l'[export PDF Bloc 4](../../../../../output/pdf/dossier-bloc-04-spity.pdf), avec une légende qui relie chaque écran à son parcours.
 
+## Preuves techniques : Git, CI/CD et audit
+
+`npm run bloc4:tech-visuals` produit les captures techniques de l'annexe A19. Elles sont intégrées directement dans le PDF et leur origine exacte est conservée dans `manifest-technique.json`.
+
+| Identifiant | Preuve technique | Compétences illustrées |
+| --- | --- | --- |
+| B4-TECH-01 | État Git lu localement : distant SSH, branches et commits | C4.1.1, C4.2.2, C4.3.2 |
+| B4-TECH-02 | Historique Git public de `main` | C4.2.2, C4.3.2 |
+| B4-TECH-03 | Workflow GitHub Actions vert sur `main` | C4.1.1 à C4.3.3 |
+| B4-TECH-04 | Workflow GitHub Actions vert et staging vérifié sur `develop` | C4.2.2, C4.3.2 |
+| B4-TECH-05 | Audit local réel des sept compétences | C4.1.1 à C4.3.3 |
+
+Les sorties locales sont rendues telles qu'elles ont été obtenues par des commandes de lecture seule. Les captures GitHub ciblent des pages publiques datées et ne contiennent ni session, ni cookie, ni secret.
+
 ## Reproduction
 
 Depuis `spity/`, avec MariaDB locale démarrée, migrations appliquées, données de démonstration chargées et l'application disponible :
 
 ```bash
 npm run bloc4:visuals
+npm run bloc4:tech-visuals
 npm run bloc4:manifest
 npm run bloc4:check
 ```

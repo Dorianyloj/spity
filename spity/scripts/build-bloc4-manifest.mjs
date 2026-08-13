@@ -77,6 +77,7 @@ const files = [
   resolve(repositoryRoot, 'spity/scripts/capture-support-collaboration-evidence.mjs'),
   resolve(repositoryRoot, 'spity/scripts/capture-bloc4-completeness-evidence.mjs'),
   resolve(repositoryRoot, 'spity/scripts/capture-bloc4-visual-evidence.mjs'),
+  resolve(repositoryRoot, 'spity/scripts/capture-bloc4-technical-evidence.mjs'),
   resolve(repositoryRoot, 'spity/scripts/check-improvement-backlog.mjs'),
   resolve(repositoryRoot, 'spity/scripts/check-release-journal.mjs'),
   resolve(repositoryRoot, 'spity/scripts/check-support-collaborations.mjs'),

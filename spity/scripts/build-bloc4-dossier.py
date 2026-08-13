@@ -72,6 +72,43 @@ VISUAL_EVIDENCE = [
         "max_height": 198 * mm,
     },
 ]
+TECHNICAL_EVIDENCE = [
+    {
+        "title": "A19.1 - État Git du dépôt",
+        "description": "Lecture locale du dépôt : distant SSH, branches de présentation et derniers commits décorés.",
+        "filename": "B4-TECH-01-etat-git-local-2026-08-13.png",
+        "max_width": 170 * mm,
+        "max_height": 145 * mm,
+    },
+    {
+        "title": "A19.2 - Historique Git sur GitHub",
+        "description": "Historique public de la branche main, utilisé pour tracer les modifications livrées.",
+        "filename": "B4-TECH-02-historique-git-github-2026-08-13.png",
+        "max_width": 170 * mm,
+        "max_height": 145 * mm,
+    },
+    {
+        "title": "A19.3 - CI GitHub Actions sur main",
+        "description": "Exécution réussie des contrôles automatisés du commit de référence sur main.",
+        "filename": "B4-TECH-03-ci-main-github-2026-08-13.png",
+        "max_width": 170 * mm,
+        "max_height": 145 * mm,
+    },
+    {
+        "title": "A19.4 - CI develop et staging vérifié",
+        "description": "Exécution réussie sur develop, incluant la vérification du staging après les contrôles CI.",
+        "filename": "B4-TECH-04-ci-develop-staging-github-2026-08-13.png",
+        "max_width": 170 * mm,
+        "max_height": 145 * mm,
+    },
+    {
+        "title": "A19.5 - Audit transversal Bloc 4",
+        "description": "Sortie réelle du contrôleur attestant la conformité des sept compétences et du manifeste.",
+        "filename": "B4-TECH-05-audit-bloc4-local-2026-08-13.png",
+        "max_width": 170 * mm,
+        "max_height": 145 * mm,
+    },
+]
 
 SPITY_DARK = colors.HexColor("#173236")
 SPITY_GREEN = colors.HexColor("#8bb957")
@@ -450,6 +487,36 @@ def build_visual_evidence_appendix() -> list:
     return story
 
 
+def build_technical_evidence_appendix() -> list:
+    story = [
+        PageBreak(),
+        Paragraph("15. Annexe technique - Git, CI/CD et audit", h2),
+        Paragraph(
+            "Cette annexe complète les parcours applicatifs par des preuves techniques réellement observées. "
+            "Elle présente l'état Git lu localement, l'historique public, les workflows GitHub Actions validés et l'audit automatisé des sept compétences. "
+            "Les captures sont datées, leurs sources sont décrites dans le manifeste technique et aucune information sensible n'est exposée.",
+            body,
+        ),
+    ]
+
+    for index, capture in enumerate(TECHNICAL_EVIDENCE):
+        path = VISUAL_EVIDENCE_DIR / capture["filename"]
+        if not path.exists():
+            raise FileNotFoundError(f"Capture technique absente : {path}")
+
+        if index:
+            story.append(PageBreak())
+
+        story.extend([
+            Paragraph(capture["title"], h3),
+            Paragraph(capture["description"], body),
+            Spacer(1, 2 * mm),
+            evidence_image(path, capture["max_width"], capture["max_height"]),
+        ])
+
+    return story
+
+
 def build_story(document: Bloc4Document) -> list:
     markdown = SOURCE.read_text(encoding="utf-8")
     story = [Spacer(1, 22 * mm)]
@@ -502,6 +569,7 @@ def build_story(document: Bloc4Document) -> list:
     story.extend([toc, PageBreak()])
     story.extend(parse_markdown(markdown, document.width))
     story.extend(build_visual_evidence_appendix())
+    story.extend(build_technical_evidence_appendix())
     return story
 
 

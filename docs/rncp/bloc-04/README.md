@@ -9,7 +9,7 @@ Ce répertoire est le chantier Bloc 4 de Spity selon le référentiel Ynov 2024,
 - [`PLAN_ACTION_BLOC_04.md`](PLAN_ACTION_BLOC_04.md) : état réel et feuille de route compétence par compétence ;
 - [`REVUE_FINALE_BLOC_04.md`](REVUE_FINALE_BLOC_04.md) : grille jury liant chaque attendu, mécanisme, commande et preuve ;
 - [`preuves/`](preuves) : preuves figées, fiches d'anomalie, recommandations, journal et collaboration support contrôlée ;
-- [`preuves/captures/`](preuves/captures/) : cinq parcours applicatifs capturés depuis l'application locale, avec manifeste de capture reproductible ;
+- [`preuves/captures/`](preuves/captures/) : parcours applicatifs, état Git, CI/CD et audit des compétences, avec manifestes de capture reproductibles ;
 - [`../../../output/pdf/dossier-bloc-04-spity.pdf`](../../../output/pdf/dossier-bloc-04-spity.pdf) : export de travail vérifié visuellement, à régénérer après chaque compétence ;
 - [`../referentiel/2024-referentiel-expert-developpement-logiciel-ynov.pdf`](../referentiel/2024-referentiel-expert-developpement-logiciel-ynov.pdf) : source officielle.
 
@@ -38,6 +38,7 @@ Depuis `spity/` :
 ```bash
 npm run bloc4:capture
 npm run bloc4:visuals
+npm run bloc4:tech-visuals
 npm run bloc4:exercise
 npm run bloc4:improvements
 npm run bloc4:releases

@@ -467,7 +467,10 @@ Le principal risque ouvert n'est pas masqué : la production est saine mais en r
 | A16 | Intégrité | `preuves/MANIFEST.sha256` |
 | A17 | Revue finale | `REVUE_FINALE_BLOC_04.md` et `preuves/B4-REVUE-FINALE-01-audit-transversal-2026-08-13.json` |
 | A18 | Parcours visuels | `preuves/captures/`, manifeste daté et procédure `npm run bloc4:visuals` |
+| A19 | Preuves techniques visuelles | État Git, historique, CI `main`, CI/staging `develop`, audit des sept compétences et procédure `npm run bloc4:tech-visuals` |
 
 Les cinq captures de l'annexe A18 sont intégrées directement à la fin de l'export PDF. Elles présentent l'accueil public, le fil grimpeur, le matching, la gestion d'événements club et le profil mobile. Leur manifeste daté conserve le scénario, le rôle de démonstration, le viewport et le nom de chaque fichier ; elles restent donc vérifiables et reproductibles, sans donnée sensible.
+
+L'annexe A19 présente les preuves techniques demandées au niveau des compétences : état Git et branches, historique de commits, workflows GitHub Actions validés sur `main` et `develop`, puis audit transverse des sept compétences. Les captures Git et CI/CD complètent les preuves C4.1.1, C4.1.2, C4.2.2 et C4.3.2 ; l'audit final couvre aussi C4.2.1, C4.3.1 et C4.3.3. Elles sont intégrées directement dans le PDF et leurs URLs ou commandes exactes sont conservées dans `preuves/captures/manifest-technique.json`.
 
 Les sources complémentaires regroupent les workflows et formulaires sous `.github/`, les politiques et scripts de maintenance sous `spity/`, les guides de déploiement, de release, de journal et d'amélioration, ainsi que le référentiel officiel archivé. Elles sont toutes reliées au manifeste d'intégrité.

@@ -38,6 +38,7 @@
     "incidents:exercise": "node scripts/run-incident-registry-exercise.mjs",
     "bloc4:capture": "node scripts/capture-bloc4-evidence.mjs",
     "bloc4:visuals": "node scripts/capture-bloc4-visual-evidence.mjs",
+    "bloc4:tech-visuals": "node scripts/capture-bloc4-technical-evidence.mjs",
     "bloc4:incidents": "node scripts/capture-incident-registry-evidence.mjs",
     "bloc4:improvements": "node scripts/capture-improvement-backlog-evidence.mjs",
     "bloc4:releases": "node scripts/capture-release-journal-evidence.mjs",
