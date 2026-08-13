@@ -40,7 +40,7 @@
     "images:demo": "node scripts/download-demo-images.mjs"
   },
   "dependencies": {
-    "@hookform/resolvers": "5.2.2",
+    "@hookform/resolvers": "5.7.1",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "drizzle-orm": "^0.45.2",
