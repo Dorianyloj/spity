@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "versionPins": [
+    {
+      "package": "@hookform/resolvers",
+      "version": "5.2.2",
+      "owner": "mainteneur Spity",
+      "expiresOn": "2026-10-13",
+      "reason": "La version 5.7.1 déclare un pair optionnel ajv ^8 alors qu'ESLint utilise ajv 6 ; npm sbom échoue avec ESBOMPROBLEMS. Spity n'utilise que le résolveur Zod, donc 5.2.2 reste verrouillée jusqu'à une version amont produisant un arbre npm et un SBOM valides."
+    }
+  ],
+  "production": {
+    "blockAtOrAbove": "high"
+  },
+  "development": {
+    "blockAtOrAbove": "moderate",
+    "maximumExceptionSeverity": "moderate",
+    "exceptions": [
+      {
+        "packages": [
+          "@esbuild-kit/core-utils",
+          "@esbuild-kit/esm-loader",
+          "drizzle-kit",
+          "esbuild"
+        ],
+        "advisory": "GHSA-67mh-4wv8-2f99",
+        "owner": "mainteneur Spity",
+        "expiresOn": "2026-11-13",
+        "reason": "Drizzle Kit est un outil de développement non exposé. npm propose une rétrogradation cassante vers 0.18.1 ; les migrations restent exécutées dans un environnement contrôlé en attendant une correction amont compatible."
+      }
+    ]
+  }
+}

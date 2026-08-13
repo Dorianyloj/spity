@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-08-13T07:14:12.088Z",
+  "criterion": "C4.1.1",
+  "repositoryRevision": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b",
+  "lockfileSha256": "16aade1e8cf0140d55f5f3c202b90a236c400dfe9fd41c38e6a912c3717aad2d",
+  "runtime": {
+    "node": ">=22 <23",
+    "npm": ">=10"
+  },
+  "controlledVersions": {
+    "next": "^16.3.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "eslint-config-next": "^16.3.0",
+    "lighthouse": "^13.4.1",
+    "puppeteer-core": "^25.6.0",
+    "@playwright/test": "^1.62.1",
+    "drizzle-kit": "^0.31.10"
+  },
+  "productionAudit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "completeAudit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 4,
+    "high": 0,
+    "critical": 0,
+    "total": 4
+  },
+  "outdatedPackages": [
+    {
+      "name": "@hookform/resolvers",
+      "current": "5.2.2",
+      "wanted": "5.2.2",
+      "latest": "5.7.1"
+    },
+    {
+      "name": "@testing-library/jest-dom",
+      "current": "6.9.1",
+      "wanted": "6.9.1",
+      "latest": "7.0.1"
+    },
+    {
+      "name": "@types/node",
+      "current": "22.20.1",
+      "wanted": "22.20.1",
+      "latest": "26.2.0"
+    },
+    {
+      "name": "eslint",
+      "current": "9.39.5",
+      "wanted": "9.39.5",
+      "latest": "10.8.1"
+    },
+    {
+      "name": "framer-motion",
+      "current": "12.43.0",
+      "wanted": "12.43.0",
+      "latest": "13.1.0"
+    },
+    {
+      "name": "jest-axe",
+      "current": "10.0.0",
+      "wanted": "10.0.0",
+      "latest": "11.0.0"
+    },
+    {
+      "name": "lucide-react",
+      "current": "0.562.0",
+      "wanted": "0.562.0",
+      "latest": "1.31.0"
+    },
+    {
+      "name": "typescript",
+      "current": "5.9.3",
+      "wanted": "5.9.3",
+      "latest": "7.0.2"
+    }
+  ],
+  "decisions": [
+    "No high or critical production vulnerability is accepted.",
+    "Lighthouse and Puppeteer were upgraded to remove the remediable high development-tooling advisories.",
+    "The remaining moderate Drizzle/esbuild advisories are development-only; npm proposes a breaking downgrade, so they are tracked instead of force-fixed.",
+    "Major upgrades are isolated and validated through lint, type checking, tests, audits, build, browser acceptance and accessibility gates."
+  ]
+}

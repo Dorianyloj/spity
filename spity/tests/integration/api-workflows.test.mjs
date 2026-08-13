@@ -3,6 +3,7 @@ import { randomUUID } from 'node:crypto'
 import { spawn } from 'node:child_process'
 import { setTimeout as delay } from 'node:timers/promises'
 import { after, before, test } from 'node:test'
+import { fileURLToPath } from 'node:url'
 import mysql from 'mysql2/promise'
 
 const port = Number(process.env.INTEGRATION_PORT ?? 3102)
@@ -179,9 +180,9 @@ before(async () => {
     return
   }
 
-  const nextBinary = new URL('../../node_modules/next/dist/bin/next', import.meta.url).pathname
+  const nextBinary = fileURLToPath(new URL('../../node_modules/next/dist/bin/next', import.meta.url))
   serverProcess = spawn(process.execPath, [nextBinary, 'dev', '--hostname', '127.0.0.1', '--port', String(port)], {
-    cwd: new URL('../..', import.meta.url).pathname,
+    cwd: fileURLToPath(new URL('../..', import.meta.url)),
     env: {
       ...process.env,
       NEXT_TELEMETRY_DISABLED: '1',

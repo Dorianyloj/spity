@@ -1,0 +1,116 @@
+name: Dependency maintenance
+
+on:
+  schedule:
+    - cron: '0 5 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: dependency-maintenance
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    name: Audit policy and SBOM
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: spity
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: spity/.nvmrc
+          cache: npm
+          cache-dependency-path: spity/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Check dependency policy and generate SBOM
+        id: dependency-policy
+        run: npm run dependencies:check
+
+      - name: Upload dependency evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: dependency-maintenance-${{ github.sha }}
+          path: tmp/dependency-maintenance
+          if-no-files-found: warn
+          retention-days: 90
+
+      - name: Open or update the maintenance incident
+        if: failure()
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const title = '[Maintenance] Politique de dépendances non conforme'
+            const marker = '<!-- spity-dependency-maintenance -->'
+            const body = `${marker}
+            Le contrôle planifié des dépendances a échoué.
+
+            - Révision : \`${context.sha}\`
+            - Exécution : ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}
+            - Action : analyser l'artefact \`dependency-maintenance-${context.sha}\`, qualifier la vulnérabilité et créer un lot correctif isolé.`
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100,
+            })
+            const existing = issues.find((issue) => issue.title === title && issue.body?.includes(marker))
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              })
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['dependencies'],
+              })
+            }
+
+      - name: Close the maintenance incident after recovery
+        if: success()
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const title = '[Maintenance] Politique de dépendances non conforme'
+            const marker = '<!-- spity-dependency-maintenance -->'
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100,
+            })
+            for (const issue of issues.filter((item) => item.title === title && item.body?.includes(marker))) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `Contrôle de nouveau conforme sur \`${context.sha}\` : ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+              })
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed',
+                state_reason: 'completed',
+              })
+            }

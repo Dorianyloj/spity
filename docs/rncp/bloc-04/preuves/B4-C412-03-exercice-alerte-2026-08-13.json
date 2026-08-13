@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "type": "controlled-monitoring-exercise",
+  "executedAt": "2026-08-13T06:34:52.343Z",
+  "criteria": [
+    "C4.1.2",
+    "C4.2.1"
+  ],
+  "repositoryRevision": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b",
+  "safety": "Local HTTP fixture only. No production request was degraded and no customer data was used.",
+  "objective": "Verify that a healthy payload passes and that an HTTP/application failure produces a retryable, actionable alert report.",
+  "expectedOutcome": "The healthy probe succeeds. The degraded probe fails after two attempts with a non-zero CLI-compatible status.",
+  "result": "passed",
+  "healthyProbe": {
+    "schemaVersion": 1,
+    "checkedAt": "2026-08-13T06:34:52.291Z",
+    "status": "healthy",
+    "target": "http://127.0.0.1:52499/healthy",
+    "attempts": [
+      {
+        "attempt": 1,
+        "httpStatus": 200,
+        "latencyMs": 21,
+        "outcome": "success"
+      }
+    ],
+    "indicators": {
+      "applicationStatus": "ok",
+      "httpStatus": 200,
+      "latencyMs": 21,
+      "maxLatencyMs": 3000,
+      "revision": "cccccccccccccccccccccccccccccccccccccccc",
+      "version": "monitoring-exercise"
+    }
+  },
+  "degradedProbe": {
+    "schemaVersion": 1,
+    "checkedAt": "2026-08-13T06:34:52.317Z",
+    "status": "unhealthy",
+    "target": "http://127.0.0.1:52499/degraded",
+    "attempts": [
+      {
+        "attempt": 1,
+        "latencyMs": 6,
+        "outcome": "failure",
+        "error": "La route de santé répond avec le statut HTTP 503"
+      },
+      {
+        "attempt": 2,
+        "latencyMs": 5,
+        "outcome": "failure",
+        "error": "La route de santé répond avec le statut HTTP 503"
+      }
+    ],
+    "error": "La route de santé répond avec le statut HTTP 503",
+    "thresholds": {
+      "maxLatencyMs": 3000,
+      "retries": 1,
+      "timeoutMs": 15000
+    }
+  }
+}

@@ -4,9 +4,16 @@ on:
   schedule:
     - cron: '*/15 * * * *'
   workflow_dispatch:
+    inputs:
+      health_url:
+        description: URL à contrôler, modifiable uniquement pour un exercice encadré
+        required: false
+        default: https://spity.fr/api/health
+        type: string
 
 permissions:
   contents: read
+  issues: write
 
 concurrency:
   group: production-monitoring
@@ -18,37 +25,110 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      HEALTH_URL: https://spity.fr/api/health
+      HEALTH_URL: ${{ inputs.health_url || 'https://spity.fr/api/health' }}
+      HEALTH_OUTPUT_PATH: .monitoring/production-health.json
+      HEALTH_MAX_LATENCY_MS: 3000
+      HEALTH_RETRIES: 2
+      HEALTH_TIMEOUT_MS: 15000
 
     steps:
+      - name: Checkout monitoring source
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: spity/.nvmrc
+
       - name: Query production
-        id: health
-        shell: bash
-        run: |
-          payload=$(curl --fail --show-error --silent \
-            --connect-timeout 5 \
-            --max-time 15 \
-            --retry 2 \
-            --retry-all-errors \
-            "$HEALTH_URL")
+        run: node spity/scripts/check-health.mjs
 
-          printf '%s\n' "$payload" | jq --exit-status \
-            '.status == "ok"
-             and (.version | type == "string" and length > 0)
-             and (.revision | type == "string" and length > 0)'
+      - name: Upload monitoring evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: production-health-${{ github.run_id }}
+          path: .monitoring/production-health.json
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30
 
-          version=$(printf '%s\n' "$payload" | jq --raw-output '.version')
-          revision=$(printf '%s\n' "$payload" | jq --raw-output '.revision')
-          echo "version=$version" >> "$GITHUB_OUTPUT"
-          echo "revision=$revision" >> "$GITHUB_OUTPUT"
+      - name: Open or refresh production alert
+        if: failure()
+        uses: actions/github-script@v8
+        env:
+          REPORT_PATH: .monitoring/production-health.json
+        with:
+          script: |
+            const fs = require('node:fs')
+            const marker = '<!-- spity-production-monitoring -->'
+            const title = '[Incident production] Supervision en échec'
+            const report = fs.existsSync(process.env.REPORT_PATH)
+              ? fs.readFileSync(process.env.REPORT_PATH, 'utf8')
+              : '{"error":"rapport indisponible"}'
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100,
+            })
+            const existing = issues.find((issue) => !issue.pull_request && issue.body?.includes(marker))
+            const body = `${marker}\nLa supervision automatique a échoué.\n\n- Workflow : ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}\n- Révision : ${context.sha}\n\n\`\`\`json\n${report.slice(0, 6000)}\n\`\`\``
+
+            if (existing) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+                title,
+              })
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+              })
+            }
+
+      - name: Close alert after recovery
+        if: success()
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const marker = '<!-- spity-production-monitoring -->'
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100,
+            })
+            const existing = issues.find((issue) => !issue.pull_request && issue.body?.includes(marker))
+
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body: `Retour à la normale confirmé par la supervision : ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+              })
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                state: 'closed',
+                state_reason: 'completed',
+              })
+            }
 
       - name: Record successful check
+        if: success()
         run: |
           {
             echo "## Production health"
             echo "- URL: $HEALTH_URL"
             echo "- Status: ok"
-            echo "- Version: ${{ steps.health.outputs.version }}"
-            echo "- Revision: ${{ steps.health.outputs.revision }}"
             echo "- Checked at: $(date --utc --iso-8601=seconds)"
+            echo "- Evidence: production-health-${{ github.run_id }}"
           } >> "$GITHUB_STEP_SUMMARY"

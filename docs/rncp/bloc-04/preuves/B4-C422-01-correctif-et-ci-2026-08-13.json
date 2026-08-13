@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-08-13T07:14:12.088Z",
+  "criteria": [
+    "C4.2.2",
+    "C4.3.2"
+  ],
+  "greenCiBaseline": {
+    "id": 31604246584,
+    "status": "completed",
+    "conclusion": "success",
+    "revision": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b",
+    "createdAt": "2026-08-12T13:58:26Z",
+    "updatedAt": "2026-08-12T14:02:02Z",
+    "url": "https://github.com/Dorianyloj/spity/actions/runs/31604246584"
+  },
+  "deployedSecurityCorrection": {
+    "revision": "49c4ea0ffa34b35e9ad5bc2e1a838eb82eb0b8ef",
+    "message": "fix(security): update vulnerable runtime dependencies",
+    "committedAt": "2026-07-23T07:28:34Z",
+    "url": "https://github.com/Dorianyloj/spity/commit/49c4ea0ffa34b35e9ad5bc2e1a838eb82eb0b8ef",
+    "observedProductionVersion": "0.1.0-jury",
+    "observedProductionRevision": "49c4ea0ffa34b35e9ad5bc2e1a838eb82eb0b8ef"
+  },
+  "publishedRelease": {
+    "tag": "v0.1.0",
+    "name": "Spity v0.1.0",
+    "publishedAt": "2026-07-20T13:29:17Z",
+    "url": "https://github.com/Dorianyloj/spity/releases/tag/v0.1.0",
+    "prerelease": false
+  }
+}

@@ -1,0 +1,77 @@
+name: Retour utilisateur ou support
+description: Qualifier un retour utilisateur avant analyse technique ou escalade.
+title: "[Support] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ne saisir aucune donnée personnelle, aucun secret et aucune copie brute de base ou de journal. Utiliser des identifiants anonymisés.
+  - type: dropdown
+    id: channel
+    attributes:
+      label: Canal de réception
+      options:
+        - Utilisateur pilote
+        - Support de niveau 1
+        - Product owner
+        - Supervision automatique
+        - Exercice Bloc 4
+    validations:
+      required: true
+  - type: input
+    id: received_at
+    attributes:
+      label: Date et heure du retour
+      placeholder: 2026-08-13 09:30 Europe/Paris
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexte utilisateur anonymisé
+      description: Rôle, écran, navigateur, version observée et préconditions utiles.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problème rapporté et impact
+      description: Distinguer les faits observés, la fréquence et l'impact métier.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction par le support
+      description: Étapes minimales, résultat obtenu et éléments anonymisés collectés.
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priorité proposée
+      options:
+        - P1 - service indisponible ou données menacées
+        - P2 - fonction critique ou accessibilité bloquante
+        - P3 - fonction dégradée avec contournement
+        - P4 - demande mineure ou amélioration
+    validations:
+      required: true
+  - type: textarea
+    id: escalation
+    attributes:
+      label: Question ou demande adressée à l'équipe technique
+    validations:
+      required: true
+  - type: textarea
+    id: resolution
+    attributes:
+      label: Résolution et réponse transmise
+      description: Cause, correctif, version, vérification support et message utilisateur.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Contrôle des données
+      options:
+        - label: Les preuves sont anonymisées et ne contiennent aucun secret.
+          required: true

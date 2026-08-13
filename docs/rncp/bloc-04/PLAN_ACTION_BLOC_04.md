@@ -1,74 +1,51 @@
-# Bloc 4 - État des lieux et plan d'action
+# Bloc 4 - Feuille de route compétence par compétence
 
-**Certification :** Expert en développement logiciel
+**Démarrage :** 12 août 2026
 
-**Projet support :** Spity
+**Dernière mise à jour :** 13 août 2026
 
-**Date de cadrage :** 12 août 2026
+**Projet :** Spity
 
-## 1. Modalité d'évaluation
+Le Bloc 4 est développé comme un chantier produit, pas comme une simple rédaction. Une compétence n'est déclarée industrialisée que lorsque le dépôt contient un fonctionnement réel, une automatisation, des tests, des preuves reproductibles et une procédure d'exploitation.
 
-Le candidat remet un dossier écrit présentant la gestion du monitoring, le traitement des anomalies et la maintenance d'un logiciel développé au cours de sa formation.
+## État réel
 
-Le référentiel officiel demande sept compétences :
-
-- C4.1.1 : gérer les mises à jour des dépendances ;
-- C4.1.2 : concevoir un système de supervision et d'alerte ;
-- C4.2.1 : consigner les anomalies détectées ;
-- C4.2.2 : créer et déployer un correctif via l'intégration et le déploiement continus ;
-- C4.3.1 : proposer des améliorations argumentées ;
-- C4.3.2 : établir un journal des versions déployées ;
-- C4.3.3 : collaborer avec le support client sur un problème complexe.
-
-## 2. Matrice de conformité initiale
-
-| Compétence | Preuves déjà disponibles | Écart à combler | Statut |
+| Ordre | Compétence | Fonctionnement présent | État d'approfondissement |
 | --- | --- | --- | --- |
-| C4.1.1 | [Dependabot](../../../.github/dependabot.yml), `package.json`, `package-lock.json`, audit npm dans la CI et mise à jour de sécurité du 12 août 2026 | Capturer une pull request Dependabot validée par la CI et expliciter l'évaluation d'impact | Partiel |
-| C4.1.2 | [Route de santé](../../../spity/src/app/api/health/route.ts), contrôles de staging/release et [workflow de supervision](../../../.github/workflows/production-monitoring.yml) | Produire l'historique d'exécution, une alerte contrôlée et sa résolution | Partiel |
-| C4.2.1 | [Registre BC02](../../bc02/11_PLAN_CORRECTION_BOGUES_C232.md), historique de correctifs et [formulaire d'incident](../../../.github/ISSUE_TEMPLATE/incident-production.yml) | Consigner une anomalie de production réelle avec contexte, reproduction, analyse et décision | Partiel |
-| C4.2.2 | [CI](../../../.github/workflows/ci.yml), [release](../../../.github/workflows/release.yml), modèle de pull request et commits `fix(...)` | Sélectionner un incident, relier le correctif, les tests, le déploiement et la vérification de production | Partiel |
-| C4.3.1 | [État des lieux](../../audits/2026-08-12-etat-des-lieux-projet.md), résultats de couverture, audit npm et décalage de déploiement | Chiffrer coût, délai, risque et gain attendu pour chaque recommandation retenue | Partiel |
-| C4.3.2 | [`CHANGELOG.md`](../../../CHANGELOG.md), version `0.1.0`, tags, release GitHub et métadonnées de santé | Ajouter la prochaine release déployée avec ses correctifs et sa révision | Présent à consolider |
-| C4.3.3 | Aucun échange de support réel versionné | Réaliser et documenter un cas avec contexte, retour, résolution et contribution de chaque partie | À produire |
+| 1 | C4.1.1 - Gérer les mises à jour | Dependabot, politique exécutable, audit planifié, SBOM, revue PR, lot compatible qualifié | **Industrialisée et vérifiée** |
+| 2 | C4.1.2 - Superviser et alerter | Route de santé, sonde, workflow planifié et exercice local | Base fonctionnelle à approfondir |
+| 3 | C4.2.1 - Consigner les anomalies | Formulaire GitHub et deux fiches reproductibles | Base fonctionnelle à approfondir |
+| 4 | C4.2.2 - Créer et déployer un correctif | CI complète, release par tag, rollback documenté | Base fonctionnelle à approfondir |
+| 5 | C4.3.1 - Proposer des améliorations | Backlog chiffré et priorisé | Base documentaire à transformer en boucle de pilotage |
+| 6 | C4.3.2 - Tenir le journal des versions | Changelog, release et version/révision de santé | Base fonctionnelle à approfondir |
+| 7 | C4.3.3 - Collaborer avec le support | Formulaire support et exercice fictif déclaré | Base fonctionnelle à approfondir |
 
-## 3. Plan de réalisation
+## Définition de terminé
 
-### Phase 1 - Stabiliser le socle
+Pour chaque ligne, les cinq conditions suivantes sont obligatoires :
 
-1. [x] remettre la couverture Jest au-dessus des seuils sans les abaisser : 60,16 % des lignes, 59,07 % des fonctions et 77,56 % des branches ;
-2. [x] intégrer les mises à jour non cassantes et conserver la décision motivée pour les alertes résiduelles ;
-3. [ ] remettre `main`, CI et production sur une révision cohérente.
+1. le mécanisme fonctionne réellement dans le dépôt ou dans un environnement contrôlé ;
+2. les erreurs importantes sont détectées automatiquement et produisent une action exploitable ;
+3. les cas sain, dégradé et limite sont testés ;
+4. les résultats sont datés, reproductibles et sans données sensibles ;
+5. la procédure indique fréquence, responsabilités, décision et retour arrière.
 
-### Phase 2 - Produire les preuves d'exploitation
+## C4.1.1 - Résultat obtenu
 
-1. laisser le workflow de supervision s'exécuter selon sa planification ;
-2. déclencher un exercice d'alerte contrôlé sans dégrader les données ;
-3. consigner l'événement avec le formulaire d'incident ;
-4. documenter diagnostic, correctif, tests, déploiement, vérification et retour arrière disponible.
+- [x] dépendances npm et GitHub Actions surveillées chaque semaine ;
+- [x] correctifs/mineures regroupés, versions majeures isolées ;
+- [x] politique JSON bloquant les vulnérabilités hors dérogation ;
+- [x] dérogations et versions verrouillées avec propriétaire, motif et expiration ;
+- [x] audit production/complet et SBOM CycloneDX générés sous Node 22 ;
+- [x] workflow planifié avec artefact, ticket unique et fermeture après récupération ;
+- [x] revue des nouvelles dépendances sur chaque pull request ;
+- [x] mise à jour réelle du lockfile et qualification de la régression `@hookform/resolvers`/Ajv ;
+- [x] 152 tests Jest, 8 tests de maintenance, 11 scénarios MariaDB, 6 recettes Playwright et audits Lighthouse verts.
 
-### Phase 3 - Couvrir la maintenance et le support
+## Prochaine étape : C4.1.2
 
-1. prioriser trois améliorations à partir des indicateurs techniques et des retours utilisateurs ;
-2. chiffrer leur coût, délai, risque et gain ;
-3. documenter un échange réel avec un utilisateur pilote ou une personne assurant le support ;
-4. mettre à jour le changelog et associer chaque correctif à une version déployée.
+La reprise suivante doit transformer la supervision actuelle en véritable dispositif d'exploitation : historique durable des mesures, objectifs SLI/SLO, alertes anti-bruit, tableau de bord, mesure de disponibilité, escalade testée et preuve de récupération. Aucun déploiement de production ne sera déclenché sans autorisation explicite.
 
-### Phase 4 - Assembler le dossier jury
+## Règle de présentation
 
-1. rédiger un chapitre par compétence ;
-2. associer chaque affirmation à une preuve datée et reproductible ;
-3. ajouter les captures utiles sans dupliquer les sources ;
-4. vérifier les liens, les versions et les révisions ;
-5. exporter puis relire le PDF final page par page.
-
-## 4. Critères de fin
-
-Le bloc ne sera considéré prêt que lorsque :
-
-- les sept compétences possèdent au moins une preuve vérifiable ;
-- une anomalie est documentée de sa détection jusqu'à sa vérification en production ;
-- une alerte de supervision est visible et expliquée ;
-- le journal des versions correspond aux révisions réellement déployées ;
-- la collaboration support repose sur un cas réel ;
-- la CI de la révision présentée est verte.
+Le dossier et le PDF restent des livrables de travail tant que les sept compétences n'ont pas franchi la même définition de terminé. Les bases existantes sont conservées, mais elles ne sont pas présentées comme industrialisées avant leur reprise dédiée.

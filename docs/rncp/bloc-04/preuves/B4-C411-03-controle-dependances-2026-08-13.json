@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-13T07:15:22.809Z",
+  "nodeVersion": "v22.23.2",
+  "lockfileSha256": "16aade1e8cf0140d55f5f3c202b90a236c400dfe9fd41c38e6a912c3717aad2d",
+  "policy": {
+    "schemaVersion": 1,
+    "versionPins": [
+      {
+        "package": "@hookform/resolvers",
+        "version": "5.2.2",
+        "owner": "mainteneur Spity",
+        "expiresOn": "2026-10-13",
+        "reason": "La version 5.7.1 déclare un pair optionnel ajv ^8 alors qu'ESLint utilise ajv 6 ; npm sbom échoue avec ESBOMPROBLEMS. Spity n'utilise que le résolveur Zod, donc 5.2.2 reste verrouillée jusqu'à une version amont produisant un arbre npm et un SBOM valides."
+      }
+    ],
+    "production": {
+      "blockAtOrAbove": "high"
+    },
+    "development": {
+      "blockAtOrAbove": "moderate",
+      "maximumExceptionSeverity": "moderate",
+      "exceptions": [
+        {
+          "packages": [
+            "@esbuild-kit/core-utils",
+            "@esbuild-kit/esm-loader",
+            "drizzle-kit",
+            "esbuild"
+          ],
+          "advisory": "GHSA-67mh-4wv8-2f99",
+          "owner": "mainteneur Spity",
+          "expiresOn": "2026-11-13",
+          "reason": "Drizzle Kit est un outil de développement non exposé. npm propose une rétrogradation cassante vers 0.18.1 ; les migrations restent exécutées dans un environnement contrôlé en attendant une correction amont compatible."
+        }
+      ]
+    }
+  },
+  "evaluation": {
+    "compliant": true,
+    "thresholds": {
+      "production": "high",
+      "development": "moderate",
+      "maximumExceptionSeverity": "moderate"
+    },
+    "auditSummary": {
+      "production": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "complete": {
+        "info": 0,
+        "low": 0,
+        "moderate": 4,
+        "high": 0,
+        "critical": 0,
+        "total": 4
+      }
+    },
+    "productionViolations": [],
+    "developmentViolations": [],
+    "exceptionsUsed": [
+      {
+        "packages": [
+          "@esbuild-kit/core-utils",
+          "@esbuild-kit/esm-loader",
+          "drizzle-kit",
+          "esbuild"
+        ],
+        "advisory": "GHSA-67mh-4wv8-2f99",
+        "owner": "mainteneur Spity",
+        "expiresOn": "2026-11-13",
+        "reason": "Drizzle Kit est un outil de développement non exposé. npm propose une rétrogradation cassante vers 0.18.1 ; les migrations restent exécutées dans un environnement contrôlé en attendant une correction amont compatible.",
+        "usedBy": [
+          "@esbuild-kit/core-utils",
+          "@esbuild-kit/esm-loader",
+          "drizzle-kit",
+          "esbuild"
+        ]
+      }
+    ],
+    "staleExceptions": [],
+    "versionPins": [
+      {
+        "package": "@hookform/resolvers",
+        "version": "5.2.2",
+        "owner": "mainteneur Spity",
+        "expiresOn": "2026-10-13",
+        "reason": "La version 5.7.1 déclare un pair optionnel ajv ^8 alors qu'ESLint utilise ajv 6 ; npm sbom échoue avec ESBOMPROBLEMS. Spity n'utilise que le résolveur Zod, donc 5.2.2 reste verrouillée jusqu'à une version amont produisant un arbre npm et un SBOM valides.",
+        "installedVersion": "5.2.2",
+        "expired": false,
+        "mismatched": false
+      }
+    ],
+    "expiredVersionPins": [],
+    "mismatchedVersionPins": []
+  },
+  "outdated": [
+    {
+      "name": "@hookform/resolvers",
+      "current": "5.2.2",
+      "wanted": "5.2.2",
+      "latest": "5.7.1",
+      "dependencyType": null
+    },
+    {
+      "name": "@testing-library/jest-dom",
+      "current": "6.9.1",
+      "wanted": "6.9.1",
+      "latest": "7.0.1",
+      "dependencyType": null
+    },
+    {
+      "name": "@types/node",
+      "current": "22.20.1",
+      "wanted": "22.20.1",
+      "latest": "26.2.0",
+      "dependencyType": null
+    },
+    {
+      "name": "eslint",
+      "current": "9.39.5",
+      "wanted": "9.39.5",
+      "latest": "10.8.1",
+      "dependencyType": null
+    },
+    {
+      "name": "framer-motion",
+      "current": "12.43.0",
+      "wanted": "12.43.0",
+      "latest": "13.1.0",
+      "dependencyType": null
+    },
+    {
+      "name": "jest-axe",
+      "current": "10.0.0",
+      "wanted": "10.0.0",
+      "latest": "11.0.0",
+      "dependencyType": null
+    },
+    {
+      "name": "lucide-react",
+      "current": "0.562.0",
+      "wanted": "0.562.0",
+      "latest": "1.31.0",
+      "dependencyType": null
+    },
+    {
+      "name": "typescript",
+      "current": "5.9.3",
+      "wanted": "5.9.3",
+      "latest": "7.0.2",
+      "dependencyType": null
+    }
+  ],
+  "sbom": {
+    "bomFormat": "CycloneDX",
+    "specVersion": "1.5",
+    "serialNumber": "urn:uuid:f310908b-2642-4d99-89c5-3cf18008245a",
+    "componentCount": 841,
+    "sha256": "5609268d20c70a1ed5c29b3ca38c72ffe77cb7ef113685899beade12c9353e23"
+  }
+}

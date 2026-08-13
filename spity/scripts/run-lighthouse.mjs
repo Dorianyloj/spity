@@ -1,5 +1,5 @@
 import { spawn, spawnSync } from 'node:child_process'
-import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises'
+import { cp, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
 const port = Number(process.env.LIGHTHOUSE_PORT ?? 3200)
@@ -82,6 +82,7 @@ try {
 
   for (const page of pages) {
     const reportPath = resolve(outputDirectory, `${page.name}.json`)
+    const auditStartedAt = Date.now()
     const result = spawnSync(
       process.execPath,
       [
@@ -98,7 +99,19 @@ try {
     )
 
     if (result.status !== 0) {
-      throw new Error(result.stderr || result.stdout || `Lighthouse a échoué pour ${page.path}`)
+      const output = `${result.stderr}\n${result.stdout}`
+      const reportMetadata = await stat(reportPath).catch(() => null)
+      const recoverableWindowsCleanupFailure = process.platform === 'win32'
+        && output.includes('Runtime error encountered: EPERM')
+        && output.includes('Launcher.destroyTmp')
+        && reportMetadata
+        && reportMetadata.mtimeMs >= auditStartedAt - 1_000
+
+      if (!recoverableWindowsCleanupFailure) {
+        throw new Error(result.stderr || result.stdout || `Lighthouse a échoué pour ${page.path}`)
+      }
+
+      console.warn(`Lighthouse a produit le rapport ${page.name}, mais Windows a retardé le nettoyage de son profil Chrome temporaire.`)
     }
 
     const report = JSON.parse(await readFile(reportPath, 'utf8'))

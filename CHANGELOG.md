@@ -6,6 +6,11 @@ Les évolutions notables de Spity sont consignées dans ce fichier. Le projet su
 
 ### Added
 
+- Chantier Bloc 4 couvrant C4.1.1 à C4.3.3, preuves figées, procédures de maintenance, observabilité et support.
+- C4.1.1 industrialisée avec politique exécutable, dérogations datées, SBOM CycloneDX, audit planifié, revue des dépendances en pull request et lot de mises à jour qualifié.
+- Sonde de santé Node.js testable avec seuil de latence, reprises, rapport JSON et exercice d'alerte local sans impact production.
+- Alerte GitHub automatique de supervision avec issue unique, artefact de contrôle et fermeture au retour à la normale.
+- Formulaire de retour support et mise en situation fictive transparente fondée sur l'anomalie réelle d'accessibilité.
 - Dossier de cadrage du bloc 4 avec matrice des sept compétences, état des preuves et plan d'action priorisé.
 - Supervision planifiée de la route de santé de production et formulaire structuré de consignation des incidents.
 - Modèle de pull request pour tracer la reproduction, la validation, le déploiement et le retour arrière des correctifs.
@@ -22,6 +27,8 @@ Les évolutions notables de Spity sont consignées dans ce fichier. Le projet su
 
 ### Fixed
 
+- Alertes hautes de l'outillage Lighthouse/Puppeteer supprimées par mise à jour contrôlée ; ESLint Next et types Node alignés avec les runtimes du projet.
+- Workflow Release aligné avec la CI pour installer et utiliser le Chromium Playwright lors de l'audit authentifié.
 - Contraste des états vides sur l'espace authentifié, avec un score Lighthouse accessibilité de 100 % sur les dix pages contrôlées.
 - Recette BC02 adaptée aux noms accessibles des nouveaux liens de profils publics ; les six scénarios Playwright passent à nouveau.
 - Audit Lighthouse rendu tolérant au verrouillage tardif du profil Chrome sous Windows lorsqu'un rapport valide a déjà été produit.

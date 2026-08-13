@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-08-13T07:14:12.088Z",
+  "criterion": "C4.1.2",
+  "source": "https://spity.fr/api/health",
+  "response": {
+    "status": "ok",
+    "version": "0.1.0-jury",
+    "revision": "49c4ea0ffa34b35e9ad5bc2e1a838eb82eb0b8ef"
+  }
+}

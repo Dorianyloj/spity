@@ -76,6 +76,11 @@ jobs:
           mkdir -p .integration-results
           npm run test:integration | tee .integration-results/results.tap
 
+      - name: Install Chromium for authenticated accessibility
+        run: |
+          npx playwright install --with-deps chromium
+          node -e 'process.stdout.write("CHROME_PATH=" + require("playwright").chromium.executablePath() + "\n")' >> "$GITHUB_ENV"
+
       - name: Audit authenticated accessibility
         run: npm run accessibility:audit
 

@@ -8,12 +8,31 @@ updates:
       time: "06:00"
       timezone: Europe/Paris
     target-branch: develop
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 10
+    versioning-strategy: increase-if-necessary
+    cooldown:
+      default-days: 3
+      semver-major-days: 14
+      semver-minor-days: 3
+      semver-patch-days: 1
+    labels:
+      - dependencies
+      - javascript
+    commit-message:
+      prefix: chore
+      prefix-development: chore
+      include: scope
     groups:
-      production-dependencies:
+      production-compatible:
         dependency-type: production
-      development-dependencies:
+        update-types:
+          - minor
+          - patch
+      development-compatible:
         dependency-type: development
+        update-types:
+          - minor
+          - patch
 
   - package-ecosystem: github-actions
     directory: /
@@ -24,3 +43,11 @@ updates:
       timezone: Europe/Paris
     target-branch: develop
     open-pull-requests-limit: 3
+    cooldown:
+      default-days: 3
+    labels:
+      - dependencies
+      - github_actions
+    commit-message:
+      prefix: chore
+      include: scope

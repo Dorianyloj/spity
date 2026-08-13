@@ -1,15 +1,25 @@
-# Preuves du bloc 4
+# Preuves du Bloc 4
 
-Ce répertoire recevra uniquement les preuves figées qui ne sont pas déjà disponibles sous forme de source versionnée ou d'historique GitHub.
+Les fichiers de ce répertoire sont datés, anonymisés et reliés à un critère. Les fichiers JSON issus de sources publiques sont régénérés par `npm run bloc4:capture`. L'exercice local est régénéré par `npm run bloc4:exercise`.
 
-## Convention de nommage
+## Inventaire
 
-`B4-COMPETENCE-NUMERO-description-AAAA-MM-JJ.ext`
+| Préfixe | Critère | Preuve |
+| --- | --- | --- |
+| C411 | C4.1.1 | Audit, décision de maintenance, politique exécutable et métadonnées SBOM. |
+| C412 | C4.1.2 | Historique de supervision, santé publique et exercice d'alerte. |
+| C421 | C4.2.1 | Fiches d'anomalie avec reproduction, cause et décision. |
+| C422 | C4.2.2 | État CI/déploiement et traitement du correctif. |
+| C431 | C4.3.1 | Recommandations chiffrées et priorisées. |
+| C432 | C4.3.2 | Journal des versions publiées/déployées. |
+| C433 | C4.3.3 | Collaboration support fictive déclarée. |
 
-Exemples :
+`MANIFEST.sha256` permet de détecter toute modification ultérieure des preuves et du PDF final.
 
-- `B4-C411-01-pull-request-dependabot-2026-08-12.png` ;
-- `B4-C412-01-alerte-supervision-2026-08-12.png` ;
-- `B4-C422-01-validation-correctif-production-2026-08-12.json`.
+## Règles
 
-Chaque preuve doit indiquer sa date, sa source, la révision Git concernée et le critère démontré. Les secrets, adresses privées, jetons, mots de passe et données personnelles doivent être masqués avant ajout au dépôt.
+- ne jamais ajouter de secret, mot de passe, token, IP privée ou donnée personnelle ;
+- conserver la date, la source publique, le SHA Git et le critère ;
+- annoncer clairement une simulation ou une mise en situation fictive ;
+- ne pas figer une capture redondante quand un JSON ou une URL publique apporte une preuve plus vérifiable ;
+- mettre à jour le journal uniquement après un déploiement réellement observé.
