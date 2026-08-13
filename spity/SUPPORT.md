@@ -46,6 +46,12 @@ Les mots de passe, jetons, adresses privées, exports de base et données person
 
 Ces délais sont des objectifs internes, pas un engagement contractuel 24/7.
 
+## Registre de collaboration
+
+Chaque collaboration support/mainteneur clôturée est consignée dans `support-collaborations/` sous la forme `SPITY-SUP-YYYY-NNNN.json`. La fiche lie le contexte anonymisé, une anomalie source, les critères fonctionnels, l'expertise technique, les transmissions entre rôles, la validation support et les preuves. La politique `support-collaboration-policy.json` impose le cycle `open` → `technical-analysis` → `awaiting-support-validation` → `closed`.
+
+La commande `npm run support:check` refuse notamment une simulation non déclarée, une transmission manquante du support vers le mainteneur ou en retour, une clôture sans validation support, une preuve hors dépôt, une URL non HTTPS ou une donnée sensible. `npm run support:exercise` rejoue ces erreurs uniquement en mémoire. Le workflow `Support collaboration` exécute le contrôle à chaque modification concernée et mensuellement, avec rapport conservé 90 jours.
+
 ## Mise en situation Bloc 4
 
-L'exercice versionné dans `docs/rncp/bloc-04/preuves/B4-C433-01-collaboration-support-2026-08-13.md` reprend l'anomalie réelle de contraste détectée sur une base vierge. Le rôle support est simulé et explicitement identifié ; les constats techniques, commits et résultats de CI sont réels et vérifiables.
+`SPITY-SUP-2026-0001` reprend l'anomalie réelle de contraste `SPITY-INC-2026-0001`. Le rôle support, le retour et la validation fonctionnelle sont une simulation contrôlée et explicitement identifiée ; les constats techniques, le correctif et les résultats CI sont réels et vérifiables. La fiche ne prétend ni à un échange client authentique ni à un déploiement de production.

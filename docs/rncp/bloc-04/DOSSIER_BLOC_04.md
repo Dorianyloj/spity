@@ -25,7 +25,7 @@ Spity dispose d'une chaîne de maintenance reproductible : Dependabot surveille 
 Le 13 août 2026, l'état vérifié est le suivant :
 
 - 0 vulnérabilité de production et 0 alerte haute/critique dans l'audit complet après mise à jour des outils ;
-- 152 tests Jest, 35 tests de maintenance, 11 scénarios MariaDB et 6 recettes Playwright ;
+- 152 tests Jest, 41 tests de maintenance, 11 scénarios MariaDB et 6 recettes Playwright ;
 - 10 pages authentifiées sur 10 à 100 % Lighthouse accessibilité ;
 - CI complète verte sur `e3784b7` ;
 - 29 exécutions de supervision historisées au moment de la collecte, avec production `ok` ;
@@ -44,7 +44,7 @@ La dérive n'a pas été corrigée par un déploiement non autorisé. Elle est t
 | C4.2.2 | Correctif décrit utilisant intégration/déploiement continu | Contrôle de promotion version/révision, staging CI, candidate de release, rapport conservé et exercice reproductible | `spity/RELEASE_VERIFICATION.md`, C422-01 à C422-03 | Industrialisé et vérifié |
 | C4.3.1 | Recommandations réalistes, argumentées, coûts/délais/gains | Registre mesurable, indicateurs, coûts/délais, retours qualifiés, revue mensuelle et CI dédiée | `spity/IMPROVEMENT_MANAGEMENT.md`, C431-01 à C431-03 | Industrialisé et vérifié |
 | C4.3.2 | Journal des versions et correctifs déployés | Registre versionné, identité SemVer/SHA, correctifs documentés, preuve de santé et revue mensuelle | `spity/RELEASE_JOURNAL.md`, C432-01 à C432-03 | Industrialisé et vérifié |
-| C4.3.3 | Problème résolu avec contexte, résolution et contributions | Mise en situation fictive support/mainteneur fondée sur une anomalie technique réelle | `spity/SUPPORT.md`, C433-01 | Base fonctionnelle à approfondir |
+| C4.3.3 | Problème résolu avec contexte, résolution et contributions | Registre contrôlé de transmissions support/mainteneur, critères fonctionnels, expertise technique, confidentialité et validation simulée déclarée | `spity/SUPPORT.md`, C433-01 à C433-03 | Industrialisé et vérifié |
 
 ## 3. Contexte technique et responsabilités
 
@@ -188,11 +188,11 @@ Le mainteneur ajoute les changements et le rollback ; le responsable de release 
 
 ## 10. C4.3.3 - Collaborer avec le support
 
-La mise en situation fictive reprend l'anomalie de contraste. Le support niveau 1 simulé collecte le contexte d'une base vierge, reproduit les écrans, qualifie P2 et définit le critère de clôture. Le mainteneur reproduit sur plusieurs environnements, explique la cause racine, corrige le composant et fournit les preuves de CI.
+Le registre `spity/support-collaborations/` rend la collaboration support/mainteneur contrôlable au lieu de la limiter à un récit. Chaque fiche `SPITY-SUP-YYYY-NNNN` lie un contexte anonymisé, une anomalie `SPITY-INC`, les critères d'acceptation fonctionnels, la cause racine, le correctif, les transmissions entre rôles, la validation support et les preuves. Son cycle strict est `open`, `technical-analysis`, `awaiting-support-validation`, puis `closed`.
 
-La résolution est validée par le support simulé sur les parcours initiaux. La contribution du support est la précision du contexte et du résultat attendu ; celle du mainteneur est l'expertise technique, le correctif et la non-régression. L'enseignement commun est d'ajouter systématiquement l'état des données initiales aux tickets de rendu conditionnel.
+La fiche `SPITY-SUP-2026-0001` présente le problème de contraste des états vides. Le support niveau 1 simulé décrit la base vierge, les écrans concernés, l'impact P2 et trois critères de clôture. Le mainteneur niveau 2 confirme la priorité, isole l'héritage de couleurs de `EmptyState`, rend le composant autonome et transmet ses validations Lighthouse, Playwright et CI. Le support reçoit ensuite la cause, le correctif et l'absence de preuve de production, puis rejoue les critères dans le scénario contrôlé avant de clôturer.
 
-Cette section ne prétend pas à un échange client réel. Elle répond à la modalité de mise en situation fictive du référentiel et fournit un exemple complet, reproductible et attribué.
+`npm run support:check` refuse une fiche sans déclaration explicite de simulation, sans escalade support vers mainteneur, sans retour d'expertise, sans validation support à la clôture, avec une preuve hors dépôt/non HTTPS ou avec une donnée sensible. `npm run support:exercise` vérifie en mémoire le cas sain et ces quatre échecs. Le workflow mensuel `Support collaboration` conserve le rapport 90 jours. La simulation est explicitement déclarée : aucun retour client humain et aucun déploiement de production ne sont revendiqués.
 
 ## 11. Protection des données et sécurité des preuves
 
@@ -202,7 +202,7 @@ Les actions destructives restent interdites dans les procédures courantes : auc
 
 ## 12. Conclusion
 
-Les sept compétences disposent désormais d'une base documentée, de sources exécutables, d'états publics figés ou d'une mise en situation fictive déclarée. C4.1.1, C4.1.2, C4.2.1, C4.2.2, C4.3.1 et C4.3.2 franchissent la définition renforcée de terminé : mécanisme réel, automatisation, cas d'échec testés, preuves reproductibles et exploitation décrite. C4.3.3 reste volontairement qualifiée comme base à approfondir.
+Les sept compétences franchissent désormais la définition renforcée de terminé : mécanisme réel ou simulation clairement déclarée, automatisation, cas d'échec testés, preuves reproductibles et exploitation décrite. C4.3.3 complète cette chaîne par un registre de collaboration qui sépare rigoureusement le contexte fonctionnel, l'expertise technique, la validation support et le statut réel de déploiement.
 
 Le principal risque ouvert n'est pas masqué : la production est saine mais en retard sur `main`. La prochaine action opérationnelle est une release versionnée autorisée, pas un déploiement improvisé. Cette transparence garantit que le dossier décrit l'état réel du logiciel.
 
@@ -237,6 +237,9 @@ Le principal risque ouvert n'est pas masqué : la production est saine mais en r
 | A14c | C4.3.2 | `preuves/B4-C432-03-exercice-journal-versions-2026-08-13.json` |
 | A14d | C4.3.2 | `spity/RELEASE_JOURNAL.md`, `release-journal/` et `check-release-journal.mjs` |
 | A15 | C4.3.3 | `spity/SUPPORT.md` et `preuves/B4-C433-01-collaboration-support-2026-08-13.md` |
+| A15b | C4.3.3 | `preuves/B4-C433-02-registre-collaboration-support-2026-08-13.json` |
+| A15c | C4.3.3 | `preuves/B4-C433-03-exercice-collaboration-support-2026-08-13.json` |
+| A15d | C4.3.3 | `spity/support-collaborations/` et `check-support-collaborations.mjs` |
 | A16 | Intégrité | `preuves/MANIFEST.sha256` |
 
-Les sources complémentaires sont `.github/workflows/ci.yml`, `release.yml`, `release-journal.yml`, `production-monitoring.yml`, `availability-slo-report.yml`, `incident-registry.yml`, `improvement-review.yml`, `dependency-maintenance.yml`, `dependency-review.yml`, `dependabot.yml`, les formulaires d'issue, `CHANGELOG.md`, `spity/dependency-policy.json`, `spity/monitoring-policy.json`, `spity/incident-policy.json`, `spity/improvement-policy.json`, `spity/release-journal-policy.json`, les scripts de sonde/SLO/registre/promotion/amélioration/journal, `spity/DEPLOYMENT.md`, `spity/RELEASE_VERIFICATION.md`, `spity/RELEASE_JOURNAL.md`, `spity/IMPROVEMENT_MANAGEMENT.md` et le référentiel officiel archivé.
+Les sources complémentaires regroupent les workflows et formulaires sous `.github/`, les politiques et scripts de maintenance sous `spity/`, les guides de déploiement, de release, de journal et d'amélioration, ainsi que le référentiel officiel archivé. Elles sont toutes reliées au manifeste d'intégrité.

@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "id": "SPITY-SUP-2026-0001",
+  "status": "closed",
+  "title": "États vides peu lisibles : qualification et résolution avec le support",
+  "simulation": {
+    "mode": "controlled-simulation",
+    "disclosure": "Mise en situation fictive et contrôlée : aucun client, échange humain ou validation de production n'est présenté comme réel.",
+    "factualBasis": "Le scénario s'appuie uniquement sur l'anomalie technique réellement reproduite SPITY-INC-2026-0001 et sur ses preuves versionnées."
+  },
+  "context": {
+    "reportedAt": "2026-08-12T09:05:00.000+02:00",
+    "contact": {
+      "identity": "not-collected",
+      "channel": "simulated-support-form",
+      "role": "end-user-simulated"
+    },
+    "productArea": "Parcours authentifiés : demandes, événements et lieux sans donnée",
+    "observed": "Les messages d'état vide deviennent difficilement perceptibles selon la surface d'affichage.",
+    "expected": "Le titre, la description et l'action de l'état vide restent perceptibles sur les surfaces claires et sombres.",
+    "impact": "Information essentielle moins accessible ; compréhension du parcours dégradée pour une partie des utilisateurs.",
+    "priority": "P2"
+  },
+  "linkedIncident": {
+    "id": "SPITY-INC-2026-0001",
+    "recordPath": "spity/incidents/SPITY-INC-2026-0001.json"
+  },
+  "supportContribution": {
+    "anonymization": "Le scénario ne collecte ni identité, ni compte, ni journal brut ; le rôle utilisateur reste simulé.",
+    "reproduction": [
+      "Partir d'une base de test vierge et d'un compte temporaire de recette.",
+      "Ouvrir les parcours demandes, événements et lieux sans donnée personnalisée.",
+      "Contrôler la perception du titre et de la description de l'état vide sur les deux surfaces."
+    ],
+    "functionalAcceptanceCriteria": [
+      "Les dix pages authentifiées contrôlées atteignent le seuil Lighthouse accessibilité prévu.",
+      "Les états vides ciblés conservent une surface et des couleurs explicites.",
+      "La recette BC02 de matching reste exécutable."
+    ],
+    "proposedUserResponse": "Le défaut provenait d'un composant partagé entre des surfaces claires et sombres. Le correctif est validé en CI ; sa promotion reste soumise à la procédure de release."
+  },
+  "maintainerContribution": {
+    "triage": "Priorité P2 confirmée, car le parcours reste navigable mais une information essentielle est moins perceptible.",
+    "rootCause": "Le composant EmptyState héritait des couleurs du parent alors qu'il était affiché sur des cartes claires et sur des surfaces sombres.",
+    "resolution": "Rendre EmptyState autonome avec bg-card, text-card-foreground et text-muted-foreground, puis assouplir le sélecteur de la recette BC02.",
+    "technicalValidation": [
+      "npm run accessibility:audit",
+      "npm run test:acceptance",
+      "CI GitHub Actions du correctif e3784b7"
+    ]
+  },
+  "resolution": {
+    "deploymentStatus": "ci-validated-not-deployed",
+    "statement": "Le correctif est validé en CI. Aucune observation de déploiement de production n'est déclarée par cette fiche.",
+    "technicalResult": "Dix pages authentifiées à 100 % Lighthouse accessibilité et six recettes BC02 réussies sur le correctif candidat.",
+    "supportValidation": {
+      "status": "passed",
+      "mode": "simulated",
+      "result": "Le support simulé rejoue les critères fonctionnels sur la base de test et confirme que les trois contrôles de clôture sont couverts."
+    }
+  },
+  "handoffs": [
+    {
+      "at": "2026-08-12T09:05:00.000+02:00",
+      "fromRole": "end-user-simulated",
+      "toRole": "support-l1",
+      "kind": "intake",
+      "summary": "Signal anonymisé et explicitement simulé sur des états vides peu lisibles."
+    },
+    {
+      "at": "2026-08-12T09:25:00.000+02:00",
+      "fromRole": "support-l1",
+      "toRole": "maintainer-l2",
+      "kind": "qualification",
+      "summary": "Contexte, étapes de reproduction, impact P2 et critères fonctionnels transmis."
+    },
+    {
+      "at": "2026-08-12T16:30:00.000+02:00",
+      "fromRole": "maintainer-l2",
+      "toRole": "support-l1",
+      "kind": "technical-expertise",
+      "summary": "Cause racine, correctif, limites de promotion et résultats CI transmis pour validation fonctionnelle."
+    },
+    {
+      "at": "2026-08-12T17:45:00.000+02:00",
+      "fromRole": "support-l1",
+      "toRole": "maintainer-l2",
+      "kind": "functional-validation",
+      "summary": "Critères rejoués dans le scénario simulé ; clôture proposée sans prétendre à une validation utilisateur réelle."
+    }
+  ],
+  "history": [
+    {
+      "at": "2026-08-12T09:05:00.000+02:00",
+      "from": null,
+      "to": "open",
+      "actorRole": "support-l1",
+      "reason": "Réception et anonymisation du scénario de support contrôlé."
+    },
+    {
+      "at": "2026-08-12T09:25:00.000+02:00",
+      "from": "open",
+      "to": "technical-analysis",
+      "actorRole": "maintainer-l2",
+      "reason": "Reproduction et expertise technique déclenchées."
+    },
+    {
+      "at": "2026-08-12T16:30:00.000+02:00",
+      "from": "technical-analysis",
+      "to": "awaiting-support-validation",
+      "actorRole": "maintainer-l2",
+      "reason": "Correctif et résultats CI transmis au support."
+    },
+    {
+      "at": "2026-08-12T17:45:00.000+02:00",
+      "from": "awaiting-support-validation",
+      "to": "closed",
+      "actorRole": "support-l1",
+      "reason": "Validation fonctionnelle simulée documentée et réponse proposée."
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "repository-path",
+      "value": "spity/incidents/SPITY-INC-2026-0001.json",
+      "purpose": "Anomalie source, cause racine et vérifications techniques."
+    },
+    {
+      "kind": "repository-path",
+      "value": "docs/rncp/bloc-04/preuves/B4-C421-01-fiche-anomalie-accessibilite-2026-08-13.md",
+      "purpose": "Fiche de reproduction du problème technique."
+    },
+    {
+      "kind": "url",
+      "value": "https://github.com/Dorianyloj/spity/actions/runs/31604246584",
+      "purpose": "Résultat CI du correctif candidat."
+    }
+  ],
+  "sensitiveDataReview": {
+    "status": "passed",
+    "reviewedAt": "2026-08-12T17:50:00.000+02:00",
+    "reviewedByRole": "maintainer-l2",
+    "statement": "Aucune donnée personnelle, secret, jeton, adresse privée ou journal brut n'est conservé dans la fiche."
+  }
+}

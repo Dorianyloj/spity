@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Spity support collaboration record",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "status",
+    "title",
+    "simulation",
+    "context",
+    "linkedIncident",
+    "supportContribution",
+    "maintainerContribution",
+    "resolution",
+    "handoffs",
+    "history",
+    "evidence",
+    "sensitiveDataReview"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "pattern": "^SPITY-SUP-\\d{4}-\\d{4}$" },
+    "status": { "enum": ["open", "technical-analysis", "awaiting-support-validation", "closed"] },
+    "simulation": {
+      "type": "object",
+      "required": ["mode", "disclosure", "factualBasis"],
+      "properties": {
+        "mode": { "const": "controlled-simulation" },
+        "disclosure": { "type": "string", "minLength": 20 },
+        "factualBasis": { "type": "string", "minLength": 20 }
+      }
+    },
+    "linkedIncident": {
+      "type": "object",
+      "required": ["id", "recordPath"],
+      "properties": {
+        "id": { "pattern": "^SPITY-INC-\\d{4}-\\d{4}$" },
+        "recordPath": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

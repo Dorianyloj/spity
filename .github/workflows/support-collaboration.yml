@@ -1,0 +1,76 @@
+name: Support collaboration
+
+on:
+  pull_request:
+    paths:
+      - 'spity/support-collaboration-policy.json'
+      - 'spity/support-collaboration-schema.json'
+      - 'spity/support-collaborations/**'
+      - 'spity/SUPPORT.md'
+      - 'spity/scripts/check-support-collaborations.mjs'
+      - 'spity/scripts/capture-support-collaboration-evidence.mjs'
+      - 'spity/scripts/run-support-collaboration-exercise.mjs'
+      - 'spity/tests/maintenance/support-collaboration.test.mjs'
+      - '.github/workflows/support-collaboration.yml'
+  push:
+    branches: [develop, main]
+    paths:
+      - 'spity/support-collaboration-policy.json'
+      - 'spity/support-collaboration-schema.json'
+      - 'spity/support-collaborations/**'
+      - 'spity/SUPPORT.md'
+      - 'spity/scripts/check-support-collaborations.mjs'
+      - 'spity/scripts/capture-support-collaboration-evidence.mjs'
+      - 'spity/scripts/run-support-collaboration-exercise.mjs'
+      - 'spity/tests/maintenance/support-collaboration.test.mjs'
+      - '.github/workflows/support-collaboration.yml'
+  schedule:
+    - cron: '30 9 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate support collaboration
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: spity
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: spity/.nvmrc
+          cache: npm
+          cache-dependency-path: spity/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Validate collaboration records
+        env:
+          SUPPORT_COLLABORATION_REPORT_PATH: .support-collaboration/report.json
+        run: npm run support:check
+
+      - name: Run collaboration maintenance validation
+        run: node --test --test-concurrency=1 tests/maintenance/support-collaboration.test.mjs
+
+      - name: Publish collaboration summary
+        run: |
+          node -e 'const report=require("./.support-collaboration/report.json"); console.log(`## Collaboration support\n\n- Fiches : ${report.recordCount}\n- Fiches clôturées : ${report.closedRecordCount}\n- Conformité : ${report.compliant ? "oui" : "non"}`)' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload collaboration evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: support-collaboration-${{ github.sha }}
+          path: spity/.support-collaboration/report.json
+          if-no-files-found: warn
+          retention-days: 90

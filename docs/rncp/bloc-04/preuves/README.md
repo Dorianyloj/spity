@@ -12,7 +12,7 @@ Les fichiers de ce répertoire sont datés, anonymisés et reliés à un critèr
 | C422 | C4.2.2 | Traitement du correctif, contrôle version/révision, CI/CD et exercice local de promotion. |
 | C431 | C4.3.1 | Backlog d'améliorations mesurable, décision, indicateurs, revue et exercice de confidentialité. |
 | C432 | C4.3.2 | Journal versionné des publications, déploiements observés, candidats exclus et correctifs documentés. |
-| C433 | C4.3.3 | Collaboration support fictive déclarée. |
+| C433 | C4.3.3 | Collaboration support contrôlée : fiche source, registre validé et exercice de rejet. |
 
 `MANIFEST.sha256` permet de détecter toute modification ultérieure des preuves et du PDF final.
 

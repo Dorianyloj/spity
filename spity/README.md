@@ -62,6 +62,7 @@ npm run accessibility:audit # Audit axe authentifié
 npm run perf:audit           # Build et audit Lighthouse
 npm run security:audit       # Audit des dépendances de production
 npm run releases:check       # Valide le journal des versions et correctifs
+npm run support:check        # Valide les collaborations support/mainteneur
 ```
 
 Les tests d'intégration et d'acceptation nécessitent une MariaDB disponible via `DATABASE_URL`. Playwright nécessite aussi Chromium, installable avec `npx playwright install chromium`.
@@ -98,6 +99,7 @@ npm run db:studio    # Ouvre Drizzle Studio
 - [État des lieux et plan d'action du bloc 4](../docs/rncp/bloc-04/PLAN_ACTION_BLOC_04.md)
 - [Procédure autonome incluse dans chaque bundle de release](DEPLOYMENT.md)
 - [Journal des versions et correctifs déployés](RELEASE_JOURNAL.md)
+- [Collaboration support et registre de transmissions](SUPPORT.md)
 
 Pour régénérer les captures puis le dossier HTML/PDF depuis une base locale de démonstration :
 

@@ -18,7 +18,7 @@ Le Bloc 4 est développé comme un chantier produit, pas comme une simple rédac
 | 4 | C4.2.2 - Créer et déployer un correctif | Correctif de contrôle de promotion, CI/release, artefacts de vérification et rollback documenté | **Industrialisée et vérifiée** |
 | 5 | C4.3.1 - Proposer des améliorations | Registre mesurable, revue mensuelle, signaux qualifiés et CI dédiée | **Industrialisée et vérifiée** |
 | 6 | C4.3.2 - Tenir le journal des versions | Registre JSON, version/SHA, documentation des correctifs, preuve de santé, exercice et workflow mensuel | **Industrialisée et vérifiée** |
-| 7 | C4.3.3 - Collaborer avec le support | Formulaire support et exercice fictif déclaré | Base fonctionnelle à approfondir |
+| 7 | C4.3.3 - Collaborer avec le support | Registre contrôlé, transmissions support/mainteneur, validation fonctionnelle, exercice et CI mensuelle | **Industrialisée et vérifiée** |
 
 ## Définition de terminé
 
@@ -93,8 +93,17 @@ Les limites restantes sont explicites : l’historique de latence P95, les resso
 - [x] porte de qualité, contrôle de fiche pour chaque tag, workflow mensuel avec artefact 90 jours, bundle de release enrichi et six tests dédiés, portant le total à 35 tests de maintenance ;
 - [x] exercice en mémoire : candidat CI faussement déployé, correctif sans documentation et santé incohérente refusés.
 
-La prochaine étape est C4.3.3 : structurer une collaboration support/mainteneur sur un cas réel, sans faire passer une simulation pour un retour utilisateur authentique.
+## C4.3.3 - Résultat obtenu
+
+- [x] registre versionné de collaborations `SPITY-SUP-YYYY-NNNN` reliant contexte, anomalie source, critères fonctionnels, expertise technique et preuves ;
+- [x] cycle contrôlé de `open` à `closed`, transmissions chronologiques obligatoires du support vers le mainteneur puis en retour ;
+- [x] simulation contrôlée explicitement déclarée, identité du contact non collectée et distinction stricte entre CI validée et production observée ;
+- [x] clôture refusée sans validation support, sans critères d'acceptation, sans cause racine ou sans retour d'expertise technique ;
+- [x] détection des secrets, jetons, IP privées, e-mails, URLs non HTTPS et chemins de preuve hors dépôt ;
+- [x] workflow mensuel, artefact 90 jours, exercice en mémoire et six tests dédiés, portant le total à 41 tests de maintenance.
+
+Les sept compétences du Bloc 4 respectent maintenant la même définition de terminé. Le prochain travail de support consistera à enregistrer les retours réellement reçus, sans modifier ni requalifier la simulation présente.
 
 ## Règle de présentation
 
-Le dossier et le PDF restent des livrables de travail tant que les sept compétences n'ont pas franchi la même définition de terminé. Les bases existantes sont conservées, mais elles ne sont pas présentées comme industrialisées avant leur reprise dédiée.
+Le dossier et le PDF sont des livrables de travail vérifiables : chaque compétence possède désormais une automatisation, des contrôles d'échec, des preuves reproductibles et une exploitation documentée. Toute future évolution doit conserver cette traçabilité et annoncer explicitement ce qui relève d'une simulation.

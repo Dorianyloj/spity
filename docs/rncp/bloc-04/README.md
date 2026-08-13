@@ -6,7 +6,7 @@ Ce répertoire est le chantier Bloc 4 de Spity selon le référentiel Ynov 2024,
 
 - [`DOSSIER_BLOC_04.md`](DOSSIER_BLOC_04.md) : dossier de travail couvrant C4.1.1 à C4.3.3 ;
 - [`PLAN_ACTION_BLOC_04.md`](PLAN_ACTION_BLOC_04.md) : état réel et feuille de route compétence par compétence ;
-- [`preuves/`](preuves) : preuves figées, fiches d'anomalie, recommandations, journal et exercice support ;
+- [`preuves/`](preuves) : preuves figées, fiches d'anomalie, recommandations, journal et collaboration support contrôlée ;
 - [`../../../output/pdf/dossier-bloc-04-spity.pdf`](../../../output/pdf/dossier-bloc-04-spity.pdf) : export de travail vérifié visuellement, à régénérer après chaque compétence ;
 - [`../referentiel/2024-referentiel-expert-developpement-logiciel-ynov.pdf`](../referentiel/2024-referentiel-expert-developpement-logiciel-ynov.pdf) : source officielle.
 
@@ -17,6 +17,8 @@ Ce répertoire est le chantier Bloc 4 de Spity selon le référentiel Ynov 2024,
 - [`../../../spity/RELEASE_VERIFICATION.md`](../../../spity/RELEASE_VERIFICATION.md) : vérification version/révision avant promotion d'un candidat ;
 
 - [`../../../spity/RELEASE_JOURNAL.md`](../../../spity/RELEASE_JOURNAL.md) : registre des versions, correctifs documentés et preuve de déploiement ;
+
+- [`../../../spity/SUPPORT.md`](../../../spity/SUPPORT.md) : processus, registre de transmissions support/mainteneur et confidentialité ;
 
 - [`../../../spity/IMPROVEMENT_MANAGEMENT.md`](../../../spity/IMPROVEMENT_MANAGEMENT.md) : registre d'améliorations, priorisation et revue mensuelle ;
 
@@ -35,7 +37,8 @@ npm run bloc4:capture
 npm run bloc4:exercise
 npm run bloc4:improvements
 npm run bloc4:releases
+npm run bloc4:support
 npm run quality
 ```
 
-La génération PDF et le manifeste sont décrits dans la procédure de build du dossier. Les preuves externes sont publiques et datées. L'exercice support est explicitement fictif, conformément à la modalité d'évaluation autorisée.
+La génération PDF et le manifeste sont décrits dans la procédure de build du dossier. Les preuves externes sont publiques et datées. La collaboration support est une simulation contrôlée explicitement déclarée, conformément à la modalité d'évaluation autorisée.

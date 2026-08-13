@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "criterion": "C4.3.3",
+  "capturedAt": "2026-08-13T10:18:01.141Z",
+  "repositoryRevision": "a813eddbce36d1f90191b36c796723a4af1210da",
+  "safety": "Repository-only validation. The support case is a declared controlled simulation. No production endpoint, deployment, database, external support mutation or LXC was used.",
+  "objective": "Verify an attributable support-to-maintainer collaboration, the reciprocal technical feedback, the controlled simulation disclosure, privacy review and non-deployment disclosure.",
+  "collaboration": {
+    "schemaVersion": 1,
+    "checkedAt": "2026-08-13T10:18:01.140Z",
+    "compliant": true,
+    "recordCount": 1,
+    "closedRecordCount": 1,
+    "statusCounts": {
+      "open": 0,
+      "technical-analysis": 0,
+      "awaiting-support-validation": 0,
+      "closed": 1
+    },
+    "errors": [],
+    "records": [
+      {
+        "id": "SPITY-SUP-2026-0001",
+        "status": "closed",
+        "incidentId": "SPITY-INC-2026-0001",
+        "deploymentStatus": "ci-validated-not-deployed"
+      }
+    ]
+  }
+}

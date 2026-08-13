@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "criterion": "C4.3.3",
+  "executedAt": "2026-08-13T10:18:00.282Z",
+  "repositoryRevision": "a813eddbce36d1f90191b36c796723a4af1210da",
+  "safety": "In-memory exercise only. No production endpoint, deployment, database, external support mutation or LXC was used.",
+  "objective": "Accept the declared support collaboration and reject an undisclosed simulation, missing technical feedback, closure without support validation and an email in the scenario.",
+  "result": "passed",
+  "cases": {
+    "canonical": {
+      "compliant": true,
+      "closedRecordCount": 1
+    },
+    "undisclosedSimulation": {
+      "compliant": false,
+      "errorCodes": [
+        "missing-simulation-disclosure"
+      ]
+    },
+    "missingTechnicalFeedback": {
+      "compliant": false,
+      "errorCodes": [
+        "missing-technical-feedback"
+      ]
+    },
+    "unreviewedClosure": {
+      "compliant": false,
+      "errorCodes": [
+        "missing-support-validation"
+      ]
+    },
+    "sensitiveScenario": {
+      "compliant": false,
+      "errorCodes": [
+        "sensitive-data"
+      ]
+    }
+  }
+}

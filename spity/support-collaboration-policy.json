@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "identifier": {
+    "pattern": "^SPITY-SUP-\\d{4}-\\d{4}$"
+  },
+  "statuses": [
+    "open",
+    "technical-analysis",
+    "awaiting-support-validation",
+    "closed"
+  ],
+  "transitions": {
+    "initial": ["open"],
+    "open": ["technical-analysis"],
+    "technical-analysis": ["awaiting-support-validation"],
+    "awaiting-support-validation": ["closed"]
+  },
+  "roles": [
+    "end-user-simulated",
+    "support-l1",
+    "maintainer-l2",
+    "product-owner"
+  ],
+  "simulationModes": ["controlled-simulation"],
+  "deploymentStatuses": ["ci-validated-not-deployed", "observed-production"]
+}
