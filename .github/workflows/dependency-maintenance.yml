@@ -42,7 +42,7 @@ jobs:
 
       - name: Upload dependency evidence
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: dependency-maintenance-${{ github.sha }}
           path: tmp/dependency-maintenance

@@ -94,7 +94,7 @@ jobs:
 
       - name: Upload release validation evidence
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: release-validation-${{ github.ref_name }}
           path: |
@@ -208,7 +208,7 @@ jobs:
           docker push "$MIGRATION_IMAGE:candidate-$VERSION"
 
       - name: Upload staging evidence
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: release-staging-${{ github.ref_name }}
           path: release-evidence
@@ -283,7 +283,7 @@ jobs:
           (cd dist && sha256sum "$bundle.tar.gz" > "$bundle.tar.gz.sha256")
 
       - name: Upload deployment bundle
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: deployment-${{ github.ref_name }}
           path: |
