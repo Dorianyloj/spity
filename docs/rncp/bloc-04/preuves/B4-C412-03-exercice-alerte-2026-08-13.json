@@ -1,27 +1,27 @@
 {
   "schemaVersion": 1,
   "type": "controlled-monitoring-exercise",
-  "executedAt": "2026-08-13T07:57:29.135Z",
+  "executedAt": "2026-08-13T11:43:30.518Z",
   "criteria": [
     "C4.1.2",
     "C4.2.1"
   ],
-  "repositoryRevision": "f892c31184be8ac889cb912305d15ca3b6394f15",
+  "repositoryRevision": "094b24f96169ad4420f6f1c3bf17af35da4922ad",
   "safety": "Local HTTP fixture only. No production request was degraded and no customer data was used.",
   "objective": "Verify that a healthy payload passes, that an HTTP/application failure produces a retryable S1 report, and that excessive latency is classified as an available-but-degraded S3 report.",
   "expectedOutcome": "The healthy probe succeeds. The degraded probe fails after two attempts. The slow probe remains available but is classified as a latency degradation.",
   "result": "passed",
   "healthyProbe": {
     "schemaVersion": 2,
-    "checkedAt": "2026-08-13T07:57:29.016Z",
+    "checkedAt": "2026-08-13T11:43:30.410Z",
     "status": "healthy",
     "availability": true,
-    "target": "http://127.0.0.1:10826/healthy",
+    "target": "http://127.0.0.1:29744/healthy",
     "attempts": [
       {
         "attempt": 1,
         "httpStatus": 200,
-        "latencyMs": 42,
+        "latencyMs": 31,
         "outcome": "success",
         "code": "healthy"
       }
@@ -36,7 +36,7 @@
     "indicators": {
       "applicationStatus": "ok",
       "httpStatus": 200,
-      "latencyMs": 42,
+      "latencyMs": 31,
       "maxLatencyMs": 3000,
       "revision": "cccccccccccccccccccccccccccccccccccccccc",
       "version": "monitoring-exercise"
@@ -49,16 +49,16 @@
   },
   "degradedProbe": {
     "schemaVersion": 2,
-    "checkedAt": "2026-08-13T07:57:29.066Z",
+    "checkedAt": "2026-08-13T11:43:30.443Z",
     "status": "unhealthy",
     "availability": false,
-    "target": "http://127.0.0.1:10826/degraded",
+    "target": "http://127.0.0.1:29744/degraded",
     "attempts": [
       {
         "attempt": 1,
         "code": "http_status",
         "httpStatus": 503,
-        "latencyMs": 7,
+        "latencyMs": 5,
         "outcome": "failure",
         "error": "La route de santé répond avec le statut HTTP 503"
       },
@@ -88,10 +88,10 @@
   },
   "slowProbe": {
     "schemaVersion": 2,
-    "checkedAt": "2026-08-13T07:57:29.090Z",
+    "checkedAt": "2026-08-13T11:43:30.473Z",
     "status": "degraded",
     "availability": true,
-    "target": "http://127.0.0.1:10826/slow",
+    "target": "http://127.0.0.1:29744/slow",
     "attempts": [
       {
         "attempt": 1,

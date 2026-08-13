@@ -13,6 +13,7 @@ Les fichiers de ce répertoire sont datés, anonymisés et reliés à un critèr
 | C431 | C4.3.1 | Backlog d'améliorations mesurable, décision, indicateurs, revue et exercice de confidentialité. |
 | C432 | C4.3.2 | Journal versionné des publications, déploiements observés, candidats exclus et correctifs documentés. |
 | C433 | C4.3.3 | Collaboration support contrôlée : fiche source, registre validé et exercice de rejet. |
+| B4-REVUE-FINALE | Transversal | Politique de complétude, audit des sept compétences et cohérence du manifeste. |
 
 `MANIFEST.sha256` permet de détecter toute modification ultérieure des preuves et du PDF final.
 
@@ -23,3 +24,4 @@ Les fichiers de ce répertoire sont datés, anonymisés et reliés à un critèr
 - annoncer clairement une simulation ou une mise en situation fictive ;
 - ne pas figer une capture redondante quand un JSON ou une URL publique apporte une preuve plus vérifiable ;
 - mettre à jour le journal uniquement après un déploiement réellement observé.
+- exécuter `npm run bloc4:check` avant toute livraison du dossier ou du PDF.

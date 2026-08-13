@@ -1,14 +1,94 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-08-13T07:14:12.088Z",
+  "capturedAt": "2026-08-13T11:43:56.987Z",
   "criterion": "C4.1.2",
   "source": "https://api.github.com/repos/Dorianyloj/spity/actions/workflows/production-monitoring.yml/runs?per_page=30",
-  "repositoryRevision": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b",
-  "totalRuns": 31,
+  "repositoryRevision": "094b24f96169ad4420f6f1c3bf17af35da4922ad",
+  "totalRuns": 39,
   "sampleSize": 30,
   "successfulRuns": 30,
   "successRatePercent": 100,
   "latestRuns": [
+    {
+      "id": 31695908327,
+      "status": "completed",
+      "conclusion": "success",
+      "event": "schedule",
+      "createdAt": "2026-08-13T11:31:50Z",
+      "updatedAt": "2026-08-13T11:32:04Z",
+      "revision": "094b24f96169ad4420f6f1c3bf17af35da4922ad",
+      "url": "https://github.com/Dorianyloj/spity/actions/runs/31695908327"
+    },
+    {
+      "id": 31694110450,
+      "status": "completed",
+      "conclusion": "success",
+      "event": "schedule",
+      "createdAt": "2026-08-13T11:07:18Z",
+      "updatedAt": "2026-08-13T11:07:41Z",
+      "revision": "094b24f96169ad4420f6f1c3bf17af35da4922ad",
+      "url": "https://github.com/Dorianyloj/spity/actions/runs/31694110450"
+    },
+    {
+      "id": 31692097496,
+      "status": "completed",
+      "conclusion": "success",
+      "event": "schedule",
+      "createdAt": "2026-08-13T10:39:57Z",
+      "updatedAt": "2026-08-13T10:40:16Z",
+      "revision": "094b24f96169ad4420f6f1c3bf17af35da4922ad",
+      "url": "https://github.com/Dorianyloj/spity/actions/runs/31692097496"
+    },
+    {
+      "id": 31690002700,
+      "status": "completed",
+      "conclusion": "success",
+      "event": "schedule",
+      "createdAt": "2026-08-13T10:11:41Z",
+      "updatedAt": "2026-08-13T10:11:53Z",
+      "revision": "a813eddbce36d1f90191b36c796723a4af1210da",
+      "url": "https://github.com/Dorianyloj/spity/actions/runs/31690002700"
+    },
+    {
+      "id": 31687714230,
+      "status": "completed",
+      "conclusion": "success",
+      "event": "schedule",
+      "createdAt": "2026-08-13T09:41:08Z",
+      "updatedAt": "2026-08-13T09:41:23Z",
+      "revision": "db9339878d41a37511806ba693886d3e1ab49381",
+      "url": "https://github.com/Dorianyloj/spity/actions/runs/31687714230"
+    },
+    {
+      "id": 31685396999,
+      "status": "completed",
+      "conclusion": "success",
+      "event": "schedule",
+      "createdAt": "2026-08-13T09:10:40Z",
+      "updatedAt": "2026-08-13T09:10:57Z",
+      "revision": "392e36c17e81fc850164f2b64e214012be574297",
+      "url": "https://github.com/Dorianyloj/spity/actions/runs/31685396999"
+    },
+    {
+      "id": 31682652603,
+      "status": "completed",
+      "conclusion": "success",
+      "event": "schedule",
+      "createdAt": "2026-08-13T08:34:25Z",
+      "updatedAt": "2026-08-13T08:34:40Z",
+      "revision": "2a7599025ab421cb12b7204232052de7ebe3c43c",
+      "url": "https://github.com/Dorianyloj/spity/actions/runs/31682652603"
+    },
+    {
+      "id": 31679575058,
+      "status": "completed",
+      "conclusion": "success",
+      "event": "schedule",
+      "createdAt": "2026-08-13T07:52:14Z",
+      "updatedAt": "2026-08-13T07:52:38Z",
+      "revision": "f892c31184be8ac889cb912305d15ca3b6394f15",
+      "url": "https://github.com/Dorianyloj/spity/actions/runs/31679575058"
+    },
     {
       "id": 31676822533,
       "status": "completed",
@@ -28,86 +108,6 @@
       "updatedAt": "2026-08-13T06:36:02Z",
       "revision": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b",
       "url": "https://github.com/Dorianyloj/spity/actions/runs/31674428517"
-    },
-    {
-      "id": 31671581684,
-      "status": "completed",
-      "conclusion": "success",
-      "event": "schedule",
-      "createdAt": "2026-08-13T05:48:22Z",
-      "updatedAt": "2026-08-13T05:48:35Z",
-      "revision": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b",
-      "url": "https://github.com/Dorianyloj/spity/actions/runs/31671581684"
-    },
-    {
-      "id": 31669375868,
-      "status": "completed",
-      "conclusion": "success",
-      "event": "schedule",
-      "createdAt": "2026-08-13T05:09:41Z",
-      "updatedAt": "2026-08-13T05:09:50Z",
-      "revision": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b",
-      "url": "https://github.com/Dorianyloj/spity/actions/runs/31669375868"
-    },
-    {
-      "id": 31666961461,
-      "status": "completed",
-      "conclusion": "success",
-      "event": "schedule",
-      "createdAt": "2026-08-13T04:25:17Z",
-      "updatedAt": "2026-08-13T04:25:25Z",
-      "revision": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b",
-      "url": "https://github.com/Dorianyloj/spity/actions/runs/31666961461"
-    },
-    {
-      "id": 31664255323,
-      "status": "completed",
-      "conclusion": "success",
-      "event": "schedule",
-      "createdAt": "2026-08-13T03:32:54Z",
-      "updatedAt": "2026-08-13T03:33:02Z",
-      "revision": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b",
-      "url": "https://github.com/Dorianyloj/spity/actions/runs/31664255323"
-    },
-    {
-      "id": 31661411984,
-      "status": "completed",
-      "conclusion": "success",
-      "event": "schedule",
-      "createdAt": "2026-08-13T02:37:57Z",
-      "updatedAt": "2026-08-13T02:38:02Z",
-      "revision": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b",
-      "url": "https://github.com/Dorianyloj/spity/actions/runs/31661411984"
-    },
-    {
-      "id": 31658322784,
-      "status": "completed",
-      "conclusion": "success",
-      "event": "schedule",
-      "createdAt": "2026-08-13T01:38:06Z",
-      "updatedAt": "2026-08-13T01:38:15Z",
-      "revision": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b",
-      "url": "https://github.com/Dorianyloj/spity/actions/runs/31658322784"
-    },
-    {
-      "id": 31656102239,
-      "status": "completed",
-      "conclusion": "success",
-      "event": "schedule",
-      "createdAt": "2026-08-13T00:56:38Z",
-      "updatedAt": "2026-08-13T00:56:46Z",
-      "revision": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b",
-      "url": "https://github.com/Dorianyloj/spity/actions/runs/31656102239"
-    },
-    {
-      "id": 31654584472,
-      "status": "completed",
-      "conclusion": "success",
-      "event": "schedule",
-      "createdAt": "2026-08-13T00:29:24Z",
-      "updatedAt": "2026-08-13T00:29:36Z",
-      "revision": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b",
-      "url": "https://github.com/Dorianyloj/spity/actions/runs/31654584472"
     }
   ]
 }

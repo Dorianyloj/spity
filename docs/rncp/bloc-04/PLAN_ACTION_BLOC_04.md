@@ -6,7 +6,7 @@
 
 **Projet :** Spity
 
-Le Bloc 4 est développé comme un chantier produit, pas comme une simple rédaction. Une compétence n'est déclarée industrialisée que lorsque le dépôt contient un fonctionnement réel, une automatisation, des tests, des preuves reproductibles et une procédure d'exploitation.
+Le Bloc 4 est développé comme un chantier produit, pas comme une simple rédaction. Une compétence n'est déclarée industrialisée que lorsque le dépôt contient un fonctionnement réel, une automatisation, des tests, des preuves reproductibles et une procédure d'exploitation. La revue transversale finale confirme désormais ces conditions sur les sept compétences à la fois.
 
 ## État réel
 
@@ -30,6 +30,8 @@ Pour chaque ligne, les cinq conditions suivantes sont obligatoires :
 4. les résultats sont datés, reproductibles et sans données sensibles ;
 5. la procédure indique fréquence, responsabilités, décision et retour arrière.
 
+La suite de contrôle finale comprend 152 tests Jest, 43 tests de maintenance, 11 scénarios MariaDB, 6 recettes Playwright, les audits Lighthouse et le contrôle `npm run bloc4:check`.
+
 ## C4.1.1 - Résultat obtenu
 
 - [x] dépendances npm et GitHub Actions surveillées chaque semaine ;
@@ -40,7 +42,7 @@ Pour chaque ligne, les cinq conditions suivantes sont obligatoires :
 - [x] workflow planifié avec artefact, ticket unique et fermeture après récupération ;
 - [x] revue des nouvelles dépendances sur chaque pull request ;
 - [x] mise à jour réelle du lockfile et qualification de la régression `@hookform/resolvers`/Ajv ;
-- [x] 152 tests Jest, 8 tests de maintenance, 11 scénarios MariaDB, 6 recettes Playwright et audits Lighthouse verts.
+- [x] couverture Jest, scénarios MariaDB, recettes Playwright et audits Lighthouse intégrés aux portes de qualité ;
 
 ## C4.1.2 - Résultat obtenu
 
@@ -50,7 +52,7 @@ Pour chaque ligne, les cinq conditions suivantes sont obligatoires :
 - [x] issue unique pour incident de sonde, issue unique pour brèche SLO, commentaire et fermeture au rétablissement ;
 - [x] objectif de disponibilité 99,5 % sur 30 jours calculé quotidiennement à partir des seuls runs planifiés ;
 - [x] protection anti-bruit : pas d’alerte SLO avec moins de 96 observations ou 95 % de couverture ;
-- [x] exercice local sain, indisponible et lent ; 13 tests de maintenance couvrant les décisions de la sonde et du SLO.
+- [x] exercice local sain, indisponible et lent ; couverture dédiée des décisions de sonde et de SLO.
 
 Les limites restantes sont explicites : l’historique de latence P95, les ressources système et les Web Vitals devront rejoindre une plateforme de métriques persistantes. Aucun déploiement de production n’est déclenché par ces workflows.
 
@@ -61,7 +63,7 @@ Les limites restantes sont explicites : l’historique de latence P95, les resso
 - [x] reproduction, cause racine, facteurs contributifs, décision, alternatives, actions et vérification obligatoires selon l’état ;
 - [x] détection automatique des jetons, secrets, adresses privées, e-mails et clés privées dans toute fiche ;
 - [x] deux anomalies réelles migrées honnêtement : une correction d’accessibilité clôturée, une dérive de release toujours planifiée ;
-- [x] formulaires GitHub de signalement, rapport CI conservé 90 jours et 18 tests de maintenance ;
+- [x] formulaires GitHub de signalement, rapport CI conservé 90 jours et couverture dédiée du cycle de vie ;
 - [x] exercice en mémoire validant le cas conforme, la transition interdite et le rejet d’un jeton simulé.
 
 ## C4.2.2 - Résultat obtenu
@@ -72,7 +74,8 @@ Les limites restantes sont explicites : l’historique de latence P95, les resso
 - [x] exécution automatique après le smoke test de staging et avant la promotion de la candidate de release ;
 - [x] rapport JSON conservé dans les artefacts CI/CD, scripts inclus dans le bundle de release ;
 - [x] exercice local en mémoire : candidat conforme accepté, version et révision erronées refusées ;
-- [x] 22 tests de maintenance couvrent la santé, les incidents, le SLO et les décisions de promotion.
+- [x] contrôle de santé, incidents, SLO et décisions de promotion couverts par la suite de maintenance finale ;
+- [x] preuve supplémentaire C422-04 : staging GitHub Actions validé après qualité, intégration, Lighthouse et recette BC02, sans prétendre à une production observée.
 
 ## C4.3.1 - Résultat obtenu
 
@@ -81,7 +84,7 @@ Les limites restantes sont explicites : l’historique de latence P95, les resso
 - [x] coût, délai, retour arrière et indicateurs de référence/cible obligatoires pour chaque proposition ;
 - [x] signaux opérationnels et retour support simulé clairement déclaré, sans inventer de données utilisateur réelles ;
 - [x] formulaire support enrichi pour qualifier les prochains retours anonymisés par zone, type de signal et bénéfice attendu ;
-- [x] workflow mensuel, artefact 90 jours, exercice local et 29 tests de maintenance couvrant les décisions de pilotage.
+- [x] workflow mensuel, artefact 90 jours, exercice local et couverture dédiée des décisions de pilotage.
 
 ## C4.3.2 - Résultat obtenu
 
@@ -90,7 +93,7 @@ Les limites restantes sont explicites : l’historique de latence P95, les resso
 - [x] documentation obligatoire de chaque correctif, avec lien vers la fiche d'anomalie ou le changelog ;
 - [x] preuve de production exigeant `status: ok`, version et révision Git strictement concordantes ;
 - [x] refus des chemins de preuve externes au dépôt, URLs non HTTPS et données sensibles ;
-- [x] porte de qualité, contrôle de fiche pour chaque tag, workflow mensuel avec artefact 90 jours, bundle de release enrichi et six tests dédiés, portant le total à 35 tests de maintenance ;
+- [x] porte de qualité, contrôle de fiche pour chaque tag, workflow mensuel avec artefact 90 jours, bundle de release enrichi et couverture dédiée ;
 - [x] exercice en mémoire : candidat CI faussement déployé, correctif sans documentation et santé incohérente refusés.
 
 ## C4.3.3 - Résultat obtenu
@@ -100,9 +103,17 @@ Les limites restantes sont explicites : l’historique de latence P95, les resso
 - [x] simulation contrôlée explicitement déclarée, identité du contact non collectée et distinction stricte entre CI validée et production observée ;
 - [x] clôture refusée sans validation support, sans critères d'acceptation, sans cause racine ou sans retour d'expertise technique ;
 - [x] détection des secrets, jetons, IP privées, e-mails, URLs non HTTPS et chemins de preuve hors dépôt ;
-- [x] workflow mensuel, artefact 90 jours, exercice en mémoire et six tests dédiés, portant le total à 41 tests de maintenance.
+- [x] workflow mensuel, artefact 90 jours, exercice en mémoire et couverture dédiée de la collaboration support.
 
 Les sept compétences du Bloc 4 respectent maintenant la même définition de terminé. Le prochain travail de support consistera à enregistrer les retours réellement reçus, sans modifier ni requalifier la simulation présente.
+
+## Revue finale transversale
+
+- [x] politique de revue des sept compétences, des sources opérationnelles, des preuves et du manifeste ;
+- [x] commande `npm run bloc4:check` ajoutée à la porte `quality`, avec deux tests dédiés ;
+- [x] rapport de lecture jury `REVUE_FINALE_BLOC_04.md` reliant l'attendu, le mécanisme, la commande et la preuve de chaque compétence ;
+- [x] preuve C422-04 ajoutée pour le staging CI réellement validé ;
+- [x] manifest SHA-256 réconcilié avec le dossier, le PDF, les scripts, les tests, les workflows et les nouvelles preuves.
 
 ## Règle de présentation
 

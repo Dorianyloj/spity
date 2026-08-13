@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "criterion": "C4.2.2",
+  "capturedAt": "2026-08-13T10:40:22.000Z",
+  "source": {
+    "kind": "github-actions-api",
+    "workflow": "Continuous integration",
+    "runId": 31691690448,
+    "url": "https://github.com/Dorianyloj/spity/actions/runs/31691690448",
+    "branch": "develop",
+    "revision": "094b24f96169ad4420f6f1c3bf17af35da4922ad",
+    "event": "push",
+    "conclusion": "success"
+  },
+  "staging": {
+    "success": true,
+    "job": "Deploy verified staging images",
+    "jobUrl": "https://github.com/Dorianyloj/spity/actions/runs/31691690448/job/94420994428",
+    "startedAt": "2026-08-13T10:37:55Z",
+    "completedAt": "2026-08-13T10:40:21Z",
+    "verifiedSteps": [
+      "Build immutable images",
+      "Smoke test staging images",
+      "Verify deployed staging metadata",
+      "Publish staging images",
+      "Upload staging deployment evidence"
+    ],
+    "statement": "Le staging éphémère a construit les images immuables, exécuté le smoke test et vérifié la version et la révision exposées avant la publication des images. Cette preuve ne déclare aucun déploiement de production."
+  },
+  "qualityGates": [
+    "Quality gates",
+    "MariaDB integration tests",
+    "Lighthouse thresholds",
+    "BC02 acceptance recipe"
+  ],
+  "safety": "Lecture d'un état GitHub Actions public. Aucun déploiement, appel de production, base de données, modification externe ou LXC n'a été effectué pour cette collecte."
+}

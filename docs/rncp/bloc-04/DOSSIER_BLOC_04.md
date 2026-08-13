@@ -25,10 +25,10 @@ Spity dispose d'une chaîne de maintenance reproductible : Dependabot surveille 
 Le 13 août 2026, l'état vérifié est le suivant :
 
 - 0 vulnérabilité de production et 0 alerte haute/critique dans l'audit complet après mise à jour des outils ;
-- 152 tests Jest, 41 tests de maintenance, 11 scénarios MariaDB et 6 recettes Playwright ;
+- 152 tests Jest, 43 tests de maintenance, 11 scénarios MariaDB et 6 recettes Playwright ;
 - 10 pages authentifiées sur 10 à 100 % Lighthouse accessibilité ;
 - CI complète verte sur `e3784b7` ;
-- 29 exécutions de supervision historisées au moment de la collecte, avec production `ok` ;
+- 30 exécutions de supervision terminées dans l'échantillon public de 39 runs, toutes réussies, avec production `ok` ;
 - version observée en production : `0.1.0-jury`, révision `49c4ea0` ;
 - dérive de déploiement réelle consignée : la production reste 19 commits derrière la référence auditée.
 
@@ -41,10 +41,14 @@ La dérive n'a pas été corrigée par un déploiement non autorisé. Elle est t
 | C4.1.1 | Processus précis : fréquence, périmètre, type | Cadence hebdomadaire et mensuelle, politique exécutable, audit planifié, SBOM, revue PR et lot réel qualifié | `spity/MAINTENANCE.md`, C411-01 à C411-03 | Industrialisé et vérifié |
 | C4.1.2 | Supervision adaptée, sondes, critères qualité/performance, disponibilité | Politique versionnée, contrôle 15 min, qualification S1/S2/S3, artefacts 90 jours, incident/rétablissement unique et SLO 30 jours avec garde de couverture | `spity/OBSERVABILITY.md`, C412-01 à C412-04 | Industrialisé et vérifié |
 | C4.2.1 | Collecte structurée, fiche reproductible, analyse et préconisations | Registre versionné, machine à états, confidentialité contrôlée, formulaires, CI dédiée et deux anomalies réelles | `spity/INCIDENT_MANAGEMENT.md`, C421-01 à C421-04 | Industrialisé et vérifié |
-| C4.2.2 | Correctif décrit utilisant intégration/déploiement continu | Contrôle de promotion version/révision, staging CI, candidate de release, rapport conservé et exercice reproductible | `spity/RELEASE_VERIFICATION.md`, C422-01 à C422-03 | Industrialisé et vérifié |
+| C4.2.2 | Correctif décrit utilisant intégration/déploiement continu | Contrôle de promotion version/révision, staging CI, candidate de release, rapport conservé, exercice reproductible et staging vérifié | `spity/RELEASE_VERIFICATION.md`, C422-01 à C422-04 | Industrialisé et vérifié |
 | C4.3.1 | Recommandations réalistes, argumentées, coûts/délais/gains | Registre mesurable, indicateurs, coûts/délais, retours qualifiés, revue mensuelle et CI dédiée | `spity/IMPROVEMENT_MANAGEMENT.md`, C431-01 à C431-03 | Industrialisé et vérifié |
 | C4.3.2 | Journal des versions et correctifs déployés | Registre versionné, identité SemVer/SHA, correctifs documentés, preuve de santé et revue mensuelle | `spity/RELEASE_JOURNAL.md`, C432-01 à C432-03 | Industrialisé et vérifié |
 | C4.3.3 | Problème résolu avec contexte, résolution et contributions | Registre contrôlé de transmissions support/mainteneur, critères fonctionnels, expertise technique, confidentialité et validation simulée déclarée | `spity/SUPPORT.md`, C433-01 à C433-03 | Industrialisé et vérifié |
+
+### 2.1 Revue transversale de clôture
+
+La revue `REVUE_FINALE_BLOC_04.md` aligne, pour chaque compétence, l'attendu du référentiel, le mécanisme Spity, la commande de contrôle et la preuve à présenter. `npm run bloc4:check` vérifie ces sept lignes ensemble : statut dans le dossier, résultat dans le plan, sources opérationnelles, assertions sur les preuves, registres vivants et SHA-256 du manifeste. Cette porte est incluse dans la qualité CI ; elle ne contacte aucun environnement externe.
 
 ## 3. Contexte technique et responsabilités
 
@@ -104,7 +108,7 @@ Le workflow de sonde conserve chaque rapport JSON 90 jours. Un deuxième workflo
 
 ### 5.3 Résultat observé et exercice
 
-La collecte publique a trouvé 29 runs de supervision, dont les plus récents sont réussis, et la production répond `ok`. Le nouveau calcul SLO est testé sur une fenêtre couverte, une brèche réellement alertable, une couverture insuffisante et l’exclusion d’un déclenchement manuel. L’exercice local contrôlé couvre désormais un cas sain, un HTTP 503/applicatif avec deux tentatives et une latence S3 encore disponible, sans toucher à la production.
+La collecte publique a trouvé 30 runs de supervision terminés dans les 39 plus récents, tous réussis, et la production répond `ok`. Le calcul SLO actuel mesure 18 observations planifiées sur les 96 minimales : il reste donc `insufficient-data` sans ouvrir de fausse alerte. Il est testé sur une fenêtre couverte, une brèche réellement alertable, une couverture insuffisante et l’exclusion d’un déclenchement manuel. L’exercice local contrôlé couvre désormais un cas sain, un HTTP 503/applicatif avec deux tentatives et une latence S3 encore disponible, sans toucher à la production.
 
 ## 6. C4.2.1 - Consigner les anomalies
 
@@ -140,7 +144,9 @@ Le bundle de release contient les scripts de contrôle et la procédure `DEPLOYM
 
 ### 7.4 Vérification reproductible
 
-L'exercice `npm run bloc4:deployment-exercise` démarre uniquement un serveur HTTP local en mémoire. Il accepte un candidat conforme et refuse séparément une version `0.1.0` inattendue puis une révision Git différente. La preuve C422-03 conserve les valeurs attendues, observées, la classification et le résultat, sans Docker, LXC, base de données ou appel de production. Les 22 tests de maintenance couvrent en plus le contrat de santé et le module de promotion.
+L'exercice `npm run bloc4:deployment-exercise` démarre uniquement un serveur HTTP local en mémoire. Il accepte un candidat conforme et refuse séparément une version `0.1.0` inattendue puis une révision Git différente. La preuve C422-03 conserve les valeurs attendues, observées, la classification et le résultat, sans Docker, LXC, base de données ou appel de production. La suite de maintenance actuelle couvre ce contrat en plus des autres portes Bloc 4.
+
+La preuve C422-04 complète l'exercice par une exécution GitHub Actions réellement terminée avec succès sur `develop` : les portes qualité, MariaDB, Lighthouse et recette BC02 précèdent la construction d'images immuables, le smoke test de staging, le contrôle de version/révision, la publication d'images et l'artefact de déploiement. Elle documente le staging éphémère, jamais une promotion de production non observée.
 
 ### 7.5 Retour arrière
 
@@ -202,7 +208,7 @@ Les actions destructives restent interdites dans les procédures courantes : auc
 
 ## 12. Conclusion
 
-Les sept compétences franchissent désormais la définition renforcée de terminé : mécanisme réel ou simulation clairement déclarée, automatisation, cas d'échec testés, preuves reproductibles et exploitation décrite. C4.3.3 complète cette chaîne par un registre de collaboration qui sépare rigoureusement le contexte fonctionnel, l'expertise technique, la validation support et le statut réel de déploiement.
+Les sept compétences franchissent désormais la définition renforcée de terminé : mécanisme réel ou simulation clairement déclarée, automatisation, cas d'échec testés, preuves reproductibles et exploitation décrite. La revue transversale automatise ce constat : les sept sources, les preuves, les registres et le manifeste doivent rester cohérents. C4.3.3 complète cette chaîne par un registre de collaboration qui sépare rigoureusement le contexte fonctionnel, l'expertise technique, la validation support et le statut réel de déploiement.
 
 Le principal risque ouvert n'est pas masqué : la production est saine mais en retard sur `main`. La prochaine action opérationnelle est une release versionnée autorisée, pas un déploiement improvisé. Cette transparence garantit que le dossier décrit l'état réel du logiciel.
 
@@ -228,6 +234,7 @@ Le principal risque ouvert n'est pas masqué : la production est saine mais en r
 | A12 | C4.2.2 | `preuves/B4-C422-02-traitement-correctif-ci-cd-2026-08-13.md` |
 | A12b | C4.2.2 | `preuves/B4-C422-03-exercice-verification-deploiement-2026-08-13.json` |
 | A12c | C4.2.2 | `spity/RELEASE_VERIFICATION.md` et `scripts/verify-deployment.mjs` |
+| A12d | C4.2.2 | `preuves/B4-C422-04-staging-verifie-2026-08-13.json` |
 | A13 | C4.3.1 | `preuves/B4-C431-01-recommandations-2026-08-13.md` |
 | A13b | C4.3.1 | `preuves/B4-C431-02-registre-ameliorations-2026-08-13.json` |
 | A13c | C4.3.1 | `preuves/B4-C431-03-exercice-revue-ameliorations-2026-08-13.json` |
@@ -241,5 +248,6 @@ Le principal risque ouvert n'est pas masqué : la production est saine mais en r
 | A15c | C4.3.3 | `preuves/B4-C433-03-exercice-collaboration-support-2026-08-13.json` |
 | A15d | C4.3.3 | `spity/support-collaborations/` et `check-support-collaborations.mjs` |
 | A16 | Intégrité | `preuves/MANIFEST.sha256` |
+| A17 | Revue finale | `REVUE_FINALE_BLOC_04.md` et `preuves/B4-REVUE-FINALE-01-audit-transversal-2026-08-13.json` |
 
 Les sources complémentaires regroupent les workflows et formulaires sous `.github/`, les politiques et scripts de maintenance sous `spity/`, les guides de déploiement, de release, de journal et d'amélioration, ainsi que le référentiel officiel archivé. Elles sont toutes reliées au manifeste d'intégrité.

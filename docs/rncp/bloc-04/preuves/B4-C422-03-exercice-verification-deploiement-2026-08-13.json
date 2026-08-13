@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "criterion": "C4.2.2",
-  "executedAt": "2026-08-13T08:48:40.219Z",
-  "repositoryRevision": "2a7599025ab421cb12b7204232052de7ebe3c43c",
+  "executedAt": "2026-08-13T11:43:19.395Z",
+  "repositoryRevision": "094b24f96169ad4420f6f1c3bf17af35da4922ad",
   "safety": "Local HTTP fixtures only. No production endpoint, Docker daemon, deployment, database or LXC was used.",
   "objective": "Verify that a staged deployment is accepted only when its health endpoint exposes the expected application version and Git revision.",
   "result": "passed",
@@ -14,7 +14,7 @@
     "acceptedCandidate": {
       "schemaVersion": 1,
       "criterion": "C4.2.2",
-      "checkedAt": "2026-08-13T08:48:40.185Z",
+      "checkedAt": "2026-08-13T11:43:19.363Z",
       "environment": "exercise",
       "expected": {
         "revision": "dddddddddddddddddddddddddddddddddddddddd",
@@ -27,15 +27,15 @@
       "result": "passed",
       "health": {
         "schemaVersion": 2,
-        "checkedAt": "2026-08-13T08:48:40.185Z",
+        "checkedAt": "2026-08-13T11:43:19.363Z",
         "status": "healthy",
         "availability": true,
-        "target": "http://127.0.0.1:49824/candidate",
+        "target": "http://127.0.0.1:29740/candidate",
         "attempts": [
           {
             "attempt": 1,
             "httpStatus": 200,
-            "latencyMs": 19,
+            "latencyMs": 23,
             "outcome": "success",
             "code": "healthy"
           }
@@ -50,7 +50,7 @@
         "indicators": {
           "applicationStatus": "ok",
           "httpStatus": 200,
-          "latencyMs": 19,
+          "latencyMs": 23,
           "maxLatencyMs": 3000,
           "revision": "dddddddddddddddddddddddddddddddddddddddd",
           "version": "0.1.1-rc.1"
@@ -65,7 +65,7 @@
     "rejectedRevision": {
       "schemaVersion": 1,
       "criterion": "C4.2.2",
-      "checkedAt": "2026-08-13T08:48:40.215Z",
+      "checkedAt": "2026-08-13T11:43:19.393Z",
       "environment": "exercise",
       "expected": {
         "revision": "dddddddddddddddddddddddddddddddddddddddd",
@@ -78,16 +78,16 @@
       "result": "failed",
       "health": {
         "schemaVersion": 2,
-        "checkedAt": "2026-08-13T08:48:40.215Z",
+        "checkedAt": "2026-08-13T11:43:19.393Z",
         "status": "degraded",
         "availability": true,
-        "target": "http://127.0.0.1:49824/wrong-revision",
+        "target": "http://127.0.0.1:29740/wrong-revision",
         "attempts": [
           {
             "attempt": 1,
             "code": "revision_mismatch",
             "httpStatus": 200,
-            "latencyMs": 4,
+            "latencyMs": 1,
             "outcome": "failure",
             "error": "La révision déployée eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee diffère de la révision attendue dddddddddddddddddddddddddddddddddddddddd"
           }
@@ -113,7 +113,7 @@
     "rejectedVersion": {
       "schemaVersion": 1,
       "criterion": "C4.2.2",
-      "checkedAt": "2026-08-13T08:48:40.207Z",
+      "checkedAt": "2026-08-13T11:43:19.388Z",
       "environment": "exercise",
       "expected": {
         "revision": "dddddddddddddddddddddddddddddddddddddddd",
@@ -126,16 +126,16 @@
       "result": "failed",
       "health": {
         "schemaVersion": 2,
-        "checkedAt": "2026-08-13T08:48:40.207Z",
+        "checkedAt": "2026-08-13T11:43:19.388Z",
         "status": "degraded",
         "availability": true,
-        "target": "http://127.0.0.1:49824/wrong-version",
+        "target": "http://127.0.0.1:29740/wrong-version",
         "attempts": [
           {
             "attempt": 1,
             "code": "version_mismatch",
             "httpStatus": 200,
-            "latencyMs": 8,
+            "latencyMs": 5,
             "outcome": "failure",
             "error": "La version déployée 0.1.0 diffère de la version attendue 0.1.1-rc.1"
           }

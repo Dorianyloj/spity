@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-08-13T07:14:12.088Z",
+  "capturedAt": "2026-08-13T11:43:56.987Z",
   "criterion": "C4.1.1",
-  "repositoryRevision": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b",
+  "repositoryRevision": "094b24f96169ad4420f6f1c3bf17af35da4922ad",
   "lockfileSha256": "16aade1e8cf0140d55f5f3c202b90a236c400dfe9fd41c38e6a912c3717aad2d",
   "runtime": {
     "node": ">=22 <23",

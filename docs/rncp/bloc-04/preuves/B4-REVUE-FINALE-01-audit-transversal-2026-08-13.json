@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "criterion": "Bloc 4",
+  "capturedAt": "2026-08-13T11:44:40.488Z",
+  "repositoryRevision": "094b24f96169ad4420f6f1c3bf17af35da4922ad",
+  "safety": "Repository-only completeness review. No production endpoint, deployment, database, external mutation or LXC was used.",
+  "objective": "Verify the seven competency claims, operational sources, evidence assertions, current registries and SHA-256 manifest together.",
+  "audit": {
+    "schemaVersion": 1,
+    "checkedAt": "2026-08-13T11:44:40.488Z",
+    "compliant": true,
+    "competencyCount": 7,
+    "compliantCompetencyCount": 7,
+    "manifest": {
+      "compliant": true,
+      "entryCount": 96
+    },
+    "registries": {
+      "C4.2.1": {
+        "compliant": true,
+        "recordCount": 2
+      },
+      "C4.3.1": {
+        "compliant": true,
+        "recordCount": 4
+      },
+      "C4.3.2": {
+        "compliant": true,
+        "recordCount": 3
+      },
+      "C4.3.3": {
+        "compliant": true,
+        "recordCount": 1
+      }
+    },
+    "competencies": [
+      {
+        "id": "C4.1.1",
+        "title": "Gérer les mises à jour des dépendances",
+        "compliant": true,
+        "operationalFileCount": 5,
+        "evidenceFileCount": 3
+      },
+      {
+        "id": "C4.1.2",
+        "title": "Concevoir un système de supervision et d’alerte",
+        "compliant": true,
+        "operationalFileCount": 6,
+        "evidenceFileCount": 4
+      },
+      {
+        "id": "C4.2.1",
+        "title": "Consigner les anomalies détectées",
+        "compliant": true,
+        "operationalFileCount": 7,
+        "evidenceFileCount": 4
+      },
+      {
+        "id": "C4.2.2",
+        "title": "Créer et déployer un correctif via CI/CD",
+        "compliant": true,
+        "operationalFileCount": 5,
+        "evidenceFileCount": 4
+      },
+      {
+        "id": "C4.3.1",
+        "title": "Proposer des axes d’amélioration",
+        "compliant": true,
+        "operationalFileCount": 4,
+        "evidenceFileCount": 3
+      },
+      {
+        "id": "C4.3.2",
+        "title": "Établir le journal des versions déployées",
+        "compliant": true,
+        "operationalFileCount": 4,
+        "evidenceFileCount": 3
+      },
+      {
+        "id": "C4.3.3",
+        "title": "Collaborer avec le support",
+        "compliant": true,
+        "operationalFileCount": 5,
+        "evidenceFileCount": 3
+      }
+    ],
+    "errors": []
+  }
+}

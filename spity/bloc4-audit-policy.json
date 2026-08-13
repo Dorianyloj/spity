@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "dossierPath": "docs/rncp/bloc-04/DOSSIER_BLOC_04.md",
+  "planPath": "docs/rncp/bloc-04/PLAN_ACTION_BLOC_04.md",
+  "reviewPath": "docs/rncp/bloc-04/REVUE_FINALE_BLOC_04.md",
+  "manifestPath": "docs/rncp/bloc-04/preuves/MANIFEST.sha256",
+  "competencies": [
+    {
+      "id": "C4.1.1",
+      "title": "Gérer les mises à jour des dépendances",
+      "operationalFiles": [
+        "spity/MAINTENANCE.md",
+        "spity/dependency-policy.json",
+        "spity/scripts/check-dependency-policy.mjs",
+        ".github/workflows/dependency-maintenance.yml",
+        ".github/workflows/dependency-review.yml"
+      ],
+      "evidenceFiles": [
+        "docs/rncp/bloc-04/preuves/B4-C411-01-audit-dependances-2026-08-13.json",
+        "docs/rncp/bloc-04/preuves/B4-C411-02-decision-maintenance-2026-08-13.md",
+        "docs/rncp/bloc-04/preuves/B4-C411-03-controle-dependances-2026-08-13.json"
+      ],
+      "assertions": [
+        {
+          "file": "docs/rncp/bloc-04/preuves/B4-C411-03-controle-dependances-2026-08-13.json",
+          "path": "evaluation.compliant",
+          "equals": true
+        }
+      ]
+    },
+    {
+      "id": "C4.1.2",
+      "title": "Concevoir un système de supervision et d’alerte",
+      "operationalFiles": [
+        "spity/OBSERVABILITY.md",
+        "spity/monitoring-policy.json",
+        "spity/scripts/check-health.mjs",
+        "spity/scripts/evaluate-monitoring-window.mjs",
+        ".github/workflows/production-monitoring.yml",
+        ".github/workflows/availability-slo-report.yml"
+      ],
+      "evidenceFiles": [
+        "docs/rncp/bloc-04/preuves/B4-C412-01-historique-supervision-2026-08-13.json",
+        "docs/rncp/bloc-04/preuves/B4-C412-02-sante-production-2026-08-13.json",
+        "docs/rncp/bloc-04/preuves/B4-C412-03-exercice-alerte-2026-08-13.json",
+        "docs/rncp/bloc-04/preuves/B4-C412-04-slo-supervision-2026-08-13.json"
+      ],
+      "assertions": [
+        {
+          "file": "docs/rncp/bloc-04/preuves/B4-C412-04-slo-supervision-2026-08-13.json",
+          "path": "availability.targetPercent",
+          "equals": 99.5
+        },
+        {
+          "file": "docs/rncp/bloc-04/preuves/B4-C412-04-slo-supervision-2026-08-13.json",
+          "path": "source.eligibleScheduledRuns",
+          "minimum": 1
+        }
+      ]
+    },
+    {
+      "id": "C4.2.1",
+      "title": "Consigner les anomalies détectées",
+      "operationalFiles": [
+        "spity/INCIDENT_MANAGEMENT.md",
+        "spity/incident-policy.json",
+        "spity/incidents/SPITY-INC-2026-0001.json",
+        "spity/incidents/SPITY-INC-2026-0002.json",
+        "spity/scripts/check-incident-registry.mjs",
+        ".github/workflows/incident-registry.yml",
+        ".github/ISSUE_TEMPLATE/support-client.yml"
+      ],
+      "evidenceFiles": [
+        "docs/rncp/bloc-04/preuves/B4-C421-01-fiche-anomalie-accessibilite-2026-08-13.md",
+        "docs/rncp/bloc-04/preuves/B4-C421-02-anomalie-derive-production-2026-08-13.md",
+        "docs/rncp/bloc-04/preuves/B4-C421-03-registre-anomalies-2026-08-13.json",
+        "docs/rncp/bloc-04/preuves/B4-C421-04-exercice-registre-2026-08-13.json"
+      ],
+      "assertions": [
+        {
+          "file": "docs/rncp/bloc-04/preuves/B4-C421-03-registre-anomalies-2026-08-13.json",
+          "path": "audit.compliant",
+          "equals": true
+        }
+      ]
+    },
+    {
+      "id": "C4.2.2",
+      "title": "Créer et déployer un correctif via CI/CD",
+      "operationalFiles": [
+        "spity/RELEASE_VERIFICATION.md",
+        "spity/scripts/verify-deployment.mjs",
+        "spity/scripts/run-deployment-verification-exercise.mjs",
+        ".github/workflows/ci.yml",
+        ".github/workflows/release.yml"
+      ],
+      "evidenceFiles": [
+        "docs/rncp/bloc-04/preuves/B4-C422-01-correctif-et-ci-2026-08-13.json",
+        "docs/rncp/bloc-04/preuves/B4-C422-02-traitement-correctif-ci-cd-2026-08-13.md",
+        "docs/rncp/bloc-04/preuves/B4-C422-03-exercice-verification-deploiement-2026-08-13.json",
+        "docs/rncp/bloc-04/preuves/B4-C422-04-staging-verifie-2026-08-13.json"
+      ],
+      "assertions": [
+        {
+          "file": "docs/rncp/bloc-04/preuves/B4-C422-03-exercice-verification-deploiement-2026-08-13.json",
+          "path": "result",
+          "equals": "passed"
+        },
+        {
+          "file": "docs/rncp/bloc-04/preuves/B4-C422-04-staging-verifie-2026-08-13.json",
+          "path": "staging.success",
+          "equals": true
+        }
+      ]
+    },
+    {
+      "id": "C4.3.1",
+      "title": "Proposer des axes d’amélioration",
+      "operationalFiles": [
+        "spity/IMPROVEMENT_MANAGEMENT.md",
+        "spity/improvement-policy.json",
+        "spity/scripts/check-improvement-backlog.mjs",
+        ".github/workflows/improvement-review.yml"
+      ],
+      "evidenceFiles": [
+        "docs/rncp/bloc-04/preuves/B4-C431-01-recommandations-2026-08-13.md",
+        "docs/rncp/bloc-04/preuves/B4-C431-02-registre-ameliorations-2026-08-13.json",
+        "docs/rncp/bloc-04/preuves/B4-C431-03-exercice-revue-ameliorations-2026-08-13.json"
+      ],
+      "assertions": [
+        {
+          "file": "docs/rncp/bloc-04/preuves/B4-C431-02-registre-ameliorations-2026-08-13.json",
+          "path": "audit.compliant",
+          "equals": true
+        }
+      ]
+    },
+    {
+      "id": "C4.3.2",
+      "title": "Établir le journal des versions déployées",
+      "operationalFiles": [
+        "spity/RELEASE_JOURNAL.md",
+        "spity/release-journal-policy.json",
+        "spity/scripts/check-release-journal.mjs",
+        ".github/workflows/release-journal.yml"
+      ],
+      "evidenceFiles": [
+        "docs/rncp/bloc-04/preuves/B4-C432-01-journal-versions-deployees-2026-08-13.md",
+        "docs/rncp/bloc-04/preuves/B4-C432-02-registre-versions-2026-08-13.json",
+        "docs/rncp/bloc-04/preuves/B4-C432-03-exercice-journal-versions-2026-08-13.json"
+      ],
+      "assertions": [
+        {
+          "file": "docs/rncp/bloc-04/preuves/B4-C432-02-registre-versions-2026-08-13.json",
+          "path": "journal.compliant",
+          "equals": true
+        }
+      ]
+    },
+    {
+      "id": "C4.3.3",
+      "title": "Collaborer avec le support",
+      "operationalFiles": [
+        "spity/SUPPORT.md",
+        "spity/support-collaboration-policy.json",
+        "spity/support-collaborations/SPITY-SUP-2026-0001.json",
+        "spity/scripts/check-support-collaborations.mjs",
+        ".github/workflows/support-collaboration.yml"
+      ],
+      "evidenceFiles": [
+        "docs/rncp/bloc-04/preuves/B4-C433-01-collaboration-support-2026-08-13.md",
+        "docs/rncp/bloc-04/preuves/B4-C433-02-registre-collaboration-support-2026-08-13.json",
+        "docs/rncp/bloc-04/preuves/B4-C433-03-exercice-collaboration-support-2026-08-13.json"
+      ],
+      "assertions": [
+        {
+          "file": "docs/rncp/bloc-04/preuves/B4-C433-02-registre-collaboration-support-2026-08-13.json",
+          "path": "collaboration.compliant",
+          "equals": true
+        }
+      ]
+    }
+  ]
+}
