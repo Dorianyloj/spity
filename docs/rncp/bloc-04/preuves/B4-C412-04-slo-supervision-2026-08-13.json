@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "evaluatedAt": "2026-08-13T07:54:33.536Z",
+  "status": "insufficient-data",
+  "alertable": false,
+  "window": {
+    "startedAt": "2026-08-13T00:00:00.000Z",
+    "endedAt": "2026-08-13T07:54:33.536Z",
+    "requestedDays": 30
+  },
+  "availability": {
+    "targetPercent": 99.5,
+    "measuredPercent": 100,
+    "availableSamples": 11,
+    "unavailableSamples": 0,
+    "observedSamples": 11,
+    "expectedSamples": 32,
+    "minimumObservedSamples": 96,
+    "minimumCoveragePercent": 95,
+    "coveragePercent": 34.375,
+    "ready": false
+  },
+  "latency": {
+    "thresholdMs": 3000,
+    "observedSamples": 0,
+    "p95Ms": null,
+    "breaches": 0
+  },
+  "dataQuality": {
+    "excludedObservations": 0,
+    "sourceObservations": 11
+  },
+  "criterion": "C4.1.2",
+  "policy": {
+    "schemaVersion": 1,
+    "service": "Spity"
+  },
+  "source": {
+    "repository": "Dorianyloj/spity",
+    "workflow": "production-monitoring.yml",
+    "collectedRuns": 11,
+    "eligibleScheduledRuns": 11,
+    "excludedRuns": 0
+  }
+}

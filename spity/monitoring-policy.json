@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "service": {
+    "name": "Spity",
+    "publicHealthUrl": "https://spity.fr/api/health"
+  },
+  "monitoringStartedAt": "2026-08-13T00:00:00.000Z",
+  "probe": {
+    "intervalMinutes": 15,
+    "maxLatencyMs": 3000,
+    "timeoutMs": 15000,
+    "retries": 2,
+    "retryDelayMs": 500
+  },
+  "objectives": {
+    "availability": {
+      "windowDays": 30,
+      "targetPercent": 99.5,
+      "minimumCoveragePercent": 95,
+      "minimumObservedSamples": 96
+    },
+    "latency": {
+      "thresholdMs": 3000
+    }
+  },
+  "alerting": {
+    "availabilityBreach": "Open or refresh one production SLO issue only when coverage is sufficient and the 30-day target is breached.",
+    "probeFailure": "Open or refresh one production incident issue for an unhealthy or degraded public probe.",
+    "recovery": "Comment and close the matching issue after a compliant recovery."
+  }
+}

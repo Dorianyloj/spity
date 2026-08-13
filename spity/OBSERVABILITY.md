@@ -1,65 +1,63 @@
 # Superviser Spity
 
-Cette procédure décrit les sondes, seuils, alertes et réactions attendues pour la production Spity.
+Cette procédure définit un dispositif de supervision exploitable pour Spity. Sa source de vérité technique est `monitoring-policy.json` : toute modification de cadence, seuil ou SLO doit passer par une revue de code, les tests de maintenance et les deux workflows GitHub Actions.
 
-## Objectif de service
+## Objectifs de service
 
-- disponibilité mensuelle cible : 99,5 % pour la route de santé publique ;
-- détection d'une indisponibilité : au prochain contrôle planifié, cible de 15 minutes ;
-- prise en charge d'une alerte S1/S2 : moins de 30 minutes pendant une plage de maintenance active ;
-- aucune alerte ne contient de secret, de donnée personnelle ou de réponse brute non maîtrisée.
-
-GitHub Actions peut différer l'heure exacte d'un cron selon la charge de la plateforme. Le délai réel est donc mesuré dans l'historique et ne constitue pas une garantie temps réel.
-
-## Périmètre et indicateurs
-
-La route `GET /api/health` vérifie l'application et sa connexion MariaDB. La sonde `scripts/check-health.mjs` contrôle :
-
-| Indicateur | Seuil | Finalité |
+| Indicateur | Objectif | Mesure et décision |
 | --- | --- | --- |
-| Réponse HTTP | 2xx | Détecter une indisponibilité réseau ou applicative. |
-| JSON valide | Obligatoire | Éviter un faux positif sur une page HTML d'erreur. |
-| `status` | Exactement `ok` | Confirmer que l'application et MariaDB sont utilisables. |
-| `version` | Chaîne non vide | Identifier la version observée. |
-| `revision` | SHA non vide | Assurer la traçabilité Git du binaire. |
-| Latence | 3 000 ms maximum | Détecter une dégradation visible avant le timeout. |
-| Timeout | 15 000 ms | Borner une sonde bloquée. |
-| Tentatives | 1 initiale + 2 reprises | Réduire les alertes dues à un incident réseau transitoire. |
+| Disponibilité | 99,5 % sur 30 jours glissants | Une exécution planifiée réussie compte comme disponible ; un échec `failure`, `timed_out` ou `action_required` compte comme indisponible. Une fenêtre est exploitable seulement à partir de 96 échantillons et 95 % de couverture. |
+| Détection | 15 minutes visées | La sonde planifiée interroge la route publique toutes les 15 minutes. GitHub peut différer un cron : le délai est observé par la couverture, pas garanti en temps réel. |
+| Latence | 3 000 ms maximum par sonde | Au-delà, l’état est `degraded`, gravité S3, sans transformer abusivement le service en indisponibilité. |
+| Reprise | S1/S2 : moins de 30 minutes pendant une plage de maintenance active | Le mainteneur qualifie l’issue unique, conserve les preuves puis applique le runbook adapté. |
 
-Une révision attendue peut être fournie avec `EXPECTED_REVISION`. Une différence devient alors une alerte de dérive de déploiement.
+Le calcul SLO ne crée une alerte de disponibilité que si la couverture est suffisante. Une fenêtre trop courte ou incomplète est `insufficient-data` : elle est visible, mais elle ne génère pas de faux incident.
 
-## Chaîne de supervision
+## Sondes et contrat contrôlé
 
-1. Le workflow `Production monitoring` est planifié toutes les 15 minutes et peut être déclenché manuellement.
-2. Il récupère la version contrôlée de la sonde et utilise Node.js 22.
-3. La sonde interroge la route de santé, applique les seuils et produit `.monitoring/production-health.json`.
-4. Le rapport est conservé 30 jours comme artefact GitHub Actions.
-5. En cas d'échec, une issue unique `[Incident production] Supervision en échec` est créée ou rafraîchie.
-6. Au premier contrôle réussi, l'issue reçoit un commentaire de retour à la normale puis est fermée.
+`GET /api/health` confirme l’application et sa connexion MariaDB. `scripts/check-health.mjs`, appelé par `scripts/run-production-monitor.mjs`, contrôle :
 
-## Qualification et escalade
+| Contrôle | Code de qualification | Gravité | Impact disponibilité |
+| --- | --- | --- | --- |
+| HTTP non 2xx, timeout ou erreur réseau | `http_status`, `timeout`, `network_error` | S1 | Oui |
+| JSON invalide ou `status` différent de `ok` | `invalid_json`, `application_status` | S1 | Oui |
+| Version ou révision absente | `metadata_missing` | S2 | Non, mais contrat de supervision invalide |
+| Révision différente de `EXPECTED_REVISION` | `revision_mismatch` | S3 | Non |
+| Latence supérieure au seuil | `latency_threshold` | S3 | Non |
 
-| Niveau | Exemple | Première action |
+Une sonde réalise une tentative initiale et deux reprises, avec timeout de 15 secondes. Chaque rapport expose `status`, `availability`, `classification`, les tentatives, les seuils et les indicateurs observés. Il ne contient ni secret, ni donnée personnelle, ni réponse HTTP brute.
+
+## Automatisation et conservation
+
+1. **Production monitoring** s’exécute toutes les 15 minutes ou manuellement pour un exercice encadré. Il écrit `.monitoring/production-health.json`, publie un résumé GitHub Actions et conserve l’artefact 90 jours.
+2. Tout état autre que `healthy` ouvre ou actualise une seule issue `[Incident production] Supervision en échec`, étiquetée `bug`. La gravité, le code, l’impact et le lien du run y sont repris sans contenu sensible.
+3. La première sonde saine ajoute un commentaire de retour à la normale et ferme cette issue unique.
+4. **Availability SLO report** s’exécute chaque jour à 06:17 UTC. Il consulte les runs *planifiés* de `production-monitoring.yml`, exclut les déclenchements manuels, calcule la disponibilité, la couverture et la fenêtre de 30 jours, puis conserve son JSON 90 jours.
+5. Une disponibilité sous 99,5 % avec couverture suffisante ouvre ou actualise une seule issue `[SLO production] Disponibilité sous l’objectif`. Elle est fermée uniquement après un rapport `compliant`.
+
+Le workflow SLO utilise `actions: read`, conformément au moindre privilège, et ne consomme que l’historique GitHub Actions du dépôt. Les annulations et résultats neutres ne sont pas assimilés à une indisponibilité ; ils réduisent la couverture, ce qui rend le manque de données explicite.
+
+## Exploitation d’une alerte
+
+| Gravité | Première action | Suite et clôture |
 | --- | --- | --- |
-| S1 | Route indisponible, perte ou corruption de données suspectée | Geler les déploiements, conserver les journaux, envisager le rollback. |
-| S2 | Authentification, matching ou événement critique indisponible | Reproduire, isoler la révision et préparer un correctif prioritaire. |
-| S3 | Latence, révision inattendue ou fonction secondaire dégradée | Consigner, mesurer et planifier selon l'impact. |
-| S4 | Anomalie cosmétique sans blocage | Ajouter au backlog de maintenance. |
+| S1 | Geler les déploiements, vérifier le run et la route publique, préserver journaux et horodatages. | Isoler réseau, application ou base ; appliquer le rollback documenté si nécessaire ; valider une sonde saine avant clôture. |
+| S2 | Vérifier la version, la révision et le contrat `/api/health`. | Corriger ou restaurer les métadonnées ; consigner la cause dans l’issue avant le retour à la normale. |
+| S3 | Vérifier le seuil, la révision attendue et l’impact utilisateur. | Créer une action d’amélioration ou de déploiement ; ne clôturer qu’après mesure conforme ou décision documentée. |
 
-Le formulaire `incident-production.yml` impose date, gravité, version, reproduction, preuves, analyse, validation et clôture.
+Le formulaire `incident-production.yml` impose date, gravité, version, reproduction, preuves, analyse, validation et clôture. Le mainteneur relie l’issue d’alerte à cette fiche lorsque l’investigation dépasse le simple rétablissement automatique.
 
-## Exercice contrôlé
-
-La commande suivante utilise exclusivement un serveur HTTP local éphémère :
+## Vérification contrôlée
 
 ```bash
 npm run bloc4:exercise
+npm run test:maintenance
 ```
 
-Elle valide un cas sain puis un cas HTTP 503/applicatif `degraded`, vérifie les reprises et génère la preuve C4.1.2/C4.2.1. Elle ne modifie ni la production ni MariaDB.
+L’exercice lance uniquement un serveur HTTP local éphémère. Il vérifie un cas sain, un HTTP 503/applicatif avec deux tentatives et une latence excessive classée S3 mais encore disponible. La preuve versionnée `B4-C412-03` ne touche ni la production, ni MariaDB, ni un LXC.
 
-Pour tester l'ouverture et la fermeture d'une issue dans GitHub Actions, un mainteneur peut déclencher manuellement le workflow avec une URL d'exercice maîtrisée. L'exercice doit être annoncé, son issue marquée comme simulation et refermée après le contrôle de récupération.
+## Limites connues et prochaine amélioration
 
-## Limites et amélioration prévue
+Les rapports de sonde individuels sont conservés 90 jours dans les artefacts ; le SLO quotidien exploite les conclusions des runs et expose donc la disponibilité et la couverture de façon durable. La latence est contrôlée à chaque sonde mais son P95 historique n’est pas encore agrégé depuis les artefacts. CPU, mémoire, disque, taux d’erreur applicatif, traces et Core Web Vitals ne sont pas non plus couverts.
 
-La supervision actuelle est synthétique : elle contrôle disponibilité, base, version, révision et latence depuis GitHub. Elle ne remplace pas des métriques persistantes de taux d'erreur, CPU, mémoire, espace disque, temps de requête ou Core Web Vitals réels. La recommandation prioritaire du Bloc 4 est d'ajouter une plateforme de métriques et un tableau de bord avec rétention.
+La prochaine amélioration mesurée consiste à exporter des métriques persistantes (latence, erreurs, ressources et Web Vitals) vers un tableau de bord avec rétention, puis à enrichir le SLO de performance sans modifier la définition de disponibilité ci-dessus.

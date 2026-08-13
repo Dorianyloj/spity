@@ -1,61 +1,121 @@
 {
   "schemaVersion": 1,
   "type": "controlled-monitoring-exercise",
-  "executedAt": "2026-08-13T06:34:52.343Z",
+  "executedAt": "2026-08-13T07:57:29.135Z",
   "criteria": [
     "C4.1.2",
     "C4.2.1"
   ],
-  "repositoryRevision": "e3784b7e6a1b3be4b7c6cb46938701bb4449027b",
+  "repositoryRevision": "f892c31184be8ac889cb912305d15ca3b6394f15",
   "safety": "Local HTTP fixture only. No production request was degraded and no customer data was used.",
-  "objective": "Verify that a healthy payload passes and that an HTTP/application failure produces a retryable, actionable alert report.",
-  "expectedOutcome": "The healthy probe succeeds. The degraded probe fails after two attempts with a non-zero CLI-compatible status.",
+  "objective": "Verify that a healthy payload passes, that an HTTP/application failure produces a retryable S1 report, and that excessive latency is classified as an available-but-degraded S3 report.",
+  "expectedOutcome": "The healthy probe succeeds. The degraded probe fails after two attempts. The slow probe remains available but is classified as a latency degradation.",
   "result": "passed",
   "healthyProbe": {
-    "schemaVersion": 1,
-    "checkedAt": "2026-08-13T06:34:52.291Z",
+    "schemaVersion": 2,
+    "checkedAt": "2026-08-13T07:57:29.016Z",
     "status": "healthy",
-    "target": "http://127.0.0.1:52499/healthy",
+    "availability": true,
+    "target": "http://127.0.0.1:10826/healthy",
     "attempts": [
       {
         "attempt": 1,
         "httpStatus": 200,
-        "latencyMs": 21,
-        "outcome": "success"
+        "latencyMs": 42,
+        "outcome": "success",
+        "code": "healthy"
       }
     ],
+    "classification": {
+      "code": "healthy",
+      "category": "healthy",
+      "severity": null,
+      "impactsAvailability": false,
+      "runbook": "none"
+    },
     "indicators": {
       "applicationStatus": "ok",
       "httpStatus": 200,
-      "latencyMs": 21,
+      "latencyMs": 42,
       "maxLatencyMs": 3000,
       "revision": "cccccccccccccccccccccccccccccccccccccccc",
       "version": "monitoring-exercise"
+    },
+    "thresholds": {
+      "maxLatencyMs": 3000,
+      "retries": 0,
+      "timeoutMs": 15000
     }
   },
   "degradedProbe": {
-    "schemaVersion": 1,
-    "checkedAt": "2026-08-13T06:34:52.317Z",
+    "schemaVersion": 2,
+    "checkedAt": "2026-08-13T07:57:29.066Z",
     "status": "unhealthy",
-    "target": "http://127.0.0.1:52499/degraded",
+    "availability": false,
+    "target": "http://127.0.0.1:10826/degraded",
     "attempts": [
       {
         "attempt": 1,
-        "latencyMs": 6,
+        "code": "http_status",
+        "httpStatus": 503,
+        "latencyMs": 7,
         "outcome": "failure",
         "error": "La route de santé répond avec le statut HTTP 503"
       },
       {
         "attempt": 2,
-        "latencyMs": 5,
+        "code": "http_status",
+        "httpStatus": 503,
+        "latencyMs": 3,
         "outcome": "failure",
         "error": "La route de santé répond avec le statut HTTP 503"
       }
     ],
+    "classification": {
+      "code": "http_status",
+      "category": "network-or-http",
+      "severity": "S1",
+      "impactsAvailability": true,
+      "runbook": "incident-production",
+      "httpStatus": 503
+    },
     "error": "La route de santé répond avec le statut HTTP 503",
     "thresholds": {
       "maxLatencyMs": 3000,
       "retries": 1,
+      "timeoutMs": 15000
+    }
+  },
+  "slowProbe": {
+    "schemaVersion": 2,
+    "checkedAt": "2026-08-13T07:57:29.090Z",
+    "status": "degraded",
+    "availability": true,
+    "target": "http://127.0.0.1:10826/slow",
+    "attempts": [
+      {
+        "attempt": 1,
+        "code": "latency_threshold",
+        "httpStatus": 200,
+        "latencyMs": 45,
+        "outcome": "failure",
+        "error": "La latence 45 ms dépasse le seuil de 5 ms"
+      }
+    ],
+    "classification": {
+      "code": "latency_threshold",
+      "category": "performance",
+      "severity": "S3",
+      "impactsAvailability": false,
+      "runbook": "performance-review",
+      "httpStatus": 200,
+      "latencyMs": 45,
+      "maxLatencyMs": 5
+    },
+    "error": "La latence 45 ms dépasse le seuil de 5 ms",
+    "thresholds": {
+      "maxLatencyMs": 5,
+      "retries": 0,
       "timeoutMs": 15000
     }
   }

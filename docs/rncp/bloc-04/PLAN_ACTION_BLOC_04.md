@@ -13,7 +13,7 @@ Le Bloc 4 est développé comme un chantier produit, pas comme une simple rédac
 | Ordre | Compétence | Fonctionnement présent | État d'approfondissement |
 | --- | --- | --- | --- |
 | 1 | C4.1.1 - Gérer les mises à jour | Dependabot, politique exécutable, audit planifié, SBOM, revue PR, lot compatible qualifié | **Industrialisée et vérifiée** |
-| 2 | C4.1.2 - Superviser et alerter | Route de santé, sonde, workflow planifié et exercice local | Base fonctionnelle à approfondir |
+| 2 | C4.1.2 - Superviser et alerter | Politique versionnée, sondes qualifiées, alerte/rétablissement uniques, SLO 30 jours, couverture et exercice local | **Industrialisée et vérifiée** |
 | 3 | C4.2.1 - Consigner les anomalies | Formulaire GitHub et deux fiches reproductibles | Base fonctionnelle à approfondir |
 | 4 | C4.2.2 - Créer et déployer un correctif | CI complète, release par tag, rollback documenté | Base fonctionnelle à approfondir |
 | 5 | C4.3.1 - Proposer des améliorations | Backlog chiffré et priorisé | Base documentaire à transformer en boucle de pilotage |
@@ -42,9 +42,17 @@ Pour chaque ligne, les cinq conditions suivantes sont obligatoires :
 - [x] mise à jour réelle du lockfile et qualification de la régression `@hookform/resolvers`/Ajv ;
 - [x] 152 tests Jest, 8 tests de maintenance, 11 scénarios MariaDB, 6 recettes Playwright et audits Lighthouse verts.
 
-## Prochaine étape : C4.1.2
+## C4.1.2 - Résultat obtenu
 
-La reprise suivante doit transformer la supervision actuelle en véritable dispositif d'exploitation : historique durable des mesures, objectifs SLI/SLO, alertes anti-bruit, tableau de bord, mesure de disponibilité, escalade testée et preuve de récupération. Aucun déploiement de production ne sera déclenché sans autorisation explicite.
+- [x] politique de supervision versionnée : cadence, seuils, SLO, couverture minimale et règles d’alerte ;
+- [x] sonde publique qualifiant S1/S2/S3, disponibilité réelle et causes actionnables ;
+- [x] artefacts de sonde et de calcul SLO conservés 90 jours ;
+- [x] issue unique pour incident de sonde, issue unique pour brèche SLO, commentaire et fermeture au rétablissement ;
+- [x] objectif de disponibilité 99,5 % sur 30 jours calculé quotidiennement à partir des seuls runs planifiés ;
+- [x] protection anti-bruit : pas d’alerte SLO avec moins de 96 observations ou 95 % de couverture ;
+- [x] exercice local sain, indisponible et lent ; 13 tests de maintenance couvrant les décisions de la sonde et du SLO.
+
+Les limites restantes sont explicites : l’historique de latence P95, les ressources système et les Web Vitals devront rejoindre une plateforme de métriques persistantes. Aucun déploiement de production n’est déclenché par ces workflows.
 
 ## Règle de présentation
 

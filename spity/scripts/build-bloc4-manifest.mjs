@@ -20,6 +20,13 @@ const files = [
   resolve(repositoryRoot, 'spity/MAINTENANCE.md'),
   resolve(repositoryRoot, 'spity/OBSERVABILITY.md'),
   resolve(repositoryRoot, 'spity/SUPPORT.md'),
+  resolve(repositoryRoot, 'spity/monitoring-policy.json'),
+  resolve(repositoryRoot, 'spity/scripts/capture-monitoring-slo.mjs'),
+  resolve(repositoryRoot, 'spity/scripts/check-health.mjs'),
+  resolve(repositoryRoot, 'spity/scripts/evaluate-monitoring-window.mjs'),
+  resolve(repositoryRoot, 'spity/scripts/run-production-monitor.mjs'),
+  resolve(repositoryRoot, '.github/workflows/availability-slo-report.yml'),
+  resolve(repositoryRoot, '.github/workflows/production-monitoring.yml'),
   resolve(repositoryRoot, 'output/pdf/dossier-bloc-04-spity.pdf'),
 ].sort((left, right) => left.localeCompare(right, 'fr'))
 

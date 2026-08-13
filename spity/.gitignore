@@ -19,6 +19,7 @@
 /test-results
 /.lighthouseci
 /.accessibility
+/.monitoring
 
 # next.js
 /.next/

@@ -1,0 +1,156 @@
+name: Availability SLO report
+
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+  issues: write
+
+concurrency:
+  group: availability-slo-report
+  cancel-in-progress: false
+
+jobs:
+  evaluate:
+    name: Evaluate 30-day availability objective
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+      MONITORING_FAIL_ON_BREACH: 'true'
+      MONITORING_SLO_OUTPUT_PATH: .monitoring/availability-slo.json
+
+    steps:
+      - name: Checkout monitoring policy
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: spity/.nvmrc
+
+      - name: Calculate SLO from scheduled health checks
+        id: slo
+        continue-on-error: true
+        run: |
+          set +e
+          node spity/scripts/capture-monitoring-slo.mjs
+          result=$?
+          set -e
+          if [ -f .monitoring/availability-slo.json ]; then
+            status=$(node -p "require('./.monitoring/availability-slo.json').status")
+            alertable=$(node -p "require('./.monitoring/availability-slo.json').alertable")
+            echo "status=$status" >> "$GITHUB_OUTPUT"
+            echo "alertable=$alertable" >> "$GITHUB_OUTPUT"
+          fi
+          exit "$result"
+
+      - name: Upload SLO report
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: availability-slo-${{ github.run_id }}
+          path: .monitoring/availability-slo.json
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 90
+
+      - name: Open or refresh availability SLO breach
+        if: steps.slo.outputs.alertable == 'true'
+        uses: actions/github-script@v8
+        env:
+          REPORT_PATH: .monitoring/availability-slo.json
+        with:
+          script: |
+            const fs = require('node:fs')
+            const marker = '<!-- spity-availability-slo -->'
+            const title = '[SLO production] Disponibilité sous l’objectif'
+            const report = JSON.parse(fs.readFileSync(process.env.REPORT_PATH, 'utf8'))
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100,
+            })
+            const existing = issues.find((issue) => !issue.pull_request && issue.body?.includes(marker))
+            const body = `${marker}
+            L’objectif de disponibilité sur ${report.window.requestedDays} jours est dépassé avec une couverture suffisante.
+
+            - Mesure : ${report.availability.measuredPercent}%
+            - Objectif : ${report.availability.targetPercent}%
+            - Couverture : ${report.availability.coveragePercent}%
+            - Échantillons indisponibles : ${report.availability.unavailableSamples}
+            - Évalué : ${report.evaluatedAt}
+            - Run : ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}
+
+            Le rapport détaillé est conservé 90 jours dans l’artefact du run.`
+
+            if (existing) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+                title,
+              })
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['bug'],
+              })
+            }
+
+      - name: Close SLO breach after recovery
+        if: steps.slo.outputs.status == 'compliant'
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const marker = '<!-- spity-availability-slo -->'
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100,
+            })
+            const existing = issues.find((issue) => !issue.pull_request && issue.body?.includes(marker))
+
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body: `Objectif SLO de nouveau respecté : ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+              })
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                state: 'closed',
+                state_reason: 'completed',
+              })
+            }
+
+      - name: Publish SLO summary
+        if: always() && hashFiles('.monitoring/availability-slo.json') != ''
+        run: |
+          node --input-type=module <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          import { readFile } from 'node:fs/promises'
+          const report = JSON.parse(await readFile('.monitoring/availability-slo.json', 'utf8'))
+          console.log('## Availability SLO')
+          console.log(`- Status: ${report.status}`)
+          console.log(`- Availability: ${report.availability.measuredPercent ?? 'n/a'}% / ${report.availability.targetPercent}%`)
+          console.log(`- Coverage: ${report.availability.coveragePercent}%`)
+          console.log(`- Window: ${report.window.startedAt} → ${report.window.endedAt}`)
+          console.log(`- Evidence: availability-slo-${process.env.GITHUB_RUN_ID}`)
+          NODE
+
+      - name: Fail workflow when SLO is breached or cannot be measured
+        if: steps.slo.outcome == 'failure'
+        run: exit 1

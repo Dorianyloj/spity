@@ -31,6 +31,8 @@
     "bloc4:exercise": "node scripts/run-monitoring-exercise.mjs",
     "bloc4:manifest": "node scripts/build-bloc4-manifest.mjs",
     "bloc4:pdf": "python scripts/build-bloc4-dossier.py",
+    "monitoring:probe": "node scripts/run-production-monitor.mjs",
+    "monitoring:slo": "node scripts/capture-monitoring-slo.mjs",
     "quality": "npm run lint && npm run typecheck && npm run test:coverage && npm run test:maintenance && npm run dependencies:check && npm run build",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",

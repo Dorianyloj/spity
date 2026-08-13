@@ -42,6 +42,8 @@ test('accepts a healthy response with version, revision and bounded latency', as
   assert.equal(report.indicators.applicationStatus, 'ok')
   assert.equal(report.indicators.version, 'exercise')
   assert.equal(report.indicators.revision, 'a'.repeat(40))
+  assert.equal(report.availability, true)
+  assert.equal(report.classification.code, 'healthy')
 })
 
 test('returns an actionable unhealthy report when the application is degraded', async () => {
@@ -49,6 +51,9 @@ test('returns an actionable unhealthy report when the application is degraded', 
 
   assert.equal(report.status, 'unhealthy')
   assert.equal(report.attempts.length, 2)
+  assert.equal(report.availability, false)
+  assert.equal(report.classification.code, 'application_status')
+  assert.equal(report.classification.severity, 'S1')
   assert.match(report.error, /degraded/)
 })
 
@@ -56,5 +61,19 @@ test('rejects an invalid health payload', async () => {
   const report = await checkHealth({ url: `${origin}/invalid-json`, retries: 0 })
 
   assert.equal(report.status, 'unhealthy')
+  assert.equal(report.classification.code, 'invalid_json')
   assert.match(report.error, /JSON valide/)
+})
+
+test('keeps service availability when only the latency objective is breached', async () => {
+  const report = await checkHealth({
+    url: `${origin}/healthy`,
+    maxLatencyMs: 0,
+    retries: 0,
+  })
+
+  assert.equal(report.status, 'degraded')
+  assert.equal(report.availability, true)
+  assert.equal(report.classification.code, 'latency_threshold')
+  assert.equal(report.classification.severity, 'S3')
 })

@@ -25,7 +25,7 @@ Spity dispose d'une chaîne de maintenance reproductible : Dependabot surveille 
 Le 13 août 2026, l'état vérifié est le suivant :
 
 - 0 vulnérabilité de production et 0 alerte haute/critique dans l'audit complet après mise à jour des outils ;
-- 152 tests Jest, 8 tests de maintenance, 11 scénarios MariaDB et 6 recettes Playwright ;
+- 152 tests Jest, 13 tests de maintenance, 11 scénarios MariaDB et 6 recettes Playwright ;
 - 10 pages authentifiées sur 10 à 100 % Lighthouse accessibilité ;
 - CI complète verte sur `e3784b7` ;
 - 29 exécutions de supervision historisées au moment de la collecte, avec production `ok` ;
@@ -39,7 +39,7 @@ La dérive n'a pas été corrigée par un déploiement non autorisé. Elle est t
 | Compétence | Attendu principal | Réponse Spity | Preuves majeures | Statut |
 | --- | --- | --- | --- | --- |
 | C4.1.1 | Processus précis : fréquence, périmètre, type | Cadence hebdomadaire et mensuelle, politique exécutable, audit planifié, SBOM, revue PR et lot réel qualifié | `spity/MAINTENANCE.md`, C411-01 à C411-03 | Industrialisé et vérifié |
-| C4.1.2 | Supervision adaptée, sondes, critères qualité/performance, disponibilité | Route santé + MariaDB, contrôle 15 min, latence, retries, version/révision, artefact et issue automatique | `spity/OBSERVABILITY.md`, C412-01 à C412-03 | Base fonctionnelle à approfondir |
+| C4.1.2 | Supervision adaptée, sondes, critères qualité/performance, disponibilité | Politique versionnée, contrôle 15 min, qualification S1/S2/S3, artefacts 90 jours, incident/rétablissement unique et SLO 30 jours avec garde de couverture | `spity/OBSERVABILITY.md`, C412-01 à C412-04 | Industrialisé et vérifié |
 | C4.2.1 | Collecte structurée, fiche reproductible, analyse et préconisations | Formulaire incident, anomalie contraste complète et dérive production réelle | C421-01 et C421-02 | Base fonctionnelle à approfondir |
 | C4.2.2 | Correctif décrit utilisant intégration/déploiement continu | Correctif sécurité observé en production, correctif accessibilité validé par quatre jobs CI et workflow Release | C422-01 et C422-02 | Base fonctionnelle à approfondir |
 | C4.3.1 | Recommandations réalistes, argumentées, coûts/délais/gains | Cinq axes notés et chiffrés, priorisation et risques | C431-01 | Base de pilotage à approfondir |
@@ -90,26 +90,21 @@ Le lockfile garantit les versions transitives et son SHA-256 est figé dans la p
 
 ### 5.1 Sondes et finalité
 
-La route `/api/health` confirme l'état de l'application, la connexion MariaDB, la version et la révision. Le script `check-health.mjs` ajoute un contrôle externe du statut HTTP, du JSON, de la latence et de la cohérence des métadonnées.
+La route `/api/health` confirme l'état de l'application, la connexion MariaDB, la version et la révision. `monitoring-policy.json` versionne la cadence de 15 minutes, le timeout de 15 secondes, les deux reprises, le seuil de 3 000 ms et l'objectif de disponibilité de 99,5 % sur 30 jours.
 
-| Contrôle | Seuil | Décision |
+| Contrôle | Qualification | Décision |
 | --- | --- | --- |
-| HTTP | 2xx | Tout autre statut déclenche l'échec. |
-| Application | `status = ok` | Toute dégradation est une alerte. |
-| Métadonnées | version et révision non vides | Absence = binaire non traçable. |
-| Performance | 3 000 ms | Dépassement = dégradation. |
-| Timeout | 15 000 ms | Interruption bornée. |
-| Résilience | 2 reprises | Limite les faux positifs réseau. |
+| HTTP, réseau, timeout, JSON ou statut applicatif | S1, impact disponibilité | Issue d’incident unique, investigation et rétablissement vérifié. |
+| Métadonnées absentes | S2, contrat de supervision invalide | Vérification de la version/révision et correction prioritaire. |
+| Latence ou révision inattendue | S3, disponible mais dégradé | Action de performance ou de contrôle de déploiement, sans faux calcul d’indisponibilité. |
 
-Le workflow est planifié toutes les 15 minutes. GitHub peut retarder un cron ; la cible de détection n'est donc pas un engagement temps réel. L'objectif mensuel est 99,5 % de disponibilité.
+### 5.2 Disponibilité, couverture et signalement
 
-### 5.2 Signalement
-
-Chaque exécution conserve un rapport JSON 30 jours. En échec, une issue d'incident unique est créée ou mise à jour avec le run, le SHA et le rapport. À la récupération, un commentaire est ajouté et l'issue est fermée. L'issue reste distincte des données utilisateurs et ne contient aucun secret.
+Le workflow de sonde conserve chaque rapport JSON 90 jours. Un deuxième workflow calcule chaque jour le SLO à partir des seuls runs **planifiés**, exclut les exercices manuels et mesure disponibilité, échantillons attendus, couverture et données exclues. Une fenêtre incomplète (`< 96` observations ou `< 95 %` de couverture) est `insufficient-data` et n’ouvre pas de faux incident. Une vraie brèche ouvre ou actualise une issue SLO unique ; une mesure `compliant` la ferme. Les rapports et issues ne contiennent ni secret, ni donnée personnelle, ni réponse brute.
 
 ### 5.3 Résultat observé et exercice
 
-La collecte publique a trouvé 29 runs de supervision, dont les plus récents sont réussis. La production répond `ok`. Un exercice local contrôlé reproduit un cas sain et un HTTP 503/applicatif `degraded`, vérifie deux tentatives et génère un rapport d'alerte sans toucher à la production.
+La collecte publique a trouvé 29 runs de supervision, dont les plus récents sont réussis, et la production répond `ok`. Le nouveau calcul SLO est testé sur une fenêtre couverte, une brèche réellement alertable, une couverture insuffisante et l’exclusion d’un déclenchement manuel. L’exercice local contrôlé couvre désormais un cas sain, un HTTP 503/applicatif avec deux tentatives et une latence S3 encore disponible, sans toucher à la production.
 
 ## 6. C4.2.1 - Consigner les anomalies
 
@@ -173,7 +168,7 @@ Les actions destructives restent interdites dans les procédures courantes : auc
 
 ## 12. Conclusion
 
-Les sept compétences disposent désormais d'une base documentée, de sources exécutables, d'états publics figés ou d'une mise en situation fictive déclarée. C4.1.1 est la première à franchir la définition renforcée de terminé : mécanisme réel, automatisation, cas d'échec testés, preuves reproductibles et exploitation décrite. Les six autres restent volontairement qualifiées comme bases à approfondir une par une.
+Les sept compétences disposent désormais d'une base documentée, de sources exécutables, d'états publics figés ou d'une mise en situation fictive déclarée. C4.1.1 et C4.1.2 franchissent la définition renforcée de terminé : mécanisme réel, automatisation, cas d'échec testés, preuves reproductibles et exploitation décrite. Les cinq autres restent volontairement qualifiées comme bases à approfondir une par une.
 
 Le principal risque ouvert n'est pas masqué : la production est saine mais en retard sur `main`. La prochaine action opérationnelle est une release versionnée autorisée, pas un déploiement improvisé. Cette transparence garantit que le dossier décrit l'état réel du logiciel.
 
@@ -189,6 +184,7 @@ Le principal risque ouvert n'est pas masqué : la production est saine mais en r
 | A6 | C4.1.2 | `preuves/B4-C412-01-historique-supervision-2026-08-13.json` |
 | A7 | C4.1.2 | `preuves/B4-C412-02-sante-production-2026-08-13.json` |
 | A8 | C4.1.2/C4.2.1 | `preuves/B4-C412-03-exercice-alerte-2026-08-13.json` |
+| A8b | C4.1.2 | `preuves/B4-C412-04-slo-supervision-2026-08-13.json` |
 | A9 | C4.2.1 | `preuves/B4-C421-01-fiche-anomalie-accessibilite-2026-08-13.md` |
 | A10 | C4.2.1 | `preuves/B4-C421-02-anomalie-derive-production-2026-08-13.md` |
 | A11 | C4.2.2 | `preuves/B4-C422-01-correctif-et-ci-2026-08-13.json` |
@@ -198,4 +194,4 @@ Le principal risque ouvert n'est pas masqué : la production est saine mais en r
 | A15 | C4.3.3 | `spity/SUPPORT.md` et `preuves/B4-C433-01-collaboration-support-2026-08-13.md` |
 | A16 | Intégrité | `preuves/MANIFEST.sha256` |
 
-Les sources complémentaires sont `.github/workflows/ci.yml`, `release.yml`, `production-monitoring.yml`, `dependency-maintenance.yml`, `dependency-review.yml`, `dependabot.yml`, les deux formulaires d'issue, `CHANGELOG.md`, `spity/dependency-policy.json`, `spity/DEPLOYMENT.md` et le référentiel officiel archivé.
+Les sources complémentaires sont `.github/workflows/ci.yml`, `release.yml`, `production-monitoring.yml`, `availability-slo-report.yml`, `dependency-maintenance.yml`, `dependency-review.yml`, `dependabot.yml`, les deux formulaires d'issue, `CHANGELOG.md`, `spity/dependency-policy.json`, `spity/monitoring-policy.json`, les scripts de sonde/SLO, `spity/DEPLOYMENT.md` et le référentiel officiel archivé.
