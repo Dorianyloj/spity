@@ -1,5 +1,10 @@
 # Changelog
 
+## Dossier Bloc 4 version 1.1
+
+- développement détaillé de chaque compétence : attendu, processus, scénario, contrôles, preuves et limites ;
+- ajout d'un guide de lecture homogène pour l'évaluation des sept compétences.
+
 ## Présentation jury du dépôt
 
 - ajout d'un point d'entrée `JURY.md` à la racine avec parcours de consultation, compétences, preuves et contrôles ;
