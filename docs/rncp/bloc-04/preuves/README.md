@@ -10,7 +10,7 @@ Les fichiers de ce répertoire sont datés, anonymisés et reliés à un critèr
 | C412 | C4.1.2 | Historique de supervision, santé publique, calcul SLO/couverture et exercice d’alerte. |
 | C421 | C4.2.1 | Registre d’anomalies validé, fiches reproductibles, audit, exercice de cycle de vie et confidentialité. |
 | C422 | C4.2.2 | Traitement du correctif, contrôle version/révision, CI/CD et exercice local de promotion. |
-| C431 | C4.3.1 | Recommandations chiffrées et priorisées. |
+| C431 | C4.3.1 | Backlog d'améliorations mesurable, décision, indicateurs, revue et exercice de confidentialité. |
 | C432 | C4.3.2 | Journal des versions publiées/déployées. |
 | C433 | C4.3.3 | Collaboration support fictive déclarée. |
 

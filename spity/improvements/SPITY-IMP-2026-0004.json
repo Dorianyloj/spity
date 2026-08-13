@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "SPITY-IMP-2026-0004",
+  "title": "Qualifier la migration de l'outillage Drizzle sur une branche dédiée",
+  "status": "under-review",
+  "priority": 4,
+  "description": "Évaluer une version amont de Drizzle Kit sur une base jetable et comparer le schéma, les migrations et les résultats de test avant toute évolution de l'outillage.",
+  "scoring": { "impact": 3, "riskReduction": 3, "confidence": 2, "effort": 4, "score": 13 },
+  "delivery": { "estimatedCalendarDays": 3, "estimatedPersonDays": 3, "rollback": "Abandonner la branche d'étude et conserver le lockfile validé si la comparaison de schéma ou les tests divergent." },
+  "indicators": [
+    { "id": "development-tooling-findings", "label": "Alertes modérées d'outillage qualifiées", "unit": "count", "baseline": 4, "target": 0, "direction": "decrease", "measurement": "Nombre d'alertes npm de développement restantes après qualification ou correction compatible." }
+  ],
+  "feedbackInputs": [
+    { "kind": "operational", "reference": "docs/rncp/bloc-04/preuves/B4-C431-01-recommandations-2026-08-13.md", "summary": "La recommandation initiale interdit une rétrogradation automatique et impose une base jetable.", "declaredAt": "2026-08-13T09:30:00.000+02:00" }
+  ],
+  "decision": { "selected": "Maintenir en étude jusqu'à disponibilité d'une fenêtre de qualification dédiée.", "rationale": "La valeur est réelle mais le niveau de confiance est insuffisant pour modifier le lockfile de production.", "ownerRole": "product-owner", "reviewerRole": "maintainer", "decidedAt": "2026-08-13T09:35:00.000+02:00" },
+  "history": [
+    { "at": "2026-08-13T09:30:00.000+02:00", "to": "proposed", "actorRole": "maintainer", "reason": "Dette de développement identifiée par la politique de dépendances." },
+    { "at": "2026-08-13T09:35:00.000+02:00", "to": "under-review", "actorRole": "product-owner", "reason": "Étude séparée requise avant toute modification de l'outillage." }
+  ],
+  "evidence": [
+    { "kind": "repository-path", "value": "spity/dependency-policy.json" },
+    { "kind": "repository-path", "value": "docs/rncp/bloc-04/preuves/B4-C411-03-controle-dependances-2026-08-13.json" }
+  ]
+}

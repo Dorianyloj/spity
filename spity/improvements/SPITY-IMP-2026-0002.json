@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "SPITY-IMP-2026-0002",
+  "title": "Étendre les tests de contrat des API critiques",
+  "status": "approved",
+  "priority": 2,
+  "description": "Ajouter des tests de contrat ciblés sur les parcours authentification, événements, matching, permissions et erreurs MariaDB afin de compléter la couverture de bout en bout existante.",
+  "scoring": { "impact": 4, "riskReduction": 4, "confidence": 4, "effort": 4, "score": 20 },
+  "delivery": { "estimatedCalendarDays": 5, "estimatedPersonDays": 4, "rollback": "Les tests sont ajoutitifs : retirer uniquement un test instable documenté, sans modifier les contrats applicatifs." },
+  "indicators": [
+    { "id": "critical-api-contracts", "label": "Contrats API critiques couverts", "unit": "percent", "baseline": 0, "target": 70, "direction": "increase", "measurement": "Part des contrats critiques listés dans le plan de test disposant d'un test automatisé dédié." }
+  ],
+  "feedbackInputs": [
+    { "kind": "operational", "reference": "spity/package.json", "summary": "Les tests Jest, MariaDB et Playwright sont déjà intégrés à la CI ; les route handlers demandent une couverture de contrat plus fine.", "declaredAt": "2026-08-13T09:05:00.000+02:00" }
+  ],
+  "decision": { "selected": "Préparer le lot après l'observabilité persistante.", "rationale": "Le risque de régression est réduit sans changer les fonctionnalités exposées.", "ownerRole": "product-owner", "reviewerRole": "maintainer", "decidedAt": "2026-08-13T09:20:00.000+02:00" },
+  "history": [
+    { "at": "2026-08-13T09:05:00.000+02:00", "to": "proposed", "actorRole": "maintainer", "reason": "Couverture de contrat à renforcer malgré la qualité globale." },
+    { "at": "2026-08-13T09:20:00.000+02:00", "to": "approved", "actorRole": "product-owner", "reason": "Deuxième priorité, compatible avec la cadence de maintenance." }
+  ],
+  "evidence": [
+    { "kind": "repository-path", "value": "spity/package.json" },
+    { "kind": "repository-path", "value": ".github/workflows/ci.yml" }
+  ]
+}

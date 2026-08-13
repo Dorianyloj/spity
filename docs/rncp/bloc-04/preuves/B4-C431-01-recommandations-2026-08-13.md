@@ -1,37 +1,28 @@
-# B4-C431-01 - Recommandations d'amélioration
+# B4-C431-01 - Revue initiale des améliorations
 
-## Méthode
+## Méthode reprise dans le registre
 
-Les propositions sont notées sur 5 selon l'impact utilisateur, la réduction du risque et l'effort. La priorité favorise l'impact et la réduction du risque, puis pénalise l'effort : `score = impact + risque réduit - effort`.
+La revue initiale devient le backlog versionné `spity/improvements/`. La formule contrôlée est :
 
-| Priorité | Recommandation | Impact | Risque réduit | Effort | Score | Délai | Coût estimé | Gain mesurable |
-| --- | --- | ---: | ---: | ---: | ---: | --- | --- | --- |
-| 1 | Ajouter métriques persistantes et tableau de bord | 5 | 5 | 3 | 7 | 3 jours | 2 à 3 j.h puis 0,5 j.h/mois | MTTD inférieur à 15 min, disponibilité et latence mensuelles démontrables. |
-| 2 | Promouvoir une release alignée avec `main` | 5 | 5 | 2 | 8 | 1 à 2 jours | 1 j.h hors fenêtre de surveillance | Supprimer l'écart de 19 commits et exposer version/SHA exacts. |
-| 3 | Porter la couverture des API critiques à 70 % | 4 | 4 | 4 | 4 | 5 jours | 3 à 5 j.h | Réduire les régressions auth, événements, matching et migrations. |
-| 4 | Industrialiser le support et les retours terrain | 4 | 3 | 2 | 5 | 2 jours | 1,5 j.h puis 0,25 j.h/semaine | 100 % des tickets qualifiés avec version, reproduction et réponse. |
-| 5 | Réduire la dette des outils Drizzle/esbuild | 3 | 3 | 4 | 2 | Étude de 3 jours | 2 à 4 j.h selon migration | Supprimer les quatre alertes modérées de développement sans rétrogradation. |
+```text
+score = impact * 3 + risque réduit * 2 + confiance - effort
+```
 
-## Recommandation 1 - Observabilité persistante
+Chaque priorité conserve une cible mesurable, un coût, un délai, un responsable, une décision et un retour arrière. Le contrôleur refuse désormais un score erroné, un indicateur sans cible, une priorité contraire au score ou une donnée personnelle dans un retour.
 
-Ajouter un collecteur de métriques ou un service d'uptime avec rétention, puis un tableau de bord : disponibilité, p50/p95 de latence, erreurs HTTP, saturation mémoire/CPU, espace disque MariaDB et échecs de tâches. Conserver la sonde GitHub comme contrôle externe.
+| Priorité | Amélioration | Score | Délai | Coût | Gain mesurable | Décision |
+| --- | --- | ---: | --- | --- | --- | --- |
+| 1 | Conserver métriques et tableau de bord | 26 | 3 jours | 2,5 j.h | 95 % de fenêtres avec p95 et disponibilité mesurables | Approuvée |
+| 2 | Étendre les contrats API critiques | 20 | 5 jours | 4 j.h | 70 % des contrats critiques avec test dédié | Approuvée |
+| 3 | Qualifier les retours produit anonymisés | 19 | 2 jours | 1,5 j.h | 100 % des futurs retours avec zone, signal et bénéfice | Approuvée |
+| 4 | Qualifier l'outillage Drizzle | 13 | 3 jours d'étude | 3 j.h | 0 alerte d'outillage non qualifiée | En étude |
 
-## Recommandation 2 - Release alignée
+## Sources et limites honnêtes
 
-Préparer `v0.1.1`, vérifier sauvegarde, migrations, digests et smoke test, puis promouvoir avec le workflow existant. Le risque principal est une migration ou une configuration d'environnement ; le retour arrière documenté réduit ce risque.
+Les deux premières priorités sont fondées sur les politiques de supervision, les tests CI et la dette de couverture. La troisième s'appuie sur une mise en situation support explicitement fictive : elle sert à livrer l'instrumentation de collecte, pas à prétendre que des retours utilisateurs réels existent déjà. Le formulaire GitHub recueille dès maintenant les prochains signaux anonymisés.
 
-## Recommandation 3 - Tests des chemins critiques
+La promotion de release déjà renforcée par C4.2.2 n'est plus répétée comme recommandation active : elle est traitée par le correctif de vérification version/révision. La production n'est pas modifiée par cette revue.
 
-La couverture globale dépasse juste le seuil de 60 %, alors que plusieurs route handlers restent à 0 % Jest et sont surtout couverts en intégration. Ajouter des tests de contrat ciblés sur authentification, permissions, événements, matching et erreurs MariaDB.
+## Revue et décision
 
-## Recommandation 4 - Support terrain
-
-Utiliser le formulaire support, mesurer accusé de réception, délai de qualification, délai de résolution et réouverture. Une revue mensuelle transforme les retours récurrents en backlog produit.
-
-## Recommandation 5 - Dette Drizzle
-
-Tester une version amont de Drizzle Kit sur une branche dédiée avec génération et migration d'une base jetable. Ne jamais appliquer la rétrogradation proposée automatiquement sans comparer le schéma et les migrations.
-
-## Arbitrage
-
-Les priorités 1 et 2 apportent le plus grand gain opérationnel. La priorité 2 exige une autorisation explicite de déploiement ; elle reste donc préparée mais non exécutée dans ce dossier. Les recommandations sont réalisables sans refonte de l'application.
+Le product owner arbitre une fois par mois avec le mainteneur. Une amélioration peut être approuvée, lancée, différée, rejetée ou clôturée seulement avec une mesure vérifiée. Les actions réversibles restent privilégiées : désactivation du collecteur, retrait d'un test instable documenté, retour du formulaire ou abandon d'une branche d'étude. Aucune migration ni mise à jour forcée n'est autorisée par cette seule priorisation.

@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "criterion": "C4.3.1",
+  "executedAt": "2026-08-13T09:13:36.162Z",
+  "repositoryRevision": "392e36c17e81fc850164f2b64e214012be574297",
+  "safety": "In-memory review only. No user account, production endpoint, database, external issue or LXC was used.",
+  "objective": "Verify a measurable prioritized improvement backlog, reject a formula mismatch, and reject personal data in a feedback source.",
+  "result": "passed",
+  "valid": {
+    "schemaVersion": 1,
+    "checkedAt": "2026-08-13T09:13:36.158Z",
+    "compliant": true,
+    "recordCount": 4,
+    "statusCounts": {
+      "proposed": 0,
+      "under-review": 1,
+      "approved": 3,
+      "in-progress": 0,
+      "validating": 0,
+      "completed": 0,
+      "deferred": 0,
+      "rejected": 0
+    },
+    "errors": [],
+    "records": [
+      {
+        "id": "SPITY-IMP-2026-0001",
+        "priority": 1,
+        "score": 26,
+        "status": "approved"
+      },
+      {
+        "id": "SPITY-IMP-2026-0002",
+        "priority": 2,
+        "score": 20,
+        "status": "approved"
+      },
+      {
+        "id": "SPITY-IMP-2026-0003",
+        "priority": 3,
+        "score": 19,
+        "status": "approved"
+      },
+      {
+        "id": "SPITY-IMP-2026-0004",
+        "priority": 4,
+        "score": 13,
+        "status": "under-review"
+      }
+    ]
+  },
+  "invalidScore": {
+    "schemaVersion": 1,
+    "checkedAt": "2026-08-13T09:13:36.160Z",
+    "compliant": false,
+    "recordCount": 4,
+    "statusCounts": {
+      "proposed": 0,
+      "under-review": 1,
+      "approved": 3,
+      "in-progress": 0,
+      "validating": 0,
+      "completed": 0,
+      "deferred": 0,
+      "rejected": 0
+    },
+    "errors": [
+      {
+        "code": "score-mismatch",
+        "path": "$.scoring.score",
+        "message": "Le score doit valoir 26 selon la formule versionnée.",
+        "recordId": "SPITY-IMP-2026-0001"
+      },
+      {
+        "code": "priority-order-mismatch",
+        "path": "$.priority",
+        "message": "La priorité 1 est attendue selon le score et l’effort.",
+        "recordId": "SPITY-IMP-2026-0002"
+      },
+      {
+        "code": "priority-order-mismatch",
+        "path": "$.priority",
+        "message": "La priorité 2 est attendue selon le score et l’effort.",
+        "recordId": "SPITY-IMP-2026-0003"
+      },
+      {
+        "code": "priority-order-mismatch",
+        "path": "$.priority",
+        "message": "La priorité 3 est attendue selon le score et l’effort.",
+        "recordId": "SPITY-IMP-2026-0004"
+      },
+      {
+        "code": "priority-order-mismatch",
+        "path": "$.priority",
+        "message": "La priorité 4 est attendue selon le score et l’effort.",
+        "recordId": "SPITY-IMP-2026-0001"
+      }
+    ],
+    "records": [
+      {
+        "id": "SPITY-IMP-2026-0001",
+        "priority": 1,
+        "score": 1,
+        "status": "approved"
+      },
+      {
+        "id": "SPITY-IMP-2026-0002",
+        "priority": 2,
+        "score": 20,
+        "status": "approved"
+      },
+      {
+        "id": "SPITY-IMP-2026-0003",
+        "priority": 3,
+        "score": 19,
+        "status": "approved"
+      },
+      {
+        "id": "SPITY-IMP-2026-0004",
+        "priority": 4,
+        "score": 13,
+        "status": "under-review"
+      }
+    ]
+  },
+  "sensitiveFeedback": {
+    "schemaVersion": 1,
+    "checkedAt": "2026-08-13T09:13:36.162Z",
+    "compliant": false,
+    "recordCount": 4,
+    "statusCounts": {
+      "proposed": 0,
+      "under-review": 1,
+      "approved": 3,
+      "in-progress": 0,
+      "validating": 0,
+      "completed": 0,
+      "deferred": 0,
+      "rejected": 0
+    },
+    "errors": [
+      {
+        "code": "sensitive-data",
+        "path": "$.feedbackInputs[0].summary",
+        "message": "Contenu interdit détecté (email-address).",
+        "recordId": "SPITY-IMP-2026-0003"
+      }
+    ],
+    "records": [
+      {
+        "id": "SPITY-IMP-2026-0001",
+        "priority": 1,
+        "score": 26,
+        "status": "approved"
+      },
+      {
+        "id": "SPITY-IMP-2026-0002",
+        "priority": 2,
+        "score": 20,
+        "status": "approved"
+      },
+      {
+        "id": "SPITY-IMP-2026-0003",
+        "priority": 3,
+        "score": 19,
+        "status": "approved"
+      },
+      {
+        "id": "SPITY-IMP-2026-0004",
+        "priority": 4,
+        "score": 13,
+        "status": "under-review"
+      }
+    ]
+  }
+}

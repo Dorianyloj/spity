@@ -25,7 +25,7 @@ Spity dispose d'une chaîne de maintenance reproductible : Dependabot surveille 
 Le 13 août 2026, l'état vérifié est le suivant :
 
 - 0 vulnérabilité de production et 0 alerte haute/critique dans l'audit complet après mise à jour des outils ;
-- 152 tests Jest, 22 tests de maintenance, 11 scénarios MariaDB et 6 recettes Playwright ;
+- 152 tests Jest, 28 tests de maintenance, 11 scénarios MariaDB et 6 recettes Playwright ;
 - 10 pages authentifiées sur 10 à 100 % Lighthouse accessibilité ;
 - CI complète verte sur `e3784b7` ;
 - 29 exécutions de supervision historisées au moment de la collecte, avec production `ok` ;
@@ -42,7 +42,7 @@ La dérive n'a pas été corrigée par un déploiement non autorisé. Elle est t
 | C4.1.2 | Supervision adaptée, sondes, critères qualité/performance, disponibilité | Politique versionnée, contrôle 15 min, qualification S1/S2/S3, artefacts 90 jours, incident/rétablissement unique et SLO 30 jours avec garde de couverture | `spity/OBSERVABILITY.md`, C412-01 à C412-04 | Industrialisé et vérifié |
 | C4.2.1 | Collecte structurée, fiche reproductible, analyse et préconisations | Registre versionné, machine à états, confidentialité contrôlée, formulaires, CI dédiée et deux anomalies réelles | `spity/INCIDENT_MANAGEMENT.md`, C421-01 à C421-04 | Industrialisé et vérifié |
 | C4.2.2 | Correctif décrit utilisant intégration/déploiement continu | Contrôle de promotion version/révision, staging CI, candidate de release, rapport conservé et exercice reproductible | `spity/RELEASE_VERIFICATION.md`, C422-01 à C422-03 | Industrialisé et vérifié |
-| C4.3.1 | Recommandations réalistes, argumentées, coûts/délais/gains | Cinq axes notés et chiffrés, priorisation et risques | C431-01 | Base de pilotage à approfondir |
+| C4.3.1 | Recommandations réalistes, argumentées, coûts/délais/gains | Registre mesurable, indicateurs, coûts/délais, retours qualifiés, revue mensuelle et CI dédiée | `spity/IMPROVEMENT_MANAGEMENT.md`, C431-01 à C431-03 | Industrialisé et vérifié |
 | C4.3.2 | Journal des versions et correctifs déployés | Release v0.1.0, instance jury 0.1.0-jury, SHA et règle de tenue | C432-01, `CHANGELOG.md` | Base fonctionnelle à approfondir |
 | C4.3.3 | Problème résolu avec contexte, résolution et contributions | Mise en situation fictive support/mainteneur fondée sur une anomalie technique réelle | `spity/SUPPORT.md`, C433-01 | Base fonctionnelle à approfondir |
 
@@ -148,11 +148,23 @@ Le retour arrière remet le tag d'image immuable précédent, relance le même c
 
 ## 8. C4.3.1 - Proposer des améliorations
 
-Cinq recommandations sont chiffrées dans C431-01 : observabilité persistante, release alignée, couverture des API critiques, industrialisation du support et réduction de la dette Drizzle/esbuild.
+### 8.1 Backlog mesurable et arbitrage
 
-La priorité opérationnelle est double : ajouter une rétention de métriques pour mesurer le service, puis promouvoir une release alignée avec `main`. Les gains attendus sont un MTTD inférieur à 15 minutes, une disponibilité mensuelle démontrable et la suppression de l'écart de 19 commits. Le coût initial est estimé à 3 à 5 jours.homme pour l'observabilité et 1 jour.homme pour la release hors surveillance.
+Le backlog `spity/improvements/` remplace la simple liste de recommandations par quatre fiches versionnées. Chaque fiche lie une source, un impact, une réduction de risque, une confiance, un effort, un coût en jours.homme, un délai, un rollback et des indicateurs de référence/cible. La formule `impact * 3 + risque réduit * 2 + confiance - effort` classe les priorités actives et le contrôleur refuse un ordre contradictoire.
 
-Les propositions restent adaptées au projet : aucune refonte, un déploiement seulement avec autorisation, et une dette d'outillage traitée sur branche dédiée.
+La priorité 1 livre des métriques persistantes avec une couverture p95 et disponibilité de 95 % ; la priorité 2 vise 70 % des contrats API critiques testés ; la priorité 3 permet de qualifier 100 % des futurs retours par zone, type de signal et bénéfice attendu ; la priorité 4 reste une étude Drizzle séparée, sans modification du lockfile ni rétrogradation automatique.
+
+### 8.2 Indicateurs et retours utilisateurs
+
+Les signaux opérationnels proviennent de la politique de supervision, des preuves CI et de la politique de dépendances. La seule source de retour non opérationnelle disponible est une simulation support explicitement déclarée : elle est utilisée pour concevoir la collecte, jamais comme un avis utilisateur réel. Le formulaire support collecte désormais la zone fonctionnelle, le type de signal et le résultat attendu, en plus du contexte déjà anonymisé.
+
+Une source de retour contenant un e-mail, une adresse privée, un secret ou un jeton est refusée. L'exercice C431-03 vérifie le backlog sain, le refus d'un score volontairement erroné et le refus d'une adresse e-mail simulée. Il s'exécute uniquement en mémoire.
+
+### 8.3 Cadence, responsabilité et décision
+
+Chaque premier jour du mois, le workflow `Improvement review` valide le backlog, exécute les tests dédiés et conserve un rapport 90 jours. Le product owner arbitre priorité, coût et délai ; le mainteneur valide indicateurs, faisabilité et retour arrière ; le support ou pilote qualifie le bénéfice attendu. Une fiche ne peut être clôturée qu'avec un résultat mesuré : aucune recommandation approuvée n'est présentée comme déjà réalisée.
+
+Cette boucle reste réaliste pour Spity : elle ne déclenche ni déploiement ni refonte, et elle laisse la promotion de production soumise à l'autorisation déjà définie par C4.2.2.
 
 ## 9. C4.3.2 - Établir le journal des versions
 
@@ -180,7 +192,7 @@ Les actions destructives restent interdites dans les procédures courantes : auc
 
 ## 12. Conclusion
 
-Les sept compétences disposent désormais d'une base documentée, de sources exécutables, d'états publics figés ou d'une mise en situation fictive déclarée. C4.1.1, C4.1.2, C4.2.1 et C4.2.2 franchissent la définition renforcée de terminé : mécanisme réel, automatisation, cas d'échec testés, preuves reproductibles et exploitation décrite. Les trois suivantes restent volontairement qualifiées comme bases à approfondir une par une.
+Les sept compétences disposent désormais d'une base documentée, de sources exécutables, d'états publics figés ou d'une mise en situation fictive déclarée. C4.1.1, C4.1.2, C4.2.1, C4.2.2 et C4.3.1 franchissent la définition renforcée de terminé : mécanisme réel, automatisation, cas d'échec testés, preuves reproductibles et exploitation décrite. Les deux suivantes restent volontairement qualifiées comme bases à approfondir une par une.
 
 Le principal risque ouvert n'est pas masqué : la production est saine mais en retard sur `main`. La prochaine action opérationnelle est une release versionnée autorisée, pas un déploiement improvisé. Cette transparence garantit que le dossier décrit l'état réel du logiciel.
 
@@ -207,8 +219,11 @@ Le principal risque ouvert n'est pas masqué : la production est saine mais en r
 | A12b | C4.2.2 | `preuves/B4-C422-03-exercice-verification-deploiement-2026-08-13.json` |
 | A12c | C4.2.2 | `spity/RELEASE_VERIFICATION.md` et `scripts/verify-deployment.mjs` |
 | A13 | C4.3.1 | `preuves/B4-C431-01-recommandations-2026-08-13.md` |
+| A13b | C4.3.1 | `preuves/B4-C431-02-registre-ameliorations-2026-08-13.json` |
+| A13c | C4.3.1 | `preuves/B4-C431-03-exercice-revue-ameliorations-2026-08-13.json` |
+| A13d | C4.3.1 | `spity/IMPROVEMENT_MANAGEMENT.md` et `spity/improvements/` |
 | A14 | C4.3.2 | `preuves/B4-C432-01-journal-versions-deployees-2026-08-13.md` |
 | A15 | C4.3.3 | `spity/SUPPORT.md` et `preuves/B4-C433-01-collaboration-support-2026-08-13.md` |
 | A16 | Intégrité | `preuves/MANIFEST.sha256` |
 
-Les sources complémentaires sont `.github/workflows/ci.yml`, `release.yml`, `production-monitoring.yml`, `availability-slo-report.yml`, `incident-registry.yml`, `dependency-maintenance.yml`, `dependency-review.yml`, `dependabot.yml`, les formulaires d'issue, `CHANGELOG.md`, `spity/dependency-policy.json`, `spity/monitoring-policy.json`, `spity/incident-policy.json`, les scripts de sonde/SLO/registre/promotion, `spity/DEPLOYMENT.md`, `spity/RELEASE_VERIFICATION.md` et le référentiel officiel archivé.
+Les sources complémentaires sont `.github/workflows/ci.yml`, `release.yml`, `production-monitoring.yml`, `availability-slo-report.yml`, `incident-registry.yml`, `improvement-review.yml`, `dependency-maintenance.yml`, `dependency-review.yml`, `dependabot.yml`, les formulaires d'issue, `CHANGELOG.md`, `spity/dependency-policy.json`, `spity/monitoring-policy.json`, `spity/incident-policy.json`, `spity/improvement-policy.json`, les scripts de sonde/SLO/registre/promotion/amélioration, `spity/DEPLOYMENT.md`, `spity/RELEASE_VERIFICATION.md`, `spity/IMPROVEMENT_MANAGEMENT.md` et le référentiel officiel archivé.

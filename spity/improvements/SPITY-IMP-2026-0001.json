@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "SPITY-IMP-2026-0001",
+  "title": "Conserver les métriques de disponibilité et de latence",
+  "status": "approved",
+  "priority": 1,
+  "description": "Ajouter une rétention de métriques et un tableau de bord afin de mesurer la disponibilité, le p95 de latence, les erreurs et la couverture des sondes sur une période exploitable.",
+  "scoring": { "impact": 5, "riskReduction": 5, "confidence": 4, "effort": 3, "score": 26 },
+  "delivery": { "estimatedCalendarDays": 3, "estimatedPersonDays": 2.5, "rollback": "Conserver la sonde GitHub actuelle et désactiver le collecteur additionnel sans modifier le service." },
+  "indicators": [
+    { "id": "latency-p95-coverage", "label": "Couverture de mesure p95", "unit": "percent", "baseline": 0, "target": 95, "direction": "increase", "measurement": "Part des fenêtres mensuelles disposant d'un p95 de latence exploitable." },
+    { "id": "availability-evidence", "label": "Fenêtres mensuelles avec preuve de disponibilité", "unit": "percent", "baseline": 0, "target": 95, "direction": "increase", "measurement": "Part des fenêtres mensuelles répondant à la couverture minimale définie par la politique de supervision." }
+  ],
+  "feedbackInputs": [
+    { "kind": "operational", "reference": "spity/monitoring-policy.json", "summary": "La politique actuelle contrôle la santé publique mais documente l'absence de métriques persistantes p95 et de ressources système.", "declaredAt": "2026-08-13T09:00:00.000+02:00" }
+  ],
+  "decision": { "selected": "Planifier dans la prochaine itération de maintenance.", "rationale": "Le gain apporte une mesure durable des objectifs déjà définis sans refonte applicative.", "ownerRole": "product-owner", "reviewerRole": "maintainer", "decidedAt": "2026-08-13T09:15:00.000+02:00" },
+  "history": [
+    { "at": "2026-08-13T09:00:00.000+02:00", "to": "proposed", "actorRole": "maintainer", "reason": "Limite d'observabilité constatée dans la politique versionnée." },
+    { "at": "2026-08-13T09:15:00.000+02:00", "to": "approved", "actorRole": "product-owner", "reason": "Priorité maximale pour rendre les SLO mesurables." }
+  ],
+  "evidence": [
+    { "kind": "repository-path", "value": "spity/monitoring-policy.json" },
+    { "kind": "repository-path", "value": "docs/rncp/bloc-04/preuves/B4-C412-04-slo-supervision-2026-08-13.json" }
+  ]
+}

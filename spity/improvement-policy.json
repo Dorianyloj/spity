@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "identifier": {
+    "pattern": "^SPITY-IMP-[0-9]{4}-[0-9]{4}$",
+    "description": "Identifiant stable d'une amélioration priorisée."
+  },
+  "review": {
+    "cadence": "monthly",
+    "ownerRole": "product-owner",
+    "technicalReviewerRole": "maintainer",
+    "decisionRule": "Une amélioration n'est approuvée qu'avec ses indicateurs, son coût, son délai, ses sources et son retour arrière."
+  },
+  "scoring": {
+    "range": { "minimum": 1, "maximum": 5 },
+    "formula": "impact * 3 + riskReduction * 2 + confidence - effort",
+    "priorityRule": "Les éléments non terminés sont classés par score décroissant, puis par effort croissant."
+  },
+  "statuses": ["proposed", "under-review", "approved", "in-progress", "validating", "completed", "deferred", "rejected"],
+  "feedback": {
+    "allowedKinds": ["operational", "user-feedback", "controlled-simulation"],
+    "simulationRule": "Toute source simulée doit l'indiquer explicitement et ne peut pas être présentée comme un retour utilisateur réel.",
+    "privacyRule": "Aucun identifiant personnel, secret, jeton, adresse e-mail ou adresse IP privée n'est accepté."
+  }
+}

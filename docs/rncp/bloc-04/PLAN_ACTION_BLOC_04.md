@@ -16,7 +16,7 @@ Le Bloc 4 est développé comme un chantier produit, pas comme une simple rédac
 | 2 | C4.1.2 - Superviser et alerter | Politique versionnée, sondes qualifiées, alerte/rétablissement uniques, SLO 30 jours, couverture et exercice local | **Industrialisée et vérifiée** |
 | 3 | C4.2.1 - Consigner les anomalies | Registre JSON validé, cycle de vie, cause racine, confidentialité, formulaires et CI dédiée | **Industrialisée et vérifiée** |
 | 4 | C4.2.2 - Créer et déployer un correctif | Correctif de contrôle de promotion, CI/release, artefacts de vérification et rollback documenté | **Industrialisée et vérifiée** |
-| 5 | C4.3.1 - Proposer des améliorations | Backlog chiffré et priorisé | Base documentaire à transformer en boucle de pilotage |
+| 5 | C4.3.1 - Proposer des améliorations | Registre mesurable, revue mensuelle, signaux qualifiés et CI dédiée | **Industrialisée et vérifiée** |
 | 6 | C4.3.2 - Tenir le journal des versions | Changelog, release et version/révision de santé | Base fonctionnelle à approfondir |
 | 7 | C4.3.3 - Collaborer avec le support | Formulaire support et exercice fictif déclaré | Base fonctionnelle à approfondir |
 
@@ -74,7 +74,16 @@ Les limites restantes sont explicites : l’historique de latence P95, les resso
 - [x] exercice local en mémoire : candidat conforme accepté, version et révision erronées refusées ;
 - [x] 22 tests de maintenance couvrent la santé, les incidents, le SLO et les décisions de promotion.
 
-La prochaine étape est C4.3.1 : utiliser les indicateurs et les retours pour transformer les recommandations en décisions priorisées et mesurables.
+## C4.3.1 - Résultat obtenu
+
+- [x] registre versionné de quatre améliorations avec identifiant, statut, priorisation et décision attribuée ;
+- [x] formule de score exécutable, ordre de priorité contrôlé et refus des doublons ;
+- [x] coût, délai, retour arrière et indicateurs de référence/cible obligatoires pour chaque proposition ;
+- [x] signaux opérationnels et retour support simulé clairement déclaré, sans inventer de données utilisateur réelles ;
+- [x] formulaire support enrichi pour qualifier les prochains retours anonymisés par zone, type de signal et bénéfice attendu ;
+- [x] workflow mensuel, artefact 90 jours, exercice local et 28 tests de maintenance couvrant les décisions de pilotage.
+
+La prochaine étape est C4.3.2 : relier les livraisons réellement observées à un journal de versions immuable et vérifiable.
 
 ## Règle de présentation
 

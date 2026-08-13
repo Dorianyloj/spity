@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "criterion": "C4.3.1",
+  "capturedAt": "2026-08-13T09:13:36.840Z",
+  "repositoryRevision": "392e36c17e81fc850164f2b64e214012be574297",
+  "policy": {
+    "cadence": "monthly",
+    "scoreFormula": "impact * 3 + riskReduction * 2 + confidence - effort",
+    "statuses": [
+      "proposed",
+      "under-review",
+      "approved",
+      "in-progress",
+      "validating",
+      "completed",
+      "deferred",
+      "rejected"
+    ]
+  },
+  "audit": {
+    "schemaVersion": 1,
+    "checkedAt": "2026-08-13T09:13:36.839Z",
+    "compliant": true,
+    "recordCount": 4,
+    "statusCounts": {
+      "proposed": 0,
+      "under-review": 1,
+      "approved": 3,
+      "in-progress": 0,
+      "validating": 0,
+      "completed": 0,
+      "deferred": 0,
+      "rejected": 0
+    },
+    "errors": [],
+    "records": [
+      {
+        "id": "SPITY-IMP-2026-0001",
+        "priority": 1,
+        "score": 26,
+        "status": "approved"
+      },
+      {
+        "id": "SPITY-IMP-2026-0002",
+        "priority": 2,
+        "score": 20,
+        "status": "approved"
+      },
+      {
+        "id": "SPITY-IMP-2026-0003",
+        "priority": 3,
+        "score": 19,
+        "status": "approved"
+      },
+      {
+        "id": "SPITY-IMP-2026-0004",
+        "priority": 4,
+        "score": 13,
+        "status": "under-review"
+      }
+    ]
+  }
+}

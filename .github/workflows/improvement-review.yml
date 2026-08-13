@@ -1,0 +1,72 @@
+name: Improvement review
+
+on:
+  pull_request:
+    paths:
+      - 'spity/improvement-policy.json'
+      - 'spity/improvement-schema.json'
+      - 'spity/improvements/**'
+      - 'spity/scripts/check-improvement-backlog.mjs'
+      - 'spity/scripts/capture-improvement-backlog-evidence.mjs'
+      - 'spity/tests/maintenance/improvement-backlog.test.mjs'
+      - '.github/workflows/improvement-review.yml'
+  push:
+    branches: [develop, main]
+    paths:
+      - 'spity/improvement-policy.json'
+      - 'spity/improvement-schema.json'
+      - 'spity/improvements/**'
+      - 'spity/scripts/check-improvement-backlog.mjs'
+      - 'spity/scripts/capture-improvement-backlog-evidence.mjs'
+      - 'spity/tests/maintenance/improvement-backlog.test.mjs'
+      - '.github/workflows/improvement-review.yml'
+  schedule:
+    - cron: '0 9 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  review:
+    name: Validate prioritized improvements
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: spity
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: spity/.nvmrc
+          cache: npm
+          cache-dependency-path: spity/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Validate improvement backlog
+        env:
+          IMPROVEMENT_REPORT_PATH: .improvements/backlog-report.json
+        run: npm run improvements:check
+
+      - name: Run maintenance validation
+        run: node --test --test-concurrency=1 tests/maintenance/improvement-backlog.test.mjs
+
+      - name: Publish review summary
+        run: |
+          node -e 'const report=require("./.improvements/backlog-report.json"); console.log(`## Revue des améliorations\n\n- Éléments : ${report.recordCount}\n- Conformité : ${report.compliant ? "oui" : "non"}\n- Statuts : ${Object.entries(report.statusCounts).filter(([, count]) => count).map(([status, count]) => `${status}: ${count}`).join(", ")}`)' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload improvement review evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: improvements-${{ github.sha }}
+          path: spity/.improvements/backlog-report.json
+          if-no-files-found: warn
+          retention-days: 90

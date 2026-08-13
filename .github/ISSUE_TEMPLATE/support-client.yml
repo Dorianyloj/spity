@@ -39,6 +39,39 @@ body:
       description: Distinguer les faits observés, la fréquence et l'impact métier.
     validations:
       required: true
+  - type: dropdown
+    id: product_area
+    attributes:
+      label: Zone fonctionnelle concernée
+      options:
+        - Authentification et profil
+        - Événements
+        - Matching
+        - Lieux et clubs
+        - Publication et commentaires
+        - Performance ou accessibilité
+        - Autre zone à préciser dans le contexte
+    validations:
+      required: true
+  - type: dropdown
+    id: signal_type
+    attributes:
+      label: Type de signal produit
+      options:
+        - Anomalie bloquante
+        - Anomalie avec contournement
+        - Demande d'amélioration
+        - Difficulté de compréhension
+        - Performance ou accessibilité
+    validations:
+      required: true
+  - type: textarea
+    id: expected_outcome
+    attributes:
+      label: Résultat attendu ou amélioration souhaitée
+      description: Décrire le bénéfice attendu de manière anonymisée, sans données personnelles.
+    validations:
+      required: true
   - type: textarea
     id: reproduction
     attributes:

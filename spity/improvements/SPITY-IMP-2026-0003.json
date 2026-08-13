@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "SPITY-IMP-2026-0003",
+  "title": "Transformer les retours support en signaux produit anonymisés",
+  "status": "approved",
+  "priority": 3,
+  "description": "Compléter le formulaire support avec la zone fonctionnelle, le type de signal et le résultat attendu afin de repérer les retours récurrents lors de la revue mensuelle.",
+  "scoring": { "impact": 4, "riskReduction": 3, "confidence": 3, "effort": 2, "score": 19 },
+  "delivery": { "estimatedCalendarDays": 2, "estimatedPersonDays": 1.5, "rollback": "Le formulaire peut revenir à sa version précédente sans perte de donnée car aucune soumission n'est stockée dans le dépôt." },
+  "indicators": [
+    { "id": "qualified-feedback", "label": "Retours avec signal produit qualifié", "unit": "percent", "baseline": 0, "target": 100, "direction": "increase", "measurement": "Part des futurs retours support contenant zone, type de signal, impact et résultat attendu anonymisés." }
+  ],
+  "feedbackInputs": [
+    { "kind": "controlled-simulation", "reference": "docs/rncp/bloc-04/preuves/B4-C433-01-collaboration-support-2026-08-13.md", "summary": "Simulation déclarée : le support a besoin du contexte initial et du résultat attendu pour rendre un rendu conditionnel reproductible.", "disclosure": "Cette source est une mise en situation explicitement fictive et ne représente pas un avis utilisateur réel.", "declaredAt": "2026-08-13T09:10:00.000+02:00" }
+  ],
+  "decision": { "selected": "Mettre à jour le formulaire puis mesurer les futurs retours réels anonymisés.", "rationale": "L'instrumentation peut être livrée maintenant, sans prétendre disposer d'un historique utilisateur absent.", "ownerRole": "product-owner", "reviewerRole": "maintainer", "decidedAt": "2026-08-13T09:25:00.000+02:00" },
+  "history": [
+    { "at": "2026-08-13T09:10:00.000+02:00", "to": "proposed", "actorRole": "support-level-1", "reason": "Le scénario support identifie un besoin de qualification produit plus explicite." },
+    { "at": "2026-08-13T09:25:00.000+02:00", "to": "approved", "actorRole": "product-owner", "reason": "La collecte reste anonymisée et la source fictive est clairement identifiée." }
+  ],
+  "evidence": [
+    { "kind": "repository-path", "value": "spity/SUPPORT.md" },
+    { "kind": "repository-path", "value": ".github/ISSUE_TEMPLATE/support-client.yml" }
+  ]
+}

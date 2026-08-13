@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Spity improvement backlog record",
+  "type": "object",
+  "required": ["schemaVersion", "id", "title", "status", "priority", "scoring", "delivery", "indicators", "feedbackInputs", "decision", "history", "evidence"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "pattern": "^SPITY-IMP-[0-9]{4}-[0-9]{4}$" },
+    "title": { "type": "string", "minLength": 8 },
+    "status": { "type": "string" },
+    "priority": { "type": "integer", "minimum": 1 },
+    "scoring": { "type": "object" },
+    "delivery": { "type": "object" },
+    "indicators": { "type": "array", "minItems": 1 },
+    "feedbackInputs": { "type": "array", "minItems": 1 },
+    "decision": { "type": "object" },
+    "history": { "type": "array", "minItems": 1 },
+    "evidence": { "type": "array", "minItems": 1 }
+  }
+}
