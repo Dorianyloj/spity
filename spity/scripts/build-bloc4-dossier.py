@@ -15,6 +15,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import (
     BaseDocTemplate,
     Frame,
+    Flowable,
     Image,
     KeepTogether,
     ListFlowable,
@@ -197,6 +198,12 @@ h2 = ParagraphStyle(
     spaceAfter=5 * mm,
     keepWithNext=True,
 )
+h2_compact = ParagraphStyle(
+    "H2Compact",
+    parent=h2,
+    fontSize=14,
+    leading=18,
+)
 h3 = ParagraphStyle(
     "H3",
     parent=body,
@@ -298,14 +305,39 @@ class Bloc4Document(BaseDocTemplate):
         canvas.restoreState()
 
     def afterFlowable(self, flowable) -> None:
-        if isinstance(flowable, Paragraph) and flowable.style.name in {"H2", "H3"}:
-            level = 0 if flowable.style.name == "H2" else 1
+        if isinstance(flowable, Paragraph) and flowable.style.name in {"H2", "H2Compact", "H3"}:
+            level = 0 if flowable.style.name in {"H2", "H2Compact"} else 1
             text = flowable.getPlainText()
             key = f"heading-{self.heading_counter}"
             self.heading_counter += 1
             self.canv.bookmarkPage(key)
             self.canv.addOutlineEntry(text, key, level=level, closed=False)
             self.notify("TOCEntry", (level, text, self.page, key))
+
+
+class JuryPageChrome(Flowable):
+    """Redraw stable page markers for competency pages after a page break."""
+
+    def wrap(self, available_width: float, available_height: float) -> tuple[float, float]:
+        return 0, 0
+
+    def drawOn(self, canvas, x: float, y: float, _sW: float = 0) -> None:
+        page_number = canvas.getPageNumber()
+        if page_number == 1:
+            return
+
+        canvas.saveState()
+        width, height = A4
+        canvas.setStrokeColor(SPITY_BORDER)
+        canvas.line(18 * mm, height - 13 * mm, width - 18 * mm, height - 13 * mm)
+        canvas.setFont("Vera-Bold", 7.5)
+        canvas.setFillColor(SPITY_DARK)
+        canvas.drawString(18 * mm, height - 10 * mm, "SPITY - DOSSIER BLOC 4")
+        canvas.setFont("Vera", 7.5)
+        canvas.setFillColor(SPITY_MUTED)
+        canvas.drawRightString(width - 18 * mm, 9 * mm, f"Page {page_number}")
+        canvas.drawString(18 * mm, 9 * mm, "Expert en développement logiciel - 13 août 2026")
+        canvas.restoreState()
 
 
 def make_table(rows: list[list[str]], available_width: float) -> Table:
@@ -416,7 +448,12 @@ def parse_markdown(content: str, available_width: float) -> list:
             if seen_section:
                 story.append(PageBreak())
             seen_section = True
-            story.append(Paragraph(inline_markup(line[3:].strip()), h2))
+            heading = line[3:].strip()
+            heading = re.sub(r"(?<![A-Za-z0-9])(C4\.\d\.\d)(?![A-Za-z0-9])", r"[\1]", heading)
+            heading_style = h2_compact if heading.startswith("7. [C4.2.2]") else h2
+            if "[C4." in heading:
+                story.append(JuryPageChrome())
+            story.append(Paragraph(inline_markup(heading), heading_style))
             continue
 
         if line.startswith("### "):
