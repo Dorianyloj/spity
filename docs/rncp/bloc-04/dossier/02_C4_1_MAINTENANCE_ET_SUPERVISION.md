@@ -1,6 +1,6 @@
 # 02 — C4.1 : Maintenance et supervision
 
-Cette partie couvre les deux compétences préventives du Bloc 4 : garder les composants à jour et observer l'application de manière adaptée. Elles sont complémentaires : la première réduit le risque connu, la seconde détecte une dérive ou une indisponibilité en exploitation.
+Dans cette partie, j'explique comment je garde les composants à jour et comment je surveille l'application. Ces deux sujets se complètent : les mises à jour réduisent les risques connus, tandis que la supervision permet de repérer une dérive ou une indisponibilité.
 
 ## C4.1.1 — Gérer les mises à jour des dépendances
 
@@ -8,7 +8,7 @@ Cette partie couvre les deux compétences préventives du Bloc 4 : garder les co
 
 Le processus doit préciser la fréquence, le périmètre et le type de mises à jour. Il doit aussi démontrer que les changements sont qualifiés avant leur intégration.
 
-### Réponse mise en œuvre
+### Ce que j'ai mis en place
 
 Dependabot inspecte npm chaque lundi à 06:00 et les GitHub Actions à 06:30, en fuseau Europe/Paris. Une revue mensuelle complète cette cadence avec les versions disponibles, l'audit npm, les images et les notes de version.
 
@@ -40,7 +40,7 @@ Les preuves montrent la qualification d'un lot d'outillage et l'absence d'alerte
 
 La supervision doit être adaptée au service, définir des sondes et seuils pertinents, caractériser disponibilité et performance, puis signaler les incidents sans produire de faux positifs.
 
-### Réponse mise en œuvre
+### Ce que j'ai mis en place
 
 La route `/api/health` expose un état applicatif, la connexion MariaDB, la version et la révision sans révéler de secret. Une politique versionnée définit une sonde toutes les 15 minutes, un timeout de 15 secondes, deux tentatives et un seuil de latence de 3 secondes.
 
@@ -66,4 +66,4 @@ Le SLO porte sur 30 jours et 99,5 % de disponibilité. Seuls les runs planifiés
 
 ## À retenir pour l'entretien
 
-Le dispositif ne se limite pas à « surveiller si le site répond ». Il distingue l'indisponibilité, une rupture de contrat et une performance dégradée ; il conserve les rapports, évite les faux incidents liés à une période trop courte et relie une alerte à un cycle d'incident contrôlé.
+Je ne vérifie pas seulement que le site répond. Je distingue une indisponibilité, une réponse incomplète et une performance dégradée. Les rapports sont conservés et une période trop courte n'est pas transformée en incident.

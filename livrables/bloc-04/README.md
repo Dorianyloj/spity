@@ -1,10 +1,10 @@
 # Remise Bloc 4 — Spity
 
-Ce dossier est autonome : il contient uniquement ce qui doit être remis ou contrôlé par le jury.
+Ce dossier contient les deux fichiers utiles pour ma remise : le PDF final et son empreinte de contrôle.
 
 | Fichier | Rôle |
 | --- | --- |
-| [`dossier-bloc-04-spity.pdf`](dossier-bloc-04-spity.pdf) | Dossier final de 72 pages avec les preuves P1 à P8 et les annexes visuelles A18/A19 intégrées. |
+| [`dossier-bloc-04-spity.pdf`](dossier-bloc-04-spity.pdf) | Dossier final avec les preuves P1 à P8 et les annexes visuelles A18/A19 intégrées. |
 | [`dossier-bloc-04-spity.pdf.sha256`](dossier-bloc-04-spity.pdf.sha256) | Empreinte permettant de vérifier que le PDF n'a pas été modifié après sa génération. |
 
 ## Vérification rapide

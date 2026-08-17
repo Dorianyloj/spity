@@ -1,6 +1,6 @@
 # Preuves du Bloc 4
 
-Les fichiers de ce répertoire sont datés, anonymisés et reliés à un critère. Les fichiers JSON issus de sources publiques sont régénérés par `npm run bloc4:capture`. L'exercice local est régénéré par `npm run bloc4:exercise`.
+J'ai regroupé ici les fichiers utilisés comme preuves dans le dossier. Ils sont datés, anonymisés et reliés à une compétence. Les données publiques peuvent être recapturées avec `npm run bloc4:capture` et l'exercice local avec `npm run bloc4:exercise`.
 
 ## Captures visuelles de l'application
 
@@ -27,6 +27,6 @@ Le sous-répertoire [`captures/`](captures/) contient les écrans réels de dém
 - conserver la date, la source publique, le SHA Git et le critère ;
 - annoncer clairement une simulation ou une mise en situation fictive ;
 - ne pas figer une capture redondante quand un JSON ou une URL publique apporte une preuve plus vérifiable ;
-- mettre à jour le journal uniquement après un déploiement réellement observé.
-- exécuter `npm run bloc4:check` avant toute livraison du dossier ou du PDF.
+- mettre à jour le journal uniquement après un déploiement réellement observé ;
+- exécuter `npm run bloc4:check` avant toute livraison du dossier ou du PDF ;
 - exécuter `npm run bloc4:pdf:verify` pour vérifier l'intégrité du PDF remis.

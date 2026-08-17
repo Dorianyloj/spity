@@ -1,6 +1,6 @@
 # Dossier de remise — Bloc 4 Spity
 
-Ce dossier est la porte d'entrée de remise du Bloc 4 : **maintenir l'application logicielle en condition opérationnelle**. Il traduit les mécanismes réellement versionnés de Spity en une lecture claire pour le jury, sans remplacer les sources techniques ni les preuves datées.
+J'ai préparé ce dossier comme point d'entrée pour la remise du Bloc 4 : **maintenir l'application logicielle en condition opérationnelle**. Les documents suivent le déroulement de mon travail sur Spity et renvoient vers les sources ou les preuves lorsque le jury souhaite vérifier un point.
 
 ## Parcours recommandé
 
@@ -30,9 +30,9 @@ Ce dossier est la porte d'entrée de remise du Bloc 4 : **maintenir l'applicatio
 
 ## Ce que le dossier permet d'affirmer
 
-Chaque compétence est accompagnée d'une documentation d'exploitation, d'un mécanisme versionné, d'un contrôle reproductible et d'au moins une preuve datée. Les sept compétences sont contrôlées ensemble par `npm run bloc4:check`.
+Pour chaque compétence, je fournis une procédure, une mise en œuvre versionnée, une commande de contrôle et au moins une preuve datée. La commande `npm run bloc4:check` vérifie l'ensemble.
 
-Le dossier ne confond jamais une simulation, un staging validé et une promotion de production. En particulier, le cas de support est une mise en situation explicitement déclarée et l'instance de production observée est saine mais n'est pas présentée comme mise à jour par la seule réussite d'une CI.
+Je distingue une simulation, un staging validé et une mise en production. Le cas de support est une mise en situation déclarée. De même, je n'utilise pas la réussite d'une CI pour affirmer que la production a été mise à jour.
 
 ## Vérification rapide
 

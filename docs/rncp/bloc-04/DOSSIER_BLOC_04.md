@@ -14,17 +14,17 @@
 
 ## Déclaration de portée
 
-Ce dossier présente la maintenance de Spity, application Next.js 16 avec MariaDB, conteneurs Docker et GitHub Actions. Il couvre la gestion des dépendances, la supervision, la consignation et la correction des anomalies, les recommandations, le journal des versions et la collaboration support.
+J'ai réalisé ce dossier à partir du travail mené sur Spity, une application Next.js 16 reliée à MariaDB et déployable avec Docker et GitHub Actions. J'y présente la gestion des dépendances, la supervision, le traitement des anomalies, les correctifs, les pistes d'amélioration, le suivi des versions et la relation avec le support.
 
-Les preuves sont de trois natures : sources versionnées, états externes publics figés en JSON et mise en situation fictive autorisée par le référentiel. Les simulations sont toujours annoncées comme telles. Aucun incident réel, échange humain ou déploiement n'est inventé. Aucun LXC n'a été utilisé pour constituer le dossier.
+Je me suis appuyé sur trois types de preuves : les fichiers versionnés du projet, des états publics conservés en JSON et des mises en situation autorisées par le référentiel. Quand une situation est simulée, je l'indique directement. Je ne présente donc ni échange client ni déploiement fictif comme un fait réel. Aucun LXC n'a été utilisé pour constituer le dossier.
 
 > **Lecture de remise :** le répertoire [`dossier/`](dossier/) organise ce dossier, la revue finale, les commandes et les preuves pour une présentation progressive au jury. Le PDF à transmettre est isolé dans [`livrables/bloc-04/`](../../../livrables/bloc-04/).
 
 ## 1. Résumé exécutif
 
-Spity dispose d'une chaîne de maintenance reproductible : Dependabot surveille chaque semaine npm et GitHub Actions, la CI bloque lint, types, tests, audit, build, MariaDB, accessibilité, Lighthouse et recettes Playwright, tandis qu'une sonde externe vérifie la production. Les images de release sont immuables et associées à une version, une révision et un manifeste.
+Pour maintenir Spity, j'ai mis en place une chaîne de contrôles qui peut être rejouée. Dependabot surveille chaque semaine npm et GitHub Actions. La CI vérifie le lint, les types, les tests, les audits, le build, MariaDB, l'accessibilité, Lighthouse et les recettes Playwright. Une sonde séparée contrôle la production. Les images de release sont liées à une version, une révision et un manifeste.
 
-La revue finale locale du 17 août 2026 et les observations externes datées du 13 août établissent l'état suivant :
+Au moment de clôturer le dossier, le 17 août 2026, j'ai relevé les résultats suivants. Les observations de production citées ont été figées le 13 août :
 
 - 0 vulnérabilité de production et 0 alerte haute/critique dans l'audit complet après mise à jour des outils ;
 - 152 tests Jest, 47 tests de maintenance, 11 scénarios MariaDB et 6 recettes Playwright ;
@@ -34,27 +34,27 @@ La revue finale locale du 17 août 2026 et les observations externes datées du 
 - version observée en production : `0.1.0-jury`, révision `49c4ea0` ;
 - dérive de déploiement réelle consignée : au 17 août, la production reste 36 commits derrière `main`.
 
-La dérive n'a pas été corrigée par un déploiement non autorisé. Elle est transformée en action de release contrôlée, avec sauvegarde et retour arrière.
+Je n'ai pas déclenché un déploiement uniquement pour faire disparaître l'écart de révision. Je l'ai conservé comme action de release à traiter avec l'autorisation, la sauvegarde et le retour arrière prévus.
 
 ## 2. Correspondance avec le référentiel
 
 | Code compétence | Attendu principal | Réponse Spity | Preuves majeures | Statut |
 | --- | --- | --- | --- | --- |
-| C4.1.1 | Processus précis : fréquence, périmètre, type | Cadence hebdomadaire et mensuelle, politique exécutable, audit planifié, SBOM, revue PR et lot réel qualifié | `spity/MAINTENANCE.md`, C411-01 à C411-03 | Industrialisé et vérifié |
-| C4.1.2 | Supervision adaptée, sondes, critères qualité/performance, disponibilité | Politique versionnée, contrôle 15 min, qualification S1/S2/S3, artefacts 90 jours, incident/rétablissement unique, SLO 30 jours et validation des scripts d'alerte | `spity/OBSERVABILITY.md`, C412-01 à C412-05 | Industrialisé et vérifié |
-| C4.2.1 | Collecte structurée, fiche reproductible, analyse et préconisations | Registre versionné, machine à états, confidentialité contrôlée, formulaires, CI dédiée et deux anomalies réelles | `spity/INCIDENT_MANAGEMENT.md`, C421-01 à C421-04 | Industrialisé et vérifié |
-| C4.2.2 | Correctif décrit utilisant intégration/déploiement continu | Contrôle de promotion version/révision, staging CI, candidate de release, rapport conservé, exercice reproductible et staging vérifié | `spity/RELEASE_VERIFICATION.md`, C422-01 à C422-04 | Industrialisé et vérifié |
-| C4.3.1 | Recommandations réalistes, argumentées, coûts/délais/gains | Registre mesurable, indicateurs, coûts/délais, retours qualifiés, revue mensuelle et CI dédiée | `spity/IMPROVEMENT_MANAGEMENT.md`, C431-01 à C431-03 | Industrialisé et vérifié |
-| C4.3.2 | Journal des versions et correctifs déployés | Registre versionné, identité SemVer/SHA, correctifs documentés, preuve de santé et revue mensuelle | `spity/RELEASE_JOURNAL.md`, C432-01 à C432-03 | Industrialisé et vérifié |
-| C4.3.3 | Problème résolu avec contexte, résolution et contributions | Registre contrôlé de transmissions support/mainteneur, critères fonctionnels, expertise technique, confidentialité et validation simulée déclarée | `spity/SUPPORT.md`, C433-01 à C433-03 | Industrialisé et vérifié |
+| C4.1.1 | Processus précis : fréquence, périmètre, type | Cadence hebdomadaire et mensuelle, politique exécutable, audit planifié, SBOM, revue PR et lot réel qualifié | `spity/MAINTENANCE.md`, C411-01 à C411-03 | Mis en œuvre et vérifié |
+| C4.1.2 | Supervision adaptée, sondes, critères qualité/performance, disponibilité | Politique versionnée, contrôle 15 min, qualification S1/S2/S3, artefacts 90 jours, incident/rétablissement unique, SLO 30 jours et validation des scripts d'alerte | `spity/OBSERVABILITY.md`, C412-01 à C412-05 | Mis en œuvre et vérifié |
+| C4.2.1 | Collecte structurée, fiche reproductible, analyse et préconisations | Registre versionné, machine à états, confidentialité contrôlée, formulaires, CI dédiée et deux anomalies réelles | `spity/INCIDENT_MANAGEMENT.md`, C421-01 à C421-04 | Mis en œuvre et vérifié |
+| C4.2.2 | Correctif décrit utilisant intégration/déploiement continu | Contrôle de promotion version/révision, staging CI, candidate de release, rapport conservé, exercice reproductible et staging vérifié | `spity/RELEASE_VERIFICATION.md`, C422-01 à C422-04 | Mis en œuvre et vérifié |
+| C4.3.1 | Recommandations réalistes, argumentées, coûts/délais/gains | Registre mesurable, indicateurs, coûts/délais, retours qualifiés, revue mensuelle et CI dédiée | `spity/IMPROVEMENT_MANAGEMENT.md`, C431-01 à C431-03 | Mis en œuvre et vérifié |
+| C4.3.2 | Journal des versions et correctifs déployés | Registre versionné, identité SemVer/SHA, correctifs documentés, preuve de santé et revue mensuelle | `spity/RELEASE_JOURNAL.md`, C432-01 à C432-03 | Mis en œuvre et vérifié |
+| C4.3.3 | Problème résolu avec contexte, résolution et contributions | Registre contrôlé de transmissions support/mainteneur, critères fonctionnels, expertise technique, confidentialité et validation simulée déclarée | `spity/SUPPORT.md`, C433-01 à C433-03 | Mis en œuvre et vérifié |
 
 ### 2.1 Revue transversale de clôture
 
-La revue `REVUE_FINALE_BLOC_04.md` aligne, pour chaque compétence, l'attendu du référentiel, le mécanisme Spity, la commande de contrôle et la preuve à présenter. `npm run bloc4:check` vérifie ces sept lignes ensemble : statut dans le dossier, résultat dans le plan, sources opérationnelles, assertions sur les preuves, registres vivants et SHA-256 du manifeste. Cette porte est incluse dans la qualité CI ; elle ne contacte aucun environnement externe.
+J'ai regroupé dans `REVUE_FINALE_BLOC_04.md`, pour chaque compétence, l'attendu du référentiel, ce que j'ai mis en place, la commande de contrôle et la preuve à montrer. La commande `npm run bloc4:check` relit ces sept lignes, les sources, les registres et le manifeste SHA-256. Elle fait partie de la qualité CI et ne contacte aucun environnement externe.
 
 ### 2.2 Comment lire et évaluer chaque compétence
 
-Les sections 4 à 10 suivent la même grille afin que le lecteur puisse vérifier le raisonnement sans devoir deviner le rôle d'un fichier. Chaque compétence présente :
+J'ai gardé la même trame pour les sections 4 à 10 afin de faciliter la lecture. Pour chaque compétence, je présente :
 
 1. **l'attendu** : reformulation du critère évalué et du risque métier ou technique associé ;
 2. **la mise en œuvre** : politique, registre, script, workflow ou procédure réellement présents dans le dépôt ;
@@ -83,15 +83,15 @@ La chaîne de livraison est structurée ainsi :
 
 ### 3.2 Rôles
 
-Le mainteneur est responsable de la qualification technique, des tests, des correctifs et du déploiement. GitHub Actions exécute les contrôles automatiques. Dependabot propose les mises à jour. Le product owner décide de la priorité métier et peut tenir le rôle support niveau 1 dans la configuration actuelle. Un utilisateur pilote valide les parcours lorsque ce rôle existe.
+Dans ce projet, je tiens le rôle de mainteneur : je qualifie les problèmes techniques, prépare les correctifs et vérifie les déploiements. GitHub Actions exécute les contrôles automatiques et Dependabot propose les mises à jour. Les arbitrages métier relèvent du product owner. Pour la mise en situation du dossier, le support de niveau 1 est représenté par un rôle fonctionnel simulé et clairement identifié.
 
 ## 4. C4.1.1 - Gérer les mises à jour des dépendances
 
-### 4.0 Ce que la compétence demande et pourquoi elle est nécessaire
+### 4.0 Mon approche
 
 Gérer les dépendances ne consiste pas à lancer une mise à jour automatique. Le référentiel attend un processus explicite qui indique **quand** les composants sont revus, **ce qui** est inclus dans le périmètre et **comment** chaque type de changement est qualifié. Pour Spity, le risque principal est double : conserver un composant vulnérable trop longtemps, ou introduire une régression en appliquant une mise à jour incompatible sans analyse.
 
-La réponse retenue sépare donc la détection, la décision et l'intégration. Dependabot signale les évolutions ; la politique de dépendances définit les règles acceptables ; la CI vérifie le lot choisi ; le lockfile et le SBOM permettent ensuite de retrouver exactement ce qui a été installé. Une alerte ne devient jamais une modification de production sans revue et sans tests.
+J'ai donc séparé la détection, la décision et l'intégration. Dependabot signale les évolutions, la politique de dépendances fixe les règles, puis la CI vérifie le lot choisi. Le lockfile et le SBOM permettent de retrouver ce qui a été installé. Une alerte ne devient pas une modification de production sans revue ni tests.
 
 ### 4.1 Processus précis
 
@@ -137,11 +137,11 @@ La commande à exécuter est `npm run dependencies:check`. La preuve `B4-C411-03
 
 ## 5. C4.1.2 - Concevoir la supervision et l'alerte
 
-### 5.0 Ce que la compétence demande et la réponse retenue
+### 5.0 Mon choix de supervision
 
 La supervision attendue ne se résume pas à vérifier qu'une URL répond. Elle doit observer un service avec des critères adaptés, signaler les situations réellement actionnables et mesurer la disponibilité sans confondre une mesure incomplète avec une panne. Spity distingue donc la santé applicative, l'identité de la version exécutée, la latence et la couverture des observations.
 
-La stratégie choisie combine une route de santé publique sans donnée sensible, une politique de supervision versionnée, des workflows planifiés, un calcul de SLO et un exercice local qui rejoue les erreurs. Elle transforme un signal brut en décision : incident de disponibilité, anomalie de contrat ou investigation de performance.
+J'ai retenu une route de santé publique sans donnée sensible, une politique versionnée, des workflows planifiés, un calcul de SLO et un exercice local qui rejoue les erreurs. Ce dispositif me permet de distinguer un incident de disponibilité, une rupture du contrat de santé et un problème de performance.
 
 ### 5.1 Sondes et finalité
 
@@ -187,9 +187,9 @@ Les preuves C412-01 à C412-04 permettent de séparer l'historique de supervisio
 
 ## 6. C4.2.1 - Consigner les anomalies
 
-### 6.0 Ce que la compétence demande et le principe appliqué
+### 6.0 La méthode utilisée
 
-Consigner une anomalie signifie rendre le problème compréhensible et rejouable par une autre personne. Une simple issue ou une phrase du type « cela ne fonctionne pas » ne permet ni d'établir l'impact, ni de choisir une correction, ni de vérifier la résolution. Spity utilise donc un registre structuré qui sépare le signal initial, l'analyse, la décision, l'action et la vérification.
+Pour moi, consigner une anomalie consiste d'abord à permettre à une autre personne de la comprendre et de la reproduire. Une phrase comme « cela ne fonctionne pas » ne suffit pas pour mesurer l'impact ou vérifier la correction. J'ai donc utilisé un registre qui sépare le signal initial, l'analyse, la décision, l'action et la vérification.
 
 La fiche d'incident n'est pas une archive figée : elle porte un cycle de vie contrôlé. Chaque changement d'état correspond à une action réellement effectuée. Cela évite de clôturer un défaut avant investigation ou de faire disparaître une anomalie parce qu'un correctif paraît probable.
 
@@ -227,11 +227,11 @@ Les commandes `npm run incidents:check` et `npm run incidents:exercise` donnent 
 
 ## 7. C4.2.2 - Créer et déployer un correctif via CI/CD
 
-### 7.0 Ce que la compétence demande et la difficulté traitée
+### 7.0 Le problème que j'ai traité
 
 Cette compétence demande de montrer qu'un correctif est décrit, intégré et déployé par une chaîne continue. Le risque n'est pas seulement qu'un test échoue : une application peut être disponible tout en exécutant un binaire qui ne correspond pas à celui qui a été validé. Spity traite ce risque avec une porte de promotion qui compare l'identité attendue du candidat avec l'identité réellement exposée par sa route de santé.
 
-Le dossier ne prétend pas qu'une réussite CI est une production mise à jour. Il démontre un correctif de chaîne CI/CD, un staging réellement vérifié et une procédure de promotion/retour arrière qui reste soumise à l'autorisation de release.
+Je ne considère pas qu'une CI verte signifie que la production a été mise à jour. Je montre ici le correctif apporté à la chaîne CI/CD, la vérification du staging et la procédure de promotion ou de retour arrière. La mise en production reste soumise à une décision de release.
 
 ### 7.1 Anomalie traitée et décision
 
@@ -287,9 +287,9 @@ La limite est importante : C422-04 prouve un **staging éphémère validé**, ja
 
 ## 8. C4.3.1 - Proposer des améliorations
 
-### 8.0 Ce que la compétence demande et la méthode d'arbitrage
+### 8.0 Ma méthode d'arbitrage
 
-Proposer une amélioration n'est pas produire une liste d'idées. Le référentiel attend des recommandations réalistes, expliquées et comparables : il doit être possible de comprendre le problème traité, le bénéfice attendu, l'effort, le délai, le risque et la manière de mesurer le résultat. Spity transforme ces éléments en fiches versionnées plutôt qu'en notes dispersées.
+Je n'ai pas voulu limiter cette partie à une liste d'idées. Pour chaque proposition, j'ai renseigné le problème, le bénéfice attendu, l'effort, le délai, le risque et la façon de mesurer le résultat. Ces informations sont conservées dans des fiches versionnées plutôt que dans des notes dispersées.
 
 La priorisation repose sur des critères visibles. Une recommandation ne peut pas être déclarée terminée parce qu'elle est séduisante ou urgente : elle doit posséder un indicateur de départ, une cible, un responsable, un plan de retour arrière et une mesure de résultat. Cela permet au product owner et au mainteneur de partager une décision intelligible.
 
@@ -337,9 +337,9 @@ La simulation support utilisée comme exemple de futur signal est clairement dé
 
 ## 9. C4.3.2 - Établir le journal des versions
 
-### 9.0 Ce que la compétence demande et le problème de traçabilité
+### 9.0 Le suivi que j'ai retenu
 
-Le journal de versions attendu doit permettre de savoir ce qui a été publié, corrigé et réellement déployé. Un changelog seul décrit des évolutions produit, mais il ne suffit pas à identifier le binaire exécuté dans un environnement. Spity associe donc chaque entrée à une version SemVer, une révision Git complète, un statut explicite, des correctifs documentés et des preuves.
+J'utilise le journal de versions pour distinguer ce qui a été publié, corrigé et effectivement observé en production. Le changelog explique les évolutions du produit, mais il ne suffit pas à identifier le binaire exécuté. J'ai donc associé chaque entrée à une version SemVer, une révision Git complète, un statut, les correctifs concernés et leurs preuves.
 
 La règle essentielle est de ne pas confondre trois événements : la publication d'une version, la validation d'un candidat et l'observation de la production. Cette séparation est particulièrement importante dans un projet où un staging CI peut réussir avant qu'une promotion de production ne soit autorisée.
 
@@ -388,11 +388,11 @@ Les commandes `npm run releases:check` et `npm run releases:exercise` permettent
 
 ## 10. C4.3.3 - Collaborer avec le support
 
-### 10.0 Ce que la compétence demande et l'organisation retenue
+### 10.0 L'organisation retenue
 
 Collaborer avec le support consiste à rendre visible le passage entre un problème vécu dans le produit et une résolution technique. Le support apporte le contexte fonctionnel, l'impact et les critères de réussite ; le mainteneur apporte l'analyse, la cause, le correctif, les limites et les validations. Les deux contributions doivent rester distinguables afin que la résolution soit comprise autant par le métier que par la technique.
 
-Spity formalise ce dialogue dans un registre versionné. Une transmission n'est pas une conversation libre impossible à vérifier : elle contient le rôle émetteur, le rôle destinataire, le contenu utile, la date, les critères de validation et les preuves. La confidentialité est contrôlée au même niveau que les autres registres.
+J'ai formalisé ce dialogue dans un registre versionné. Chaque transmission indique qui parle, à qui, à quelle date, avec quel contexte, quels critères de validation et quelles preuves. Ce format garde la chronologie lisible et applique les mêmes règles de confidentialité que les autres registres.
 
 ### 10.1 Registre et cycle de collaboration
 
@@ -425,9 +425,9 @@ Les actions destructives restent interdites dans les procédures courantes : auc
 
 ## 12. Conclusion
 
-Les sept compétences franchissent désormais la définition renforcée de terminé : mécanisme réel ou simulation clairement déclarée, automatisation, cas d'échec testés, preuves reproductibles et exploitation décrite. La revue transversale automatise ce constat : les sept sources, les preuves, les registres et le manifeste doivent rester cohérents. C4.3.3 complète cette chaîne par un registre de collaboration qui sépare rigoureusement le contexte fonctionnel, l'expertise technique, la validation support et le statut réel de déploiement.
+Ce travail m'a permis de couvrir les sept compétences avec la même exigence : une mise en œuvre identifiable, des erreurs testées, des preuves datées et une procédure compréhensible. Le contrôle transversal vérifie que les documents, les registres et le manifeste restent cohérents. Pour la partie support, j'ai veillé à séparer le contexte fonctionnel, l'analyse technique, la validation simulée et le statut réel du déploiement.
 
-Le principal risque ouvert n'est pas masqué : la production est saine mais en retard sur `main`. La prochaine action opérationnelle est une release versionnée autorisée, pas un déploiement improvisé. Cette transparence garantit que le dossier décrit l'état réel du logiciel.
+Il reste un point ouvert : la production répond correctement, mais sa révision est en retard sur `main`. La suite logique est de préparer une release versionnée et autorisée. Je préfère conserver cet écart dans le dossier plutôt que de laisser entendre qu'un déploiement a eu lieu alors que ce n'est pas le cas.
 
 ## 13. Index des annexes
 

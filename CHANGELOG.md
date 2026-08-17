@@ -32,7 +32,7 @@ Les évolutions notables de Spity sont consignées dans ce fichier. Le projet su
 - Journal des versions versionné : distinction entre release publiée, version observée en production et candidat CI, avec documentation obligatoire des correctifs.
 - Registre de collaboration support/mainteneur : contexte anonymisé, transmissions réciproques, critères fonctionnels, expertise technique, validation et contrôle de confidentialité.
 - Revue finale Bloc 4 automatisée : cohérence des sept compétences, sources opérationnelles, preuves, registres et manifeste SHA-256, avec une preuve de staging CI validé.
-- C4.1.1 industrialisée avec politique exécutable, dérogations datées, SBOM CycloneDX, audit planifié, revue des dépendances en pull request et lot de mises à jour qualifié.
+- C4.1.1 mise en œuvre avec une politique exécutable, des dérogations datées, un SBOM CycloneDX, un audit planifié, une revue des dépendances en pull request et un lot de mises à jour qualifié.
 - Sonde de santé Node.js testable avec seuil de latence, reprises, rapport JSON et exercice d'alerte local sans impact production.
 - Alerte GitHub automatique de supervision avec issue unique, artefact de contrôle et fermeture au retour à la normale.
 - Formulaire de retour support et mise en situation fictive transparente fondée sur l'anomalie réelle d'accessibilité.

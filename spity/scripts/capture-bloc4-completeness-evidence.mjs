@@ -14,8 +14,8 @@ const evidence = {
   criterion: 'Bloc 4',
   capturedAt: new Date().toISOString(),
   repositoryRevision: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: repositoryRoot, encoding: 'utf8' }).trim(),
-  safety: 'Repository-only completeness review. No production endpoint, deployment, database, external mutation or LXC was used.',
-  objective: 'Verify the seven competency claims, operational sources, evidence assertions, current registries and SHA-256 manifest together.',
+  safety: 'Contrôle effectué uniquement à partir du dépôt. Aucun appel à la production, déploiement, accès à la base de données, changement externe ou LXC.',
+  objective: 'Vérifier ensemble les sept compétences, leurs sources, les preuves, les registres et le manifeste SHA-256.',
   audit,
 }
 

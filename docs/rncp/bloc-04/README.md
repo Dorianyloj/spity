@@ -1,6 +1,6 @@
 # Bloc 4 - Maintenir l'application en condition opérationnelle
 
-Ce répertoire est le chantier Bloc 4 de Spity selon le référentiel Ynov 2024, pages 15 à 17. Les compétences sont désormais reprises une à une et ne sont déclarées industrialisées qu'après fonctionnement réel, automatisation et tests.
+Ce répertoire rassemble mon travail sur le Bloc 4 de Spity à partir du référentiel Ynov 2024, pages 15 à 17. J'ai repris chaque compétence séparément et je ne la considère terminée qu'après vérification du fonctionnement, des tests et des preuves associées.
 
 ## Livrables
 

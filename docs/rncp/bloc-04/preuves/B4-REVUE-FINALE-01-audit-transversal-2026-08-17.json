@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "criterion": "Bloc 4",
-  "capturedAt": "2026-08-17T21:31:49.673Z",
-  "repositoryRevision": "eb3a8fe7d3cf2d26fa8364403069ded1287c2b09",
-  "safety": "Repository-only completeness review. No production endpoint, deployment, database, external mutation or LXC was used.",
-  "objective": "Verify the seven competency claims, operational sources, evidence assertions, current registries and SHA-256 manifest together.",
+  "capturedAt": "2026-08-17T21:38:01.135Z",
+  "repositoryRevision": "559cbf00f0c8928463f8f451ba381b6030707d49",
+  "safety": "Contrôle effectué uniquement à partir du dépôt. Aucun appel à la production, déploiement, accès à la base de données, changement externe ou LXC.",
+  "objective": "Vérifier ensemble les sept compétences, leurs sources, les preuves, les registres et le manifeste SHA-256.",
   "audit": {
     "schemaVersion": 1,
-    "checkedAt": "2026-08-17T21:31:49.673Z",
+    "checkedAt": "2026-08-17T21:38:01.134Z",
     "compliant": true,
     "competencyCount": 7,
     "compliantCompetencyCount": 7,

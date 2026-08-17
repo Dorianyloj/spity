@@ -1,10 +1,10 @@
 # 04 — C4.3 : Amélioration, versions et support
 
-Les trois compétences C4.3 installent une boucle d'apprentissage : mesurer les sujets à améliorer, conserver l'historique des versions, puis organiser la réponse entre le support et la maintenance technique.
+J'ai regroupé ici trois sujets liés : les améliorations à prioriser, le suivi des versions et les échanges entre le support et la maintenance technique.
 
 ## C4.3.1 — Proposer des axes d'amélioration
 
-### Attendu et réponse
+### Mon travail
 
 Une recommandation doit être réaliste, argumentée et permettre de comparer coûts, délais et gains attendus. Spity utilise le registre `spity/improvements/` : chaque fiche versionnée relie une source, un impact, un risque réduit, une confiance, un effort, un coût en jours.homme, un délai, un rollback et des indicateurs de référence/cible.
 
@@ -25,7 +25,7 @@ La revue mensuelle est automatisée et conserve son rapport. Le product owner ar
 
 ## C4.3.2 — Établir le journal des versions déployées
 
-### Attendu et réponse
+### Mon travail
 
 Le journal doit documenter les versions et les correctifs effectivement déployés, sans transformer un candidat CI en déploiement réel. Les fiches JSON de `spity/release-journal/` utilisent trois statuts factuels :
 
@@ -43,7 +43,7 @@ Une fiche contient la version SemVer, le SHA complet, les évolutions, les corre
 
 ## C4.3.3 — Collaborer avec le support
 
-### Attendu et réponse
+### Mon travail
 
 La collaboration doit rendre visible le contexte fonctionnel, l'analyse technique, le correctif et la validation de la résolution. Spity formalise ce dialogue dans `spity/support-collaborations/` par des fiches `SPITY-SUP-YYYY-NNNN` liées aux incidents.
 
@@ -64,4 +64,4 @@ Le contrôleur rejette une fiche sans simulation déclarée, sans escalade, sans
 
 ## À retenir pour l'entretien
 
-Les améliorations ne sont pas présentées comme des promesses floues, les versions ne sont pas déclarées déployées sans observation et la collaboration support ne mélange pas le vécu fonctionnel avec l'analyse technique. Les trois registres rendent ces distinctions contrôlables à tout moment.
+Je conserve une mesure pour chaque amélioration, une preuve avant de déclarer une version déployée et des contributions distinctes pour le support et la maintenance. Les trois registres permettent de retrouver ces décisions sans dépendre de ma mémoire.

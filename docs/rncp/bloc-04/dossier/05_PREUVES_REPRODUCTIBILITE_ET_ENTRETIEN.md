@@ -2,7 +2,7 @@
 
 ## 1. Une preuve est utile si elle est rejouable
 
-Le dossier combine quatre niveaux complémentaires. Aucun niveau ne remplace les autres : un document explique, une source fait, un exercice vérifie le comportement et une capture datée atteste un état observé.
+Pour constituer les preuves, j'ai utilisé quatre niveaux complémentaires. La documentation explique la règle, le code l'applique, un exercice vérifie le comportement et une capture datée conserve l'état observé.
 
 | Niveau | Rôle | Exemple |
 | --- | --- | --- |
@@ -39,7 +39,7 @@ Elle contrôle les sept compétences, les statuts des documents, les sources op�
 | Régénérer l'export du dossier | `npm run bloc4:pdf` |
 | Vérifier l'export PDF | `npm run bloc4:pdf:verify` |
 
-Les exercices utilisent des données et serveurs locaux en mémoire. Ils sont conçus pour prouver les règles sans toucher une instance de production. Aucun LXC n'est utilisé dans ce parcours de vérification.
+Les exercices utilisent des données et de petits serveurs locaux en mémoire. Je peux ainsi montrer les règles et les cas d'échec sans toucher à la production. Aucun LXC n'est utilisé dans ce parcours.
 
 ## 4. Déroulé suggéré pour présenter le Bloc 4
 

@@ -6,19 +6,19 @@
 
 **Projet :** Spity
 
-Le Bloc 4 est développé comme un chantier produit, pas comme une simple rédaction. Une compétence n'est déclarée industrialisée que lorsque le dépôt contient un fonctionnement réel, une automatisation, des tests, des preuves reproductibles et une procédure d'exploitation. La revue transversale finale confirme désormais ces conditions sur les sept compétences à la fois.
+J'ai traité le Bloc 4 comme un travail de maintenance appliqué au projet, et pas seulement comme un exercice de rédaction. Pour considérer une compétence terminée, j'ai exigé une mise en œuvre identifiable, des tests, une preuve datée et une procédure que je peux expliquer ou rejouer.
 
 ## État réel
 
 | Ordre | Compétence | Fonctionnement présent | État d'approfondissement |
 | --- | --- | --- | --- |
-| 1 | C4.1.1 - Gérer les mises à jour | Dependabot, politique exécutable, audit planifié, SBOM, revue PR, lot compatible qualifié | **Industrialisée et vérifiée** |
-| 2 | C4.1.2 - Superviser et alerter | Politique versionnée, sondes qualifiées, alerte/rétablissement uniques, SLO 30 jours, couverture et exercice local | **Industrialisée et vérifiée** |
-| 3 | C4.2.1 - Consigner les anomalies | Registre JSON validé, cycle de vie, cause racine, confidentialité, formulaires et CI dédiée | **Industrialisée et vérifiée** |
-| 4 | C4.2.2 - Créer et déployer un correctif | Correctif de contrôle de promotion, CI/release, artefacts de vérification et rollback documenté | **Industrialisée et vérifiée** |
-| 5 | C4.3.1 - Proposer des améliorations | Registre mesurable, revue mensuelle, signaux qualifiés et CI dédiée | **Industrialisée et vérifiée** |
-| 6 | C4.3.2 - Tenir le journal des versions | Registre JSON, version/SHA, documentation des correctifs, preuve de santé, exercice et workflow mensuel | **Industrialisée et vérifiée** |
-| 7 | C4.3.3 - Collaborer avec le support | Registre contrôlé, transmissions support/mainteneur, validation fonctionnelle, exercice et CI mensuelle | **Industrialisée et vérifiée** |
+| 1 | C4.1.1 - Gérer les mises à jour | Dependabot, politique exécutable, audit planifié, SBOM, revue PR, lot compatible qualifié | **Terminé et vérifié** |
+| 2 | C4.1.2 - Superviser et alerter | Politique versionnée, sondes qualifiées, alerte/rétablissement uniques, SLO 30 jours, couverture et exercice local | **Terminé et vérifié** |
+| 3 | C4.2.1 - Consigner les anomalies | Registre JSON validé, cycle de vie, cause racine, confidentialité, formulaires et CI dédiée | **Terminé et vérifié** |
+| 4 | C4.2.2 - Créer et déployer un correctif | Correctif de contrôle de promotion, CI/release, artefacts de vérification et rollback documenté | **Terminé et vérifié** |
+| 5 | C4.3.1 - Proposer des améliorations | Registre mesurable, revue mensuelle, signaux qualifiés et CI dédiée | **Terminé et vérifié** |
+| 6 | C4.3.2 - Tenir le journal des versions | Registre JSON, version/SHA, documentation des correctifs, preuve de santé, exercice et workflow mensuel | **Terminé et vérifié** |
+| 7 | C4.3.3 - Collaborer avec le support | Registre contrôlé, transmissions support/mainteneur, validation fonctionnelle, exercice et CI mensuelle | **Terminé et vérifié** |
 
 ## Définition de terminé
 
@@ -106,7 +106,7 @@ Les limites restantes sont explicites : l’historique de latence P95, les resso
 - [x] détection des secrets, jetons, IP privées, e-mails, URLs non HTTPS et chemins de preuve hors dépôt ;
 - [x] workflow mensuel, artefact 90 jours, exercice en mémoire et couverture dédiée de la collaboration support.
 
-Les sept compétences du Bloc 4 respectent maintenant la même définition de terminé. Le prochain travail de support consistera à enregistrer les retours réellement reçus, sans modifier ni requalifier la simulation présente.
+J'ai appliqué la même définition de terminé aux sept compétences. Pour la suite, les nouveaux retours du support devront être enregistrés comme tels, sans modifier la mise en situation déjà présente dans le dossier.
 
 ## Revue finale transversale
 
@@ -119,4 +119,4 @@ Les sept compétences du Bloc 4 respectent maintenant la même définition de te
 
 ## Règle de présentation
 
-Le dossier et le PDF sont des livrables de travail vérifiables : chaque compétence possède désormais une automatisation, des contrôles d'échec, des preuves reproductibles et une exploitation documentée. Toute future évolution doit conserver cette traçabilité et annoncer explicitement ce qui relève d'une simulation.
+Le dossier et le PDF reprennent le travail que j'ai vérifié pour chaque compétence : automatisation, cas d'échec, preuves et procédure d'exploitation. Si le projet évolue, je devrai mettre à jour les preuves correspondantes et continuer à signaler clairement les mises en situation.

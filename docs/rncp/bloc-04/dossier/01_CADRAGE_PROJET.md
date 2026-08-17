@@ -2,7 +2,7 @@
 
 ## 1. Le projet maintenu
 
-Spity est un réseau social consacré à la communauté de l'escalade. Le Bloc 4 ne présente pas un prototype de maintenance : il documente les processus qui permettent à l'équipe de maintenir l'application, détecter les dérives, qualifier les anomalies, préparer un correctif et conserver une trace exploitable des décisions.
+Spity est le réseau social consacré à l'escalade que j'ai utilisé comme support pour cette certification. Dans ce Bloc 4, je présente les processus que j'ai mis en place pour maintenir l'application, repérer une dérive, qualifier une anomalie, préparer un correctif et garder une trace des décisions.
 
 Le périmètre technique comprend Next.js 16, React 19, TypeScript, Drizzle ORM, MariaDB, Docker et GitHub Actions. Les fichiers de l'application sont centralisés dans `spity/`, les automatisations dans `.github/workflows/`, et les documents de certification dans `docs/rncp/bloc-04/`.
 
@@ -17,7 +17,7 @@ Contrôle automatisé -> Registre versionné -> Décision documentée
 
 ## 2. Objectif de maintenance
 
-La finalité est de rendre chaque action maintenable et vérifiable. Une mise à jour de dépendance, un incident, une recommandation ou une release ne doit pas dépendre d'un souvenir oral ou d'une capture isolée. Pour être considéré terminé, un élément doit avoir :
+Mon objectif est de pouvoir retrouver et expliquer chaque décision. Une mise à jour de dépendance, un incident, une recommandation ou une release ne doit pas dépendre d'un souvenir oral ou d'une capture isolée. Je considère un élément terminé lorsqu'il possède :
 
 1. un besoin ou un signal identifié ;
 2. une source de vérité versionnée ;
@@ -38,7 +38,7 @@ Cette définition est vérifiée à l'échelle du Bloc 4 par la politique `spity
 | Product owner | Arbitre les priorités, coûts, délais et bénéfices attendus des améliorations. |
 | Support niveau 1 / pilote | Formalise le contexte fonctionnel et valide les critères d'acceptation lorsqu'un retour est disponible. |
 
-Dans la configuration actuelle, le rôle support est représenté par une simulation contrôlée. Cette modalité est annoncée dans les preuves concernées : elle sert à démontrer le processus, jamais à inventer un retour client réel.
+Dans la configuration actuelle, j'ai représenté le rôle support par une mise en situation. Je le précise dans les preuves concernées : cette situation sert à montrer le processus et ne correspond pas à un retour client réel.
 
 ## 4. Principe de transparence
 
@@ -50,7 +50,7 @@ Le dossier distingue trois états :
 | Staging validé | La chaîne CI a construit et vérifié un candidat dans un environnement éphémère. | Images immuables, smoke test et contrôle version/révision sur `develop`. |
 | Production observée | L'instance publique répond avec une version et une révision identifiées. | Route `/api/health` saine et fiche `observed-production`. |
 
-Une CI verte ne suffit donc pas à déclarer une production promue. De même, une donnée simulée ne devient pas un retour utilisateur réel. Cette séparation est une exigence de qualité du dossier, pas une faiblesse à masquer.
+Une CI verte ne me suffit donc pas pour déclarer une mise en production. De la même façon, je ne transforme pas une donnée simulée en retour utilisateur réel. Cette distinction est importante pour présenter l'état du projet tel qu'il est.
 
 ## 5. Où retrouver l'information
 

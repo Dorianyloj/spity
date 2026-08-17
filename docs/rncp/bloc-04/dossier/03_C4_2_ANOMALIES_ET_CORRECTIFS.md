@@ -1,6 +1,6 @@
 # 03 — C4.2 : Anomalies et correctifs
 
-Cette partie montre comment Spity passe d'un signal à une décision, puis d'une décision à un correctif contrôlé. Les éléments métiers, techniques et de déploiement sont séparés pour conserver une chronologie fiable.
+Dans cette partie, je pars d'un signal observé dans Spity, puis je montre comment je l'ai qualifié et traité. J'ai séparé le constat fonctionnel, l'analyse technique et le déploiement afin de conserver une chronologie lisible.
 
 ## C4.2.1 — Consigner les anomalies détectées
 
@@ -8,7 +8,7 @@ Cette partie montre comment Spity passe d'un signal à une décision, puis d'une
 
 Une anomalie doit être collectée de façon structurée, décrite pour être reproductible, analysée, puis accompagnée d'une préconisation. Sa clôture doit reposer sur une vérification et non sur une simple déclaration.
 
-### Réponse mise en œuvre
+### Ce que j'ai mis en place
 
 Le signal initial est recueilli via une issue avec les informations minimales : date, impact, version/révision, reproduction, preuves anonymisées et confirmation de confidentialité. Après triage, une fiche `SPITY-INC-YYYY-NNNN` devient la source de vérité dans `spity/incidents/`.
 
@@ -38,7 +38,7 @@ L'exercice teste le registre sain et des erreurs représentatives, sans modifier
 
 Le candidat doit décrire un correctif, l'intégrer et le déployer par une chaîne CI/CD. La validation doit garantir que le bon binaire est vérifié et que l'on n'affirme pas un déploiement qui n'a pas été observé.
 
-### Réponse mise en œuvre
+### Ce que j'ai mis en place
 
 L'anomalie de dérive entre la révision de production observée et la référence auditée a conduit à un contrôle de promotion explicite. `verify-deployment.mjs` exige, avant acceptation d'un candidat, l'URL de santé, la version attendue et le SHA Git complet attendu.
 
@@ -71,4 +71,4 @@ Un rollback remet le tag d'image immuable précédent, rejoue le contrôle de ve
 
 ## À retenir pour l'entretien
 
-La compétence est démontrée par une chaîne exécutable, pas par une capture de CI : l'incident reste ouvert si la production n'est pas promue, le staging est clairement identifié, et le script compare le binaire observé au binaire attendu.
+La démonstration repose sur une chaîne que je peux rejouer, pas seulement sur une capture de CI. L'incident reste ouvert tant que la production n'a pas été promue, le staging est identifié comme tel et le script compare le binaire observé au binaire attendu.

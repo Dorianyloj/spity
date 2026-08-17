@@ -141,8 +141,8 @@ export const auditBloc4Completeness = async ({ policy, root = repositoryRoot } =
     }
     identifiers.add(competency.id)
     const statusRow = dossier.split(/\r?\n/).find((line) => line.startsWith(`| ${competency.id} |`))
-    if (!statusRow || !/Industrialisé et vérifié/.test(statusRow)) {
-      competencyErrors.push(issue('dossier-status-missing', resolvedPolicy.dossierPath, 'Le dossier doit déclarer la compétence industrialisée et vérifiée.', competency.id))
+    if (!statusRow || !/Mis en œuvre et vérifié/.test(statusRow)) {
+      competencyErrors.push(issue('dossier-status-missing', resolvedPolicy.dossierPath, 'Le dossier doit indiquer que la compétence est mise en œuvre et vérifiée.', competency.id))
     }
     if (!plan.includes(`## ${competency.id} - Résultat obtenu`)) {
       competencyErrors.push(issue('plan-result-missing', resolvedPolicy.planPath, 'Le plan doit contenir le résultat obtenu de la compétence.', competency.id))

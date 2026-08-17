@@ -615,8 +615,8 @@ def build_textual_evidence_appendix(document: Bloc4Document) -> list:
         PageBreak(),
         Paragraph("14. Annexes probantes - contenus intégrés", h2),
         Paragraph(
-            f"Cette annexe contient directement les {evidence_count} pièces textuelles et structurées mobilisées par le dossier. "
-            "Chaque pièce affiche son chemin source afin de permettre sa vérification dans le dépôt. Le manifeste SHA-256 protège "
+            f"J'ai regroupé dans cette annexe les {evidence_count} pièces textuelles et structurées utilisées dans le dossier. "
+            "Le chemin source de chaque pièce est indiqué pour pouvoir la retrouver dans le dépôt. Le manifeste SHA-256 protège "
             "les sources et preuves stables ; l'empreinte détachée du PDF protège le livrable final dans son ensemble.",
             body,
         ),
@@ -669,8 +669,8 @@ def build_visual_evidence_appendix() -> list:
         PageBreak(),
         Paragraph("15. Annexe visuelle - parcours applicatifs", h2),
         Paragraph(
-            "Les captures ci-dessous ont été produites depuis l'application locale avec des données de démonstration. "
-            "Le manifeste A18 précise pour chacune le scénario, le rôle, le viewport et le fichier source ; aucune donnée sensible n'est incluse.",
+            "J'ai réalisé les captures suivantes depuis l'application locale avec des données de démonstration. "
+            "Le manifeste A18 indique le scénario, le rôle, le viewport et le fichier source de chacune ; aucune donnée sensible n'est incluse.",
             body,
         ),
     ]
@@ -698,9 +698,9 @@ def build_technical_evidence_appendix() -> list:
         PageBreak(),
         Paragraph("16. Annexe technique - Git, CI/CD et audit", h2),
         Paragraph(
-            "Cette annexe complète les parcours applicatifs par des preuves techniques réellement observées. "
-            "Elle présente l'état Git lu localement, l'historique public, les workflows GitHub Actions validés et l'audit automatisé des sept compétences. "
-            "Les captures sont datées, leurs sources sont décrites dans le manifeste technique et aucune information sensible n'est exposée.",
+            "J'ai ajouté ces captures pour compléter les parcours applicatifs par des éléments techniques observables : "
+            "état Git local, historique public, workflows GitHub Actions validés et contrôle des sept compétences. "
+            "Le manifeste technique conserve leur date et leur source, sans information sensible.",
             body,
         ),
     ]
@@ -762,7 +762,7 @@ def build_story(document: Bloc4Document) -> list:
     story.extend([
         summary,
         Spacer(1, 18 * mm),
-        Paragraph("Mise en situation réelle et fictive déclarée - preuves anonymisées et reproductibles", cover_subtitle),
+        Paragraph("Travaux réalisés sur Spity - mises en situation signalées dans le dossier", cover_subtitle),
         PageBreak(),
         Paragraph("Sommaire", h2),
     ])

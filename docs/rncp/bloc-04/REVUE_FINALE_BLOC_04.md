@@ -6,7 +6,7 @@
 
 ## Objet de la revue
 
-Cette revue donne au jury une lecture directe des sept compétences du Bloc 4. Elle ne remplace pas les sources opérationnelles : elle montre comment retrouver, rejouer et contrôler les mécanismes réellement versionnés.
+J'ai préparé cette revue pour retrouver rapidement les sept compétences, leur mise en œuvre et la preuve principale à présenter. Elle sert de synthèse ; les détails restent dans le dossier, les registres et les fichiers de preuve.
 
 La commande `npm run bloc4:check` vérifie ensemble les sept déclarations du dossier, les sources opérationnelles, les preuves JSON, les registres vivants et tous les SHA-256 du manifeste. Elle ne contacte ni la production, ni une base de données, ni un service externe.
 
@@ -32,4 +32,4 @@ La commande `npm run bloc4:check` vérifie ensemble les sept déclarations du do
 
 ## État de clôture
 
-Les sept compétences sont **industrialisées et vérifiées**. Les preuves P1 à P8, l'audit transversal et les captures A18/A19 sont intégrés au PDF final. Les prochaines actions de maintenance restent séparées de ce constat : traiter les futures alertes, enregistrer les retours réellement reçus et ne promouvoir une nouvelle version qu'après les portes de release prévues.
+Les sept compétences sont **mises en œuvre et vérifiées**. Les preuves P1 à P8 et les captures A18/A19 sont intégrées au PDF final. Les prochains travaux de maintenance restent identifiés séparément : traiter les alertes futures, consigner les retours reçus et ne promouvoir une version qu'après les contrôles de release prévus.
