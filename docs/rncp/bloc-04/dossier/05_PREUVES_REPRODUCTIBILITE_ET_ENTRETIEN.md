@@ -13,7 +13,7 @@ Le dossier combine quatre niveaux complémentaires. Aucun niveau ne remplace les
 
 ## 2. Intégrité et cohérence globale
 
-Le fichier `../preuves/MANIFEST.sha256` contient l'empreinte de chaque document important, politique, script, workflow, test et preuve stable. Toute modification d'un élément inscrit doit donc régénérer le manifeste ; une incohérence est détectée par le contrôle global. Après intégration de ces éléments et de l'audit transversal dans le PDF, `output/pdf/dossier-bloc-04-spity.pdf.sha256` protège séparément le livrable final.
+Le fichier `../preuves/MANIFEST.sha256` contient l'empreinte de chaque document important, politique, script, workflow, test et preuve stable. Toute modification d'un élément inscrit doit donc régénérer le manifeste ; une incohérence est détectée par le contrôle global. Après intégration de ces éléments et de l'audit transversal dans le PDF, `livrables/bloc-04/dossier-bloc-04-spity.pdf.sha256` protège séparément le livrable final.
 
 La commande ci-dessous est la porte principale de cohérence :
 
@@ -70,4 +70,4 @@ Elle est une simulation contrôlée, clairement indiquée. Elle démontre le for
 
 ## 6. Restitution finale
 
-Le dossier détaillé, la revue finale et les preuves structurées sont intégrés dans l'export PDF disponible sous `output/pdf/dossier-bloc-04-spity.pdf`. Le manifeste protège les entrées stables et l'empreinte détachée protège l'export ; les deux contrôles doivent être rejoués dès qu'une source évolue.
+Le dossier détaillé, la revue finale et les preuves structurées sont intégrés dans le PDF disponible sous `livrables/bloc-04/dossier-bloc-04-spity.pdf`. Le manifeste protège les entrées stables et l'empreinte détachée protège le livrable ; les deux contrôles doivent être rejoués dès qu'une source évolue.

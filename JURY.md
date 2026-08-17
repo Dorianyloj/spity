@@ -9,7 +9,7 @@ Bienvenue dans le dépôt de Spity. Cette page permet d'accéder rapidement aux 
 | Projet | Spity, réseau social pour la communauté de l'escalade |
 | Application | Next.js, TypeScript, React, Drizzle ORM et MariaDB |
 | Qualité | Jest, Node Test Runner, Playwright, axe, Lighthouse et GitHub Actions |
-| Livrable principal de maintenance | [Bloc 4 — Maintenir l'application en condition opérationnelle](docs/rncp/bloc-04/dossier-jury/README.md) |
+| Livrable principal de maintenance | [PDF final du Bloc 4](livrables/bloc-04/dossier-bloc-04-spity.pdf) |
 
 Le [cadrage produit](CADRAGE_PROJET.md) présente le besoin, les utilisateurs, les fonctionnalités et les objectifs. Le [README applicatif](spity/README.md) décrit l'installation et l'architecture du code.
 
@@ -19,12 +19,12 @@ Le [cadrage produit](CADRAGE_PROJET.md) présente le besoin, les utilisateurs, l
 
 1. Lire le [README du projet](README.md).
 2. Ouvrir la [revue finale Bloc 4](docs/rncp/bloc-04/REVUE_FINALE_BLOC_04.md).
-3. Consulter l'[export PDF](output/pdf/dossier-bloc-04-spity.pdf) si une lecture hors dépôt est souhaitée.
+3. Consulter le [PDF final](livrables/bloc-04/dossier-bloc-04-spity.pdf).
 
 ### Parcours Bloc 4 — 20 minutes
 
-1. Suivre le [dossier de remise](docs/rncp/bloc-04/dossier-jury/README.md).
-2. Utiliser la [matrice de preuves](docs/rncp/bloc-04/dossier-jury/annexes/MATRICE_DE_PREUVES.md).
+1. Suivre le [dossier de remise](docs/rncp/bloc-04/dossier/README.md).
+2. Utiliser la [matrice de preuves](docs/rncp/bloc-04/dossier/annexes/MATRICE_DE_PREUVES.md).
 3. Consulter les [captures applicatives, Git et CI/CD](docs/rncp/bloc-04/preuves/captures/README.md).
 4. Vérifier l'intégrité dans [`preuves/MANIFEST.sha256`](docs/rncp/bloc-04/preuves/MANIFEST.sha256).
 
@@ -78,11 +78,11 @@ Le principal point ouvert est documenté sans être masqué : une production sai
 ## 6. Fichiers à remettre ou à ouvrir
 
 - [Dossier écrit Bloc 4](docs/rncp/bloc-04/DOSSIER_BLOC_04.md)
-- [Dossier de remise structuré](docs/rncp/bloc-04/dossier-jury/README.md)
+- [Dossier de remise structuré](docs/rncp/bloc-04/dossier/README.md)
 - [Revue finale des compétences](docs/rncp/bloc-04/REVUE_FINALE_BLOC_04.md)
 - [Feuille de route et état réel](docs/rncp/bloc-04/PLAN_ACTION_BLOC_04.md)
 - [Preuves et manifeste](docs/rncp/bloc-04/preuves/README.md)
 - [Captures réelles : parcours, Git et CI/CD](docs/rncp/bloc-04/preuves/captures/README.md)
-- [Export PDF Bloc 4](output/pdf/dossier-bloc-04-spity.pdf)
+- [Dossier final prêt à remettre](livrables/bloc-04/README.md)
 
-Le dépôt est volontairement organisé pour que ces fichiers restent consultables sans dépendre d'un environnement externe : le code exécutable est dans `spity/`, les livrables dans `docs/` et les exports dans `output/`.
+Le dépôt sépare les responsabilités : le code exécutable est dans `spity/`, les sources et preuves dans `docs/`, et les seuls fichiers à remettre dans `livrables/`.

@@ -36,7 +36,7 @@ from reportlab.platypus.tableofcontents import TableOfContents
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "docs" / "rncp" / "bloc-04" / "DOSSIER_BLOC_04.md"
-OUTPUT = ROOT / "output" / "pdf" / "dossier-bloc-04-spity.pdf"
+OUTPUT = ROOT / "livrables" / "bloc-04" / "dossier-bloc-04-spity.pdf"
 OUTPUT_CHECKSUM = OUTPUT.with_name(f"{OUTPUT.name}.sha256")
 LOGO = ROOT / "spity" / "public" / "images" / "brand" / "logo-spity-transparent.png"
 VISUAL_EVIDENCE_DIR = ROOT / "docs" / "rncp" / "bloc-04" / "preuves" / "captures"
@@ -182,7 +182,7 @@ TEXTUAL_EVIDENCE = [
         "title": "P8 - contrôle transversal, matrice et intégrité",
         "files": [
             "docs/rncp/bloc-04/REVUE_FINALE_BLOC_04.md",
-            "docs/rncp/bloc-04/dossier-jury/annexes/MATRICE_DE_PREUVES.md",
+            "docs/rncp/bloc-04/dossier/annexes/MATRICE_DE_PREUVES.md",
             "docs/rncp/bloc-04/preuves/captures/manifest.json",
             "docs/rncp/bloc-04/preuves/captures/manifest-technique.json",
             "docs/rncp/bloc-04/preuves/MANIFEST.sha256",

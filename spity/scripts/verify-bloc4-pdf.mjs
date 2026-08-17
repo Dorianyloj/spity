@@ -5,8 +5,8 @@ import { fileURLToPath } from 'node:url'
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url))
 const repositoryRoot = resolve(scriptDirectory, '../..')
-const defaultPdfPath = resolve(repositoryRoot, 'output/pdf/dossier-bloc-04-spity.pdf')
-const defaultChecksumPath = resolve(repositoryRoot, 'output/pdf/dossier-bloc-04-spity.pdf.sha256')
+const defaultPdfPath = resolve(repositoryRoot, 'livrables/bloc-04/dossier-bloc-04-spity.pdf')
+const defaultChecksumPath = resolve(repositoryRoot, 'livrables/bloc-04/dossier-bloc-04-spity.pdf.sha256')
 
 export const verifyPdfChecksum = async ({
   checksumPath = defaultChecksumPath,

@@ -1,19 +1,19 @@
 {
   "schemaVersion": 1,
   "criterion": "Bloc 4",
-  "capturedAt": "2026-08-17T21:22:48.863Z",
-  "repositoryRevision": "b210551d394fcb421d9d6e0b9410b651c324bf93",
+  "capturedAt": "2026-08-17T21:31:49.673Z",
+  "repositoryRevision": "eb3a8fe7d3cf2d26fa8364403069ded1287c2b09",
   "safety": "Repository-only completeness review. No production endpoint, deployment, database, external mutation or LXC was used.",
   "objective": "Verify the seven competency claims, operational sources, evidence assertions, current registries and SHA-256 manifest together.",
   "audit": {
     "schemaVersion": 1,
-    "checkedAt": "2026-08-17T21:22:48.863Z",
+    "checkedAt": "2026-08-17T21:31:49.673Z",
     "compliant": true,
     "competencyCount": 7,
     "compliantCompetencyCount": 7,
     "manifest": {
       "compliant": true,
-      "entryCount": 133
+      "entryCount": 134
     },
     "registries": {
       "C4.2.1": {

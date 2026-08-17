@@ -18,7 +18,7 @@ Ce dossier présente la maintenance de Spity, application Next.js 16 avec MariaD
 
 Les preuves sont de trois natures : sources versionnées, états externes publics figés en JSON et mise en situation fictive autorisée par le référentiel. Les simulations sont toujours annoncées comme telles. Aucun incident réel, échange humain ou déploiement n'est inventé. Aucun LXC n'a été utilisé pour constituer le dossier.
 
-> **Lecture de remise :** le répertoire [`dossier-jury/`](dossier-jury/) organise ce dossier, la revue finale, les commandes et les preuves pour une présentation progressive au jury.
+> **Lecture de remise :** le répertoire [`dossier/`](dossier/) organise ce dossier, la revue finale, les commandes et les preuves pour une présentation progressive au jury. Le PDF à transmettre est isolé dans [`livrables/bloc-04/`](../../../livrables/bloc-04/).
 
 ## 1. Résumé exécutif
 

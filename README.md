@@ -8,16 +8,16 @@ Spity est une application web dédiée à la communauté de l'escalade. Elle ré
 
 | Répertoire ou fichier | Rôle |
 | --- | --- |
-| [`spity/`](spity/) | Application Next.js, base MariaDB, migrations, tests, scripts et Docker. |
-| [`docs/`](docs/) | Documentation produit, dossiers RNCP, audits et preuves. |
-| [`output/`](output/) | Exports générés et relus, jamais les sources à modifier. |
+| [`spity/`](spity/) | Application exécutable : Next.js, MariaDB, migrations, tests, scripts et Docker. |
+| [`docs/`](docs/) | Sources documentaires : dossiers RNCP, audits et preuves. |
+| [`livrables/`](livrables/) | Fichiers finaux prêts à remettre, classés par bloc. |
 | [`CADRAGE_PROJET.md`](CADRAGE_PROJET.md) | Vision produit, périmètre, parties prenantes et objectifs. |
 | [`CHANGELOG.md`](CHANGELOG.md) | Historique des évolutions notables. |
 
 ## Parcours de lecture
 
 - **Vue projet (5 min)** : [cadrage produit](CADRAGE_PROJET.md), puis [documentation applicative](spity/README.md).
-- **Dossier RNCP Bloc 4 (15 min)** : [dossier de remise](docs/rncp/bloc-04/dossier-jury/README.md), [revue finale](docs/rncp/bloc-04/REVUE_FINALE_BLOC_04.md) et [preuves](docs/rncp/bloc-04/preuves/README.md).
+- **Dossier RNCP Bloc 4 (15 min)** : [PDF à remettre](livrables/bloc-04/dossier-bloc-04-spity.pdf), [dossier source](docs/rncp/bloc-04/dossier/README.md) et [preuves](docs/rncp/bloc-04/preuves/README.md).
 - **Vérification complète** : suivre les commandes de [JURY.md](JURY.md) et consulter le [manifeste SHA-256](docs/rncp/bloc-04/preuves/MANIFEST.sha256).
 
 ## Démarrage local
@@ -45,18 +45,19 @@ npm run test:maintenance
 
 Les contrôles sont versionnés et s'exécutent également dans GitHub Actions. Le dépôt distingue strictement les sources, les preuves datées, les simulations déclarées, le staging validé et la production observée.
 
-## Organisation des livrables
+## Organisation du dépôt
 
-La documentation est rangée par objectif :
+L'arborescence sépare volontairement l'application, les sources documentaires et les fichiers de remise :
 
 ```text
-docs/
-├── audits/             # états des lieux datés
-├── bc02/               # livrables du Bloc 2 conservés
-└── rncp/
-    ├── bloc-01/        # livrables du Bloc 1
-    ├── bloc-04/        # dossier, preuves et dossier jury du Bloc 4
-    └── referentiel/    # référentiel officiel archivé
+.
+├── spity/                  # application et automatisations
+├── docs/                   # sources documentaires et preuves
+│   └── rncp/bloc-04/
+│       ├── dossier/        # parcours de lecture du dossier
+│       └── preuves/        # preuves datées et manifestes
+└── livrables/
+    └── bloc-04/            # PDF final et empreinte à remettre
 ```
 
-Les fichiers temporaires et secrets locaux sont ignorés par Git. Aucun LXC n'est requis pour utiliser ou vérifier ce dépôt.
+Le cadrage, le changelog et l'entrée jury restent à la racine afin d'être immédiatement visibles. Les fichiers temporaires et secrets locaux sont ignorés par Git. Aucun LXC n'est requis pour utiliser ou vérifier ce dépôt.

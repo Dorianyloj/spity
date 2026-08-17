@@ -25,7 +25,7 @@ Ce dossier est la porte d'entrée de remise du Bloc 4 : **maintenir l'applicatio
 - [Revue finale](../REVUE_FINALE_BLOC_04.md) : une ligne par compétence avec commande et preuve ;
 - [Feuille de route](../PLAN_ACTION_BLOC_04.md) : état réel et définition de terminé ;
 - [Répertoire des preuves](../preuves/README.md) : captures figées, exercices et manifeste ;
-- [PDF final](../../../../output/pdf/dossier-bloc-04-spity.pdf) : dossier autonome contenant les preuves textuelles P1 à P8 et les annexes visuelles A18/A19 ;
+- [PDF final](../../../../livrables/bloc-04/dossier-bloc-04-spity.pdf) : dossier autonome contenant les preuves textuelles P1 à P8 et les annexes visuelles A18/A19 ;
 - [Référentiel officiel](../../referentiel/2024-referentiel-expert-developpement-logiciel-ynov.pdf) : pages 15 à 17.
 
 ## Ce que le dossier permet d'affirmer

@@ -19,7 +19,7 @@ Le sous-répertoire [`captures/`](captures/) contient les écrans réels de dém
 | C433 | C4.3.3 | Collaboration support contrôlée : fiche source, registre validé et exercice de rejet. |
 | B4-REVUE-FINALE | Transversal | Politique de complétude, audit des sept compétences et cohérence du manifeste. |
 
-`MANIFEST.sha256` permet de détecter toute modification ultérieure des sources et preuves stables. Le PDF final, qui intègre les pièces P1 à P8 et l'audit transversal, est protégé séparément par `output/pdf/dossier-bloc-04-spity.pdf.sha256`.
+`MANIFEST.sha256` permet de détecter toute modification ultérieure des sources et preuves stables. Le PDF final, qui intègre les pièces P1 à P8 et l'audit transversal, est protégé séparément par `livrables/bloc-04/dossier-bloc-04-spity.pdf.sha256`.
 
 ## Règles
 
