@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import hashlib
+import json
 import re
+import textwrap
 from pathlib import Path
 from xml.sax.saxutils import escape
 
@@ -34,8 +37,11 @@ from reportlab.platypus.tableofcontents import TableOfContents
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "docs" / "rncp" / "bloc-04" / "DOSSIER_BLOC_04.md"
 OUTPUT = ROOT / "output" / "pdf" / "dossier-bloc-04-spity.pdf"
+OUTPUT_CHECKSUM = OUTPUT.with_name(f"{OUTPUT.name}.sha256")
 LOGO = ROOT / "spity" / "public" / "images" / "brand" / "logo-spity-transparent.png"
 VISUAL_EVIDENCE_DIR = ROOT / "docs" / "rncp" / "bloc-04" / "preuves" / "captures"
+DOSSIER_DATE = "17 août 2026"
+DOSSIER_VERSION = "1.2"
 VISUAL_EVIDENCE = [
     {
         "title": "A18.1 - Accueil public",
@@ -77,37 +83,111 @@ TECHNICAL_EVIDENCE = [
     {
         "title": "A19.1 - État Git du dépôt",
         "description": "Lecture locale du dépôt : distant SSH, branches de présentation et derniers commits décorés.",
-        "filename": "B4-TECH-01-etat-git-local-2026-08-13.png",
+        "filename": "B4-TECH-01-etat-git-local-2026-08-17.png",
         "max_width": 170 * mm,
         "max_height": 145 * mm,
     },
     {
         "title": "A19.2 - Historique Git sur GitHub",
         "description": "Historique public de la branche main, utilisé pour tracer les modifications livrées.",
-        "filename": "B4-TECH-02-historique-git-github-2026-08-13.png",
+        "filename": "B4-TECH-02-historique-git-github-2026-08-17.png",
         "max_width": 170 * mm,
         "max_height": 145 * mm,
     },
     {
         "title": "A19.3 - CI GitHub Actions sur main",
         "description": "Exécution réussie des contrôles automatisés du commit de référence sur main.",
-        "filename": "B4-TECH-03-ci-main-github-2026-08-13.png",
+        "filename": "B4-TECH-03-ci-main-github-2026-08-17.png",
         "max_width": 170 * mm,
         "max_height": 145 * mm,
     },
     {
         "title": "A19.4 - CI develop et staging vérifié",
         "description": "Exécution réussie sur develop, incluant la vérification du staging après les contrôles CI.",
-        "filename": "B4-TECH-04-ci-develop-staging-github-2026-08-13.png",
+        "filename": "B4-TECH-04-ci-develop-staging-github-2026-08-17.png",
         "max_width": 170 * mm,
         "max_height": 145 * mm,
     },
     {
         "title": "A19.5 - Audit transversal Bloc 4",
         "description": "Sortie réelle du contrôleur attestant la conformité des sept compétences et du manifeste.",
-        "filename": "B4-TECH-05-audit-bloc4-local-2026-08-13.png",
+        "filename": "B4-TECH-05-audit-bloc4-local-2026-08-17.png",
         "max_width": 170 * mm,
         "max_height": 145 * mm,
+    },
+]
+
+TEXTUAL_EVIDENCE = [
+    {
+        "title": "P1 - C4.1.1 : maintenance préventive et dépendances",
+        "files": [
+            "docs/rncp/bloc-04/preuves/B4-C411-01-audit-dependances-2026-08-13.json",
+            "docs/rncp/bloc-04/preuves/B4-C411-02-decision-maintenance-2026-08-13.md",
+            "docs/rncp/bloc-04/preuves/B4-C411-03-controle-dependances-2026-08-13.json",
+        ],
+    },
+    {
+        "title": "P2 - C4.1.2 : supervision, alertes et SLO",
+        "files": [
+            "docs/rncp/bloc-04/preuves/B4-C412-01-historique-supervision-2026-08-13.json",
+            "docs/rncp/bloc-04/preuves/B4-C412-02-sante-production-2026-08-13.json",
+            "docs/rncp/bloc-04/preuves/B4-C412-03-exercice-alerte-2026-08-13.json",
+            "docs/rncp/bloc-04/preuves/B4-C412-04-slo-supervision-2026-08-13.json",
+            "docs/rncp/bloc-04/preuves/B4-C412-05-validation-scripts-alertes-2026-08-17.json",
+        ],
+    },
+    {
+        "title": "P3 - C4.2.1 : qualification et traçabilité des anomalies",
+        "files": [
+            "docs/rncp/bloc-04/preuves/B4-C421-01-fiche-anomalie-accessibilite-2026-08-13.md",
+            "docs/rncp/bloc-04/preuves/B4-C421-02-anomalie-derive-production-2026-08-13.md",
+            "docs/rncp/bloc-04/preuves/B4-C421-03-registre-anomalies-2026-08-13.json",
+            "docs/rncp/bloc-04/preuves/B4-C421-04-exercice-registre-2026-08-13.json",
+        ],
+    },
+    {
+        "title": "P4 - C4.2.2 : correctifs et vérification de déploiement",
+        "files": [
+            "docs/rncp/bloc-04/preuves/B4-C422-01-correctif-et-ci-2026-08-13.json",
+            "docs/rncp/bloc-04/preuves/B4-C422-02-traitement-correctif-ci-cd-2026-08-13.md",
+            "docs/rncp/bloc-04/preuves/B4-C422-03-exercice-verification-deploiement-2026-08-13.json",
+            "docs/rncp/bloc-04/preuves/B4-C422-04-staging-verifie-2026-08-13.json",
+        ],
+    },
+    {
+        "title": "P5 - C4.3.1 : recommandations d'amélioration",
+        "files": [
+            "docs/rncp/bloc-04/preuves/B4-C431-01-recommandations-2026-08-13.md",
+            "docs/rncp/bloc-04/preuves/B4-C431-02-registre-ameliorations-2026-08-13.json",
+            "docs/rncp/bloc-04/preuves/B4-C431-03-exercice-revue-ameliorations-2026-08-13.json",
+        ],
+    },
+    {
+        "title": "P6 - C4.3.2 : journal des versions déployées",
+        "files": [
+            "docs/rncp/bloc-04/preuves/B4-C432-01-journal-versions-deployees-2026-08-13.md",
+            "docs/rncp/bloc-04/preuves/B4-C432-02-registre-versions-2026-08-13.json",
+            "docs/rncp/bloc-04/preuves/B4-C432-03-exercice-journal-versions-2026-08-13.json",
+        ],
+    },
+    {
+        "title": "P7 - C4.3.3 : collaboration avec le support",
+        "files": [
+            "docs/rncp/bloc-04/preuves/B4-C433-01-collaboration-support-2026-08-13.md",
+            "docs/rncp/bloc-04/preuves/B4-C433-02-registre-collaboration-support-2026-08-13.json",
+            "docs/rncp/bloc-04/preuves/B4-C433-03-exercice-collaboration-support-2026-08-13.json",
+        ],
+    },
+    {
+        "title": "P8 - contrôle transversal, matrice et intégrité",
+        "files": [
+            "docs/rncp/bloc-04/REVUE_FINALE_BLOC_04.md",
+            "docs/rncp/bloc-04/dossier-jury/annexes/MATRICE_DE_PREUVES.md",
+            "docs/rncp/bloc-04/preuves/captures/manifest.json",
+            "docs/rncp/bloc-04/preuves/captures/manifest-technique.json",
+            "docs/rncp/bloc-04/preuves/MANIFEST.sha256",
+            "docs/rncp/bloc-04/preuves/B4-REVUE-FINALE-01-audit-transversal-2026-08-17.json",
+        ],
     },
 ]
 
@@ -140,7 +220,7 @@ def inline_markup(value: str) -> str:
     placeholders: list[str] = []
 
     def preserve_code(match: re.Match[str]) -> str:
-        placeholders.append(f'<font name="Courier">{escape(match.group(1))}</font>')
+        placeholders.append(f'<font name="Vera">{escape(match.group(1))}</font>')
         return f"@@CODE{len(placeholders) - 1}@@"
 
     value = re.sub(r"`([^`]+)`", preserve_code, value)
@@ -228,7 +308,7 @@ quote = ParagraphStyle(
 code = ParagraphStyle(
     "Code",
     parent=body,
-    fontName="Courier",
+    fontName="Vera",
     fontSize=7.2,
     leading=9.2,
     leftIndent=3 * mm,
@@ -236,6 +316,30 @@ code = ParagraphStyle(
     borderPadding=3 * mm,
     backColor=colors.HexColor("#f3f5f2"),
     textColor=colors.HexColor("#243b3d"),
+)
+raw_code = ParagraphStyle(
+    "RawCode",
+    parent=code,
+    fontSize=6.2,
+    leading=8,
+    leftIndent=2 * mm,
+    rightIndent=2 * mm,
+    spaceAfter=2 * mm,
+)
+annex_file_title = ParagraphStyle(
+    "AnnexFileTitle",
+    parent=h3,
+    fontSize=10,
+    leading=13,
+    textColor=SPITY_DARK,
+    spaceBefore=4 * mm,
+)
+annex_heading = ParagraphStyle(
+    "AnnexHeading",
+    parent=h3,
+    fontSize=9.5,
+    leading=12,
+    spaceBefore=2 * mm,
 )
 cover_title = ParagraphStyle(
     "CoverTitle",
@@ -300,7 +404,7 @@ class Bloc4Document(BaseDocTemplate):
             canvas.setFont("Vera", 7.5)
             canvas.setFillColor(SPITY_MUTED)
             canvas.drawRightString(width - 18 * mm, 9 * mm, f"Page {doc.page}")
-            canvas.drawString(18 * mm, 9 * mm, "Expert en développement logiciel - 13 août 2026")
+            canvas.drawString(18 * mm, 9 * mm, f"Expert en développement logiciel - {DOSSIER_DATE}")
 
         canvas.restoreState()
 
@@ -336,7 +440,7 @@ class JuryPageChrome(Flowable):
         canvas.setFont("Vera", 7.5)
         canvas.setFillColor(SPITY_MUTED)
         canvas.drawRightString(width - 18 * mm, 9 * mm, f"Page {page_number}")
-        canvas.drawString(18 * mm, 9 * mm, "Expert en développement logiciel - 13 août 2026")
+        canvas.drawString(18 * mm, 9 * mm, f"Expert en développement logiciel - {DOSSIER_DATE}")
         canvas.restoreState()
 
 
@@ -372,7 +476,26 @@ def make_table(rows: list[list[str]], available_width: float) -> Table:
     return table
 
 
-def parse_markdown(content: str, available_width: float) -> list:
+def wrap_preformatted(value: str, width: int = 112) -> str:
+    wrapped_lines = []
+    for line in value.splitlines():
+        if not line:
+            wrapped_lines.append("")
+            continue
+        wrapped_lines.extend(
+            textwrap.wrap(
+                line,
+                width=width,
+                replace_whitespace=False,
+                drop_whitespace=False,
+                break_long_words=True,
+                break_on_hyphens=False,
+            ) or [""]
+        )
+    return "\n".join(wrapped_lines)
+
+
+def parse_markdown(content: str, available_width: float, compact: bool = False) -> list:
     lines = content.splitlines()
     story = []
     paragraph_lines: list[str] = []
@@ -415,7 +538,7 @@ def parse_markdown(content: str, available_width: float) -> list:
             flush_list()
             flush_table()
             if in_code:
-                story.append(Preformatted("\n".join(code_lines), code))
+                story.append(Preformatted(wrap_preformatted("\n".join(code_lines)), raw_code if compact else code))
                 story.append(Spacer(1, 3 * mm))
                 code_lines.clear()
                 in_code = False
@@ -445,13 +568,13 @@ def parse_markdown(content: str, available_width: float) -> list:
         if line.startswith("## "):
             flush_paragraph()
             flush_list()
-            if seen_section:
+            if seen_section and not compact:
                 story.append(PageBreak())
             seen_section = True
             heading = line[3:].strip()
             heading = re.sub(r"(?<![A-Za-z0-9])(C4\.\d\.\d)(?![A-Za-z0-9])", r"[\1]", heading)
-            heading_style = h2_compact if heading.startswith("7. [C4.2.2]") else h2
-            if "[C4." in heading:
+            heading_style = annex_heading if compact else (h2_compact if heading.startswith("7. [C4.2.2]") else h2)
+            if "[C4." in heading and not compact:
                 story.append(JuryPageChrome())
             story.append(Paragraph(inline_markup(heading), heading_style))
             continue
@@ -459,7 +582,7 @@ def parse_markdown(content: str, available_width: float) -> list:
         if line.startswith("### "):
             flush_paragraph()
             flush_list()
-            story.append(Paragraph(inline_markup(line[4:].strip()), h3))
+            story.append(Paragraph(inline_markup(line[4:].strip()), annex_heading if compact else h3))
             continue
 
         if line.startswith("- "):
@@ -486,6 +609,52 @@ def parse_markdown(content: str, available_width: float) -> list:
     return story
 
 
+def build_textual_evidence_appendix(document: Bloc4Document) -> list:
+    evidence_count = sum(len(group["files"]) for group in TEXTUAL_EVIDENCE)
+    story = [
+        PageBreak(),
+        Paragraph("14. Annexes probantes - contenus intégrés", h2),
+        Paragraph(
+            f"Cette annexe contient directement les {evidence_count} pièces textuelles et structurées mobilisées par le dossier. "
+            "Chaque pièce affiche son chemin source afin de permettre sa vérification dans le dépôt. Le manifeste SHA-256 protège "
+            "les sources et preuves stables ; l'empreinte détachée du PDF protège le livrable final dans son ensemble.",
+            body,
+        ),
+    ]
+
+    for group in TEXTUAL_EVIDENCE:
+        story.extend([
+            PageBreak(),
+            Spacer(1, 15 * mm),
+            JuryPageChrome(),
+            Paragraph(group["title"], h2_compact),
+        ])
+
+        for relative_path in group["files"]:
+            path = ROOT / relative_path
+            if not path.exists():
+                raise FileNotFoundError(f"Preuve textuelle absente : {path}")
+
+            story.extend([
+                Paragraph(inline_markup(path.name), annex_file_title),
+                Paragraph(f"Source : <font name=\"Vera\">{escape(relative_path)}</font>", small),
+                Spacer(1, 1.5 * mm),
+            ])
+
+            content = path.read_text(encoding="utf-8")
+            if path.suffix == ".md":
+                story.extend(parse_markdown(content, document.width, compact=True))
+            elif path.suffix == ".json":
+                normalized = json.dumps(json.loads(content), ensure_ascii=False, indent=2)
+                story.append(Preformatted(wrap_preformatted(normalized), raw_code))
+            else:
+                story.append(Preformatted(wrap_preformatted(content.rstrip()), raw_code))
+
+            story.append(Spacer(1, 3 * mm))
+
+    return story
+
+
 def evidence_image(path: Path, max_width: float, max_height: float) -> Image:
     image = Image(str(path))
     scale = min(max_width / image.imageWidth, max_height / image.imageHeight)
@@ -498,7 +667,7 @@ def evidence_image(path: Path, max_width: float, max_height: float) -> Image:
 def build_visual_evidence_appendix() -> list:
     story = [
         PageBreak(),
-        Paragraph("14. Annexe visuelle - parcours applicatifs", h2),
+        Paragraph("15. Annexe visuelle - parcours applicatifs", h2),
         Paragraph(
             "Les captures ci-dessous ont été produites depuis l'application locale avec des données de démonstration. "
             "Le manifeste A18 précise pour chacune le scénario, le rôle, le viewport et le fichier source ; aucune donnée sensible n'est incluse.",
@@ -527,7 +696,7 @@ def build_visual_evidence_appendix() -> list:
 def build_technical_evidence_appendix() -> list:
     story = [
         PageBreak(),
-        Paragraph("15. Annexe technique - Git, CI/CD et audit", h2),
+        Paragraph("16. Annexe technique - Git, CI/CD et audit", h2),
         Paragraph(
             "Cette annexe complète les parcours applicatifs par des preuves techniques réellement observées. "
             "Elle présente l'état Git lu localement, l'historique public, les workflows GitHub Actions validés et l'audit automatisé des sept compétences. "
@@ -575,7 +744,7 @@ def build_story(document: Bloc4Document) -> list:
         [Paragraph("Certification", small), Paragraph("Expert en développement logiciel", small)],
         [Paragraph("Candidat", small), Paragraph("Dorian Joly", small)],
         [Paragraph("Référentiel", small), Paragraph("Ynov 2024 - C4.1.1 à C4.3.3", small)],
-        [Paragraph("Version", small), Paragraph("1.0 - 13 août 2026", small)],
+        [Paragraph("Version", small), Paragraph(f"{DOSSIER_VERSION} - {DOSSIER_DATE}", small)],
         [Paragraph("État", small), Paragraph("7 compétences documentées et vérifiables", small)],
     ], colWidths=[42 * mm, 90 * mm], hAlign="CENTER")
     summary.setStyle(TableStyle([
@@ -605,6 +774,7 @@ def build_story(document: Bloc4Document) -> list:
     ]
     story.extend([toc, PageBreak()])
     story.extend(parse_markdown(markdown, document.width))
+    story.extend(build_textual_evidence_appendix(document))
     story.extend(build_visual_evidence_appendix())
     story.extend(build_technical_evidence_appendix())
     return story
@@ -614,7 +784,10 @@ def main() -> None:
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     document = Bloc4Document(str(OUTPUT))
     document.multiBuild(build_story(document))
+    checksum = hashlib.sha256(OUTPUT.read_bytes()).hexdigest()
+    OUTPUT_CHECKSUM.write_text(f"{checksum}  {OUTPUT.name}\n", encoding="utf-8")
     print(f"PDF Bloc 4 généré : {OUTPUT}")
+    print(f"Empreinte SHA-256 générée : {OUTPUT_CHECKSUM}")
 
 
 if __name__ == "__main__":

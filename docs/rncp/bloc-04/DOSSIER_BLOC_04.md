@@ -6,9 +6,9 @@
 
 **Candidat :** Dorian Joly
 
-**Version du dossier :** 1.1
+**Version du dossier :** 1.2
 
-**Date :** 13 août 2026
+**Date :** 17 août 2026
 
 **Référentiel :** Ynov 2024, pages 15 à 17
 
@@ -24,15 +24,15 @@ Les preuves sont de trois natures : sources versionnées, états externes public
 
 Spity dispose d'une chaîne de maintenance reproductible : Dependabot surveille chaque semaine npm et GitHub Actions, la CI bloque lint, types, tests, audit, build, MariaDB, accessibilité, Lighthouse et recettes Playwright, tandis qu'une sonde externe vérifie la production. Les images de release sont immuables et associées à une version, une révision et un manifeste.
 
-Le 13 août 2026, l'état vérifié est le suivant :
+La revue finale locale du 17 août 2026 et les observations externes datées du 13 août établissent l'état suivant :
 
 - 0 vulnérabilité de production et 0 alerte haute/critique dans l'audit complet après mise à jour des outils ;
-- 152 tests Jest, 43 tests de maintenance, 11 scénarios MariaDB et 6 recettes Playwright ;
+- 152 tests Jest, 47 tests de maintenance, 11 scénarios MariaDB et 6 recettes Playwright ;
 - 10 pages authentifiées sur 10 à 100 % Lighthouse accessibilité ;
-- CI complète verte sur `e3784b7` ;
+- CI complète verte sur `b210551` sur `main` et `develop` ;
 - 30 exécutions de supervision terminées dans l'échantillon public de 39 runs, toutes réussies, avec production `ok` ;
 - version observée en production : `0.1.0-jury`, révision `49c4ea0` ;
-- dérive de déploiement réelle consignée : la production reste 19 commits derrière la référence auditée.
+- dérive de déploiement réelle consignée : au 17 août, la production reste 36 commits derrière `main`.
 
 La dérive n'a pas été corrigée par un déploiement non autorisé. Elle est transformée en action de release contrôlée, avec sauvegarde et retour arrière.
 
@@ -41,7 +41,7 @@ La dérive n'a pas été corrigée par un déploiement non autorisé. Elle est t
 | Code compétence | Attendu principal | Réponse Spity | Preuves majeures | Statut |
 | --- | --- | --- | --- | --- |
 | C4.1.1 | Processus précis : fréquence, périmètre, type | Cadence hebdomadaire et mensuelle, politique exécutable, audit planifié, SBOM, revue PR et lot réel qualifié | `spity/MAINTENANCE.md`, C411-01 à C411-03 | Industrialisé et vérifié |
-| C4.1.2 | Supervision adaptée, sondes, critères qualité/performance, disponibilité | Politique versionnée, contrôle 15 min, qualification S1/S2/S3, artefacts 90 jours, incident/rétablissement unique et SLO 30 jours avec garde de couverture | `spity/OBSERVABILITY.md`, C412-01 à C412-04 | Industrialisé et vérifié |
+| C4.1.2 | Supervision adaptée, sondes, critères qualité/performance, disponibilité | Politique versionnée, contrôle 15 min, qualification S1/S2/S3, artefacts 90 jours, incident/rétablissement unique, SLO 30 jours et validation des scripts d'alerte | `spity/OBSERVABILITY.md`, C412-01 à C412-05 | Industrialisé et vérifié |
 | C4.2.1 | Collecte structurée, fiche reproductible, analyse et préconisations | Registre versionné, machine à états, confidentialité contrôlée, formulaires, CI dédiée et deux anomalies réelles | `spity/INCIDENT_MANAGEMENT.md`, C421-01 à C421-04 | Industrialisé et vérifié |
 | C4.2.2 | Correctif décrit utilisant intégration/déploiement continu | Contrôle de promotion version/révision, staging CI, candidate de release, rapport conservé, exercice reproductible et staging vérifié | `spity/RELEASE_VERIFICATION.md`, C422-01 à C422-04 | Industrialisé et vérifié |
 | C4.3.1 | Recommandations réalistes, argumentées, coûts/délais/gains | Registre mesurable, indicateurs, coûts/délais, retours qualifiés, revue mensuelle et CI dédiée | `spity/IMPROVEMENT_MANAGEMENT.md`, C431-01 à C431-03 | Industrialisé et vérifié |
@@ -159,7 +159,7 @@ Le workflow de sonde conserve chaque rapport JSON 90 jours. Un deuxième workflo
 
 ### 5.3 Résultat observé et exercice
 
-La collecte publique a trouvé 30 runs de supervision terminés dans les 39 plus récents, tous réussis, et la production répond `ok`. Le calcul SLO actuel mesure 18 observations planifiées sur les 96 minimales : il reste donc `insufficient-data` sans ouvrir de fausse alerte. Il est testé sur une fenêtre couverte, une brèche réellement alertable, une couverture insuffisante et l’exclusion d’un déclenchement manuel. L’exercice local contrôlé couvre désormais un cas sain, un HTTP 503/applicatif avec deux tentatives et une latence S3 encore disponible, sans toucher à la production.
+La collecte publique figée le 13 août a trouvé 30 runs de supervision terminés dans les 39 plus récents, tous réussis, et la production répond `ok`. Le calcul SLO associé mesure 18 observations planifiées sur les 96 minimales : il reste donc `insufficient-data` sans ouvrir de fausse alerte. Il est testé sur une fenêtre couverte, une brèche réellement alertable, une couverture insuffisante et l’exclusion d’un déclenchement manuel. L’exercice local contrôlé couvre un cas sain, un HTTP 503/applicatif avec deux tentatives et une latence S3 encore disponible. Le contrôle ajouté le 17 août extrait et compile les six blocs `actions/github-script` des dix workflows ; il protège notamment l'ouverture et la clôture automatiques des alertes contre une erreur JavaScript avant exécution distante.
 
 ### 5.4 Du signal à la décision de maintenance
 
@@ -442,6 +442,7 @@ Le principal risque ouvert n'est pas masqué : la production est saine mais en r
 | A7 | C4.1.2 | `preuves/B4-C412-02-sante-production-2026-08-13.json` |
 | A8 | C4.1.2/C4.2.1 | `preuves/B4-C412-03-exercice-alerte-2026-08-13.json` |
 | A8b | C4.1.2 | `preuves/B4-C412-04-slo-supervision-2026-08-13.json` |
+| A8c | C4.1.2 | `preuves/B4-C412-05-validation-scripts-alertes-2026-08-17.json` |
 | A9 | C4.2.1 | `preuves/B4-C421-01-fiche-anomalie-accessibilite-2026-08-13.md` |
 | A10 | C4.2.1 | `preuves/B4-C421-02-anomalie-derive-production-2026-08-13.md` |
 | A10b | C4.2.1 | `spity/INCIDENT_MANAGEMENT.md` et `spity/incidents/` |
@@ -465,12 +466,14 @@ Le principal risque ouvert n'est pas masqué : la production est saine mais en r
 | A15c | C4.3.3 | `preuves/B4-C433-03-exercice-collaboration-support-2026-08-13.json` |
 | A15d | C4.3.3 | `spity/support-collaborations/` et `check-support-collaborations.mjs` |
 | A16 | Intégrité | `preuves/MANIFEST.sha256` |
-| A17 | Revue finale | `REVUE_FINALE_BLOC_04.md` et `preuves/B4-REVUE-FINALE-01-audit-transversal-2026-08-13.json` |
+| A17 | Revue finale | `REVUE_FINALE_BLOC_04.md` et `preuves/B4-REVUE-FINALE-01-audit-transversal-2026-08-17.json` |
 | A18 | Parcours visuels | `preuves/captures/`, manifeste daté et procédure `npm run bloc4:visuals` |
 | A19 | Preuves techniques visuelles | État Git, historique, CI `main`, CI/staging `develop`, audit des sept compétences et procédure `npm run bloc4:tech-visuals` |
+
+Les pièces textuelles et structurées sont intégrées directement dans les annexes probantes P1 à P8 du PDF : résultats JSON, fiches Markdown, matrice, manifestes de capture, manifeste SHA-256 et audit transversal. Le PDF reste ainsi consultable hors dépôt sans perdre les preuves qui fondent chaque compétence.
 
 Les cinq captures de l'annexe A18 sont intégrées directement à la fin de l'export PDF. Elles présentent l'accueil public, le fil grimpeur, le matching, la gestion d'événements club et le profil mobile. Leur manifeste daté conserve le scénario, le rôle de démonstration, le viewport et le nom de chaque fichier ; elles restent donc vérifiables et reproductibles, sans donnée sensible.
 
 L'annexe A19 présente les preuves techniques demandées au niveau des compétences : état Git et branches, historique de commits, workflows GitHub Actions validés sur `main` et `develop`, puis audit transverse des sept compétences. Les captures Git et CI/CD complètent les preuves C4.1.1, C4.1.2, C4.2.2 et C4.3.2 ; l'audit final couvre aussi C4.2.1, C4.3.1 et C4.3.3. Elles sont intégrées directement dans le PDF et leurs URLs ou commandes exactes sont conservées dans `preuves/captures/manifest-technique.json`.
 
-Les sources complémentaires regroupent les workflows et formulaires sous `.github/`, les politiques et scripts de maintenance sous `spity/`, les guides de déploiement, de release, de journal et d'amélioration, ainsi que le référentiel officiel archivé. Elles sont toutes reliées au manifeste d'intégrité.
+Les sources complémentaires regroupent les workflows et formulaires sous `.github/`, les politiques et scripts de maintenance sous `spity/`, les guides de déploiement, de release, de journal et d'amélioration, ainsi que le référentiel officiel archivé. Elles sont reliées au manifeste d'intégrité. Le PDF final, qui contient aussi l'audit transversal produit après le manifeste, possède sa propre empreinte détachée `dossier-bloc-04-spity.pdf.sha256`.

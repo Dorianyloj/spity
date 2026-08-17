@@ -1,19 +1,19 @@
 {
   "schemaVersion": 1,
   "criterion": "Bloc 4",
-  "capturedAt": "2026-08-13T11:44:40.488Z",
-  "repositoryRevision": "094b24f96169ad4420f6f1c3bf17af35da4922ad",
+  "capturedAt": "2026-08-17T21:22:48.863Z",
+  "repositoryRevision": "b210551d394fcb421d9d6e0b9410b651c324bf93",
   "safety": "Repository-only completeness review. No production endpoint, deployment, database, external mutation or LXC was used.",
   "objective": "Verify the seven competency claims, operational sources, evidence assertions, current registries and SHA-256 manifest together.",
   "audit": {
     "schemaVersion": 1,
-    "checkedAt": "2026-08-13T11:44:40.488Z",
+    "checkedAt": "2026-08-17T21:22:48.863Z",
     "compliant": true,
     "competencyCount": 7,
     "compliantCompetencyCount": 7,
     "manifest": {
       "compliant": true,
-      "entryCount": 96
+      "entryCount": 133
     },
     "registries": {
       "C4.2.1": {
@@ -45,8 +45,8 @@
         "id": "C4.1.2",
         "title": "Concevoir un système de supervision et d’alerte",
         "compliant": true,
-        "operationalFileCount": 6,
-        "evidenceFileCount": 4
+        "operationalFileCount": 7,
+        "evidenceFileCount": 5
       },
       {
         "id": "C4.2.1",

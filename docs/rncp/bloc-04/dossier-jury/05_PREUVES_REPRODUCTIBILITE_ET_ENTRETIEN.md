@@ -13,7 +13,7 @@ Le dossier combine quatre niveaux complémentaires. Aucun niveau ne remplace les
 
 ## 2. Intégrité et cohérence globale
 
-Le fichier `../preuves/MANIFEST.sha256` contient l'empreinte de chaque document important, politique, script, workflow, test, preuve et du PDF. Toute modification d'un élément inscrit doit donc régénérer le manifeste ; une incohérence est détectée par le contrôle global.
+Le fichier `../preuves/MANIFEST.sha256` contient l'empreinte de chaque document important, politique, script, workflow, test et preuve stable. Toute modification d'un élément inscrit doit donc régénérer le manifeste ; une incohérence est détectée par le contrôle global. Après intégration de ces éléments et de l'audit transversal dans le PDF, `output/pdf/dossier-bloc-04-spity.pdf.sha256` protège séparément le livrable final.
 
 La commande ci-dessous est la porte principale de cohérence :
 
@@ -37,6 +37,7 @@ Elle contrôle les sept compétences, les statuts des documents, les sources op�
 | Lancer la qualité complète | `npm run quality` |
 | Régénérer le manifeste | `npm run bloc4:manifest` |
 | Régénérer l'export du dossier | `npm run bloc4:pdf` |
+| Vérifier l'export PDF | `npm run bloc4:pdf:verify` |
 
 Les exercices utilisent des données et serveurs locaux en mémoire. Ils sont conçus pour prouver les règles sans toucher une instance de production. Aucun LXC n'est utilisé dans ce parcours de vérification.
 
@@ -69,4 +70,4 @@ Elle est une simulation contrôlée, clairement indiquée. Elle démontre le for
 
 ## 6. Restitution finale
 
-Le dossier détaillé, la revue finale, les preuves structurées et l'export PDF sont cohérents par le manifeste. Pour une consultation hors dépôt, l'export PDF est disponible sous `output/pdf/dossier-bloc-04-spity.pdf`; il doit être régénéré avec `npm run bloc4:pdf` dès qu'un document source évolue.
+Le dossier détaillé, la revue finale et les preuves structurées sont intégrés dans l'export PDF disponible sous `output/pdf/dossier-bloc-04-spity.pdf`. Le manifeste protège les entrées stables et l'empreinte détachée protège l'export ; les deux contrôles doivent être rejoués dès qu'une source évolue.

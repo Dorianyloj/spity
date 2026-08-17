@@ -51,10 +51,11 @@ Le formulaire `incident-production.yml` impose date, gravité, version, reproduc
 
 ```bash
 npm run bloc4:exercise
+npm run workflows:scripts:check
 npm run test:maintenance
 ```
 
-L’exercice lance uniquement un serveur HTTP local éphémère. Il vérifie un cas sain, un HTTP 503/applicatif avec deux tentatives et une latence excessive classée S3 mais encore disponible. La preuve versionnée `B4-C412-03` ne touche ni la production, ni MariaDB, ni un LXC.
+L'exercice lance uniquement un serveur HTTP local éphémère. Il vérifie un cas sain, un HTTP 503/applicatif avec deux tentatives et une latence excessive classée S3 mais encore disponible. Le contrôle des workflows extrait et compile chaque bloc `actions/github-script`, y compris les étapes d'ouverture et de clôture des alertes ; un JavaScript invalide fait échouer la qualité avant exécution distante. Les preuves versionnées `B4-C412-03` et `B4-C412-05` ne touchent ni la production, ni MariaDB, ni un LXC.
 
 ## Limites connues et prochaine amélioration
 

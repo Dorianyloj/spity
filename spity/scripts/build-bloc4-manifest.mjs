@@ -7,6 +7,7 @@ const scriptDirectory = dirname(fileURLToPath(import.meta.url))
 const repositoryRoot = resolve(scriptDirectory, '../..')
 const evidenceDirectory = resolve(repositoryRoot, 'docs/rncp/bloc-04/preuves')
 const manifestPath = resolve(evidenceDirectory, 'MANIFEST.sha256')
+const finalAuditPath = resolve(evidenceDirectory, 'B4-REVUE-FINALE-01-audit-transversal-2026-08-17.json')
 
 const collectEvidenceFiles = async (directory) => {
   const entries = await readdir(directory, { withFileTypes: true })
@@ -16,7 +17,7 @@ const collectEvidenceFiles = async (directory) => {
     const path = resolve(directory, entry.name)
     if (entry.isDirectory()) {
       files.push(...await collectEvidenceFiles(path))
-    } else if (entry.isFile() && path !== manifestPath) {
+    } else if (entry.isFile() && path !== manifestPath && path !== finalAuditPath) {
       files.push(path)
     }
   }
@@ -26,7 +27,7 @@ const collectEvidenceFiles = async (directory) => {
 
 const evidenceFiles = await collectEvidenceFiles(evidenceDirectory)
 
-const files = [
+const files = [...new Set([
   ...evidenceFiles,
   resolve(repositoryRoot, 'README.md'),
   resolve(repositoryRoot, 'JURY.md'),
@@ -59,6 +60,10 @@ const files = [
   resolve(repositoryRoot, 'spity/support-collaboration-policy.json'),
   resolve(repositoryRoot, 'spity/support-collaboration-schema.json'),
   resolve(repositoryRoot, 'spity/bloc4-audit-policy.json'),
+  resolve(repositoryRoot, 'spity/.gitignore'),
+  resolve(repositoryRoot, 'spity/package.json'),
+  resolve(repositoryRoot, 'spity/package-lock.json'),
+  resolve(repositoryRoot, 'spity/requirements-docs.txt'),
   resolve(repositoryRoot, 'spity/incidents/SPITY-INC-2026-0001.json'),
   resolve(repositoryRoot, 'spity/incidents/SPITY-INC-2026-0002.json'),
   resolve(repositoryRoot, 'spity/improvements/SPITY-IMP-2026-0001.json'),
@@ -78,6 +83,8 @@ const files = [
   resolve(repositoryRoot, 'spity/scripts/capture-bloc4-completeness-evidence.mjs'),
   resolve(repositoryRoot, 'spity/scripts/capture-bloc4-visual-evidence.mjs'),
   resolve(repositoryRoot, 'spity/scripts/capture-bloc4-technical-evidence.mjs'),
+  resolve(repositoryRoot, 'spity/scripts/build-bloc4-dossier.py'),
+  resolve(repositoryRoot, 'spity/scripts/build-bloc4-manifest.mjs'),
   resolve(repositoryRoot, 'spity/scripts/check-improvement-backlog.mjs'),
   resolve(repositoryRoot, 'spity/scripts/check-release-journal.mjs'),
   resolve(repositoryRoot, 'spity/scripts/check-support-collaborations.mjs'),
@@ -85,6 +92,8 @@ const files = [
   resolve(repositoryRoot, 'spity/scripts/check-incident-registry.mjs'),
   resolve(repositoryRoot, 'spity/scripts/capture-monitoring-slo.mjs'),
   resolve(repositoryRoot, 'spity/scripts/check-health.mjs'),
+  resolve(repositoryRoot, 'spity/scripts/check-workflow-scripts.mjs'),
+  resolve(repositoryRoot, 'spity/scripts/verify-bloc4-pdf.mjs'),
   resolve(repositoryRoot, 'spity/scripts/check-dependency-policy.mjs'),
   resolve(repositoryRoot, 'spity/scripts/evaluate-monitoring-window.mjs'),
   resolve(repositoryRoot, 'spity/scripts/run-incident-registry-exercise.mjs'),
@@ -95,6 +104,8 @@ const files = [
   resolve(repositoryRoot, 'spity/scripts/run-production-monitor.mjs'),
   resolve(repositoryRoot, 'spity/scripts/verify-deployment.mjs'),
   resolve(repositoryRoot, 'spity/tests/maintenance/check-health.test.mjs'),
+  resolve(repositoryRoot, 'spity/tests/maintenance/workflow-scripts.test.mjs'),
+  resolve(repositoryRoot, 'spity/tests/maintenance/bloc4-pdf.test.mjs'),
   resolve(repositoryRoot, 'spity/tests/maintenance/verify-deployment.test.mjs'),
   resolve(repositoryRoot, 'spity/tests/maintenance/improvement-backlog.test.mjs'),
   resolve(repositoryRoot, 'spity/tests/maintenance/release-journal.test.mjs'),
@@ -112,8 +123,7 @@ const files = [
   resolve(repositoryRoot, '.github/workflows/ci.yml'),
   resolve(repositoryRoot, '.github/workflows/release.yml'),
   resolve(repositoryRoot, 'output/README.md'),
-  resolve(repositoryRoot, 'output/pdf/dossier-bloc-04-spity.pdf'),
-].sort((left, right) => left.localeCompare(right, 'fr'))
+])].sort((left, right) => left.localeCompare(right, 'fr'))
 
 const lines = []
 

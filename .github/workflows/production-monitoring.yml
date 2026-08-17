@@ -76,7 +76,7 @@ jobs:
             })
             const existing = issues.find((issue) => !issue.pull_request && issue.body?.includes(marker))
             const body = `${marker}
-            La sonde publique nécessite une prise en charge selon `spity/OBSERVABILITY.md`.
+            La sonde publique nécessite une prise en charge selon spity/OBSERVABILITY.md.
 
             - Observé : ${report.checkedAt ?? 'indisponible'}
             - État : ${report.status ?? 'unknown'}

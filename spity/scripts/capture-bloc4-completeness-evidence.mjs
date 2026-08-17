@@ -6,7 +6,7 @@ import { auditBloc4Completeness, writeBloc4CompletenessReport } from './check-bl
 const scriptDirectory = dirname(fileURLToPath(import.meta.url))
 const repositoryRoot = resolve(scriptDirectory, '../..')
 const outputPath = process.env.BLOC4_COMPLETENESS_EVIDENCE_PATH
-  ?? resolve(repositoryRoot, 'docs/rncp/bloc-04/preuves/B4-REVUE-FINALE-01-audit-transversal-2026-08-13.json')
+  ?? resolve(repositoryRoot, 'docs/rncp/bloc-04/preuves/B4-REVUE-FINALE-01-audit-transversal-2026-08-17.json')
 
 const audit = await auditBloc4Completeness()
 const evidence = {

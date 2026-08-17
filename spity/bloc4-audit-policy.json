@@ -35,6 +35,7 @@
         "spity/OBSERVABILITY.md",
         "spity/monitoring-policy.json",
         "spity/scripts/check-health.mjs",
+        "spity/scripts/check-workflow-scripts.mjs",
         "spity/scripts/evaluate-monitoring-window.mjs",
         ".github/workflows/production-monitoring.yml",
         ".github/workflows/availability-slo-report.yml"
@@ -43,7 +44,8 @@
         "docs/rncp/bloc-04/preuves/B4-C412-01-historique-supervision-2026-08-13.json",
         "docs/rncp/bloc-04/preuves/B4-C412-02-sante-production-2026-08-13.json",
         "docs/rncp/bloc-04/preuves/B4-C412-03-exercice-alerte-2026-08-13.json",
-        "docs/rncp/bloc-04/preuves/B4-C412-04-slo-supervision-2026-08-13.json"
+        "docs/rncp/bloc-04/preuves/B4-C412-04-slo-supervision-2026-08-13.json",
+        "docs/rncp/bloc-04/preuves/B4-C412-05-validation-scripts-alertes-2026-08-17.json"
       ],
       "assertions": [
         {
@@ -55,6 +57,11 @@
           "file": "docs/rncp/bloc-04/preuves/B4-C412-04-slo-supervision-2026-08-13.json",
           "path": "source.eligibleScheduledRuns",
           "minimum": 1
+        },
+        {
+          "file": "docs/rncp/bloc-04/preuves/B4-C412-05-validation-scripts-alertes-2026-08-17.json",
+          "path": "compliant",
+          "equals": true
         }
       ]
     },

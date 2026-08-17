@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-08-17T21:18:47.261Z",
+  "compliant": true,
+  "workflowCount": 10,
+  "scriptCount": 6,
+  "scripts": [
+    {
+      "path": ".github/workflows/availability-slo-report.yml#evaluate:step-5",
+      "name": "Open or refresh availability SLO breach"
+    },
+    {
+      "path": ".github/workflows/availability-slo-report.yml#evaluate:step-6",
+      "name": "Close SLO breach after recovery"
+    },
+    {
+      "path": ".github/workflows/dependency-maintenance.yml#audit:step-6",
+      "name": "Open or update the maintenance incident"
+    },
+    {
+      "path": ".github/workflows/dependency-maintenance.yml#audit:step-7",
+      "name": "Close the maintenance incident after recovery"
+    },
+    {
+      "path": ".github/workflows/production-monitoring.yml#health-check:step-5",
+      "name": "Open or refresh production alert"
+    },
+    {
+      "path": ".github/workflows/production-monitoring.yml#health-check:step-6",
+      "name": "Close alert after recovery"
+    }
+  ],
+  "errors": []
+}

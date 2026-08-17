@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-08-13T13:34:00.832Z",
+  "capturedAt": "2026-08-17T21:19:05.652Z",
   "source": "git-local-et-github-public",
   "sensitiveData": "Aucun secret, cookie ou jeton n’est inclus. Les captures GitHub peuvent afficher les métadonnées publiques du dépôt nécessaires à la traçabilité.",
   "captures": [
@@ -9,63 +9,63 @@
       "label": "État Git du dépôt",
       "source": "commandes-locales",
       "command": "git remote get-url origin ; git branch -vv ; git log --decorate --oneline -4",
-      "file": "B4-TECH-01-etat-git-local-2026-08-13.png",
+      "file": "B4-TECH-01-etat-git-local-2026-08-17.png",
       "viewport": {
         "width": 1440,
         "height": 1000
       },
-      "byteSize": 179672
+      "byteSize": 307183
     },
     {
       "id": "B4-TECH-05",
       "label": "Audit transversal des sept compétences",
       "source": "commandes-locales",
       "command": "node spity/scripts/check-bloc4-completeness.mjs",
-      "file": "B4-TECH-05-audit-bloc4-local-2026-08-13.png",
+      "file": "B4-TECH-05-audit-bloc4-local-2026-08-17.png",
       "viewport": {
         "width": 1440,
         "height": 1000
       },
-      "byteSize": 180502
+      "byteSize": 269050
     },
     {
       "id": "B4-TECH-02",
       "label": "Historique Git sur main",
       "source": "github-public",
       "url": "https://github.com/Dorianyloj/spity/commits/main",
-      "expectedText": "docs(bloc4): embed visual evidence in pdf",
-      "file": "B4-TECH-02-historique-git-github-2026-08-13.png",
+      "expectedText": "fix(bloc4): stabilize competency PDF headings",
+      "file": "B4-TECH-02-historique-git-github-2026-08-17.png",
       "viewport": {
         "width": 1440,
         "height": 1000
       },
-      "byteSize": 113338
+      "byteSize": 144888
     },
     {
       "id": "B4-TECH-03",
       "label": "GitHub Actions - CI main validée",
       "source": "github-public",
-      "url": "https://github.com/Dorianyloj/spity/actions/runs/31703899463",
+      "url": "https://github.com/Dorianyloj/spity/actions/runs/31778632975",
       "expectedText": "Success",
-      "file": "B4-TECH-03-ci-main-github-2026-08-13.png",
+      "file": "B4-TECH-03-ci-main-github-2026-08-17.png",
       "viewport": {
         "width": 1440,
         "height": 1000
       },
-      "byteSize": 89377
+      "byteSize": 113499
     },
     {
       "id": "B4-TECH-04",
       "label": "GitHub Actions - CI develop et staging validés",
       "source": "github-public",
-      "url": "https://github.com/Dorianyloj/spity/actions/runs/31703902352",
+      "url": "https://github.com/Dorianyloj/spity/actions/runs/31778635277",
       "expectedText": "Success",
-      "file": "B4-TECH-04-ci-develop-staging-github-2026-08-13.png",
+      "file": "B4-TECH-04-ci-develop-staging-github-2026-08-17.png",
       "viewport": {
         "width": 1440,
         "height": 1000
       },
-      "byteSize": 89364
+      "byteSize": 113435
     }
   ]
 }

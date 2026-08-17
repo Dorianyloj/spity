@@ -5,7 +5,7 @@ Cette matrice permet de passer rapidement d'un attendu à son mécanisme, sa com
 | Compétence | Attendu résumé | Source opérationnelle principale | Vérification | Preuve de référence | Limite explicitement assumée |
 | --- | --- | --- | --- | --- | --- |
 | C4.1.1 | Fréquence, périmètre et type de mises à jour | `spity/MAINTENANCE.md` ; `dependency-policy.json` | `npm run dependencies:check` | `B4-C411-03-controle-dependances-2026-08-13.json` | Les exceptions d'audit sont documentées et expirent ; aucune correction forcée cassante n'est appliquée. |
-| C4.1.2 | Sondes, seuils, alertes et disponibilité | `spity/OBSERVABILITY.md` ; `monitoring-policy.json` | `npm run monitoring:slo` | `B4-C412-04-slo-supervision-2026-08-13.json` | Une fenêtre courte est `insufficient-data`, elle ne crée pas de fausse indisponibilité. |
+| C4.1.2 | Sondes, seuils, alertes et disponibilité | `spity/OBSERVABILITY.md` ; `monitoring-policy.json` | `npm run monitoring:slo` ; `npm run workflows:scripts:check` | `B4-C412-04-slo-supervision-2026-08-13.json` ; `B4-C412-05-validation-scripts-alertes-2026-08-17.json` | Une fenêtre courte est `insufficient-data`, elle ne crée pas de fausse indisponibilité. |
 | C4.2.1 | Anomalie structurée, analysée et vérifiée | `spity/INCIDENT_MANAGEMENT.md` ; `incidents/` | `npm run incidents:check` | `B4-C421-03-registre-anomalies-2026-08-13.json` | L'incident de dérive reste planifié tant qu'une release n'est pas autorisée. |
 | C4.2.2 | Correctif intégré et déployé via CI/CD | `spity/RELEASE_VERIFICATION.md` ; `verify-deployment.mjs` | `npm run bloc4:deployment-exercise` | `B4-C422-04-staging-verifie-2026-08-13.json` | La preuve confirme un staging, pas une promotion de production. |
 | C4.3.1 | Améliorations réalistes, argumentées et mesurables | `spity/IMPROVEMENT_MANAGEMENT.md` ; `improvements/` | `npm run improvements:check` | `B4-C431-02-registre-ameliorations-2026-08-13.json` | Une recommandation n'est pas déclarée réalisée sans mesure de résultat. |
@@ -15,6 +15,8 @@ Cette matrice permet de passer rapidement d'un attendu à son mécanisme, sa com
 ## Contrôle transversal
 
 `npm run bloc4:check` vérifie toute la matrice à partir de `spity/bloc4-audit-policy.json`. Il exige l'existence des documents et sources listés, contrôle les assertions des preuves, audite les registres et valide le manifeste SHA-256.
+
+Les preuves textuelles de cette matrice sont reproduites intégralement dans les annexes P1 à P8 du PDF final ; elles ne sont donc pas seulement référencées par un chemin externe.
 
 ## Illustration des parcours applicatifs
 

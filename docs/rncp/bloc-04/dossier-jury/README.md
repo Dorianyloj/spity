@@ -25,6 +25,7 @@ Ce dossier est la porte d'entrée de remise du Bloc 4 : **maintenir l'applicatio
 - [Revue finale](../REVUE_FINALE_BLOC_04.md) : une ligne par compétence avec commande et preuve ;
 - [Feuille de route](../PLAN_ACTION_BLOC_04.md) : état réel et définition de terminé ;
 - [Répertoire des preuves](../preuves/README.md) : captures figées, exercices et manifeste ;
+- [PDF final](../../../../output/pdf/dossier-bloc-04-spity.pdf) : dossier autonome contenant les preuves textuelles P1 à P8 et les annexes visuelles A18/A19 ;
 - [Référentiel officiel](../../referentiel/2024-referentiel-expert-developpement-logiciel-ynov.pdf) : pages 15 à 17.
 
 ## Ce que le dossier permet d'affirmer
@@ -38,9 +39,11 @@ Le dossier ne confond jamais une simulation, un staging validé et une promotion
 Depuis le répertoire `spity/` :
 
 ```bash
+nvm use
 npm run bloc4:check
+npm run bloc4:pdf:verify
 npm run test:maintenance
 npm run quality
 ```
 
-Ces contrôles n'utilisent pas le LXC. Le premier vérifie les sept compétences, les sources, les registres, les preuves JSON et les empreintes SHA-256 du manifeste.
+Ces contrôles n'utilisent pas le LXC. Le premier vérifie les sept compétences, les sources, les registres, les preuves JSON et les empreintes SHA-256 du manifeste ; le second vérifie que le PDF remis correspond à son empreinte détachée.

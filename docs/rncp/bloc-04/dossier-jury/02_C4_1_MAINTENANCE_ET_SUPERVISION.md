@@ -54,14 +54,15 @@ Le SLO porte sur 30 jours et 99,5 % de disponibilité. Seuls les runs planifiés
 
 ### Résultat vérifiable
 
-`npm run monitoring:probe` contrôle la santé publique de manière explicite. `npm run monitoring:slo` calcule la couverture et la disponibilité à partir des rapports retenus. L'exercice `npm run bloc4:exercise` rejoue en mémoire un cas sain, un échec applicatif après reprises et une dégradation de latence S3.
+`npm run monitoring:probe` contrôle la santé publique de manière explicite. `npm run monitoring:slo` calcule la couverture et la disponibilité à partir des rapports retenus. L'exercice `npm run bloc4:exercise` rejoue en mémoire un cas sain, un échec applicatif après reprises et une dégradation de latence S3. `npm run workflows:scripts:check` compile les blocs JavaScript des workflows d'alerte avant leur exécution distante.
 
 **Sources et preuves à présenter :**
 
 - `spity/OBSERVABILITY.md` et `spity/monitoring-policy.json` ;
 - `spity/scripts/check-health.mjs` et `spity/scripts/evaluate-monitoring-window.mjs` ;
 - `.github/workflows/production-monitoring.yml` et `availability-slo-report.yml` ;
-- `../preuves/B4-C412-01-historique-supervision-2026-08-13.json` à `B4-C412-04-slo-supervision-2026-08-13.json`.
+- `../preuves/B4-C412-01-historique-supervision-2026-08-13.json` à `B4-C412-04-slo-supervision-2026-08-13.json` ;
+- `../preuves/B4-C412-05-validation-scripts-alertes-2026-08-17.json`.
 
 ## À retenir pour l'entretien
 

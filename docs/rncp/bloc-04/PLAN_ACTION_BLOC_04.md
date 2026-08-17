@@ -2,7 +2,7 @@
 
 **Démarrage :** 12 août 2026
 
-**Dernière mise à jour :** 13 août 2026
+**Dernière mise à jour :** 17 août 2026
 
 **Projet :** Spity
 
@@ -30,7 +30,7 @@ Pour chaque ligne, les cinq conditions suivantes sont obligatoires :
 4. les résultats sont datés, reproductibles et sans données sensibles ;
 5. la procédure indique fréquence, responsabilités, décision et retour arrière.
 
-La suite de contrôle finale comprend 152 tests Jest, 43 tests de maintenance, 11 scénarios MariaDB, 6 recettes Playwright, les audits Lighthouse et le contrôle `npm run bloc4:check`.
+La suite de contrôle finale comprend 152 tests Jest, 47 tests de maintenance, 11 scénarios MariaDB, 6 recettes Playwright, les audits Lighthouse et le contrôle `npm run bloc4:check`.
 
 ## C4.1.1 - Résultat obtenu
 
@@ -53,6 +53,7 @@ La suite de contrôle finale comprend 152 tests Jest, 43 tests de maintenance, 1
 - [x] objectif de disponibilité 99,5 % sur 30 jours calculé quotidiennement à partir des seuls runs planifiés ;
 - [x] protection anti-bruit : pas d’alerte SLO avec moins de 96 observations ou 95 % de couverture ;
 - [x] exercice local sain, indisponible et lent ; couverture dédiée des décisions de sonde et de SLO.
+- [x] extraction et compilation automatique des blocs `actions/github-script`, avec preuve datée et cas de régression syntaxique testé.
 
 Les limites restantes sont explicites : l’historique de latence P95, les ressources système et les Web Vitals devront rejoindre une plateforme de métriques persistantes. Aucun déploiement de production n’est déclenché par ces workflows.
 
@@ -113,7 +114,8 @@ Les sept compétences du Bloc 4 respectent maintenant la même définition de te
 - [x] commande `npm run bloc4:check` ajoutée à la porte `quality`, avec deux tests dédiés ;
 - [x] rapport de lecture jury `REVUE_FINALE_BLOC_04.md` reliant l'attendu, le mécanisme, la commande et la preuve de chaque compétence ;
 - [x] preuve C422-04 ajoutée pour le staging CI réellement validé ;
-- [x] manifest SHA-256 réconcilié avec le dossier, le PDF, les scripts, les tests, les workflows et les nouvelles preuves.
+- [x] manifeste SHA-256 réconcilié avec les sources et preuves stables, puis empreinte détachée du PDF final ;
+- [x] preuves textuelles P1 à P8 et captures A18/A19 intégrées directement dans le PDF remis.
 
 ## Règle de présentation
 
