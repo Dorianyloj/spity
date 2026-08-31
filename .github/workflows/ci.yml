@@ -62,7 +62,7 @@ jobs:
 
       - name: Upload coverage report
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-${{ github.sha }}
           path: spity/coverage
@@ -128,7 +128,7 @@ jobs:
 
       - name: Upload integration report
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: integration-${{ github.sha }}
           path: spity/.integration-results
@@ -138,7 +138,7 @@ jobs:
 
       - name: Upload authenticated accessibility reports
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: accessibility-${{ github.sha }}
           path: spity/.accessibility
@@ -183,7 +183,7 @@ jobs:
 
       - name: Upload Lighthouse reports
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: lighthouse-${{ github.sha }}
           path: spity/.lighthouseci
@@ -250,7 +250,7 @@ jobs:
 
       - name: Upload acceptance reports
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: acceptance-${{ github.sha }}
           path: |
@@ -408,7 +408,7 @@ jobs:
 
       - name: Upload staging deployment evidence
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: staging-${{ github.sha }}
           path: staging-evidence
