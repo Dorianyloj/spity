@@ -47,7 +47,7 @@ jobs:
 
     steps:
       - name: Checkout tagged sources
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
@@ -232,7 +232,7 @@ jobs:
 
     steps:
       - name: Checkout tagged sources
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Authenticate to GitHub Container Registry
         env:
