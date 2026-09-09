@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 export type RateLimitPolicy = {
-  bucket: 'auth' | 'api'
+  bucket: 'auth' | 'api' | 'media'
   maxRequests: number
   windowMs: number
 }

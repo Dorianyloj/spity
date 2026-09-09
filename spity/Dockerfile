@@ -50,7 +50,10 @@ LABEL org.opencontainers.image.revision=${APP_REVISION}
 LABEL org.opencontainers.image.source="https://github.com/Dorianyloj/spity"
 
 RUN groupadd --system --gid 1001 nodejs \
-  && useradd --system --uid 1001 --gid nodejs nextjs
+  && useradd --system --uid 1001 --gid nodejs nextjs \
+  && mkdir /app/.media \
+  && chown nextjs:nodejs /app/.media \
+  && chmod 700 /app/.media
 
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./

@@ -192,6 +192,16 @@ export const posts = mysqlTable('posts', {
 })
 
 // === MEDIA ===
+// Private uploads are independent of posts until a publishing workflow attaches them.
+export const mediaUploads = mysqlTable('media_uploads', {
+  id: varchar('id', { length: 36 }).primaryKey(),
+  ownerId: varchar('owner_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
+  byteSize: int('byte_size', { unsigned: true }).notNull(),
+  width: int('width', { unsigned: true }).notNull(),
+  height: int('height', { unsigned: true }).notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+}, (table) => [index('media_uploads_owner_idx').on(table.ownerId)])
+
 export const medias = mysqlTable('medias', {
   id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
   postId: varchar('post_id', { length: 36 }).notNull().references(() => posts.id, { onDelete: 'cascade' }),

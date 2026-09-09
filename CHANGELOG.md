@@ -28,6 +28,8 @@ Les évolutions notables de Spity sont consignées dans ce fichier. Le projet su
 
 ### Added
 
+- API d’import d’images privées : validation du contenu, réencodage WebP sans métadonnées, quotas par compte, lecture et suppression réservées au propriétaire, migration et stockage Docker persistant. Voir le [contrat d’API](spity/docs/media-uploads.md).
+- Tests des uploads et scénarios d’intégration MariaDB couvrant confidentialité, suppression et concurrence au seuil du quota.
 - Chantier Bloc 4 couvrant C4.1.1 à C4.3.3, preuves figées, procédures de maintenance, observabilité et support.
 - Journal des versions versionné : distinction entre release publiée, version observée en production et candidat CI, avec documentation obligatoire des correctifs.
 - Registre de collaboration support/mainteneur : contexte anonymisé, transmissions réciproques, critères fonctionnels, expertise technique, validation et contrôle de confidentialité.
@@ -52,6 +54,7 @@ Les évolutions notables de Spity sont consignées dans ce fichier. Le projet su
 
 ### Fixed
 
+- Correctifs Next.js 16.3.4 et Sharp 0.35.4 pour les alertes GHSA-p293-qw3h-jr36, GHSA-2xp9-vwfh-vxw4 et GHSA-rgj7-g3m4-5g8c ; configuration ESLint Next alignée.
 - Alertes hautes de l'outillage Lighthouse/Puppeteer supprimées par mise à jour contrôlée ; ESLint Next et types Node alignés avec les runtimes du projet.
 - Workflow Release aligné avec la CI pour installer et utiliser le Chromium Playwright lors de l'audit authentifié.
 - Contraste des états vides sur l'espace authentifié, avec un score Lighthouse accessibilité de 100 % sur les dix pages contrôlées.

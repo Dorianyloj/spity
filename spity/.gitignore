@@ -21,6 +21,7 @@
 /.accessibility
 /.monitoring
 /.incidents
+/.media/
 
 # next.js
 /.next/

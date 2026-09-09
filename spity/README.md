@@ -1,5 +1,9 @@
 # Spity
 
+Le [service d’import d’images privées](docs/media-uploads.md) documente l’API,
+les limites de sécurité, le volume de stockage et les étapes d’intégration aux
+avatars et aux publications.
+
 Spity est le prototype fonctionnel d'un réseau social pour la communauté escalade : profils grimpeurs et clubs, inventaire de matériel, recherche de partenaires, événements et répertoire de lieux.
 
 > **Accès jury :** [`../JURY.md`](../JURY.md) donne le parcours de lecture, les livrables et les commandes de vérification.

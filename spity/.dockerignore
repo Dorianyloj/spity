@@ -2,6 +2,7 @@
 .github
 .next
 coverage
+.media
 docs
 node_modules
 npm-debug.log*

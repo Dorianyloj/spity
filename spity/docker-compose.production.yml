@@ -59,11 +59,14 @@ services:
       JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
       NODE_ENV: production
       HOSTNAME: 0.0.0.0
+      MEDIA_STORAGE_DIR: /app/.media
       PORT: 3000
       APP_VERSION: ${APP_VERSION:-0.1.0-local}
       APP_REVISION: ${APP_REVISION:-unknown}
     ports:
       - "127.0.0.1:${APP_PORT:-3000}:3000"
+    volumes:
+      - media_production_data:/app/.media
     depends_on:
       mariadb:
         condition: service_healthy
@@ -83,3 +86,4 @@ services:
 
 volumes:
   mariadb_production_data:
+  media_production_data:

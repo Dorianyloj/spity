@@ -50,6 +50,13 @@
       "when": 1785241056143,
       "tag": "0006_add_post_comment_content",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1788943409483,
+      "tag": "0007_private_media_uploads",
+      "breakpoints": true
     }
   ]
 }

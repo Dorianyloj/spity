@@ -5,6 +5,7 @@ import { setTimeout as delay } from 'node:timers/promises'
 import { after, before, test } from 'node:test'
 import { fileURLToPath } from 'node:url'
 import mysql from 'mysql2/promise'
+import sharp from 'sharp'
 
 const port = Number(process.env.INTEGRATION_PORT ?? 3102)
 const baseUrl = process.env.INTEGRATION_BASE_URL ?? `http://127.0.0.1:${port}`
@@ -235,6 +236,69 @@ test('parcours BC02 matching et événements avec MariaDB', async (context) => {
       },
     })
     assert.equal(clubProfile.response.status, 201, JSON.stringify(clubProfile.body))
+  })
+
+  await context.test('les imports image restent privés et seul le propriétaire peut les supprimer', async () => {
+    const png = await sharp({ create: { width: 12, height: 8, channels: 3, background: 'white' } }).png().toBuffer()
+    const form = new FormData()
+    form.append('file', new File([png], '../../photo.png', { type: 'image/png' }))
+    const response = await fetch(`${baseUrl}/api/media`, {
+      method: 'POST', headers: { Origin: baseUrl, Cookie: accounts.firstClimber.cookie }, body: form,
+    })
+    const body = await response.json()
+    assert.equal(response.status, 201, JSON.stringify(body))
+    const media = body.media
+    assert.equal(media.visibility, 'private')
+    assert.equal(media.mimeType, 'image/webp')
+    assert.match(media.url, /^\/api\/media\/[a-f0-9-]{36}$/)
+    try {
+      const image = await fetch(`${baseUrl}${media.url}`, { headers: { Cookie: accounts.firstClimber.cookie } })
+      assert.equal(image.status, 200)
+      assert.equal(image.headers.get('content-type'), 'image/webp')
+      assert.equal(image.headers.get('cache-control'), 'private, no-store')
+      const metadata = await sharp(Buffer.from(await image.arrayBuffer())).metadata()
+      assert.equal(metadata.format, 'webp')
+      assert.equal(metadata.width, 12)
+      assert.equal(metadata.height, 8)
+      assert.equal((await request(media.url)).response.status, 401)
+      assert.equal((await request(media.url, { cookie: accounts.secondClimber.cookie })).response.status, 404)
+      assert.equal((await request(media.url, { method: 'DELETE', cookie: accounts.secondClimber.cookie })).response.status, 404)
+      assert.equal((await request(media.url, { method: 'DELETE', cookie: accounts.firstClimber.cookie, origin: 'https://attacker.test' })).response.status, 403)
+    } finally {
+      assert.equal((await request(media.url, { method: 'DELETE', cookie: accounts.firstClimber.cookie })).response.status, 204)
+    }
+    assert.equal((await request(media.url, { cookie: accounts.firstClimber.cookie })).response.status, 404)
+  })
+
+  await context.test('les imports concurrents ne dépassent pas le quota persistant du compte', async () => {
+    const connection = await mysql.createConnection(databaseUrl)
+    const ownerId = accounts.firstClimber.userId
+    const createdMedia = []
+    try {
+      // Metadata-only fixtures make the quota boundary cheap to exercise.
+      const rows = Array.from({ length: 99 }, () => [randomUUID(), ownerId, 1, 1, 1])
+      await connection.query('insert into media_uploads (id, owner_id, byte_size, width, height) values ?', [rows])
+      const png = await sharp({ create: { width: 12, height: 8, channels: 3, background: 'white' } }).png().toBuffer()
+      const results = await Promise.all([0, 1].map(async () => {
+        const form = new FormData()
+        form.append('file', new File([png], 'quota.png', { type: 'image/png' }))
+        const response = await fetch(`${baseUrl}/api/media`, {
+          method: 'POST', headers: { Origin: baseUrl, Cookie: accounts.firstClimber.cookie }, body: form,
+        })
+        const body = await response.json()
+        if (response.status === 201) createdMedia.push(body.media)
+        return response.status
+      }))
+      assert.deepEqual(results.sort(), [201, 409])
+      const [[usage]] = await connection.execute('select count(*) as total from media_uploads where owner_id = ?', [ownerId])
+      assert.equal(usage.total, 100)
+    } finally {
+      for (const media of createdMedia) {
+        await request(media.url, { method: 'DELETE', cookie: accounts.firstClimber.cookie })
+      }
+      await connection.execute('delete from media_uploads where owner_id = ?', [ownerId])
+      await connection.end()
+    }
   })
 
   await context.test('l’annuaire combine les règles de confidentialité et de matching', async () => {
