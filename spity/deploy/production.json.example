@@ -1,0 +1,5 @@
+{
+  "envFile": "/opt/spity/repo/spity/.env.production",
+  "healthUrl": "https://spity.fr/api/health",
+  "appPort": 3100
+}

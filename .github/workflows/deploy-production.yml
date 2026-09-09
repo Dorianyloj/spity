@@ -1,0 +1,204 @@
+name: Deploy production VPS
+
+on:
+  workflow_run:
+    workflows: [Continuous integration]
+    branches: [main]
+    types: [completed]
+
+permissions:
+  contents: read
+
+# Separate from CI: a new push must never interrupt an active migration/deploy.
+concurrency:
+  group: spity-production-vps
+  cancel-in-progress: false
+
+jobs:
+  images:
+    name: Build and verify production images
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      current: ${{ steps.current.outputs.current }}
+      revision: ${{ steps.publish.outputs.revision }}
+      version: ${{ steps.publish.outputs.version }}
+      app_image: ${{ steps.publish.outputs.app_image }}
+      migration_image: ${{ steps.publish.outputs.migration_image }}
+    env:
+      REVISION: ${{ github.event.workflow_run.head_sha }}
+      APP_IMAGE: ghcr.io/dorianyloj/spity
+      MIGRATION_IMAGE: ghcr.io/dorianyloj/spity-migrations
+      SMOKE_NETWORK: spity-production-smoke-${{ github.run_id }}
+      SMOKE_DB: spity-production-db-${{ github.run_id }}
+      SMOKE_APP: spity-production-app-${{ github.run_id }}
+    steps:
+      - name: Ignore superseded commits and old CI reruns
+        id: current
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { data } = await github.rest.repos.getBranch({ ...context.repo, branch: 'main' })
+            core.setOutput('current', data.commit.sha === process.env.REVISION ? 'true' : 'false')
+
+      - name: Checkout the exact commit that passed CI
+        if: steps.current.outputs.current == 'true'
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          persist-credentials: false
+
+      - name: Build images without production secrets
+        if: steps.current.outputs.current == 'true'
+        run: |
+          version=$(jq --raw-output .version spity/package.json)
+          docker build --target migration \
+            --label "org.opencontainers.image.source=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" \
+            --label "org.opencontainers.image.revision=$REVISION" \
+            --tag "$MIGRATION_IMAGE:sha-$REVISION" spity
+          docker build --target runner \
+            --build-arg "APP_VERSION=$version" --build-arg "APP_REVISION=$REVISION" \
+            --tag "$APP_IMAGE:sha-$REVISION" spity
+
+      - name: Verify images and migrations on an isolated database
+        if: steps.current.outputs.current == 'true'
+        run: |
+          docker network create "$SMOKE_NETWORK"
+          docker run --detach --name "$SMOKE_DB" --network "$SMOKE_NETWORK" \
+            --env MARIADB_ROOT_PASSWORD=ci_smoke_root_password \
+            --env MARIADB_DATABASE=spity --env MARIADB_USER=spity \
+            --env MARIADB_PASSWORD=ci_smoke_app_password mariadb:11.4
+          for attempt in $(seq 1 40); do
+            if docker exec "$SMOKE_DB" healthcheck.sh --connect --innodb_initialized; then break; fi
+            if [ "$attempt" -eq 40 ]; then exit 1; fi
+            sleep 3
+          done
+          docker run --rm --network "$SMOKE_NETWORK" \
+            --env "DATABASE_URL=mysql://spity:ci_smoke_app_password@$SMOKE_DB:3306/spity" \
+            "$MIGRATION_IMAGE:sha-$REVISION"
+          docker run --detach --name "$SMOKE_APP" --network "$SMOKE_NETWORK" \
+            --publish 127.0.0.1:3000:3000 \
+            --env "DATABASE_URL=mysql://spity:ci_smoke_app_password@$SMOKE_DB:3306/spity" \
+            --env JWT_SECRET=ci_smoke_only_secret_with_at_least_32_characters \
+            "$APP_IMAGE:sha-$REVISION"
+          EXPECTED_VERSION=$(jq --raw-output .version spity/package.json) \
+          EXPECTED_REVISION="$REVISION" \
+          DEPLOYMENT_ENVIRONMENT=production-candidate \
+          HEALTH_URL=http://127.0.0.1:3000/api/health \
+          HEALTH_RETRIES=40 HEALTH_RETRY_DELAY_MS=3000 \
+          node spity/scripts/verify-deployment.mjs
+          # The runtime user must be able to write the private media directory.
+          docker exec "$SMOKE_APP" node -e \
+            'const fs=require("node:fs");fs.writeFileSync("/app/.media/smoke","ok");fs.unlinkSync("/app/.media/smoke")'
+
+      - name: Remove isolated smoke containers
+        if: always() && steps.current.outputs.current == 'true'
+        run: |
+          docker rm --force "$SMOKE_APP" "$SMOKE_DB" 2>/dev/null || true
+          docker network rm "$SMOKE_NETWORK" 2>/dev/null || true
+
+      - name: Publish verified images and resolve immutable digests
+        id: publish
+        if: steps.current.outputs.current == 'true'
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          printf '%s' "$GHCR_TOKEN" | docker login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+          docker push "$APP_IMAGE:sha-$REVISION"
+          docker push "$MIGRATION_IMAGE:sha-$REVISION"
+          app_digest=$(docker image inspect "$APP_IMAGE:sha-$REVISION" --format '{{index .RepoDigests 0}}')
+          migration_digest=$(docker image inspect "$MIGRATION_IMAGE:sha-$REVISION" --format '{{index .RepoDigests 0}}')
+          echo "revision=$REVISION" >> "$GITHUB_OUTPUT"
+          echo "version=$(jq --raw-output .version spity/package.json)" >> "$GITHUB_OUTPUT"
+          echo "app_image=$app_digest" >> "$GITHUB_OUTPUT"
+          echo "migration_image=$migration_digest" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    name: Update spity.fr
+    needs: images
+    if: needs.images.outputs.current == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: production
+      url: https://spity.fr
+    permissions:
+      contents: read
+      packages: read
+    env:
+      VPS_HOST: ${{ vars.VPS_HOST }}
+      VPS_PORT: ${{ vars.VPS_PORT }}
+      VPS_USER: ${{ vars.VPS_USER }}
+      REVISION: ${{ needs.images.outputs.revision }}
+      VERSION: ${{ needs.images.outputs.version }}
+      APP_IMAGE: ${{ needs.images.outputs.app_image }}
+      MIGRATION_IMAGE: ${{ needs.images.outputs.migration_image }}
+    steps:
+      - name: Checkout verified deployment scripts
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.images.outputs.revision }}
+          persist-credentials: false
+
+      - name: Send release over host-verified SSH
+        env:
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REGISTRY_USER: ${{ github.repository_owner }}
+        run: |
+          : "${VPS_HOST:?Set production variable VPS_HOST}"
+          : "${VPS_PORT:?Set production variable VPS_PORT}"
+          : "${VPS_USER:?Set production variable VPS_USER}"
+          : "${VPS_SSH_KEY:?Set production secret VPS_SSH_KEY}"
+          : "${VPS_KNOWN_HOSTS:?Set production secret VPS_KNOWN_HOSTS}"
+          [[ "$VPS_HOST" =~ ^[a-zA-Z0-9.-]+$ ]]
+          [[ "$VPS_PORT" =~ ^[0-9]{1,5}$ ]]
+          [[ "$VPS_USER" =~ ^[a-z_][a-z0-9_-]*$ ]]
+          umask 077
+          transfer=$(mktemp -d)
+          trap 'rm -rf -- "$transfer"' EXIT
+          mkdir "$transfer/bundle"
+          printf '%s\n' "$VPS_SSH_KEY" > "$transfer/key"
+          printf '%s\n' "$VPS_KNOWN_HOSTS" > "$transfer/known_hosts"
+          printf '%s' "$GHCR_TOKEN" > "$transfer/bundle/registry-token"
+          cp spity/deploy/deploy-vps.mjs spity/docker-compose.production.yml "$transfer/bundle/"
+          jq --null-input --arg revision "$REVISION" --arg version "$VERSION" \
+            --arg appImage "$APP_IMAGE" --arg migrationImage "$MIGRATION_IMAGE" \
+            --arg registryUser "$REGISTRY_USER" \
+            '{revision:$revision,version:$version,appImage:$appImage,migrationImage:$migrationImage,registryUser:$registryUser}' \
+            > "$transfer/bundle/manifest.json"
+          tar --create --gzip --directory "$transfer/bundle" . | \
+            ssh -T -i "$transfer/key" -p "$VPS_PORT" \
+              -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes \
+              -o "UserKnownHostsFile=$transfer/known_hosts" \
+              -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=4 \
+              "$VPS_USER@$VPS_HOST" deploy
+
+      - name: Verify public release from outside the VPS
+        env:
+          EXPECTED_REVISION: ${{ needs.images.outputs.revision }}
+          EXPECTED_VERSION: ${{ needs.images.outputs.version }}
+          DEPLOYMENT_ENVIRONMENT: production
+          HEALTH_URL: https://spity.fr/api/health
+          HEALTH_RETRIES: 5
+          HEALTH_RETRY_DELAY_MS: 3000
+          HEALTH_OUTPUT_PATH: deployment-evidence/health.json
+        run: node spity/scripts/verify-deployment.mjs
+
+      - name: Save public verification (no production secrets or database backup)
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: production-${{ needs.images.outputs.revision }}
+          path: deployment-evidence
+          if-no-files-found: warn
+          retention-days: 30

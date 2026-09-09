@@ -1,5 +1,13 @@
 # Déployer une version de Spity
 
+## Déploiement automatique depuis `main`
+
+La production sur `spity.fr` est mise à jour par le workflow **Deploy production VPS**, après réussite du workflow **Continuous integration** sur un push de `main`. Aucun tag ni lancement manuel n'est nécessaire. Une CI en échec ne déploie rien. Les anciens commits supplantés avant le démarrage du déploiement sont ignorés.
+
+Le [guide du VPS](deploy/README.md) décrit l'installation, les secrets GitHub, la conservation des données et la reprise après incident. Les étapes ci-dessous restent la procédure manuelle pour les bundles de release ; le workflow de release par tag publie les versions, sans déclencher un second déploiement sur le VPS.
+
+## Déploiement manuel d'un bundle
+
 Cette procédure autonome est incluse dans chaque bundle de release. Elle déploie les images immuables de l'application et des migrations avec MariaDB. Le manuel détaillé et les choix techniques sont documentés dans [`../docs/bc02/12_MANUEL_DEPLOIEMENT_C241.md`](../docs/bc02/12_MANUEL_DEPLOIEMENT_C241.md) lorsque le dépôt complet est disponible.
 
 ## Prérequis
