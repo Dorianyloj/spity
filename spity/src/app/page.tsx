@@ -16,7 +16,7 @@ import {
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRef, type ReactNode } from 'react'
-import BrandMark from '@/components/brand/brand-mark'
+import { Header } from '@/components/ui/header-2'
 import { brandAssets } from '@/lib/brand-assets'
 
 type AnimatedSectionProps = {
@@ -130,7 +130,9 @@ function AnimatedSection({ children, className = '', delay = 0, id }: AnimatedSe
 
 export default function LandingPage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#173236] text-white">
+    <div className="min-h-dvh bg-[#173236] text-white">
+      <Header />
+    <main className="overflow-hidden">
       <section className="relative flex min-h-[92svh] flex-col overflow-hidden">
         <Image
           src={brandAssets.heroSunset}
@@ -148,30 +150,6 @@ export default function LandingPage() {
           }}
           aria-hidden="true"
         />
-        <nav className="relative z-20 mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-6 text-sm text-white/[0.78] md:px-8">
-          <Link href="/" className="flex items-center gap-3" aria-label="Accueil Spity">
-            <BrandMark className="bg-white/6 shadow-lg shadow-black/20 ring-1 ring-white/12" priority size={42} tone="dark" />
-            <span className="text-lg font-bold text-white">Spity</span>
-          </Link>
-          <div className="hidden items-center gap-10 md:flex">
-            <a href="#activites" className="transition-colors hover:text-white">
-              Activités
-            </a>
-            <a href="#galerie" className="transition-colors hover:text-white">
-              Topos
-            </a>
-            <a href="#communaute" className="transition-colors hover:text-white">
-              Communauté
-            </a>
-          </div>
-          <Link
-            href="/login"
-            className="rounded-lg border border-white/30 px-4 py-2 font-semibold text-white transition-colors hover:bg-white hover:text-[#173236]"
-          >
-            Connexion
-          </Link>
-        </nav>
-
         <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-16 pt-8 md:px-8">
           <div className="max-w-4xl">
             <motion.p
@@ -441,5 +419,6 @@ export default function LandingPage() {
         </div>
       </footer>
     </main>
+    </div>
   )
 }

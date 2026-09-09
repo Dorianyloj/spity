@@ -149,6 +149,49 @@ test('profil complet : persistance, confidentialité, médias et interface réel
           await page.evaluate(() => document.fonts.ready); await audit(`${section}-${width}`)
         }
       }
+      // Exercise the widest navigation (administrator) without production data.
+      await connection.execute('UPDATE users SET is_admin = TRUE WHERE id = ?', [owner.id])
+      for (const width of [1440, 1280, 1024, 390, 320]) {
+        await page.setViewport({ width, height: 1000 })
+        await page.goto(`${base}/profile/me`, { waitUntil: 'networkidle0' })
+        await page.evaluate(() => document.fonts.ready)
+        assert.ok(await page.evaluate(() => {
+          const bar = document.querySelector('[data-spity-header] > div')
+          return document.documentElement.scrollWidth <= innerWidth && bar.scrollWidth <= bar.clientWidth
+        }), `Header overflow at ${width}px`)
+        if (width >= 1280) {
+          assert.equal(await page.$eval('nav[aria-label="Navigation principale"] a[aria-current="page"]', (link) => link.textContent), 'Profil')
+          await page.evaluate(() => window.scrollTo({ top: 600, behavior: 'instant' }))
+          await page.waitForFunction(() => document.querySelector('[data-spity-header]').dataset.scrolled === 'true')
+          assert.ok(await page.$eval('[data-spity-header]', (header) => Math.abs(header.getBoundingClientRect().top) <= 1))
+          await page.screenshot({ path: `${cwd}/.integration-results/navbar-desktop-${width}.png` })
+        } else {
+          await page.locator('button[aria-label="Ouvrir le menu"]').click()
+          await page.waitForSelector('dialog[open]')
+          assert.equal(await page.evaluate(() => document.activeElement.getAttribute('aria-label')), 'Fermer le menu')
+          assert.equal(await page.$$eval('nav[aria-label="Navigation mobile"] a', (links) => links.length), 7)
+          assert.equal(await page.$eval('dialog', (dialog) => dialog.matches(':modal')), true)
+          await page.keyboard.press('Tab')
+          assert.ok(await page.evaluate(() => document.querySelector('dialog').contains(document.activeElement)))
+          await page.screenshot({ path: `${cwd}/.integration-results/navbar-mobile-${width}.png` })
+          await audit(`navigation-${width}`)
+          await page.keyboard.press('Escape')
+          assert.equal(await page.evaluate(() => document.activeElement.getAttribute('aria-label')), 'Ouvrir le menu')
+          assert.notEqual(await page.evaluate(() => document.body.style.overflow), 'hidden')
+        }
+      }
+      await page.locator('button[aria-label="Ouvrir le menu"]').click()
+      await page.waitForSelector('dialog[open]')
+      await page.setViewport({ width: 1440, height: 1000 })
+      await page.waitForSelector('dialog[open]', { hidden: true })
+      assert.notEqual(await page.evaluate(() => document.body.style.overflow), 'hidden')
+      await page.setViewport({ width: 320, height: 1000 })
+      await page.locator('button[aria-label="Ouvrir le menu"]').click()
+      await page.waitForSelector('dialog[open]')
+      await page.locator('nav[aria-label="Navigation mobile"] a[href="/app/places"]').click()
+      await page.waitForFunction(() => location.pathname === '/app/places')
+      await page.waitForSelector('dialog[open]', { hidden: true })
+      await connection.execute('UPDATE users SET is_admin = FALSE WHERE id = ?', [owner.id])
       await page.goto(`${base}/profile/me`, { waitUntil: 'networkidle0' })
       await page.locator('::-p-aria(Modifier mon profil[role="button"])').click()
       await page.waitForSelector('dialog[open]'); await audit('identity-320')

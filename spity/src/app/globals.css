@@ -223,6 +223,7 @@
   html {
     -webkit-tap-highlight-color: transparent;
     scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
   }
 
   body {
