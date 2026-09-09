@@ -81,6 +81,10 @@ export async function POST(request: Request) {
     return authErrorResponse('Identifiants invalides', 401)
   }
 
+  if (user.isSuspended) {
+    return authErrorResponse('Ce compte est suspendu. Contactez un administrateur.', 403)
+  }
+
   await db
     .update(users)
     .set({
@@ -91,7 +95,7 @@ export async function POST(request: Request) {
 
   const authUser = toAuthUser(user)
   const response = authUserResponse(authUser)
-  setSessionCookie(response, createSessionToken(authUser))
+  setSessionCookie(response, createSessionToken(authUser, user.sessionVersion))
   logger.info('auth.login_succeeded', { userId: authUser.id, role: authUser.role })
 
   return response

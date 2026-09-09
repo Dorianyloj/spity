@@ -68,7 +68,7 @@ export async function POST(request: Request) {
 
   const user = toAuthUser(createdUser)
   const response = authUserResponse(user, 201)
-  setSessionCookie(response, createSessionToken(user))
+  setSessionCookie(response, createSessionToken(user, createdUser.sessionVersion))
   logger.info('auth.registration_succeeded', { userId: user.id, role: user.role })
 
   return response

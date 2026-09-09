@@ -9,6 +9,7 @@ export const authUserSchema = z.object({
   role: authRoleSchema,
   avatarUrl: imageSourceSchema.nullable(),
   emailVerified: z.boolean(),
+  isAdmin: z.boolean().default(false),
 })
 
 export const authSuccessResponseSchema = z.object({
@@ -35,6 +36,7 @@ export const sessionPayloadSchema = z.object({
   role: authRoleSchema,
   iat: z.number().int().positive(),
   exp: z.number().int().positive(),
+  ver: z.number().int().nonnegative().default(0),
 })
 
 export type AuthRole = z.infer<typeof authRoleSchema>

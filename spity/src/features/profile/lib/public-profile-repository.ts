@@ -1,4 +1,4 @@
-import { desc, eq, inArray } from 'drizzle-orm'
+import { and, desc, eq, inArray } from 'drizzle-orm'
 import { db } from '@/db'
 import { clubProfiles, grimpeurProfiles, medias, posts, users } from '@/db/schema'
 
@@ -97,7 +97,7 @@ export const findPublicProfileByUserId = async (userId: string): Promise<PublicP
       cotation: posts.cotation,
     })
     .from(posts)
-    .where(eq(posts.authorId, userId))
+    .where(and(eq(posts.authorId, userId), eq(posts.isHidden, false)))
     .orderBy(desc(posts.createdAt))
     .limit(30)
 

@@ -27,6 +27,7 @@ const config: Config = {
   },
   modulePathIgnorePatterns: ['<rootDir>/.next/'],
   testPathIgnorePatterns: [
+    '<rootDir>/docs/design/',
     '<rootDir>/tests/acceptance/',
     '<rootDir>/tests/integration/',
     '<rootDir>/tests/maintenance/',

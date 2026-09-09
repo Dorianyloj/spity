@@ -28,6 +28,7 @@ COPY --from=dependencies /app/node_modules ./node_modules
 COPY package.json package-lock.json drizzle.config.ts tsconfig.json ./
 COPY drizzle ./drizzle
 COPY scripts/seed-demo.mjs ./scripts/seed-demo.mjs
+COPY scripts/grant-admin.mjs ./scripts/grant-admin.mjs
 COPY src/db ./src/db
 CMD ["npm", "run", "db:migrate"]
 

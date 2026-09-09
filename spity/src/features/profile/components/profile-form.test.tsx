@@ -18,6 +18,7 @@ const grimpeurProfile: ProfileMeResponse = {
     role: 'grimpeur',
     avatarUrl: 'https://images.example.com/lina.jpg',
     emailVerified: true,
+    isAdmin: false,
   },
   grimpeurProfile: {
     id: '22222222-2222-4222-8222-222222222222',
@@ -65,6 +66,7 @@ const clubProfile: ProfileMeResponse = {
     role: 'club',
     avatarUrl: null,
     emailVerified: false,
+    isAdmin: false,
   },
   grimpeurProfile: null,
   clubProfile: {

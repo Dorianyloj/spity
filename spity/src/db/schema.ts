@@ -18,6 +18,9 @@ export const users = mysqlTable('users', {
   email: varchar('email', { length: 255 }).notNull().unique(),
   passwordHash: varchar('password_hash', { length: 255 }).notNull(),
   role: mysqlEnum('role', ['grimpeur', 'club']).notNull(),
+  isAdmin: boolean('is_admin').notNull().default(false),
+  isSuspended: boolean('is_suspended').notNull().default(false),
+  sessionVersion: int('session_version').notNull().default(0),
   avatarUrl: varchar('avatar_url', { length: 500 }),
   emailVerified: boolean('email_verified').default(false),
   emailVerificationToken: varchar('email_verification_token', { length: 255 }),
@@ -188,6 +191,7 @@ export const posts = mysqlTable('posts', {
   contenu: varchar('contenu', { length: 500 }),
   cotation: varchar('cotation', { length: 10 }),
   isStory: boolean('is_story').default(false),
+  isHidden: boolean('is_hidden').notNull().default(false),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 })
 
@@ -229,9 +233,20 @@ export const likes = mysqlTable(
     id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
     postId: varchar('post_id', { length: 36 }).notNull().references(() => posts.id, { onDelete: 'cascade' }),
     userId: varchar('user_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
+    // Legacy likes remain undated; never fabricate their creation date in a migration.
+    createdAt: timestamp('created_at'),
   },
   (table) => [uniqueIndex('likes_post_user_unique').on(table.postId, table.userId)]
 )
+
+export const adminAuditLogs = mysqlTable('admin_audit_logs', {
+  id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+  actorId: varchar('actor_id', { length: 36 }).references(() => users.id, { onDelete: 'set null' }),
+  action: mysqlEnum('action', ['admin_granted', 'user_suspended', 'user_restored', 'post_hidden', 'post_restored']).notNull(),
+  targetId: varchar('target_id', { length: 36 }).notNull(),
+  reason: varchar('reason', { length: 500 }).notNull(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+}, (table) => [index('admin_audit_created_idx').on(table.createdAt)])
 
 // === EVENT ===
 export const events = mysqlTable(

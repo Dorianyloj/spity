@@ -1,4 +1,4 @@
-import { Calendar, Handshake, MapPin, MessageCircle, Search, UserRound } from 'lucide-react'
+import { Calendar, Handshake, MapPin, MessageCircle, Search, ShieldCheck, UserRound } from 'lucide-react'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import BrandMark from '@/components/brand/brand-mark'
@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui'
 import type { AuthUser } from '@/features/auth/schemas'
 import LogoutButton from './logout-button'
 
-type AppShellNavItem = 'feed' | 'matching' | 'partnerships' | 'places' | 'events' | 'profile'
+type AppShellNavItem = 'feed' | 'matching' | 'partnerships' | 'places' | 'events' | 'profile' | 'admin'
 
 type AppShellProps = {
   activeItem: AppShellNavItem
@@ -20,6 +20,7 @@ const navigationItems: Array<{
   href: string
   icon: typeof MessageCircle
   role?: 'grimpeur' | 'club'
+  adminOnly?: boolean
 }> = [
   { key: 'feed', label: 'Feed', href: '/app', icon: MessageCircle },
   { key: 'matching', label: 'Partenaires', href: '/app/matching', icon: Search, role: 'grimpeur' },
@@ -27,6 +28,7 @@ const navigationItems: Array<{
   { key: 'places', label: 'Lieux', href: '/app/places', icon: MapPin },
   { key: 'events', label: 'Événements', href: '/app/events', icon: Calendar },
   { key: 'profile', label: 'Profil', href: '/profile/me', icon: UserRound },
+  { key: 'admin', label: 'Administration', href: '/app/admin', icon: ShieldCheck, adminOnly: true },
 ]
 
 export default function AppShell({ activeItem, children, user }: AppShellProps) {
@@ -52,7 +54,7 @@ export default function AppShell({ activeItem, children, user }: AppShellProps) 
           </div>
 
           <nav className="flex gap-1 overflow-x-auto pb-1 lg:pb-0" aria-label="Navigation principale">
-            {navigationItems.filter((item) => !item.role || item.role === user.role).map((item) => {
+            {navigationItems.filter((item) => (!item.role || item.role === user.role) && (!item.adminOnly || user.isAdmin === true)).map((item) => {
               const Icon = item.icon
               const isActive = item.key === activeItem
 

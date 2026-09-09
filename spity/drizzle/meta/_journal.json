@@ -57,6 +57,13 @@
       "when": 1788943409483,
       "tag": "0007_private_media_uploads",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1788952658082,
+      "tag": "0008_admin_moderation",
+      "breakpoints": true
     }
   ]
 }

@@ -87,6 +87,7 @@ const findCommentForViewer = async (commentId: string, viewerId: string) => {
       clubName: clubProfiles.nom,
     })
     .from(comments)
+    .innerJoin(posts, and(eq(posts.id, comments.postId), eq(posts.isHidden, false)))
     .innerJoin(users, eq(users.id, comments.authorId))
     .leftJoin(grimpeurProfiles, eq(grimpeurProfiles.userId, comments.authorId))
     .leftJoin(clubProfiles, eq(clubProfiles.userId, comments.authorId))
@@ -113,6 +114,7 @@ export const listFeedPosts = async (viewerId: string): Promise<FeedPost[]> => {
     .leftJoin(clubProfiles, eq(clubProfiles.id, posts.clubId))
     .leftJoin(salles, eq(salles.id, posts.salleId))
     .leftJoin(falaises, eq(falaises.id, posts.falaiseId))
+    .where(eq(posts.isHidden, false))
     .orderBy(desc(posts.createdAt))
     .limit(50)
 
@@ -193,8 +195,9 @@ export const setPostLike = async (postId: string, userId: string, liked: boolean
     const [post] = await transaction
       .select({ id: posts.id })
       .from(posts)
-      .where(eq(posts.id, postId))
+      .where(and(eq(posts.id, postId), eq(posts.isHidden, false)))
       .limit(1)
+      .for('update')
 
     if (!post) {
       throw new FeedOperationError('Publication introuvable', 404)
@@ -212,6 +215,7 @@ export const setPostLike = async (postId: string, userId: string, liked: boolean
         id: randomUUID(),
         postId,
         userId,
+        createdAt: new Date(),
       })
     }
 
@@ -232,7 +236,7 @@ export const createPostComment = async (postId: string, userId: string, content:
   const [post] = await db
     .select({ id: posts.id })
     .from(posts)
-    .where(eq(posts.id, postId))
+    .where(and(eq(posts.id, postId), eq(posts.isHidden, false)))
     .limit(1)
 
   if (!post) {
@@ -262,6 +266,7 @@ export const updatePostComment = async (
   userId: string,
   content: string
 ) => {
+  await assertVisiblePost(postId)
   const [comment] = await db
     .select()
     .from(comments)
@@ -291,6 +296,7 @@ export const updatePostComment = async (
 }
 
 export const deletePostComment = async (postId: string, commentId: string, userId: string) => {
+  await assertVisiblePost(postId)
   const [comment] = await db
     .select()
     .from(comments)
@@ -306,4 +312,9 @@ export const deletePostComment = async (postId: string, commentId: string, userI
   }
 
   await db.delete(comments).where(eq(comments.id, commentId))
+}
+
+async function assertVisiblePost(postId: string) {
+  const [post] = await db.select({ id: posts.id }).from(posts).where(and(eq(posts.id, postId), eq(posts.isHidden, false))).limit(1)
+  if (!post) throw new FeedOperationError('Publication introuvable', 404)
 }

@@ -13,6 +13,7 @@ export const toAuthUser = (user: UserRow): AuthUser => {
     role: user.role,
     avatarUrl: user.avatarUrl,
     emailVerified: Boolean(user.emailVerified),
+    isAdmin: user.isAdmin,
   })
 }
 
@@ -25,7 +26,7 @@ export const getCurrentUser = async () => {
 
   const [user] = await db.select().from(users).where(eq(users.id, session.sub)).limit(1)
 
-  if (!user) {
+  if (!user || user.isSuspended || user.sessionVersion !== session.ver) {
     return null
   }
 

@@ -32,7 +32,7 @@ const request = async (method = 'POST', origin = base) => {
 beforeEach(() => {
   jest.resetAllMocks()
   resetRateLimitStoreForTests()
-  jest.mocked(getCurrentUser).mockResolvedValue({ id: ownerId, email: 'test@spity.test', role: 'grimpeur', avatarUrl: null, emailVerified: false })
+  jest.mocked(getCurrentUser).mockResolvedValue({ id: ownerId, email: 'test@spity.test', role: 'grimpeur', avatarUrl: null, emailVerified: false, isAdmin: false })
   jest.mocked(createMediaUpload).mockResolvedValue({ id, url: `/api/media/${id}`, visibility: 'private', mimeType: 'image/webp', byteSize: 20, width: 12, height: 8 })
   jest.mocked(findOwnedMedia).mockResolvedValue({ id, ownerId, byteSize: 20, width: 12, height: 8, createdAt: new Date() })
   jest.mocked(readImage).mockResolvedValue(Buffer.from('webp data'))
@@ -47,7 +47,7 @@ it('imports a decoded image for the authenticated owner', async () => {
 })
 
 it('accepts the club role as well', async () => {
-  jest.mocked(getCurrentUser).mockResolvedValue({ id: ownerId, email: 'club@spity.test', role: 'club', avatarUrl: null, emailVerified: false })
+  jest.mocked(getCurrentUser).mockResolvedValue({ id: ownerId, email: 'club@spity.test', role: 'club', avatarUrl: null, emailVerified: false, isAdmin: false })
   expect((await POST(await request())).status).toBe(201)
 })
 

@@ -13,6 +13,7 @@ const grimpeurUser: AuthUser = {
   role: 'grimpeur',
   avatarUrl: null,
   emailVerified: true,
+  isAdmin: false,
 }
 
 const posts: FeedPost[] = [

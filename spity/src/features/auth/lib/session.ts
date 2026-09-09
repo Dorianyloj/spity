@@ -32,7 +32,7 @@ const hasValidSignature = (value: string, signature: string) => {
   return timingSafeEqual(expectedBuffer, signatureBuffer)
 }
 
-export const createSessionToken = (user: AuthUser) => {
+export const createSessionToken = (user: AuthUser, sessionVersion = 0) => {
   const now = Math.floor(Date.now() / 1000)
   const header = base64UrlEncode({ alg: 'HS256', typ: 'JWT' })
   const payload = base64UrlEncode({
@@ -41,6 +41,7 @@ export const createSessionToken = (user: AuthUser) => {
     role: user.role,
     iat: now,
     exp: now + SESSION_TTL_SECONDS,
+    ver: sessionVersion,
   })
   const unsignedToken = `${header}.${payload}`
 
