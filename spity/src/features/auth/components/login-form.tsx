@@ -126,9 +126,6 @@ export default function LoginForm() {
             isLoading={isSubmitting}
             loadingText="Connexion en cours…"
           />
-          <p className="text-center text-sm leading-relaxed text-muted-foreground">
-            Grimpeur ou club, retrouvez votre espace avec le même formulaire.
-          </p>
         </div>
       </form>
       <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3 border-t border-border pt-6">
