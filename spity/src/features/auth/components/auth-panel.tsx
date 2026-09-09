@@ -109,9 +109,8 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
         >
           <div className="absolute inset-0 bg-[#173236]/20" />
           <div className="relative flex h-full flex-col justify-between p-10">
-            <Link href="/" className="flex items-center gap-3">
-              <BrandMark className="bg-white/6 shadow-xl shadow-black/20 ring-1 ring-white/12" priority size={48} tone="dark" />
-              <span className="text-2xl font-bold tracking-normal">Spity</span>
+            <Link href="/" aria-label="Accueil Spity" className="flex min-h-11 w-fit items-center rounded-lg">
+              <BrandMark priority size={48} tone="dark" />
             </Link>
 
             <div className="max-w-xl space-y-6">
@@ -144,9 +143,8 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
         <section className="flex items-center bg-background px-4 py-8 sm:px-8">
           <div className="mx-auto w-full max-w-md space-y-6">
             <div className="flex items-center justify-between">
-              <Link href="/" className="flex items-center gap-2 text-xl font-bold text-foreground lg:hidden">
-                <BrandMark className="bg-white/6 ring-1 ring-white/12" size={36} tone="dark" />
-                <span>Spity</span>
+              <Link href="/" aria-label="Accueil Spity" className="flex min-h-11 items-center rounded-lg lg:hidden">
+                <BrandMark size={48} tone="light" />
               </Link>
               <Link
                 href={isLogin ? '/register' : '/login'}

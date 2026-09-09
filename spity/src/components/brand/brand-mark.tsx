@@ -17,19 +17,19 @@ export default function BrandMark({
   size = 40,
   tone = 'dark',
 }: BrandMarkProps) {
-  const src = tone === 'dark' ? brandAssets.logoWhite : brandAssets.logoTransparent
+  const imageSize = Math.round(size * 8 / 3)
 
   return (
     <span
-      className={cn('flex shrink-0 items-center justify-center overflow-hidden rounded-lg', className)}
-      style={{ height: size, width: size }}
+      className={cn('relative block shrink-0 overflow-hidden', className)}
+      style={{ height: size, width: size * 2 }}
     >
       <Image
-        src={src}
+        src={brandAssets.logoTransparent}
         alt=""
-        width={size}
-        height={size}
-        className={cn('h-full w-full object-contain', imageClassName)}
+        width={imageSize}
+        height={imageSize}
+        className={cn('absolute top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2', tone === 'dark' && 'brightness-0 invert', imageClassName)}
         priority={priority}
       />
     </span>
