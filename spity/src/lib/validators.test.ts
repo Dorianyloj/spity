@@ -33,6 +33,20 @@ describe('authentication validators', () => {
     expect(loginSchema.safeParse({ email: 'test@spity.test', password: '' }).success).toBe(false)
   })
 
+  it('accepts 72 ASCII characters and explains shorter Unicode limits without technical jargon', () => {
+    const input = { email: 'test@spity.test', role: 'grimpeur' }
+    expect(registerSchema.safeParse({ ...input, password: `Aa1!${'a'.repeat(68)}` }).success).toBe(true)
+
+    for (const password of [`Aa1!${'é'.repeat(35)}`, `Aa1!${'🧗'.repeat(18)}`]) {
+      const result = registerSchema.safeParse({ ...input, password })
+      expect(result.success).toBe(false)
+      if (!result.success) {
+        expect(result.error.issues[0].message).toContain('Retirez quelques caractères')
+        expect(result.error.issues[0].message).not.toContain('octets')
+      }
+    }
+  })
+
   it('rejects authentication inputs exceeding storage or bcrypt limits', () => {
     const longEmail = `${'a'.repeat(250)}@spity.test`
     const longPassword = `Spity-test1!${'a'.repeat(72)}`

@@ -20,7 +20,7 @@ const utf8ByteLength = (value: string) => {
 
 const bcryptInputSchema = z.string().refine(
   (value) => utf8ByteLength(value) <= 72,
-  'Le mot de passe ne doit pas dépasser 72 octets'
+  'Le mot de passe est trop long. Retirez quelques caractères (les accents et emojis prennent plus de place).'
 )
 
 export const registerSchema = z.object({

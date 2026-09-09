@@ -243,7 +243,7 @@ export default function RegistrationForm() {
               })}
             </ul>
             <p className="mt-3 text-xs text-muted-foreground">
-              72 octets maximum (certains caractères accentués et emojis comptent pour plusieurs octets).
+              Jusqu’à 72 caractères. Les accents et emojis peuvent réduire cette limite.
             </p>
           </div>
         </fieldset>
