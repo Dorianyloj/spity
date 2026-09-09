@@ -88,8 +88,18 @@ export function Header({ links = publicLinks, homeHref = '/', accountLabel, acti
   }, [open])
 
   const close = () => setOpen(false)
-  return <header data-spity-header data-scrolled={scrolled} className={cn('top-0 z-40 px-3 pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-6', overlay ? 'dark fixed inset-x-0' : 'sticky')}>
-    <div className={cn('mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-2xl border p-2.5 text-foreground sm:px-4', scrolled ? 'border-border bg-card/95 shadow-lg backdrop-blur-lg' : overlay ? 'border-border bg-card/90 shadow-lg backdrop-blur-lg' : 'border-card/80 bg-card shadow-sm')}>
+  const expanded = overlay && !scrolled
+
+  return <header data-spity-header data-scrolled={scrolled} className={cn(
+    'top-0 z-40 motion-safe:transition-[padding] motion-safe:duration-300 motion-safe:ease-out',
+    overlay ? 'dark fixed inset-x-0' : 'sticky',
+    expanded ? 'px-0 pt-[env(safe-area-inset-top)]' : 'px-3 pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-6',
+  )}>
+    <div className={cn(
+      'mx-auto flex w-full items-center justify-between gap-4 border p-2.5 text-foreground motion-safe:transition-[max-width,border-radius] motion-safe:duration-300 motion-safe:ease-out',
+      expanded ? 'max-w-full rounded-none sm:px-6' : 'max-w-7xl rounded-2xl sm:px-4',
+      scrolled ? 'border-border bg-card/95 shadow-lg backdrop-blur-lg' : overlay ? 'border-border bg-card/90 shadow-lg backdrop-blur-lg' : 'border-card/80 bg-card shadow-sm',
+    )}>
       <Link ref={brandRef} href={homeHref} aria-label="Accueil Spity" className="flex min-h-11 shrink-0 items-center gap-2.5 rounded-xl pr-2">
         <HeaderBrand light={overlay} />
       </Link>
