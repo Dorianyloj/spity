@@ -33,13 +33,13 @@ const navigationItems: Array<{
 
 export default function AppShell({ activeItem, children, user }: AppShellProps) {
   const isClub = user.role === 'club'
-  const showProfileShortcut = activeItem !== 'profile'
+  const showProfileShortcut = activeItem !== 'profile' && !user.isAdmin
   const navActionClass = '!text-white/80 hover:!bg-white/10 hover:!text-white'
 
   return (
     <main className="min-h-dvh bg-zinc-800 pb-10 text-foreground">
       <header className="sticky top-0 z-40 border-b border-zinc-700 bg-zinc-900/95 text-white backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
+        <div className={`mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center lg:justify-between ${user.isAdmin ? 'lg:flex-wrap' : ''}`}>
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <Link href="/app" className="flex items-center gap-3 pr-2 text-2xl font-extrabold text-white">
@@ -53,7 +53,7 @@ export default function AppShell({ activeItem, children, user }: AppShellProps) 
             </div>
           </div>
 
-          <nav className="flex gap-1 overflow-x-auto pb-1 lg:pb-0" aria-label="Navigation principale">
+          <nav className={`flex min-w-0 gap-1 overflow-x-auto pb-1 lg:pb-0 ${user.isAdmin ? 'lg:order-3 lg:w-full' : ''}`} aria-label="Navigation principale">
             {navigationItems.filter((item) => (!item.role || item.role === user.role) && (!item.adminOnly || user.isAdmin === true)).map((item) => {
               const Icon = item.icon
               const isActive = item.key === activeItem

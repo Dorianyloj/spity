@@ -135,6 +135,10 @@ jobs:
       - name: Audit authenticated accessibility
         run: npm run accessibility:audit
 
+      - name: Diagnose admin browser failures in development mode
+        if: failure()
+        run: ADMIN_TEST_PRODUCTION=0 node --test tests/integration/admin.test.mjs > .integration-results/admin-development.tap 2>&1
+
       - name: Upload integration report
         if: always()
         uses: actions/upload-artifact@v6

@@ -130,7 +130,8 @@ test('administration réelle : accès, statistiques, modération et sessions', {
       const lighthouseRequire = createRequire(require.resolve('lighthouse/package.json'))
       const axe = await readFile(lighthouseRequire.resolve('axe-core/axe.min.js'), 'utf8')
       const errors = []
-      page.on('pageerror', (error) => errors.push(error.message))
+      page.on('pageerror', (error) => errors.push({ url: page.url(), message: error.message, stack: error.stack }))
+      page.on('console', (message) => { if (message.type() === 'error') console.error('admin-browser:', message.text()) })
       await mkdir(`${cwd}/.integration-results`, { recursive: true })
       for (const width of [1440, 320]) {
         await page.setViewport({ width, height: 1000 })
