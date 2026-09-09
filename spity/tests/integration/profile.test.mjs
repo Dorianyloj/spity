@@ -176,7 +176,7 @@ test('profil complet : persistance, confidentialité, médias et interface réel
       await page.waitForSelector('dialog[open]'); await audit('request-320')
       await page.locator('::-p-aria(Envoyer la demande[role="button"])').click()
       await page.waitForSelector('dialog[open]', { hidden: true })
-      const [requests] = await connection.execute('SELECT status FROM partnership_requests WHERE sender_id = ? AND recipient_id = ?', [viewer.id, owner.id])
+      const [requests] = await connection.execute('SELECT partnership_status AS status FROM partnership_requests WHERE sender_id = ? AND recipient_id = ?', [viewer.id, owner.id])
       assert.equal(requests[0].status, 'pending'); assert.deepEqual(errors, [])
       assert.deepEqual(visualFailures, [], JSON.stringify(visualFailures))
     } finally { await browser.close() }
