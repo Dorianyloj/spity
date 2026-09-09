@@ -77,8 +77,8 @@ const toFeedComment = (row: CommentRow, viewerId: string): FeedComment => {
   })
 }
 
-const findCommentForViewer = async (commentId: string, viewerId: string) => {
-  const [row] = await db
+const findCommentForViewer = async (commentId: string, viewerId: string, executor: Pick<typeof db, 'select'> = db) => {
+  const [row] = await executor
     .select({
       comment: comments,
       authorEmail: users.email,
@@ -233,31 +233,14 @@ export const setPostLike = async (postId: string, userId: string, liked: boolean
 }
 
 export const createPostComment = async (postId: string, userId: string, content: string) => {
-  const [post] = await db
-    .select({ id: posts.id })
-    .from(posts)
-    .where(and(eq(posts.id, postId), eq(posts.isHidden, false)))
-    .limit(1)
-
-  if (!post) {
-    throw new FeedOperationError('Publication introuvable', 404)
-  }
-
-  const commentId = randomUUID()
-  await db.insert(comments).values({
-    id: commentId,
-    postId,
-    authorId: userId,
-    contenu: content,
+  return db.transaction(async (transaction) => {
+    await assertVisiblePost(postId, transaction)
+    const commentId = randomUUID()
+    await transaction.insert(comments).values({ id: commentId, postId, authorId: userId, contenu: content })
+    const comment = await findCommentForViewer(commentId, userId, transaction)
+    if (!comment) throw new FeedOperationError('Commentaire introuvable', 404)
+    return comment
   })
-
-  const comment = await findCommentForViewer(commentId, userId)
-
-  if (!comment) {
-    throw new FeedOperationError('Commentaire introuvable', 404)
-  }
-
-  return comment
 }
 
 export const updatePostComment = async (
@@ -266,55 +249,33 @@ export const updatePostComment = async (
   userId: string,
   content: string
 ) => {
-  await assertVisiblePost(postId)
-  const [comment] = await db
-    .select()
-    .from(comments)
-    .where(and(eq(comments.id, commentId), eq(comments.postId, postId)))
-    .limit(1)
-
-  if (!comment) {
-    throw new FeedOperationError('Commentaire introuvable', 404)
-  }
-
-  if (comment.authorId !== userId) {
-    throw new FeedOperationError('Vous ne pouvez modifier que vos commentaires', 403)
-  }
-
-  await db
-    .update(comments)
-    .set({ contenu: content })
-    .where(eq(comments.id, commentId))
-
-  const updatedComment = await findCommentForViewer(commentId, userId)
-
-  if (!updatedComment) {
-    throw new FeedOperationError('Commentaire introuvable', 404)
-  }
-
-  return updatedComment
+  return db.transaction(async (transaction) => {
+    await assertVisiblePost(postId, transaction)
+    const [comment] = await transaction.select().from(comments)
+      .where(and(eq(comments.id, commentId), eq(comments.postId, postId))).limit(1).for('update')
+    if (!comment) throw new FeedOperationError('Commentaire introuvable', 404)
+    if (comment.authorId !== userId) throw new FeedOperationError('Vous ne pouvez modifier que vos commentaires', 403)
+    await transaction.update(comments).set({ contenu: content }).where(eq(comments.id, commentId))
+    const updatedComment = await findCommentForViewer(commentId, userId, transaction)
+    if (!updatedComment) throw new FeedOperationError('Commentaire introuvable', 404)
+    return updatedComment
+  })
 }
 
 export const deletePostComment = async (postId: string, commentId: string, userId: string) => {
-  await assertVisiblePost(postId)
-  const [comment] = await db
-    .select()
-    .from(comments)
-    .where(and(eq(comments.id, commentId), eq(comments.postId, postId)))
-    .limit(1)
-
-  if (!comment) {
-    throw new FeedOperationError('Commentaire introuvable', 404)
-  }
-
-  if (comment.authorId !== userId) {
-    throw new FeedOperationError('Vous ne pouvez supprimer que vos commentaires', 403)
-  }
-
-  await db.delete(comments).where(eq(comments.id, commentId))
+  return db.transaction(async (transaction) => {
+    await assertVisiblePost(postId, transaction)
+    const [comment] = await transaction.select().from(comments)
+      .where(and(eq(comments.id, commentId), eq(comments.postId, postId))).limit(1).for('update')
+    if (!comment) throw new FeedOperationError('Commentaire introuvable', 404)
+    if (comment.authorId !== userId) throw new FeedOperationError('Vous ne pouvez supprimer que vos commentaires', 403)
+    await transaction.delete(comments).where(eq(comments.id, commentId))
+  })
 }
 
-async function assertVisiblePost(postId: string) {
-  const [post] = await db.select({ id: posts.id }).from(posts).where(and(eq(posts.id, postId), eq(posts.isHidden, false))).limit(1)
+// Serialize moderation and comment writes on the same post row. A concurrent hide
+// cannot slip between the visibility check and an interaction being persisted.
+async function assertVisiblePost(postId: string, executor: Pick<typeof db, 'select'>) {
+  const [post] = await executor.select({ id: posts.id }).from(posts).where(and(eq(posts.id, postId), eq(posts.isHidden, false))).limit(1).for('update')
   if (!post) throw new FeedOperationError('Publication introuvable', 404)
 }
