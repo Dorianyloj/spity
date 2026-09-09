@@ -227,7 +227,7 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background font-sans text-foreground antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     text-rendering: optimizeLegibility;
     letter-spacing: 0;
@@ -463,7 +463,7 @@
   }
 
   .spity-stat__value {
-    @apply font-mono text-2xl font-bold text-foreground;
+    @apply text-2xl font-bold tabular-nums text-foreground;
   }
 
   .spity-stat__label {

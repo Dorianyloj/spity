@@ -287,7 +287,7 @@ export default function LandingPage() {
                   <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/[0.08]" />
                   <div className="relative z-10 flex h-full flex-col justify-between">
                     <div>
-                      <p className="font-mono text-lg font-bold text-white">
+                      <p className="text-lg font-bold tabular-nums text-white">
                         {adventure.number}
                         <span className="ml-1 text-xs text-[#8bb957]">/ Spity</span>
                       </p>
@@ -345,7 +345,7 @@ export default function LandingPage() {
                 <p className="text-xs font-bold uppercase text-[#8bb957]">Falaise</p>
                 <h3 className="mt-2 text-3xl font-black">Curis Solitude</h3>
               </div>
-              <p className="font-mono text-sm text-white/[0.58]">2026</p>
+              <p className="text-sm tabular-nums text-white/[0.58]">2026</p>
             </div>
 
             <div className="space-y-4">
