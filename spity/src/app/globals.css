@@ -233,6 +233,13 @@
     letter-spacing: 0;
   }
 
+  /* Keep the landing canvas dark when reaching a scroll boundary. */
+  html:has([data-spity-landing]),
+  body:has([data-spity-landing]) {
+    background-color: var(--spity-slate);
+    overscroll-behavior-y: none;
+  }
+
   /* Typographie fluide */
   h1, h2, h3, h4, h5, h6 {
     @apply font-display text-balance;

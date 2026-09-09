@@ -130,7 +130,7 @@ function AnimatedSection({ children, className = '', delay = 0, id }: AnimatedSe
 
 export default function LandingPage() {
   return (
-    <div className="min-h-dvh bg-[#173236] text-white">
+    <div data-spity-landing className="min-h-dvh bg-[#173236] text-white">
       <Header overlay />
     <main className="overflow-hidden">
       <section className="relative flex min-h-[92svh] flex-col overflow-hidden">
