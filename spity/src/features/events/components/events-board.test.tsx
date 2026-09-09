@@ -42,6 +42,7 @@ describe('EventsBoard', () => {
 
     rerender(<EventsBoard initialEvents={[]} role="club" />)
     expect(screen.getByRole('button', { name: 'Nouvel événement' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Nouvel événement' })).toHaveAttribute('data-slot', 'flow-button')
   })
 
   it('registers then unregisters a climber', async () => {
@@ -56,8 +57,10 @@ describe('EventsBoard', () => {
       .mockResolvedValueOnce(jsonResponse({ event }))
     render(<EventsBoard initialEvents={[event]} role="grimpeur" />)
 
+    expect(screen.getByRole('button', { name: 'S’inscrire' })).toHaveAttribute('data-slot', 'flow-button')
     fireEvent.click(screen.getByRole('button', { name: 'S’inscrire' }))
     expect(await screen.findByText('Inscription confirmée.')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Annuler mon inscription' })).not.toHaveAttribute('data-slot', 'flow-button')
     expect(fetchMock).toHaveBeenNthCalledWith(1, `/api/events/${event.id}/registrations`, expect.objectContaining({ method: 'POST' }))
 
     fireEvent.click(screen.getByRole('button', { name: 'Annuler mon inscription' }))

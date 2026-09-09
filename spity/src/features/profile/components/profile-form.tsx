@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Camera, CheckCircle2, Clock, Mail, MapPin, Mountain, SearchCheck, ShieldCheck, Target, UserRound } from 'lucide-react'
 import Link from 'next/link'
+import { FlowButton } from '@/components/ui/flow-button'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -379,9 +380,7 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
             <CardDescription>Connectez-vous avant de compléter votre profil Spity.</CardDescription>
           </CardHeader>
           <CardContent>
-            <Link className="spity-btn spity-btn--primary" href="/login">
-              Aller à la connexion
-            </Link>
+            <FlowButton href="/login" text="Aller à la connexion" />
           </CardContent>
         </Card>
       )
@@ -399,9 +398,7 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
               <CardDescription>Connectez-vous avant de compléter votre profil Spity.</CardDescription>
             </CardHeader>
             <CardContent>
-              <Link className="spity-btn spity-btn--primary" href="/login">
-                Aller à la connexion
-              </Link>
+              <FlowButton href="/login" text="Aller à la connexion" />
             </CardContent>
           </Card>
         </div>
@@ -1028,9 +1025,7 @@ export default function ProfileForm({ mode, variant = 'standalone' }: ProfileFor
 
             <div className="flex flex-wrap gap-3 lg:justify-end">
               {profile.onboardingComplete && (
-                <Link className="spity-btn spity-btn--primary" href="/app">
-                  Entrer dans l’app
-                </Link>
+                <FlowButton href="/app" text="Entrer dans l’app" />
               )}
               <Link className="spity-btn spity-btn--secondary" href="/">
                 Accueil

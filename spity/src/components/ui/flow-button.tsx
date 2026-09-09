@@ -1,10 +1,10 @@
 'use client'
 
-import { ArrowRight, Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import type { ButtonHTMLAttributes, ComponentProps } from 'react'
 import { cn } from '@/lib/class-names'
 import styles from './flow-button.module.css'
+import FlowButtonContent from './flow-button-content'
 
 type CommonProps = {
   text?: string
@@ -36,14 +36,7 @@ export function FlowButton({
   ...props
 }: FlowButtonProps) {
   const content = (
-    <>
-      <ArrowRight aria-hidden="true" className={cn(styles.arrow, styles.entering)} />
-      <span className={styles.label}>
-        {isLoading && <Loader2 aria-hidden="true" className={styles.spinner} />}
-        {isLoading ? loadingText : text}
-      </span>
-      <ArrowRight aria-hidden="true" className={cn(styles.arrow, styles.leaving)} />
-    </>
+    <FlowButtonContent isLoading={isLoading}>{isLoading ? loadingText : text}</FlowButtonContent>
   )
   const classes = cn(styles.button, styles[variant], className)
 

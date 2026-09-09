@@ -102,7 +102,7 @@ export default function EventsBoard({ initialEvents, role }: EventsBoardProps) {
         title="Événements Spity"
       >
         {role === 'club' && (
-          <Button onClick={() => { setEditingId(null); setShowCreateForm((current) => !current) }} variant="secondary">
+          <Button onClick={() => { setEditingId(null); setShowCreateForm((current) => !current) }} variant="primary">
             <CalendarPlus size={18} aria-hidden="true" />
             Nouvel événement
           </Button>

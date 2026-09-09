@@ -33,6 +33,16 @@
 .primary {
   --flow-background: #8bb957;
 }
+.sm {
+  min-height: 44px;
+  padding: 8px 32px;
+  font-size: 12px;
+}
+.lg {
+  min-height: 52px;
+  padding: 12px 44px;
+  font-size: 16px;
+}
 .light {
   --flow-background: #ffffff;
 }

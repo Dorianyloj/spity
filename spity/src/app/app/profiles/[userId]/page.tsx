@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, Award, MapPin, Mountain, Settings, UsersRound } from 'lucide-react'
+import { ArrowLeft, Award, MapPin, Mountain } from 'lucide-react'
 import type { Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
-import { Avatar, Badge, EmptyState } from '@/components/ui'
+import { Avatar, Badge, EmptyState, FlowButton } from '@/components/ui'
 import AppShell from '@/features/app/components/app-shell'
 import { getCurrentProfile } from '@/features/profile/lib/current-profile'
 import { findPublicProfileByUserId, type PublicProfile } from '@/features/profile/lib/public-profile-repository'
@@ -134,19 +134,11 @@ function ClubProfileContent({ profile, currentProfile }: { profile: PublicProfil
 
               <div className="mt-5 flex flex-wrap gap-2">
                 {isCurrentUser ? (
-                  <Link className="spity-btn spity-btn--primary" href="/profile/me">
-                    <Settings aria-hidden="true" size={17} />
-                    Modifier mon profil
-                  </Link>
+                  <FlowButton href="/profile/me" text="Modifier mon profil" />
                 ) : profile.role === 'grimpeur' ? (
-                  <Link className="spity-btn spity-btn--primary" href="/app/matching">
-                    <UsersRound aria-hidden="true" size={17} />
-                    Trouver un partenaire
-                  </Link>
+                  <FlowButton href="/app/matching" text="Trouver un partenaire" />
                 ) : (
-                  <Link className="spity-btn spity-btn--primary" href="/app/events">
-                    Voir les événements
-                  </Link>
+                  <FlowButton href="/app/events" text="Voir les événements" />
                 )}
               </div>
             </div>

@@ -1,6 +1,8 @@
 import { forwardRef, type ButtonHTMLAttributes } from 'react'
 import { Loader2 } from 'lucide-react'
 import { cn } from '@/lib/class-names'
+import FlowButtonContent from './flow-button-content'
+import flowStyles from './flow-button.module.css'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'destructive'
@@ -25,6 +27,24 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const isDisabled = disabled || isLoading
+
+    if (variant === 'primary') {
+      return (
+        <button
+          ref={ref}
+          className={cn(flowStyles.button, flowStyles.primary, flowStyles[size], className)}
+          disabled={isDisabled}
+          aria-busy={isLoading || undefined}
+          type={type}
+          {...props}
+          data-slot="flow-button"
+        >
+          <FlowButtonContent isLoading={isLoading}>
+            {isLoading && loadingText ? loadingText : children}
+          </FlowButtonContent>
+        </button>
+      )
+    }
 
     const variantClasses = {
       primary: 'spity-btn--primary',
