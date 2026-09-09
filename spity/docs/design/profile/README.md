@@ -1,4 +1,6 @@
-# Profil Spity — maquette à valider
+# Profil Spity — maquette validée
+
+Maquette validée le 9 septembre 2026. L'intégration React est décrite dans [INTEGRATION.md](INTEGRATION.md). Les fichiers de démonstration ci-dessous restent indépendants de l'application.
 
 Prototype **local et interactif**, pas une fonctionnalité intégrée ou déployée. Le profil de Camille Martin, son e-mail en `.test`, ses publications et son inventaire sont fictifs. Aucune API, base de données, session utilisateur ou production n'est contactée. Les modifications restent en mémoire et disparaissent au rechargement. Aucun stockage local persistant. Aucun Superdesign.
 

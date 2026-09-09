@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto'
 import { and, count, eq, sum } from 'drizzle-orm'
 import { db } from '@/db'
-import { mediaUploads, users } from '@/db/schema'
+import { medias, mediaUploads, users } from '@/db/schema'
 import { logger } from '@/lib/logger'
 import { MediaOperationError } from './errors'
 import type { NormalizedImage } from './image-upload'
@@ -43,9 +43,15 @@ export const findOwnedMedia = async (id: string, ownerId: string): Promise<typeo
 }
 
 export const deleteOwnedMedia = async (id: string, ownerId: string) => {
-  const media = await findOwnedMedia(id, ownerId)
-  if (!media) throw new MediaOperationError('Image introuvable', 404)
-  // Remove the bytes first. If SQL fails, a retry safely removes the remaining metadata.
-  await removeImage(media.id)
-  await db.delete(mediaUploads).where(and(eq(mediaUploads.id, media.id), eq(mediaUploads.ownerId, ownerId)))
+  await db.transaction(async (tx) => {
+    // Same lock order as attachment/publication: an upload cannot disappear mid-save.
+    const [owner] = await tx.select({ id: users.id, avatarUrl: users.avatarUrl }).from(users).where(eq(users.id, ownerId)).limit(1).for('update')
+    const [media] = await tx.select().from(mediaUploads).where(and(eq(mediaUploads.id, id), eq(mediaUploads.ownerId, ownerId))).limit(1).for('update')
+    if (!owner || !media) throw new MediaOperationError('Image introuvable', 404)
+    const [publication] = await tx.select({ id: medias.id }).from(medias).where(eq(medias.url, `/api/post-media/${media.id}`)).limit(1)
+    if (owner.avatarUrl === `/api/avatars/${media.id}` || publication) throw new MediaOperationError('Cette image est utilisée par le profil ou une publication.', 409)
+    // Retain metadata for retry if removal fails. Never delete an attached object.
+    await removeImage(media.id)
+    await tx.delete(mediaUploads).where(and(eq(mediaUploads.id, media.id), eq(mediaUploads.ownerId, ownerId)))
+  })
 }

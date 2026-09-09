@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { privateProfileResponse } from '@/features/profile/lib/http'
 import { getCurrentUser } from '@/features/auth/lib/current-user'
 import { rejectInvalidOrigin } from '@/features/auth/lib/csrf'
 import {
@@ -33,7 +33,7 @@ export async function GET() {
 
   const equipment = await findUserEquipmentByUserId(user.id)
 
-  return NextResponse.json(equipmentListResponseSchema.parse({ equipment }))
+  return privateProfileResponse(equipmentListResponseSchema.parse({ equipment }))
 }
 
 export async function POST(request: Request) {
@@ -70,5 +70,5 @@ export async function POST(request: Request) {
     return profileErrorResponse('Impossible de créer le matériel', 500)
   }
 
-  return NextResponse.json(equipmentItemResponseSchema.parse({ equipment }), { status: 201 })
+  return privateProfileResponse(equipmentItemResponseSchema.parse({ equipment }), 201)
 }

@@ -6,9 +6,14 @@ import { notFound, redirect } from 'next/navigation'
 import { Avatar, Badge, EmptyState } from '@/components/ui'
 import AppShell from '@/features/app/components/app-shell'
 import { getCurrentProfile } from '@/features/profile/lib/current-profile'
-import { findPublicProfileByUserId } from '@/features/profile/lib/public-profile-repository'
+import { findPublicProfileByUserId, type PublicProfile } from '@/features/profile/lib/public-profile-repository'
+import MemberProfile from '@/features/profile/components/member-profile'
+import { profileSection } from '@/features/profile/lib/presentation'
+import { findPartnershipByPair } from '@/features/matching/lib/matching-repository'
+import { z } from 'zod'
 
 type PublicProfilePageProps = {
+  searchParams: Promise<{ section?: string; page?: string }>
   params: Promise<{
     userId: string
   }>
@@ -17,6 +22,7 @@ type PublicProfilePageProps = {
 export const metadata: Metadata = {
   title: 'Profil - Spity',
   description: 'Profil public d’un membre de la communauté Spity.',
+  robots: { index: false, follow: false },
 }
 
 const environmentLabels = {
@@ -29,7 +35,7 @@ const formatMemberSince = (date: Date) => {
   return new Intl.DateTimeFormat('fr-FR', { month: 'long', year: 'numeric' }).format(date)
 }
 
-export default async function PublicProfilePage({ params }: PublicProfilePageProps) {
+export default async function PublicProfilePage({ params, searchParams }: PublicProfilePageProps) {
   const currentProfile = await getCurrentProfile()
 
   if (!currentProfile) {
@@ -41,12 +47,23 @@ export default async function PublicProfilePage({ params }: PublicProfilePagePro
   }
 
   const { userId } = await params
-  const profile = await findPublicProfileByUserId(userId)
+  if (!z.string().uuid().safeParse(userId).success) notFound()
+  const query = await searchParams
+  const profile = await findPublicProfileByUserId(userId, Number(query.page ?? 1))
 
   if (!profile) {
     notFound()
   }
 
+  const isCurrentUser = profile.userId === currentProfile.user.id
+  if (profile.role === 'grimpeur') {
+    const partnership = !isCurrentUser && currentProfile.user.role === 'grimpeur' ? await findPartnershipByPair(currentProfile.user.id, profile.userId) : null
+    return <AppShell activeItem="profile" user={currentProfile.user}><MemberProfile key={`${profile.userId}:${profile.page}:${query.section ?? ''}`} profile={profile} isOwner={isCurrentUser} canRequest={currentProfile.user.role === 'grimpeur' && !isCurrentUser} initialStatus={partnership?.status ?? null} initialSection={profileSection(query.section)} /></AppShell>
+  }
+  return <ClubProfileContent profile={profile} currentProfile={currentProfile} />
+}
+
+function ClubProfileContent({ profile, currentProfile }: { profile: PublicProfile; currentProfile: NonNullable<Awaited<ReturnType<typeof getCurrentProfile>>> }) {
   const isCurrentUser = profile.userId === currentProfile.user.id
   const levels = Object.entries(profile.niveaux)
   const primaryLevel = levels.at(0)?.[1]
@@ -85,7 +102,7 @@ export default async function PublicProfilePage({ params }: PublicProfilePagePro
 
               <dl className="mt-5 grid grid-cols-3 gap-3 border-y border-border py-4 text-center sm:max-w-lg">
                 <div>
-                  <dd className="text-lg font-bold text-foreground tabular-nums">{profile.posts.length}</dd>
+                  <dd className="text-lg font-bold text-foreground tabular-nums">{profile.postCount}</dd>
                   <dt className="text-xs text-muted-foreground">publications</dt>
                 </div>
                 <div>
@@ -218,6 +235,7 @@ export default async function PublicProfilePage({ params }: PublicProfilePagePro
             />
           )}
         </section>
+        {profile.pageCount > 1 && <nav aria-label="Pages de publications" className="flex flex-wrap items-center justify-between gap-3 text-sm text-white">{profile.page > 1 ? <Link className="spity-btn spity-btn--secondary" href={`/app/profiles/${profile.userId}?page=${profile.page - 1}`}>Précédente</Link> : <span />}<span className="tabular-nums">Page {profile.page} sur {profile.pageCount}</span>{profile.page < profile.pageCount && <Link className="spity-btn spity-btn--secondary" href={`/app/profiles/${profile.userId}?page=${profile.page + 1}`}>Suivante</Link>}</nav>}
       </div>
     </AppShell>
   )

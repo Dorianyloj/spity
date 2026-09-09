@@ -84,7 +84,7 @@ const selectDirectoryRows = async (excludedUserId?: string) => {
     })
     .from(grimpeurProfiles)
     .innerJoin(users, eq(users.id, grimpeurProfiles.userId))
-    .where(excludedUserId ? ne(users.id, excludedUserId) : undefined)
+    .where(and(eq(users.isSuspended, false), excludedUserId ? ne(users.id, excludedUserId) : undefined))
     .orderBy(asc(grimpeurProfiles.displayName), asc(users.id))
     .limit(100)
 }
@@ -116,7 +116,7 @@ export const findPublicClimberByUserId = async (userId: string) => {
     })
     .from(grimpeurProfiles)
     .innerJoin(users, eq(users.id, grimpeurProfiles.userId))
-    .where(eq(users.id, userId))
+    .where(and(eq(users.id, userId), eq(users.isSuspended, false)))
     .limit(1)
 
   return rows[0] ? toPublicClimber(rows[0], false) : null

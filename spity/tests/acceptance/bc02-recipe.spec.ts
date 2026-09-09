@@ -197,10 +197,12 @@ test.describe.serial('Cahier de recettes BC02 - fonctions F01 à F10', () => {
 
     await climber.page.goto('/profile/me')
     await expect(climber.page.getByRole('heading', { name: accounts.firstClimber.displayName })).toBeVisible()
+    await climber.page.getByRole('button', { name: 'Modifier mon profil' }).click()
     await expect(climber.page.getByLabel('Nom affiché')).toHaveValue(accounts.firstClimber.displayName)
-    await climber.page.getByLabel('Bio courte').fill(`Profil vérifié par la recette ${runId}`)
-    await climber.page.getByRole('button', { name: 'Mettre à jour la fiche publique' }).click()
-    await expect(climber.page.getByText('Profil public mis à jour')).toBeVisible()
+    await climber.page.getByLabel('Quelques mots sur toi').fill(`Profil vérifié par la recette ${runId}`)
+    await climber.page.getByRole('button', { name: 'Enregistrer', exact: true }).click()
+    await expect(climber.page.getByText('Profil mis à jour.')).toBeVisible()
+    await expect(climber.page.getByRole('dialog')).toHaveCount(0)
     await climber.context.close()
 
     const club = await newAuthenticatedPage(browser, clubState)
