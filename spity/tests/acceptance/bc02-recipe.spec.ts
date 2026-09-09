@@ -353,9 +353,20 @@ test.describe.serial('Cahier de recettes BC02 - fonctions F01 à F10', () => {
 
     await page.goto('/app/matching')
     await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1)
-    await expect(page.getByRole('navigation', { name: 'Navigation principale' })).toBeVisible()
+    const menuTrigger = page.getByRole('button', { name: 'Ouvrir le menu' })
+    await expect(menuTrigger).toBeVisible()
+    await expect(menuTrigger).toHaveAttribute('aria-expanded', 'false')
+    for (let attempt = 0; attempt < 10; attempt += 1) {
+      if (await menuTrigger.evaluate((element) => element === document.activeElement)) break
+      await page.keyboard.press('Tab')
+    }
+    await expect(menuTrigger).toBeFocused()
+    await page.keyboard.press('Enter')
+    const navigation = page.getByRole('navigation', { name: 'Navigation mobile' })
+    await expect(navigation).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Fermer le menu' })).toBeFocused()
 
-    const matchingLink = page.getByRole('link', { name: 'Partenaires', exact: true })
+    const matchingLink = navigation.getByRole('link', { name: 'Partenaires', exact: true })
     for (let attempt = 0; attempt < 20; attempt += 1) {
       if (await matchingLink.evaluate((element) => element === document.activeElement)) {
         break
@@ -365,6 +376,8 @@ test.describe.serial('Cahier de recettes BC02 - fonctions F01 à F10', () => {
     await expect(matchingLink).toBeFocused()
     await page.keyboard.press('Enter')
     await expect(page).toHaveURL(/\/app\/matching$/)
+    await expect(page.getByRole('dialog')).toHaveCount(0)
+    await expect(menuTrigger).toHaveAttribute('aria-expanded', 'false')
 
     const hasHorizontalOverflow = await page.evaluate(() => (
       document.documentElement.scrollWidth > document.documentElement.clientWidth
