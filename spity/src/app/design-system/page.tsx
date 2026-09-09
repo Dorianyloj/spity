@@ -19,6 +19,7 @@ import {
 } from '@/components/ui'
 import { Heart, MessageCircle, Share2, TrendingUp, Mountain, Award } from 'lucide-react'
 import BrandMark from '@/components/brand/brand-mark'
+import FlowButtonDemo from '@/components/ui/flow-button-demo'
 import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
 
 export default function DesignSystemPage() {
@@ -44,6 +45,7 @@ export default function DesignSystemPage() {
           <h2 className="text-2xl font-bold">Boutons</h2>
           <Card>
             <CardContent className="pt-6">
+              <div className="mb-6 border-b border-border pb-6"><FlowButtonDemo /></div>
               <div className="flex flex-wrap gap-4">
                 <Button variant="primary">Primaire</Button>
                 <Button variant="secondary">Secondaire</Button>

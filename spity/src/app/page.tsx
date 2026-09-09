@@ -2,7 +2,6 @@
 
 import { motion, useInView } from 'framer-motion'
 import {
-  ArrowRight,
   Bell,
   CalendarDays,
   Camera,
@@ -17,6 +16,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRef, type ReactNode } from 'react'
 import { Header } from '@/components/ui/header-2'
+import { FlowButton } from '@/components/ui/flow-button'
 import { brandAssets } from '@/lib/brand-assets'
 
 type AnimatedSectionProps = {
@@ -188,13 +188,7 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
             >
-              <Link
-                href="/register"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-5 py-3 font-bold text-[#173236] transition-transform hover:-translate-y-0.5"
-              >
-                Rejoindre Spity
-                <ArrowRight size={18} aria-hidden="true" />
-              </Link>
+              <FlowButton href="/register" text="Rejoindre Spity" variant="light" />
               <Link
                 href="/login"
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/[0.28] bg-white/10 px-5 py-3 font-bold text-white backdrop-blur transition-colors hover:bg-white/[0.18]"
@@ -362,13 +356,7 @@ export default function LandingPage() {
               ))}
             </div>
 
-            <Link
-              href="/register"
-              className="mt-7 inline-flex items-center gap-2 rounded-lg bg-[#5f8f50] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#8bb957] hover:text-[#173236]"
-            >
-              Explorer les topos
-              <ArrowRight size={17} aria-hidden="true" />
-            </Link>
+            <FlowButton href="/register" text="Explorer les topos" className="mt-7" />
           </div>
         </div>
       </AnimatedSection>

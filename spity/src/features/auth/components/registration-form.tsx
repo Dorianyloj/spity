@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { z } from 'zod'
-import { Button, Input } from '@/components/ui'
+import { FlowButton, Input } from '@/components/ui'
 import { cn } from '@/lib/class-names'
 import { registerSchema } from '@/lib/validators'
 import { registrationFormSchema, type RegistrationFormInput } from '../registration-schema'
@@ -258,10 +258,13 @@ export default function RegistrationForm() {
               {feedback}
             </p>
           )}
-          <Button type="submit" className="min-h-12 w-full justify-between px-5" isLoading={isSubmitting}>
-            Créer mon compte
-            <ArrowRight aria-hidden="true" size={18} />
-          </Button>
+          <FlowButton
+            type="submit"
+            text="Créer mon compte"
+            className="w-full"
+            isLoading={isSubmitting}
+            loadingText="Création du compte…"
+          />
           <p className="text-center text-sm leading-relaxed text-muted-foreground">
             {role === 'club'
               ? 'Ensuite : présentez votre club, sa localisation et ses activités.'

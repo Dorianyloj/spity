@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Button, Input } from '@/components/ui'
+import { FlowButton, Input } from '@/components/ui'
 import { loginSchema, type LoginInput } from '@/lib/validators'
 import { authErrorResponseSchema, authSuccessResponseSchema } from '../schemas'
 
@@ -119,15 +119,13 @@ export default function LoginForm() {
               {feedback}
             </p>
           )}
-          <Button
+          <FlowButton
             type="submit"
-            className="min-h-12 w-full justify-between px-5"
+            text="Se connecter"
+            className="w-full"
             isLoading={isSubmitting}
             loadingText="Connexion en cours…"
-          >
-            Se connecter
-            <ArrowRight aria-hidden="true" size={18} />
-          </Button>
+          />
           <p className="text-center text-sm leading-relaxed text-muted-foreground">
             Grimpeur ou club, retrouvez votre espace avec le même formulaire.
           </p>

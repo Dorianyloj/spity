@@ -1,6 +1,8 @@
 // Composants de base
 export { default as Button } from './button'
 export type { ButtonProps } from './button'
+export { FlowButton } from './flow-button'
+export type { FlowButtonProps } from './flow-button'
 
 export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './card'
 export type { CardProps, CardHeaderProps, CardTitleProps, CardDescriptionProps, CardContentProps, CardFooterProps } from './card'

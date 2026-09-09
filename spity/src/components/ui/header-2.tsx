@@ -7,6 +7,7 @@ import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
 import { brandAssets } from '@/lib/brand-assets'
 import { cn } from '@/lib/class-names'
 import Button from './button'
+import { FlowButton } from './flow-button'
 import { useScroll } from './use-scroll'
 
 export type HeaderLink = {
@@ -31,9 +32,7 @@ function HeaderBrand({ light = false }: { light?: boolean }) {
 function PublicActions() {
   return <>
     <Link href="/login" className="inline-flex min-h-11 items-center justify-center rounded-xl border border-border px-4 text-sm font-semibold hover:bg-secondary">Connexion</Link>
-    <Link href="/register" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground hover:bg-[#a2ca75]">
-      Créer un compte <ArrowRight size={16} aria-hidden="true" />
-    </Link>
+    <FlowButton href="/register" text="Créer un compte" />
   </>
 }
 
