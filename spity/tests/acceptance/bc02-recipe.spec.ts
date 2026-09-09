@@ -175,6 +175,7 @@ test.describe.serial('Cahier de recettes BC02 - fonctions F01 à F10', () => {
     await expect(page.locator('#register-password-error')).toContainText('au moins 8 caractères')
 
     await page.locator('#register-password').fill(password)
+    await page.getByLabel('Confirmer le mot de passe').fill(password)
     await page.getByLabel('Grimpeur').check()
     await page.getByRole('button', { name: 'Créer mon compte' }).click()
     await expect(page).toHaveURL(/\/profile\/onboarding$/)
