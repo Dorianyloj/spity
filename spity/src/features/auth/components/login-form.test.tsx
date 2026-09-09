@@ -23,6 +23,15 @@ async function fillForm() {
   return user
 }
 
+it('places the registration link below the login form', () => {
+  render(<LoginForm />)
+  const link = screen.getByRole('link', { name: 'Créer un compte' })
+  expect(link).toHaveAttribute('href', '/register')
+  expect(screen.getByText('Pas encore de compte ?')).toBeVisible()
+  const submit = screen.getByRole('button', { name: 'Se connecter' })
+  expect(submit.compareDocumentPosition(link) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+})
+
 it('validates required fields and focuses the first error without a request', async () => {
   render(<LoginForm />)
   await userEvent.setup().click(screen.getByRole('button', { name: 'Se connecter' }))
