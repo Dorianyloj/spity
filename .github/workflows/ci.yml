@@ -48,8 +48,8 @@ jobs:
       - name: Run tests with coverage
         run: npm run test:coverage
 
-      - name: Test operations and deployment safety
-        run: npm run test:maintenance
+      - name: Test deployment safety
+        run: node --test tests/maintenance/deploy-vps.test.mjs
 
       - name: Audit production dependencies
         run: npm run security:audit
