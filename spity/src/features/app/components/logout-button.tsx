@@ -24,7 +24,7 @@ export default function LogoutButton({ className = '', compact = false }: Logout
   return (
     <Button
       aria-label={compact ? 'Se déconnecter' : undefined}
-      className={`${compact ? 'h-11 w-11 p-0' : ''} ${className}`}
+      className={`${compact ? 'size-11 shrink-0 !p-0' : ''} ${className}`}
       title={compact ? 'Se déconnecter' : undefined}
       variant="ghost"
       type="button"

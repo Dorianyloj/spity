@@ -160,6 +160,7 @@ test('profil complet : persistance, confidentialité, médias et interface réel
           return document.documentElement.scrollWidth <= innerWidth && bar.scrollWidth <= bar.clientWidth
         }), `Header overflow at ${width}px`)
         if (width >= 1280) {
+          assert.ok(await page.$eval('button[aria-label="Se déconnecter"] svg', (icon) => icon.getBoundingClientRect().width >= 18), 'Logout icon must retain its readable size')
           assert.equal(await page.$eval('nav[aria-label="Navigation principale"] a[aria-current="page"]', (link) => link.textContent), 'Profil')
           await page.evaluate(() => window.scrollTo({ top: 600, behavior: 'instant' }))
           await page.waitForFunction(() => document.querySelector('[data-spity-header]').dataset.scrolled === 'true')
