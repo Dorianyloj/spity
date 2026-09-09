@@ -56,6 +56,53 @@ it('retains the identity draft after network failure and submits no other sectio
   expect(JSON.parse(fetchMock.mock.calls[1][1].body)).toEqual({ section: 'identity', displayName: 'Camille bis', bio: 'Bloc et voie', location: 'Lyon', avatarMediaId: null })
 })
 
+it('keeps six disciplines with visually hidden, accessible grade labels', async () => {
+  const { container } = render(<ProfileEditor kind="practice" profile={ownerFixture()} onClose={jest.fn()} onSaved={jest.fn()} />)
+  const disciplines = within(screen.getByRole('group', { name: 'Disciplines et niveaux déclarés' }))
+  const names = ['Bloc', 'Voie', 'Trad', 'Via ferrata', 'Grandes voies', 'Speed']
+  expect(disciplines.getAllByRole('checkbox').map((checkbox) => checkbox.closest('label')?.textContent)).toEqual(names)
+  expect(disciplines.getAllByRole('combobox')).toHaveLength(6)
+  expect(disciplines.queryByRole('checkbox', { name: 'Escalade' })).not.toBeInTheDocument()
+  for (const name of names) {
+    const select = disciplines.getByRole('combobox', { name: `Niveau ${name}` }) as HTMLSelectElement
+    expect(select.labels?.[0]).toHaveClass('sr-only')
+    expect(select.disabled).toBe(!['Bloc', 'Voie'].includes(name))
+  }
+  const environment = screen.getByRole('combobox', { name: 'Environnement préféré' }) as HTMLSelectElement
+  expect(environment.labels?.[0]).not.toHaveClass('sr-only')
+  expect((await axe(container)).violations).toEqual([])
+})
+
+it('only removes the legacy discipline when the owner saves practice', async () => {
+  const profile = ownerFixture(), saved = jest.fn(), closed = jest.fn()
+  profile.grimpeurProfile!.disciplines = ['bloc', 'escalade']
+  profile.grimpeurProfile!.niveaux = { bloc: '6b', escalade: '5a' }
+  const { unmount } = render(<ProfileEditor kind="practice" profile={profile} onClose={closed} onSaved={saved} />)
+  click('Annuler')
+  expect(closed).toHaveBeenCalledTimes(1)
+  expect(fetchMock).not.toHaveBeenCalled()
+  expect(profile.grimpeurProfile!.disciplines).toEqual(['bloc', 'escalade'])
+  unmount()
+  render(<ProfileEditor kind="practice" profile={profile} onClose={closed} onSaved={saved} />)
+  fetchMock.mockResolvedValueOnce(response(ownerFixture())); click('Enregistrer')
+  await waitFor(() => expect(saved).toHaveBeenCalledTimes(1))
+  expect(JSON.parse(fetchMock.mock.calls[0][1].body)).toMatchObject({ section: 'practice', disciplines: ['bloc'], niveaux: { bloc: '6b' } })
+})
+
+it('requires a selectable discipline before saving a legacy-only practice', async () => {
+  const profile = ownerFixture(), saved = jest.fn()
+  profile.grimpeurProfile!.disciplines = ['escalade']
+  profile.grimpeurProfile!.niveaux = { escalade: '5a' }
+  render(<ProfileEditor kind="practice" profile={profile} onClose={jest.fn()} onSaved={saved} />)
+  click('Enregistrer')
+  expect(screen.getByText('Vérifie les champs indiqués.')).toBeVisible()
+  expect(fetchMock).not.toHaveBeenCalled()
+  fireEvent.click(screen.getByRole('checkbox', { name: 'Trad' }))
+  edit('Niveau Trad', '6a'); fetchMock.mockResolvedValueOnce(response(ownerFixture())); click('Enregistrer')
+  await waitFor(() => expect(saved).toHaveBeenCalledTimes(1))
+  expect(JSON.parse(fetchMock.mock.calls[0][1].body)).toMatchObject({ section: 'practice', disciplines: ['trad'], niveaux: { trad: '6a' } })
+})
+
 it('edits practice and opt-in partner preferences using independent payloads', async () => {
   const saved = jest.fn()
   const { unmount } = render(<ProfileEditor kind="practice" profile={ownerFixture()} onClose={jest.fn()} onSaved={saved} />)

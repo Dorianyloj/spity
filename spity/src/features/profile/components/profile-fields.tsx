@@ -2,11 +2,12 @@
 
 import { useId, type ReactNode, type SelectHTMLAttributes } from 'react'
 import { z } from 'zod'
+import { cn } from '@/lib/class-names'
 
-export function ProfileSelect({ label, options, error, ...props }: SelectHTMLAttributes<HTMLSelectElement> & { label: string; options: Record<string, string>; error?: string }) {
+export function ProfileSelect({ label, hideLabel = false, options, error, ...props }: SelectHTMLAttributes<HTMLSelectElement> & { label: string; hideLabel?: boolean; options: Record<string, string>; error?: string }) {
   const generated = useId()
   const id = props.id ?? generated
-  return <div className="min-w-0"><label className="mb-1.5 block text-sm font-medium" htmlFor={id}>{label}</label><select {...props} id={id} className="spity-input min-h-11" aria-invalid={error ? true : undefined} aria-describedby={error ? `${id}-error` : undefined}>
+  return <div className="min-w-0"><label className={cn(hideLabel ? 'sr-only' : 'mb-1.5 block text-sm font-medium')} htmlFor={id}>{label}</label><select {...props} id={id} className="spity-input min-h-11" aria-invalid={error ? true : undefined} aria-describedby={error ? `${id}-error` : undefined}>
     {Object.entries(options).map(([value, text]) => <option key={value} value={value}>{text}</option>)}
   </select>{error && <p id={`${id}-error`} role="alert" className="mt-1.5 text-xs text-destructive">{error}</p>}</div>
 }

@@ -9,9 +9,11 @@ import { availabilityLabels, disciplineLabels, environmentLabels, goalOptions, g
 import ProfileDialog from './profile-dialog'
 import { apiData, Choice, failureMessage, FormError, ProfileSelect, uploadProfileImage } from './profile-fields'
 
+const practiceDisciplines = disciplinesEnum.options.filter((key) => key !== 'escalade')
+
 export default function ProfileEditor({ kind, profile, onClose, onSaved }: { kind: ProfileEditorKind; profile: ProfileMeResponse; onClose: () => void; onSaved: (profile: ProfileMeResponse) => void }) {
   const climber = profile.grimpeurProfile!
-  const [selected, setSelected] = useState(climber.disciplines)
+  const [selected, setSelected] = useState(climber.disciplines.filter((key) => key !== 'escalade'))
   const [file, setFile] = useState<File | null>(null)
   const [removeAvatar, setRemoveAvatar] = useState(false)
   const [preview, setPreview] = useState<string | null>(null)
@@ -77,7 +79,7 @@ export default function ProfileEditor({ kind, profile, onClose, onSaved }: { kin
         <p className="text-pretty text-xs text-muted-foreground">Choisis une ville ou un secteur, pas une adresse précise. Ton adresse e-mail reste privée.</p>
       </>}
       {kind === 'practice' && <>
-        <fieldset><legend className="mb-3 text-sm font-medium">Disciplines et niveaux déclarés</legend><div className="space-y-3">{disciplinesEnum.options.map((key) => <div key={key} className="grid grid-cols-[minmax(0,1fr)_6rem] items-center gap-3"><Choice><input type="checkbox" name="disciplines" value={key} checked={selected.includes(key)} onChange={(event) => setSelected((items) => event.target.checked ? [...items, key] : items.filter((item) => item !== key))} />{disciplineLabels[key]}</Choice><ProfileSelect name={`niveaux.${key}`} label={`Niveau ${disciplineLabels[key]}`} disabled={!selected.includes(key)} defaultValue={climber.niveaux[key] ?? '5a'} options={Object.fromEntries(gradeOptions.map((grade) => [grade, grade]))} error={errors[`niveaux.${key}`]} /></div>)}</div><FormError message={errors.disciplines ?? null} /></fieldset>
+        <fieldset><legend className="mb-3 text-sm font-medium">Disciplines et niveaux déclarés</legend><div className="space-y-3">{practiceDisciplines.map((key) => <div key={key} className="grid grid-cols-[minmax(0,1fr)_6rem] items-center gap-3"><Choice><input type="checkbox" name="disciplines" value={key} checked={selected.includes(key)} onChange={(event) => setSelected((items) => event.target.checked ? [...items, key] : items.filter((item) => item !== key))} />{disciplineLabels[key]}</Choice><ProfileSelect name={`niveaux.${key}`} label={`Niveau ${disciplineLabels[key]}`} hideLabel disabled={!selected.includes(key)} defaultValue={climber.niveaux[key] ?? '5a'} options={Object.fromEntries(gradeOptions.map((grade) => [grade, grade]))} error={errors[`niveaux.${key}`]} /></div>)}</div><FormError message={errors.disciplines ?? null} /></fieldset>
         <ProfileSelect name="climbingEnvironment" label="Environnement préféré" defaultValue={climber.climbingEnvironment ?? ''} options={{ '': 'À préciser', ...environmentLabels }} />
         <fieldset><legend className="mb-3 text-sm font-medium">Mes objectifs</legend><div className="grid gap-2 sm:grid-cols-2">{[...new Set([...goalOptions, ...climber.goals])].map((goal) => <Choice key={goal}><input type="checkbox" name="goals" value={goal} defaultChecked={climber.goals.includes(goal)} />{goal}</Choice>)}</div><FormError message={errors.goals ?? null} /></fieldset>
       </>}

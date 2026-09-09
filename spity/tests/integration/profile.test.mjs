@@ -161,7 +161,18 @@ test('profil complet : persistance, confidentialité, médias et interface réel
       await page.waitForSelector('dialog[open]'); await page.keyboard.press('Escape')
       assert.equal(await page.evaluate(() => document.activeElement?.textContent), 'Modifier mon profil')
       for (const label of ['Modifier : pratique et objectifs', 'Ajuster : disponibilités et partenaires']) {
-        await page.locator(`button[aria-label="${label}"]`).click(); await page.waitForSelector('dialog[open]'); await audit(label.startsWith('Modifier') ? 'practice-320' : 'partners-320'); await page.keyboard.press('Escape')
+        await page.locator(`button[aria-label="${label}"]`).click(); await page.waitForSelector('dialog[open]')
+        if (label.startsWith('Modifier')) {
+          const rows = await page.evaluate(() => [...document.querySelectorAll('dialog input[name="disciplines"]')].map((checkbox) => {
+            const choice = checkbox.closest('label'), select = choice.parentElement.querySelector('select'), label = select.labels[0]
+            const choiceRect = choice.getBoundingClientRect(), selectRect = select.getBoundingClientRect(), labelRect = label.getBoundingClientRect()
+            return { discipline: choice.textContent, gradeLabel: label.textContent, hiddenLabel: labelRect.width <= 1 && labelRect.height <= 1, aligned: Math.abs(choiceRect.top + choiceRect.height / 2 - selectRect.top - selectRect.height / 2) <= 1 }
+          }))
+          assert.deepEqual(rows.map((row) => row.discipline), ['Bloc', 'Voie', 'Trad', 'Via ferrata', 'Grandes voies', 'Speed'])
+          assert.ok(rows.every((row) => row.hiddenLabel && row.aligned && row.gradeLabel === `Niveau ${row.discipline}`), JSON.stringify(rows))
+          await page.screenshot({ path: `${cwd}/.integration-results/profile-practice-320-viewport.png` })
+        }
+        await audit(label.startsWith('Modifier') ? 'practice-320' : 'partners-320'); await page.keyboard.press('Escape')
       }
       await page.goto(`${base}/profile/me?section=equipment`, { waitUntil: 'networkidle0' })
       await page.locator('::-p-aria(Ajouter du matériel[role="button"])').click()
