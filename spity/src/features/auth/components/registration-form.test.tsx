@@ -10,6 +10,15 @@ const password = 'SpityTest42!'
 const mockFetch = jest.fn()
 const originalFetch = global.fetch
 
+it('places the login link after the registration form', () => {
+  render(<RegistrationForm />)
+  const link = screen.getByRole('link', { name: 'Se connecter' })
+  expect(link).toHaveAttribute('href', '/login')
+  expect(screen.getByText('Déjà un compte ?')).toBeVisible()
+  const submit = screen.getByRole('button', { name: 'Créer mon compte' })
+  expect(submit.compareDocumentPosition(link) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+})
+
 beforeEach(() => {
   jest.clearAllMocks()
   global.fetch = mockFetch

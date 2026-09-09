@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowRight, Check, Circle, Eye, EyeOff, Lock, Mail, Mountain, UsersRound } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { z } from 'zod'
@@ -268,6 +269,16 @@ export default function RegistrationForm() {
           </p>
         </div>
       </form>
+      <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3 border-t border-border pt-6">
+        <p className="text-sm text-muted-foreground">Déjà un compte ?</p>
+        <Link
+          href="/login"
+          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#376b31]/40 px-5 py-2 text-sm font-semibold text-[#376b31] transition-colors hover:border-[#376b31] hover:bg-[#e8f0df] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#376b31] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+          Se connecter
+          <ArrowRight aria-hidden="true" size={16} />
+        </Link>
+      </div>
     </div>
   )
 }

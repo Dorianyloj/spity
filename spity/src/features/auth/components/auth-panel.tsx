@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import BrandMark from '@/components/brand/brand-mark'
 import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
+import { cn } from '@/lib/class-names'
 import LoginForm from './login-form'
 import RegistrationForm from './registration-form'
 
@@ -47,7 +48,12 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
 
         <section className="flex items-center bg-background px-4 py-8 sm:px-8 lg:px-10 xl:px-16">
           <div className="mx-auto w-full max-w-2xl space-y-8">
-            <div className="flex items-center justify-between gap-4 lg:justify-end">
+            <div
+              className={cn(
+                'flex items-center justify-between gap-4 lg:justify-end',
+                !isLogin && 'lg:hidden'
+              )}
+            >
               <Link
                 href="/"
                 aria-label="Accueil Spity"
@@ -55,12 +61,14 @@ export default function AuthPanel({ mode }: AuthPanelProps) {
               >
                 <BrandMark size={48} tone="light" />
               </Link>
-              <Link
-                href={isLogin ? '/register' : '/login'}
-                className="inline-flex min-h-11 items-center text-sm font-semibold text-[#376b31] underline-offset-4 hover:underline"
-              >
-                {isLogin ? 'Créer un compte' : 'Se connecter'}
-              </Link>
+              {isLogin && (
+                <Link
+                  href="/register"
+                  className="inline-flex min-h-11 items-center text-sm font-semibold text-[#376b31] underline-offset-4 hover:underline"
+                >
+                  Créer un compte
+                </Link>
+              )}
             </div>
 
             {isLogin ? <LoginForm /> : <RegistrationForm />}
