@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Administration — Maquette Spity</title>
+  <link rel="stylesheet" href="./admin.css">
+  <script src="./admin.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">Aller au contenu principal</a>
+  <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2m20 0v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/><circle cx="9" cy="7" r="4"/></symbol>
+    <symbol id="feed" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+    <symbol id="search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></symbol>
+    <symbol id="profile" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol>
+    <symbol id="history-icon" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.4-6.1L3 8m0-5v5h5m4-1v5l3 2"/></symbol>
+    <symbol id="grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="building" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></symbol>
+    <symbol id="eye-off" viewBox="0 0 24 24"><path d="m3 3 18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.2A11 11 0 0 1 12 5c7 0 10 7 10 7a15 15 0 0 1-3.2 4.4M6.6 6.6A16 16 0 0 0 2 12s3 7 10 7a10 10 0 0 0 5.4-1.6"/></symbol>
+    <symbol id="lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  </svg>
+
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-group">
+        <button class="brand" type="button" data-view="overview" aria-label="Spity, accueil de la maquette admin">
+          <img src="../../../public/images/brand/logo-spity-white.png" alt="" width="42" height="42">Spity
+        </button>
+        <span class="profile-badge">Grimpeur</span>
+      </div>
+      <nav class="app-nav" aria-label="Navigation principale">
+        <button type="button" data-app-preview><svg><use href="#feed"/></svg>Feed</button>
+        <button type="button" data-app-preview><svg><use href="#search"/></svg>Partenaires</button>
+        <button type="button" data-app-preview><svg><use href="#users"/></svg>Demandes</button>
+        <button type="button" data-app-preview><svg><use href="#pin"/></svg>Lieux</button>
+        <button type="button" data-app-preview><svg><use href="#calendar"/></svg>Événements</button>
+        <button type="button" data-app-preview><svg><use href="#profile"/></svg>Profil</button>
+        <button class="active" type="button" data-view="overview" aria-current="page"><svg><use href="#shield"/></svg>Administration</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content" tabindex="-1" class="container">
+    <div class="demo-bar"><span><span class="demo-dot" aria-hidden="true"></span>Maquette interactive <span class="demo-detail">· Données fictives, aucune action réelle</span></span><button class="text-button on-dark" type="button" id="reset-demo">Réinitialiser la démo</button></div>
+    <div class="page-heading">
+      <div><p class="eyebrow">Espace administrateur</p><h1>Administration</h1><p class="heading-description">Prenez soin de la communauté Spity.</p></div>
+      <span class="access-badge"><svg aria-hidden="true"><use href="#shield"/></svg>Accès réservé</span>
+    </div>
+    <nav class="section-nav" aria-label="Sections de l’administration">
+      <button type="button" data-view="overview" aria-pressed="true"><svg><use href="#grid"/></svg>Vue d’ensemble</button>
+      <button type="button" data-view="accounts" aria-pressed="false"><svg><use href="#users"/></svg>Comptes</button>
+      <button type="button" data-view="posts" aria-pressed="false"><svg><use href="#feed"/></svg>Publications</button>
+      <button type="button" data-view="history" aria-pressed="false"><svg><use href="#history-icon"/></svg>Historique</button>
+    </nav>
+    <p id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+
+    <section id="overview" class="view" aria-label="Vue d’ensemble">
+      <div class="stats" id="stats"></div>
+      <div class="overview-grid">
+        <section class="card">
+          <div class="card-heading"><div><h2>La communauté</h2><p>Un aperçu des comptes de la plateforme.</p></div><button type="button" class="text-button" data-view="accounts">Voir les comptes <svg aria-hidden="true"><use href="#arrow"/></svg></button></div>
+          <div id="recent-accounts" class="account-preview"></div>
+          <div class="card-footer"><svg aria-hidden="true"><use href="#lock"/></svg>Les accès admin restent distincts des profils grimpeur et club.</div>
+        </section>
+        <section class="card"><div class="card-heading"><div><h2>Dernières actions</h2><p>Une trace pour chaque décision.</p></div><svg class="muted" aria-hidden="true"><use href="#history-icon"/></svg></div><ol id="recent-history" class="activity-list"></ol><div class="card-footer"><button type="button" class="text-button" data-view="history">Consulter l’historique <svg aria-hidden="true"><use href="#arrow"/></svg></button></div></section>
+      </div>
+      <section class="moderation-callout"><div class="callout-icon"><svg aria-hidden="true"><use href="#eye-off"/></svg></div><div><h2>Une modération réversible</h2><p>Masquez une publication sans la supprimer. Chaque action est motivée et peut être annulée.</p></div><button type="button" class="button primary" data-view="posts">Gérer les publications <svg aria-hidden="true"><use href="#arrow"/></svg></button></section>
+    </section>
+
+    <section id="accounts" class="view" aria-labelledby="accounts-title" hidden>
+      <div class="view-heading"><h2 id="accounts-title">Comptes de la communauté</h2><p>Retrouvez un membre et gérez son accès à Spity.</p></div>
+      <form id="account-filters" class="card filters" role="search" aria-label="Rechercher des comptes">
+        <label class="search-field">Nom ou adresse e-mail<span class="input-with-icon"><svg aria-hidden="true"><use href="#search"/></svg><input id="account-search" type="search" placeholder="Rechercher un compte…"></span></label>
+        <div><label for="account-role">Type de profil</label><select id="account-role"><option value="all">Tous les profils</option><option value="Grimpeur">Grimpeurs</option><option value="Club">Clubs</option></select></div>
+        <div><label for="account-status">Statut</label><select id="account-status"><option value="all">Tous les statuts</option><option value="active">Actifs</option><option value="suspended">Suspendus</option></select></div>
+      </form>
+      <div class="card table-card"><div class="table-scroll" tabindex="0" role="region" aria-label="Tableau des comptes, défilement horizontal possible"><table><caption id="account-count">Comptes</caption><thead><tr><th scope="col">Compte</th><th scope="col">Profil</th><th scope="col">Accès</th><th scope="col">Statut</th><th scope="col" class="align-right">Action</th></tr></thead><tbody id="account-rows"></tbody></table></div><p class="table-note">Suspendre bloque l’accès au compte, sans supprimer ses données. Les administrateurs sont protégés.</p></div>
+      <div id="accounts-empty" class="empty card" hidden><h3>Aucun compte trouvé</h3><p>Essayez un autre nom ou modifiez vos filtres.</p><button class="button secondary" type="button" id="reset-filters">Effacer les filtres</button></div>
+    </section>
+
+    <section id="posts" class="view" aria-labelledby="posts-title" hidden>
+      <div class="view-heading"><h2 id="posts-title">Modération des publications</h2><p>Consultez les contenus et choisissez ce qui reste visible.</p></div>
+      <form id="post-filters" class="card filters post-filters" role="search" aria-label="Rechercher des publications">
+        <label class="search-field">Auteur ou contenu<span class="input-with-icon"><svg aria-hidden="true"><use href="#search"/></svg><input id="post-search" type="search" placeholder="Rechercher une publication…"></span></label>
+        <div><label for="post-status">Visibilité</label><select id="post-status"><option value="all">Toutes les publications</option><option value="visible">Visibles</option><option value="hidden">Masquées</option></select></div>
+      </form>
+      <p id="post-count" class="result-count" role="status"></p><div id="post-list" class="post-list"></div>
+      <div id="posts-empty" class="empty card" hidden><h3>Aucune publication trouvée</h3><p>Essayez un autre auteur ou modifiez vos filtres.</p><button class="button secondary" type="button" id="reset-post-filters">Effacer les filtres</button></div>
+    </section>
+
+    <section id="history" class="view" aria-labelledby="history-title" hidden>
+      <div class="view-heading"><h2 id="history-title">Historique de modération</h2><p>Qui a fait quoi, quand et pour quelle raison.</p></div>
+      <div class="card table-card"><div class="table-scroll" tabindex="0" role="region" aria-label="Historique, défilement horizontal possible"><table><caption>Actions fictives de cette session de démonstration</caption><thead><tr><th scope="col">Date</th><th scope="col">Administrateur</th><th scope="col">Action et cible</th><th scope="col">Motif</th></tr></thead><tbody id="history-rows"></tbody></table></div></div>
+    </section>
+    <footer class="page-footer">Aperçu de conception · Les modifications de cette démo disparaissent au rechargement.</footer>
+  </main>
+
+  <dialog id="confirmation" role="alertdialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+    <form id="confirmation-form" novalidate>
+      <div class="dialog-icon"><svg aria-hidden="true"><use href="#shield"/></svg></div><h2 id="dialog-title">Confirmer l’action</h2><p id="dialog-description"></p>
+      <label for="reason">Motif <span class="muted">(obligatoire)</span></label><textarea id="reason" rows="3" maxlength="500" required aria-describedby="reason-help reason-error" placeholder="Expliquez brièvement votre décision…"></textarea><p id="reason-help" class="helper">Entre 8 et 500 caractères. Visible dans l’historique d’administration.</p><p id="reason-error" class="error" role="alert"></p>
+      <div class="dialog-note">Simulation uniquement : aucun compte ni contenu réel ne sera modifié.</div>
+      <div class="dialog-actions"><button type="button" class="button secondary" id="cancel-action" autofocus>Annuler</button><button type="submit" class="button danger" id="confirm-action">Confirmer</button></div>
+    </form>
+  </dialog>
+</body>
+</html>

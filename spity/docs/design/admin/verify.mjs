@@ -1,0 +1,101 @@
+import assert from 'node:assert/strict'
+import { mkdir, readFile } from 'node:fs/promises'
+import { createRequire } from 'node:module'
+import { resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { chromium } from '@playwright/test'
+
+const require = createRequire(import.meta.url)
+const output = fileURLToPath(new URL('../../../../tmp/admin-preview/', import.meta.url))
+await mkdir(output, { recursive: true })
+const browser = await chromium.launch({ headless: true })
+const page = await browser.newPage({ viewport: { width: 1440, height: 1060 }, deviceScaleFactor: 1 })
+const errors = []
+page.on('pageerror', (error) => errors.push(error.message))
+page.on('response', (response) => { if (response.status() >= 400 && !response.url().endsWith('.woff2')) errors.push(`${response.status()} ${response.url()}`) })
+const requests = []
+page.on('request', (request) => requests.push(request))
+const axeSource = await readFile(require.resolve('axe-core/axe.min.js'), 'utf8')
+const view = (name) => page.getByRole('navigation', { name: 'Sections de l’administration' }).getByRole('button', { name, exact: true })
+const audit = async (label) => {
+  await page.evaluate(axeSource)
+  const violations = await page.evaluate(async () => (await window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations.map(({ id, impact, nodes }) => ({ id, impact, targets: nodes.map((node) => node.target) })))
+  assert.deepEqual(violations, [], `Accessibilité : ${label}`)
+}
+const screenshot = (name) => page.screenshot({ path: resolve(output, name), fullPage: true })
+try {
+  await page.goto('http://127.0.0.1:3113/docs/design/admin/index.html')
+  await page.evaluate(() => document.fonts.ready)
+  await page.locator('#stats .stat').last().waitFor()
+  assert.equal(await page.locator('#stats .stat').count(), 4)
+  await audit('vue d’ensemble desktop')
+  await screenshot('01-overview-desktop.png')
+
+  await view('Comptes').click()
+  assert.equal(await page.locator('#account-rows tr').count(), 6)
+  assert.equal(await page.getByText('Compte protégé', { exact: true }).count(), 1)
+  await screenshot('02-accounts-desktop.png')
+  await page.getByLabel('Nom ou adresse e-mail').fill('lea')
+  assert.equal(await page.locator('#account-rows tr').count(), 1)
+  await page.getByLabel('Nom ou adresse e-mail').fill('aucun-compte')
+  await page.getByRole('heading', { name: 'Aucun compte trouvé' }).waitFor()
+  await page.getByRole('button', { name: 'Effacer les filtres', exact: true }).click()
+  const suspend = page.getByRole('button', { name: 'Suspendre le compte de Noah Bernard' })
+  await suspend.click()
+  await page.getByRole('alertdialog').waitFor()
+  assert.equal(await page.locator('#cancel-action').evaluate((element) => element === document.activeElement), true)
+  await audit('confirmation')
+  await screenshot('03-confirmation-desktop.png')
+  await page.keyboard.press('Escape')
+  await page.getByRole('alertdialog').waitFor({ state: 'hidden' })
+  assert.equal(await suspend.evaluate((element) => element === document.activeElement), true)
+  await suspend.click()
+  await page.locator('#confirm-action').click()
+  await page.getByText('Indiquez un motif de 8 à 500 caractères.').waitFor()
+  assert.equal(await page.getByLabel('Motif (obligatoire)').getAttribute('aria-invalid'), 'true')
+  const reason = 'Exemple de modération <img src=x> — test de la maquette.'
+  await page.getByLabel('Motif (obligatoire)').fill(reason)
+  await page.locator('#confirm-action').click()
+  await page.getByRole('alertdialog').waitFor({ state: 'hidden' })
+  const restore = page.getByRole('button', { name: 'Réactiver le compte de Noah Bernard' })
+  await restore.waitFor()
+  assert.equal(await restore.evaluate((element) => element === document.activeElement), true)
+  await audit('comptes après suspension')
+  await view('Historique').click()
+  assert.equal(await page.locator('#history-rows tr').count(), 4)
+  assert.equal(await page.locator('#history-rows tr').first().locator('td').last().textContent(), reason)
+  assert.equal(await page.locator('#history-rows img').count(), 0)
+  await audit('historique')
+  await screenshot('04-history-desktop.png')
+
+  await view('Publications').click()
+  await page.getByLabel('Visibilité', { exact: true }).selectOption('visible')
+  assert.equal(await page.locator('#post-list article').count(), 4)
+  await page.getByRole('button', { name: 'Masquer la publication de Noah Bernard' }).click()
+  await page.getByLabel('Motif (obligatoire)').fill('Exemple de masquage réversible.')
+  await page.locator('#confirm-action').click()
+  await page.getByRole('alertdialog').waitFor({ state: 'hidden' })
+  assert.equal(await page.locator('#post-list article').count(), 3)
+  assert.equal(await page.getByLabel('Auteur ou contenu').evaluate((element) => element === document.activeElement), true)
+  await page.getByLabel('Visibilité', { exact: true }).selectOption('hidden')
+  await page.getByRole('button', { name: 'Rétablir la publication de Noah Bernard' }).click()
+  await page.getByLabel('Motif (obligatoire)').fill('Exemple de contenu vérifié.')
+  await page.locator('#confirm-action').click()
+  await page.getByRole('alertdialog').waitFor({ state: 'hidden' })
+  assert.equal(await page.locator('#post-list article').count(), 1)
+  await page.getByLabel('Visibilité', { exact: true }).selectOption('all')
+  await audit('publications')
+  await screenshot('05-posts-desktop.png')
+
+  await page.getByRole('button', { name: 'Réinitialiser la démo' }).click()
+  await page.setViewportSize({ width: 390, height: 844 })
+  for (const [label, image] of [['Vue d’ensemble', '06-overview-mobile.png'], ['Comptes', '07-accounts-mobile.png'], ['Publications', '08-posts-mobile.png'], ['Historique', '09-history-mobile.png']]) {
+    await view(label).click()
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true, `Pas de débordement horizontal : ${label}`)
+    await audit(`${label} mobile`)
+    await screenshot(image)
+  }
+  assert.equal(requests.every((request) => request.method() === 'GET' && new URL(request.url()).origin === 'http://127.0.0.1:3113'), true, 'Aucun appel externe ou API')
+  assert.deepEqual(errors, [], 'Pas d’erreur navigateur')
+  console.log(`OK — parcours, confirmation, motif, focus, recherche, masquage/rétablissement, historique, données échappées, 9 audits WCAG et captures dans ${output}`)
+} finally { await browser.close() }
