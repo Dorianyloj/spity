@@ -83,6 +83,7 @@ jobs:
       DATABASE_URL: mysql://spity:spity_ci_password@127.0.0.1:3306/spity
       JWT_SECRET: ci_only_secret_with_at_least_32_characters
       INTEGRATION_PORT: 3102
+      ADMIN_TEST_PRODUCTION: '1'
     services:
       mariadb:
         image: mariadb:11.4
@@ -121,8 +122,13 @@ jobs:
       - name: Apply Drizzle migrations
         run: npm run db:migrate
 
+      - name: Build production application for admin integration
+        run: npm run build
+
       - name: Run MariaDB integration tests
+        shell: bash
         run: |
+          set -o pipefail
           mkdir -p .integration-results
           npm run test:integration | tee .integration-results/results.tap
 

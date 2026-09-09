@@ -36,7 +36,8 @@ test('administration réelle : accès, statistiques, modération et sessions', {
     }
   })
   if (!process.env.INTEGRATION_BASE_URL) {
-    server = spawn(process.execPath, ['node_modules/next/dist/bin/next', 'dev', '--hostname', '127.0.0.1', '--port', String(port)], { cwd, env: { ...process.env, NEXT_TELEMETRY_DISABLED: '1' }, stdio: ['ignore', 'pipe', 'pipe'] })
+    const mode = process.env.ADMIN_TEST_PRODUCTION === '1' ? 'start' : 'dev'
+    server = spawn(process.execPath, ['node_modules/next/dist/bin/next', mode, '--hostname', '127.0.0.1', '--port', String(port)], { cwd, env: { ...process.env, NEXT_TELEMETRY_DISABLED: '1' }, stdio: ['ignore', 'pipe', 'pipe'] })
     const append = (chunk) => { output = `${output}${chunk}`.slice(-12000) }
     server.stdout.on('data', append)
     server.stderr.on('data', append)
@@ -102,7 +103,8 @@ test('administration réelle : accès, statistiques, modération et sessions', {
       assert.equal(response.status, 200, String(response.data).slice(-1000))
       assert.match(response.data, /Administration/)
       assert.doesNotMatch(response.data, /password_hash|resetPasswordToken|mysql:\/\//)
-      assert.match(response.headers.get('cache-control'), /no-store|private/)
+      // next dev overrides cache headers; CI also runs this against next start.
+      assert.match(response.headers.get('cache-control'), process.env.ADMIN_TEST_PRODUCTION === '1' ? /no-store|private/ : /no-store|private|no-cache/)
       assert.match(response.data, /noindex/)
     }
     const dashboard = await request('/app/admin', { cookie: adminCookie })
@@ -123,18 +125,22 @@ test('administration réelle : accès, statistiques, modération et sessions', {
       const [name, value] = adminCookie.split('=')
       await page.setCookie({ name, value, url: base, httpOnly: true, sameSite: 'Lax' })
       const require = createRequire(import.meta.url)
-      const axe = await readFile(require.resolve('axe-core/axe.min.js'), 'utf8')
+      // Use Lighthouse's locked, modern engine: the root transitive axe 3.x
+      // cannot interpret Tailwind 4 OKLCH colors and reports false contrasts.
+      const lighthouseRequire = createRequire(require.resolve('lighthouse/package.json'))
+      const axe = await readFile(lighthouseRequire.resolve('axe-core/axe.min.js'), 'utf8')
       const errors = []
       page.on('pageerror', (error) => errors.push(error.message))
       await mkdir(`${cwd}/.integration-results`, { recursive: true })
       for (const width of [1440, 320]) {
         await page.setViewport({ width, height: 1000 })
         await page.goto(`${base}/app/admin`, { waitUntil: 'networkidle0' })
+        await page.evaluate(() => document.fonts.ready)
+        await page.screenshot({ path: `${cwd}/.integration-results/admin-${width}.png`, fullPage: true })
         await page.addScriptTag({ content: axe })
-        const violations = await page.evaluate(async () => (await window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations.map(({ id, nodes }) => ({ id, targets: nodes.map((node) => node.target) })))
+        const violations = await page.evaluate(async () => (await window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations.map(({ id, nodes }) => ({ id, targets: nodes.map((node) => ({ target: node.target, summary: node.failureSummary })) })))
         assert.deepEqual(violations, [], JSON.stringify(violations))
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `Débordement à ${width}px`)
-        await page.screenshot({ path: `${cwd}/.integration-results/admin-${width}.png`, fullPage: true })
       }
       await page.goto(`${base}/app/admin?view=accounts&q=${encodeURIComponent(emails[1])}`, { waitUntil: 'networkidle0' })
       await page.locator('button[aria-label^="Suspendre :"]').click()
