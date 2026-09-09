@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Check, Eye, LockKeyhole, Mountain, Pencil, Settings2, UserRound } from 'lucide-react'
+import { Check, Eye, LockKeyhole, Pencil, Settings2, UserRound } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui'
 import type { ProfileMeResponse } from '../schemas'
@@ -10,7 +10,7 @@ import type { PublicProfile } from '../lib/public-profile-repository'
 import { ownerPresentation, profileCompletion, type ProfileEditorKind, type ProfileSection } from '../lib/presentation'
 import ProfileEditor from './profile-editor'
 import ProfileEquipment from './profile-equipment'
-import { PartnerCard, ProfileCard, ProfileHero, ProfileOverview } from './profile-presentation'
+import { PartnerCard, ProfileCard, ProfileCredits, ProfileHero, ProfileOverview } from './profile-presentation'
 import { ProfilePostComposer, ProfilePosts } from './profile-posts'
 import ProfileNavigation from './profile-navigation'
 
@@ -35,7 +35,7 @@ export default function ProfileWorkspace({ initialProfile, publicProfile, initia
     {section === 'posts' && <div className="text-white"><ProfilePosts profile={presentation} basePath="/profile/me" onCompose={() => setCompose(true)} /></div>}
     {section === 'equipment' && <ProfileEquipment equipment={profile.equipment} sharingEnabled={profile.grimpeurProfile?.partnerSearch.shareEquipment} onSharing={() => setEditor('partners')} onChange={(equipment) => { setProfile((current) => ({ ...current, equipment })); router.refresh() }} />}
     {section === 'settings' && <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]"><div className="space-y-6"><ProfileCard title="Personnaliser mon profil" icon={Settings2}><div className="divide-y divide-border">{([['identity', 'Identité et présentation', 'Nom affiché, photo, ville et bio.'], ['practice', 'Pratique et objectifs', 'Disciplines, niveaux déclarés et envies de grimpe.'], ['partners', 'Disponibilités et partenaires', 'Créneaux, recherche et partage du matériel.']] as const).map(([kind, title, description]) => <div key={kind} className="flex flex-wrap items-center justify-between gap-3 py-4 first:pt-0 last:pb-0"><div><h3 className="font-semibold">{title}</h3><p className="mt-1 text-pretty text-sm text-muted-foreground">{description}</p></div><Button variant="secondary" onClick={() => setEditor(kind)} aria-label={`Modifier : ${title}`}>Modifier</Button></div>)}</div></ProfileCard><ProfileCard title="Compte et sécurité" icon={LockKeyhole}><p className="text-pretty text-sm text-muted-foreground">Ces informations restent privées.</p><h3 className="mt-4 text-sm font-semibold">Adresse e-mail de connexion</h3><p className="mt-1 wrap-anywhere text-sm">{profile.user.email}</p><p className="mt-5 rounded-lg bg-secondary p-4 text-pretty text-xs">Le changement d’e-mail ou de mot de passe et la suppression du compte ne sont pas encore disponibles ici. Aucun réglage fictif n’est proposé.</p></ProfileCard></div><aside className="space-y-6"><ProfileCard title="Ce que les membres voient" icon={Eye}><ul className="list-disc space-y-3 pl-5 text-sm"><li>Ta présentation et ta pratique.</li><li>Tes envies, disponibilités et préférences.</li><li>Tes publications non masquées.</li><li>Le matériel disponible, seulement si tu actives son affichage.</li></ul><p className="my-4 text-pretty text-xs text-muted-foreground">L’e-mail, les notes du matériel et l’inventaire non partagé ne sont pas transmis à la fiche membre.</p><Link className="spity-btn spity-btn--secondary" href={memberHref}>Vérifier ma vue membre</Link></ProfileCard>{readinessCard}</aside></div>}
-    <p className="mt-6 flex items-start gap-2 text-xs text-white/75"><Mountain size={15} aria-hidden="true" className="shrink-0" />Couverture décorative : Denis E. Corpet / Wikimedia Commons, CC BY-SA 2.5.</p>
+    <ProfileCredits />
     {editor && <ProfileEditor kind={editor} profile={profile} onClose={() => setEditor(null)} onSaved={(fresh) => { setProfile(fresh); setEditor(null); setFeedback('Profil mis à jour.'); router.refresh() }} />}
     {compose && <ProfilePostComposer onClose={() => setCompose(false)} onPublished={() => { setCompose(false); setSection('posts'); setFeedback('Publication créée.'); router.push('/profile/me?section=posts'); router.refresh() }} />}
   </div>

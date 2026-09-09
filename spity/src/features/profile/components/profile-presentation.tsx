@@ -47,3 +47,7 @@ export function PartnerCard({ profile, action }: { profile: PublicProfile; actio
 export function ProfileSafety() {
   return <ProfileCard title="Pour une première sortie" icon={Clock}><p className="text-pretty text-sm text-muted-foreground">Échangez sur le lieu, les disponibilités, l’assurage et le matériel avant de vous retrouver.</p><p className="mt-3 text-pretty text-xs text-muted-foreground">Les niveaux et les états du matériel sont déclaratifs. Spity ne certifie pas les compétences d’assurage ou la sécurité d’un équipement.</p></ProfileCard>
 }
+export function ProfileCredits() {
+  const linkClass = 'underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+  return <p className="mt-6 text-pretty text-xs text-white/75">Couverture décorative recadrée : <a className={linkClass} href="https://commons.wikimedia.org/wiki/File:Verdon-cliff-eperon-Sublime-vude-Trescaire.jpg" rel="noreferrer">Denis E. Corpet / Wikimedia Commons</a>, <a className={linkClass} href="https://creativecommons.org/licenses/by-sa/2.5/" rel="noreferrer">CC BY-SA 2.5</a>.</p>
+}

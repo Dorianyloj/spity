@@ -127,7 +127,7 @@ test('profil complet : persistance, confidentialité, médias et interface réel
   await t.test('interface hydratée accessible, formulaires persistants et mobile sans débordement', { skip: !process.env.CHROME_PATH }, async () => {
     const browser = await puppeteer.launch({ executablePath: process.env.CHROME_PATH, headless: true, args: ['--no-sandbox'] })
     try {
-      const page = await browser.newPage(), errors = []
+      const page = await browser.newPage(), errors = [], visualFailures = []
       page.on('pageerror', (error) => errors.push(error.message))
       page.on('console', (message) => { if (message.type() === 'error') console.error('profile-browser:', message.text()) })
       const [name, value] = owner.cookie.split('='); await page.setCookie({ name, value, url: base, httpOnly: true, sameSite: 'Lax' })
@@ -138,8 +138,8 @@ test('profil complet : persistance, confidentialité, médias et interface réel
         await page.screenshot({ path: `${cwd}/.integration-results/profile-${label}.png`, fullPage: true })
         await page.addScriptTag({ content: axe })
         const violations = await page.evaluate(async () => (await window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations.map(({ id, nodes }) => ({ id, targets: nodes.map((node) => ({ target: node.target, summary: node.failureSummary })) })))
-        assert.deepEqual(violations, [], JSON.stringify(violations))
-        assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Débordement : ${label}`)
+        if (violations.length) visualFailures.push({ label, violations })
+        if (!await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)) visualFailures.push({ label, overflow: true })
       }
       for (const width of [1440, 320]) {
         await page.setViewport({ width, height: 1000 })
@@ -163,6 +163,12 @@ test('profil complet : persistance, confidentialité, médias et interface réel
       for (const label of ['Modifier : pratique et objectifs', 'Ajuster : disponibilités et partenaires']) {
         await page.locator(`button[aria-label="${label}"]`).click(); await page.waitForSelector('dialog[open]'); await audit(label.startsWith('Modifier') ? 'practice-320' : 'partners-320'); await page.keyboard.press('Escape')
       }
+      await page.goto(`${base}/profile/me?section=equipment`, { waitUntil: 'networkidle0' })
+      await page.locator('button').filter((button) => button.textContent === 'Ajouter du matériel').click()
+      await page.waitForSelector('dialog[open]'); await audit('equipment-dialog-320'); await page.keyboard.press('Escape')
+      await page.goto(`${base}/profile/me?section=posts`, { waitUntil: 'networkidle0' })
+      await page.locator('button').filter((button) => button.textContent === 'Créer une publication').click()
+      await page.waitForSelector('dialog[open]'); await audit('post-dialog-320'); await page.keyboard.press('Escape')
       const [viewerName, viewerValue] = viewer.cookie.split('='); await page.setCookie({ name: viewerName, value: viewerValue, url: base, httpOnly: true, sameSite: 'Lax' })
       await page.goto(`${base}${memberPath}`, { waitUntil: 'networkidle0' }); await audit('member-320')
       assert.ok(!(await page.content()).includes(owner.email))
@@ -172,6 +178,7 @@ test('profil complet : persistance, confidentialité, médias et interface réel
       await page.waitForSelector('dialog[open]', { hidden: true })
       const [requests] = await connection.execute('SELECT status FROM partnership_requests WHERE sender_id = ? AND recipient_id = ?', [viewer.id, owner.id])
       assert.equal(requests[0].status, 'pending'); assert.deepEqual(errors, [])
+      assert.deepEqual(visualFailures, [], JSON.stringify(visualFailures))
     } finally { await browser.close() }
   })
   await t.test('un compte suspendu perd la fiche et les écritures', async () => {

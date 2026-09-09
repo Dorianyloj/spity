@@ -11,7 +11,7 @@ import ProfileDialog from './profile-dialog'
 import ProfileEquipment from './profile-equipment'
 import { apiData, failureMessage, FormError } from './profile-fields'
 import { ProfilePosts } from './profile-posts'
-import { PartnerCard, ProfileHero, ProfileOverview, ProfileSafety } from './profile-presentation'
+import { PartnerCard, ProfileCredits, ProfileHero, ProfileOverview, ProfileSafety } from './profile-presentation'
 import ProfileNavigation from './profile-navigation'
 
 export default function MemberProfile({ profile, isOwner, canRequest, initialStatus, initialSection = 'overview' }: {
@@ -43,7 +43,7 @@ export default function MemberProfile({ profile, isOwner, canRequest, initialSta
     {section === 'overview' && <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]"><ProfileOverview profile={profile} fallbackAction={fallback} posts={<ProfilePosts profile={profile} basePath={basePath} summary onAll={() => setSection('posts')} />} /><aside className="space-y-6"><PartnerCard profile={profile} action={action} /><ProfileSafety /></aside></div>}
     {section === 'posts' && <div className="text-white"><ProfilePosts profile={profile} basePath={basePath} /></div>}
     {section === 'equipment' && <ProfileEquipment equipment={profile.sharedEquipment} />}
-    <p className="mt-6 text-xs text-white/75">Couverture décorative : Denis E. Corpet / Wikimedia Commons, CC BY-SA 2.5.</p>
+    <ProfileCredits />
     {confirm && <ProfileDialog title="Grimper ensemble ?" description={`Envoyer une demande de partenaire à ${profile.displayName}.`} busy={busy} onClose={() => setConfirm(false)}><div className="space-y-4 p-5"><p className="text-pretty text-sm">La demande apparaîtra dans vos espaces « Demandes ». Elle ne réserve pas de créneau et ne confirme pas de sortie.</p><FormError message={error} /><div className="flex flex-wrap justify-end gap-3"><Button variant="secondary" disabled={busy} onClick={() => setConfirm(false)}>Annuler</Button><Button isLoading={busy} loadingText="Envoi…" onClick={send}>Envoyer la demande</Button></div></div></ProfileDialog>}
   </div>
 }
