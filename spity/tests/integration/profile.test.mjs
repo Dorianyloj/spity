@@ -138,7 +138,7 @@ test('profil complet : persistance, confidentialité, médias et interface réel
         await page.screenshot({ path: `${cwd}/.integration-results/profile-${label}.png`, fullPage: true })
         await page.addScriptTag({ content: axe })
         const violations = await page.evaluate(async () => (await window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations.map(({ id, nodes }) => ({ id, targets: nodes.map((node) => ({ target: node.target, summary: node.failureSummary })) })))
-        if (violations.length) visualFailures.push({ label, violations })
+        if (violations.length) { visualFailures.push({ label, violations }); console.error('profile-accessibility:', JSON.stringify({ label, violations })) }
         if (!await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)) visualFailures.push({ label, overflow: true })
       }
       for (const width of [1440, 320]) {
@@ -150,31 +150,31 @@ test('profil complet : persistance, confidentialité, médias et interface réel
         }
       }
       await page.goto(`${base}/profile/me`, { waitUntil: 'networkidle0' })
-      await page.locator('button').filter((button) => button.textContent === 'Modifier mon profil').click()
+      await page.locator('::-p-aria(Modifier mon profil[role="button"])').click()
       await page.waitForSelector('dialog[open]'); await audit('identity-320')
       assert.ok(await page.evaluate(() => { const rect = document.activeElement.getBoundingClientRect(); return rect.top >= 0 && rect.bottom <= innerHeight }))
       await page.locator('input[name="displayName"]').fill(`Camille UI ${suffix}`)
       await page.locator('dialog button[type="submit"]').click(); await page.waitForSelector('dialog[open]', { hidden: true })
       await page.reload({ waitUntil: 'networkidle0' })
       assert.ok((await page.content()).includes(`Camille UI ${suffix}`))
-      await page.locator('button').filter((button) => button.textContent === 'Modifier mon profil').click()
+      await page.locator('::-p-aria(Modifier mon profil[role="button"])').click()
       await page.waitForSelector('dialog[open]'); await page.keyboard.press('Escape')
       assert.equal(await page.evaluate(() => document.activeElement?.textContent), 'Modifier mon profil')
       for (const label of ['Modifier : pratique et objectifs', 'Ajuster : disponibilités et partenaires']) {
         await page.locator(`button[aria-label="${label}"]`).click(); await page.waitForSelector('dialog[open]'); await audit(label.startsWith('Modifier') ? 'practice-320' : 'partners-320'); await page.keyboard.press('Escape')
       }
       await page.goto(`${base}/profile/me?section=equipment`, { waitUntil: 'networkidle0' })
-      await page.locator('button').filter((button) => button.textContent === 'Ajouter du matériel').click()
+      await page.locator('::-p-aria(Ajouter du matériel[role="button"])').click()
       await page.waitForSelector('dialog[open]'); await audit('equipment-dialog-320'); await page.keyboard.press('Escape')
       await page.goto(`${base}/profile/me?section=posts`, { waitUntil: 'networkidle0' })
-      await page.locator('button').filter((button) => button.textContent === 'Créer une publication').click()
+      await page.locator('::-p-aria(Créer une publication[role="button"])').click()
       await page.waitForSelector('dialog[open]'); await audit('post-dialog-320'); await page.keyboard.press('Escape')
       const [viewerName, viewerValue] = viewer.cookie.split('='); await page.setCookie({ name: viewerName, value: viewerValue, url: base, httpOnly: true, sameSite: 'Lax' })
       await page.goto(`${base}${memberPath}`, { waitUntil: 'networkidle0' }); await audit('member-320')
       assert.ok(!(await page.content()).includes(owner.email))
-      await page.locator('button').filter((button) => button.textContent === 'Grimper ensemble').click()
+      await page.locator('::-p-aria(Grimper ensemble[role="button"])').click()
       await page.waitForSelector('dialog[open]'); await audit('request-320')
-      await page.locator('dialog button').filter((button) => button.textContent === 'Envoyer la demande').click()
+      await page.locator('::-p-aria(Envoyer la demande[role="button"])').click()
       await page.waitForSelector('dialog[open]', { hidden: true })
       const [requests] = await connection.execute('SELECT status FROM partnership_requests WHERE sender_id = ? AND recipient_id = ?', [viewer.id, owner.id])
       assert.equal(requests[0].status, 'pending'); assert.deepEqual(errors, [])
