@@ -10,6 +10,7 @@ const routes = new Map([
   [`${prefix}index.html`, ['index.html', 'text/html; charset=utf-8']],
   [`${prefix}admin.css`, ['admin.css', 'text/css; charset=utf-8']],
   [`${prefix}admin.js`, ['admin.js', 'text/javascript; charset=utf-8']],
+  [`${prefix}dashboard.mjs`, ['dashboard.mjs', 'text/javascript; charset=utf-8']],
 ].map(([url, [file, mime]]) => [url, { file: join(directory, file), mime }]))
 routes.set('/public/images/brand/logo-spity-white.png', { file: join(appRoot, 'public/images/brand/logo-spity-white.png'), mime: 'image/png' })
 

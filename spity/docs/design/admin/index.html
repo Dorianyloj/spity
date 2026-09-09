@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex, nofollow">
   <title>Administration — Maquette Spity</title>
   <link rel="stylesheet" href="./admin.css">
-  <script src="./admin.js" defer></script>
+  <script src="./admin.js" type="module"></script>
 </head>
 <body>
   <a class="skip-link" href="#content">Aller au contenu principal</a>
@@ -61,7 +61,26 @@
     <p id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true"></p>
 
     <section id="overview" class="view" aria-label="Vue d’ensemble">
+      <div class="dashboard-toolbar">
+        <div><h2>Tableau de bord</h2><p id="dashboard-dates"></p></div>
+        <div class="period-picker" role="group" aria-label="Période des statistiques">
+          <button type="button" data-period="7" aria-pressed="false">7 jours</button>
+          <button type="button" data-period="30" aria-pressed="true">30 jours</button>
+          <button type="button" data-period="90" aria-pressed="false">90 jours</button>
+        </div>
+      </div>
       <div class="stats" id="stats"></div>
+      <p id="dashboard-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+      <div class="analytics-grid">
+        <section class="card chart-card" aria-labelledby="activity-title">
+          <div class="card-heading"><div><h2 id="activity-title">Activité de la communauté</h2><p id="chart-subtitle"></p></div><div class="metric-picker"><label for="chart-metric">Indicateur</label><select id="chart-metric"><option value="interactions">Interactions</option><option value="accounts">Inscriptions</option><option value="posts">Publications</option></select></div></div>
+          <figure class="activity-figure"><div id="activity-chart"></div><figcaption id="chart-caption"></figcaption></figure>
+          <div id="chart-empty" class="chart-empty" hidden><p>Aucune activité sur cette période.</p><button type="button" class="text-button" data-period="90">Afficher les 90 derniers jours</button></div>
+          <details class="chart-data"><summary>Voir les données du graphique</summary><div class="table-scroll" tabindex="0" role="region" aria-label="Données du graphique"><table><caption id="chart-table-caption"></caption><thead><tr><th scope="col">Période</th><th scope="col" id="chart-column">Interactions</th></tr></thead><tbody id="chart-rows"></tbody></table></div></details>
+        </section>
+        <section class="card community-card" aria-labelledby="community-title"><div class="card-heading"><div><h2 id="community-title">La communauté en chiffres</h2><p>Effectifs actuels de la démo, toutes dates.</p></div></div><div id="community-breakdown"></div><div class="card-footer"><button type="button" class="text-button" data-view="accounts">Explorer les comptes <svg aria-hidden="true"><use href="#arrow"/></svg></button></div></section>
+      </div>
+      <section class="card moderation-summary" aria-labelledby="moderation-title"><div class="card-heading"><div><h2 id="moderation-title">Suivi de la modération</h2><p>État actuel des comptes et contenus. Actions sur la période sélectionnée.</p></div><span class="status admin"><svg aria-hidden="true"><use href="#shield"/></svg>Actions réversibles</span></div><div id="moderation-metrics" class="moderation-metrics"></div></section>
       <div class="overview-grid">
         <section class="card">
           <div class="card-heading"><div><h2>La communauté</h2><p>Un aperçu des comptes de la plateforme.</p></div><button type="button" class="text-button" data-view="accounts">Voir les comptes <svg aria-hidden="true"><use href="#arrow"/></svg></button></div>
@@ -70,7 +89,6 @@
         </section>
         <section class="card"><div class="card-heading"><div><h2>Dernières actions</h2><p>Une trace pour chaque décision.</p></div><svg class="muted" aria-hidden="true"><use href="#history-icon"/></svg></div><ol id="recent-history" class="activity-list"></ol><div class="card-footer"><button type="button" class="text-button" data-view="history">Consulter l’historique <svg aria-hidden="true"><use href="#arrow"/></svg></button></div></section>
       </div>
-      <section class="moderation-callout"><div class="callout-icon"><svg aria-hidden="true"><use href="#eye-off"/></svg></div><div><h2>Une modération réversible</h2><p>Masquez une publication sans la supprimer. Chaque action est motivée et peut être annulée.</p></div><button type="button" class="button primary" data-view="posts">Gérer les publications <svg aria-hidden="true"><use href="#arrow"/></svg></button></section>
     </section>
 
     <section id="accounts" class="view" aria-labelledby="accounts-title" hidden>

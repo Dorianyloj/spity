@@ -1,4 +1,4 @@
-'use strict'
+import { calculateDashboard, comparison, DEMO_DATE, demoInteractions, formatDay } from './dashboard.mjs'
 
 // Isolated design prototype: no API, persistence, production account or permission.
 const initialAccounts = [
@@ -8,24 +8,29 @@ const initialAccounts = [
   { id: 'lea', name: 'Léa Moreau', email: 'lea@example.test', role: 'Grimpeur', admin: false, suspended: false },
   { id: 'jules', name: 'Jules Petit', email: 'jules@example.test', role: 'Grimpeur', admin: false, suspended: true },
   { id: 'horizon', name: 'Horizon Escalade', email: 'bonjour@horizon.example.test', role: 'Club', admin: false, suspended: false },
-]
+].map((account, index) => ({ ...account, createdAt: ['2026-09-05', '2026-08-12', '2026-07-31', '2026-07-05', '2026-08-26', '2026-06-16'][index] }))
 const initialPosts = [
   { id: 'p1', author: 'Noah Bernard', content: 'Première 6b en tête ! Merci aux partenaires de la session pour les conseils et les encouragements.', place: 'Session en salle · 6b', date: '9 sept. 2026 · 09:15', hidden: false },
   { id: 'p2', author: 'Club Vertical', content: 'Une sortie club ce samedi, ouverte à tous les niveaux. Pensez à vérifier votre matériel avant le départ.', place: 'Vie du club', date: '8 sept. 2026 · 18:30', hidden: false },
   { id: 'p3', author: 'Jules Petit', content: 'Exemple fictif de message publicitaire répété, utilisé uniquement pour présenter la modération.', place: 'Publication de démonstration', date: '8 sept. 2026 · 16:10', hidden: true },
   { id: 'p4', author: 'Léa Moreau', content: 'Qui aurait envie de découvrir les blocs de Fontainebleau ce week-end ? Je cherche un petit groupe pour une session tranquille.', place: 'Fontainebleau · Bloc', date: '8 sept. 2026 · 12:20', hidden: false },
   { id: 'p5', author: 'Horizon Escalade', content: 'Bienvenue aux nouveaux adhérents ! La prochaine séance découverte se prépare avec nos bénévoles.', place: 'Vie du club', date: '7 sept. 2026 · 17:45', hidden: false },
-]
+].map((post, index) => {
+  const publishedAt = ['2026-09-09', '2026-09-02', '2026-08-28', '2026-08-23', '2026-08-16'][index]
+  return { ...post, publishedAt, authorId: ['noah', 'vertical', 'jules', 'lea', 'horizon'][index], date: `${formatDay(publishedAt)} 2026` }
+})
 const initialHistory = [
   { action: 'Compte suspendu', target: 'Jules Petit', reason: 'Exemple : répétition de messages publicitaires.', date: '9 sept. 2026 · 09:42', icon: 'lock' },
   { action: 'Publication masquée', target: 'Publication de Jules Petit', reason: 'Exemple : contenu publicitaire hors sujet.', date: '9 sept. 2026 · 09:40', icon: 'eye-off' },
-  { action: 'Publication rétablie', target: 'Publication de Noah Bernard', reason: 'Exemple : contenu vérifié et conforme.', date: '8 sept. 2026 · 18:12', icon: 'feed' },
-]
+  { action: 'Publication rétablie', target: 'Publication de Léa Moreau', reason: 'Exemple : contenu vérifié et conforme.', date: '8 sept. 2026 · 18:12', icon: 'feed' },
+].map((entry, index) => ({ ...entry, occurredAt: index === 2 ? '2026-09-08' : DEMO_DATE }))
 let accounts = structuredClone(initialAccounts)
 let posts = structuredClone(initialPosts)
 let history = structuredClone(initialHistory)
 let pending = null
 let returnFocus = null
+let dashboardDays = 30
+let dashboardModel = null
 const byId = (id) => document.getElementById(id)
 const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character])
 const icon = (name) => `<svg aria-hidden="true"><use href="#${name}"/></svg>`
@@ -37,20 +42,61 @@ const announce = (message) => { byId('feedback').textContent = message }
 function showView(name) {
   document.querySelectorAll('.view').forEach((section) => { section.hidden = section.id !== name })
   document.querySelectorAll('.section-nav [data-view]').forEach((button) => { button.setAttribute('aria-pressed', String(button.dataset.view === name)) })
+  if (name === 'overview') renderChart()
 }
 
 function renderOverview() {
-  const suspended = accounts.filter((account) => account.suspended).length
-  const hidden = posts.filter((post) => post.hidden).length
+  dashboardModel = calculateDashboard({ accounts, posts, interactions: demoInteractions, history, days: dashboardDays })
+  const { current, previous, totals } = dashboardModel
+  byId('dashboard-dates').textContent = `${formatDay(dashboardModel.start)} – ${formatDay(dashboardModel.end)} 2026 · comparaison avec les ${dashboardDays} jours précédents`
   const stats = [
-    ['Comptes', accounts.length, `${accounts.length - suspended} actifs · ${suspended} suspendu${suspended > 1 ? 's' : ''}`, 'users'],
-    ['Clubs', accounts.filter((account) => account.role === 'Club').length, 'Au sein de la communauté', 'building'],
-    ['Publications', posts.length, `${posts.length - hidden} visibles · ${hidden} masquée${hidden > 1 ? 's' : ''}`, 'feed'],
-    ['Administrateurs', accounts.filter((account) => account.admin).length, 'Accès à cet espace', 'shield'],
+    ['accounts', 'Nouveaux comptes', `${totals.accounts} comptes au total`, 'users'],
+    ['posts', 'Publications créées', `${totals.posts} publications au total, y compris masquées`, 'feed'],
+    ['interactions', 'Interactions', `${current.likes} j’aime · ${current.comments} commentaires`, 'feed'],
+    ['contributors', 'Contributeurs', 'Comptes ayant publié sur cette période', 'profile'],
   ]
-  byId('stats').innerHTML = stats.map(([label, value, detail, glyph]) => `<div class="stat"><div class="stat-top"><span>${label}</span>${icon(glyph)}</div><div class="stat-value">${value}</div><p class="stat-detail">${detail}</p></div>`).join('')
+  byId('stats').innerHTML = stats.map(([key, label, detail, glyph]) => `<div class="stat" data-stat="${key}"><div class="stat-top"><span>${label}</span>${icon(glyph)}</div><div class="stat-value">${current[key]}</div><p class="stat-comparison${current[key] > previous[key] ? ' increasing' : ''}">${escapeHtml(comparison(current[key], previous[key]))}</p><p class="stat-detail">${detail}</p></div>`).join('')
+  byId('community-breakdown').innerHTML = `<div class="community-total"><strong>${totals.accounts}</strong><span>comptes inscrits</span></div><div class="distribution">${[['Grimpeurs', totals.climbers, 'climbers'], ['Clubs', totals.clubs, 'clubs']].map(([label, value, key]) => {
+    const share = totals.accounts ? value / totals.accounts * 100 : 0
+    return `<div class="distribution-row"><div><span>${label}</span><span><strong>${value}</strong> · ${Math.round(share)} %</span></div><svg class="distribution-bar" viewBox="0 0 100 4" preserveAspectRatio="none" aria-hidden="true"><rect class="bar-track" width="100" height="4" rx="2"/><rect class="bar-${key}" width="${share}" height="4" rx="2"/></svg></div>`
+  }).join('')}</div><dl class="community-facts"><div><dt>Comptes non suspendus</dt><dd>${totals.accounts - totals.suspended} / ${totals.accounts}</dd></div><div><dt>Accès administrateur</dt><dd>${totals.admins}</dd></div></dl><p class="community-note">L’accès administrateur s’ajoute au profil : il ne crée pas un compte supplémentaire.</p>`
+  byId('moderation-metrics').innerHTML = `<div><div class="moderation-number">${icon('lock')}<strong id="suspended-count">${totals.suspended}</strong><span>compte${totals.suspended > 1 ? 's' : ''} suspendu${totals.suspended > 1 ? 's' : ''}</span></div><button class="text-button" type="button" data-filter-link="suspended">Voir les comptes suspendus ${icon('arrow')}</button></div><div><div class="moderation-number">${icon('eye-off')}<strong id="hidden-count">${totals.hidden}</strong><span>publication${totals.hidden > 1 ? 's' : ''} masquée${totals.hidden > 1 ? 's' : ''}</span></div><button class="text-button" type="button" data-filter-link="hidden">Voir les publications masquées ${icon('arrow')}</button></div><div><div class="moderation-number">${icon('shield')}<strong id="actions-count">${totals.actions}</strong><span>action${totals.actions > 1 ? 's' : ''} sur ${dashboardDays} jours</span></div><button class="text-button" type="button" data-view="history">Voir tout l’historique ${icon('arrow')}</button></div>`
+  renderChart()
   byId('recent-accounts').innerHTML = [accounts[0], accounts[1], accounts[2], accounts[4]].map((account) => `<div class="account-item">${avatar(account.name, account.role === 'Club')}<div class="person"><strong>${escapeHtml(account.name)}</strong><small>${account.role}${account.admin ? ' · Administrateur' : ''}</small></div>${status(account.suspended)}</div>`).join('')
   byId('recent-history').innerHTML = history.slice(0, 3).map((entry) => `<li><span class="activity-icon">${icon(entry.icon)}</span><div><strong>${escapeHtml(entry.action)}</strong><p>${escapeHtml(entry.target)} · Admin démo</p><time>${escapeHtml(entry.date)}</time></div></li>`).join('')
+}
+
+function renderChart() {
+  if (!dashboardModel || byId('overview').hidden) return
+  const metric = byId('chart-metric').value
+  const label = { accounts: 'Inscriptions', posts: 'Publications', interactions: 'Interactions' }[metric]
+  const { buckets, bucketDays, current } = dashboardModel
+  const total = current[metric]
+  byId('chart-subtitle').textContent = `${total} ${label.toLocaleLowerCase('fr')} sur la période${metric === 'interactions' ? ' · j’aime et commentaires' : ''}`
+  const chart = byId('activity-chart')
+  const width = Math.max(280, Math.min(900, chart.clientWidth))
+  const left = 30, right = width - 16, top = 20, bottom = 200
+  const max = Math.max(4, Math.ceil(Math.max(...buckets.map((bucket) => bucket[metric])) / 4) * 4)
+  const points = buckets.map((bucket, index) => ({ x: left + index / (buckets.length - 1) * (right - left), y: bottom - bucket[metric] / max * (bottom - top), bucket }))
+  const line = points.map(({ x, y }) => `${x.toFixed(2)},${y.toFixed(2)}`).join(' ')
+  const ticks = [0, 1, 2, 3, 4].map((step) => {
+    const y = bottom - step / 4 * (bottom - top)
+    return `<line x1="${left}" x2="${right}" y1="${y}" y2="${y}" class="chart-gridline"/><text x="${left - 10}" y="${y + 4}" text-anchor="end" class="chart-label">${max * step / 4}</text>`
+  }).join('')
+  const labelIndices = [...new Set([0, Math.floor((buckets.length - 1) / 2), buckets.length - 1])]
+  chart.innerHTML = `<svg class="trend-chart" viewBox="0 0 ${width} 236" role="img" aria-labelledby="trend-title trend-description"><title id="trend-title">${label} sur ${dashboardDays} jours</title><desc id="trend-description">${total} au total. Valeurs par ${bucketDays === 1 ? 'jour' : `tranche de ${bucketDays} jours`}. Les valeurs exactes sont disponibles dans le tableau sous le graphique.</desc>${ticks}<polygon class="chart-area" points="${left},${bottom} ${line} ${right},${bottom}"/><polyline class="chart-line" points="${line}"/>${points.map(({ x, y, bucket }) => `<circle cx="${x}" cy="${y}" r="4" class="chart-point"><title>${formatDay(bucket.start)}${bucket.start === bucket.end ? '' : ` – ${formatDay(bucket.end)}`} : ${bucket[metric]}</title></circle>`).join('')}${labelIndices.map((index) => `<text class="chart-label" x="${points[index].x}" y="228" text-anchor="${index === 0 ? 'start' : index === buckets.length - 1 ? 'end' : 'middle'}">${formatDay(buckets[index].start)}</text>`).join('')}</svg>`
+  byId('chart-caption').textContent = `${label} par ${bucketDays === 1 ? 'jour' : `tranche de ${bucketDays} jours`} · historique incluant les contenus masqués.`
+  byId('chart-empty').hidden = total !== 0
+  byId('chart-column').textContent = label
+  byId('chart-table-caption').textContent = `${label} du ${formatDay(dashboardModel.start)} au ${formatDay(dashboardModel.end)} 2026`
+  byId('chart-rows').innerHTML = buckets.map((bucket) => `<tr><th scope="row">${formatDay(bucket.start)}${bucket.start === bucket.end ? '' : ` – ${formatDay(bucket.end)}`}</th><td>${bucket[metric]}</td></tr>`).join('')
+}
+
+function selectPeriod(days) {
+  dashboardDays = days
+  document.querySelectorAll('.period-picker button').forEach((button) => button.setAttribute('aria-pressed', String(Number(button.dataset.period) === days)))
+  renderOverview()
+  byId('dashboard-announcement').textContent = `Statistiques mises à jour sur ${days} jours : ${dashboardModel.current.accounts} inscriptions, ${dashboardModel.current.posts} publications et ${dashboardModel.current.interactions} interactions.`
 }
 
 function renderAccounts() {
@@ -101,9 +147,21 @@ document.addEventListener('click', (event) => {
   const button = event.target.closest('button')
   if (!button) return
   if (button.dataset.view) showView(button.dataset.view)
+  if (button.dataset.period) selectPeriod(Number(button.dataset.period))
+  if (button.dataset.filterLink === 'suspended') {
+    byId('account-filters').reset(); byId('account-status').value = 'suspended'; renderAccounts(); showView('accounts'); byId('account-status').focus()
+  }
+  if (button.dataset.filterLink === 'hidden') {
+    byId('post-filters').reset(); byId('post-status').value = 'hidden'; renderPosts(); showView('posts'); byId('post-status').focus()
+  }
   if (button.hasAttribute('data-app-preview')) announce('Cette maquette couvre uniquement l’administration. Les autres rubriques restent inchangées dans Spity.')
   if (button.dataset.action) openConfirmation(button.dataset.action, button.dataset.id, button)
 })
+byId('chart-metric').addEventListener('change', () => {
+  renderChart()
+  byId('dashboard-announcement').textContent = byId('chart-subtitle').textContent
+})
+window.addEventListener('resize', renderChart)
 byId('account-filters').addEventListener('input', renderAccounts)
 byId('post-filters').addEventListener('input', renderPosts)
 for (const id of ['account-filters', 'post-filters']) byId(id).addEventListener('submit', (event) => event.preventDefault())
@@ -145,7 +203,7 @@ byId('confirmation-form').addEventListener('submit', (event) => {
     action = restoring ? 'Publication rétablie' : 'Publication masquée'
     target = `Publication de ${post.author}`
   }
-  history.unshift({ action, target, reason, icon: kind === 'account' ? 'lock' : 'eye-off', date: new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date()) })
+  history.unshift({ action, target, reason, icon: kind === 'account' ? 'lock' : 'eye-off', occurredAt: DEMO_DATE, date: `${formatDay(DEMO_DATE)} 2026 · simulation` })
   renderAll()
   byId('confirmation').close()
   announce(`Simulation : ${action.toLocaleLowerCase('fr')} — ${target}. Le motif figure dans l’historique.`)
@@ -156,6 +214,8 @@ byId('reset-demo').addEventListener('click', () => {
   history = structuredClone(initialHistory)
   byId('account-filters').reset()
   byId('post-filters').reset()
+  byId('chart-metric').value = 'interactions'
+  selectPeriod(30)
   renderAll()
   announce('La démo a été réinitialisée. Aucune donnée réelle n’a été modifiée.')
 })

@@ -16,13 +16,17 @@ Ouvrir http://127.0.0.1:3113/docs/design/admin/index.html. Le serveur n'écoute 
 
 ## Parcours à valider
 
-- Vue d'ensemble : comptes, clubs, publications, administrateurs et dernières actions.
+- Dashboard : périodes 7/30/90 jours, nouveaux comptes, publications créées, interactions et contributeurs, comparés à la période précédente de même durée.
+- Graphique interchangeable (inscriptions, publications, interactions) avec tableau de valeurs accessible ; répartition grimpeurs/clubs et effectifs actuels.
+- Modération : compteurs réactifs et raccourcis vers les listes de comptes suspendus et de publications masquées ; aperçu des comptes et dernières actions conservés.
 - Comptes : recherche, filtres, suspension/réactivation avec motif ; administrateur protégé.
 - Publications : filtre de visibilité, masquage/rétablissement avec motif.
 - Historique : action, cible, date, administrateur et motif ; mis à jour après chaque simulation.
 - Affichage mobile, navigation clavier, confirmation native avec annulation et retour du focus.
 
 Les autres rubriques de la navigation sont des repères visuels ; elles n'ouvrent pas la production. Aucun système de signalement, suppression définitive, attribution d'accès ou métrique de disponibilité n'est simulé.
+
+Les statistiques de démonstration se terminent au **9 septembre 2026**, indépendamment de l'horloge locale. Les périodes sont des jours calendaires UTC, inclusifs à l'affichage, avec bornes exclusives dans les calculs. Les interactions sont comptées à leur propre date (j'aime + commentaires) et les contributeurs sont les auteurs distincts ayant publié pendant la période, pas des visiteurs ou des utilisateurs connectés. L'historique inclut les contenus ensuite masqués. Les stocks actuels (comptes, répartition, suspensions et masquages) ne sont pas filtrés par période ; les actions de modération le sont. Les six comptes et cinq publications forment le même jeu de données que les listes, sans totaux inventés séparément.
 
 ## Après validation seulement
 
@@ -33,6 +37,7 @@ Implémenter un accès administrateur distinct des profils grimpeur/club, les co
 Avec le serveur local lancé et Chromium Playwright installé :
 
 ```sh
+node --test docs/design/admin/dashboard.test.mjs
 node docs/design/admin/verify.mjs
 ```
 
