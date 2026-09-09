@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Maquette interactive locale du profil Spity. Données fictives, aucune action en production.">
+  <meta name="theme-color" content="#18181b">
+  <title>Mon profil — Maquette Spity</title>
+  <link rel="icon" href="/public/images/brand/logo-spity-white.png" type="image/png">
+  <link rel="stylesheet" href="./fonts.css">
+  <link rel="stylesheet" href="./profile.css">
+  <script src="./profile.js" type="module"></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">Aller au contenu principal</a>
+  <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="mountain" viewBox="0 0 24 24"><path d="m8 3 4 8 3-3 7 13H2L8 3Z"/><path d="m6.2 8 3 2 1.3-2"/></symbol>
+    <symbol id="profile" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol>
+    <symbol id="users" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2m4 0v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+    <symbol id="pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></symbol>
+    <symbol id="feed" viewBox="0 0 24 24"><path d="M8 20A9 9 0 1 0 4 16L2 22Z"/></symbol>
+    <symbol id="search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4-4"/></symbol>
+    <symbol id="edit" viewBox="0 0 24 24"><path d="m16 3 5 5M4 15 17 2l5 5L9 20l-7 2 2-7Z"/></symbol>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="eye" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+    <symbol id="check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="gear" viewBox="0 0 24 24"><rect x="5" y="6" width="14" height="16" rx="4"/><path d="M9 6V4a3 3 0 0 1 6 0v2M5 14h14M9 14v3m6-3v3"/></symbol>
+    <symbol id="grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="settings" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="15" cy="17" r="3"/></symbol>
+    <symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z"/><circle cx="12" cy="13" r="4"/></symbol>
+    <symbol id="close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></symbol>
+  </svg>
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand"><img src="/public/images/brand/logo-spity-white.png" width="40" height="40" alt="">Spity <span class="role-badge">Grimpeur</span></div>
+      <nav class="app-nav" tabindex="0" aria-label="Navigation principale, repères de la maquette">
+        <span><svg aria-hidden="true"><use href="#feed"/></svg>Feed</span>
+        <span><svg aria-hidden="true"><use href="#search"/></svg>Partenaires</span>
+        <span><svg aria-hidden="true"><use href="#users"/></svg>Demandes</span>
+        <span><svg aria-hidden="true"><use href="#pin"/></svg>Lieux</span>
+        <span><svg aria-hidden="true"><use href="#calendar"/></svg>Événements</span>
+        <span class="active" aria-current="page"><svg aria-hidden="true"><use href="#profile"/></svg>Profil</span>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="container" tabindex="-1">
+    <div class="demo-bar">
+      <p><span class="demo-dot" aria-hidden="true"></span>Maquette interactive · profil fictif, rien n’est envoyé</p>
+      <div class="demo-controls"><label for="scenario">Exemple</label><select id="scenario"><option value="filled">Profil renseigné</option><option value="empty">Profil à compléter</option></select><button id="reset" class="text-button on-dark" type="button">Réinitialiser</button></div>
+    </div>
+    <div class="page-heading">
+      <div><h1 id="page-title">Mon profil</h1><p id="page-description">Ta pratique, tes envies, ta prochaine cordée.</p></div>
+      <div class="view-switch" role="group" aria-label="Vue du profil">
+        <button type="button" data-mode="owner" aria-pressed="true"><svg aria-hidden="true"><use href="#profile"/></svg>Mon espace</button>
+        <button type="button" data-mode="member" aria-pressed="false"><svg aria-hidden="true"><use href="#eye"/></svg>Vue membre</button>
+      </div>
+    </div>
+    <p id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+    <div id="member-notice" class="member-notice" hidden><svg aria-hidden="true"><use href="#eye"/></svg><p>Aperçu proposé pour les membres connectés. Les réglages, l’e-mail et les notes privées ne sont pas affichés.</p></div>
+    <section id="hero" class="card hero" aria-label="Présentation du profil"></section>
+    <nav id="sections" class="section-nav" aria-label="Rubriques du profil"></nav>
+    <div id="panel"></div>
+    <footer class="page-footer">
+      <p>Prototype à valider · Modifications en mémoire, effacées au rechargement.</p>
+      <details><summary>À propos de cet aperçu et des photos</summary><p>Le compte Camille Martin est fictif. Les photos illustrent des publications de démonstration, pas une activité réelle de cette personne.</p><p>Couverture : Denis E. Corpet, CC BY-SA 2.5. Fontainebleau : Protolanguage17, CC BY-SA 4.0. Verdon : Michel Royon, CC0. Salle : Vatealyo, CC0. Images Wikimedia Commons déjà présentes dans Spity ; recadrées à l’affichage. <a href="/credits" target="_blank" rel="noopener">Crédits, sources et licences</a>.</p></details>
+    </footer>
+    <noscript><p class="card card-body">Active JavaScript pour explorer les interactions de cette maquette locale.</p></noscript>
+  </main>
+  <dialog id="editor" aria-labelledby="dialog-title" aria-describedby="dialog-description"><div id="dialog-content"></div></dialog>
+</body>
+</html>

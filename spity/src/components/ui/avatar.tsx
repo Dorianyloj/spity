@@ -58,6 +58,7 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
             fill
             sizes="(max-width: 768px) 64px, 64px"
             className="object-cover"
+            unoptimized={src.startsWith('/api/') || src.startsWith('blob:')}
             {...props}
           />
         ) : fallback ? (

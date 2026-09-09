@@ -144,6 +144,7 @@ export default function FeedTimeline({ initialPosts }: FeedTimelineProps) {
                     fill
                     sizes="(max-width: 768px) 100vw, 672px"
                     src={post.imageUrl}
+                    unoptimized={post.imageUrl.startsWith('/api/')}
                   />
                 </div>
               )}

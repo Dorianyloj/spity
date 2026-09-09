@@ -46,6 +46,8 @@ const nullableClimbingEnvironmentSchema = z.preprocess((value) => {
 
 export const partnerSearchSchema = z.object({
   enabled: z.boolean(),
+  // Existing inventories stay private until their owner explicitly opts in.
+  shareEquipment: z.boolean().optional(),
   levelPreference: partnerLevelPreferenceSchema,
   style: partnerStyleSchema,
   notes: z.preprocess((value) => {

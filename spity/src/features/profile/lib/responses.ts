@@ -24,7 +24,7 @@ export const profileMeResponse = (
       equipment,
       onboardingComplete: Boolean(grimpeurProfile || clubProfile),
     }),
-    { status }
+    { status, headers: { 'Cache-Control': 'private, no-store', Vary: 'Cookie' } }
   )
 }
 
