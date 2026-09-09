@@ -131,7 +131,7 @@ function AnimatedSection({ children, className = '', delay = 0, id }: AnimatedSe
 export default function LandingPage() {
   return (
     <div className="min-h-dvh bg-[#173236] text-white">
-      <Header />
+      <Header overlay />
     <main className="overflow-hidden">
       <section className="relative flex min-h-[92svh] flex-col overflow-hidden">
         <Image
@@ -150,7 +150,7 @@ export default function LandingPage() {
           }}
           aria-hidden="true"
         />
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-16 pt-8 md:px-8">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-16 pt-[calc(8rem+env(safe-area-inset-top))] md:px-8">
           <div className="max-w-4xl">
             <motion.p
               className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/[0.18] bg-white/10 px-4 py-2 text-sm font-semibold text-white/[0.86] backdrop-blur"
