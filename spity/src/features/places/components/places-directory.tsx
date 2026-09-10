@@ -232,8 +232,6 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
     <div className="space-y-7">
       <AppHero
         backgroundImage={brandAssets.crag}
-        description="Trouve les salles, falaises et clubs autour de toi, avec les informations partagées par la communauté."
-        eyebrow="Répertoire"
         stats={[
           { label: 'lieux', value: totalPlaces },
           { label: 'voies', value: voies.length },
@@ -247,7 +245,7 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
             href="/app/places/suggest"
           >
             <Plus size={18} aria-hidden="true" />
-            Proposer un lieu
+            Ajouter un lieu
           </Link>
         )}
       </AppHero>

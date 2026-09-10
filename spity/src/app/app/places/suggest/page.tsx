@@ -5,8 +5,8 @@ import PlaceRequestForm from '@/features/places/components/place-request-form'
 import { getCurrentProfile } from '@/features/profile/lib/current-profile'
 
 export const metadata: Metadata = {
-  title: 'Proposer un lieu - Spity',
-  description: 'Proposer une salle ou un site d’escalade à la communauté Spity.',
+  title: 'Ajouter un lieu - Spity',
+  description: 'Ajouter une salle ou un site d’escalade sur Spity.',
 }
 
 export default async function SuggestPlacePage() {
@@ -19,13 +19,7 @@ export default async function SuggestPlacePage() {
   return (
     <AppShell activeItem="places" user={currentProfile.user}>
       <div className="mx-auto max-w-5xl space-y-6">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-wider text-primary">Répertoire communautaire</p>
-          <h1 className="mt-2 text-3xl font-black text-balance text-white sm:text-4xl">Proposer un nouveau lieu</h1>
-          <p className="mt-3 max-w-2xl text-pretty text-white/70">
-            Ajoute une salle ou un site extérieur. Plus les informations sont précises, plus la validation sera simple.
-          </p>
-        </div>
+        <h1 className="text-3xl font-black text-balance text-white sm:text-4xl">Ajouter un lieu</h1>
         <PlaceRequestForm />
       </div>
     </AppShell>

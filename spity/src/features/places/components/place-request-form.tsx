@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { Controller, useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Check, LocateFixed, MapPin, Mountain, Warehouse } from 'lucide-react'
-import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input, Textarea } from '@/components/ui'
+import { Button, Card, CardContent, CardHeader, CardTitle, Input, Textarea } from '@/components/ui'
 import { cn } from '@/lib/class-names'
 import {
   disciplineLabels,
@@ -178,7 +178,7 @@ export default function PlaceRequestForm() {
       }
 
       setSubmitted(true)
-      setSubmissionStatus('Ta proposition a bien été envoyée. Elle sera visible après validation.')
+      setSubmissionStatus('Lieu envoyé pour validation.')
       reset(defaultValues)
     } catch {
       setSubmissionStatus('La demande n’a pas pu être envoyée. Réessaie dans un instant.')
@@ -191,8 +191,7 @@ export default function PlaceRequestForm() {
     <form className="space-y-6" noValidate onSubmit={handleSubmit(submit)}>
       <Card hover={false}>
         <CardHeader>
-          <CardTitle>1. Quel lieu veux-tu ajouter ?</CardTitle>
-          <CardDescription>La proposition sera vérifiée avant d’apparaître dans le répertoire.</CardDescription>
+          <CardTitle>1. Type de lieu</CardTitle>
         </CardHeader>
         <CardContent>
           <fieldset>
@@ -236,8 +235,7 @@ export default function PlaceRequestForm() {
 
       <Card hover={false}>
         <CardHeader>
-          <CardTitle>2. Place le point sur la carte</CardTitle>
-          <CardDescription>La commune, le département et la région sont remplis automatiquement. Tout reste modifiable.</CardDescription>
+          <CardTitle>2. Localisation</CardTitle>
         </CardHeader>
         <CardContent className="space-y-5">
           <div className="overflow-hidden rounded-lg border border-border">
@@ -260,8 +258,7 @@ export default function PlaceRequestForm() {
 
       <Card hover={false}>
         <CardHeader>
-          <CardTitle>3. Les détails utiles aux grimpeurs</CardTitle>
-          <CardDescription>{kind === 'falaise' ? 'Conditions, accès et informations pratiques du site.' : 'Services et informations pratiques de la salle.'}</CardDescription>
+          <CardTitle>3. Détails</CardTitle>
         </CardHeader>
         <CardContent className="space-y-5">
           {kind === 'falaise' ? (
@@ -292,7 +289,7 @@ export default function PlaceRequestForm() {
 
       <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
         <Link className="text-center text-sm font-semibold text-muted-foreground hover:text-foreground" href="/app/places">Retour aux lieux</Link>
-        <Button className="w-full sm:w-auto" isLoading={isSubmitting} loadingText="Envoi…" type="submit">Envoyer la proposition</Button>
+        <Button className="w-full sm:w-auto" isLoading={isSubmitting} loadingText="Envoi…" type="submit">Ajouter le lieu</Button>
       </div>
       {submissionStatus && <div className={cn('rounded-lg border p-4 text-sm font-medium', submitted ? 'border-primary/40 bg-primary/10 text-foreground' : 'border-destructive/40 bg-destructive/10 text-destructive')} role={submitted ? 'status' : 'alert'}>{submitted && <Check className="mr-2 inline" size={18} aria-hidden="true" />}{submissionStatus}</div>}
     </form>

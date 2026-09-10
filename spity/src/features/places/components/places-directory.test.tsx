@@ -65,7 +65,7 @@ describe('PlacesDirectory', () => {
     expect(screen.getByRole('heading', { name: 'Club Alpin Lyon' })).toBeInTheDocument()
     expect(screen.getByText('La directe')).toBeInTheDocument()
     expect(screen.getByText('3 résultat(s) affiché(s)')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Proposer un lieu' })).toHaveAttribute('href', '/app/places/suggest')
+    expect(screen.getByRole('link', { name: 'Ajouter un lieu' })).toHaveAttribute('href', '/app/places/suggest')
   })
 
   it('filters by text, type and status and exposes empty states', async () => {
