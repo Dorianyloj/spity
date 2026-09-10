@@ -59,6 +59,7 @@ describe('database schema', () => {
       'authorId',
       'kind',
       'status',
+      'photoMediaId',
       'city',
       'department',
       'region',

@@ -21,7 +21,7 @@ function deletingTransaction(avatarUrl: string | null = null) {
   const select = jest.fn()
     .mockReturnValueOnce({ from: () => ({ where: () => ({ limit: () => ({ for: async () => [{ id: owner, avatarUrl }] }) }) }) })
     .mockReturnValueOnce({ from: () => ({ where: () => ({ limit: () => ({ for: foundLimit }) }) }) })
-    .mockReturnValueOnce({ from: () => ({ where: () => ({ limit: attachedLimit }) }) })
+    .mockReturnValue({ from: () => ({ where: () => ({ limit: attachedLimit }) }) })
   jest.mocked(db.transaction).mockImplementation(async (callback) => callback({ select, delete: db.delete } as never))
   attachedLimit.mockResolvedValue([])
 }
@@ -113,9 +113,9 @@ it('deletes the canonical storage ID even when the lookup used different casing'
   expect(removeImage).toHaveBeenCalledWith(id)
 })
 
-it.each(['avatar', 'post'])('refuses to remove an image referenced by a %s', async (kind) => {
+it.each(['avatar', 'post', 'place'])('refuses to remove an image referenced by a %s', async (kind) => {
   deletingTransaction(kind === 'avatar' ? `/api/avatars/${id}` : null)
-  if (kind === 'post') attachedLimit.mockResolvedValue([{ id: 'attachment' }])
+  if (kind !== 'avatar') attachedLimit.mockResolvedValue([{ id: 'attachment' }])
   await expect(deleteOwnedMedia(id, owner)).rejects.toMatchObject({ status: 409 })
   expect(removeImage).not.toHaveBeenCalled()
   expect(db.delete).not.toHaveBeenCalled()

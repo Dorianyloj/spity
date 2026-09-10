@@ -1,0 +1,1 @@
+ALTER TABLE `place_creation_requests` ADD `photo_media_id` varchar(36);

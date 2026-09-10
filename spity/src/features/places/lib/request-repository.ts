@@ -1,6 +1,8 @@
 import { randomUUID } from 'crypto'
+import { and, eq } from 'drizzle-orm'
 import { db } from '@/db'
-import { placeCreationRequests } from '@/db/schema'
+import { mediaUploads, placeCreationRequests } from '@/db/schema'
+import { ProfileOperationError } from '@/features/profile/lib/http'
 import type { PlaceCreationInput } from '../schemas'
 
 const nullable = <Value extends string>(value: Value): Value | null => value || null
@@ -12,6 +14,7 @@ export const createPlaceRequest = async (authorId: string, input: PlaceCreationI
     authorId,
     kind: input.kind,
     name: input.name,
+    photoMediaId: input.photoMediaId,
     disciplines: input.disciplines,
     latitude: input.latitude,
     longitude: input.longitude,
@@ -36,7 +39,16 @@ export const createPlaceRequest = async (authorId: string, input: PlaceCreationI
     notes: nullable(input.notes),
   }
 
-  await db.insert(placeCreationRequests).values(values)
+  await db.transaction(async (tx) => {
+    if (input.photoMediaId) {
+      const [photo] = await tx.select({ id: mediaUploads.id }).from(mediaUploads)
+        .where(and(eq(mediaUploads.id, input.photoMediaId), eq(mediaUploads.ownerId, authorId)))
+        .limit(1)
+        .for('update')
+      if (!photo) throw new ProfileOperationError('Cette photo est introuvable ou ne t’appartient pas.', 404)
+    }
+    await tx.insert(placeCreationRequests).values(values)
+  })
 
   return { id, status: 'pending' as const }
 }

@@ -1,11 +1,13 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Controller, useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Check, LocateFixed, MapPin, Mountain, ParkingCircle, Search, Warehouse } from 'lucide-react'
+import { z } from 'zod'
+import { Camera, Check, LocateFixed, MapPin, Mountain, ParkingCircle, Search, Trash2, Warehouse } from 'lucide-react'
 import { Button, Card, CardContent, CardHeader, CardTitle, Input, Textarea } from '@/components/ui'
 import { cn } from '@/lib/class-names'
 import {
@@ -35,6 +37,7 @@ const PlaceMap = dynamic(() => import('./place-map'), {
 const defaultValues: PlaceCreationInput = {
   kind: 'falaise',
   name: '',
+  photoMediaId: null,
   disciplines: [],
   latitude: 45.764,
   longitude: 4.8357,
@@ -116,6 +119,14 @@ export default function PlaceRequestForm() {
   const [searchResults, setSearchResults] = useState<LocationSearchResult[]>([])
   const [searchStatus, setSearchStatus] = useState('')
   const [isSearching, setIsSearching] = useState(false)
+  const [photoFile, setPhotoFile] = useState<File | null>(null)
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null)
+  const [photoError, setPhotoError] = useState('')
+  const [photoInputKey, setPhotoInputKey] = useState(0)
+
+  useEffect(() => () => {
+    if (photoPreview) URL.revokeObjectURL(photoPreview)
+  }, [photoPreview])
   const [submissionStatus, setSubmissionStatus] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const {
@@ -218,15 +229,53 @@ export default function PlaceRequestForm() {
     handleMapChange({ latitude: result.latitude, longitude: result.longitude })
   }
 
+  const changePhoto = (file: File | null) => {
+    setPhotoError('')
+
+    if (!file) {
+      setPhotoFile(null)
+      setPhotoPreview(null)
+      return true
+    }
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type) || file.size > 5 * 1024 * 1024) {
+      setPhotoFile(null)
+      setPhotoPreview(null)
+      setPhotoError('Choisis une image JPG, PNG ou WebP de 5 Mio maximum.')
+      return false
+    }
+
+    const preview = URL.createObjectURL(file)
+    setPhotoFile(file)
+    setPhotoPreview(preview)
+    return true
+  }
+
+  const uploadPhoto = async (file: File) => {
+    const body = new FormData()
+    body.set('file', file)
+    const response = await fetch('/api/media', { method: 'POST', body })
+    const payload: unknown = await response.json()
+    const parsed = z.object({ media: z.object({ id: z.uuid() }) }).safeParse(payload)
+    if (!response.ok || !parsed.success) {
+      const message = typeof payload === 'object' && payload && 'error' in payload && typeof payload.error === 'string'
+        ? payload.error
+        : 'La photo n’a pas pu être importée.'
+      throw new Error(message)
+    }
+    return parsed.data.media.id
+  }
+
   const submit = async (values: PlaceCreationInput) => {
     setSubmissionStatus('')
     setSubmitted(false)
+    let uploadedPhotoId: string | null = null
 
     try {
+      if (photoFile) uploadedPhotoId = await uploadPhoto(photoFile)
       const response = await fetch('/api/places/requests', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, photoMediaId: uploadedPhotoId }),
       })
       const payload = await response.json() as ApiError
 
@@ -236,6 +285,7 @@ export default function PlaceRequestForm() {
             setError(issue.path as keyof PlaceCreationInput, { message: issue.message })
           }
         })
+        if (uploadedPhotoId) void fetch(`/api/media/${uploadedPhotoId}`, { method: 'DELETE', keepalive: true }).catch(() => undefined)
         setSubmissionStatus(payload.error ?? 'La demande n’a pas pu être envoyée.')
         return
       }
@@ -244,8 +294,11 @@ export default function PlaceRequestForm() {
       setSubmissionStatus('Lieu envoyé pour validation.')
       reset(defaultValues)
       setMapTarget('place')
-    } catch {
-      setSubmissionStatus('La demande n’a pas pu être envoyée. Réessaie dans un instant.')
+      changePhoto(null)
+      setPhotoInputKey((key) => key + 1)
+    } catch (error) {
+      if (uploadedPhotoId) void fetch(`/api/media/${uploadedPhotoId}`, { method: 'DELETE', keepalive: true }).catch(() => undefined)
+      setSubmissionStatus(error instanceof Error ? error.message : 'La demande n’a pas pu être envoyée. Réessaie dans un instant.')
     }
   }
 
@@ -300,6 +353,39 @@ export default function PlaceRequestForm() {
             <Controller control={control} name="disciplines" render={({ field }) => (
               <ChoiceField label="Disciplines" name="disciplines" options={disciplines.map((value) => ({ value, label: disciplineLabels[value] }))} value={field.value} onChange={field.onChange} error={errors.disciplines?.message} />
             )} />
+          </div>
+          <div className="mt-5 grid gap-4 sm:grid-cols-[minmax(0,16rem)_minmax(0,1fr)] sm:items-center">
+            {photoPreview ? (
+              <div className="relative aspect-video overflow-hidden rounded-lg border border-border">
+                <Image alt="Aperçu de la photo du lieu" className="object-cover" fill sizes="(min-width: 640px) 256px, 100vw" src={photoPreview} unoptimized />
+              </div>
+            ) : (
+              <div className="flex aspect-video items-center justify-center rounded-lg border border-dashed border-border bg-secondary text-muted-foreground" aria-hidden="true">
+                <Camera size={28} />
+              </div>
+            )}
+            <div>
+              <Input
+                key={photoInputKey}
+                accept="image/jpeg,image/png,image/webp"
+                disabled={isSubmitting}
+                error={photoError || undefined}
+                label="Photo du lieu (facultative)"
+                onChange={(event) => {
+                  if (!changePhoto(event.target.files?.[0] ?? null)) event.target.value = ''
+                }}
+                type="file"
+              />
+              <p className="mt-2 text-xs text-pretty text-muted-foreground">JPG, PNG ou WebP · 5 Mio maximum.</p>
+              {photoPreview && (
+                <Button className="mt-2" disabled={isSubmitting} variant="ghost" onClick={() => {
+                  changePhoto(null)
+                  setPhotoInputKey((key) => key + 1)
+                }}>
+                  <Trash2 size={16} aria-hidden="true" /> Retirer la photo
+                </Button>
+              )}
+            </div>
           </div>
         </CardContent>
       </Card>

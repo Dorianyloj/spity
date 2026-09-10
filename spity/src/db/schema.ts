@@ -167,6 +167,7 @@ export const placeCreationRequests = mysqlTable(
     kind: mysqlEnum('kind', ['salle', 'falaise']).notNull(),
     status: mysqlEnum('request_status', ['pending', 'approved', 'rejected']).notNull().default('pending'),
     name: varchar('name', { length: 255 }).notNull(),
+    photoMediaId: varchar('photo_media_id', { length: 36 }),
     disciplines: json('disciplines').$type<string[]>().notNull(),
     latitude: double('latitude').notNull(),
     longitude: double('longitude').notNull(),

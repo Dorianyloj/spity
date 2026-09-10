@@ -3,6 +3,7 @@ import { placeCreationInputSchema } from './schemas'
 const baseRequest = {
   kind: 'falaise' as const,
   name: 'Roche Corbière',
+  photoMediaId: null,
   disciplines: ['voie'] as const,
   latitude: 45.9,
   longitude: 4.1,
@@ -30,6 +31,14 @@ const baseRequest = {
 describe('placeCreationInputSchema', () => {
   it('accepts a complete outdoor place suggestion', () => {
     expect(placeCreationInputSchema.safeParse(baseRequest).success).toBe(true)
+  })
+
+  it('accepts an uploaded photo ID and rejects malformed IDs', () => {
+    expect(placeCreationInputSchema.safeParse({
+      ...baseRequest,
+      photoMediaId: 'eb7c2638-3114-41b6-8917-a5dc4bc1d22e',
+    }).success).toBe(true)
+    expect(placeCreationInputSchema.safeParse({ ...baseRequest, photoMediaId: '../photo' }).success).toBe(false)
   })
 
   it('requires outdoor conditions for a crag', () => {

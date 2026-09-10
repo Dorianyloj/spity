@@ -15,6 +15,7 @@ const optionalUrl = z.union([z.literal(''), z.url('Saisis une adresse web valide
 export const placeCreationInputSchema = z.object({
   kind: z.enum(placeKinds),
   name: z.string().trim().min(2, 'Indique le nom du lieu.').max(255),
+  photoMediaId: z.uuid().nullable(),
   disciplines: z.array(z.enum(placeDisciplines)).min(1, 'Choisis au moins une discipline.').max(placeDisciplines.length),
   latitude: z.number().min(-90, 'Latitude invalide.').max(90, 'Latitude invalide.'),
   longitude: z.number().min(-180, 'Longitude invalide.').max(180, 'Longitude invalide.'),

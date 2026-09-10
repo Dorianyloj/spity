@@ -17,7 +17,7 @@ beforeEach(() => {
   limit.mockResolvedValue([{ id: imageId }])
   jest.mocked(readImage).mockResolvedValue(Buffer.from('webp'))
 })
-it.each(['avatar', 'post'] as const)('serves referenced %s media only with private headers', async (kind) => {
+it.each(['avatar', 'post', 'place'] as const)('serves referenced %s media only with private headers', async (kind) => {
   const response = await serveMemberMedia(imageId.toUpperCase(), kind)
   expect(response.status).toBe(200)
   expect(response.headers.get('cache-control')).toBe('private, no-store')

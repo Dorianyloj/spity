@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Badge, Button, Input } from '@/components/ui'
 import { disciplineLabels, orientationLabels, rockTypeLabels, seasonLabels } from '@/features/places/schemas'
 import { listAdminAccounts, listAdminHistory, listAdminPlaceRequests, listAdminPosts, PAGE_SIZE } from '../lib/repository'
@@ -104,6 +105,18 @@ export default async function AdminManagement({ query }: { query: AdminQuery }) 
                 <PlaceReviewButton decision="approve" id={request.id} name={request.name} />
               </div>}
             </div>
+            {request.photoMediaId && (
+              <div className="relative mt-4 aspect-video max-h-80 overflow-hidden rounded-lg border border-border">
+                <Image
+                  alt={`Photo proposée pour ${request.name}`}
+                  className="object-cover"
+                  fill
+                  sizes="(min-width: 1280px) 900px, 100vw"
+                  src={`/api/admin/place-media/${request.photoMediaId}`}
+                  unoptimized
+                />
+              </div>
+            )}
             <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
               <div><dt className="font-semibold">Disciplines</dt><dd className="text-muted-foreground">{disciplines || 'Non renseignées'}</dd></div>
               {request.kind === 'salle' ? <>

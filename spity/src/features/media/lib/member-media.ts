@@ -1,25 +1,36 @@
 import { and, eq } from 'drizzle-orm'
 import { db } from '@/db'
-import { medias, mediaUploads, posts, users } from '@/db/schema'
+import { falaises, medias, mediaUploads, posts, salles, users } from '@/db/schema'
 import { getCurrentProfile } from '@/features/profile/lib/current-profile'
 import { mediaIdSchema, readImage } from './storage'
 import { handleMediaError, mediaErrorResponse } from './responses'
 
-export async function findMemberMedia(id: string, kind: 'avatar' | 'post') {
+export async function findMemberMedia(id: string, kind: 'avatar' | 'post' | 'place') {
   if (kind === 'avatar') {
     const [row] = await db.select({ id: mediaUploads.id }).from(mediaUploads)
       .innerJoin(users, and(eq(users.id, mediaUploads.ownerId), eq(users.avatarUrl, `/api/avatars/${id}`), eq(users.isSuspended, false)))
       .where(eq(mediaUploads.id, id)).limit(1)
     return row ?? null
   }
-  const [row] = await db.select({ id: mediaUploads.id }).from(mediaUploads)
-    .innerJoin(medias, eq(medias.url, `/api/post-media/${id}`))
-    .innerJoin(posts, and(eq(posts.id, medias.postId), eq(posts.authorId, mediaUploads.ownerId), eq(posts.isHidden, false)))
-    .where(eq(mediaUploads.id, id)).limit(1)
-  return row ?? null
+  if (kind === 'post') {
+    const [row] = await db.select({ id: mediaUploads.id }).from(mediaUploads)
+      .innerJoin(medias, eq(medias.url, `/api/post-media/${id}`))
+      .innerJoin(posts, and(eq(posts.id, medias.postId), eq(posts.authorId, mediaUploads.ownerId), eq(posts.isHidden, false)))
+      .where(eq(mediaUploads.id, id)).limit(1)
+    return row ?? null
+  }
+  const [salleRows, falaiseRows] = await Promise.all([
+    db.select({ id: mediaUploads.id }).from(mediaUploads)
+      .innerJoin(salles, eq(salles.photoUrl, `/api/place-media/${id}`))
+      .where(eq(mediaUploads.id, id)).limit(1),
+    db.select({ id: mediaUploads.id }).from(mediaUploads)
+      .innerJoin(falaises, eq(falaises.photoUrl, `/api/place-media/${id}`))
+      .where(eq(mediaUploads.id, id)).limit(1),
+  ])
+  return salleRows[0] ?? falaiseRows[0] ?? null
 }
 
-export async function serveMemberMedia(id: string, kind: 'avatar' | 'post') {
+export async function serveMemberMedia(id: string, kind: 'avatar' | 'post' | 'place') {
   try {
     const viewer = await getCurrentProfile()
     if (!viewer) return mediaErrorResponse('Authentification requise', 401)
