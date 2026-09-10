@@ -89,10 +89,13 @@ export default async function AdminManagement({ query }: { query: AdminQuery }) 
 
     return <section className={panelClass}>
       <h2 className="text-xl font-bold text-balance">Contributions aux lieux</h2>
-      <p className="mt-2 text-sm text-pretty text-muted-foreground">Valide les nouveaux lieux, les corrections de fiches et les photos ajoutées par la communauté.</p>
+      <p className="mt-2 text-sm text-pretty text-muted-foreground">Traite les demandes en série : les informations essentielles restent visibles, le dossier complet s’ouvre uniquement au besoin.</p>
       <Filters query={query} />
-      <h3 className="text-lg font-bold text-balance">Nouveaux lieux</h3>
-      <div className="space-y-4">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h3 className="text-lg font-bold text-balance">Nouveaux lieux</h3>
+        <p className="text-sm text-muted-foreground tabular-nums">{number(data.total)} demande{data.total > 1 ? 's' : ''}</p>
+      </div>
+      <ol className="mt-3 divide-y divide-border border-y border-border">
         {data.rows.map(({ request, authorEmail }) => {
           const currentStatus = status[request.status]
           const disciplines = listLabels(request.disciplines, disciplineLabels)
@@ -104,15 +107,15 @@ export default async function AdminManagement({ query }: { query: AdminQuery }) 
             ? `https://www.openstreetmap.org/?mlat=${request.parkingLatitude}&mlon=${request.parkingLongitude}#map=17/${request.parkingLatitude}/${request.parkingLongitude}`
             : null
 
-          return <article className="rounded-lg border border-border p-4 sm:p-5" key={request.id}>
+          return <li className="py-4" key={request.id}>
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="text-lg font-bold text-balance">{request.name}</h3>
+                  <h4 className="text-base font-bold text-balance">{request.name}</h4>
                   <Badge variant="secondary">{request.kind === 'salle' ? 'Salle' : 'Falaise'}</Badge>
                   <Badge variant={currentStatus.variant}>{currentStatus.label}</Badge>
                 </div>
-                <p className="mt-1 text-sm text-muted-foreground">{request.city} · {request.department} · {request.region}</p>
+                <p className="mt-1 text-sm text-muted-foreground line-clamp-1">{request.city} · {request.department} · {request.region} · {disciplines || 'Disciplines non renseignées'}</p>
                 <p className="mt-1 break-all text-xs text-muted-foreground">Par {authorEmail} · {dateTime(request.createdAt)}</p>
               </div>
               {request.status === 'pending' && <div className="flex flex-wrap gap-2">
@@ -120,52 +123,50 @@ export default async function AdminManagement({ query }: { query: AdminQuery }) 
                 <PlaceReviewButton decision="approve" id={request.id} name={request.name} />
               </div>}
             </div>
-            {request.photoMediaId && (
-              <div className="relative mt-4 aspect-video max-h-80 overflow-hidden rounded-lg border border-border">
-                <Image
-                  alt={`Photo proposée pour ${request.name}`}
-                  className="object-cover"
-                  fill
-                  sizes="(min-width: 1280px) 900px, 100vw"
-                  src={`/api/admin/place-media/${request.photoMediaId}`}
-                  unoptimized
-                />
+            {request.reviewReason && <p className="mt-3 text-sm text-muted-foreground line-clamp-1"><strong className="font-semibold text-foreground">Décision :</strong> {request.reviewReason}</p>}
+            <details className="mt-3">
+              <summary className="cursor-pointer rounded text-sm font-semibold text-primary underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Ouvrir le dossier</summary>
+              <div className="mt-4 border-l-2 border-border pl-4">
+                {request.photoMediaId && <div className="relative aspect-video max-w-xl overflow-hidden rounded-lg border border-border">
+                  <Image alt={`Photo proposée pour ${request.name}`} className="object-cover" fill sizes="(min-width: 1024px) 560px, 100vw" src={`/api/admin/place-media/${request.photoMediaId}`} unoptimized />
+                </div>}
+                <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
+                  <div><dt className="font-semibold">Disciplines</dt><dd className="text-muted-foreground">{disciplines || 'Non renseignées'}</dd></div>
+                  {request.kind === 'salle' ? <>
+                    <div><dt className="font-semibold">Adresse</dt><dd className="text-muted-foreground">{request.address}</dd></div>
+                    <div><dt className="font-semibold">Services</dt><dd className="text-muted-foreground">{services || 'Aucun'}</dd></div>
+                  </> : <>
+                    <div><dt className="font-semibold">Roche</dt><dd className="text-muted-foreground">{request.rockType ? rockTypeLabels[request.rockType] : 'Non renseignée'}</dd></div>
+                    <div><dt className="font-semibold">Saisons</dt><dd className="text-muted-foreground">{seasons || 'Non renseignées'}</dd></div>
+                    <div><dt className="font-semibold">Orientations</dt><dd className="text-muted-foreground">{orientations || 'Non renseignées'}</dd></div>
+                    <div><dt className="font-semibold">Approche</dt><dd className="text-muted-foreground">{request.approach || 'Non renseignée'}</dd></div>
+                    <div><dt className="font-semibold">Parking</dt><dd className="text-muted-foreground">{request.parking || 'Non renseigné'}</dd></div>
+                  </>}
+                </dl>
+                {(request.access || request.restrictions || request.notes) && <div className="mt-4 space-y-2 border-t border-border pt-4 text-sm text-pretty">
+                  {request.access && <p><strong>Accès :</strong> {request.access}</p>}
+                  {request.restrictions && <p><strong>Restrictions :</strong> {request.restrictions}</p>}
+                  {request.notes && <p><strong>Notes :</strong> {request.notes}</p>}
+                </div>}
+                <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold">
+                  <a href={siteMapUrl} target="_blank" rel="noreferrer" className="underline underline-offset-4">Voir le lieu sur la carte</a>
+                  {parkingMapUrl && <a href={parkingMapUrl} target="_blank" rel="noreferrer" className="underline underline-offset-4">Voir le parking</a>}
+                  {request.sourceUrl && <a href={request.sourceUrl} target="_blank" rel="noreferrer" className="underline underline-offset-4">Voir la source</a>}
+                </div>
               </div>
-            )}
-            <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
-              <div><dt className="font-semibold">Disciplines</dt><dd className="text-muted-foreground">{disciplines || 'Non renseignées'}</dd></div>
-              {request.kind === 'salle' ? <>
-                <div><dt className="font-semibold">Adresse</dt><dd className="text-muted-foreground">{request.address}</dd></div>
-                <div><dt className="font-semibold">Services</dt><dd className="text-muted-foreground">{services || 'Aucun'}</dd></div>
-              </> : <>
-                <div><dt className="font-semibold">Roche</dt><dd className="text-muted-foreground">{request.rockType ? rockTypeLabels[request.rockType] : 'Non renseignée'}</dd></div>
-                <div><dt className="font-semibold">Saisons</dt><dd className="text-muted-foreground">{seasons}</dd></div>
-                <div><dt className="font-semibold">Orientations</dt><dd className="text-muted-foreground">{orientations}</dd></div>
-                <div><dt className="font-semibold">Approche</dt><dd className="text-muted-foreground">{request.approach || 'Non renseignée'}</dd></div>
-                <div><dt className="font-semibold">Parking</dt><dd className="text-muted-foreground">{request.parking || 'Non renseigné'}</dd></div>
-              </>}
-            </dl>
-            {(request.access || request.restrictions || request.notes) && <div className="mt-4 space-y-2 border-t border-border pt-4 text-sm text-pretty">
-              {request.access && <p><strong>Accès :</strong> {request.access}</p>}
-              {request.restrictions && <p><strong>Restrictions :</strong> {request.restrictions}</p>}
-              {request.notes && <p><strong>Notes :</strong> {request.notes}</p>}
-            </div>}
-            <div className="mt-4 flex flex-wrap gap-4 text-sm font-semibold">
-              <a href={siteMapUrl} target="_blank" rel="noreferrer" className="underline">Voir le lieu sur la carte</a>
-              {parkingMapUrl && <a href={parkingMapUrl} target="_blank" rel="noreferrer" className="underline">Voir le parking</a>}
-              {request.sourceUrl && <a href={request.sourceUrl} target="_blank" rel="noreferrer" className="underline">Voir la source</a>}
-            </div>
-            {request.reviewReason && <p className="mt-4 rounded-lg bg-secondary p-3 text-sm"><strong>Décision :</strong> {request.reviewReason}</p>}
-          </article>
+            </details>
+          </li>
         })}
-      </div>
+      </ol>
       {!data.rows.length && <p className="py-8 text-center text-muted-foreground">Aucune demande de lieu.</p>}
       <Pagination query={query} total={data.total} />
 
       <div className="mt-10 border-t border-border pt-8">
-        <h3 className="text-lg font-bold text-balance">Corrections et photos</h3>
-        <p className="mt-2 text-sm text-pretty text-muted-foreground">Chaque demande contient une version complète de la fiche ; seules les contributions validées deviennent publiques.</p>
-        <div className="mt-5 space-y-4">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <div><h3 className="text-lg font-bold text-balance">Corrections et photos</h3><p className="mt-1 text-sm text-pretty text-muted-foreground">Chaque contribution garde sa fiche détaillée, sans alourdir la file.</p></div>
+          <p className="text-sm text-muted-foreground tabular-nums">{number(changes.total)} demande{changes.total > 1 ? 's' : ''}</p>
+        </div>
+        <ol className="mt-3 divide-y divide-border border-y border-border">
           {changes.rows.map(({ request, authorEmail, photoMediaIds }) => {
             const values = storedObject(request.values)
             const currentStatus = status[request.status]
@@ -177,16 +178,16 @@ export default async function AdminManagement({ query }: { query: AdminQuery }) 
                 ? `/app/places/falaises/${request.falaiseId}`
                 : null
 
-            return <article className="rounded-lg border border-border p-4 sm:p-5" key={request.id}>
+            return <li className="py-4" key={request.id}>
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
-                    <h4 className="text-lg font-bold text-balance">{name}</h4>
+                    <h4 className="text-base font-bold text-balance">{name}</h4>
                     <Badge variant="secondary">{request.kind === 'salle' ? 'Salle' : 'Falaise'}</Badge>
                     <Badge variant="secondary">Correction</Badge>
                     <Badge variant={currentStatus.variant}>{currentStatus.label}</Badge>
                   </div>
-                  <p className="mt-1 text-sm text-muted-foreground">{city} · {photoMediaIds.length} photo{photoMediaIds.length > 1 ? 's' : ''} proposée{photoMediaIds.length > 1 ? 's' : ''}</p>
+                  <p className="mt-1 text-sm text-muted-foreground line-clamp-1">{city} · {photoMediaIds.length} photo{photoMediaIds.length > 1 ? 's' : ''} proposée{photoMediaIds.length > 1 ? 's' : ''}</p>
                   <p className="mt-1 break-all text-xs text-muted-foreground">Par {authorEmail} · {dateTime(request.createdAt)}</p>
                 </div>
                 {request.status === 'pending' && <div className="flex flex-wrap gap-2">
@@ -194,31 +195,36 @@ export default async function AdminManagement({ query }: { query: AdminQuery }) 
                   <PlaceReviewButton decision="approve" id={request.id} name={name} requestType="change" />
                 </div>}
               </div>
-              {photoMediaIds.length > 0 && <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {photoMediaIds.map((mediaId, index) => <div className="relative aspect-video overflow-hidden rounded-lg border border-border" key={mediaId}>
-                  <Image alt={`Photo ${index + 1} proposée pour ${name}`} className="object-cover" fill sizes="(min-width: 1024px) 280px, (min-width: 640px) 45vw, 100vw" src={`/api/admin/place-change-media/${mediaId}`} unoptimized />
-                </div>)}
-              </div>}
-              <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
-                <div><dt className="font-semibold">Commune</dt><dd className="text-muted-foreground">{city}</dd></div>
-                <div><dt className="font-semibold">Coordonnées</dt><dd className="tabular-nums text-muted-foreground">{typeof values.latitude === 'number' && typeof values.longitude === 'number' ? `${values.latitude.toFixed(5)}, ${values.longitude.toFixed(5)}` : 'Non renseignées'}</dd></div>
-                {request.kind === 'salle' ? <>
-                  <div><dt className="font-semibold">Adresse</dt><dd className="text-muted-foreground">{textValue(values.address)}</dd></div>
-                  <div><dt className="font-semibold">Horaires</dt><dd className="text-muted-foreground">{textValue(values.weekdayHours)} · {textValue(values.weekendHours)}</dd></div>
-                </> : <>
-                  <div><dt className="font-semibold">Accès</dt><dd className="text-muted-foreground">{textValue(values.access)}</dd></div>
-                  <div><dt className="font-semibold">Parking</dt><dd className="text-muted-foreground">{textValue(values.parking)}</dd></div>
-                </>}
-              </dl>
-              {request.message && <p className="mt-4 rounded-lg bg-secondary p-3 text-sm text-pretty"><strong>Message du grimpeur :</strong> {request.message}</p>}
-              <div className="mt-4 flex flex-wrap gap-4 text-sm font-semibold">
-                {targetHref && <Link className="underline" href={targetHref}>Voir la fiche actuelle</Link>}
-                {typeof values.sourceUrl === 'string' && values.sourceUrl && <a href={values.sourceUrl} target="_blank" rel="noreferrer" className="underline">Voir la source</a>}
-              </div>
-              {request.reviewReason && <p className="mt-4 rounded-lg bg-secondary p-3 text-sm"><strong>Décision :</strong> {request.reviewReason}</p>}
-            </article>
+              {request.reviewReason && <p className="mt-3 text-sm text-muted-foreground line-clamp-1"><strong className="font-semibold text-foreground">Décision :</strong> {request.reviewReason}</p>}
+              <details className="mt-3">
+                <summary className="cursor-pointer rounded text-sm font-semibold text-primary underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Ouvrir le dossier</summary>
+                <div className="mt-4 border-l-2 border-border pl-4">
+                  {photoMediaIds.length > 0 && <div className="grid max-w-3xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {photoMediaIds.map((mediaId, index) => <div className="relative aspect-video overflow-hidden rounded-lg border border-border" key={mediaId}>
+                      <Image alt={`Photo ${index + 1} proposée pour ${name}`} className="object-cover" fill sizes="(min-width: 1024px) 280px, (min-width: 640px) 45vw, 100vw" src={`/api/admin/place-change-media/${mediaId}`} unoptimized />
+                    </div>)}
+                  </div>}
+                  <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
+                    <div><dt className="font-semibold">Commune</dt><dd className="text-muted-foreground">{city}</dd></div>
+                    <div><dt className="font-semibold">Coordonnées</dt><dd className="tabular-nums text-muted-foreground">{typeof values.latitude === 'number' && typeof values.longitude === 'number' ? `${values.latitude.toFixed(5)}, ${values.longitude.toFixed(5)}` : 'Non renseignées'}</dd></div>
+                    {request.kind === 'salle' ? <>
+                      <div><dt className="font-semibold">Adresse</dt><dd className="text-muted-foreground">{textValue(values.address)}</dd></div>
+                      <div><dt className="font-semibold">Horaires</dt><dd className="text-muted-foreground">{textValue(values.weekdayHours)} · {textValue(values.weekendHours)}</dd></div>
+                    </> : <>
+                      <div><dt className="font-semibold">Accès</dt><dd className="text-muted-foreground">{textValue(values.access)}</dd></div>
+                      <div><dt className="font-semibold">Parking</dt><dd className="text-muted-foreground">{textValue(values.parking)}</dd></div>
+                    </>}
+                  </dl>
+                  {request.message && <p className="mt-4 rounded-lg bg-secondary p-3 text-sm text-pretty"><strong>Message du grimpeur :</strong> {request.message}</p>}
+                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold">
+                    {targetHref && <Link className="underline underline-offset-4" href={targetHref}>Voir la fiche actuelle</Link>}
+                    {typeof values.sourceUrl === 'string' && values.sourceUrl && <a href={values.sourceUrl} target="_blank" rel="noreferrer" className="underline underline-offset-4">Voir la source</a>}
+                  </div>
+                </div>
+              </details>
+            </li>
           })}
-        </div>
+        </ol>
         {!changes.rows.length && <p className="py-8 text-center text-muted-foreground">Aucune correction ou photo à examiner.</p>}
         <Pagination query={query} total={changes.total} />
       </div>

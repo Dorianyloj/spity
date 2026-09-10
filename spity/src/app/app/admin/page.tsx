@@ -14,7 +14,11 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
   const user = await getCurrentUser()
   if (!user) redirect('/login')
   if (!user.isAdmin) notFound()
-  const query = adminQuerySchema.parse(await searchParams)
+  const rawQuery = await searchParams
+  const parsedQuery = adminQuerySchema.parse(rawQuery)
+  const query = parsedQuery.view === 'places' && rawQuery.status === undefined
+    ? { ...parsedQuery, status: 'pending' as const }
+    : parsedQuery
   const views = { dashboard: 'Vue d’ensemble', accounts: 'Comptes', posts: 'Publications', places: 'Lieux', history: 'Historique' } as const
   return <AppShell activeItem="admin" user={user}>
     <div className="mb-6"><p className="text-sm font-semibold text-primary">ESPACE ADMINISTRATEUR</p><h1 className="mt-2 text-balance text-3xl font-bold text-white sm:text-4xl">Administration</h1><p className="mt-3 text-pretty text-zinc-300">Suivez la communauté et veillez au bon fonctionnement de Spity.</p></div>
