@@ -73,6 +73,18 @@ export const placeRequestResponseSchema = z.object({
 
 export const reverseGeocodeResponseSchema = z.object({ city: z.string(), region: z.string(), department: z.string() })
 
+export const locationSearchResultSchema = z.object({
+  id: z.string(),
+  label: z.string(),
+  latitude: z.number(),
+  longitude: z.number(),
+  type: z.string(),
+})
+export const locationSearchResponseSchema = z.object({
+  results: z.array(locationSearchResultSchema),
+})
+export type LocationSearchResult = z.infer<typeof locationSearchResultSchema>
+
 export const disciplineLabels: Record<(typeof placeDisciplines)[number], string> = {
   voie: 'Voie', bloc: 'Bloc', grande_voie: 'Grande voie', trad: 'Trad', artif: 'Artif',
   deep_water_solo: 'Deep water solo', via_ferrata: 'Via ferrata', speed: 'Vitesse',

@@ -5,11 +5,12 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Controller, useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Check, LocateFixed, MapPin, Mountain, ParkingCircle, Warehouse } from 'lucide-react'
+import { Check, LocateFixed, MapPin, Mountain, ParkingCircle, Search, Warehouse } from 'lucide-react'
 import { Button, Card, CardContent, CardHeader, CardTitle, Input, Textarea } from '@/components/ui'
 import { cn } from '@/lib/class-names'
 import {
   disciplineLabels,
+  locationSearchResponseSchema,
   orientationLabels,
   orientationOptions,
   placeCreationInputSchema,
@@ -22,6 +23,7 @@ import {
   seasonLabels,
   seasonOptions,
   sunlightOptions,
+  type LocationSearchResult,
   type PlaceCreationInput,
 } from '../schemas'
 
@@ -110,6 +112,10 @@ type ApiError = { error?: string; issues?: Array<{ path: string; message: string
 export default function PlaceRequestForm() {
   const [mapTarget, setMapTarget] = useState<'place' | 'parking'>('place')
   const [locationStatus, setLocationStatus] = useState('Clique sur la carte pour placer précisément le lieu.')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchResults, setSearchResults] = useState<LocationSearchResult[]>([])
+  const [searchStatus, setSearchStatus] = useState('')
+  const [isSearching, setIsSearching] = useState(false)
   const [submissionStatus, setSubmissionStatus] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const {
@@ -166,6 +172,50 @@ export default function PlaceRequestForm() {
     setValue('latitude', roundedLatitude, { shouldValidate: true })
     setValue('longitude', roundedLongitude, { shouldValidate: true })
     void identifyLocation(roundedLatitude, roundedLongitude)
+  }
+
+  const searchLocation = async () => {
+    const query = searchQuery.trim()
+    if (query.length < 2) {
+      setSearchResults([])
+      setSearchStatus('Saisis au moins 2 caractères.')
+      return
+    }
+
+    setIsSearching(true)
+    setSearchStatus('Recherche en cours…')
+    try {
+      const response = await fetch(`/api/places/search?q=${encodeURIComponent(query)}`)
+      const payload: unknown = await response.json()
+      const parsed = locationSearchResponseSchema.safeParse(payload)
+
+      if (!response.ok || !parsed.success) {
+        const message = typeof payload === 'object' && payload && 'error' in payload && typeof payload.error === 'string'
+          ? payload.error
+          : 'Recherche indisponible. Réessaie.'
+        setSearchResults([])
+        setSearchStatus(message)
+        return
+      }
+
+      setSearchResults(parsed.data.results)
+      setSearchStatus(parsed.data.results.length ? `${parsed.data.results.length} résultat(s)` : 'Aucun résultat.')
+    } catch {
+      setSearchResults([])
+      setSearchStatus('Recherche indisponible. Réessaie.')
+    } finally {
+      setIsSearching(false)
+    }
+  }
+
+  const selectSearchResult = (result: LocationSearchResult) => {
+    if (mapTarget === 'place' && kind === 'salle' && result.type !== 'municipality') {
+      setValue('address', result.label, { shouldValidate: true })
+    }
+    setSearchQuery(result.label)
+    setSearchResults([])
+    setSearchStatus('')
+    handleMapChange({ latitude: result.latitude, longitude: result.longitude })
   }
 
   const submit = async (values: PlaceCreationInput) => {
@@ -259,6 +309,44 @@ export default function PlaceRequestForm() {
           <CardTitle>2. Localisation</CardTitle>
         </CardHeader>
         <CardContent className="space-y-5">
+          <div>
+            <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
+              <Input
+                aria-controls={searchResults.length ? 'place-search-results' : undefined}
+                label="Rechercher une ville ou une adresse"
+                onChange={(event) => setSearchQuery(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    event.preventDefault()
+                    void searchLocation()
+                  }
+                }}
+                placeholder="Ex. Fontainebleau ou 12 rue…"
+                type="search"
+                value={searchQuery}
+              />
+              <Button className="w-full sm:w-auto" isLoading={isSearching} loadingText="Recherche…" variant="secondary" onClick={() => void searchLocation()}>
+                <Search size={17} aria-hidden="true" /> Rechercher
+              </Button>
+            </div>
+            {searchStatus && <p className="mt-2 text-sm text-muted-foreground" aria-live="polite" role="status">{searchStatus}</p>}
+            {searchResults.length > 0 && (
+              <ul className="mt-3 divide-y divide-border overflow-hidden rounded-lg border border-border" id="place-search-results">
+                {searchResults.map((result) => (
+                  <li key={result.id}>
+                    <button
+                      className="w-full px-4 py-3 text-left text-sm font-medium text-foreground hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+                      onClick={() => selectSearchResult(result)}
+                      type="button"
+                    >
+                      <MapPin className="mr-2 inline text-primary" size={16} aria-hidden="true" />
+                      {result.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
           <div className="flex flex-wrap gap-2" role="group" aria-label="Point à placer sur la carte">
             <Button aria-pressed={mapTarget === 'place'} variant={mapTarget === 'place' ? 'primary' : 'secondary'} onClick={() => setMapTarget('place')}>
               <MapPin size={17} aria-hidden="true" /> Lieu
