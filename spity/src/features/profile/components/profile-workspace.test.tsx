@@ -27,6 +27,8 @@ it('renders the approved sections with actual counts and private account setting
   expect(screen.getByRole('heading', { name: 'Mon profil' })).toBeInTheDocument()
   expect(screen.getByRole('progressbar', { name: 'Complétude du profil' })).toHaveAttribute('value', '5')
   expect(screen.getByRole('link', { name: 'Vue membre' })).toHaveAttribute('href', `/app/profiles/${userId}`)
+  expect(screen.queryByText('Niveau déclaré')).not.toBeInTheDocument()
+  expect(screen.getByText('Repères personnels, pas un classement.')).toBeVisible()
   expect((await axe(container)).violations).toEqual([])
   click('Publications'); expect(screen.getByLabelText('Filtrer les publications de cette page')).toBeVisible()
   click('Matériel'); expect(screen.getByText(/Notes privées : SECRET-INVENTORY/)).toBeVisible()
