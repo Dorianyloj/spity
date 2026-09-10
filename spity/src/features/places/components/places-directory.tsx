@@ -301,8 +301,8 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
       <header className="flex flex-col gap-4 border-b border-border pb-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-sm font-semibold text-primary">Explorer</p>
-          <h1 className="mt-1 text-balance text-3xl font-bold text-foreground sm:text-4xl">Lieux d’escalade</h1>
-          <p className="mt-2 max-w-2xl text-pretty text-sm text-muted-foreground">Trouve un spot, vérifie les conditions, puis ouvre la fiche quand tu veux les détails.</p>
+          <h1 className="mt-1 text-balance text-3xl font-bold text-white sm:text-4xl">Lieux d’escalade</h1>
+          <p className="mt-2 max-w-2xl text-pretty text-sm text-zinc-300">Trouve un spot, vérifie les conditions, puis ouvre la fiche quand tu veux les détails.</p>
         </div>
         {canSuggest && (
           <Link className="spity-btn spity-btn--primary shrink-0" href="/app/places/suggest">
@@ -329,8 +329,8 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
       <div className="grid items-start gap-6 xl:grid-cols-[minmax(0,1fr)_23rem]">
         <section aria-labelledby="places-results-heading">
           <div className="mb-4 flex items-center justify-between gap-4">
-            <h2 id="places-results-heading" className="text-balance text-xl font-bold text-foreground">Résultats</h2>
-            {results.length > 0 && <span className="text-sm tabular-nums text-muted-foreground">{Math.min(displayedResults.length, results.length)} / {results.length}</span>}
+            <h2 id="places-results-heading" className="text-balance text-xl font-bold text-white">Résultats</h2>
+            {results.length > 0 && <span className="text-sm tabular-nums text-zinc-300">{Math.min(displayedResults.length, results.length)} / {results.length}</span>}
           </div>
 
           {displayedResults.length > 0 ? (
