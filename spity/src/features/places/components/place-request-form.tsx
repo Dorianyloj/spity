@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Controller, useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Check, LocateFixed, MapPin, Mountain, Warehouse } from 'lucide-react'
+import { Check, LocateFixed, MapPin, Mountain, ParkingCircle, Warehouse } from 'lucide-react'
 import { Button, Card, CardContent, CardHeader, CardTitle, Input, Textarea } from '@/components/ui'
 import { cn } from '@/lib/class-names'
 import {
@@ -27,7 +27,7 @@ import {
 
 const PlaceMap = dynamic(() => import('./place-map'), {
   ssr: false,
-  loading: () => <div className="h-[320px] animate-pulse rounded-lg bg-secondary" aria-label="Chargement de la carte" />,
+  loading: () => <div className="h-[320px] rounded-lg bg-secondary" aria-label="Chargement de la carte" />,
 })
 
 const defaultValues: PlaceCreationInput = {
@@ -50,6 +50,8 @@ const defaultValues: PlaceCreationInput = {
   access: '',
   approach: '',
   parking: '',
+  parkingLatitude: null,
+  parkingLongitude: null,
   restrictions: '',
   sourceUrl: '',
   notes: '',
@@ -106,6 +108,7 @@ function ChoiceField({ error, label, name, onChange, options, value }: ChoiceFie
 type ApiError = { error?: string; issues?: Array<{ path: string; message: string }> }
 
 export default function PlaceRequestForm() {
+  const [mapTarget, setMapTarget] = useState<'place' | 'parking'>('place')
   const [locationStatus, setLocationStatus] = useState('Clique sur la carte pour placer précisément le lieu.')
   const [submissionStatus, setSubmissionStatus] = useState('')
   const [submitted, setSubmitted] = useState(false)
@@ -121,6 +124,8 @@ export default function PlaceRequestForm() {
   const kind = useWatch({ control, name: 'kind' })
   const latitude = useWatch({ control, name: 'latitude' })
   const longitude = useWatch({ control, name: 'longitude' })
+  const parkingLatitude = useWatch({ control, name: 'parkingLatitude' })
+  const parkingLongitude = useWatch({ control, name: 'parkingLongitude' })
 
   const identifyLocation = async (nextLatitude = latitude, nextLongitude = longitude) => {
     setLocationStatus('Recherche de la commune et de la région…')
@@ -150,6 +155,14 @@ export default function PlaceRequestForm() {
   const handleMapChange = ({ latitude: nextLatitude, longitude: nextLongitude }: { latitude: number; longitude: number }) => {
     const roundedLatitude = Number(nextLatitude.toFixed(6))
     const roundedLongitude = Number(nextLongitude.toFixed(6))
+
+    if (mapTarget === 'parking' && kind === 'falaise') {
+      setValue('parkingLatitude', roundedLatitude, { shouldValidate: true })
+      setValue('parkingLongitude', roundedLongitude, { shouldValidate: true })
+      setLocationStatus('Point du parking enregistré.')
+      return
+    }
+
     setValue('latitude', roundedLatitude, { shouldValidate: true })
     setValue('longitude', roundedLongitude, { shouldValidate: true })
     void identifyLocation(roundedLatitude, roundedLongitude)
@@ -180,6 +193,7 @@ export default function PlaceRequestForm() {
       setSubmitted(true)
       setSubmissionStatus('Lieu envoyé pour validation.')
       reset(defaultValues)
+      setMapTarget('place')
     } catch {
       setSubmissionStatus('La demande n’a pas pu être envoyée. Réessaie dans un instant.')
     }
@@ -212,7 +226,14 @@ export default function PlaceRequestForm() {
                       type="radio"
                       value={option.value}
                       {...register('kind', {
-                        onChange: () => setValue('disciplines', [], { shouldValidate: false }),
+                        onChange: (event) => {
+                          setValue('disciplines', [], { shouldValidate: false })
+                          if (event.target.value === 'salle') {
+                            setMapTarget('place')
+                            setValue('parkingLatitude', null)
+                            setValue('parkingLongitude', null)
+                          }
+                        },
                       })}
                     />
                     <span className="flex items-start gap-3">
@@ -238,8 +259,24 @@ export default function PlaceRequestForm() {
           <CardTitle>2. Localisation</CardTitle>
         </CardHeader>
         <CardContent className="space-y-5">
+          <div className="flex flex-wrap gap-2" role="group" aria-label="Point à placer sur la carte">
+            <Button aria-pressed={mapTarget === 'place'} variant={mapTarget === 'place' ? 'primary' : 'secondary'} onClick={() => setMapTarget('place')}>
+              <MapPin size={17} aria-hidden="true" /> Lieu
+            </Button>
+            {kind === 'falaise' && (
+              <Button aria-pressed={mapTarget === 'parking'} variant={mapTarget === 'parking' ? 'primary' : 'secondary'} onClick={() => setMapTarget('parking')}>
+                <ParkingCircle size={17} aria-hidden="true" /> Parking
+              </Button>
+            )}
+          </div>
           <div className="overflow-hidden rounded-lg border border-border">
-            <PlaceMap latitude={latitude} longitude={longitude} onChange={handleMapChange} />
+            <PlaceMap
+              latitude={latitude}
+              longitude={longitude}
+              parkingLatitude={parkingLatitude}
+              parkingLongitude={parkingLongitude}
+              onChange={handleMapChange}
+            />
           </div>
           <p className="flex items-center gap-2 text-sm text-muted-foreground" aria-live="polite" role="status"><MapPin size={16} aria-hidden="true" />{locationStatus}</p>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_auto] lg:items-end">
@@ -247,6 +284,26 @@ export default function PlaceRequestForm() {
             <Input label="Longitude" type="number" step="any" error={errors.longitude?.message} {...register('longitude', { valueAsNumber: true })} />
             <Button className="w-full lg:w-auto" variant="secondary" onClick={() => void identifyLocation()}><LocateFixed size={17} aria-hidden="true" /> Identifier ce point</Button>
           </div>
+          {kind === 'falaise' && (
+            <fieldset className="rounded-lg border border-border p-4">
+              <legend className="px-2 text-sm font-bold text-foreground">Point du parking</legend>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_auto] lg:items-end">
+                <Input label="Latitude parking" type="number" step="any" error={errors.parkingLatitude?.message} {...register('parkingLatitude', { setValueAs: (value) => value === '' ? null : Number(value) })} />
+                <Input label="Longitude parking" type="number" step="any" error={errors.parkingLongitude?.message} {...register('parkingLongitude', { setValueAs: (value) => value === '' ? null : Number(value) })} />
+                <Button
+                  className="w-full lg:w-auto"
+                  disabled={parkingLatitude === null && parkingLongitude === null}
+                  variant="ghost"
+                  onClick={() => {
+                    setValue('parkingLatitude', null, { shouldValidate: true })
+                    setValue('parkingLongitude', null, { shouldValidate: true })
+                  }}
+                >
+                  Effacer
+                </Button>
+              </div>
+            </fieldset>
+          )}
           <div className="grid gap-4 md:grid-cols-3">
             <Input label="Commune" error={errors.city?.message} {...register('city')} />
             <Input label="Département" error={errors.department?.message} {...register('department')} />

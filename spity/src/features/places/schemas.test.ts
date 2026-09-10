@@ -20,6 +20,8 @@ const baseRequest = {
   access: '',
   approach: '',
   parking: '',
+  parkingLatitude: null,
+  parkingLongitude: null,
   restrictions: '',
   sourceUrl: '',
   notes: '',
@@ -46,6 +48,11 @@ describe('placeCreationInputSchema', () => {
         'rockType', 'rainExposure', 'sunlight', 'seasons', 'orientations',
       ]))
     }
+  })
+
+  it('keeps the two parking coordinates together', () => {
+    expect(placeCreationInputSchema.safeParse({ ...baseRequest, parkingLatitude: 45.9 }).success).toBe(false)
+    expect(placeCreationInputSchema.safeParse({ ...baseRequest, parkingLatitude: 45.9, parkingLongitude: 4.1 }).success).toBe(true)
   })
 
   it('accepts indoor disciplines and requires an address for a gym', () => {

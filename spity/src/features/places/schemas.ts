@@ -32,6 +32,8 @@ export const placeCreationInputSchema = z.object({
   access: optionalText(500),
   approach: optionalText(255),
   parking: optionalText(255),
+  parkingLatitude: z.number().min(-90, 'Latitude du parking invalide.').max(90, 'Latitude du parking invalide.').nullable(),
+  parkingLongitude: z.number().min(-180, 'Longitude du parking invalide.').max(180, 'Longitude du parking invalide.').nullable(),
   restrictions: optionalText(500),
   sourceUrl: optionalUrl,
   notes: optionalText(1000),
@@ -48,7 +50,20 @@ export const placeCreationInputSchema = z.object({
   if (!value.sunlight) context.addIssue({ code: 'custom', path: ['sunlight'], message: 'Précise l’ensoleillement.' })
   if (!value.seasons.length) context.addIssue({ code: 'custom', path: ['seasons'], message: 'Choisis au moins une saison favorable.' })
   if (!value.orientations.length) context.addIssue({ code: 'custom', path: ['orientations'], message: 'Choisis au moins une orientation.' })
+  if ((value.parkingLatitude === null) !== (value.parkingLongitude === null)) {
+    context.addIssue({ code: 'custom', path: ['parkingLatitude'], message: 'Place complètement le point du parking.' })
+  }
 })
+
+export const placeReviewSchema = z.object({
+  decision: z.enum(['approve', 'reject']),
+  reason: z.string().trim().max(500),
+}).strict().superRefine((value, context) => {
+  if (value.decision === 'reject' && value.reason.length < 8) {
+    context.addIssue({ code: 'custom', path: ['reason'], message: 'Précise le motif du refus (8 caractères minimum).' })
+  }
+})
+export type PlaceReviewInput = z.infer<typeof placeReviewSchema>
 
 export type PlaceCreationInput = z.infer<typeof placeCreationInputSchema>
 

@@ -29,6 +29,8 @@ export const createPlaceRequest = async (authorId: string, input: PlaceCreationI
     access: input.kind === 'falaise' ? nullable(input.access) : null,
     approach: input.kind === 'falaise' ? nullable(input.approach) : null,
     parking: input.kind === 'falaise' ? nullable(input.parking) : null,
+    parkingLatitude: input.kind === 'falaise' ? input.parkingLatitude : null,
+    parkingLongitude: input.kind === 'falaise' ? input.parkingLongitude : null,
     restrictions: input.kind === 'falaise' ? nullable(input.restrictions) : null,
     sourceUrl: nullable(input.sourceUrl),
     notes: nullable(input.notes),

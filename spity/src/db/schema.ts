@@ -151,6 +151,8 @@ export const falaises = mysqlTable('falaises', {
   orientation: mysqlEnum('orientation', ['nord', 'sud', 'est', 'ouest', 'multi']),
   approche: varchar('approche', { length: 255 }),
   parking: varchar('parking', { length: 255 }),
+  parkingLatitude: double('parking_latitude'),
+  parkingLongitude: double('parking_longitude'),
   saison: json('saison').$type<string[]>(),
   status: mysqlEnum('status', ['sec', 'humide', 'attention', 'ferme']),
 })
@@ -182,11 +184,15 @@ export const placeCreationRequests = mysqlTable(
     access: varchar('access', { length: 500 }),
     approach: varchar('approach', { length: 255 }),
     parking: varchar('parking', { length: 255 }),
+    parkingLatitude: double('parking_latitude'),
+    parkingLongitude: double('parking_longitude'),
     restrictions: varchar('restrictions', { length: 500 }),
     sourceUrl: varchar('source_url', { length: 500 }),
     notes: varchar('notes', { length: 1000 }),
     createdAt: timestamp('created_at').defaultNow().notNull(),
     reviewedAt: timestamp('reviewed_at'),
+    reviewedBy: varchar('reviewed_by', { length: 36 }).references(() => users.id, { onDelete: 'set null' }),
+    reviewReason: varchar('review_reason', { length: 500 }),
   },
   (table) => [
     index('place_creation_requests_author_idx').on(table.authorId),
@@ -281,7 +287,7 @@ export const likes = mysqlTable(
 export const adminAuditLogs = mysqlTable('admin_audit_logs', {
   id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
   actorId: varchar('actor_id', { length: 36 }).references(() => users.id, { onDelete: 'set null' }),
-  action: mysqlEnum('action', ['admin_granted', 'user_suspended', 'user_restored', 'post_hidden', 'post_restored']).notNull(),
+  action: mysqlEnum('action', ['admin_granted', 'user_suspended', 'user_restored', 'post_hidden', 'post_restored', 'place_approved', 'place_rejected']).notNull(),
   targetId: varchar('target_id', { length: 36 }).notNull(),
   reason: varchar('reason', { length: 500 }).notNull(),
   createdAt: timestamp('created_at').notNull().defaultNow(),

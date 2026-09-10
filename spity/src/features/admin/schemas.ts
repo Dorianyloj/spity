@@ -1,11 +1,11 @@
 import { z } from 'zod'
 
 export const adminQuerySchema = z.object({
-  view: z.enum(['dashboard', 'accounts', 'posts', 'history']).catch('dashboard'),
+  view: z.enum(['dashboard', 'accounts', 'posts', 'places', 'history']).catch('dashboard'),
   days: z.coerce.number().pipe(z.union([z.literal(7), z.literal(30), z.literal(90)])).catch(30),
   page: z.coerce.number().int().min(1).max(10000).catch(1),
   q: z.string().trim().max(100).catch(''),
-  status: z.enum(['all', 'restricted', 'active']).catch('all'),
+  status: z.enum(['all', 'restricted', 'active', 'pending', 'approved', 'rejected']).catch('all'),
 })
 export type AdminQuery = z.infer<typeof adminQuerySchema>
 
@@ -25,6 +25,8 @@ export const actionLabels = {
   user_restored: 'Compte réactivé',
   post_hidden: 'Publication masquée',
   post_restored: 'Publication restaurée',
+  place_approved: 'Lieu validé',
+  place_rejected: 'Lieu refusé',
 } as const
 
 export function adminHref(query: Partial<AdminQuery>) {

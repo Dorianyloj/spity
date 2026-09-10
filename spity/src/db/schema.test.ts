@@ -62,6 +62,11 @@ describe('database schema', () => {
       'city',
       'department',
       'region',
+      'parkingLatitude',
+      'parkingLongitude',
+      'reviewedBy',
+      'reviewReason',
     ]))
+    expect(Object.keys(getTableColumns(falaises))).toEqual(expect.arrayContaining(['parkingLatitude', 'parkingLongitude']))
   })
 })

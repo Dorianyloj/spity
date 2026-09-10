@@ -272,6 +272,16 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
                   <div>
                     <p className="font-semibold text-foreground">Parking</p>
                     <p className="mt-1 text-muted-foreground">{falaise.parking ?? 'À compléter'}</p>
+                    {falaise.parkingLatitude !== null && falaise.parkingLongitude !== null && (
+                      <a
+                        className="mt-2 inline-block font-semibold text-foreground underline"
+                        href={`https://www.openstreetmap.org/?mlat=${falaise.parkingLatitude}&mlon=${falaise.parkingLongitude}#map=17/${falaise.parkingLatitude}/${falaise.parkingLongitude}`}
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        Voir sur la carte
+                      </a>
+                    )}
                   </div>
                 </div>
                 <div className="flex items-start gap-3 rounded-lg border border-border p-3">
