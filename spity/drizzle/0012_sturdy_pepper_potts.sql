@@ -48,7 +48,7 @@ ALTER TABLE `salles` ADD `region` varchar(255);--> statement-breakpoint
 ALTER TABLE `salles` ADD `restrictions` varchar(500);--> statement-breakpoint
 ALTER TABLE `salles` ADD `source_url` varchar(500);--> statement-breakpoint
 ALTER TABLE `salles` ADD `notes` varchar(1000);--> statement-breakpoint
-ALTER TABLE `place_change_request_photos` ADD CONSTRAINT `place_change_request_photos_request_id_place_change_requests_id_fk` FOREIGN KEY (`request_id`) REFERENCES `place_change_requests`(`id`) ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `place_change_request_photos` ADD CONSTRAINT `place_change_photo_request_fk` FOREIGN KEY (`request_id`) REFERENCES `place_change_requests`(`id`) ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE `place_change_requests` ADD CONSTRAINT `place_change_requests_author_id_users_id_fk` FOREIGN KEY (`author_id`) REFERENCES `users`(`id`) ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE `place_change_requests` ADD CONSTRAINT `place_change_requests_salle_id_salles_id_fk` FOREIGN KEY (`salle_id`) REFERENCES `salles`(`id`) ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE `place_change_requests` ADD CONSTRAINT `place_change_requests_falaise_id_falaises_id_fk` FOREIGN KEY (`falaise_id`) REFERENCES `falaises`(`id`) ON DELETE cascade ON UPDATE no action;--> statement-breakpoint

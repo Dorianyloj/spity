@@ -82,37 +82,50 @@ try {
 
   for (const page of pages) {
     const reportPath = resolve(outputDirectory, `${page.name}.json`)
-    const auditStartedAt = Date.now()
-    const result = spawnSync(
-      process.execPath,
-      [
-        lighthouseCli,
-        `${origin}${page.path}`,
-        '--quiet',
-        '--preset=desktop',
-        '--only-categories=performance,accessibility,best-practices,seo',
-        '--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage',
-        '--output=json',
-        `--output-path=${reportPath}`,
-      ],
-      { encoding: 'utf8' }
-    )
+    let completed = false
 
-    if (result.status !== 0) {
+    for (let attempt = 1; attempt <= 2; attempt += 1) {
+      await rm(reportPath, { force: true })
+      const auditStartedAt = Date.now()
+      const result = spawnSync(
+        process.execPath,
+        [
+          lighthouseCli,
+          `${origin}${page.path}`,
+          '--quiet',
+          '--preset=desktop',
+          '--only-categories=performance,accessibility,best-practices,seo',
+          '--chrome-flags=--headless=new --no-sandbox --disable-dev-shm-usage --disable-gpu',
+          '--output=json',
+          `--output-path=${reportPath}`,
+        ],
+        { encoding: 'utf8' }
+      )
+      if (result.status === 0) {
+        completed = true
+        break
+      }
+
       const output = `${result.stderr}\n${result.stdout}`
       const reportMetadata = await stat(reportPath).catch(() => null)
       const recoverableWindowsCleanupFailure = process.platform === 'win32'
-        && output.includes('Runtime error encountered: EPERM')
+        && output.includes('EPERM')
         && output.includes('Launcher.destroyTmp')
         && reportMetadata
         && reportMetadata.mtimeMs >= auditStartedAt - 1_000
-
-      if (!recoverableWindowsCleanupFailure) {
+      if (recoverableWindowsCleanupFailure) {
+        console.warn(`Lighthouse a produit le rapport ${page.name}, mais Windows a retardé le nettoyage de son profil Chrome temporaire.`)
+        completed = true
+        break
+      }
+      if (attempt === 2 || !output.includes('NO_NAVSTART')) {
         throw new Error(result.stderr || result.stdout || `Lighthouse a échoué pour ${page.path}`)
       }
-
-      console.warn(`Lighthouse a produit le rapport ${page.name}, mais Windows a retardé le nettoyage de son profil Chrome temporaire.`)
+      console.warn(`Lighthouse n’a pas reçu de navigation pour ${page.name} ; nouvelle tentative.`)
+      await new Promise((resolveDelay) => setTimeout(resolveDelay, 1_000))
     }
+
+    if (!completed) throw new Error(`Lighthouse a échoué pour ${page.path}`)
 
     const report = JSON.parse(await readFile(reportPath, 'utf8'))
     const scores = Object.fromEntries(

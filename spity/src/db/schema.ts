@@ -1,6 +1,7 @@
 import {
   boolean,
   double,
+  foreignKey,
   index,
   int,
   json,
@@ -249,10 +250,15 @@ export const placeChangeRequestPhotos = mysqlTable(
   'place_change_request_photos',
   {
     id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
-    requestId: varchar('request_id', { length: 36 }).notNull().references(() => placeChangeRequests.id, { onDelete: 'cascade' }),
+    requestId: varchar('request_id', { length: 36 }).notNull(),
     mediaId: varchar('media_id', { length: 36 }).notNull(),
   },
   (table) => [
+    foreignKey({
+      columns: [table.requestId],
+      foreignColumns: [placeChangeRequests.id],
+      name: 'place_change_photo_request_fk',
+    }).onDelete('cascade'),
     uniqueIndex('place_change_request_photo_unique').on(table.requestId, table.mediaId),
     index('place_change_request_photo_media_idx').on(table.mediaId),
   ]

@@ -1222,8 +1222,8 @@
         }
       },
       "foreignKeys": {
-        "place_change_request_photos_request_id_place_change_requests_id_fk": {
-          "name": "place_change_request_photos_request_id_place_change_requests_id_fk",
+        "place_change_photo_request_fk": {
+          "name": "place_change_photo_request_fk",
           "tableFrom": "place_change_request_photos",
           "tableTo": "place_change_requests",
           "columnsFrom": [
