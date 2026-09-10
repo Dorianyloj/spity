@@ -2,6 +2,10 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import PlacesDirectory from './places-directory'
 
+jest.mock('next/dynamic', () => () => function MockPlacesMap() {
+  return <div data-testid="places-map" />
+})
+
 const salles = [{
   id: 'salle-1',
   nom: 'Arkose Lyon',
@@ -9,30 +13,21 @@ const salles = [{
   adresse: '15 rue du Bloc',
   disciplines: ['bloc', 'voie'],
   photoUrl: null,
-  horaires: { semaine: '10h-23h' },
-  tarifs: { entree: '18 EUR' },
-  services: ['Parking', 'Douche'],
-  siteWeb: null,
   latitude: 45.75,
   longitude: 4.85,
   niveauMin: '4a',
   niveauMax: '8a',
-  frequentation: 'moderee' as const,
 }]
 
 const falaises = [{
   id: 'falaise-1',
   nom: 'Curis',
   location: 'Curis-au-Mont-d’Or',
-  acces: 'Sentier balisé',
+  disciplines: ['voie', 'trad'],
   niveaux: ['5c', '6a'],
   photoUrl: null,
   latitude: 45.86,
   longitude: 4.82,
-  orientation: 'sud' as const,
-  approche: '15 minutes',
-  parking: 'Parking mairie',
-  saison: ['printemps', 'automne'],
   status: 'sec' as const,
 }]
 
@@ -49,43 +44,41 @@ const voies = [{
   falaiseId: 'falaise-1',
   nom: 'La directe',
   cotation: '6a',
-  hauteur: 24,
-  degaines: 10,
   secteur: 'Principal',
-  style: 'vertical' as const,
-  status: 'ok' as const,
 }]
 
 describe('PlacesDirectory', () => {
-  it('renders every place type and its route details', () => {
+  it('renders a compact directory and its useful map', () => {
     render(<PlacesDirectory canSuggest salles={salles} falaises={falaises} clubs={clubs} voies={voies} />)
 
     expect(screen.getByRole('heading', { name: 'Arkose Lyon' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Curis' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Club Alpin Lyon' })).toBeInTheDocument()
-    expect(screen.getByText('La directe')).toBeInTheDocument()
-    expect(screen.getByText('3 résultat(s) affiché(s)')).toBeInTheDocument()
+    expect(screen.getByText('1 voie')).toBeInTheDocument()
+    expect(screen.queryByText('La directe')).not.toBeInTheDocument()
+    expect(screen.getByText('3 lieux trouvés')).toBeInTheDocument()
+    expect(screen.getByTestId('places-map')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Ajouter un lieu' })).toHaveAttribute('href', '/app/places/suggest')
   })
 
-  it('filters by text, type and status and exposes empty states', async () => {
+  it('filters accurately and lets the climber reset the exploration', async () => {
     const user = userEvent.setup()
     render(<PlacesDirectory salles={salles} falaises={falaises} clubs={clubs} voies={voies} />)
 
     await user.type(screen.getByRole('searchbox'), 'directe')
     expect(screen.queryByRole('heading', { name: 'Arkose Lyon' })).not.toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Curis' })).toBeInTheDocument()
-    expect(screen.getByText('Aucune salle trouvée')).toBeInTheDocument()
-    expect(screen.getByText('Aucun club trouvé')).toBeInTheDocument()
 
     await user.clear(screen.getByRole('searchbox'))
-    await user.selectOptions(screen.getByLabelText('Type'), 'clubs')
-    expect(screen.getByRole('heading', { name: 'Club Alpin Lyon' })).toBeInTheDocument()
-    expect(screen.getByText('Aucune falaise trouvée')).toBeInTheDocument()
-
-    await user.selectOptions(screen.getByLabelText('Type'), 'all')
-    await user.selectOptions(screen.getByLabelText('État'), 'sec')
+    await user.selectOptions(screen.getByLabelText('Pratique'), 'trad')
     expect(screen.getByRole('heading', { name: 'Curis' })).toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: 'Arkose Lyon' })).not.toBeInTheDocument()
+
+    await user.selectOptions(screen.getByLabelText('Pratique'), 'grande_voie')
+    expect(screen.getByText('Aucun lieu trouvé')).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: 'Réinitialiser' }))
+    expect(screen.getByRole('heading', { name: 'Arkose Lyon' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Club Alpin Lyon' })).toBeInTheDocument()
   })
 })

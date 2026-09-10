@@ -1,5 +1,6 @@
 import { useId, type ReactNode } from 'react'
-import { Filter, Search } from 'lucide-react'
+import { Filter, RotateCcw, Search } from 'lucide-react'
+import Button from './button'
 import { Card, CardContent } from './card'
 import { cn } from '@/lib/class-names'
 
@@ -22,6 +23,9 @@ export interface FilterToolbarProps {
   query: string
   queryLabel?: string
   queryPlaceholder?: string
+  onReset?: () => void
+  resetLabel?: string
+  showReset?: boolean
 }
 
 export default function FilterToolbar({
@@ -31,6 +35,9 @@ export default function FilterToolbar({
   query,
   queryLabel = 'Recherche',
   queryPlaceholder = 'Rechercher...',
+  onReset,
+  resetLabel = 'Réinitialiser',
+  showReset = false,
 }: FilterToolbarProps) {
   const searchId = useId()
 
@@ -74,14 +81,22 @@ export default function FilterToolbar({
           </div>
         </div>
 
-        <div
-          className="mt-4 flex flex-wrap items-center gap-2 border-t border-white/10 pt-4 text-sm text-muted-foreground"
-          role="status"
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          <Filter size={16} aria-hidden="true" />
-          <span>{countLabel}</span>
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-4">
+          <div
+            className="flex items-center gap-2 text-sm text-muted-foreground"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            <Filter size={16} aria-hidden="true" />
+            <span>{countLabel}</span>
+          </div>
+          {showReset && onReset && (
+            <Button variant="ghost" size="sm" onClick={onReset}>
+              <RotateCcw size={15} aria-hidden="true" />
+              {resetLabel}
+            </Button>
+          )}
         </div>
       </CardContent>
     </Card>

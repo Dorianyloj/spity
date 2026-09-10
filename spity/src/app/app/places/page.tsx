@@ -87,6 +87,7 @@ export default async function PlacesPage() {
         }))}
         falaises={falaiseRows.map((falaise) => ({
           ...falaise,
+          disciplines: parseStringArray(falaise.disciplines),
           niveaux: parseStringArray(falaise.niveaux),
           saison: parseStringArray(falaise.saison),
         }))}

@@ -1,11 +1,12 @@
 'use client'
 
-import { Building2, MapPin, Mountain, Plus, Route, SearchX, ShieldCheck, UsersRound } from 'lucide-react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import { Building2, MapPin, Mountain, Plus, SearchX, UsersRound } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import {
-  AppHero,
   Badge,
+  Button,
   Card,
   CardContent,
   CardDescription,
@@ -16,6 +17,17 @@ import {
   MediaHeader,
 } from '@/components/ui'
 import { brandAssets } from '@/lib/brand-assets'
+import { cn } from '@/lib/class-names'
+import type { PlaceMapPoint } from './places-map'
+
+const PlacesMap = dynamic(() => import('./places-map'), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-80 items-center justify-center rounded-lg bg-secondary text-sm text-muted-foreground" role="status">
+      Chargement de la carte…
+    </div>
+  ),
+})
 
 type SallePlace = {
   id: string
@@ -24,30 +36,21 @@ type SallePlace = {
   adresse: string
   disciplines: string[]
   photoUrl: string | null
-  horaires: Record<string, string>
-  tarifs: Record<string, string>
-  services: string[]
-  siteWeb: string | null
   latitude: number | null
   longitude: number | null
   niveauMin: string | null
   niveauMax: string | null
-  frequentation: 'calme' | 'moderee' | 'elevee' | null
 }
 
 type FalaisePlace = {
   id: string
   nom: string
   location: string
-  acces: string | null
+  disciplines: string[]
   niveaux: string[] | null
   photoUrl: string | null
   latitude: number | null
   longitude: number | null
-  orientation: 'nord' | 'sud' | 'est' | 'ouest' | 'multi' | null
-  approche: string | null
-  parking: string | null
-  saison: string[]
   status: 'sec' | 'humide' | 'attention' | 'ferme' | null
 }
 
@@ -64,16 +67,23 @@ type RoutePlace = {
   falaiseId: string
   nom: string
   cotation: string
-  hauteur: number | null
-  degaines: number | null
   secteur: string | null
-  style: 'dalle' | 'devers' | 'vertical' | 'fissure' | 'pilier' | 'mixte' | null
-  status: 'ok' | 'humide' | 'spit_a_verifier' | 'fermee' | null
 }
 
 type PlaceKind = 'all' | 'salles' | 'falaises' | 'clubs'
-type DisciplineFilter = 'all' | 'bloc' | 'voie' | 'trad'
+type DisciplineFilter = 'all' | 'bloc' | 'voie' | 'grande_voie' | 'trad' | 'artif' | 'deep_water_solo' | 'via_ferrata' | 'speed'
 type StatusFilter = 'all' | 'sec' | 'attention'
+
+type DirectoryResult = {
+  details: string[]
+  href: string
+  id: string
+  imageUrl: string
+  kind: 'salle' | 'falaise' | 'club'
+  location: string
+  mapPoint: PlaceMapPoint | null
+  name: string
+}
 
 type PlacesDirectoryProps = {
   canSuggest?: boolean
@@ -83,41 +93,28 @@ type PlacesDirectoryProps = {
   voies: RoutePlace[]
 }
 
+const PAGE_SIZE = 12
+
 const disciplineLabels: Record<string, string> = {
   bloc: 'Bloc',
   voie: 'Voie',
+  grande_voie: 'Grande voie',
   trad: 'Trad',
+  artif: 'Artif',
+  deep_water_solo: 'Deep water solo',
+  via_ferrata: 'Via ferrata',
+  speed: 'Vitesse',
 }
 
 const statusLabels = {
   sec: 'Sec',
   humide: 'Humide',
-  attention: 'Attention',
+  attention: 'À surveiller',
   ferme: 'Fermé',
 } as const
 
-const routeStatusLabels = {
-  ok: 'OK',
-  humide: 'Humide',
-  spit_a_verifier: 'Spit à vérifier',
-  fermee: 'Fermée',
-} as const
-
-const frequentationLabels = {
-  calme: 'Calme',
-  moderee: 'Modérée',
-  elevee: 'Élevée',
-} as const
-
-const seasonLabels: Record<string, string> = {
-  printemps: 'Printemps',
-  ete: 'Été',
-  automne: 'Automne',
-  hiver: 'Hiver',
-}
-
 const filters = [
-  { value: 'all', label: 'Tous' },
+  { value: 'all', label: 'Tous les lieux' },
   { value: 'salles', label: 'Salles' },
   { value: 'falaises', label: 'Falaises' },
   { value: 'clubs', label: 'Clubs' },
@@ -127,383 +124,284 @@ const disciplineFilters = [
   { value: 'all', label: 'Toutes pratiques' },
   { value: 'bloc', label: 'Bloc' },
   { value: 'voie', label: 'Voie' },
+  { value: 'grande_voie', label: 'Grande voie' },
   { value: 'trad', label: 'Trad' },
+  { value: 'artif', label: 'Artif' },
+  { value: 'deep_water_solo', label: 'Deep water solo' },
+  { value: 'via_ferrata', label: 'Via ferrata' },
+  { value: 'speed', label: 'Vitesse' },
 ] satisfies Array<{ value: DisciplineFilter; label: string }>
 
 const statusFilters = [
-  { value: 'all', label: 'Tous statuts' },
-  { value: 'sec', label: 'Falaises sèches' },
-  { value: 'attention', label: 'Points à surveiller' },
+  { value: 'all', label: 'Toutes conditions' },
+  { value: 'sec', label: 'Falaise sèche' },
+  { value: 'attention', label: 'À surveiller ou fermée' },
 ] satisfies Array<{ value: StatusFilter; label: string }>
 
-const placeCards = [
-  {
-    label: 'Salles',
-    description: 'Bloc, voie et spots indoor proches.',
-    icon: Building2,
-    image: brandAssets.indoor,
-  },
-  {
-    label: 'Falaises',
-    description: 'Accès, niveaux et voies collaboratives.',
-    icon: Mountain,
-    image: brandAssets.crag,
-  },
-  {
-    label: 'Clubs',
-    description: 'Sorties, initiations et communauté locale.',
-    icon: UsersRound,
-    image: brandAssets.heroSunset,
-  },
-]
+const getRoutesForCrag = (voies: RoutePlace[], falaiseId: string) => voies.filter((voie) => voie.falaiseId === falaiseId)
 
-const getRoutesForCrag = (voies: RoutePlace[], falaiseId: string) => {
-  return voies.filter((voie) => voie.falaiseId === falaiseId)
-}
+const includesQuery = (query: string, values: Array<string | null | undefined>) =>
+  query.length === 0 || values.filter((value): value is string => Boolean(value)).join(' ').toLowerCase().includes(query)
 
 export default function PlacesDirectory({ canSuggest = false, salles, falaises, clubs, voies }: PlacesDirectoryProps) {
   const [query, setQuery] = useState('')
   const [placeKind, setPlaceKind] = useState<PlaceKind>('all')
   const [discipline, setDiscipline] = useState<DisciplineFilter>('all')
   const [status, setStatus] = useState<StatusFilter>('all')
-  const totalPlaces = salles.length + falaises.length + clubs.length
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
+  const [selectedPlaceId, setSelectedPlaceId] = useState<string | null>(null)
   const normalizedQuery = query.trim().toLowerCase()
-  const filteredSalles = useMemo(() => {
-    return salles.filter((salle) => {
-      const matchesKind = placeKind === 'all' || placeKind === 'salles'
-      const matchesDiscipline = discipline === 'all' || salle.disciplines.includes(discipline)
-      const matchesStatus = status === 'all'
-      const matchesQuery =
-        normalizedQuery.length === 0 ||
-        [salle.nom, salle.location, salle.adresse, ...salle.disciplines, ...salle.services]
-          .join(' ')
-          .toLowerCase()
-          .includes(normalizedQuery)
 
-      return matchesKind && matchesDiscipline && matchesStatus && matchesQuery
-    })
-  }, [discipline, normalizedQuery, placeKind, salles, status])
-  const filteredFalaises = useMemo(() => {
-    return falaises.filter((falaise) => {
-      const routes = getRoutesForCrag(voies, falaise.id)
-      const matchesKind = placeKind === 'all' || placeKind === 'falaises'
-      const matchesDiscipline = discipline === 'all' || discipline === 'voie' || discipline === 'trad'
-      const matchesStatus =
-        status === 'all' ||
-        (status === 'sec' && falaise.status === 'sec') ||
-        (status === 'attention' && ['attention', 'ferme'].includes(falaise.status ?? ''))
-      const matchesQuery =
-        normalizedQuery.length === 0 ||
-        [
-          falaise.nom,
-          falaise.location,
-          falaise.acces ?? '',
-          falaise.approche ?? '',
-          falaise.parking ?? '',
-          ...(falaise.niveaux ?? []),
-          ...falaise.saison,
-          ...routes.map((route) => `${route.nom} ${route.cotation} ${route.secteur ?? ''}`),
-        ]
-          .join(' ')
-          .toLowerCase()
-          .includes(normalizedQuery)
+  const filteredSalles = useMemo(
+    () =>
+      salles.filter((salle) =>
+        (placeKind === 'all' || placeKind === 'salles') &&
+        (discipline === 'all' || salle.disciplines.includes(discipline)) &&
+        status === 'all' &&
+        includesQuery(normalizedQuery, [salle.nom, salle.location, salle.adresse, ...salle.disciplines])
+      ),
+    [discipline, normalizedQuery, placeKind, salles, status]
+  )
 
-      return matchesKind && matchesDiscipline && matchesStatus && matchesQuery
-    })
-  }, [discipline, falaises, normalizedQuery, placeKind, status, voies])
-  const filteredClubs = useMemo(() => {
-    return clubs.filter((club) => {
-      const matchesKind = placeKind === 'all' || placeKind === 'clubs'
-      const matchesDiscipline = discipline === 'all'
-      const matchesStatus = status === 'all'
-      const matchesQuery =
-        normalizedQuery.length === 0 ||
-        [club.nom, club.location ?? '', club.bio ?? '', club.ffmeNum ?? '']
-          .join(' ')
-          .toLowerCase()
-          .includes(normalizedQuery)
+  const filteredFalaises = useMemo(
+    () =>
+      falaises.filter((falaise) => {
+        const routes = getRoutesForCrag(voies, falaise.id)
+        const matchesStatus =
+          status === 'all' ||
+          (status === 'sec' && falaise.status === 'sec') ||
+          (status === 'attention' && ['attention', 'ferme'].includes(falaise.status ?? ''))
 
-      return matchesKind && matchesDiscipline && matchesStatus && matchesQuery
-    })
-  }, [clubs, discipline, normalizedQuery, placeKind, status])
-  const visiblePlaces = filteredSalles.length + filteredFalaises.length + filteredClubs.length
+        return (
+          (placeKind === 'all' || placeKind === 'falaises') &&
+          (discipline === 'all' || falaise.disciplines.includes(discipline)) &&
+          matchesStatus &&
+          includesQuery(normalizedQuery, [
+            falaise.nom,
+            falaise.location,
+            ...falaise.disciplines,
+            ...(falaise.niveaux ?? []),
+            ...routes.flatMap((route) => [route.nom, route.cotation, route.secteur]),
+          ])
+        )
+      }),
+    [discipline, falaises, normalizedQuery, placeKind, status, voies]
+  )
+
+  const filteredClubs = useMemo(
+    () =>
+      clubs.filter(
+        (club) =>
+          (placeKind === 'all' || placeKind === 'clubs') &&
+          discipline === 'all' &&
+          status === 'all' &&
+          includesQuery(normalizedQuery, [club.nom, club.location, club.bio, club.ffmeNum])
+      ),
+    [clubs, discipline, normalizedQuery, placeKind, status]
+  )
+
+  const results = useMemo<DirectoryResult[]>(
+    () => [
+      ...filteredSalles.map((salle) => ({
+        id: salle.id,
+        kind: 'salle' as const,
+        name: salle.nom,
+        location: salle.location,
+        href: `/app/places/salles/${salle.id}`,
+        imageUrl: salle.photoUrl ?? brandAssets.indoor,
+        details: [
+          salle.disciplines.slice(0, 2).map((value) => disciplineLabels[value] ?? value).join(' · '),
+          salle.niveauMin && salle.niveauMax ? `${salle.niveauMin} – ${salle.niveauMax}` : '',
+        ].filter(Boolean),
+        mapPoint:
+          salle.latitude !== null && salle.longitude !== null
+            ? { id: salle.id, kind: 'salle' as const, name: salle.nom, location: salle.location, href: `/app/places/salles/${salle.id}`, latitude: salle.latitude, longitude: salle.longitude }
+            : null,
+      })),
+      ...filteredFalaises.map((falaise) => {
+        const routes = getRoutesForCrag(voies, falaise.id)
+
+        return {
+          id: falaise.id,
+          kind: 'falaise' as const,
+          name: falaise.nom,
+          location: falaise.location,
+          href: `/app/places/falaises/${falaise.id}`,
+          imageUrl: falaise.photoUrl ?? brandAssets.crag,
+          details: [
+            falaise.disciplines.slice(0, 2).map((value) => disciplineLabels[value] ?? value).join(' · '),
+            routes.length > 0 ? `${routes.length} voie${routes.length > 1 ? 's' : ''}` : '',
+            falaise.status ? statusLabels[falaise.status] : '',
+          ].filter(Boolean),
+          mapPoint:
+            falaise.latitude !== null && falaise.longitude !== null
+              ? { id: falaise.id, kind: 'falaise' as const, name: falaise.nom, location: falaise.location, href: `/app/places/falaises/${falaise.id}`, latitude: falaise.latitude, longitude: falaise.longitude }
+              : null,
+        }
+      }),
+      ...filteredClubs.map((club) => ({
+        id: club.id,
+        kind: 'club' as const,
+        name: club.nom,
+        location: club.location ?? 'Localisation à compléter',
+        href: `/app/places/clubs/${club.id}`,
+        imageUrl: brandAssets.heroSunset,
+        details: [club.ffmeNum ?? 'Club local'],
+        mapPoint: null,
+      })),
+    ],
+    [filteredClubs, filteredFalaises, filteredSalles, voies]
+  )
+
+  const displayedResults = results.slice(0, visibleCount)
+  const mapPoints = results.flatMap((result) => (result.mapPoint ? [result.mapPoint] : []))
+  const hasActiveFilters = query.length > 0 || placeKind !== 'all' || discipline !== 'all' || status !== 'all'
+
+  const resetFilters = () => {
+    setQuery('')
+    setPlaceKind('all')
+    setDiscipline('all')
+    setStatus('all')
+    setVisibleCount(PAGE_SIZE)
+    setSelectedPlaceId(null)
+  }
+
+  const changeQuery = (value: string) => {
+    setQuery(value)
+    setVisibleCount(PAGE_SIZE)
+  }
+
+  const changePlaceKind = (value: PlaceKind) => {
+    setPlaceKind(value)
+    setVisibleCount(PAGE_SIZE)
+  }
+
+  const changeDiscipline = (value: DisciplineFilter) => {
+    setDiscipline(value)
+    setVisibleCount(PAGE_SIZE)
+  }
+
+  const changeStatus = (value: StatusFilter) => {
+    setStatus(value)
+    setVisibleCount(PAGE_SIZE)
+  }
+
+  const selectMapPoint = (placeId: string) => {
+    const placeIndex = results.findIndex((result) => result.id === placeId)
+
+    if (placeIndex >= visibleCount) {
+      setVisibleCount(Math.ceil((placeIndex + 1) / PAGE_SIZE) * PAGE_SIZE)
+    }
+
+    setSelectedPlaceId(placeId)
+  }
 
   return (
-    <div className="space-y-7">
-      <AppHero
-        backgroundImage={brandAssets.crag}
-        stats={[
-          { label: 'lieux', value: totalPlaces },
-          { label: 'voies', value: voies.length },
-          { label: 'clubs', value: clubs.length },
-        ]}
-        title="Lieux d’escalade"
-      >
+    <div className="space-y-6">
+      <header className="flex flex-col gap-4 border-b border-border pb-6 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-sm font-semibold text-primary">Explorer</p>
+          <h1 className="mt-1 text-balance text-3xl font-bold text-foreground sm:text-4xl">Lieux d’escalade</h1>
+          <p className="mt-2 max-w-2xl text-pretty text-sm text-muted-foreground">Trouve un spot, vérifie les conditions, puis ouvre la fiche quand tu veux les détails.</p>
+        </div>
         {canSuggest && (
-          <Link
-            className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-primary-foreground hover:bg-[#c8ef4e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-            href="/app/places/suggest"
-          >
+          <Link className="spity-btn spity-btn--primary shrink-0" href="/app/places/suggest">
             <Plus size={18} aria-hidden="true" />
             Ajouter un lieu
           </Link>
         )}
-      </AppHero>
-
-      <section className="grid gap-4 md:grid-cols-3">
-        {placeCards.map((placeCard) => {
-          const Icon = placeCard.icon
-
-          return (
-            <Card key={placeCard.label} hover={false} className="overflow-hidden">
-              <MediaHeader imageUrl={placeCard.image} />
-              <CardHeader>
-                <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                  <Icon size={22} />
-                </div>
-                <CardTitle>{placeCard.label}</CardTitle>
-                <CardDescription>{placeCard.description}</CardDescription>
-              </CardHeader>
-            </Card>
-          )
-        })}
-      </section>
+      </header>
 
       <FilterToolbar
-        countLabel={`${visiblePlaces} résultat(s) affiché(s)`}
+        countLabel={`${results.length} lieu${results.length > 1 ? 'x' : ''} trouvé${results.length > 1 ? 's' : ''}`}
         filters={[
-          {
-            label: 'Type',
-            options: filters,
-            value: placeKind,
-            onChange: (value) => setPlaceKind(value as PlaceKind),
-          },
-          {
-            label: 'Discipline',
-            options: disciplineFilters,
-            value: discipline,
-            onChange: (value) => setDiscipline(value as DisciplineFilter),
-          },
-          {
-            label: 'État',
-            options: statusFilters,
-            value: status,
-            onChange: (value) => setStatus(value as StatusFilter),
-          },
+          { label: 'Type', options: filters, value: placeKind, onChange: (value) => changePlaceKind(value as PlaceKind) },
+          { label: 'Pratique', options: disciplineFilters, value: discipline, onChange: (value) => changeDiscipline(value as DisciplineFilter) },
+          { label: 'Conditions', options: statusFilters, value: status, onChange: (value) => changeStatus(value as StatusFilter) },
         ]}
         query={query}
-        queryPlaceholder="Nom, ville, voie, service..."
-        onQueryChange={setQuery}
+        queryPlaceholder="Nom, ville ou voie…"
+        onQueryChange={changeQuery}
+        onReset={resetFilters}
+        showReset={hasActiveFilters}
       />
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_380px]">
-        <section className="space-y-6">
-          <Card hover={false}>
-            <CardHeader>
-              <CardTitle>Salles</CardTitle>
-              <CardDescription>Les lieux indoor disponibles dans le répertoire.</CardDescription>
-            </CardHeader>
-            <CardContent className="grid gap-3 md:grid-cols-2">
-              {filteredSalles.map((salle) => (
-                <article key={salle.id} className="overflow-hidden rounded-lg border border-border bg-white/[0.03]">
-                  <MediaHeader imageUrl={salle.photoUrl ?? brandAssets.indoor} />
-                  <div className="p-4">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="font-bold text-foreground">{salle.nom}</h3>
-                      <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
-                        <MapPin size={15} />
-                        {salle.location}
-                      </p>
-                    </div>
-                    <Badge variant="primary">Salle</Badge>
-                  </div>
-                  <p className="mt-3 text-sm text-muted-foreground">{salle.adresse}</p>
-                  <div className="mt-3 grid gap-2 text-sm text-muted-foreground sm:grid-cols-2">
-                    <span>Horaires : {salle.horaires.semaine ?? 'À compléter'}</span>
-                    <span>Entrée : {salle.tarifs.entree ?? 'À compléter'}</span>
-                    <span>Niveaux : {salle.niveauMin ?? '4a'} → {salle.niveauMax ?? '8a'}</span>
-                    <span>Fréquentation : {salle.frequentation ? frequentationLabels[salle.frequentation] : 'À préciser'}</span>
-                  </div>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {salle.disciplines.map((discipline) => (
-                      <Badge key={discipline} variant="secondary">
-                        {disciplineLabels[discipline] ?? discipline}
-                      </Badge>
-                    ))}
-                    {salle.services.slice(0, 4).map((service) => (
-                      <Badge key={service} variant="secondary">
-                        {service}
-                      </Badge>
-                    ))}
-                  </div>
-                  <Link
-                    href={`/app/places/salles/${salle.id}`}
-                    className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-colors hover:bg-[#5f8f50] hover:text-white"
-                  >
-                    Voir la fiche salle
-                  </Link>
-                  </div>
-                </article>
-              ))}
-              {filteredSalles.length === 0 && (
-                <EmptyState
-                  className="md:col-span-2"
-                  icon={SearchX}
-                  title="Aucune salle trouvée"
-                  description="Aucune salle ne correspond aux filtres actifs."
-                />
-              )}
-            </CardContent>
-          </Card>
+      <div className="grid items-start gap-6 xl:grid-cols-[minmax(0,1fr)_23rem]">
+        <section aria-labelledby="places-results-heading">
+          <div className="mb-4 flex items-center justify-between gap-4">
+            <h2 id="places-results-heading" className="text-balance text-xl font-bold text-foreground">Résultats</h2>
+            {results.length > 0 && <span className="text-sm tabular-nums text-muted-foreground">{Math.min(displayedResults.length, results.length)} / {results.length}</span>}
+          </div>
 
-          <Card hover={false}>
-            <CardHeader>
-              <CardTitle>Falaises</CardTitle>
-              <CardDescription>Sites naturels et voies associées.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {filteredFalaises.map((falaise) => {
-                const routes = getRoutesForCrag(voies, falaise.id)
+          {displayedResults.length > 0 ? (
+            <ul className="space-y-3">
+              {displayedResults.map((result) => {
+                const Icon = result.kind === 'salle' ? Building2 : result.kind === 'falaise' ? Mountain : UsersRound
+                const isSelected = result.id === selectedPlaceId
 
                 return (
-                  <article key={falaise.id} className="overflow-hidden rounded-lg border border-border bg-white/[0.03]">
-                    <MediaHeader className="h-36" imageUrl={falaise.photoUrl ?? brandAssets.crag} />
-                    <div className="p-4">
-                    <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                      <div>
-                        <div className="flex flex-wrap items-center gap-2">
-                          <h3 className="font-bold text-foreground">{falaise.nom}</h3>
-                          <Badge variant="primary">Falaise</Badge>
-                        </div>
-                        <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
-                          <MapPin size={15} />
-                          {falaise.location}
-                        </p>
-                        <p className="mt-3 text-sm text-muted-foreground">
-                          {falaise.acces ?? 'Accès à compléter par la communauté.'}
-                        </p>
-                        <div className="mt-3 grid gap-2 text-sm text-muted-foreground sm:grid-cols-2">
-                          <span>Orientation : {falaise.orientation ?? 'À préciser'}</span>
-                          <span>Approche : {falaise.approche ?? 'À compléter'}</span>
-                          <span>Parking : {falaise.parking ?? 'À compléter'}</span>
-                          <span>État : {falaise.status ? statusLabels[falaise.status] : 'À confirmer'}</span>
-                        </div>
-                      </div>
-                      <div className="flex shrink-0 flex-wrap gap-2 md:max-w-52 md:justify-end">
-                        {(falaise.niveaux ?? []).map((niveau) => (
-                          <Badge key={niveau} variant="secondary">
-                            {niveau}
-                          </Badge>
-                        ))}
-                        {falaise.saison.map((season) => (
-                          <Badge key={season} variant="secondary">
-                            {seasonLabels[season] ?? season}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-
-                    {routes.length > 0 && (
-                      <div className="mt-4 grid gap-2 md:grid-cols-3">
-                        {routes.map((route) => (
-                          <div key={route.id} className="rounded-lg border border-border bg-secondary/60 p-3">
-                            <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                              <Route size={15} className="text-primary" />
-                              {route.nom}
-                            </div>
-                            <p className="mt-1 text-sm text-muted-foreground">Cotation {route.cotation}</p>
-                            <p className="mt-1 text-xs text-muted-foreground">
-                              {route.secteur ?? 'Secteur à préciser'} · {route.hauteur ?? '?'} m · {route.status ? routeStatusLabels[route.status] : 'État à confirmer'}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                  <li key={`${result.kind}-${result.id}`}>
                     <Link
-                      href={`/app/places/falaises/${falaise.id}`}
-                      className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-colors hover:bg-[#5f8f50] hover:text-white"
+                      href={result.href}
+                      className={cn(
+                        'group flex overflow-hidden rounded-lg border bg-card shadow-sm outline-none transition-colors hover:border-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+                        isSelected ? 'border-primary' : 'border-border'
+                      )}
                     >
-                      Voir la fiche falaise
+                      <MediaHeader className="size-24 shrink-0 sm:size-28" imageUrl={result.imageUrl} />
+                      <div className="min-w-0 flex-1 p-4">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="min-w-0">
+                            <h3 className="truncate text-base font-bold text-foreground">{result.name}</h3>
+                            <p className="mt-1 flex items-center gap-1.5 truncate text-sm text-muted-foreground"><MapPin size={15} aria-hidden="true" />{result.location}</p>
+                          </div>
+                          <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-secondary text-foreground" aria-hidden="true">
+                            <Icon size={18} aria-hidden="true" />
+                          </span>
+                        </div>
+                        {result.details.length > 0 && (
+                          <div className="mt-3 flex flex-wrap gap-2">
+                            {result.details.slice(0, 3).map((detail) => <Badge key={detail} variant="secondary">{detail}</Badge>)}
+                          </div>
+                        )}
+                      </div>
                     </Link>
-                    </div>
-                  </article>
+                  </li>
                 )
               })}
-              {filteredFalaises.length === 0 && (
-                <EmptyState
-                  icon={SearchX}
-                  title="Aucune falaise trouvée"
-                  description="Aucune falaise ne correspond aux filtres actifs."
-                />
-              )}
-            </CardContent>
-          </Card>
+            </ul>
+          ) : (
+            <EmptyState
+              icon={SearchX}
+              title="Aucun lieu trouvé"
+              description={hasActiveFilters ? 'Essaie avec moins de filtres ou réinitialise la recherche.' : 'Aucun lieu n’est encore publié.'}
+            />
+          )}
+
+          {displayedResults.length < results.length && (
+            <div className="mt-5 flex justify-center">
+              <Button variant="secondary" onClick={() => setVisibleCount((current) => current + PAGE_SIZE)}>
+                Afficher {Math.min(PAGE_SIZE, results.length - displayedResults.length)} lieu{results.length - displayedResults.length > 1 ? 'x' : ''} de plus
+              </Button>
+            </div>
+          )}
         </section>
 
-        <aside className="space-y-6">
+        <aside className="xl:sticky xl:top-6" aria-labelledby="places-map-heading">
           <Card hover={false}>
             <CardHeader>
-              <CardTitle>Carte à venir</CardTitle>
-              <CardDescription>Préparation du futur affichage Mapbox ou Leaflet.</CardDescription>
+              <CardTitle id="places-map-heading">Carte</CardTitle>
+              <CardDescription>{mapPoints.length > 0 ? 'Sélectionne un point pour le surligner dans la liste.' : 'Aucun des résultats ne possède encore de position.'}</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="relative min-h-[280px] overflow-hidden rounded-lg border border-border bg-[#173236]">
-                <div className="absolute inset-0 topo-lines opacity-80" />
-                {[
-                  { label: 'Salle', x: '22%', y: '28%' },
-                  { label: 'Falaise', x: '64%', y: '42%' },
-                  { label: 'Club', x: '44%', y: '68%' },
-                ].map((pin) => (
-                  <div
-                    key={pin.label}
-                    className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full bg-primary px-3 py-1.5 text-xs font-bold text-primary-foreground shadow-lg shadow-black/30"
-                    style={{ left: pin.x, top: pin.y }}
-                  >
-                    <MapPin size={14} />
-                    {pin.label}
-                  </div>
-                ))}
+              <div className="overflow-hidden rounded-lg border border-border">
+                {mapPoints.length > 0 ? <PlacesMap places={mapPoints} selectedPlaceId={selectedPlaceId} onSelect={selectMapPoint} /> : <div className="flex h-80 items-center justify-center bg-secondary px-6 text-center text-pretty text-sm text-muted-foreground">Ajoute une position sur la fiche d’un lieu pour l’afficher ici.</div>}
               </div>
-            </CardContent>
-          </Card>
-
-          <Card hover={false}>
-            <CardHeader>
-              <CardTitle>Clubs</CardTitle>
-              <CardDescription>Structures locales prêtes pour les événements.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {filteredClubs.map((club) => (
-                <article key={club.id} className="rounded-lg border border-border bg-white/[0.03] p-4">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <h3 className="font-bold text-foreground">{club.nom}</h3>
-                      <p className="mt-1 text-sm text-muted-foreground">{club.location ?? 'Localisation à compléter'}</p>
-                    </div>
-                    <ShieldCheck className="shrink-0 text-primary" size={20} />
-                  </div>
-                  <p className="mt-3 text-sm text-muted-foreground">
-                    {club.bio ?? 'Présentation club à compléter.'}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <Badge variant="primary">Club</Badge>
-                    {club.ffmeNum && <Badge variant="secondary">{club.ffmeNum}</Badge>}
-                  </div>
-                  <Link
-                    href={`/app/places/clubs/${club.id}`}
-                    className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-colors hover:bg-[#5f8f50] hover:text-white"
-                  >
-                    Voir la fiche club
-                  </Link>
-                </article>
-              ))}
-              {filteredClubs.length === 0 && (
-                <EmptyState
-                  icon={SearchX}
-                  title="Aucun club trouvé"
-                  description="Aucun club ne correspond aux filtres actifs."
-                />
+              {mapPoints.length > 0 && (
+                <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground">
+                  <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-[#173236]" aria-hidden="true" />Salle</span>
+                  <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-primary" aria-hidden="true" />Falaise</span>
+                </div>
               )}
             </CardContent>
           </Card>
