@@ -114,6 +114,12 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Restore Chromium for browser checks
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('spity/package-lock.json') }}
+
       - name: Install Chromium for authenticated accessibility
         run: |
           npx playwright install --with-deps chromium
@@ -244,6 +250,12 @@ jobs:
 
       - name: Install locked dependencies
         run: npm ci
+
+      - name: Restore Chromium for acceptance checks
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('spity/package-lock.json') }}
 
       - name: Install Chromium
         run: npx playwright install --with-deps chromium

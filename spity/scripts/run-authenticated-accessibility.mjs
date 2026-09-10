@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { randomUUID } from 'node:crypto'
 import { spawn } from 'node:child_process'
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
+import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { setTimeout as delay } from 'node:timers/promises'
 import mysql from 'mysql2/promise'
@@ -13,6 +13,9 @@ const databaseUrl = process.env.DATABASE_URL
 const outputDirectory = resolve('.accessibility')
 const lighthouseCli = resolve('node_modules/lighthouse/cli/index.js')
 const nextBinary = resolve('node_modules/next/dist/bin/next')
+const standaloneDirectory = resolve('.next/standalone')
+const standaloneServer = resolve(standaloneDirectory, 'server.js')
+const useProductionServer = Boolean(process.env.CI)
 const runId = randomUUID().slice(0, 8)
 const password = 'Accessibility2026!'
 const emails = {
@@ -307,31 +310,54 @@ const auditPage = async (page) => {
     ? ['--screenEmulation.width=360', '--screenEmulation.height=800', '--screenEmulation.deviceScaleFactor=1']
     : ['--preset=desktop']
 
-  try {
-    await runCommand(process.execPath, [
-      lighthouseCli,
-      `${origin}${page.path}`,
-      '--quiet',
-      ...viewportArguments,
-      '--only-categories=accessibility',
-      '--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage',
-      `--extra-headers=${extraHeaders}`,
-      '--output=json',
-      `--output-path=${reportPath}`,
-    ])
-  } catch (error) {
-    // Chrome Launcher can fail while removing its temporary profile on Windows
-    // after Lighthouse has already written a complete report.
+  for (let attempt = 1; attempt <= 2; attempt += 1) {
+    await rm(reportPath, { force: true })
     try {
-      await readFile(reportPath, 'utf8')
-    } catch {
-      throw error
+      await runCommand(process.execPath, [
+        lighthouseCli,
+        `${origin}${page.path}`,
+        '--quiet',
+        ...viewportArguments,
+        '--only-categories=accessibility',
+        '--chrome-flags=--headless=new --no-sandbox --disable-dev-shm-usage --disable-gpu',
+        `--extra-headers=${extraHeaders}`,
+        '--output=json',
+        `--output-path=${reportPath}`,
+      ])
+    } catch (error) {
+      // Chrome Launcher can fail after it has written a complete report, and
+      // transient trace starts are worth retrying once before failing CI.
+      try {
+        const report = JSON.parse(await readFile(reportPath, 'utf8'))
+        return report.categories.accessibility.score
+      } catch {
+        if (attempt === 2 || !String(error).includes('NO_NAVSTART')) throw error
+        await delay(1_000)
+        continue
+      }
+    }
+
+    const report = JSON.parse(await readFile(reportPath, 'utf8'))
+    return report.categories.accessibility.score
+  }
+
+  throw new Error(`Lighthouse n’a produit aucun rapport pour ${page.path}`)
+}
+
+const auditPages = async (pages, concurrency = 2) => {
+  const scores = {}
+  let index = 0
+
+  const worker = async () => {
+    while (index < pages.length) {
+      const page = pages[index]
+      index += 1
+      scores[page.name] = await auditPage(page)
     }
   }
 
-  const report = JSON.parse(await readFile(reportPath, 'utf8'))
-
-  return report.categories.accessibility.score
+  await Promise.all(Array.from({ length: Math.min(concurrency, pages.length) }, worker))
+  return scores
 }
 
 assert.ok(databaseUrl, 'DATABASE_URL est requis pour l’audit authentifié')
@@ -339,11 +365,20 @@ await rm(outputDirectory, { recursive: true, force: true })
 await mkdir(outputDirectory, { recursive: true })
 await cleanupDatabase()
 
-server = spawn(process.execPath, [nextBinary, 'dev', '--hostname', '127.0.0.1', '--port', String(port)], {
-  cwd: resolve('.'),
+if (useProductionServer) {
+  await cp(resolve('public'), resolve(standaloneDirectory, 'public'), { recursive: true, force: true })
+  await mkdir(resolve(standaloneDirectory, '.next'), { recursive: true })
+  await cp(resolve('.next/static'), resolve(standaloneDirectory, '.next/static'), { recursive: true, force: true })
+}
+
+server = spawn(process.execPath, useProductionServer
+  ? [standaloneServer]
+  : [nextBinary, 'dev', '--hostname', '127.0.0.1', '--port', String(port)], {
+  cwd: useProductionServer ? standaloneDirectory : resolve('.'),
   env: {
     ...process.env,
     NEXT_TELEMETRY_DISABLED: '1',
+    ...(useProductionServer ? { NODE_ENV: 'production', HOSTNAME: '127.0.0.1', PORT: String(port) } : {}),
   },
   stdio: ['ignore', 'pipe', 'pipe'],
 })
@@ -366,11 +401,7 @@ try {
     { name: 'dashboard-grimpeur-mobile', path: '/app', cookie: climberCookie, mobile: true },
     { name: 'profil-grimpeur-mobile', path: '/profile/me', cookie: climberCookie, mobile: true },
   ]
-  const scores = {}
-
-  for (const page of pages) {
-    scores[page.name] = await auditPage(page)
-  }
+  const scores = await auditPages(pages)
 
   const failures = Object.entries(scores)
     .filter(([, score]) => score !== 1)
