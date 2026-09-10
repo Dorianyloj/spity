@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Badge, Button, Input } from '@/components/ui'
 import { disciplineLabels, orientationLabels, rockTypeLabels, seasonLabels } from '@/features/places/schemas'
-import { listAdminAccounts, listAdminHistory, listAdminPlaceRequests, listAdminPosts, PAGE_SIZE } from '../lib/repository'
+import { listAdminAccounts, listAdminHistory, listAdminPlaceChangeRequests, listAdminPlaceRequests, listAdminPosts, PAGE_SIZE } from '../lib/repository'
 import { actionLabels, adminHref, type AdminQuery } from '../schemas'
 import { dateTime, number, panelClass } from './dashboard'
 import ModerationButton from './moderation-button'
@@ -57,6 +57,19 @@ const storedArray = (value: unknown) => {
 
 const listLabels = (value: unknown, labels: Record<string, string>) => storedArray(value).map((item) => labels[item] ?? item).join(', ')
 
+const storedObject = (value: unknown) => {
+  if (value && typeof value === 'object' && !Array.isArray(value)) return value as Record<string, unknown>
+  if (typeof value !== 'string') return {}
+  try {
+    const parsed: unknown = JSON.parse(value)
+    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed as Record<string, unknown> : {}
+  } catch {
+    return {}
+  }
+}
+
+const textValue = (value: unknown, fallback = 'Non renseigné') => typeof value === 'string' && value ? value : fallback
+
 export default async function AdminManagement({ query }: { query: AdminQuery }) {
   if (query.view === 'accounts') {
     const data = await listAdminAccounts(query)
@@ -67,7 +80,7 @@ export default async function AdminManagement({ query }: { query: AdminQuery }) 
     return <section className={panelClass}><h2 className="text-xl font-bold">Publications</h2><p className="mt-2 text-sm text-muted-foreground">Les publications masquées sont retirées du fil et des profils publics. Leurs données sont conservées pour permettre une restauration.</p><Filters query={query} /><div className="space-y-3">{data.rows.map((post) => <article key={post.id} className="rounded-lg border border-border p-4"><div className="flex flex-wrap items-start justify-between gap-4"><div className="min-w-0"><h3 className="break-all font-semibold">{post.email}</h3><p className="mt-1 text-xs text-muted-foreground">{dateTime(post.createdAt)} · {post.isHidden ? 'Masquée' : 'Visible'}</p></div><ModerationButton kind="posts" id={post.id} restricted={post.isHidden} label={`Publication de ${post.email}`} /></div><p className="mt-4 whitespace-pre-wrap break-words text-pretty text-sm">{post.content || 'Publication sans texte'}</p></article>)}</div>{!data.rows.length && <p className="py-8 text-center text-muted-foreground">Aucune publication ne correspond à ces filtres.</p>}<Pagination query={query} total={data.total} /></section>
   }
   if (query.view === 'places') {
-    const data = await listAdminPlaceRequests(query)
+    const [data, changes] = await Promise.all([listAdminPlaceRequests(query), listAdminPlaceChangeRequests(query)])
     const status = {
       pending: { label: 'À valider', variant: 'warning' as const },
       approved: { label: 'Validé', variant: 'success' as const },
@@ -75,8 +88,10 @@ export default async function AdminManagement({ query }: { query: AdminQuery }) 
     }
 
     return <section className={panelClass}>
-      <h2 className="text-xl font-bold">Demandes de lieux</h2>
+      <h2 className="text-xl font-bold text-balance">Contributions aux lieux</h2>
+      <p className="mt-2 text-sm text-pretty text-muted-foreground">Valide les nouveaux lieux, les corrections de fiches et les photos ajoutées par la communauté.</p>
       <Filters query={query} />
+      <h3 className="text-lg font-bold text-balance">Nouveaux lieux</h3>
       <div className="space-y-4">
         {data.rows.map(({ request, authorEmail }) => {
           const currentStatus = status[request.status]
@@ -146,6 +161,67 @@ export default async function AdminManagement({ query }: { query: AdminQuery }) 
       </div>
       {!data.rows.length && <p className="py-8 text-center text-muted-foreground">Aucune demande de lieu.</p>}
       <Pagination query={query} total={data.total} />
+
+      <div className="mt-10 border-t border-border pt-8">
+        <h3 className="text-lg font-bold text-balance">Corrections et photos</h3>
+        <p className="mt-2 text-sm text-pretty text-muted-foreground">Chaque demande contient une version complète de la fiche ; seules les contributions validées deviennent publiques.</p>
+        <div className="mt-5 space-y-4">
+          {changes.rows.map(({ request, authorEmail, photoMediaIds }) => {
+            const values = storedObject(request.values)
+            const currentStatus = status[request.status]
+            const name = textValue(values.name, 'Lieu sans nom')
+            const city = textValue(values.city)
+            const targetHref = request.kind === 'salle' && request.salleId
+              ? `/app/places/salles/${request.salleId}`
+              : request.kind === 'falaise' && request.falaiseId
+                ? `/app/places/falaises/${request.falaiseId}`
+                : null
+
+            return <article className="rounded-lg border border-border p-4 sm:p-5" key={request.id}>
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h4 className="text-lg font-bold text-balance">{name}</h4>
+                    <Badge variant="secondary">{request.kind === 'salle' ? 'Salle' : 'Falaise'}</Badge>
+                    <Badge variant="secondary">Correction</Badge>
+                    <Badge variant={currentStatus.variant}>{currentStatus.label}</Badge>
+                  </div>
+                  <p className="mt-1 text-sm text-muted-foreground">{city} · {photoMediaIds.length} photo{photoMediaIds.length > 1 ? 's' : ''} proposée{photoMediaIds.length > 1 ? 's' : ''}</p>
+                  <p className="mt-1 break-all text-xs text-muted-foreground">Par {authorEmail} · {dateTime(request.createdAt)}</p>
+                </div>
+                {request.status === 'pending' && <div className="flex flex-wrap gap-2">
+                  <PlaceReviewButton decision="reject" id={request.id} name={name} requestType="change" />
+                  <PlaceReviewButton decision="approve" id={request.id} name={name} requestType="change" />
+                </div>}
+              </div>
+              {photoMediaIds.length > 0 && <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {photoMediaIds.map((mediaId, index) => <div className="relative aspect-video overflow-hidden rounded-lg border border-border" key={mediaId}>
+                  <Image alt={`Photo ${index + 1} proposée pour ${name}`} className="object-cover" fill sizes="(min-width: 1024px) 280px, (min-width: 640px) 45vw, 100vw" src={`/api/admin/place-change-media/${mediaId}`} unoptimized />
+                </div>)}
+              </div>}
+              <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
+                <div><dt className="font-semibold">Commune</dt><dd className="text-muted-foreground">{city}</dd></div>
+                <div><dt className="font-semibold">Coordonnées</dt><dd className="tabular-nums text-muted-foreground">{typeof values.latitude === 'number' && typeof values.longitude === 'number' ? `${values.latitude.toFixed(5)}, ${values.longitude.toFixed(5)}` : 'Non renseignées'}</dd></div>
+                {request.kind === 'salle' ? <>
+                  <div><dt className="font-semibold">Adresse</dt><dd className="text-muted-foreground">{textValue(values.address)}</dd></div>
+                  <div><dt className="font-semibold">Horaires</dt><dd className="text-muted-foreground">{textValue(values.weekdayHours)} · {textValue(values.weekendHours)}</dd></div>
+                </> : <>
+                  <div><dt className="font-semibold">Accès</dt><dd className="text-muted-foreground">{textValue(values.access)}</dd></div>
+                  <div><dt className="font-semibold">Parking</dt><dd className="text-muted-foreground">{textValue(values.parking)}</dd></div>
+                </>}
+              </dl>
+              {request.message && <p className="mt-4 rounded-lg bg-secondary p-3 text-sm text-pretty"><strong>Message du grimpeur :</strong> {request.message}</p>}
+              <div className="mt-4 flex flex-wrap gap-4 text-sm font-semibold">
+                {targetHref && <Link className="underline" href={targetHref}>Voir la fiche actuelle</Link>}
+                {typeof values.sourceUrl === 'string' && values.sourceUrl && <a href={values.sourceUrl} target="_blank" rel="noreferrer" className="underline">Voir la source</a>}
+              </div>
+              {request.reviewReason && <p className="mt-4 rounded-lg bg-secondary p-3 text-sm"><strong>Décision :</strong> {request.reviewReason}</p>}
+            </article>
+          })}
+        </div>
+        {!changes.rows.length && <p className="py-8 text-center text-muted-foreground">Aucune correction ou photo à examiner.</p>}
+        <Pagination query={query} total={changes.total} />
+      </div>
     </section>
   }
   const data = await listAdminHistory(query.page)

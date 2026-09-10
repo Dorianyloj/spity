@@ -11,6 +11,7 @@ export const placeServices = ['vestiaires', 'douches', 'location_materiel', 'res
 
 const optionalText = (maximum: number) => z.string().trim().max(maximum)
 const optionalUrl = z.union([z.literal(''), z.url('Saisis une adresse web valide.')])
+const nullableCoordinate = (minimum: number, maximum: number, message: string) => z.number().min(minimum, message).max(maximum, message).nullable()
 
 export const placeCreationInputSchema = z.object({
   kind: z.enum(placeKinds),
@@ -67,6 +68,69 @@ export const placeReviewSchema = z.object({
 export type PlaceReviewInput = z.infer<typeof placeReviewSchema>
 
 export type PlaceCreationInput = z.infer<typeof placeCreationInputSchema>
+
+const changeRequestBase = z.object({
+  placeId: z.uuid(),
+  message: optionalText(500),
+  photoMediaIds: z.array(z.uuid()).max(6, 'Ajoute au maximum 6 photos par demande.')
+    .refine((ids) => new Set(ids).size === ids.length, 'Chaque photo ne peut être ajoutée qu’une fois.'),
+  name: z.string().trim().min(2, 'Indique le nom du lieu.').max(255),
+  city: z.string().trim().min(2, 'Indique la commune.').max(255),
+  department: optionalText(255),
+  region: optionalText(255),
+  latitude: nullableCoordinate(-90, 90, 'Latitude invalide.'),
+  longitude: nullableCoordinate(-180, 180, 'Longitude invalide.'),
+  restrictions: optionalText(500),
+  sourceUrl: optionalUrl,
+  notes: optionalText(1000),
+})
+
+const coordinatesTogether = (value: { latitude: number | null; longitude: number | null }, context: z.RefinementCtx) => {
+  if ((value.latitude === null) !== (value.longitude === null)) {
+    context.addIssue({ code: 'custom', path: ['latitude'], message: 'Renseigne les deux coordonnées du lieu.' })
+  }
+}
+
+export const placeChangeInputSchema = z.discriminatedUnion('kind', [
+  changeRequestBase.extend({
+    kind: z.literal('salle'),
+    address: z.string().trim().min(4, 'Indique l’adresse de la salle.').max(500),
+    disciplines: z.array(z.enum(['voie', 'bloc', 'speed'])).min(1, 'Choisis au moins une discipline.').max(3),
+    services: z.array(z.enum(placeServices)).max(placeServices.length),
+    website: optionalUrl,
+    weekdayHours: optionalText(120),
+    weekendHours: optionalText(120),
+    entryPrice: optionalText(80),
+    subscriptionPrice: optionalText(80),
+    minimumLevel: optionalText(10),
+    maximumLevel: optionalText(10),
+    attendance: z.union([z.literal(''), z.enum(['calme', 'moderee', 'elevee'])]),
+  }).superRefine(coordinatesTogether),
+  changeRequestBase.extend({
+    kind: z.literal('falaise'),
+    disciplines: z.array(z.enum(placeDisciplines)).max(placeDisciplines.length),
+    rockType: z.union([z.literal(''), z.enum(rockTypes)]),
+    rainExposure: z.union([z.literal(''), z.enum(rainExposures)]),
+    sunlight: z.union([z.literal(''), z.enum(sunlightOptions)]),
+    levels: optionalText(500),
+    orientation: z.union([z.literal(''), z.enum(['nord', 'sud', 'est', 'ouest', 'multi'])]),
+    orientations: z.array(z.enum(orientationOptions)).max(orientationOptions.length),
+    seasons: z.array(z.enum(seasonOptions)).max(seasonOptions.length),
+    status: z.union([z.literal(''), z.enum(['sec', 'humide', 'attention', 'ferme'])]),
+    access: optionalText(500),
+    approach: optionalText(255),
+    parking: optionalText(255),
+    parkingLatitude: nullableCoordinate(-90, 90, 'Latitude du parking invalide.'),
+    parkingLongitude: nullableCoordinate(-180, 180, 'Longitude du parking invalide.'),
+  }).superRefine((value, context) => {
+    coordinatesTogether(value, context)
+    if ((value.parkingLatitude === null) !== (value.parkingLongitude === null)) {
+      context.addIssue({ code: 'custom', path: ['parkingLatitude'], message: 'Renseigne les deux coordonnées du parking.' })
+    }
+  }),
+])
+
+export type PlaceChangeInput = z.infer<typeof placeChangeInputSchema>
 
 export const placeRequestResponseSchema = z.object({
   request: z.object({ id: z.uuid(), status: z.literal('pending') }),

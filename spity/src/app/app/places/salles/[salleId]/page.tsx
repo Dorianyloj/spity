@@ -13,10 +13,11 @@ import {
   UsersRound,
 } from 'lucide-react'
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
 import { db } from '@/db'
-import { medias, placeReports, posts, salles, users } from '@/db/schema'
+import { medias, placePhotos, placeReports, posts, salles, users } from '@/db/schema'
 import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui'
 import AppShell from '@/features/app/components/app-shell'
 import { getCurrentProfile } from '@/features/profile/lib/current-profile'
@@ -122,7 +123,7 @@ export default async function GymDetailPage({ params }: GymDetailPageProps) {
     notFound()
   }
 
-  const [reportRows, postRows] = await Promise.all([
+  const [reportRows, postRows, galleryRows] = await Promise.all([
     db
       .select({
         id: placeReports.id,
@@ -149,6 +150,7 @@ export default async function GymDetailPage({ params }: GymDetailPageProps) {
       .innerJoin(users, eq(posts.authorId, users.id))
       .leftJoin(medias, eq(medias.postId, posts.id))
       .where(eq(posts.salleId, salle.id)),
+    db.select({ id: placePhotos.id, mediaId: placePhotos.mediaId }).from(placePhotos).where(eq(placePhotos.salleId, salle.id)),
   ])
   const disciplines = parseStringArray(salle.disciplines)
   const horaires = parseStringRecord(salle.horaires)
@@ -179,6 +181,7 @@ export default async function GymDetailPage({ params }: GymDetailPageProps) {
                 {salle.location}
               </p>
               <p className="mt-4 max-w-2xl text-white/[0.76]">{salle.adresse}</p>
+              {currentProfile.user.role === 'grimpeur' && <Link className="mt-5 inline-flex min-h-11 items-center rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:bg-[#c8ef4e]" href={`/app/places/salles/${salle.id}/contribute`}>Corriger la fiche ou ajouter des photos</Link>}
             </div>
             <div className="grid grid-cols-3 gap-2 rounded-lg border border-white/10 bg-[#173236]/60 p-3 backdrop-blur">
               <div>
@@ -242,6 +245,20 @@ export default async function GymDetailPage({ params }: GymDetailPageProps) {
                 </article>
               </CardContent>
             </Card>
+
+            {galleryRows.length > 0 && <Card hover={false}>
+              <CardHeader>
+                <CardTitle>Photos de la communauté</CardTitle>
+                <CardDescription>Photos proposées par des grimpeurs et validées par Spity.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="grid gap-3 sm:grid-cols-2">
+                  {galleryRows.map((photo, index) => <li className="relative aspect-video overflow-hidden rounded-lg border border-border" key={photo.id}>
+                    <Image alt={`Photo ${index + 1} de ${salle.nom}`} className="object-cover" fill sizes="(min-width: 768px) 45vw, 100vw" src={`/api/place-media/${photo.mediaId}`} unoptimized />
+                  </li>)}
+                </ul>
+              </CardContent>
+            </Card>}
 
             <Card hover={false}>
               <CardHeader>

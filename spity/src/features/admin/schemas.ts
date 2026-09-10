@@ -27,6 +27,8 @@ export const actionLabels = {
   post_restored: 'Publication restaurée',
   place_approved: 'Lieu validé',
   place_rejected: 'Lieu refusé',
+  place_change_approved: 'Correction de lieu validée',
+  place_change_rejected: 'Correction de lieu refusée',
 } as const
 
 export function adminHref(query: Partial<AdminQuery>) {

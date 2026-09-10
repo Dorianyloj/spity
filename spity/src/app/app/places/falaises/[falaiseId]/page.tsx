@@ -1,10 +1,11 @@
 import { eq } from 'drizzle-orm'
 import { AlertTriangle, ArrowLeft, Clock, MapPin, Mountain, ParkingCircle, Route, ShieldCheck } from 'lucide-react'
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
 import { db } from '@/db'
-import { falaises, placeReports, users, voies } from '@/db/schema'
+import { falaises, placePhotos, placeReports, users, voies } from '@/db/schema'
 import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui'
 import AppShell from '@/features/app/components/app-shell'
 import { getCurrentProfile } from '@/features/profile/lib/current-profile'
@@ -93,6 +94,13 @@ const seasonLabels: Record<string, string> = {
   hiver: 'Hiver',
 }
 
+const rockLabels: Record<string, string> = {
+  calcaire: 'Calcaire', gres: 'Grès', granite: 'Granite', gneiss: 'Gneiss', schiste: 'Schiste', conglomerat: 'Conglomérat', volcanique: 'Volcanique', autre: 'Autre',
+}
+
+const rainLabels: Record<string, string> = { abrite: 'abrité', partiellement_abrite: 'partiellement abrité', expose: 'exposé' }
+const sunlightLabels: Record<string, string> = { ombrage: 'ombragé', mixte: 'mixte', ensoleille: 'ensoleillé' }
+
 export default async function CragDetailPage({ params }: CragDetailPageProps) {
   const currentProfile = await getCurrentProfile()
 
@@ -111,7 +119,7 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
     notFound()
   }
 
-  const [routeRows, reportRows] = await Promise.all([
+  const [routeRows, reportRows, galleryRows] = await Promise.all([
     db.select().from(voies).where(eq(voies.falaiseId, falaise.id)),
     db
       .select({
@@ -125,9 +133,12 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
       .from(placeReports)
       .innerJoin(users, eq(placeReports.authorId, users.id))
       .where(eq(placeReports.falaiseId, falaise.id)),
+    db.select({ id: placePhotos.id, mediaId: placePhotos.mediaId }).from(placePhotos).where(eq(placePhotos.falaiseId, falaise.id)),
   ])
   const niveaux = parseStringArray(falaise.niveaux)
   const saisons = parseStringArray(falaise.saison)
+  const disciplines = parseStringArray(falaise.disciplines)
+  const orientations = parseStringArray(falaise.orientations)
   const photoUrl = falaise.photoUrl ?? brandAssets.crag
 
   return (
@@ -155,6 +166,7 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
               <p className="mt-4 max-w-2xl text-white/[0.76]">
                 {falaise.acces ?? 'Accès à compléter par la communauté.'}
               </p>
+              {currentProfile.user.role === 'grimpeur' && <Link className="mt-5 inline-flex min-h-11 items-center rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:bg-[#c8ef4e]" href={`/app/places/falaises/${falaise.id}/contribute`}>Corriger la fiche ou ajouter des photos</Link>}
             </div>
             <div className="grid grid-cols-3 gap-2 rounded-lg border border-white/10 bg-[#173236]/60 p-3 backdrop-blur">
               <div>
@@ -210,6 +222,20 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
               </CardContent>
             </Card>
 
+            {galleryRows.length > 0 && <Card hover={false}>
+              <CardHeader>
+                <CardTitle>Photos de la communauté</CardTitle>
+                <CardDescription>Photos proposées par des grimpeurs et validées par Spity.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="grid gap-3 sm:grid-cols-2">
+                  {galleryRows.map((photo, index) => <li className="relative aspect-video overflow-hidden rounded-lg border border-border" key={photo.id}>
+                    <Image alt={`Photo ${index + 1} de ${falaise.nom}`} className="object-cover" fill sizes="(min-width: 768px) 45vw, 100vw" src={`/api/place-media/${photo.mediaId}`} unoptimized />
+                  </li>)}
+                </ul>
+              </CardContent>
+            </Card>}
+
             <Card hover={false}>
               <CardHeader>
                 <CardTitle>Signalements</CardTitle>
@@ -260,6 +286,14 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
                     </div>
                   </div>
                 </div>
+                {(falaise.rockType || falaise.rainExposure || falaise.sunlight || disciplines.length > 0) && <div className="flex items-start gap-3 rounded-lg border border-border p-3">
+                  <Mountain className="mt-0.5 text-primary" size={18} />
+                  <div>
+                    <p className="font-semibold text-foreground">Terrain</p>
+                    <p className="mt-1 text-muted-foreground">{disciplines.join(', ') || 'Pratique à préciser'} · {falaise.rockType ? rockLabels[falaise.rockType] : 'roche à préciser'}</p>
+                    <p className="mt-1 text-muted-foreground">{falaise.rainExposure ? `Pluie : ${rainLabels[falaise.rainExposure]}` : 'Exposition à la pluie à préciser'} · {falaise.sunlight ? sunlightLabels[falaise.sunlight] : 'ensoleillement à préciser'}</p>
+                  </div>
+                </div>}
                 <div className="flex items-start gap-3 rounded-lg border border-border p-3">
                   <Clock className="mt-0.5 text-primary" size={18} />
                   <div>
@@ -289,10 +323,15 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
                   <div>
                     <p className="font-semibold text-foreground">Saison et orientation</p>
                     <p className="mt-1 text-muted-foreground">
-                      {saisons.map((saison) => seasonLabels[saison] ?? saison).join(', ') || 'Saison à préciser'} · {falaise.orientation ?? 'orientation à préciser'}
+                      {saisons.map((saison) => seasonLabels[saison] ?? saison).join(', ') || 'Saison à préciser'} · {orientations.join(', ') || falaise.orientation || 'orientation à préciser'}
                     </p>
                   </div>
                 </div>
+                {(falaise.restrictions || falaise.notes) && <div className="rounded-lg border border-border p-3">
+                  <p className="font-semibold text-foreground">À savoir</p>
+                  {falaise.restrictions && <p className="mt-1 text-muted-foreground">{falaise.restrictions}</p>}
+                  {falaise.notes && <p className="mt-2 text-muted-foreground">{falaise.notes}</p>}
+                </div>}
               </CardContent>
             </Card>
           </aside>

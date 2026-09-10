@@ -9,9 +9,10 @@ type Props = {
   decision: 'approve' | 'reject'
   id: string
   name: string
+  requestType?: 'creation' | 'change'
 }
 
-export default function PlaceReviewButton({ decision, id, name }: Props) {
+export default function PlaceReviewButton({ decision, id, name, requestType = 'creation' }: Props) {
   const router = useRouter()
   const dialog = useRef<HTMLDialogElement>(null)
   const trigger = useRef<HTMLButtonElement>(null)
@@ -23,6 +24,7 @@ export default function PlaceReviewButton({ decision, id, name }: Props) {
   const [notice, setNotice] = useState('')
   const approve = decision === 'approve'
   const action = approve ? 'Valider' : 'Refuser'
+  const subject = requestType === 'change' ? 'cette contribution' : 'ce lieu'
 
   const close = () => {
     dialog.current?.close()
@@ -40,7 +42,7 @@ export default function PlaceReviewButton({ decision, id, name }: Props) {
     setPending(true)
     setError('')
     try {
-      const response = await fetch(`/api/admin/place-requests/${id}`, {
+      const response = await fetch(`/api/admin/${requestType === 'change' ? 'place-changes' : 'place-requests'}/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(input.data),
@@ -48,7 +50,7 @@ export default function PlaceReviewButton({ decision, id, name }: Props) {
       const body = await response.json() as { error?: string }
       if (!response.ok) throw new Error(body.error ?? 'Action impossible. Réessayez.')
       close()
-      setNotice(approve ? 'Lieu ajouté au répertoire.' : 'Demande refusée.')
+      setNotice(approve ? requestType === 'change' ? 'Contribution appliquée au lieu.' : 'Lieu ajouté au répertoire.' : 'Demande refusée.')
       router.refresh()
     } catch (failure) {
       setError(failure instanceof Error ? failure.message : 'Connexion impossible. Réessayez.')
@@ -83,9 +85,11 @@ export default function PlaceReviewButton({ decision, id, name }: Props) {
         }}
       >
         <form className="space-y-4" onSubmit={confirm}>
-          <h2 className="text-xl font-bold text-balance" id={titleId}>{action} ce lieu ?</h2>
+          <h2 className="text-xl font-bold text-balance" id={titleId}>{action} {subject} ?</h2>
           <p className="text-sm text-pretty text-muted-foreground" id={descriptionId}>
-            {approve ? `${name} sera ajouté au répertoire.` : `${name} ne sera pas publié.`}
+            {approve
+              ? requestType === 'change' ? `Les informations proposées pour ${name} seront appliquées.` : `${name} sera ajouté au répertoire.`
+              : requestType === 'change' ? `Les informations proposées pour ${name} ne seront pas appliquées.` : `${name} ne sera pas publié.`}
           </p>
           <Textarea
             disabled={pending}

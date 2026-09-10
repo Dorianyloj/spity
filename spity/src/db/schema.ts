@@ -124,6 +124,8 @@ export const salles = mysqlTable('salles', {
   id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
   nom: varchar('nom', { length: 255 }).notNull(),
   location: varchar('location', { length: 255 }).notNull(),
+  department: varchar('department', { length: 255 }),
+  region: varchar('region', { length: 255 }),
   adresse: varchar('adresse', { length: 500 }).notNull(),
   disciplines: json('disciplines').$type<string[]>().notNull(),
   photoUrl: varchar('photo_url', { length: 500 }),
@@ -136,6 +138,9 @@ export const salles = mysqlTable('salles', {
   niveauMin: varchar('niveau_min', { length: 10 }),
   niveauMax: varchar('niveau_max', { length: 10 }),
   frequentation: mysqlEnum('frequentation', ['calme', 'moderee', 'elevee']),
+  restrictions: varchar('restrictions', { length: 500 }),
+  sourceUrl: varchar('source_url', { length: 500 }),
+  notes: varchar('notes', { length: 1000 }),
 })
 
 // === FALAISE ===
@@ -143,18 +148,28 @@ export const falaises = mysqlTable('falaises', {
   id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
   nom: varchar('nom', { length: 255 }).notNull(),
   location: varchar('location', { length: 255 }).notNull(),
+  department: varchar('department', { length: 255 }),
+  region: varchar('region', { length: 255 }),
   acces: varchar('acces', { length: 500 }),
+  disciplines: json('disciplines').$type<string[]>(),
+  rockType: mysqlEnum('rock_type', ['calcaire', 'gres', 'granite', 'gneiss', 'schiste', 'conglomerat', 'volcanique', 'autre']),
+  rainExposure: mysqlEnum('rain_exposure', ['abrite', 'partiellement_abrite', 'expose']),
+  sunlight: mysqlEnum('sunlight', ['ombrage', 'mixte', 'ensoleille']),
   niveaux: json('niveaux').$type<string[]>(),
   photoUrl: varchar('photo_url', { length: 500 }),
   latitude: double('latitude'),
   longitude: double('longitude'),
   orientation: mysqlEnum('orientation', ['nord', 'sud', 'est', 'ouest', 'multi']),
+  orientations: json('orientations').$type<string[]>(),
   approche: varchar('approche', { length: 255 }),
   parking: varchar('parking', { length: 255 }),
   parkingLatitude: double('parking_latitude'),
   parkingLongitude: double('parking_longitude'),
   saison: json('saison').$type<string[]>(),
   status: mysqlEnum('status', ['sec', 'humide', 'attention', 'ferme']),
+  restrictions: varchar('restrictions', { length: 500 }),
+  sourceUrl: varchar('source_url', { length: 500 }),
+  notes: varchar('notes', { length: 1000 }),
 })
 
 // === PLACE CREATION REQUEST ===
@@ -198,6 +213,66 @@ export const placeCreationRequests = mysqlTable(
   (table) => [
     index('place_creation_requests_author_idx').on(table.authorId),
     index('place_creation_requests_status_created_idx').on(table.status, table.createdAt),
+  ]
+)
+
+// === PLACE CHANGE REQUEST ===
+// The requested values are a complete, validated snapshot. Administrators can therefore
+// review one coherent version before applying it to the published place.
+export const placeChangeRequests = mysqlTable(
+  'place_change_requests',
+  {
+    id: varchar('id', { length: 36 }).primaryKey(),
+    authorId: varchar('author_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
+    kind: mysqlEnum('kind', ['salle', 'falaise']).notNull(),
+    salleId: varchar('salle_id', { length: 36 }).references(() => salles.id, { onDelete: 'cascade' }),
+    falaiseId: varchar('falaise_id', { length: 36 }).references(() => falaises.id, { onDelete: 'cascade' }),
+    status: mysqlEnum('change_request_status', ['pending', 'approved', 'rejected']).notNull().default('pending'),
+    values: json('values').$type<Record<string, unknown>>().notNull(),
+    message: varchar('message', { length: 500 }),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    reviewedAt: timestamp('reviewed_at'),
+    reviewedBy: varchar('reviewed_by', { length: 36 }).references(() => users.id, { onDelete: 'set null' }),
+    reviewReason: varchar('review_reason', { length: 500 }),
+  },
+  (table) => [
+    index('place_change_requests_author_idx').on(table.authorId),
+    index('place_change_requests_status_created_idx').on(table.status, table.createdAt),
+    index('place_change_requests_salle_idx').on(table.salleId),
+    index('place_change_requests_falaise_idx').on(table.falaiseId),
+  ]
+)
+
+// One contribution can propose several photos. The files remain private until the
+// parent contribution is approved, then they are copied into placePhotos.
+export const placeChangeRequestPhotos = mysqlTable(
+  'place_change_request_photos',
+  {
+    id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+    requestId: varchar('request_id', { length: 36 }).notNull().references(() => placeChangeRequests.id, { onDelete: 'cascade' }),
+    mediaId: varchar('media_id', { length: 36 }).notNull(),
+  },
+  (table) => [
+    uniqueIndex('place_change_request_photo_unique').on(table.requestId, table.mediaId),
+    index('place_change_request_photo_media_idx').on(table.mediaId),
+  ]
+)
+
+// Public gallery images linked to one published salle or falaise. mediaId deliberately
+// has no FK because mediaUploads is defined later and media is managed as private storage.
+export const placePhotos = mysqlTable(
+  'place_photos',
+  {
+    id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+    salleId: varchar('salle_id', { length: 36 }).references(() => salles.id, { onDelete: 'cascade' }),
+    falaiseId: varchar('falaise_id', { length: 36 }).references(() => falaises.id, { onDelete: 'cascade' }),
+    mediaId: varchar('media_id', { length: 36 }).notNull(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+  },
+  (table) => [
+    uniqueIndex('place_photos_media_unique').on(table.mediaId),
+    index('place_photos_salle_idx').on(table.salleId),
+    index('place_photos_falaise_idx').on(table.falaiseId),
   ]
 )
 
@@ -288,7 +363,7 @@ export const likes = mysqlTable(
 export const adminAuditLogs = mysqlTable('admin_audit_logs', {
   id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
   actorId: varchar('actor_id', { length: 36 }).references(() => users.id, { onDelete: 'set null' }),
-  action: mysqlEnum('action', ['admin_granted', 'user_suspended', 'user_restored', 'post_hidden', 'post_restored', 'place_approved', 'place_rejected']).notNull(),
+  action: mysqlEnum('action', ['admin_granted', 'user_suspended', 'user_restored', 'post_hidden', 'post_restored', 'place_approved', 'place_rejected', 'place_change_approved', 'place_change_rejected']).notNull(),
   targetId: varchar('target_id', { length: 36 }).notNull(),
   reason: varchar('reason', { length: 500 }).notNull(),
   createdAt: timestamp('created_at').notNull().defaultNow(),

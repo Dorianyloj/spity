@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto'
 import { and, count, eq, sum } from 'drizzle-orm'
 import { db } from '@/db'
-import { falaises, medias, mediaUploads, placeCreationRequests, salles, users } from '@/db/schema'
+import { falaises, medias, mediaUploads, placeChangeRequestPhotos, placeCreationRequests, placePhotos, salles, users } from '@/db/schema'
 import { logger } from '@/lib/logger'
 import { MediaOperationError } from './errors'
 import type { NormalizedImage } from './image-upload'
@@ -50,9 +50,11 @@ export const deleteOwnedMedia = async (id: string, ownerId: string) => {
     if (!owner || !media) throw new MediaOperationError('Image introuvable', 404)
     const [publication] = await tx.select({ id: medias.id }).from(medias).where(eq(medias.url, `/api/post-media/${media.id}`)).limit(1)
     const [placeRequest] = await tx.select({ id: placeCreationRequests.id }).from(placeCreationRequests).where(eq(placeCreationRequests.photoMediaId, media.id)).limit(1)
+    const [placeChangePhoto] = await tx.select({ id: placeChangeRequestPhotos.id }).from(placeChangeRequestPhotos).where(eq(placeChangeRequestPhotos.mediaId, media.id)).limit(1)
+    const [placePhoto] = await tx.select({ id: placePhotos.id }).from(placePhotos).where(eq(placePhotos.mediaId, media.id)).limit(1)
     const [salle] = await tx.select({ id: salles.id }).from(salles).where(eq(salles.photoUrl, `/api/place-media/${media.id}`)).limit(1)
     const [falaise] = await tx.select({ id: falaises.id }).from(falaises).where(eq(falaises.photoUrl, `/api/place-media/${media.id}`)).limit(1)
-    if (owner.avatarUrl === `/api/avatars/${media.id}` || publication || placeRequest || salle || falaise) {
+    if (owner.avatarUrl === `/api/avatars/${media.id}` || publication || placeRequest || placeChangePhoto || placePhoto || salle || falaise) {
       throw new MediaOperationError('Cette image est déjà utilisée.', 409)
     }
     // Retain metadata for retry if removal fails. Never delete an attached object.

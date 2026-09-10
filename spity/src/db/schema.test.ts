@@ -10,7 +10,10 @@ import {
   medias,
   mediaUploads,
   partnershipRequests,
+  placeChangeRequestPhotos,
+  placeChangeRequests,
   placeCreationRequests,
+  placePhotos,
   placeReports,
   posts,
   salles,
@@ -29,6 +32,9 @@ describe('database schema', () => {
     [salles, 'salles'],
     [falaises, 'falaises'],
     [placeCreationRequests, 'place_creation_requests'],
+    [placeChangeRequests, 'place_change_requests'],
+    [placeChangeRequestPhotos, 'place_change_request_photos'],
+    [placePhotos, 'place_photos'],
     [voies, 'voies'],
     [placeReports, 'place_reports'],
     [posts, 'posts'],
@@ -68,6 +74,10 @@ describe('database schema', () => {
       'reviewedBy',
       'reviewReason',
     ]))
-    expect(Object.keys(getTableColumns(falaises))).toEqual(expect.arrayContaining(['parkingLatitude', 'parkingLongitude']))
+    expect(Object.keys(getTableColumns(placeChangeRequests))).toEqual(expect.arrayContaining(['authorId', 'salleId', 'falaiseId', 'values', 'status']))
+    expect(Object.keys(getTableColumns(placeChangeRequestPhotos))).toEqual(expect.arrayContaining(['requestId', 'mediaId']))
+    expect(Object.keys(getTableColumns(placePhotos))).toEqual(expect.arrayContaining(['salleId', 'falaiseId', 'mediaId']))
+    expect(Object.keys(getTableColumns(falaises))).toEqual(expect.arrayContaining(['parkingLatitude', 'parkingLongitude', 'disciplines', 'orientations', 'rockType']))
+    expect(Object.keys(getTableColumns(salles))).toEqual(expect.arrayContaining(['department', 'region', 'restrictions', 'sourceUrl', 'notes']))
   })
 })

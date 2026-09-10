@@ -1,9 +1,9 @@
 import { randomUUID } from 'crypto'
-import { and, eq } from 'drizzle-orm'
+import { and, eq, inArray } from 'drizzle-orm'
 import { db } from '@/db'
-import { mediaUploads, placeCreationRequests } from '@/db/schema'
+import { falaises, mediaUploads, placeChangeRequestPhotos, placeChangeRequests, placeCreationRequests, salles } from '@/db/schema'
 import { ProfileOperationError } from '@/features/profile/lib/http'
-import type { PlaceCreationInput } from '../schemas'
+import type { PlaceChangeInput, PlaceCreationInput } from '../schemas'
 
 const nullable = <Value extends string>(value: Value): Value | null => value || null
 
@@ -48,6 +48,42 @@ export const createPlaceRequest = async (authorId: string, input: PlaceCreationI
       if (!photo) throw new ProfileOperationError('Cette photo est introuvable ou ne t’appartient pas.', 404)
     }
     await tx.insert(placeCreationRequests).values(values)
+  })
+
+  return { id, status: 'pending' as const }
+}
+
+export const createPlaceChangeRequest = async (authorId: string, input: PlaceChangeInput) => {
+  const id = randomUUID()
+  const { kind, message, photoMediaIds, placeId, ...values } = input
+
+  await db.transaction(async (tx) => {
+    const target = kind === 'salle'
+      ? await tx.select({ id: salles.id }).from(salles).where(eq(salles.id, placeId)).limit(1).for('update')
+      : await tx.select({ id: falaises.id }).from(falaises).where(eq(falaises.id, placeId)).limit(1).for('update')
+    if (!target[0]) throw new ProfileOperationError('Ce lieu n’existe plus.', 404)
+
+    if (photoMediaIds.length) {
+      const photos = await tx.select({ id: mediaUploads.id }).from(mediaUploads)
+        .where(and(eq(mediaUploads.ownerId, authorId), inArray(mediaUploads.id, photoMediaIds)))
+        .for('update')
+      if (photos.length !== photoMediaIds.length) {
+        throw new ProfileOperationError('Une ou plusieurs photos sont introuvables ou ne t’appartiennent pas.', 404)
+      }
+    }
+
+    await tx.insert(placeChangeRequests).values({
+      id,
+      authorId,
+      kind,
+      salleId: kind === 'salle' ? placeId : null,
+      falaiseId: kind === 'falaise' ? placeId : null,
+      values: values as Record<string, unknown>,
+      message: nullable(message),
+    })
+    if (photoMediaIds.length) {
+      await tx.insert(placeChangeRequestPhotos).values(photoMediaIds.map((mediaId) => ({ requestId: id, mediaId })))
+    }
   })
 
   return { id, status: 'pending' as const }

@@ -1,6 +1,6 @@
 import { and, eq } from 'drizzle-orm'
 import { db } from '@/db'
-import { falaises, medias, mediaUploads, posts, salles, users } from '@/db/schema'
+import { falaises, medias, mediaUploads, placePhotos, posts, salles, users } from '@/db/schema'
 import { getCurrentProfile } from '@/features/profile/lib/current-profile'
 import { mediaIdSchema, readImage } from './storage'
 import { handleMediaError, mediaErrorResponse } from './responses'
@@ -19,7 +19,10 @@ export async function findMemberMedia(id: string, kind: 'avatar' | 'post' | 'pla
       .where(eq(mediaUploads.id, id)).limit(1)
     return row ?? null
   }
-  const [salleRows, falaiseRows] = await Promise.all([
+  const [galleryRows, salleRows, falaiseRows] = await Promise.all([
+    db.select({ id: mediaUploads.id }).from(mediaUploads)
+      .innerJoin(placePhotos, eq(placePhotos.mediaId, mediaUploads.id))
+      .where(eq(mediaUploads.id, id)).limit(1),
     db.select({ id: mediaUploads.id }).from(mediaUploads)
       .innerJoin(salles, eq(salles.photoUrl, `/api/place-media/${id}`))
       .where(eq(mediaUploads.id, id)).limit(1),
@@ -27,7 +30,7 @@ export async function findMemberMedia(id: string, kind: 'avatar' | 'post' | 'pla
       .innerJoin(falaises, eq(falaises.photoUrl, `/api/place-media/${id}`))
       .where(eq(mediaUploads.id, id)).limit(1),
   ])
-  return salleRows[0] ?? falaiseRows[0] ?? null
+  return galleryRows[0] ?? salleRows[0] ?? falaiseRows[0] ?? null
 }
 
 export async function serveMemberMedia(id: string, kind: 'avatar' | 'post' | 'place') {
