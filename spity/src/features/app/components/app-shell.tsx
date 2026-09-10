@@ -35,8 +35,8 @@ export default function AppShell({ activeItem, children, user }: AppShellProps) 
     .map((item) => ({ label: item.label, href: item.href, active: item.key === activeItem, icon: <item.icon size={18} aria-hidden="true" /> }))
   return (
     <div className="min-h-dvh bg-zinc-800 pb-10 text-foreground">
-      <Header homeHref="/app" links={links} accountLabel={user.role === 'club' ? 'Club' : 'Grimpeur'} actions={<LogoutButton compact className="rounded-xl transition-none" />} mobileActions={<LogoutButton className="justify-start rounded-xl border border-border transition-none" />} />
-      <main className="mx-auto max-w-7xl px-4 py-7">{children}</main>
+      <Header overlay homeHref="/app" links={links} accountLabel={user.role === 'club' ? 'Club' : 'Grimpeur'} actions={<LogoutButton compact className="rounded-xl transition-none" />} mobileActions={<LogoutButton className="justify-start rounded-xl border border-border transition-none" />} />
+      <main className="mx-auto max-w-7xl px-4 pb-7 pt-[calc(8rem+env(safe-area-inset-top))]">{children}</main>
     </div>
   )
 }

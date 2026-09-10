@@ -94,12 +94,14 @@ it('updates the floating surface only after crossing the scroll threshold', () =
 
 it.each(['grimpeur', 'club'] as const)('preserves the %s navigation and active page without exposing administration', (role) => {
   const user = { ...ownerFixture().user, role }
-  render(<AppShell user={user} activeItem="profile"><h1>Mon profil</h1></AppShell>)
+  const { container } = render(<AppShell user={user} activeItem="profile"><h1>Mon profil</h1></AppShell>)
   const nav = within(screen.getByRole('navigation', { name: 'Navigation principale' }))
   expect(nav.getByRole('link', { name: 'Profil' })).toHaveAttribute('aria-current', 'page')
   expect(nav.getAllByRole('link')).toHaveLength(role === 'club' ? 4 : 6)
   expect(nav.queryByRole('link', { name: 'Administration' })).not.toBeInTheDocument()
   expect(screen.getByRole('main')).toHaveTextContent('Mon profil')
+  expect(container.querySelector('header')).toHaveClass('fixed')
+  expect(container.querySelector('main')).toHaveClass('pt-[calc(8rem+env(safe-area-inset-top))]')
 })
 
 it('retains administration and a readable logout action inside the mobile menu', () => {
