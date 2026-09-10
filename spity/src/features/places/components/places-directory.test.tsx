@@ -58,13 +58,14 @@ const voies = [{
 
 describe('PlacesDirectory', () => {
   it('renders every place type and its route details', () => {
-    render(<PlacesDirectory salles={salles} falaises={falaises} clubs={clubs} voies={voies} />)
+    render(<PlacesDirectory canSuggest salles={salles} falaises={falaises} clubs={clubs} voies={voies} />)
 
     expect(screen.getByRole('heading', { name: 'Arkose Lyon' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Curis' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Club Alpin Lyon' })).toBeInTheDocument()
     expect(screen.getByText('La directe')).toBeInTheDocument()
     expect(screen.getByText('3 résultat(s) affiché(s)')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Proposer un lieu' })).toHaveAttribute('href', '/app/places/suggest')
   })
 
   it('filters by text, type and status and exposes empty states', async () => {

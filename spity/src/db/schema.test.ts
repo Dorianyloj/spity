@@ -10,6 +10,7 @@ import {
   medias,
   mediaUploads,
   partnershipRequests,
+  placeCreationRequests,
   placeReports,
   posts,
   salles,
@@ -27,6 +28,7 @@ describe('database schema', () => {
     [partnershipRequests, 'partnership_requests'],
     [salles, 'salles'],
     [falaises, 'falaises'],
+    [placeCreationRequests, 'place_creation_requests'],
     [voies, 'voies'],
     [placeReports, 'place_reports'],
     [posts, 'posts'],
@@ -53,5 +55,13 @@ describe('database schema', () => {
       'status',
     ]))
     expect(Object.keys(getTableColumns(voies))).toEqual(expect.arrayContaining(['falaiseId', 'cotation', 'status']))
+    expect(Object.keys(getTableColumns(placeCreationRequests))).toEqual(expect.arrayContaining([
+      'authorId',
+      'kind',
+      'status',
+      'city',
+      'department',
+      'region',
+    ]))
   })
 })

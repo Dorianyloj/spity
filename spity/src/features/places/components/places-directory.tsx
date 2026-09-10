@@ -1,6 +1,6 @@
 'use client'
 
-import { Building2, MapPin, Mountain, Route, SearchX, ShieldCheck, UsersRound } from 'lucide-react'
+import { Building2, MapPin, Mountain, Plus, Route, SearchX, ShieldCheck, UsersRound } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import {
@@ -76,6 +76,7 @@ type DisciplineFilter = 'all' | 'bloc' | 'voie' | 'trad'
 type StatusFilter = 'all' | 'sec' | 'attention'
 
 type PlacesDirectoryProps = {
+  canSuggest?: boolean
   salles: SallePlace[]
   falaises: FalaisePlace[]
   clubs: ClubPlace[]
@@ -160,7 +161,7 @@ const getRoutesForCrag = (voies: RoutePlace[], falaiseId: string) => {
   return voies.filter((voie) => voie.falaiseId === falaiseId)
 }
 
-export default function PlacesDirectory({ salles, falaises, clubs, voies }: PlacesDirectoryProps) {
+export default function PlacesDirectory({ canSuggest = false, salles, falaises, clubs, voies }: PlacesDirectoryProps) {
   const [query, setQuery] = useState('')
   const [placeKind, setPlaceKind] = useState<PlaceKind>('all')
   const [discipline, setDiscipline] = useState<DisciplineFilter>('all')
@@ -231,15 +232,25 @@ export default function PlacesDirectory({ salles, falaises, clubs, voies }: Plac
     <div className="space-y-7">
       <AppHero
         backgroundImage={brandAssets.crag}
-        description="Une première vue unifiée des salles, falaises et clubs, alimentée par MariaDB pour la démo."
-        eyebrow="Répertoire MVP"
+        description="Trouve les salles, falaises et clubs autour de toi, avec les informations partagées par la communauté."
+        eyebrow="Répertoire"
         stats={[
           { label: 'lieux', value: totalPlaces },
           { label: 'voies', value: voies.length },
           { label: 'clubs', value: clubs.length },
         ]}
         title="Lieux d’escalade"
-      />
+      >
+        {canSuggest && (
+          <Link
+            className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-primary-foreground hover:bg-[#c8ef4e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            href="/app/places/suggest"
+          >
+            <Plus size={18} aria-hidden="true" />
+            Proposer un lieu
+          </Link>
+        )}
+      </AppHero>
 
       <section className="grid gap-4 md:grid-cols-3">
         {placeCards.map((placeCard) => {

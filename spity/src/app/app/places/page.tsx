@@ -77,6 +77,7 @@ export default async function PlacesPage() {
   return (
     <AppShell activeItem="places" user={currentProfile.user}>
       <PlacesDirectory
+        canSuggest={currentProfile.user.role === 'grimpeur'}
         salles={salleRows.map((salle) => ({
           ...salle,
           disciplines: parseStringArray(salle.disciplines),

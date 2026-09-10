@@ -155,6 +155,45 @@ export const falaises = mysqlTable('falaises', {
   status: mysqlEnum('status', ['sec', 'humide', 'attention', 'ferme']),
 })
 
+// === PLACE CREATION REQUEST ===
+// A suggestion remains private until it has been reviewed and published by an administrator.
+export const placeCreationRequests = mysqlTable(
+  'place_creation_requests',
+  {
+    id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+    authorId: varchar('author_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
+    kind: mysqlEnum('kind', ['salle', 'falaise']).notNull(),
+    status: mysqlEnum('request_status', ['pending', 'approved', 'rejected']).notNull().default('pending'),
+    name: varchar('name', { length: 255 }).notNull(),
+    disciplines: json('disciplines').$type<string[]>().notNull(),
+    latitude: double('latitude').notNull(),
+    longitude: double('longitude').notNull(),
+    city: varchar('city', { length: 255 }).notNull(),
+    department: varchar('department', { length: 255 }).notNull(),
+    region: varchar('region', { length: 255 }).notNull(),
+    address: varchar('address', { length: 500 }),
+    rockType: mysqlEnum('rock_type', ['calcaire', 'gres', 'granite', 'gneiss', 'schiste', 'conglomerat', 'volcanique', 'autre']),
+    rainExposure: mysqlEnum('rain_exposure', ['abrite', 'partiellement_abrite', 'expose']),
+    sunlight: mysqlEnum('sunlight', ['ombrage', 'mixte', 'ensoleille']),
+    seasons: json('seasons').$type<string[]>(),
+    orientations: json('orientations').$type<string[]>(),
+    services: json('services').$type<string[]>(),
+    website: varchar('website', { length: 500 }),
+    access: varchar('access', { length: 500 }),
+    approach: varchar('approach', { length: 255 }),
+    parking: varchar('parking', { length: 255 }),
+    restrictions: varchar('restrictions', { length: 500 }),
+    sourceUrl: varchar('source_url', { length: 500 }),
+    notes: varchar('notes', { length: 1000 }),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    reviewedAt: timestamp('reviewed_at'),
+  },
+  (table) => [
+    index('place_creation_requests_author_idx').on(table.authorId),
+    index('place_creation_requests_status_created_idx').on(table.status, table.createdAt),
+  ]
+)
+
 // === VOIE ===
 export const voies = mysqlTable('voies', {
   id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
