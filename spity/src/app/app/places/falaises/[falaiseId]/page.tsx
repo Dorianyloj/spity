@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm'
+import { desc, eq } from 'drizzle-orm'
 import { AlertTriangle, ArrowLeft, Clock, MapPin, Mountain, ParkingCircle, Route, ShieldCheck } from 'lucide-react'
 import type { Metadata } from 'next'
 import Image from 'next/image'
@@ -8,6 +8,8 @@ import { db } from '@/db'
 import { falaises, placePhotos, placeReports, users, voies } from '@/db/schema'
 import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui'
 import AppShell from '@/features/app/components/app-shell'
+import CragContributionActions from '@/features/places/components/crag-contribution-actions'
+import { conditionStateLabels, parseConditionReport } from '@/features/places/lib/crag-reports'
 import { getCurrentProfile } from '@/features/profile/lib/current-profile'
 import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
 
@@ -65,13 +67,6 @@ const parseNumberRecord = (value: unknown) => {
     return {}
   }
 }
-
-const statusLabels = {
-  sec: 'Sec',
-  humide: 'Humide',
-  attention: 'Attention',
-  ferme: 'Fermé',
-} as const
 
 const routeStatusLabels = {
   ok: 'OK',
@@ -132,7 +127,8 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
       })
       .from(placeReports)
       .innerJoin(users, eq(placeReports.authorId, users.id))
-      .where(eq(placeReports.falaiseId, falaise.id)),
+      .where(eq(placeReports.falaiseId, falaise.id))
+      .orderBy(desc(placeReports.createdAt)),
     db.select({ id: placePhotos.id, mediaId: placePhotos.mediaId }).from(placePhotos).where(eq(placePhotos.falaiseId, falaise.id)),
   ])
   const niveaux = parseStringArray(falaise.niveaux)
@@ -140,6 +136,13 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
   const disciplines = parseStringArray(falaise.disciplines)
   const orientations = parseStringArray(falaise.orientations)
   const photoUrl = falaise.photoUrl ?? brandAssets.crag
+  const reports = reportRows.map((report) => ({
+    ...report,
+    condition: report.type === 'condition' ? parseConditionReport(report.message) : null,
+  }))
+  const latestCondition = reports.find((report) => report.status === 'open' && report.condition?.state)
+  const currentState = latestCondition?.condition?.state ?? falaise.status
+  const openAlerts = reports.filter((report) => report.type !== 'condition' && report.status === 'open')
 
   return (
     <AppShell activeItem="places" user={currentProfile.user}>
@@ -166,7 +169,10 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
               <p className="mt-4 max-w-2xl text-white/[0.76]">
                 {falaise.acces ?? 'Accès à compléter par la communauté.'}
               </p>
-              {currentProfile.user.role === 'grimpeur' && <Link className="mt-5 inline-flex min-h-11 items-center rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:bg-[#c8ef4e]" href={`/app/places/falaises/${falaise.id}/contribute`}>Corriger la fiche ou ajouter des photos</Link>}
+              {currentProfile.user.role === 'grimpeur' && <div className="mt-5 flex flex-wrap gap-3">
+                <a className="inline-flex min-h-11 items-center rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:bg-[#c8ef4e]" href="#contribuer">Ajouter une voie ou l’état</a>
+                <Link className="inline-flex min-h-11 items-center rounded-lg border border-white/30 bg-black/10 px-4 py-2 text-sm font-bold text-white hover:bg-white/10" href={`/app/places/falaises/${falaise.id}/contribute`}>Corriger la fiche / photos</Link>
+              </div>}
             </div>
             <div className="grid grid-cols-3 gap-2 rounded-lg border border-white/10 bg-[#173236]/60 p-3 backdrop-blur">
               <div>
@@ -174,11 +180,11 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
                 <p className="text-xs font-semibold uppercase text-white/[0.62]">voies</p>
               </div>
               <div>
-                <p className="text-2xl font-black text-[#8bb957]">{reportRows.length}</p>
-                <p className="text-xs font-semibold uppercase text-white/[0.62]">alertes</p>
+                <p className="text-2xl font-black text-[#8bb957]">{openAlerts.length}</p>
+                <p className="text-xs font-semibold uppercase text-white/[0.62]">alertes ouvertes</p>
               </div>
               <div>
-                <p className="text-2xl font-black text-[#8bb957]">{falaise.status ? statusLabels[falaise.status] : 'N/A'}</p>
+                <p className="text-2xl font-black text-[#8bb957]">{currentState ? conditionStateLabels[currentState] : 'N/A'}</p>
                 <p className="text-xs font-semibold uppercase text-white/[0.62]">état</p>
               </div>
             </div>
@@ -187,6 +193,10 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
 
         <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_380px]">
           <section className="space-y-6">
+            {currentProfile.user.role === 'grimpeur' && <section id="contribuer">
+              <CragContributionActions falaiseId={falaise.id} falaiseName={falaise.nom} />
+            </section>}
+
             <Card hover={false}>
               <CardHeader>
                 <CardTitle>Voies</CardTitle>
@@ -219,6 +229,9 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
                     </article>
                   )
                 })}
+                {routeRows.length === 0 && <p className="rounded-lg border border-dashed border-border p-4 text-sm text-muted-foreground md:col-span-2">
+                  Pas encore de voie répertoriée. Ajoute la première juste au-dessus.
+                </p>}
               </CardContent>
             </Card>
 
@@ -242,24 +255,25 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
                 <CardDescription>Informations temps réel pour préparer la sortie.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
-                {reportRows.map((report) => (
+                {reports.map((report) => (
                   <article key={report.id} className="rounded-lg border border-border bg-white/[0.03] p-4">
                     <div className="flex flex-wrap items-center justify-between gap-3">
                       <div className="flex items-center gap-2">
                         <AlertTriangle className="text-primary" size={18} />
                         <h2 className="font-bold text-foreground">{reportTypeLabels[report.type]}</h2>
+                        {report.condition?.state && <Badge variant="secondary">{conditionStateLabels[report.condition.state]}</Badge>}
                       </div>
                       <Badge variant={report.status === 'open' ? 'warning' : 'success'}>
                         {report.status === 'open' ? 'Ouvert' : 'Résolu'}
                       </Badge>
                     </div>
-                    <p className="mt-3 text-sm text-muted-foreground">{report.message}</p>
+                    <p className="mt-3 text-sm text-muted-foreground">{report.condition?.message ?? report.message}</p>
                     <p className="mt-3 text-xs text-muted-foreground">
                       Signalé par {report.authorEmail} · {report.createdAt.toLocaleDateString('fr-FR')}
                     </p>
                   </article>
                 ))}
-                {reportRows.length === 0 && (
+                {reports.length === 0 && (
                   <p className="rounded-lg border border-border p-4 text-sm text-muted-foreground">
                     Aucun signalement pour cette falaise.
                   </p>

@@ -8,6 +8,10 @@ export const sunlightOptions = ['ombrage', 'mixte', 'ensoleille'] as const
 export const seasonOptions = ['printemps', 'ete', 'automne', 'hiver'] as const
 export const orientationOptions = ['nord', 'nord_est', 'est', 'sud_est', 'sud', 'sud_ouest', 'ouest', 'nord_ouest'] as const
 export const placeServices = ['vestiaires', 'douches', 'location_materiel', 'restauration', 'entrainement', 'parking_velo'] as const
+export const routeStyles = ['dalle', 'devers', 'vertical', 'fissure', 'pilier', 'mixte'] as const
+export const routeConditions = ['ok', 'humide', 'spit_a_verifier', 'fermee'] as const
+export const conditionStates = ['sec', 'humide', 'attention', 'ferme'] as const
+export const cragReportTypes = ['condition', 'access', 'safety', 'info'] as const
 
 const optionalText = (maximum: number) => z.string().trim().max(maximum)
 const optionalUrl = z.union([z.literal(''), z.url('Saisis une adresse web valide.')])
@@ -131,6 +135,36 @@ export const placeChangeInputSchema = z.discriminatedUnion('kind', [
 ])
 
 export type PlaceChangeInput = z.infer<typeof placeChangeInputSchema>
+
+const optionalPositiveInteger = z.number().int().min(1).max(2_000).nullable()
+
+export const cragRouteInputSchema = z.object({
+  falaiseId: z.uuid('Falaise invalide.'),
+  nom: z.string().trim().min(2, 'Indique le nom de la voie.').max(255),
+  cotation: z.string().trim().regex(/^[3-9][a-c]\+?$/, 'Indique une cotation valide, par exemple 6a+.'),
+  secteur: optionalText(120),
+  hauteur: optionalPositiveInteger,
+  degaines: z.number().int().min(1).max(100).nullable(),
+  style: z.union([z.literal(''), z.enum(routeStyles)]),
+  status: z.enum(routeConditions),
+}).strict()
+
+export const cragReportInputSchema = z.discriminatedUnion('type', [
+  z.object({
+    falaiseId: z.uuid('Falaise invalide.'),
+    type: z.literal('condition'),
+    conditionState: z.enum(conditionStates),
+    message: optionalText(500),
+  }).strict(),
+  z.object({
+    falaiseId: z.uuid('Falaise invalide.'),
+    type: z.enum(['access', 'safety', 'info']),
+    message: z.string().trim().min(8, 'Décris le signalement en au moins 8 caractères.').max(500),
+  }).strict(),
+])
+
+export type CragRouteInput = z.infer<typeof cragRouteInputSchema>
+export type CragReportInput = z.infer<typeof cragReportInputSchema>
 
 export const placeRequestResponseSchema = z.object({
   request: z.object({ id: z.uuid(), status: z.literal('pending') }),

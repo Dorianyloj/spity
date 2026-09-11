@@ -1,4 +1,4 @@
-import { placeChangeInputSchema, placeCreationInputSchema } from './schemas'
+import { cragReportInputSchema, cragRouteInputSchema, placeChangeInputSchema, placeCreationInputSchema } from './schemas'
 
 const baseRequest = {
   kind: 'falaise' as const,
@@ -138,5 +138,49 @@ describe('placeChangeInputSchema', () => {
       ...baseChange,
       photoMediaIds: Array.from({ length: 7 }, (_, index) => `11111111-1111-4111-8111-${String(index).padStart(12, '0')}`),
     }).success).toBe(false)
+  })
+})
+
+describe('crag contribution schemas', () => {
+  const falaiseId = 'eb7c2638-3114-41b6-8917-a5dc4bc1d22e'
+
+  it('accepts a concise route contribution', () => {
+    expect(cragRouteInputSchema.safeParse({
+      falaiseId,
+      nom: 'La sortie du loup',
+      cotation: '6a+',
+      secteur: '',
+      hauteur: null,
+      degaines: null,
+      style: '',
+      status: 'ok',
+    }).success).toBe(true)
+  })
+
+  it('requires a real route grade and a coherent alert', () => {
+    expect(cragRouteInputSchema.safeParse({
+      falaiseId,
+      nom: 'La sortie du loup',
+      cotation: 'difficile',
+      secteur: '',
+      hauteur: null,
+      degaines: null,
+      style: '',
+      status: 'ok',
+    }).success).toBe(false)
+    expect(cragReportInputSchema.safeParse({
+      falaiseId,
+      type: 'safety',
+      message: 'Court',
+    }).success).toBe(false)
+  })
+
+  it('allows a condition report without a comment', () => {
+    expect(cragReportInputSchema.safeParse({
+      falaiseId,
+      type: 'condition',
+      conditionState: 'humide',
+      message: '',
+    }).success).toBe(true)
   })
 })

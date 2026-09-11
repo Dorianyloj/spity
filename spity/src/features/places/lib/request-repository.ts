@@ -1,9 +1,10 @@
 import { randomUUID } from 'crypto'
 import { and, eq, inArray } from 'drizzle-orm'
 import { db } from '@/db'
-import { falaises, mediaUploads, placeChangeRequestPhotos, placeChangeRequests, placeCreationRequests, salles } from '@/db/schema'
+import { falaises, mediaUploads, placeChangeRequestPhotos, placeChangeRequests, placeCreationRequests, placeReports, salles, voies } from '@/db/schema'
 import { ProfileOperationError } from '@/features/profile/lib/http'
-import type { PlaceChangeInput, PlaceCreationInput } from '../schemas'
+import { formatConditionReport } from './crag-reports'
+import type { CragReportInput, CragRouteInput, PlaceChangeInput, PlaceCreationInput } from '../schemas'
 
 const nullable = <Value extends string>(value: Value): Value | null => value || null
 
@@ -87,4 +88,54 @@ export const createPlaceChangeRequest = async (authorId: string, input: PlaceCha
   })
 
   return { id, status: 'pending' as const }
+}
+
+export const createCragRoute = async (authorId: string, input: CragRouteInput) => {
+  const id = randomUUID()
+
+  await db.transaction(async (tx) => {
+    const [crag] = await tx.select({ id: falaises.id }).from(falaises)
+      .where(eq(falaises.id, input.falaiseId)).limit(1).for('update')
+    if (!crag) throw new ProfileOperationError('Cette falaise n’existe plus.', 404)
+
+    const [existingRoute] = await tx.select({ id: voies.id }).from(voies)
+      .where(and(eq(voies.falaiseId, input.falaiseId), eq(voies.nom, input.nom))).limit(1).for('update')
+    if (existingRoute) throw new ProfileOperationError('Une voie porte déjà ce nom sur cette falaise.', 409)
+
+    await tx.insert(voies).values({
+      id,
+      falaiseId: input.falaiseId,
+      nom: input.nom,
+      cotation: input.cotation,
+      secteur: nullable(input.secteur),
+      hauteur: input.hauteur,
+      degaines: input.degaines,
+      style: input.style || null,
+      status: input.status,
+      etatVotes: {},
+    })
+  })
+
+  return { id }
+}
+
+export const createCragReport = async (authorId: string, input: CragReportInput) => {
+  const id = randomUUID()
+
+  await db.transaction(async (tx) => {
+    const [crag] = await tx.select({ id: falaises.id }).from(falaises)
+      .where(eq(falaises.id, input.falaiseId)).limit(1).for('update')
+    if (!crag) throw new ProfileOperationError('Cette falaise n’existe plus.', 404)
+
+    await tx.insert(placeReports).values({
+      id,
+      falaiseId: input.falaiseId,
+      authorId,
+      type: input.type,
+      status: 'open',
+      message: input.type === 'condition' ? formatConditionReport(input) : input.message,
+    })
+  })
+
+  return { id }
 }
