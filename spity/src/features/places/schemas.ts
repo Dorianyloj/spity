@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { cragRouteDisciplines } from '@/lib/climbing-disciplines'
 
 export const placeKinds = ['salle', 'falaise'] as const
 export const placeDisciplines = ['voie', 'bloc', 'grande_voie', 'trad', 'artif', 'deep_water_solo', 'via_ferrata', 'speed'] as const
@@ -141,6 +142,7 @@ const optionalPositiveInteger = z.number().int().min(1).max(2_000).nullable()
 export const cragRouteInputSchema = z.object({
   falaiseId: z.uuid('Falaise invalide.'),
   nom: z.string().trim().min(2, 'Indique le nom de la voie.').max(255),
+  discipline: z.enum(cragRouteDisciplines),
   cotation: z.string().trim().regex(/^[3-9][a-c]\+?$/, 'Indique une cotation valide, par exemple 6a+.'),
   secteur: optionalText(120),
   hauteur: optionalPositiveInteger,

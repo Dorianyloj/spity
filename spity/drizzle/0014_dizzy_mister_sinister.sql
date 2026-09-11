@@ -1,0 +1,1 @@
+ALTER TABLE `voies` ADD `discipline` enum('voie','bloc','grande_voie','trad','artif','deep_water_solo','via_ferrata') DEFAULT 'voie' NOT NULL;

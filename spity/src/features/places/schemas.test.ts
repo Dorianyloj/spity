@@ -148,6 +148,7 @@ describe('crag contribution schemas', () => {
     expect(cragRouteInputSchema.safeParse({
       falaiseId,
       nom: 'La sortie du loup',
+      discipline: 'grande_voie',
       cotation: '6a+',
       secteur: '',
       hauteur: null,
@@ -161,7 +162,19 @@ describe('crag contribution schemas', () => {
     expect(cragRouteInputSchema.safeParse({
       falaiseId,
       nom: 'La sortie du loup',
+      discipline: 'voie',
       cotation: 'difficile',
+      secteur: '',
+      hauteur: null,
+      degaines: null,
+      style: '',
+      status: 'ok',
+    }).success).toBe(false)
+    expect(cragRouteInputSchema.safeParse({
+      falaiseId,
+      nom: 'La sortie du loup',
+      discipline: 'speed',
+      cotation: '6a',
       secteur: '',
       hauteur: null,
       degaines: null,

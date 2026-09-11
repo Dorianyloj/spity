@@ -12,6 +12,7 @@ import {
   varchar,
 } from 'drizzle-orm/mysql-core'
 import { relations } from 'drizzle-orm'
+import { cragRouteDisciplines } from '@/lib/climbing-disciplines'
 
 // === USERS ===
 export const users = mysqlTable('users', {
@@ -307,6 +308,7 @@ export const voies = mysqlTable('voies', {
   id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
   falaiseId: varchar('falaise_id', { length: 36 }).notNull().references(() => falaises.id, { onDelete: 'cascade' }),
   nom: varchar('nom', { length: 255 }).notNull(),
+  discipline: mysqlEnum('discipline', cragRouteDisciplines).notNull().default('voie'),
   cotation: varchar('cotation', { length: 10 }).notNull(),
   etatVotes: json('etat_votes').$type<Record<string, number>>(),
   hauteur: int('hauteur'),

@@ -43,6 +43,7 @@ describe('CragContributionActions', () => {
     await user.click(screen.getByText('Ajouter une voie'))
     await user.type(screen.getByLabelText('Nom de la voie'), 'La sortie du loup')
     await user.type(screen.getByLabelText('Cotation'), '6a+')
+    await user.selectOptions(screen.getByLabelText('Type de voie'), 'grande_voie')
     await user.type(screen.getByLabelText('Secteur'), 'Grand mur')
     await user.type(screen.getByLabelText('Hauteur (m)'), '24')
     await user.type(screen.getByLabelText('Dégaines'), '10')
@@ -54,6 +55,7 @@ describe('CragContributionActions', () => {
     expect(JSON.parse(fetchMock.mock.calls[0]?.[1]?.body as string)).toEqual({
       falaiseId: 'eb7c2638-3114-41b6-8917-a5dc4bc1d22e',
       nom: 'La sortie du loup',
+      discipline: 'grande_voie',
       cotation: '6a+',
       secteur: 'Grand mur',
       hauteur: 24,

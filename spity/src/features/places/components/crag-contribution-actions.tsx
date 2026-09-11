@@ -5,6 +5,7 @@ import { AlertTriangle, CheckCircle2, CloudSun, FileText, Link as LinkIcon, Rout
 import { useRouter } from 'next/navigation'
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input, Textarea } from '@/components/ui'
 import { cn } from '@/lib/class-names'
+import { cragRouteDisciplineLabels, cragRouteDisciplines } from '@/lib/climbing-disciplines'
 
 type ContributionMode = 'condition' | 'route' | 'alert' | 'topo'
 type TopoKind = 'link' | 'pdf'
@@ -49,6 +50,7 @@ export default function CragContributionActions({ falaiseId, falaiseName }: Crag
       ? {
           falaiseId,
           nom: values.get('nom'),
+          discipline: values.get('discipline'),
           cotation: values.get('cotation'),
           secteur: values.get('secteur'),
           hauteur: numberOrNull(values.get('hauteur')),
@@ -170,6 +172,14 @@ export default function CragContributionActions({ falaiseId, falaiseName }: Crag
           {mode === 'route' && <div className="grid gap-4 sm:grid-cols-2">
             <Input label="Nom de la voie" maxLength={255} name="nom" placeholder="Ex. Le pas du loup" required />
             <Input label="Cotation" maxLength={4} name="cotation" pattern="[3-9][a-c]\+?" placeholder="6a+" required />
+            <label className="block text-sm font-medium text-foreground">
+              Type de voie
+              <select className="spity-input mt-1.5 min-h-11 w-full" defaultValue="voie" name="discipline" required>
+                {cragRouteDisciplines.map((discipline) => (
+                  <option key={discipline} value={discipline}>{cragRouteDisciplineLabels[discipline]}</option>
+                ))}
+              </select>
+            </label>
             <Input label="Secteur" maxLength={120} name="secteur" placeholder="Facultatif" />
             <label className="block text-sm font-medium text-foreground">
               Style

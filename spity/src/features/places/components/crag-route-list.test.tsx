@@ -3,9 +3,9 @@ import userEvent from '@testing-library/user-event'
 import CragRouteList, { gradeColorClass, type CragRoute } from './crag-route-list'
 
 const routes: CragRoute[] = [
-  { id: 'route-1', nom: 'La dalle douce', cotation: '5c', secteur: 'Ouest', style: 'dalle', hauteur: 18, degaines: 7, status: 'ok', voteCount: 2 },
-  { id: 'route-2', nom: 'Le grand dévers', cotation: '7a+', secteur: 'Est', style: 'devers', hauteur: 31, degaines: 12, status: 'humide', voteCount: 0 },
-  { id: 'route-3', nom: 'Fissure du matin', cotation: '6b', secteur: 'Ouest', style: 'fissure', hauteur: null, degaines: null, status: null, voteCount: 1 },
+  { id: 'route-1', nom: 'La dalle douce', discipline: 'voie', cotation: '5c', secteur: 'Ouest', style: 'dalle', hauteur: 18, degaines: 7, status: 'ok', voteCount: 2 },
+  { id: 'route-2', nom: 'Le grand dévers', discipline: 'grande_voie', cotation: '7a+', secteur: 'Est', style: 'devers', hauteur: 31, degaines: 12, status: 'humide', voteCount: 0 },
+  { id: 'route-3', nom: 'Fissure du matin', discipline: 'trad', cotation: '6b', secteur: 'Ouest', style: 'fissure', hauteur: null, degaines: null, status: null, voteCount: 1 },
 ]
 
 const routeNames = () => screen.getAllByRole('heading', { level: 3 }).map((heading) => heading.textContent)
@@ -23,6 +23,7 @@ describe('CragRouteList', () => {
     render(<CragRouteList routes={routes} />)
 
     expect(routeNames()).toEqual(['Le grand dévers', 'Fissure du matin', 'La dalle douce'])
+    expect(screen.getByText('Grande voie · Est · devers')).toBeInTheDocument()
     expect(screen.getByText('31 m · 12 dégaines')).toBeInTheDocument()
     expect(screen.getByText('Humide')).toBeInTheDocument()
     expect(screen.getByRole('status')).toHaveClass('sr-only')

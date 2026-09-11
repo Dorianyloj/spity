@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react'
 import { Badge, Button, FilterToolbar } from '@/components/ui'
 import { cn } from '@/lib/class-names'
+import { cragRouteDisciplineLabels, type CragRouteDiscipline } from '@/lib/climbing-disciplines'
 import { climbingGradeRank } from '../lib/grade-range'
 
 type RouteStatus = 'ok' | 'humide' | 'spit_a_verifier' | 'fermee'
@@ -11,6 +12,7 @@ type RouteSort = 'hardest' | 'easiest' | 'name'
 export type CragRoute = {
   cotation: string
   degaines: number | null
+  discipline: CragRouteDiscipline
   hauteur: number | null
   id: string
   nom: string
@@ -111,7 +113,7 @@ export default function CragRouteList({ routes }: CragRouteListProps) {
       {filteredRoutes.length > 0 ? <ul className="divide-y divide-border overflow-hidden rounded-lg border border-border bg-card">
         {filteredRoutes.map((route) => {
           const routeStatus = route.status ?? 'unknown'
-          const details = [route.secteur ?? 'Secteur à préciser', route.style ?? 'style à préciser'].join(' · ')
+          const details = [cragRouteDisciplineLabels[route.discipline], route.secteur ?? 'Secteur à préciser', route.style ?? 'style à préciser'].join(' · ')
           const measures = [route.hauteur ? `${route.hauteur} m` : null, route.degaines ? `${route.degaines} dégaines` : null].filter(Boolean).join(' · ')
 
           return (

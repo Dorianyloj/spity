@@ -15,6 +15,7 @@ import { conditionStateLabels, parseConditionReport } from '@/features/places/li
 import { formatGradeRange } from '@/features/places/lib/grade-range'
 import { getCurrentProfile } from '@/features/profile/lib/current-profile'
 import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
+import { getClimbingDisciplineLabel } from '@/lib/climbing-disciplines'
 
 type CragDetailPageProps = {
   params: Promise<{
@@ -230,6 +231,7 @@ export default async function CragDetailPage({ params, searchParams }: CragDetai
                 <CragRouteList routes={routeRows.map((routeRow) => ({
                   id: routeRow.id,
                   nom: routeRow.nom,
+                  discipline: routeRow.discipline,
                   cotation: routeRow.cotation,
                   secteur: routeRow.secteur,
                   style: routeRow.style,
@@ -310,7 +312,7 @@ export default async function CragDetailPage({ params, searchParams }: CragDetai
                   <Mountain className="mt-0.5 text-primary" size={18} />
                   <div>
                     <p className="font-semibold text-foreground">Terrain</p>
-                    <p className="mt-1 text-muted-foreground">{disciplines.join(', ') || 'Pratique à préciser'} · {falaise.rockType ? rockLabels[falaise.rockType] : 'roche à préciser'}</p>
+                    <p className="mt-1 text-muted-foreground">{disciplines.map(getClimbingDisciplineLabel).join(', ') || 'Pratique à préciser'} · {falaise.rockType ? rockLabels[falaise.rockType] : 'roche à préciser'}</p>
                     <p className="mt-1 text-muted-foreground">{falaise.rainExposure ? `Pluie : ${rainLabels[falaise.rainExposure]}` : 'Exposition à la pluie à préciser'} · {falaise.sunlight ? sunlightLabels[falaise.sunlight] : 'ensoleillement à préciser'}</p>
                   </div>
                 </div>}

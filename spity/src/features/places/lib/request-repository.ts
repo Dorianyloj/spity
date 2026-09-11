@@ -98,7 +98,7 @@ export const createCragRoute = async (authorId: string, input: CragRouteInput) =
   const id = randomUUID()
 
   await db.transaction(async (tx) => {
-    const [crag] = await tx.select({ id: falaises.id }).from(falaises)
+    const [crag] = await tx.select({ id: falaises.id, disciplines: falaises.disciplines }).from(falaises)
       .where(eq(falaises.id, input.falaiseId)).limit(1).for('update')
     if (!crag) throw new ProfileOperationError('Cette falaise n’existe plus.', 404)
 
@@ -110,6 +110,7 @@ export const createCragRoute = async (authorId: string, input: CragRouteInput) =
       id,
       falaiseId: input.falaiseId,
       nom: input.nom,
+      discipline: input.discipline,
       cotation: input.cotation,
       secteur: nullable(input.secteur),
       hauteur: input.hauteur,
@@ -118,6 +119,13 @@ export const createCragRoute = async (authorId: string, input: CragRouteInput) =
       status: input.status,
       etatVotes: {},
     })
+
+    const currentDisciplines = Array.isArray(crag.disciplines) ? crag.disciplines : []
+    if (!currentDisciplines.includes(input.discipline)) {
+      await tx.update(falaises)
+        .set({ disciplines: [...currentDisciplines, input.discipline] })
+        .where(eq(falaises.id, input.falaiseId))
+    }
   })
 
   return { id }

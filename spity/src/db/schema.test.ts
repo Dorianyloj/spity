@@ -60,7 +60,7 @@ describe('database schema', () => {
       'userId',
       'status',
     ]))
-    expect(Object.keys(getTableColumns(voies))).toEqual(expect.arrayContaining(['falaiseId', 'cotation', 'status']))
+    expect(Object.keys(getTableColumns(voies))).toEqual(expect.arrayContaining(['falaiseId', 'discipline', 'cotation', 'status']))
     expect(Object.keys(getTableColumns(placeCreationRequests))).toEqual(expect.arrayContaining([
       'authorId',
       'kind',

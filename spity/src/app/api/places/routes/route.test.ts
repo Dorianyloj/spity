@@ -22,7 +22,7 @@ const request = (body: unknown) => new Request('http://localhost:3000/api/places
 
 const validRoute = {
   falaiseId: 'eb7c2638-3114-41b6-8917-a5dc4bc1d22e', nom: 'La sortie du loup', cotation: '6a+', secteur: '',
-  hauteur: null, degaines: null, style: '', status: 'ok',
+  discipline: 'trad', hauteur: null, degaines: null, style: '', status: 'ok',
 }
 
 beforeEach(() => {
