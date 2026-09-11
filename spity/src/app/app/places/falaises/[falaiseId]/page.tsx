@@ -9,6 +9,7 @@ import { cragTopos, falaises, placePhotos, placeReports, users, voies } from '@/
 import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui'
 import AppShell from '@/features/app/components/app-shell'
 import CragContributionActions from '@/features/places/components/crag-contribution-actions'
+import PlaceSectionMenu from '@/features/places/components/place-section-menu'
 import { conditionStateLabels, parseConditionReport } from '@/features/places/lib/crag-reports'
 import { getCurrentProfile } from '@/features/profile/lib/current-profile'
 import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
@@ -203,13 +204,20 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
           </div>
         </section>
 
+        <PlaceSectionMenu sections={[
+          ...(currentProfile.user.role === 'grimpeur' ? [{ href: '#contribuer', label: 'Contribuer', section: 'contribute' as const }] : []),
+          { href: '#voies', label: 'Voies', section: 'routes' },
+          { href: '#photos', label: 'Photos', section: 'photos' },
+          { href: '#signalements', label: 'Signalements', section: 'reports' },
+        ]} />
+
         <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_380px]">
           <section className="space-y-6">
             {currentProfile.user.role === 'grimpeur' && <section id="contribuer">
               <CragContributionActions falaiseId={falaise.id} falaiseName={falaise.nom} />
             </section>}
 
-            <Card hover={false}>
+            <Card hover={false} id="voies">
               <CardHeader>
                 <CardTitle>Voies</CardTitle>
                 <CardDescription>Cotations, secteurs, hauteur et état communautaire.</CardDescription>
@@ -247,21 +255,23 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
               </CardContent>
             </Card>
 
-            {galleryRows.length > 0 && <Card hover={false}>
+            <Card hover={false} id="photos">
               <CardHeader>
                 <CardTitle>Photos de la communauté</CardTitle>
                 <CardDescription>Photos proposées par des grimpeurs et validées par Spity.</CardDescription>
               </CardHeader>
               <CardContent>
-                <ul className="grid gap-3 sm:grid-cols-2">
+                {galleryRows.length > 0 ? <ul className="grid gap-3 sm:grid-cols-2">
                   {galleryRows.map((photo, index) => <li className="relative aspect-video overflow-hidden rounded-lg border border-border" key={photo.id}>
                     <Image alt={`Photo ${index + 1} de ${falaise.nom}`} className="object-cover" fill sizes="(min-width: 768px) 45vw, 100vw" src={`/api/place-media/${photo.mediaId}`} unoptimized />
                   </li>)}
-                </ul>
+                </ul> : <p className="text-pretty text-sm text-muted-foreground">
+                  Pas encore de photo partagée.{currentProfile.user.role === 'grimpeur' && <> <Link className="font-semibold text-foreground underline underline-offset-4" href={`/app/places/falaises/${falaise.id}/contribute`}>Ajouter la première.</Link></>}
+                </p>}
               </CardContent>
-            </Card>}
+            </Card>
 
-            <Card hover={false}>
+            <Card hover={false} id="signalements">
               <CardHeader>
                 <CardTitle>Signalements</CardTitle>
                 <CardDescription>Informations temps réel pour préparer la sortie.</CardDescription>
