@@ -302,6 +302,22 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @layer components {
+  .leaflet-tooltip.places-cluster-count {
+    margin: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+  }
+
+  .leaflet-tooltip.places-cluster-count::before {
+    display: none;
+  }
+
   /* Badge de cotation */
   .grade-badge {
     @apply inline-flex items-center justify-center rounded-md px-2 py-0.5 font-mono text-xs font-bold;

@@ -23,7 +23,7 @@ import type { PlaceMapPoint } from './places-map'
 const PlacesMap = dynamic(() => import('./places-map'), {
   ssr: false,
   loading: () => (
-    <div className="flex h-80 items-center justify-center rounded-lg bg-secondary text-sm text-muted-foreground" role="status">
+    <div className="flex h-96 items-center justify-center rounded-lg bg-secondary text-sm text-muted-foreground" role="status">
       Chargement de la carte…
     </div>
   ),
@@ -326,8 +326,8 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
         showReset={hasActiveFilters}
       />
 
-      <div className="grid items-start gap-6 xl:grid-cols-[minmax(0,1fr)_23rem]">
-        <section aria-labelledby="places-results-heading">
+      <div className="flex flex-col gap-6">
+        <section aria-labelledby="places-results-heading" className="order-2">
           <div className="mb-4 flex items-center justify-between gap-4">
             <h2 id="places-results-heading" className="text-balance text-xl font-bold text-white">Résultats</h2>
             {results.length > 0 && <span className="text-sm tabular-nums text-zinc-300">{Math.min(displayedResults.length, results.length)} / {results.length}</span>}
@@ -387,15 +387,15 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
           )}
         </section>
 
-        <aside className="xl:sticky xl:top-6" aria-labelledby="places-map-heading">
+        <aside className="order-1" aria-labelledby="places-map-heading">
           <Card hover={false}>
             <CardHeader>
-              <CardTitle id="places-map-heading">Carte</CardTitle>
-              <CardDescription>{mapPoints.length > 0 ? 'Sélectionne un point pour le surligner dans la liste.' : 'Aucun des résultats ne possède encore de position.'}</CardDescription>
+              <CardTitle id="places-map-heading">Carte des lieux</CardTitle>
+              <CardDescription>{mapPoints.length > 0 ? 'Dézoome pour regrouper les lieux, puis clique un groupe pour l’ouvrir.' : 'Aucun des résultats ne possède encore de position.'}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="overflow-hidden rounded-lg border border-border">
-                {mapPoints.length > 0 ? <PlacesMap places={mapPoints} selectedPlaceId={selectedPlaceId} onSelect={selectMapPoint} /> : <div className="flex h-80 items-center justify-center bg-secondary px-6 text-center text-pretty text-sm text-muted-foreground">Ajoute une position sur la fiche d’un lieu pour l’afficher ici.</div>}
+                {mapPoints.length > 0 ? <PlacesMap className="h-96 lg:h-[32rem]" places={mapPoints} selectedPlaceId={selectedPlaceId} onSelect={selectMapPoint} /> : <div className="flex h-96 items-center justify-center bg-secondary px-6 text-center text-pretty text-sm text-muted-foreground">Ajoute une position sur la fiche d’un lieu pour l’afficher ici.</div>}
               </div>
               {mapPoints.length > 0 && (
                 <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground">
