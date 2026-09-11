@@ -1,5 +1,5 @@
 import { desc, eq } from 'drizzle-orm'
-import { AlertTriangle, ArrowLeft, Clock, ExternalLink, FileDown, FileText, MapPin, Mountain, ParkingCircle, Route, ShieldCheck } from 'lucide-react'
+import { AlertTriangle, ArrowLeft, Clock, ExternalLink, FileDown, FileText, MapPin, Mountain, ParkingCircle, ShieldCheck } from 'lucide-react'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -9,6 +9,7 @@ import { cragTopos, falaises, placePhotos, placeReports, users, voies } from '@/
 import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui'
 import AppShell from '@/features/app/components/app-shell'
 import CragContributionActions from '@/features/places/components/crag-contribution-actions'
+import CragRouteList from '@/features/places/components/crag-route-list'
 import PlaceSectionMenu from '@/features/places/components/place-section-menu'
 import { conditionStateLabels, parseConditionReport } from '@/features/places/lib/crag-reports'
 import { getCurrentProfile } from '@/features/profile/lib/current-profile'
@@ -71,13 +72,6 @@ const parseNumberRecord = (value: unknown) => {
     return {}
   }
 }
-
-const routeStatusLabels = {
-  ok: 'OK',
-  humide: 'Humide',
-  spit_a_verifier: 'Spit à vérifier',
-  fermee: 'Fermée',
-} as const
 
 const reportTypeLabels = {
   condition: 'Condition',
@@ -227,38 +221,20 @@ export default async function CragDetailPage({ params, searchParams }: CragDetai
             {activeSection === 'routes' && <Card hover={false} id="voies">
               <CardHeader>
                 <CardTitle>Voies</CardTitle>
-                <CardDescription>Cotations, secteurs, hauteur et état communautaire.</CardDescription>
+                <CardDescription>Recherche, filtres et état communautaire, sans surcharge visuelle.</CardDescription>
               </CardHeader>
-              <CardContent className="grid gap-3 md:grid-cols-2">
-                {routeRows.map((routeRow) => {
-                  const votes = parseNumberRecord(routeRow.etatVotes)
-
-                  return (
-                    <article key={routeRow.id} className="rounded-lg border border-border bg-white/[0.03] p-4">
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <h2 className="flex items-center gap-2 font-bold text-foreground">
-                            <Route className="text-primary" size={18} />
-                            {routeRow.nom}
-                          </h2>
-                          <p className="mt-1 text-sm text-muted-foreground">
-                            {routeRow.secteur ?? 'Secteur à préciser'} · {routeRow.style ?? 'style à préciser'}
-                          </p>
-                        </div>
-                        <Badge variant="primary">{routeRow.cotation}</Badge>
-                      </div>
-                      <div className="mt-4 grid gap-2 text-sm text-muted-foreground sm:grid-cols-2">
-                        <span>{routeRow.hauteur ?? '?'} m</span>
-                        <span>{routeRow.degaines ?? '?'} dégaines</span>
-                        <span>{routeRow.status ? routeStatusLabels[routeRow.status] : 'État à confirmer'}</span>
-                        <span>{Object.values(votes).reduce((total, vote) => total + vote, 0)} votes état</span>
-                      </div>
-                    </article>
-                  )
-                })}
-                {routeRows.length === 0 && <p className="rounded-lg border border-dashed border-border p-4 text-sm text-muted-foreground md:col-span-2">
-                  Pas encore de voie répertoriée. Ajoute la première juste au-dessus.
-                </p>}
+              <CardContent>
+                <CragRouteList routes={routeRows.map((routeRow) => ({
+                  id: routeRow.id,
+                  nom: routeRow.nom,
+                  cotation: routeRow.cotation,
+                  secteur: routeRow.secteur,
+                  style: routeRow.style,
+                  hauteur: routeRow.hauteur,
+                  degaines: routeRow.degaines,
+                  status: routeRow.status,
+                  voteCount: Object.values(parseNumberRecord(routeRow.etatVotes)).reduce((total, vote) => total + vote, 0),
+                }))} />
               </CardContent>
             </Card>}
 
