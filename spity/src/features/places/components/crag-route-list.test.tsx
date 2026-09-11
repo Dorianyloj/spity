@@ -24,7 +24,7 @@ describe('CragRouteList', () => {
 
     expect(routeNames()).toEqual(['Le grand dévers', 'Fissure du matin', 'La dalle douce'])
     expect(screen.getByText('31 m · 12 dégaines')).toBeInTheDocument()
-    expect(screen.getAllByText('Humide')).toHaveLength(2)
+    expect(screen.getByText('Humide')).toBeInTheDocument()
     expect(screen.getByRole('status')).toHaveClass('sr-only')
   })
 
@@ -36,11 +36,15 @@ describe('CragRouteList', () => {
     expect(routeNames()).toEqual(['Fissure du matin'])
 
     await user.clear(screen.getByLabelText('Rechercher une voie'))
-    await user.selectOptions(screen.getByLabelText('Secteur'), 'Ouest')
-    await user.selectOptions(screen.getByLabelText('Trier'), 'easiest')
+    expect(routeNames()).toEqual(['Le grand dévers', 'Fissure du matin', 'La dalle douce'])
+    await user.click(screen.getByRole('combobox', { name: 'Secteur' }))
+    await user.click(await screen.findByRole('option', { name: 'Ouest' }))
+    await user.click(screen.getByRole('combobox', { name: 'Trier' }))
+    await user.click(await screen.findByRole('option', { name: 'Plus facile' }))
     expect(routeNames()).toEqual(['La dalle douce', 'Fissure du matin'])
 
-    await user.selectOptions(screen.getByLabelText('État'), 'unknown')
+    await user.click(screen.getByRole('combobox', { name: 'État' }))
+    await user.click(await screen.findByRole('option', { name: 'À confirmer' }))
     expect(routeNames()).toEqual(['Fissure du matin'])
 
     const resetButton = screen.getByRole('button', { name: 'Réinitialiser les filtres' })

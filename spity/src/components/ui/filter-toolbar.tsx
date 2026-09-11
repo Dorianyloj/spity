@@ -1,5 +1,6 @@
 import { useId, type ReactNode } from 'react'
 import { Filter, RotateCcw, Search } from 'lucide-react'
+import AnimatedSelect from './animated-select'
 import Button from './button'
 import { Card, CardContent } from './card'
 import { cn } from '@/lib/class-names'
@@ -76,36 +77,26 @@ export default function FilterToolbar({
               const filterId = `${searchId}-filter-${index}`
 
               return (
-                <div key={filter.label} className="space-y-2">
-                  <label className="block text-xs font-semibold text-muted-foreground" htmlFor={filterId}>
-                    {filter.label}
-                  </label>
-                  <div className="flex items-center gap-2">
-                    <select
-                      id={filterId}
-                      className={cn('spity-input h-12 min-w-0 flex-1', filters.length === 1 && 'sm:max-w-xs')}
-                      value={filter.value}
-                      onChange={(event) => filter.onChange(event.target.value)}
-                      aria-label={filter.label}
+                <div key={filter.label} className="flex min-w-0 items-end gap-2">
+                  <AnimatedSelect
+                    className={cn('min-w-0 flex-1', filters.length === 1 && 'sm:max-w-xs')}
+                    id={filterId}
+                    label={filter.label}
+                    onValueChange={filter.onChange}
+                    options={filter.options}
+                    value={filter.value}
+                  />
+                  {showInlineReset && index === filters.length - 1 && (
+                    <Button
+                      aria-label={resetLabel}
+                      className="size-10 shrink-0 p-0 text-muted-foreground"
+                      onClick={onReset}
+                      title={resetLabel}
+                      variant="ghost"
                     >
-                      {filter.options.map((option) => (
-                        <option key={`${index}-${option.value}`} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
-                    {showInlineReset && index === filters.length - 1 && (
-                      <Button
-                        aria-label={resetLabel}
-                        className="size-10 shrink-0 p-0 text-muted-foreground"
-                        onClick={onReset}
-                        title={resetLabel}
-                        variant="ghost"
-                      >
-                        <RotateCcw size={16} aria-hidden="true" />
-                      </Button>
-                    )}
-                  </div>
+                      <RotateCcw size={16} aria-hidden="true" />
+                    </Button>
+                  )}
                 </div>
               )
             })}

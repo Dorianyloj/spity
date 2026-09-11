@@ -76,11 +76,14 @@ describe('PlacesDirectory', () => {
     expect(screen.getByRole('heading', { name: 'Curis' })).toBeInTheDocument()
 
     await user.clear(screen.getByRole('searchbox'))
-    await user.selectOptions(screen.getByLabelText('Pratique'), 'trad')
+    expect(screen.getByRole('heading', { name: 'Arkose Lyon' })).toBeInTheDocument()
+    await user.click(screen.getByRole('combobox', { name: 'Pratique' }))
+    await user.click(await screen.findByRole('option', { name: 'Trad' }))
     expect(screen.getByRole('heading', { name: 'Curis' })).toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: 'Arkose Lyon' })).not.toBeInTheDocument()
 
-    await user.selectOptions(screen.getByLabelText('Pratique'), 'grande_voie')
+    await user.click(screen.getByRole('combobox', { name: 'Pratique' }))
+    await user.click(await screen.findByRole('option', { name: 'Grande voie' }))
     expect(screen.getByText('Aucun lieu trouvé')).toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: 'Réinitialiser les filtres' }))

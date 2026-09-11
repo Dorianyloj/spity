@@ -38,6 +38,9 @@ export type { AppHeroProps } from './app-hero'
 export { default as FilterToolbar } from './filter-toolbar'
 export type { FilterToolbarProps } from './filter-toolbar'
 
+export { default as AnimatedSelect } from './animated-select'
+export type { AnimatedSelectOption, AnimatedSelectProps } from './animated-select'
+
 export { default as MediaHeader } from './media-header'
 export type { MediaHeaderProps } from './media-header'
 
