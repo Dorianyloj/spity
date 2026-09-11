@@ -4,6 +4,7 @@ import { CircleMarker, MapContainer, Popup, TileLayer, Tooltip, useMap, useMapEv
 import { useEffect, useMemo, useState } from 'react'
 import { cn } from '@/lib/class-names'
 import { clusterMapPlaces } from '../lib/map-clustering'
+import { getDominantMapDiscipline, mapDisciplineStyles, type MapDiscipline } from '../lib/map-marker-styles'
 
 export type PlaceMapPoint = {
   id: string
@@ -13,21 +14,17 @@ export type PlaceMapPoint = {
   name: string
   location: string
   href: string
+  discipline: MapDiscipline
 }
 
 type PlacesMapProps = {
+  ariaLabel: string
   className?: string
   expanded?: boolean
   onSelect: (placeId: string) => void
   places: PlaceMapPoint[]
   selectedPlaceId: string | null
 }
-
-const markerColors = {
-  salle: '#2563eb',
-  falaise: '#e11d48',
-  cluster: '#7c3aed',
-} as const
 
 function FitPlaces({ places }: Pick<PlacesMapProps, 'places'>) {
   const map = useMap()
@@ -52,7 +49,7 @@ function FitPlaces({ places }: Pick<PlacesMapProps, 'places'>) {
   return null
 }
 
-function ClusteredMarkers({ onSelect, places, selectedPlaceId }: Omit<PlacesMapProps, 'className'>) {
+function ClusteredMarkers({ onSelect, places, selectedPlaceId }: Pick<PlacesMapProps, 'onSelect' | 'places' | 'selectedPlaceId'>) {
   const map = useMap()
   const [zoom, setZoom] = useState(map.getZoom())
 
@@ -69,7 +66,6 @@ function ClusteredMarkers({ onSelect, places, selectedPlaceId }: Omit<PlacesMapP
     if (cluster.places.length === 1) {
       const [place] = cluster.places
       const isSelected = place.id === selectedPlaceId
-      const isCrag = place.kind === 'falaise'
 
       return (
         <CircleMarker
@@ -78,7 +74,7 @@ function ClusteredMarkers({ onSelect, places, selectedPlaceId }: Omit<PlacesMapP
           eventHandlers={{ click: () => onSelect(place.id) }}
           pathOptions={{
             color: '#ffffff',
-            fillColor: isCrag ? markerColors.falaise : markerColors.salle,
+            fillColor: mapDisciplineStyles[place.discipline].color,
             fillOpacity: 1,
             weight: isSelected ? 5 : 3,
           }}
@@ -95,6 +91,7 @@ function ClusteredMarkers({ onSelect, places, selectedPlaceId }: Omit<PlacesMapP
     }
 
     const includesSelectedPlace = cluster.places.some((place) => place.id === selectedPlaceId)
+    const dominantDiscipline = getDominantMapDiscipline(cluster.places.map((place) => place.discipline))
 
     return (
       <CircleMarker
@@ -103,7 +100,7 @@ function ClusteredMarkers({ onSelect, places, selectedPlaceId }: Omit<PlacesMapP
         eventHandlers={{ click: () => map.fitBounds(cluster.places.map((place) => [place.latitude, place.longitude] as [number, number]), { maxZoom: 14, padding: [36, 36] }) }}
         pathOptions={{
           color: '#ffffff',
-          fillColor: markerColors.cluster,
+          fillColor: mapDisciplineStyles[dominantDiscipline].color,
           fillOpacity: 1,
           weight: includesSelectedPlace ? 5 : 3,
         }}
@@ -126,10 +123,10 @@ function MapSizeInvalidator({ expanded }: Pick<PlacesMapProps, 'expanded'>) {
   return null
 }
 
-export default function PlacesMap({ className, expanded = false, onSelect, places, selectedPlaceId }: PlacesMapProps) {
+export default function PlacesMap({ ariaLabel, className, expanded = false, onSelect, places, selectedPlaceId }: PlacesMapProps) {
   return (
     <MapContainer
-      aria-label="Carte des lieux correspondant à la recherche"
+      aria-label={ariaLabel}
       center={[46.7, 2.4]}
       className={cn('h-80 w-full', className)}
       scrollWheelZoom

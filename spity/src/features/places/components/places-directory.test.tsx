@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import PlacesDirectory from './places-directory'
 
-jest.mock('next/dynamic', () => () => function MockPlacesMap({ className, expanded }: { className?: string; expanded?: boolean }) {
-  return <div className={className} data-expanded={expanded} data-testid="places-map" />
+jest.mock('next/dynamic', () => () => function MockPlacesMap({ ariaLabel, className, expanded }: { ariaLabel: string; className?: string; expanded?: boolean }) {
+  return <div aria-label={ariaLabel} className={className} data-expanded={expanded} data-testid="places-map" />
 })
 
 const salles = [{
@@ -57,7 +57,9 @@ describe('PlacesDirectory', () => {
     expect(screen.getByText('1 voie')).toBeInTheDocument()
     expect(screen.queryByText('La directe')).not.toBeInTheDocument()
     expect(screen.getByText('3 lieux trouvés')).toBeInTheDocument()
-    expect(screen.getByTestId('places-map')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Carte des falaises' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Carte des salles' })).toBeInTheDocument()
+    expect(screen.getAllByTestId('places-map')).toHaveLength(2)
     expect(screen.getByRole('link', { name: 'Ajouter un lieu' })).toHaveAttribute('href', '/app/places/suggest')
   })
 
@@ -86,12 +88,13 @@ describe('PlacesDirectory', () => {
     const user = userEvent.setup()
     render(<PlacesDirectory salles={salles} falaises={falaises} clubs={clubs} voies={voies} />)
 
-    await user.click(screen.getByRole('button', { name: 'Agrandir la carte' }))
-    expect(screen.getByRole('button', { name: 'Réduire la carte' })).toHaveAttribute('aria-pressed', 'true')
+    await user.click(screen.getByRole('button', { name: 'Agrandir la carte des falaises' }))
+    expect(screen.getByRole('button', { name: 'Réduire la carte des falaises' })).toHaveAttribute('aria-pressed', 'true')
     expect(screen.queryByRole('heading', { name: 'Résultats' })).not.toBeInTheDocument()
     expect(screen.getByTestId('places-map')).toHaveClass('min-h-96')
+    expect(screen.queryByRole('heading', { name: 'Carte des salles' })).not.toBeInTheDocument()
 
-    await user.click(screen.getByRole('button', { name: 'Réduire la carte' }))
+    await user.click(screen.getByRole('button', { name: 'Réduire la carte des falaises' }))
     expect(screen.getByRole('heading', { name: 'Résultats' })).toBeInTheDocument()
   })
 })

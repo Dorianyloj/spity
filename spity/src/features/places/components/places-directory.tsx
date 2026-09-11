@@ -18,6 +18,7 @@ import {
 } from '@/components/ui'
 import { brandAssets } from '@/lib/brand-assets'
 import { cn } from '@/lib/class-names'
+import { getMapDiscipline, mapDisciplines, mapDisciplineStyles, type MapDiscipline } from '../lib/map-marker-styles'
 import type { PlaceMapPoint } from './places-map'
 
 const PlacesMap = dynamic(() => import('./places-map'), {
@@ -71,6 +72,7 @@ type RoutePlace = {
 }
 
 type PlaceKind = 'all' | 'salles' | 'falaises' | 'clubs'
+type MapKind = 'salles' | 'falaises'
 type DisciplineFilter = 'all' | 'bloc' | 'voie' | 'grande_voie' | 'trad' | 'artif' | 'deep_water_solo' | 'via_ferrata' | 'speed'
 type StatusFilter = 'all' | 'sec' | 'attention'
 
@@ -150,7 +152,7 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
   const [status, setStatus] = useState<StatusFilter>('all')
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
   const [selectedPlaceId, setSelectedPlaceId] = useState<string | null>(null)
-  const [isMapExpanded, setIsMapExpanded] = useState(false)
+  const [expandedMap, setExpandedMap] = useState<MapKind | null>(null)
   const normalizedQuery = query.trim().toLowerCase()
 
   const filteredSalles = useMemo(
@@ -216,7 +218,16 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
         ].filter(Boolean),
         mapPoint:
           salle.latitude !== null && salle.longitude !== null
-            ? { id: salle.id, kind: 'salle' as const, name: salle.nom, location: salle.location, href: `/app/places/salles/${salle.id}`, latitude: salle.latitude, longitude: salle.longitude }
+            ? {
+                id: salle.id,
+                kind: 'salle' as const,
+                name: salle.nom,
+                location: salle.location,
+                href: `/app/places/salles/${salle.id}`,
+                latitude: salle.latitude,
+                longitude: salle.longitude,
+                discipline: getMapDiscipline(salle.disciplines, discipline === 'all' ? undefined : discipline),
+              }
             : null,
       })),
       ...filteredFalaises.map((falaise) => {
@@ -236,7 +247,16 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
           ].filter(Boolean),
           mapPoint:
             falaise.latitude !== null && falaise.longitude !== null
-              ? { id: falaise.id, kind: 'falaise' as const, name: falaise.nom, location: falaise.location, href: `/app/places/falaises/${falaise.id}`, latitude: falaise.latitude, longitude: falaise.longitude }
+              ? {
+                  id: falaise.id,
+                  kind: 'falaise' as const,
+                  name: falaise.nom,
+                  location: falaise.location,
+                  href: `/app/places/falaises/${falaise.id}`,
+                  latitude: falaise.latitude,
+                  longitude: falaise.longitude,
+                  discipline: getMapDiscipline(falaise.disciplines, discipline === 'all' ? undefined : discipline),
+                }
               : null,
         }
       }),
@@ -251,11 +271,22 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
         mapPoint: null,
       })),
     ],
-    [filteredClubs, filteredFalaises, filteredSalles, voies]
+    [discipline, filteredClubs, filteredFalaises, filteredSalles, voies]
   )
 
   const displayedResults = results.slice(0, visibleCount)
-  const mapPoints = results.flatMap((result) => (result.mapPoint ? [result.mapPoint] : []))
+  const salleMapPoints = results.flatMap((result) => result.kind === 'salle' && result.mapPoint ? [result.mapPoint] : [])
+  const falaiseMapPoints = results.flatMap((result) => result.kind === 'falaise' && result.mapPoint ? [result.mapPoint] : [])
+  const mapPanels = ([
+    { kind: 'falaises', title: 'Carte des falaises', ariaLabel: 'Carte des falaises correspondant à la recherche', points: falaiseMapPoints },
+    { kind: 'salles', title: 'Carte des salles', ariaLabel: 'Carte des salles correspondant à la recherche', points: salleMapPoints },
+  ] satisfies Array<{ ariaLabel: string; kind: MapKind; points: PlaceMapPoint[]; title: string }>).filter((panel) => {
+    if (expandedMap) return panel.kind === expandedMap
+    if (placeKind === 'clubs') return false
+    if (placeKind === 'salles' || placeKind === 'falaises') return panel.kind === placeKind
+    return panel.points.length > 0
+  })
+  const isMapExpanded = expandedMap !== null
   const hasActiveFilters = query.length > 0 || placeKind !== 'all' || discipline !== 'all' || status !== 'all'
 
   const resetFilters = () => {
@@ -327,7 +358,7 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
         showReset={hasActiveFilters}
       />
 
-      <div className={cn('grid items-start gap-6', isMapExpanded ? 'grid-cols-1' : 'xl:grid-cols-[minmax(0,1fr)_23rem]')}>
+      <div className={cn('grid items-start gap-6', isMapExpanded || mapPanels.length === 0 ? 'grid-cols-1' : 'xl:grid-cols-[minmax(0,1fr)_23rem]')}>
         {!isMapExpanded && <section aria-labelledby="places-results-heading">
           <div className="mb-4 flex items-center justify-between gap-4">
             <h2 id="places-results-heading" className="text-balance text-xl font-bold text-white">Résultats</h2>
@@ -388,31 +419,64 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
           )}
         </section>}
 
-        <aside className={cn(isMapExpanded && 'col-span-full')} aria-labelledby="places-map-heading">
-          <Card hover={false}>
-            <CardHeader className="gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <CardTitle id="places-map-heading">Carte des lieux</CardTitle>
-                <CardDescription>{mapPoints.length > 0 ? 'Dézoome pour regrouper les lieux, puis clique un groupe pour l’ouvrir.' : 'Aucun des résultats ne possède encore de position.'}</CardDescription>
-              </div>
-              <Button aria-pressed={isMapExpanded} onClick={() => setIsMapExpanded((expanded) => !expanded)} size="sm" type="button" variant="secondary">
-                {isMapExpanded ? <Minimize2 aria-hidden="true" size={16} /> : <Maximize2 aria-hidden="true" size={16} />}
-                {isMapExpanded ? 'Réduire la carte' : 'Agrandir la carte'}
-              </Button>
-            </CardHeader>
-            <CardContent>
-              <div className="overflow-hidden rounded-lg border border-border">
-                {mapPoints.length > 0 ? <PlacesMap className={isMapExpanded ? 'h-[calc(100dvh-14rem)] min-h-96' : 'h-80'} expanded={isMapExpanded} places={mapPoints} selectedPlaceId={selectedPlaceId} onSelect={selectMapPoint} /> : <div className={cn('flex items-center justify-center bg-secondary px-6 text-center text-pretty text-sm text-muted-foreground', isMapExpanded ? 'h-[calc(100dvh-14rem)] min-h-96' : 'h-80')}>Ajoute une position sur la fiche d’un lieu pour l’afficher ici.</div>}
-              </div>
-              {mapPoints.length > 0 && (
-                <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground">
-                  <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-blue-600" aria-hidden="true" />Salle</span>
-                  <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-rose-600" aria-hidden="true" />Falaise</span>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </aside>
+        {mapPanels.length > 0 && (
+          <aside className={cn('space-y-6', isMapExpanded && 'col-span-full')} aria-label="Cartes des lieux">
+            {mapPanels.map((panel) => {
+              const panelIsExpanded = expandedMap === panel.kind
+              const legendDisciplines = mapDisciplines.filter((item) => panel.points.some((point) => point.discipline === item))
+
+              return (
+                <Card hover={false} key={panel.kind}>
+                  <CardHeader className="gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <CardTitle>{panel.title}</CardTitle>
+                      <CardDescription>{panel.points.length > 0 ? 'Clique un groupe pour zoomer.' : 'Aucune position pour ces résultats.'}</CardDescription>
+                    </div>
+                    <Button
+                      aria-label={`${panelIsExpanded ? 'Réduire' : 'Agrandir'} la ${panel.title.toLowerCase()}`}
+                      aria-pressed={panelIsExpanded}
+                      onClick={() => setExpandedMap(panelIsExpanded ? null : panel.kind)}
+                      size="sm"
+                      type="button"
+                      variant="secondary"
+                    >
+                      {panelIsExpanded ? <Minimize2 aria-hidden="true" size={16} /> : <Maximize2 aria-hidden="true" size={16} />}
+                      {panelIsExpanded ? 'Réduire' : 'Agrandir'}
+                    </Button>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="overflow-hidden rounded-lg border border-border">
+                      {panel.points.length > 0 ? (
+                        <PlacesMap
+                          ariaLabel={panel.ariaLabel}
+                          className={panelIsExpanded ? 'h-[calc(100dvh-14rem)] min-h-96' : 'h-64'}
+                          expanded={panelIsExpanded}
+                          places={panel.points}
+                          selectedPlaceId={selectedPlaceId}
+                          onSelect={selectMapPoint}
+                        />
+                      ) : (
+                        <div className={cn('flex items-center justify-center bg-secondary px-6 text-center text-pretty text-sm text-muted-foreground', panelIsExpanded ? 'h-[calc(100dvh-14rem)] min-h-96' : 'h-64')}>
+                          Aucun lieu géolocalisé.
+                        </div>
+                      )}
+                    </div>
+                    {legendDisciplines.length > 0 && (
+                      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground">
+                        {legendDisciplines.map((item: MapDiscipline) => (
+                          <span className="flex items-center gap-1.5" key={item}>
+                            <span className={cn('size-2 rounded-full', mapDisciplineStyles[item].dotClassName)} aria-hidden="true" />
+                            {mapDisciplineStyles[item].label}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </aside>
+        )}
       </div>
     </div>
   )
