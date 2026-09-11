@@ -12,6 +12,7 @@ import CragContributionActions from '@/features/places/components/crag-contribut
 import CragRouteList from '@/features/places/components/crag-route-list'
 import PlaceSectionMenu from '@/features/places/components/place-section-menu'
 import { conditionStateLabels, parseConditionReport } from '@/features/places/lib/crag-reports'
+import { formatGradeRange } from '@/features/places/lib/grade-range'
 import { getCurrentProfile } from '@/features/profile/lib/current-profile'
 import { brandAssets, makePanelBackground } from '@/lib/brand-assets'
 
@@ -143,6 +144,8 @@ export default async function CragDetailPage({ params, searchParams }: CragDetai
       .orderBy(desc(cragTopos.createdAt)),
   ])
   const niveaux = parseStringArray(falaise.niveaux)
+  const gradeRange = formatGradeRange(routeRows.map((route) => route.cotation))
+    ?? formatGradeRange(niveaux)
   const saisons = parseStringArray(falaise.saison)
   const disciplines = parseStringArray(falaise.disciplines)
   const orientations = parseStringArray(falaise.orientations)
@@ -298,11 +301,9 @@ export default async function CragDetailPage({ params, searchParams }: CragDetai
                   <Mountain className="mt-0.5 text-primary" size={18} />
                   <div>
                     <p className="font-semibold text-foreground">Niveaux</p>
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      {niveaux.map((niveau) => (
-                        <Badge key={niveau} variant="secondary">{niveau}</Badge>
-                      ))}
-                    </div>
+                    {gradeRange
+                      ? <Badge className="mt-2 tabular-nums" variant="secondary">{gradeRange}</Badge>
+                      : <p className="mt-1 text-muted-foreground">À compléter</p>}
                   </div>
                 </div>
                 {(falaise.rockType || falaise.rainExposure || falaise.sunlight || disciplines.length > 0) && <div className="flex items-start gap-3 rounded-lg border border-border p-3">

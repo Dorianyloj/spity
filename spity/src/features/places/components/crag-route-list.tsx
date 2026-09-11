@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react'
 import { Badge, Button, FilterToolbar } from '@/components/ui'
 import { cn } from '@/lib/class-names'
+import { climbingGradeRank } from '../lib/grade-range'
 
 type RouteStatus = 'ok' | 'humide' | 'spit_a_verifier' | 'fermee'
 type RouteSort = 'hardest' | 'easiest' | 'name'
@@ -41,16 +42,8 @@ const statusVariants: Record<RouteStatus | 'unknown', 'secondary' | 'success' | 
 
 const normalize = (value: string) => value.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLocaleLowerCase('fr-FR')
 
-const gradeRank = (grade: string) => {
-  const match = /^([3-9])([a-c])(\+)?$/.exec(grade)
-  if (!match) return -1
-
-  const [, level, letter, plus] = match
-  return Number(level) * 10 + ({ a: 1, b: 3, c: 5 } as const)[letter as 'a' | 'b' | 'c'] + (plus ? 1 : 0)
-}
-
 export const gradeColorClass = (grade: string) => {
-  const rank = gradeRank(grade)
+  const rank = climbingGradeRank(grade)
 
   if (rank >= 80) return 'bg-red-800 text-white'
   if (rank >= 70) return 'bg-orange-600 text-white'
@@ -81,7 +74,7 @@ export default function CragRouteList({ routes }: CragRouteListProps) {
       .sort((first, second) => {
         if (sort === 'name') return first.nom.localeCompare(second.nom, 'fr')
 
-        const order = gradeRank(first.cotation) - gradeRank(second.cotation)
+        const order = climbingGradeRank(first.cotation) - climbingGradeRank(second.cotation)
         return sort === 'hardest' ? -order : order
       }),
     [normalizedQuery, routes, sector, sort, status]

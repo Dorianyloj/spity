@@ -58,7 +58,7 @@ describe('PlacesDirectory', () => {
     expect(screen.getByText('Falaise')).toBeInTheDocument()
     expect(screen.getByText('Club')).toBeInTheDocument()
     expect(screen.getByText('Sec')).toBeInTheDocument()
-    expect(screen.getByText('1 voie')).toBeInTheDocument()
+    expect(screen.getByText('6a')).toBeInTheDocument()
     expect(screen.queryByText('La directe')).not.toBeInTheDocument()
     expect(screen.getByText('3 lieux trouvés')).toHaveClass('sr-only')
     expect(screen.getByRole('heading', { name: 'Carte des falaises' })).toBeInTheDocument()

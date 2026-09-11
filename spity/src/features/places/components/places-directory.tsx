@@ -18,6 +18,7 @@ import {
 } from '@/components/ui'
 import { brandAssets } from '@/lib/brand-assets'
 import { cn } from '@/lib/class-names'
+import { formatGradeRange } from '../lib/grade-range'
 import { getMapDiscipline, mapDisciplines, mapDisciplineStyles, type MapDiscipline } from '../lib/map-marker-styles'
 import type { PlaceMapPoint } from './places-map'
 
@@ -242,6 +243,8 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
       })),
       ...filteredFalaises.map((falaise) => {
         const routes = getRoutesForCrag(voies, falaise.id)
+        const gradeRange = formatGradeRange(routes.map((route) => route.cotation))
+          ?? formatGradeRange(falaise.niveaux ?? [])
 
         return {
           id: falaise.id,
@@ -253,7 +256,7 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
           imageUrl: falaise.photoUrl ?? brandAssets.crag,
           details: [
             falaise.disciplines.slice(0, 2).map((value) => disciplineLabels[value] ?? value).join(' · '),
-            routes.length > 0 ? `${routes.length} voie${routes.length > 1 ? 's' : ''}` : '',
+            gradeRange ?? '',
           ].filter(Boolean),
           status: falaise.status,
           mapPoint:
