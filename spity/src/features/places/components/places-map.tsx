@@ -17,6 +17,7 @@ export type PlaceMapPoint = {
 
 type PlacesMapProps = {
   className?: string
+  expanded?: boolean
   onSelect: (placeId: string) => void
   places: PlaceMapPoint[]
   selectedPlaceId: string | null
@@ -108,7 +109,18 @@ function ClusteredMarkers({ onSelect, places, selectedPlaceId }: Omit<PlacesMapP
   })
 }
 
-export default function PlacesMap({ className, onSelect, places, selectedPlaceId }: PlacesMapProps) {
+function MapSizeInvalidator({ expanded }: Pick<PlacesMapProps, 'expanded'>) {
+  const map = useMap()
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => map.invalidateSize({ animate: false }))
+    return () => window.cancelAnimationFrame(frame)
+  }, [expanded, map])
+
+  return null
+}
+
+export default function PlacesMap({ className, expanded = false, onSelect, places, selectedPlaceId }: PlacesMapProps) {
   return (
     <MapContainer
       aria-label="Carte des lieux correspondant à la recherche"
@@ -122,6 +134,7 @@ export default function PlacesMap({ className, onSelect, places, selectedPlaceId
         url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <FitPlaces places={places} />
+      <MapSizeInvalidator expanded={expanded} />
       <ClusteredMarkers onSelect={onSelect} places={places} selectedPlaceId={selectedPlaceId} />
     </MapContainer>
   )

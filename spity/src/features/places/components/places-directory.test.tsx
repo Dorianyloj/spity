@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import PlacesDirectory from './places-directory'
 
-jest.mock('next/dynamic', () => () => function MockPlacesMap() {
-  return <div data-testid="places-map" />
+jest.mock('next/dynamic', () => () => function MockPlacesMap({ className, expanded }: { className?: string; expanded?: boolean }) {
+  return <div className={className} data-expanded={expanded} data-testid="places-map" />
 })
 
 const salles = [{
@@ -80,5 +80,18 @@ describe('PlacesDirectory', () => {
     await user.click(screen.getByRole('button', { name: 'Réinitialiser' }))
     expect(screen.getByRole('heading', { name: 'Arkose Lyon' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Club Alpin Lyon' })).toBeInTheDocument()
+  })
+
+  it('lets the climber expand the map without keeping the result list on screen', async () => {
+    const user = userEvent.setup()
+    render(<PlacesDirectory salles={salles} falaises={falaises} clubs={clubs} voies={voies} />)
+
+    await user.click(screen.getByRole('button', { name: 'Agrandir la carte' }))
+    expect(screen.getByRole('button', { name: 'Réduire la carte' })).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.queryByRole('heading', { name: 'Résultats' })).not.toBeInTheDocument()
+    expect(screen.getByTestId('places-map')).toHaveClass('min-h-96')
+
+    await user.click(screen.getByRole('button', { name: 'Réduire la carte' }))
+    expect(screen.getByRole('heading', { name: 'Résultats' })).toBeInTheDocument()
   })
 })

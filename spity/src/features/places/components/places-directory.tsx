@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { Building2, MapPin, Mountain, Plus, SearchX, UsersRound } from 'lucide-react'
+import { Building2, MapPin, Maximize2, Minimize2, Mountain, Plus, SearchX, UsersRound } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import {
   Badge,
@@ -150,6 +150,7 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
   const [status, setStatus] = useState<StatusFilter>('all')
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
   const [selectedPlaceId, setSelectedPlaceId] = useState<string | null>(null)
+  const [isMapExpanded, setIsMapExpanded] = useState(false)
   const normalizedQuery = query.trim().toLowerCase()
 
   const filteredSalles = useMemo(
@@ -326,8 +327,8 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
         showReset={hasActiveFilters}
       />
 
-      <div className="flex flex-col gap-6">
-        <section aria-labelledby="places-results-heading" className="order-2">
+      <div className={cn('grid items-start gap-6', isMapExpanded ? 'grid-cols-1' : 'xl:grid-cols-[minmax(0,1fr)_23rem]')}>
+        {!isMapExpanded && <section aria-labelledby="places-results-heading">
           <div className="mb-4 flex items-center justify-between gap-4">
             <h2 id="places-results-heading" className="text-balance text-xl font-bold text-white">Résultats</h2>
             {results.length > 0 && <span className="text-sm tabular-nums text-zinc-300">{Math.min(displayedResults.length, results.length)} / {results.length}</span>}
@@ -385,17 +386,23 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
               </Button>
             </div>
           )}
-        </section>
+        </section>}
 
-        <aside className="order-1" aria-labelledby="places-map-heading">
+        <aside className={cn(isMapExpanded && 'col-span-full')} aria-labelledby="places-map-heading">
           <Card hover={false}>
-            <CardHeader>
-              <CardTitle id="places-map-heading">Carte des lieux</CardTitle>
-              <CardDescription>{mapPoints.length > 0 ? 'Dézoome pour regrouper les lieux, puis clique un groupe pour l’ouvrir.' : 'Aucun des résultats ne possède encore de position.'}</CardDescription>
+            <CardHeader className="gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <CardTitle id="places-map-heading">Carte des lieux</CardTitle>
+                <CardDescription>{mapPoints.length > 0 ? 'Dézoome pour regrouper les lieux, puis clique un groupe pour l’ouvrir.' : 'Aucun des résultats ne possède encore de position.'}</CardDescription>
+              </div>
+              <Button aria-pressed={isMapExpanded} onClick={() => setIsMapExpanded((expanded) => !expanded)} size="sm" type="button" variant="secondary">
+                {isMapExpanded ? <Minimize2 aria-hidden="true" size={16} /> : <Maximize2 aria-hidden="true" size={16} />}
+                {isMapExpanded ? 'Réduire la carte' : 'Agrandir la carte'}
+              </Button>
             </CardHeader>
             <CardContent>
               <div className="overflow-hidden rounded-lg border border-border">
-                {mapPoints.length > 0 ? <PlacesMap className="h-96 lg:h-[32rem]" places={mapPoints} selectedPlaceId={selectedPlaceId} onSelect={selectMapPoint} /> : <div className="flex h-96 items-center justify-center bg-secondary px-6 text-center text-pretty text-sm text-muted-foreground">Ajoute une position sur la fiche d’un lieu pour l’afficher ici.</div>}
+                {mapPoints.length > 0 ? <PlacesMap className={isMapExpanded ? 'h-[calc(100dvh-14rem)] min-h-96' : 'h-80'} expanded={isMapExpanded} places={mapPoints} selectedPlaceId={selectedPlaceId} onSelect={selectMapPoint} /> : <div className={cn('flex items-center justify-center bg-secondary px-6 text-center text-pretty text-sm text-muted-foreground', isMapExpanded ? 'h-[calc(100dvh-14rem)] min-h-96' : 'h-80')}>Ajoute une position sur la fiche d’un lieu pour l’afficher ici.</div>}
               </div>
               {mapPoints.length > 0 && (
                 <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground">
