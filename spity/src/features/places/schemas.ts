@@ -163,8 +163,26 @@ export const cragReportInputSchema = z.discriminatedUnion('type', [
   }).strict(),
 ])
 
+export const cragTopoLinkInputSchema = z.object({
+  falaiseId: z.uuid('Falaise invalide.'),
+  type: z.literal('link'),
+  title: z.string().trim().min(2, 'Indique le titre du topo.').max(255),
+  url: z.url('Saisis une adresse web valide.').refine((value) => {
+    const protocol = new URL(value).protocol
+    return protocol === 'http:' || protocol === 'https:'
+  }, 'Utilise une adresse http ou https.'),
+}).strict()
+
+export const cragTopoPdfInputSchema = z.object({
+  falaiseId: z.uuid('Falaise invalide.'),
+  type: z.literal('pdf'),
+  title: z.string().trim().min(2, 'Indique le titre du topo.').max(255),
+}).strict()
+
 export type CragRouteInput = z.infer<typeof cragRouteInputSchema>
 export type CragReportInput = z.infer<typeof cragReportInputSchema>
+export type CragTopoLinkInput = z.infer<typeof cragTopoLinkInputSchema>
+export type CragTopoPdfInput = z.infer<typeof cragTopoPdfInputSchema>
 
 export const placeRequestResponseSchema = z.object({
   request: z.object({ id: z.uuid(), status: z.literal('pending') }),

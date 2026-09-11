@@ -4,7 +4,7 @@ import { z } from 'zod'
 
 export const mediaIdSchema = z.string().uuid()
 
-const storagePath = (id: string) => {
+const storagePath = (id: string, extension: 'webp' | 'pdf') => {
   // Neither the original filename nor a user-provided path is ever persisted.
   const safeId = mediaIdSchema.parse(id)
   // Runtime uploads are mounted separately, never bundled in the Next.js standalone output.
@@ -15,11 +15,12 @@ const storagePath = (id: string) => {
   if (relativeToPublic === '' || (!relativeToPublic.startsWith(`..${path.sep}`) && relativeToPublic !== '..' && !path.isAbsolute(relativeToPublic))) {
     throw new Error('MEDIA_STORAGE_DIR must be outside public/')
   }
-  return path.join(root, `${safeId}.webp`)
+  // The runtime media volume is outside the application bundle.
+  return path.join(/*turbopackIgnore: true*/ root, `${safeId}.${extension}`)
 }
 
 export const writeImage = async (id: string, data: Buffer) => {
-  const filePath = storagePath(id)
+  const filePath = storagePath(id, 'webp')
   await mkdir(path.dirname(filePath), { recursive: true, mode: 0o700 })
   try {
     await writeFile(filePath, data, { flag: 'wx', mode: 0o600 })
@@ -32,11 +33,34 @@ export const writeImage = async (id: string, data: Buffer) => {
   }
 }
 
-export const readImage = async (id: string) => readFile(storagePath(id))
+export const readImage = async (id: string) => readFile(storagePath(id, 'webp'))
 
 export const removeImage = async (id: string) => {
   try {
-    await unlink(storagePath(id))
+    await unlink(storagePath(id, 'webp'))
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error
+  }
+}
+
+export const writePdf = async (id: string, data: Buffer) => {
+  const filePath = storagePath(id, 'pdf')
+  await mkdir(path.dirname(filePath), { recursive: true, mode: 0o700 })
+  try {
+    await writeFile(filePath, data, { flag: 'wx', mode: 0o600 })
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== 'EEXIST') {
+      await unlink(filePath).catch(() => undefined)
+    }
+    throw error
+  }
+}
+
+export const readPdf = async (id: string) => readFile(storagePath(id, 'pdf'))
+
+export const removePdf = async (id: string) => {
+  try {
+    await unlink(storagePath(id, 'pdf'))
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error
   }

@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import CragContributionActions from './crag-contribution-actions'
 
@@ -76,5 +76,49 @@ describe('CragContributionActions', () => {
 
     expect(await screen.findByText('Connexion impossible. Réessaie dans un instant.')).toBeInTheDocument()
     expect(screen.getByLabelText('Ce qui se passe')).toHaveValue('Le chemin est fermé après les pluies.')
+  })
+
+  it('submits a web topo link', async () => {
+    const user = userEvent.setup()
+    fetchMock.mockResolvedValue({ ok: true, json: async () => ({ topo: { id: 'topo-1' } }) } as Response)
+    renderActions()
+
+    await user.click(screen.getByText('Ajouter un topo'))
+    await user.type(screen.getByLabelText('Titre du topo'), 'Topo du grand mur')
+    await user.type(screen.getByLabelText('Lien du topo'), 'https://topo.example/grand-mur')
+    await user.click(screen.getByRole('button', { name: 'Ajouter le topo' }))
+
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledWith('/api/places/topos', expect.objectContaining({ method: 'POST' })))
+    expect(JSON.parse(fetchMock.mock.calls[0]?.[1]?.body as string)).toEqual({
+      falaiseId: 'eb7c2638-3114-41b6-8917-a5dc4bc1d22e',
+      type: 'link',
+      title: 'Topo du grand mur',
+      url: 'https://topo.example/grand-mur',
+    })
+    expect(await screen.findByText('Topo ajouté à la fiche.')).toBeInTheDocument()
+  })
+
+  it('sends a PDF topo as multipart data', async () => {
+    const user = userEvent.setup({ applyAccept: false })
+    fetchMock.mockResolvedValue({ ok: true, json: async () => ({ topo: { id: 'topo-2' } }) } as Response)
+    renderActions()
+
+    await user.click(screen.getByText('Ajouter un topo'))
+    const pdfChoice = screen.getByRole('radio', { name: /Fichier PDF/ })
+    await user.click(pdfChoice)
+    expect(pdfChoice).toBeChecked()
+    await user.type(screen.getByLabelText('Titre du topo'), 'Topo du secteur est')
+    const fileInput = screen.getByLabelText('Fichier PDF')
+    const form = fileInput.closest('form')
+    if (!form) throw new Error('Formulaire topo introuvable')
+    fireEvent.submit(form)
+
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledWith('/api/places/topos', expect.objectContaining({ method: 'POST' })))
+    const body = fetchMock.mock.calls[0]?.[1]?.body as FormData
+    expect(body).toBeInstanceOf(FormData)
+    expect(body.get('falaiseId')).toBe('eb7c2638-3114-41b6-8917-a5dc4bc1d22e')
+    expect(body.get('type')).toBe('pdf')
+    expect(body.get('title')).toBe('Topo du secteur est')
+    expect(body.get('file')).toBeInstanceOf(File)
   })
 })

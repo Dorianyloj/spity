@@ -1,11 +1,11 @@
 import { desc, eq } from 'drizzle-orm'
-import { AlertTriangle, ArrowLeft, Clock, MapPin, Mountain, ParkingCircle, Route, ShieldCheck } from 'lucide-react'
+import { AlertTriangle, ArrowLeft, Clock, ExternalLink, FileDown, FileText, MapPin, Mountain, ParkingCircle, Route, ShieldCheck } from 'lucide-react'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
 import { db } from '@/db'
-import { falaises, placePhotos, placeReports, users, voies } from '@/db/schema'
+import { cragTopos, falaises, placePhotos, placeReports, users, voies } from '@/db/schema'
 import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui'
 import AppShell from '@/features/app/components/app-shell'
 import CragContributionActions from '@/features/places/components/crag-contribution-actions'
@@ -95,6 +95,7 @@ const rockLabels: Record<string, string> = {
 
 const rainLabels: Record<string, string> = { abrite: 'abrité', partiellement_abrite: 'partiellement abrité', expose: 'exposé' }
 const sunlightLabels: Record<string, string> = { ombrage: 'ombragé', mixte: 'mixte', ensoleille: 'ensoleillé' }
+const formatFileSize = (bytes: number | null) => bytes === null ? '' : `${(bytes / (1024 * 1024)).toFixed(bytes >= 10 * 1024 * 1024 ? 0 : 1)} Mio`
 
 export default async function CragDetailPage({ params }: CragDetailPageProps) {
   const currentProfile = await getCurrentProfile()
@@ -114,7 +115,7 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
     notFound()
   }
 
-  const [routeRows, reportRows, galleryRows] = await Promise.all([
+  const [routeRows, reportRows, galleryRows, topoRows] = await Promise.all([
     db.select().from(voies).where(eq(voies.falaiseId, falaise.id)),
     db
       .select({
@@ -130,6 +131,17 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
       .where(eq(placeReports.falaiseId, falaise.id))
       .orderBy(desc(placeReports.createdAt)),
     db.select({ id: placePhotos.id, mediaId: placePhotos.mediaId }).from(placePhotos).where(eq(placePhotos.falaiseId, falaise.id)),
+    db
+      .select({
+        id: cragTopos.id,
+        kind: cragTopos.kind,
+        title: cragTopos.title,
+        externalUrl: cragTopos.externalUrl,
+        byteSize: cragTopos.byteSize,
+      })
+      .from(cragTopos)
+      .where(eq(cragTopos.falaiseId, falaise.id))
+      .orderBy(desc(cragTopos.createdAt)),
   ])
   const niveaux = parseStringArray(falaise.niveaux)
   const saisons = parseStringArray(falaise.saison)
@@ -170,7 +182,7 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
                 {falaise.acces ?? 'Accès à compléter par la communauté.'}
               </p>
               {currentProfile.user.role === 'grimpeur' && <div className="mt-5 flex flex-wrap gap-3">
-                <a className="inline-flex min-h-11 items-center rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:bg-[#c8ef4e]" href="#contribuer">Ajouter une voie ou l’état</a>
+                <a className="inline-flex min-h-11 items-center rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:bg-[#c8ef4e]" href="#contribuer">Contribuer à la fiche</a>
                 <Link className="inline-flex min-h-11 items-center rounded-lg border border-white/30 bg-black/10 px-4 py-2 text-sm font-bold text-white hover:bg-white/10" href={`/app/places/falaises/${falaise.id}/contribute`}>Corriger la fiche / photos</Link>
               </div>}
             </div>
@@ -346,6 +358,29 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
                   {falaise.restrictions && <p className="mt-1 text-muted-foreground">{falaise.restrictions}</p>}
                   {falaise.notes && <p className="mt-2 text-muted-foreground">{falaise.notes}</p>}
                 </div>}
+              </CardContent>
+            </Card>
+            <Card hover={false}>
+              <CardHeader>
+                <CardTitle className="text-balance">Topos</CardTitle>
+                <CardDescription className="text-pretty">Liens et PDF partagés par la communauté.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {topoRows.length > 0 ? <ul className="space-y-2">
+                  {topoRows.map((topo) => <li key={topo.id}>
+                    {topo.kind === 'link' && topo.externalUrl
+                      ? <a className="flex items-center justify-between gap-3 rounded-lg border border-border p-3 font-semibold text-foreground hover:border-primary/50" href={topo.externalUrl} rel="noreferrer" target="_blank">
+                        <span className="flex min-w-0 items-center gap-2"><ExternalLink className="shrink-0 text-primary" size={17} /><span className="truncate">{topo.title}</span></span>
+                        <span className="shrink-0 text-xs text-muted-foreground">Ouvrir</span>
+                      </a>
+                      : <a className="flex items-center justify-between gap-3 rounded-lg border border-border p-3 font-semibold text-foreground hover:border-primary/50" href={`/api/place-topos/${topo.id}`}>
+                        <span className="flex min-w-0 items-center gap-2"><FileText className="shrink-0 text-primary" size={17} /><span className="truncate">{topo.title}</span></span>
+                        <span className="flex shrink-0 items-center gap-1 text-xs text-muted-foreground"><FileDown size={14} />{formatFileSize(topo.byteSize) || 'PDF'}</span>
+                      </a>}
+                  </li>)}
+                </ul> : <p className="text-pretty text-sm text-muted-foreground">
+                  Pas encore de topo partagé.{currentProfile.user.role === 'grimpeur' && <> <a className="font-semibold text-foreground underline underline-offset-4" href="#contribuer">Ajouter le premier.</a></>}
+                </p>}
               </CardContent>
             </Card>
           </aside>

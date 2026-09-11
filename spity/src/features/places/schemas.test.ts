@@ -1,4 +1,4 @@
-import { cragReportInputSchema, cragRouteInputSchema, placeChangeInputSchema, placeCreationInputSchema } from './schemas'
+import { cragReportInputSchema, cragRouteInputSchema, cragTopoLinkInputSchema, placeChangeInputSchema, placeCreationInputSchema } from './schemas'
 
 const baseRequest = {
   kind: 'falaise' as const,
@@ -182,5 +182,20 @@ describe('crag contribution schemas', () => {
       conditionState: 'humide',
       message: '',
     }).success).toBe(true)
+  })
+
+  it('accepts only safe web links for a topo', () => {
+    expect(cragTopoLinkInputSchema.safeParse({
+      falaiseId,
+      type: 'link',
+      title: 'Topo du grand mur',
+      url: 'https://topo.example/grand-mur',
+    }).success).toBe(true)
+    expect(cragTopoLinkInputSchema.safeParse({
+      falaiseId,
+      type: 'link',
+      title: 'Topo du grand mur',
+      url: 'ftp://topo.example/grand-mur',
+    }).success).toBe(false)
   })
 })

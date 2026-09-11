@@ -1,12 +1,16 @@
 import { randomUUID } from 'crypto'
-import { and, eq, inArray } from 'drizzle-orm'
+import { and, count, eq, inArray, sum } from 'drizzle-orm'
 import { db } from '@/db'
-import { falaises, mediaUploads, placeChangeRequestPhotos, placeChangeRequests, placeCreationRequests, placeReports, salles, voies } from '@/db/schema'
+import { cragTopos, falaises, mediaUploads, placeChangeRequestPhotos, placeChangeRequests, placeCreationRequests, placeReports, salles, users, voies } from '@/db/schema'
+import { logger } from '@/lib/logger'
 import { ProfileOperationError } from '@/features/profile/lib/http'
+import { removePdf, writePdf } from '@/features/media/lib/storage'
 import { formatConditionReport } from './crag-reports'
-import type { CragReportInput, CragRouteInput, PlaceChangeInput, PlaceCreationInput } from '../schemas'
+import type { CragReportInput, CragRouteInput, CragTopoLinkInput, CragTopoPdfInput, PlaceChangeInput, PlaceCreationInput } from '../schemas'
 
 const nullable = <Value extends string>(value: Value): Value | null => value || null
+const MAX_CRAG_TOPOS_PER_AUTHOR = 40
+const MAX_CRAG_TOPO_BYTES_PER_AUTHOR = 150 * 1024 * 1024
 
 export const createPlaceRequest = async (authorId: string, input: PlaceCreationInput) => {
   const id = randomUUID()
@@ -138,4 +142,83 @@ export const createCragReport = async (authorId: string, input: CragReportInput)
   })
 
   return { id }
+}
+
+export const createCragTopoLink = async (authorId: string, input: CragTopoLinkInput) => {
+  const id = randomUUID()
+
+  await db.transaction(async (tx) => {
+    const [crag] = await tx.select({ id: falaises.id }).from(falaises)
+      .where(eq(falaises.id, input.falaiseId)).limit(1).for('update')
+    if (!crag) throw new ProfileOperationError('Cette falaise n’existe plus.', 404)
+
+    const [owner] = await tx.select({ id: users.id }).from(users)
+      .where(eq(users.id, authorId)).limit(1).for('update')
+    if (!owner) throw new ProfileOperationError('Authentification requise.', 401)
+
+    const [usage] = await tx.select({ total: count(), bytes: sum(cragTopos.byteSize) })
+      .from(cragTopos).where(eq(cragTopos.authorId, authorId))
+    if (usage.total >= MAX_CRAG_TOPOS_PER_AUTHOR) {
+      throw new ProfileOperationError('Tu as atteint la limite de 40 topos partagés.', 409)
+    }
+
+    const [duplicate] = await tx.select({ id: cragTopos.id }).from(cragTopos)
+      .where(and(eq(cragTopos.falaiseId, input.falaiseId), eq(cragTopos.externalUrl, input.url))).limit(1).for('update')
+    if (duplicate) throw new ProfileOperationError('Ce lien de topo est déjà présent.', 409)
+
+    await tx.insert(cragTopos).values({
+      id,
+      falaiseId: input.falaiseId,
+      authorId,
+      kind: 'link',
+      title: input.title,
+      externalUrl: input.url,
+      byteSize: null,
+    })
+  })
+
+  return { id, kind: 'link' as const }
+}
+
+export const createCragPdfTopo = async (authorId: string, input: CragTopoPdfInput, data: Buffer) => {
+  const id = randomUUID()
+  await writePdf(id, data)
+
+  try {
+    await db.transaction(async (tx) => {
+      const [crag] = await tx.select({ id: falaises.id }).from(falaises)
+        .where(eq(falaises.id, input.falaiseId)).limit(1).for('update')
+      if (!crag) throw new ProfileOperationError('Cette falaise n’existe plus.', 404)
+
+      const [owner] = await tx.select({ id: users.id }).from(users)
+        .where(eq(users.id, authorId)).limit(1).for('update')
+      if (!owner) throw new ProfileOperationError('Authentification requise.', 401)
+
+      const [usage] = await tx.select({ total: count(), bytes: sum(cragTopos.byteSize) })
+        .from(cragTopos).where(eq(cragTopos.authorId, authorId))
+      if (usage.total >= MAX_CRAG_TOPOS_PER_AUTHOR || Number(usage.bytes ?? 0) + data.length > MAX_CRAG_TOPO_BYTES_PER_AUTHOR) {
+        throw new ProfileOperationError('Quota de topos atteint. Supprime ou partage un lien à la place.', 409)
+      }
+
+      await tx.insert(cragTopos).values({
+        id,
+        falaiseId: input.falaiseId,
+        authorId,
+        kind: 'pdf',
+        title: input.title,
+        externalUrl: null,
+        byteSize: data.length,
+      })
+    })
+  } catch (error) {
+    await removePdf(id).catch(() => logger.error('topos.orphan_cleanup_failed', { topoId: id }))
+    throw error
+  }
+
+  return { id, kind: 'pdf' as const }
+}
+
+export const findCragTopo = async (id: string) => {
+  const [topo] = await db.select().from(cragTopos).where(eq(cragTopos.id, id)).limit(1)
+  return topo ?? null
 }

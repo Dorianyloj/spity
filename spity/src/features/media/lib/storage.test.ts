@@ -3,7 +3,7 @@ import { randomUUID } from 'node:crypto'
 import { mkdtemp, readdir, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
-import { readImage, removeImage, writeImage } from './storage'
+import { readImage, readPdf, removeImage, removePdf, writeImage, writePdf } from './storage'
 
 let directory: string
 const originalDirectory = process.env.MEDIA_STORAGE_DIR
@@ -33,6 +33,15 @@ it('does not overwrite or remove an existing object on collision', async () => {
   await writeImage(id, Buffer.from('original'))
   await expect(writeImage(id, Buffer.from('replacement'))).rejects.toMatchObject({ code: 'EEXIST' })
   expect(await readImage(id)).toEqual(Buffer.from('original'))
+})
+
+it('stores PDFs separately and never exposes their original filename', async () => {
+  const id = randomUUID()
+  await writePdf(id, Buffer.from('%PDF-1.7'))
+  expect(await readdir(path.join(directory, 'images'))).toEqual([id + '.pdf'])
+  expect(await readPdf(id)).toEqual(Buffer.from('%PDF-1.7'))
+  await removePdf(id)
+  await expect(readPdf(id)).rejects.toMatchObject({ code: 'ENOENT' })
 })
 
 it.each(['../../secret', '..\\secret', '/tmp/image.webp', 'id.png', ''])('rejects unsafe identifiers: %s', async (id) => {

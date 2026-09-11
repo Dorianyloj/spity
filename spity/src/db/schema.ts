@@ -282,6 +282,26 @@ export const placePhotos = mysqlTable(
   ]
 )
 
+// A topo can be an external reference or a PDF held in private storage.
+// PDFs are deliberately served as downloads instead of inline documents.
+export const cragTopos = mysqlTable(
+  'crag_topos',
+  {
+    id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+    falaiseId: varchar('falaise_id', { length: 36 }).notNull().references(() => falaises.id, { onDelete: 'cascade' }),
+    authorId: varchar('author_id', { length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
+    kind: mysqlEnum('crag_topo_kind', ['link', 'pdf']).notNull(),
+    title: varchar('title', { length: 255 }).notNull(),
+    externalUrl: varchar('external_url', { length: 500 }),
+    byteSize: int('byte_size', { unsigned: true }),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+  },
+  (table) => [
+    index('crag_topos_falaise_created_idx').on(table.falaiseId, table.createdAt),
+    index('crag_topos_author_idx').on(table.authorId),
+  ]
+)
+
 // === VOIE ===
 export const voies = mysqlTable('voies', {
   id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
