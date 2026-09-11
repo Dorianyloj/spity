@@ -18,6 +18,9 @@ type CragDetailPageProps = {
   params: Promise<{
     falaiseId: string
   }>
+  searchParams: Promise<{
+    section?: string
+  }>
 }
 
 export const metadata: Metadata = {
@@ -98,7 +101,7 @@ const rainLabels: Record<string, string> = { abrite: 'abrité', partiellement_ab
 const sunlightLabels: Record<string, string> = { ombrage: 'ombragé', mixte: 'mixte', ensoleille: 'ensoleillé' }
 const formatFileSize = (bytes: number | null) => bytes === null ? '' : `${(bytes / (1024 * 1024)).toFixed(bytes >= 10 * 1024 * 1024 ? 0 : 1)} Mio`
 
-export default async function CragDetailPage({ params }: CragDetailPageProps) {
+export default async function CragDetailPage({ params, searchParams }: CragDetailPageProps) {
   const currentProfile = await getCurrentProfile()
 
   if (!currentProfile) {
@@ -110,6 +113,7 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
   }
 
   const { falaiseId } = await params
+  const { section: requestedSection } = await searchParams
   const [falaise] = await db.select().from(falaises).where(eq(falaises.id, falaiseId)).limit(1)
 
   if (!falaise) {
@@ -156,6 +160,10 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
   const latestCondition = reports.find((report) => report.status === 'open' && report.condition?.state)
   const currentState = latestCondition?.condition?.state ?? falaise.status
   const openAlerts = reports.filter((report) => report.type !== 'condition' && report.status === 'open')
+  const availableSections = currentProfile.user.role === 'grimpeur'
+    ? ['routes', 'photos', 'reports', 'contribute']
+    : ['routes', 'photos', 'reports']
+  const activeSection = availableSections.includes(requestedSection ?? '') ? requestedSection! : 'routes'
 
   return (
     <AppShell activeItem="places" user={currentProfile.user}>
@@ -183,7 +191,6 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
                 {falaise.acces ?? 'Accès à compléter par la communauté.'}
               </p>
               {currentProfile.user.role === 'grimpeur' && <div className="mt-5 flex flex-wrap gap-3">
-                <a className="inline-flex min-h-11 items-center rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:bg-[#c8ef4e]" href="#contribuer">Contribuer à la fiche</a>
                 <Link className="inline-flex min-h-11 items-center rounded-lg border border-white/30 bg-black/10 px-4 py-2 text-sm font-bold text-white hover:bg-white/10" href={`/app/places/falaises/${falaise.id}/contribute`}>Corriger la fiche / photos</Link>
               </div>}
             </div>
@@ -204,20 +211,20 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
           </div>
         </section>
 
-        <PlaceSectionMenu sections={[
-          ...(currentProfile.user.role === 'grimpeur' ? [{ href: '#contribuer', label: 'Contribuer', section: 'contribute' as const }] : []),
-          { href: '#voies', label: 'Voies', section: 'routes' },
-          { href: '#photos', label: 'Photos', section: 'photos' },
-          { href: '#signalements', label: 'Signalements', section: 'reports' },
+        <PlaceSectionMenu activeSection={activeSection as 'routes' | 'photos' | 'reports' | 'contribute'} sections={[
+          { href: '?section=routes', label: 'Voies', section: 'routes' },
+          { href: '?section=photos', label: 'Photos', section: 'photos' },
+          { href: '?section=reports', label: 'Signalements', section: 'reports' },
+          ...(currentProfile.user.role === 'grimpeur' ? [{ href: '?section=contribute', label: 'Contribuer', section: 'contribute' as const }] : []),
         ]} />
 
         <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_380px]">
           <section className="space-y-6">
-            {currentProfile.user.role === 'grimpeur' && <section id="contribuer">
+            {activeSection === 'contribute' && currentProfile.user.role === 'grimpeur' && <section id="contribuer">
               <CragContributionActions falaiseId={falaise.id} falaiseName={falaise.nom} />
             </section>}
 
-            <Card hover={false} id="voies">
+            {activeSection === 'routes' && <Card hover={false} id="voies">
               <CardHeader>
                 <CardTitle>Voies</CardTitle>
                 <CardDescription>Cotations, secteurs, hauteur et état communautaire.</CardDescription>
@@ -253,9 +260,9 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
                   Pas encore de voie répertoriée. Ajoute la première juste au-dessus.
                 </p>}
               </CardContent>
-            </Card>
+            </Card>}
 
-            <Card hover={false} id="photos">
+            {activeSection === 'photos' && <Card hover={false} id="photos">
               <CardHeader>
                 <CardTitle>Photos de la communauté</CardTitle>
                 <CardDescription>Photos proposées par des grimpeurs et validées par Spity.</CardDescription>
@@ -269,9 +276,9 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
                   Pas encore de photo partagée.{currentProfile.user.role === 'grimpeur' && <> <Link className="font-semibold text-foreground underline underline-offset-4" href={`/app/places/falaises/${falaise.id}/contribute`}>Ajouter la première.</Link></>}
                 </p>}
               </CardContent>
-            </Card>
+            </Card>}
 
-            <Card hover={false} id="signalements">
+            {activeSection === 'reports' && <Card hover={false} id="signalements">
               <CardHeader>
                 <CardTitle>Signalements</CardTitle>
                 <CardDescription>Informations temps réel pour préparer la sortie.</CardDescription>
@@ -301,7 +308,7 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
                   </p>
                 )}
               </CardContent>
-            </Card>
+            </Card>}
           </section>
 
           <aside className="space-y-6">
@@ -370,7 +377,7 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
                 </div>}
               </CardContent>
             </Card>
-            <Card hover={false}>
+            {activeSection === 'routes' && <Card hover={false}>
               <CardHeader>
                 <CardTitle className="text-balance">Topos</CardTitle>
                 <CardDescription className="text-pretty">Liens et PDF partagés par la communauté.</CardDescription>
@@ -389,10 +396,10 @@ export default async function CragDetailPage({ params }: CragDetailPageProps) {
                       </a>}
                   </li>)}
                 </ul> : <p className="text-pretty text-sm text-muted-foreground">
-                  Pas encore de topo partagé.{currentProfile.user.role === 'grimpeur' && <> <a className="font-semibold text-foreground underline underline-offset-4" href="#contribuer">Ajouter le premier.</a></>}
+                  Pas encore de topo partagé.{currentProfile.user.role === 'grimpeur' && <> <Link className="font-semibold text-foreground underline underline-offset-4" href="?section=contribute">Ajouter le premier.</Link></>}
                 </p>}
               </CardContent>
-            </Card>
+            </Card>}
           </aside>
         </div>
       </div>
