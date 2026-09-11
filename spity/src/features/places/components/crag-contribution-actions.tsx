@@ -147,7 +147,7 @@ export default function CragContributionActions({ falaiseId, falaiseName }: Crag
 
           {mode === 'route' && <div className="grid gap-4 sm:grid-cols-2">
             <Input label="Nom de la voie" maxLength={255} name="nom" placeholder="Ex. Le pas du loup" required />
-            <Input label="Cotation" maxLength={4} name="cotation" pattern="[3-9][a-c]\\+?" placeholder="6a+" required />
+            <Input label="Cotation" maxLength={4} name="cotation" pattern="[3-9][a-c]\+?" placeholder="6a+" required />
             <Input label="Secteur" maxLength={120} name="secteur" placeholder="Facultatif" />
             <label className="block text-sm font-medium text-foreground">
               Style
