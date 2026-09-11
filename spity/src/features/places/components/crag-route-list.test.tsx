@@ -42,5 +42,11 @@ describe('CragRouteList', () => {
 
     await user.selectOptions(screen.getByLabelText('État'), 'unknown')
     expect(routeNames()).toEqual(['Fissure du matin'])
+
+    const resetButton = screen.getByRole('button', { name: 'Réinitialiser les filtres' })
+    expect(resetButton.parentElement).toContainElement(screen.getByLabelText('Trier'))
+
+    await user.click(resetButton)
+    expect(routeNames()).toEqual(['Le grand dévers', 'Fissure du matin', 'La dalle douce'])
   })
 })

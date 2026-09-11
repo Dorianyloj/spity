@@ -98,6 +98,7 @@ export default function CragRouteList({ routes }: CragRouteListProps) {
   return (
     <div className="space-y-3">
       <FilterToolbar
+        compactReset
         countLabel={`${filteredRoutes.length} voie${filteredRoutes.length > 1 ? 's' : ''} affichée${filteredRoutes.length > 1 ? 's' : ''}`}
         filters={[
           { label: 'Secteur', value: sector, onChange: setSector, options: [{ value: 'all', label: 'Tous les secteurs' }, ...sectors.map((value) => ({ value, label: value }))] },
@@ -109,7 +110,7 @@ export default function CragRouteList({ routes }: CragRouteListProps) {
         queryLabel="Rechercher une voie"
         queryPlaceholder="Nom, secteur ou cotation…"
         onReset={reset}
-        resetLabel="Réinitialiser"
+        resetLabel="Réinitialiser les filtres"
         showCount={false}
         showReset={hasFilters}
       />
