@@ -345,6 +345,7 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
       </header>
 
       <FilterToolbar
+        compactReset
         countLabel={`${results.length} lieu${results.length > 1 ? 'x' : ''} trouvé${results.length > 1 ? 's' : ''}`}
         filters={[
           { label: 'Type', options: filters, value: placeKind, onChange: (value) => changePlaceKind(value as PlaceKind) },
@@ -355,6 +356,8 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
         queryPlaceholder="Nom, ville ou voie…"
         onQueryChange={changeQuery}
         onReset={resetFilters}
+        resetLabel="Réinitialiser les filtres"
+        showCount={false}
         showReset={hasActiveFilters}
       />
 

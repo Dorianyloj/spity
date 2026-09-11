@@ -56,7 +56,7 @@ describe('PlacesDirectory', () => {
     expect(screen.getByRole('heading', { name: 'Club Alpin Lyon' })).toBeInTheDocument()
     expect(screen.getByText('1 voie')).toBeInTheDocument()
     expect(screen.queryByText('La directe')).not.toBeInTheDocument()
-    expect(screen.getByText('3 lieux trouvés')).toBeInTheDocument()
+    expect(screen.getByText('3 lieux trouvés')).toHaveClass('sr-only')
     expect(screen.getByRole('heading', { name: 'Carte des falaises' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Carte des salles' })).toBeInTheDocument()
     expect(screen.getAllByTestId('places-map')).toHaveLength(2)
@@ -79,7 +79,7 @@ describe('PlacesDirectory', () => {
     await user.selectOptions(screen.getByLabelText('Pratique'), 'grande_voie')
     expect(screen.getByText('Aucun lieu trouvé')).toBeInTheDocument()
 
-    await user.click(screen.getByRole('button', { name: 'Réinitialiser' }))
+    await user.click(screen.getByRole('button', { name: 'Réinitialiser les filtres' }))
     expect(screen.getByRole('heading', { name: 'Arkose Lyon' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Club Alpin Lyon' })).toBeInTheDocument()
   })

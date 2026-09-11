@@ -49,7 +49,7 @@ export default function FilterToolbar({
   return (
     <Card hover={false} className="w-full border-border/90">
       <CardContent className="p-3 sm:p-4">
-        <div className="grid gap-3 sm:grid-cols-3 xl:grid-cols-[minmax(0,2fr)_repeat(3,minmax(0,1fr))]">
+        <div className="grid items-end gap-3 sm:grid-cols-3 xl:grid-cols-[minmax(0,2fr)_repeat(3,minmax(0,1fr))]">
           <label className="min-w-0 space-y-2 sm:col-span-3 xl:col-span-1">
             <span className="text-xs font-semibold text-muted-foreground">{queryLabel}</span>
             <span className="relative block">
@@ -67,7 +67,7 @@ export default function FilterToolbar({
 
           <div
             className={cn(
-              'grid gap-3 sm:col-span-3 sm:grid-cols-3 xl:col-span-3',
+              'grid items-end gap-3 sm:col-span-3 sm:grid-cols-3 xl:col-span-3',
               compactReset &&
                 'sm:grid-cols-[minmax(0,0.9fr)_minmax(0,0.9fr)_minmax(0,1.2fr)]',
             )}
