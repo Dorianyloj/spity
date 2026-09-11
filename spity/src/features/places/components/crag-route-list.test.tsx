@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import CragRouteList, { type CragRoute } from './crag-route-list'
+import CragRouteList, { gradeColorClass, type CragRoute } from './crag-route-list'
 
 const routes: CragRoute[] = [
   { id: 'route-1', nom: 'La dalle douce', cotation: '5c', secteur: 'Ouest', style: 'dalle', hauteur: 18, degaines: 7, status: 'ok', voteCount: 2 },
@@ -11,6 +11,14 @@ const routes: CragRoute[] = [
 const routeNames = () => screen.getAllByRole('heading', { level: 3 }).map((heading) => heading.textContent)
 
 describe('CragRouteList', () => {
+  it('uses a progressively warmer and more intense color for harder grades', () => {
+    expect(gradeColorClass('4a')).toContain('emerald')
+    expect(gradeColorClass('5c')).toContain('lime')
+    expect(gradeColorClass('6a')).toContain('amber')
+    expect(gradeColorClass('7a+')).toContain('orange')
+    expect(gradeColorClass('8b')).toContain('red')
+  })
+
   it('shows compact route rows sorted from the hardest grade by default', () => {
     render(<CragRouteList routes={routes} />)
 

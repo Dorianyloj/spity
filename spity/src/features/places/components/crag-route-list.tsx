@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { Badge, Button, FilterToolbar } from '@/components/ui'
+import { cn } from '@/lib/class-names'
 
 type RouteStatus = 'ok' | 'humide' | 'spit_a_verifier' | 'fermee'
 type RouteSort = 'hardest' | 'easiest' | 'name'
@@ -46,6 +47,17 @@ const gradeRank = (grade: string) => {
 
   const [, level, letter, plus] = match
   return Number(level) * 10 + ({ a: 1, b: 3, c: 5 } as const)[letter as 'a' | 'b' | 'c'] + (plus ? 1 : 0)
+}
+
+export const gradeColorClass = (grade: string) => {
+  const rank = gradeRank(grade)
+
+  if (rank >= 80) return 'bg-red-800 text-white'
+  if (rank >= 70) return 'bg-orange-600 text-white'
+  if (rank >= 65) return 'bg-orange-500 text-white'
+  if (rank >= 60) return 'bg-amber-400 text-slate-950'
+  if (rank >= 50) return 'bg-lime-400 text-slate-950'
+  return 'bg-emerald-700 text-white'
 }
 
 export default function CragRouteList({ routes }: CragRouteListProps) {
@@ -120,7 +132,7 @@ export default function CragRouteList({ routes }: CragRouteListProps) {
                   <Badge variant={statusVariants[routeStatus]}>{statusLabels[routeStatus]}</Badge>
                   {route.voteCount > 0 && <span className="text-xs tabular-nums text-muted-foreground">{route.voteCount} avis</span>}
                 </div>
-                <Badge className="justify-self-start tabular-nums sm:justify-self-end" variant="primary">{route.cotation}</Badge>
+                <Badge className={cn('justify-self-start tabular-nums sm:justify-self-end', gradeColorClass(route.cotation))} title={`Cotation ${route.cotation}`}>{route.cotation}</Badge>
               </article>
             </li>
           )
