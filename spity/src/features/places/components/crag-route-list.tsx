@@ -98,6 +98,7 @@ export default function CragRouteList({ routes }: CragRouteListProps) {
         queryPlaceholder="Nom, secteur ou cotation…"
         onReset={reset}
         resetLabel="Réinitialiser"
+        showCount={false}
         showReset={hasFilters}
       />
 

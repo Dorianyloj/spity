@@ -25,6 +25,7 @@ export interface FilterToolbarProps {
   queryPlaceholder?: string
   onReset?: () => void
   resetLabel?: string
+  showCount?: boolean
   showReset?: boolean
 }
 
@@ -37,6 +38,7 @@ export default function FilterToolbar({
   queryPlaceholder = 'Rechercher...',
   onReset,
   resetLabel = 'Réinitialiser',
+  showCount = true,
   showReset = false,
 }: FilterToolbarProps) {
   const searchId = useId()
@@ -81,8 +83,8 @@ export default function FilterToolbar({
           </div>
         </div>
 
-        <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-lg bg-secondary/60 px-3 py-2.5">
-          <div
+        {showCount || (showReset && onReset) ? <div className={cn('mt-3 flex flex-wrap items-center gap-3 rounded-lg bg-secondary/60 px-3 py-2.5', showCount ? 'justify-between' : 'justify-end')}>
+          {showCount ? <div
             className="flex items-center gap-2 text-sm text-muted-foreground"
             role="status"
             aria-live="polite"
@@ -90,14 +92,14 @@ export default function FilterToolbar({
           >
             <Filter size={16} aria-hidden="true" />
             <span>{countLabel}</span>
-          </div>
+          </div> : <span className="sr-only" role="status" aria-live="polite" aria-atomic="true">{countLabel}</span>}
           {showReset && onReset && (
             <Button variant="ghost" size="sm" onClick={onReset}>
               <RotateCcw size={15} aria-hidden="true" />
               {resetLabel}
             </Button>
           )}
-        </div>
+        </div> : <span className="sr-only" role="status" aria-live="polite" aria-atomic="true">{countLabel}</span>}
       </CardContent>
     </Card>
   )

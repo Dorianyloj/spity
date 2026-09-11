@@ -17,6 +17,7 @@ describe('CragRouteList', () => {
     expect(routeNames()).toEqual(['Le grand dévers', 'Fissure du matin', 'La dalle douce'])
     expect(screen.getByText('31 m · 12 dégaines')).toBeInTheDocument()
     expect(screen.getAllByText('Humide')).toHaveLength(2)
+    expect(screen.getByRole('status')).toHaveClass('sr-only')
   })
 
   it('searches, filters and sorts the routes', async () => {
