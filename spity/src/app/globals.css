@@ -95,6 +95,25 @@
   --grade-elite: #173236;
 }
 
+/* Keep Leaflet's permanent cluster label visually inside the circle. */
+.leaflet-tooltip.places-cluster-count {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+.leaflet-tooltip.places-cluster-count::before {
+  display: none;
+}
+
 .dark {
   --background: #132d2f;
   --foreground: #f8fbf5;
@@ -302,22 +321,6 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @layer components {
-  .leaflet-tooltip.places-cluster-count {
-    margin: 0;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
-    color: #ffffff;
-    font-size: 0.75rem;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-    pointer-events: none;
-  }
-
-  .leaflet-tooltip.places-cluster-count::before {
-    display: none;
-  }
-
   /* Badge de cotation */
   .grade-badge {
     @apply inline-flex items-center justify-center rounded-md px-2 py-0.5 font-mono text-xs font-bold;

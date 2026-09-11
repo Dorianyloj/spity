@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { JetBrains_Mono, Outfit } from "next/font/google";
 import "leaflet/dist/leaflet.css";
 import "./globals.css";
-import "leaflet/dist/leaflet.css";
 
 const outfit = Outfit({
   variable: "--font-outfit",
