@@ -23,6 +23,12 @@ type PlacesMapProps = {
   selectedPlaceId: string | null
 }
 
+const markerColors = {
+  salle: '#2563eb',
+  falaise: '#e11d48',
+  cluster: '#7c3aed',
+} as const
+
 function FitPlaces({ places }: Pick<PlacesMapProps, 'places'>) {
   const map = useMap()
 
@@ -71,10 +77,10 @@ function ClusteredMarkers({ onSelect, places, selectedPlaceId }: Omit<PlacesMapP
           center={[place.latitude, place.longitude]}
           eventHandlers={{ click: () => onSelect(place.id) }}
           pathOptions={{
-            color: isSelected ? '#173236' : '#ffffff',
-            fillColor: isCrag ? '#d6ff52' : '#173236',
+            color: '#ffffff',
+            fillColor: isCrag ? markerColors.falaise : markerColors.salle,
             fillOpacity: 1,
-            weight: isSelected ? 4 : 2,
+            weight: isSelected ? 5 : 3,
           }}
           radius={isSelected ? 10 : 7}
         >
@@ -97,9 +103,9 @@ function ClusteredMarkers({ onSelect, places, selectedPlaceId }: Omit<PlacesMapP
         eventHandlers={{ click: () => map.fitBounds(cluster.places.map((place) => [place.latitude, place.longitude] as [number, number]), { maxZoom: 14, padding: [36, 36] }) }}
         pathOptions={{
           color: '#ffffff',
-          fillColor: includesSelectedPlace ? '#d6ff52' : '#173236',
+          fillColor: markerColors.cluster,
           fillOpacity: 1,
-          weight: 3,
+          weight: includesSelectedPlace ? 5 : 3,
         }}
         radius={Math.min(24, 12 + Math.log2(cluster.places.length) * 5)}
       >

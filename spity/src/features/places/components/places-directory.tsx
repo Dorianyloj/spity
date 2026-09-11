@@ -406,8 +406,8 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
               </div>
               {mapPoints.length > 0 && (
                 <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground">
-                  <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-[#173236]" aria-hidden="true" />Salle</span>
-                  <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-primary" aria-hidden="true" />Falaise</span>
+                  <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-blue-600" aria-hidden="true" />Salle</span>
+                  <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-rose-600" aria-hidden="true" />Falaise</span>
                 </div>
               )}
             </CardContent>
