@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import { Header } from '@/components/ui/header-2'
 import type { AuthUser } from '@/features/auth/schemas'
 import LogoutButton from './logout-button'
+import TopologyBackground from './topology-background'
 
 type AppShellNavItem = 'feed' | 'matching' | 'partnerships' | 'places' | 'events' | 'profile' | 'admin'
 
@@ -34,9 +35,10 @@ export default function AppShell({ activeItem, children, user }: AppShellProps) 
     .filter((item) => (!item.role || item.role === user.role) && (!item.adminOnly || user.isAdmin === true))
     .map((item) => ({ label: item.label, href: item.href, active: item.key === activeItem, icon: <item.icon size={18} aria-hidden="true" /> }))
   return (
-    <div className="min-h-dvh bg-zinc-800 pb-10 text-foreground">
+    <div className="relative isolate min-h-dvh bg-[#173236] pb-10 text-foreground">
+      <TopologyBackground />
       <Header overlay homeHref="/app" links={links} accountLabel={user.role === 'club' ? 'Club' : 'Grimpeur'} actions={<LogoutButton compact className="rounded-xl transition-none" />} mobileActions={<LogoutButton className="justify-start rounded-xl border border-border transition-none" />} />
-      <main className="mx-auto max-w-7xl px-4 pb-7 pt-[calc(8rem+env(safe-area-inset-top))]">{children}</main>
+      <main className="relative z-10 mx-auto max-w-7xl px-4 pb-7 pt-[calc(8rem+env(safe-area-inset-top))]">{children}</main>
     </div>
   )
 }
