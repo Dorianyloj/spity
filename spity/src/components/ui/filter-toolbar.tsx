@@ -42,7 +42,7 @@ export default function FilterToolbar({
   const searchId = useId()
 
   return (
-    <Card hover={false} className="mx-auto w-full max-w-5xl border-border/90">
+    <Card hover={false} className="w-full border-border/90">
       <CardContent className="p-3 sm:p-4">
         <div className="grid gap-3 sm:grid-cols-3 xl:grid-cols-[minmax(0,2fr)_repeat(3,minmax(0,1fr))]">
           <label className="min-w-0 space-y-2 sm:col-span-3 xl:col-span-1">
