@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { Building2, MapPin, Maximize2, Minimize2, Mountain, Plus, SearchX, UsersRound } from 'lucide-react'
+import { ArrowUpRight, Building2, MapPin, Maximize2, Minimize2, Mountain, Plus, SearchX, UsersRound } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import {
   Badge,
@@ -77,6 +77,7 @@ type DisciplineFilter = 'all' | 'bloc' | 'voie' | 'grande_voie' | 'trad' | 'arti
 type StatusFilter = 'all' | 'sec' | 'attention'
 
 type DirectoryResult = {
+  discipline: MapDiscipline | null
   details: string[]
   href: string
   id: string
@@ -85,6 +86,7 @@ type DirectoryResult = {
   location: string
   mapPoint: PlaceMapPoint | null
   name: string
+  status: FalaisePlace['status']
 }
 
 type PlacesDirectoryProps = {
@@ -113,6 +115,12 @@ const statusLabels = {
   humide: 'Humide',
   attention: 'À surveiller',
   ferme: 'Fermé',
+} as const
+
+const placeKindLabels = {
+  salle: 'Salle',
+  falaise: 'Falaise',
+  club: 'Club',
 } as const
 
 const filters = [
@@ -208,6 +216,7 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
       ...filteredSalles.map((salle) => ({
         id: salle.id,
         kind: 'salle' as const,
+        discipline: getMapDiscipline(salle.disciplines, discipline === 'all' ? undefined : discipline),
         name: salle.nom,
         location: salle.location,
         href: `/app/places/salles/${salle.id}`,
@@ -216,6 +225,7 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
           salle.disciplines.slice(0, 2).map((value) => disciplineLabels[value] ?? value).join(' · '),
           salle.niveauMin && salle.niveauMax ? `${salle.niveauMin} – ${salle.niveauMax}` : '',
         ].filter(Boolean),
+        status: null,
         mapPoint:
           salle.latitude !== null && salle.longitude !== null
             ? {
@@ -236,6 +246,7 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
         return {
           id: falaise.id,
           kind: 'falaise' as const,
+          discipline: getMapDiscipline(falaise.disciplines, discipline === 'all' ? undefined : discipline),
           name: falaise.nom,
           location: falaise.location,
           href: `/app/places/falaises/${falaise.id}`,
@@ -243,8 +254,8 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
           details: [
             falaise.disciplines.slice(0, 2).map((value) => disciplineLabels[value] ?? value).join(' · '),
             routes.length > 0 ? `${routes.length} voie${routes.length > 1 ? 's' : ''}` : '',
-            falaise.status ? statusLabels[falaise.status] : '',
           ].filter(Boolean),
+          status: falaise.status,
           mapPoint:
             falaise.latitude !== null && falaise.longitude !== null
               ? {
@@ -263,12 +274,14 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
       ...filteredClubs.map((club) => ({
         id: club.id,
         kind: 'club' as const,
+        discipline: null,
         name: club.nom,
         location: club.location ?? 'Localisation à compléter',
         href: `/app/places/clubs/${club.id}`,
         imageUrl: brandAssets.heroSunset,
         details: [club.ffmeNum ?? 'Club local'],
         mapPoint: null,
+        status: null,
       })),
     ],
     [discipline, filteredClubs, filteredFalaises, filteredSalles, voies]
@@ -379,24 +392,39 @@ export default function PlacesDirectory({ canSuggest = false, salles, falaises, 
                     <Link
                       href={result.href}
                       className={cn(
-                        'group flex overflow-hidden rounded-lg border bg-card shadow-sm outline-none transition-colors hover:border-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+                        'group flex min-h-36 overflow-hidden rounded-lg border bg-card shadow-sm outline-none transition-colors hover:border-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
                         isSelected ? 'border-primary' : 'border-border'
                       )}
                     >
-                      <MediaHeader className="size-24 shrink-0 sm:size-28" imageUrl={result.imageUrl} />
-                      <div className="min-w-0 flex-1 p-4">
+                      <div className="relative w-32 shrink-0 sm:w-44">
+                        <MediaHeader className="absolute inset-0 size-full" imageUrl={result.imageUrl} />
+                        <Badge className="absolute left-3 top-3 gap-1.5 border border-white/70 bg-background/90 text-foreground shadow-sm">
+                          <Icon size={14} aria-hidden="true" />
+                          {placeKindLabels[result.kind]}
+                        </Badge>
+                      </div>
+                      <div className="flex min-w-0 flex-1 flex-col justify-center p-4 sm:p-5">
                         <div className="flex items-start justify-between gap-3">
                           <div className="min-w-0">
-                            <h3 className="truncate text-base font-bold text-foreground">{result.name}</h3>
-                            <p className="mt-1 flex items-center gap-1.5 truncate text-sm text-muted-foreground"><MapPin size={15} aria-hidden="true" />{result.location}</p>
+                            <h3 className="line-clamp-2 text-balance text-lg font-bold leading-tight text-foreground">{result.name}</h3>
+                            <p className="mt-2 flex items-center gap-1.5 truncate text-sm text-muted-foreground">
+                              <MapPin className="shrink-0" size={16} aria-hidden="true" />
+                              {result.location}
+                            </p>
                           </div>
-                          <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-secondary text-foreground" aria-hidden="true">
-                            <Icon size={18} aria-hidden="true" />
+                          <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-border bg-background text-muted-foreground transition-colors group-hover:border-primary group-hover:text-foreground" aria-hidden="true">
+                            <ArrowUpRight size={17} aria-hidden="true" />
                           </span>
                         </div>
-                        {result.details.length > 0 && (
-                          <div className="mt-3 flex flex-wrap gap-2">
-                            {result.details.slice(0, 3).map((detail) => <Badge key={detail} variant="secondary">{detail}</Badge>)}
+                        {(result.details.length > 0 || result.status) && (
+                          <div className="mt-4 flex flex-wrap gap-2">
+                            {result.details.slice(0, 3).map((detail, index) => <Badge className="gap-1.5" key={detail} variant="secondary">
+                              {index === 0 && result.discipline && <span className={cn('size-2 rounded-full', mapDisciplineStyles[result.discipline].dotClassName)} aria-hidden="true" />}
+                              {detail}
+                            </Badge>)}
+                            {result.status && <Badge variant={result.status === 'sec' ? 'success' : result.status === 'ferme' ? 'destructive' : result.status === 'attention' ? 'warning' : 'secondary'}>
+                              {statusLabels[result.status]}
+                            </Badge>}
                           </div>
                         )}
                       </div>
