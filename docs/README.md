@@ -9,6 +9,7 @@ Cette arborescence est la source unique des livrables projet et RNCP.
 - [`audits/`](audits) : états des lieux datés et décisions de remise en ordre ;
 - [`bc02/`](bc02) : dossier final du bloc 2, annexes et plan initial archivé ;
 - [`rncp/bloc-01/`](rncp/bloc-01) : livrables HTML, PDF et sources du bloc 1 ;
+- [`rncp/bloc-03/`](rncp/bloc-03/README.md) : attendus officiels et plan de préparation de la soutenance du bloc 3 ;
 - [`rncp/bloc-04/`](rncp/bloc-04) : dossier, revue finale, preuves et [parcours jury](rncp/bloc-04/dossier-jury/README.md) du bloc 4 ;
 - [`rncp/referentiel/`](rncp/referentiel) : référentiel officiel utilisé pour contrôler les attendus.
 
