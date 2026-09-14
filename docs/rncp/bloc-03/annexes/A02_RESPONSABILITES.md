@@ -2,6 +2,8 @@
 
 Nature : simulation pédagogique. CP = chef de projet ; DEV = développeur fictif ; QA = testeur UX fictif ; CL = client fictif. R réalise, A décide et répond du résultat, C est consulté, I est informé. Une seule autorité A par ligne.
 
+CL reprend Claire Martin, présidente fictive du Collectif Altitude Grimpe, commanditaire défini dans C1.1.1 du Bloc 1. CP/DEV/QA sont des rôles du scénario et ne prouvent pas l'existence de trois collaborateurs réels.
+
 | Activité | CP | DEV | QA | CL |
 | --- | --- | --- | --- | --- |
 | Fixer périmètre et critères | R | C | C | A |

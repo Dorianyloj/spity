@@ -84,11 +84,11 @@ def footer(canvas,doc):
 
 def main():
     OUTPUT.parent.mkdir(parents=True,exist_ok=True)
-    story=[Spacer(1,32*mm),Paragraph('SPITY',ParagraphStyle('cover',fontName='Arial-Bold',fontSize=45,leading=50,textColor=GREEN)),Spacer(1,10*mm),Paragraph('Coordonner et piloter<br/>un projet logiciel',styles['h1']),Paragraph('Dossier de soutenance - Bloc 3',styles['h2']),Paragraph('Dorian Joly<br/>Expert en développement logiciel - RNCP39583<br/>Préparation du 14 septembre 2026',styles['body']),Spacer(1,12*mm),Paragraph('Réalisations vérifiables du projet et mise en situation pédagogique explicitement identifiée. Le dossier accompagne un oral de 30 minutes et une démonstration, suivis de 15 minutes de questions.',styles['body']),PageBreak()]
+    story=[Spacer(1,32*mm),Paragraph('SPITY',ParagraphStyle('cover',fontName='Arial-Bold',fontSize=45,leading=50,textColor=GREEN)),Spacer(1,10*mm),Paragraph('Coordonner et piloter<br/>un projet logiciel',styles['h1']),Paragraph('Dossier de soutenance - Bloc 3',styles['h2']),Paragraph('Dorian Joly<br/>Expert en développement logiciel - RNCP39583<br/>Préparation du 14 septembre 2026',styles['body']),Spacer(1,12*mm),Paragraph('Réalisations vérifiables du projet et mise en situation pédagogique explicitement identifiée. Le dossier accompagne un oral de 30 minutes, démonstration incluse, suivi de 15 minutes de questions.',styles['body']),PageBreak()]
     files=[DOCS/'DOSSIER_BLOC_03.md',DOCS/'MATRICE_PREUVES.md',*sorted((DOCS/'annexes').glob('A*.md')),DOCS/'VERIFICATION.md']
     for n,f in enumerate(files):
         if not f.exists():raise FileNotFoundError(f)
-        if n > 1:story.append(PageBreak())
+        if n > 0:story.append(PageBreak())
         story.extend(markdown(f))
     doc=SimpleDocTemplate(str(OUTPUT),pagesize=A4,rightMargin=18*mm,leftMargin=18*mm,topMargin=18*mm,bottomMargin=22*mm,title='Spity - Dossier Bloc 3',author='Dorian Joly')
     doc.build(story,onFirstPage=footer,onLaterPages=footer)

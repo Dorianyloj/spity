@@ -2,6 +2,8 @@
 
 Tous les comptes rendus de cette annexe sont des SIMULATIONS PÉDAGOGIQUES. Aucun échange ni accord réel n'est attesté. Les jours J3, J10 et J15 sont relatifs au cas, sans date historique inventée.
 
+Continuité du Bloc 1 : CL représente Claire Martin, présidente fictive du Collectif Altitude Grimpe. Ces comptes rendus portent sur un lot pédagogique de démonstration et ne révisent pas le budget global du MVP.
+
 ## CR01 - Validation du périmètre à J3
 
 Participants fictifs : CP, CL et QA. Objet : fixer le parcours de démonstration et les critères de validation. Le client fictif attend la recherche de partenaires, les événements et la visibilité des inscriptions côté club. La recette vérifie aussi les droits et la capacité.

@@ -184,6 +184,9 @@ add('Annexe : correspondance des preuves',0,'Annexe pour les questions','table',
 add('Annexe : calcul de la prévision',0,'Annexe, données fictives en euros','table',dict(rows=[['Poste','Calcul','Montant'],['Chef de projet','29 h × 45 €','1 305 €'],['Développement','64 h × 35 €','2 240 €'],['Recette','24 h × 30 €','720 €'],['Frais prévisionnels','Infrastructure et formation','200 €'],['Total à terminaison','Travail et frais','4 465 €']],widths=[370,560,222]),'Les charges incluent les temps de formation. Les quatre postes totalisent 4 465 euros. Les taux sont fictifs et le montant est une valorisation économique du cas, sans facture réelle correspondante.','A03 et classeur Pilotage.')
 add('Annexe : sources et portée des contrôles',0,'Annexe documentaire','columns',dict(items=[['Cadre officiel','Référentiel RNCP39583, pages 11 à 14.\nModalités 2025–2026, pages 6, 8 et 11.\nGrille BC03, page unique.'],['Vérifications du 14 septembre','389 tests unitaires et 6 scénarios navigateur.\nRecette locale sur next dev et MariaDB dédiée.\nAucune validation par un client réel.']]),'Le règlement spécial n’a pas été fourni. Les contrôles datés ne prouvent pas le fonctionnement d’une autre version. La recette locale et le cas standalone historique correspondent à deux contextes explicitement séparés.','Trois PDF fournis par le candidat. VERIFICATION et preuves/verification.json.')
 
+from bloc_context import align
+align(slides)
+
 assert len(slides)==25
 assert sum(s['minutes'] for s in slides)==30
 assert sum(s['minutes'] for s in slides if s['demo'])==6

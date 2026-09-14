@@ -1,6 +1,6 @@
 # Guide de répétition — Bloc 3 Spity
 
-Support associé : spity-bloc-3-30-minutes-visuel-v3.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
+Support associé : spity-bloc-3-30-minutes-visuel-v4.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
 
 ## Fil conducteur
 
@@ -13,13 +13,13 @@ Le texte oral ci-dessous développe chaque diapositive et propose ses transition
 | Slide | Sujet | Durée | Temps cumulé |
 | --- | --- | --- | --- |
 | 1 | Spity | 00:30 | 00:30 |
-| 2 | Une sortie, deux points de vue | 01:00 | 01:30 |
-| 3 | Des preuves réelles, un cas explicite | 01:00 | 02:30 |
+| 2 | Le besoin d’Altitude Grimpe | 01:00 | 01:30 |
+| 3 | Un projet, quatre blocs | 01:00 | 02:30 |
 | 4 | Le travail avance jusqu’à la recette | 01:30 | 04:00 |
-| 5 | Le chemin vers la démonstration | 01:30 | 05:30 |
+| 5 | Un lot sur quinze jours ouvrés | 01:30 | 05:30 |
 | 6 | Qui fait quoi ? | 01:00 | 06:30 |
 | 7 | 5 heures de plus à anticiper | 01:30 | 08:00 |
-| 8 | 232 € de marge sous le plafond | 01:30 | 09:30 |
+| 8 | Le budget du lot de démonstration | 01:30 | 09:30 |
 | 9 | Le chef de projet approche sa limite | 01:00 | 10:30 |
 | 10 | Des risques qui déclenchent une action | 01:00 | 11:30 |
 | 11 | Le choix du build standalone | 02:00 | 13:30 |
@@ -33,7 +33,7 @@ Le texte oral ci-dessous développe chaque diapositive et propose ses transition
 | 19 | Place à la démonstration | 00:30 | 23:30 |
 | 20 | Trouver un partenaire | 03:00 | 26:30 |
 | 21 | Retrouver les participants | 02:30 | 29:00 |
-| 22 | Un périmètre démontré | 01:00 | 30:00 |
+| 22 | La transmission à la maintenance | 01:00 | 30:00 |
 
 À 15:00, terminer l'arbitrage de périmètre. À 23:00, quitter le suivi client pour lancer les six minutes de démonstration. À 29:00, revenir au bilan. Si une explication dépasse, condenser un exemple ; ne pas supprimer entièrement une compétence ni la démonstration.
 
@@ -53,37 +53,41 @@ Je commence par le besoin auquel répond le produit.
 
 Source : Référentiel RNCP39583, p. 11 à 14. Photo de marque du dépôt, illustration sans lien avec une équipe réelle.
 
-### 2. Une sortie, deux points de vue
+### 2. Le besoin d’Altitude Grimpe
 
-Repère : 00:30 à 01:30. Nature : Produit Spity.
+Repère : 00:30 à 01:30. Nature : B1, commanditaire fictif et produit réel.
 
 **Texte oral proposé**
 
-Le besoin retenu pour cette présentation est concret : préparer une sortie avec des personnes compatibles avec sa pratique. Un grimpeur doit pouvoir comprendre les profils proposés, consulter les informations d'un événement et savoir si son inscription a abouti. Le club a un autre besoin : organiser la sortie et retrouver les participants autorisés.
+Je reprends le commanditaire du Bloc 1 : le Collectif Altitude Grimpe, association fictive représentée par Claire Martin. Le cadre reste une zone pilote autour de Lyon et Grenoble. Son besoin est de centraliser des usages aujourd'hui dispersés : trouver un partenaire, consulter les lieux et organiser des sorties.
 
-Ces deux points de vue déterminent ce que je vais montrer. Une page qui s'affiche correctement reste insuffisante si l'utilisateur ne comprend pas l'état de sa demande ou le nombre de places disponibles. Je retiens donc des critères observables sur le parcours complet. La capture présente le répertoire de lieux, qui apporte le contexte géographique de la pratique.
+Pour cette soutenance, je retiens le parcours déjà développé dans le Bloc 2. Le grimpeur recherche une personne compatible et rejoint un événement. Le club organise cette sortie et retrouve les participants autorisés. Ce choix relie le besoin initial à un résultat démontrable. La capture montre le répertoire de lieux du produit local. Elle illustre le contexte géographique, sans prétendre que toutes les fonctions de la vision initiale sont validées.
 
 **Transition**
 
-Il faut ensuite préciser sur quelles preuves repose cette présentation.
+Les quatre blocs abordent ce même projet sous des angles complémentaires.
 
-Source : DOSSIER_BLOC_03 §1-2. Capture locale du 14 septembre 2026, données de démonstration.
+Source : B1 : C1.1.1, p. 2 ; C1.4.1, p. 4-5. B2 : 16_DOSSIER_FINAL_BC02, F01-F10. Capture locale du 14 septembre 2026, données de test.
 
-### 3. Des preuves réelles, un cas explicite
+### 3. Un projet, quatre blocs
 
 Repère : 01:30 à 02:30. Nature : Produit réel et mise en situation fictive.
 
 **Texte oral proposé**
 
-Cette présentation combine deux ensembles que je distingue clairement. D'un côté, le logiciel existe. Le dépôt contient le code, des modifications datées et des résultats de vérification. Je peux montrer ces éléments et préciser leur portée.
+Le Bloc 1 pose le besoin, les acteurs, l'architecture cible et le budget global. Le Bloc 2 présente le prototype développé, ses tests, ses corrections et sa livraison. Le Bloc 3 explique comment piloter un lot : planifier, suivre les écarts, arbitrer et préparer la validation. Le Bloc 4 documente ensuite les responsabilités de maintenance, les anomalies et le support.
 
-De l'autre, j'utilise un cas professionnel fictif pour expliquer le pilotage d'une petite équipe. Les rôles, les charges, les coûts et les réunions client de ce cas sont des hypothèses pédagogiques. Le référentiel autorise une mise en situation réelle ou fictive. Je présente donc ces éléments comme un scénario. Les comptes de démonstration ne correspondent pas à des personnes interrogées. Cette distinction permet au jury de comprendre exactement ce qui est observé et ce qui relève de mon raisonnement de pilotage.
+Cette lecture est une articulation de compétences. Le dossier de maintenance d'août existe déjà avant cette préparation de septembre. Le logiciel et ses traces sont réels. Le commanditaire du Bloc 1 et l'équipe CP, DEV, QA du scénario sont fictifs. Je conserve cette distinction, également présente dans le cas support du Bloc 4, sans transformer une simulation en échange client réel.
+
+**À montrer ou manipuler**
+
+Montrer les quatre blocs, puis préciser la nature réelle ou fictive des éléments.
 
 **Transition**
 
-Dans ce cadre, je retiens une organisation simple, adaptée au lot.
+Je zoome maintenant sur l'organisation du lot pédagogique.
 
-Source : Référentiel p. 11. DOSSIER_BLOC_03 §1-2.
+Source : B1 : C1.1.1 et C1.4.2. B2 : 16_DOSSIER_FINAL_BC02. B4 : DOSSIER_BLOC_04 et B4-C433-01. Référentiel p. 11. COHERENCE_INTER_BLOCS.md.
 
 ### 4. Le travail avance jusqu’à la recette
 
@@ -107,13 +111,13 @@ Ces règles de travail se placent dans un planning de quinze jours ouvrés.
 
 Source : DOSSIER_BLOC_03 §3. A01 et A03.
 
-### 5. Le chemin vers la démonstration
+### 5. Un lot sur quinze jours ouvrés
 
 Repère : 04:00 à 05:30. Nature : C.3.1, simulation sur quinze jours ouvrés.
 
 **Texte oral proposé**
 
-Le planning couvre quinze jours ouvrés relatifs. J1 à J15 désignent les jours du cas, pas des dates historiques du développement de Spity. Je conserve la référence initiale pour pouvoir expliquer les changements au lieu d'effacer les retards.
+Le planning porte sur un lot pédagogique de préparation et de stabilisation d'une démonstration, adossé au produit existant. Ses quinze jours ouvrés relatifs ne représentent pas tout le développement de Spity. Les soixante-dix-neuf jours-homme du Bloc 1 concernent l'estimation globale du MVP. Ici, J1 à J15 désignent des jours du cas, et non les jalons J1 à J5 du cadrage.
 
 Le travail commence par l'étude du besoin et la mesure des critères attendus. Il comprend ensuite la conception de l'organisation, la réalisation des parcours, leur recette et la restitution. À J3, le client fictif valide le périmètre. À J8, le parcours partenaire doit être vérifié. J10 sert à examiner les écarts et à arbitrer les demandes nouvelles. La recette se clôt à J14 avant la démonstration de J15.
 
@@ -127,7 +131,7 @@ Lire les phases du planning, puis montrer la recette à J14 avant la démonstrat
 
 Pour tenir ces jalons, chacun doit connaître sa responsabilité.
 
-Source : A01. donnees/pilotage.json. Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01.
+Source : A01. donnees/pilotage.json. B1 : C1.4.1, p. 7-8, estimation globale et jalons distincts du lot B3. Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01.
 
 ### 6. Qui fait quoi ?
 
@@ -135,7 +139,7 @@ Repère : 05:30 à 06:30. Nature : C.3.1, équipe fictive du cas.
 
 **Texte oral proposé**
 
-Le scénario distingue un chef de projet, un développeur et un testeur UX. Leurs capacités représentent respectivement trente, soixante-douze et trente heures sur le lot. Le client intervient aux points de validation.
+Le Bloc 2 décrit les réalisations de Dorian. Ici, le scénario répartit les responsabilités entre trois rôles fictifs : chef de projet, développeur et testeur UX. Leurs capacités représentent respectivement trente, soixante-douze et trente heures sur le lot. Le client intervient aux points de validation.
 
 La matrice RACI précise qui réalise, qui décide, qui doit être consulté et qui doit être informé. Une seule autorité de décision est désignée pour chaque activité. Par exemple, le développeur corrige une fonction, QA vérifie le résultat et le chef de projet suit la clôture. Le client reste responsable de l'acceptation du périmètre.
 
@@ -145,7 +149,7 @@ Cette organisation évite les tâches sans responsable et les validations implic
 
 Une fois le travail réparti, je peux comparer le prévu et la prévision.
 
-Source : A02 et A03.
+Source : A02 et A03. B1 : C1.1.1, p. 3. B2 : déclaration de périmètre du dossier final. La répartition CP/DEV/QA reste simulée.
 
 ### 7. 5 heures de plus à anticiper
 
@@ -169,17 +173,17 @@ La même prévision permet de réévaluer le coût du lot.
 
 Source : A03. Classeur Pilotage et Planning. Données simulées à J10.
 
-### 8. 232 € de marge sous le plafond
+### 8. Le budget du lot de démonstration
 
 Repère : 08:00 à 09:30. Nature : C3.2.1, montants fictifs en euros.
 
 **Texte oral proposé**
 
-Le budget valorise le travail à partir de taux horaires fictifs. Il ne représente pas des salaires versés ni des factures. La référence initiale comprend quatre mille quatre-vingt-dix euros de travail et cent quatre-vingts euros de frais, soit quatre mille deux cent soixante-dix euros.
+Il faut distinguer deux périmètres. Les fiches détaillées du Bloc 1 estiment le lancement du MVP et sa première année à trente-huit mille cent vingt-six euros hors taxes, sur une base de soixante-dix-neuf jours-homme. Ici, je valorise seulement le lot pédagogique de démonstration, avec des taux horaires fictifs. Ce montant ne remplace pas le budget global et ne permet pas de calculer une économie du projet.
 
-Avec les charges revues à J10, le travail atteint quatre mille deux cent soixante-cinq euros. Les frais prévisionnels sont de deux cents euros. Le total à terminaison est donc de quatre mille quatre cent soixante-cinq euros. L'écart est de cent quatre-vingt-quinze euros, soit environ quatre virgule six pour cent.
+La référence du lot est de quatre mille deux cent soixante-dix euros, frais compris. À J10, la prévision passe à quatre mille quatre cent soixante-cinq euros. L'écart atteint cent quatre-vingt-quinze euros, soit environ quatre virgule six pour cent. Il doit rester visible même si une réserve existe.
 
-La réserve initiale de dix pour cent représente quatre cent vingt-sept euros. Elle porte le plafond à quatre mille six cent quatre-vingt-dix-sept euros. Il reste deux cent trente-deux euros de marge. La réserve n'efface pas le dépassement de la référence. Elle indique seulement que le scénario peut encore l'absorber. Une nouvelle demande doit être comparée à cette marge et à la capacité de l'équipe avant tout engagement.
+La réserve initiale de quatre cent vingt-sept euros porte le plafond à quatre mille six cent quatre-vingt-dix-sept euros. Il reste deux cent trente-deux euros de marge. Je compare toute demande nouvelle à cette marge et à la disponibilité des rôles. Le classeur permet de retrouver le détail du calcul. Ces valeurs sont des hypothèses d'exercice, sans facture ni consommation réelle du budget du Bloc 1.
 
 **À montrer ou manipuler**
 
@@ -189,7 +193,7 @@ Comparer les barres du budget initial, de la prévision et du plafond. Expliquer
 
 La marge financière doit être lue avec la disponibilité de chaque rôle.
 
-Source : A03. Classeur Pilotage. Taux et charges du cas fictif.
+Source : A03 et classeur Pilotage. B1 : fiches C1.4.1 p. 7 et C1.4.2 p. 2-4, 79 j-h et 38 126 EUR HT. L’ancien diaporama B1 porte une autre estimation, voir COHERENCE_INTER_BLOCS.md.
 
 ### 9. Le chef de projet approche sa limite
 
@@ -247,7 +251,7 @@ Comparer oralement les trois options. Mettre en avant le standalone et le commit
 
 Un arbitrage peut aussi porter sur le périmètre plutôt que sur un choix technique.
 
-Source : A04. git show 689e59d. Cahier de recettes Bloc 2, consolidation standalone.
+Source : A04. git show 689e59d. Cahier de recettes Bloc 2, consolidation standalone. B2 : 19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES, section 8. L’arbitrage B3 reprend le même événement et en explicite le raisonnement de pilotage.
 
 ### 12. Une demande qui dépasse le lot
 
@@ -269,7 +273,7 @@ Faire lire les deux dépassements, puis exposer le report.
 
 Pour appliquer cette décision, je dois aussi la faire comprendre à l’équipe.
 
-Source : A04 et CR02 dans A07. Simulation explicitement distincte du code actuel.
+Source : A04 et CR02 dans A07. Simulation explicitement distincte du code actuel. B1 : C1.4.1, contributions aux topos dans la vision cible. Le report concerne ce lot pédagogique ; il ne supprime pas la fonctionnalité du projet.
 
 ### 13. Un désaccord à traiter ensemble
 
@@ -303,7 +307,7 @@ Repère : 16:30 à 18:00. Nature : C3.3.1, dispositions du scénario.
 
 Les outils doivent aider l'équipe à retrouver une décision et à agir. Dans le cas présenté, Linear porte les tâches et les blocages. Git conserve les modifications. Les documents partagés regroupent les décisions et les comptes rendus. La visioconférence sert lorsqu'un échange direct est nécessaire.
 
-J'envoie l'ordre du jour avant la réunion et je diffuse une synthèse qui précise l'action, son responsable et son échéance. Une personne absente doit pouvoir comprendre la décision sans reconstituer toute une conversation.
+J'envoie l'ordre du jour avant la réunion et je diffuse une synthèse qui précise l'action, son responsable et son échéance. Le Bloc 4 applique aussi ce principe dans son cas support fictif : contexte fonctionnel transmis au mainteneur, puis retour sur la cause et les vérifications.
 
 Les adaptations se discutent avec la personne concernée. Elles peuvent inclure un support structuré, du sous-titrage, des pauses ou davantage de temps pour un exercice. Je n'attribue pas de situation de handicap à une personne sans information. Le scénario prévoit une organisation adaptable.
 
@@ -317,7 +321,7 @@ Donner un exemple d’action datée puis un exemple d’adaptation convenue.
 
 La répartition du travail suppose également de connaître les compétences disponibles.
 
-Source : A02 et A05, inclusion et contexte international fictif.
+Source : A02 et A05, inclusion et contexte international fictif. B4 : B4-C433-01, exemple de transmission support/mainteneur explicitement simulée, réutilisable comme méthode de communication.
 
 ### 15. La cible : l’autonomie
 
@@ -367,7 +371,7 @@ Repère : 20:30 à 22:00. Nature : C3.4.1, comptes rendus simulés.
 
 **Texte oral proposé**
 
-Le suivi client repose sur trois points dans le scénario. Le premier valide le périmètre et les critères attendus. Le deuxième présente l'avancement, les écarts et la décision sur la demande supplémentaire. Le troisième porte sur le parcours démontré et ses réserves.
+Je reprends Claire Martin pour le Collectif Altitude Grimpe, commanditaire fictif du Bloc 1. Son suivi repose sur trois points dans le scénario. Le premier valide le périmètre et les critères attendus. Le deuxième présente l'avancement, les écarts et la décision sur la demande supplémentaire. Le troisième porte sur le parcours démontré et ses réserves.
 
 Les trois comptes rendus sont fictifs et aucun accord réel n'est attesté. Leur structure montre toutefois comment préparer un échange utile : ce qui a été présenté, ce qui reste à faire, la difficulté rencontrée et la décision attendue. Une action comprend un responsable et une échéance. Le prochain point de suivi est identifié.
 
@@ -383,7 +387,7 @@ Décrire le compte rendu J10 : écart, décision, responsable et échéance.
 
 La validation du périmètre et la satisfaction méritent chacune une mesure explicite.
 
-Source : A07, CR01 à CR03. Référentiel p. 13-14.
+Source : A07, CR01 à CR03. Référentiel p. 13-14. B1 : C1.1.1 p. 2. CL représente Claire Martin pour le Collectif Altitude Grimpe, tous deux fictifs. A07 ne constitue pas un échange réel.
 
 ### 18. La satisfaction reste à mesurer
 
@@ -393,7 +397,7 @@ Repère : 22:00 à 23:00. Nature : C3.4.1, aucun résultat client réel disponib
 
 Je propose quatre indicateurs complémentaires : la part des critères acceptés, la réussite des parcours sans aide, une note d'utilité et les blocages critiques signalés. Chaque résultat doit être accompagné de la date et du nombre de participants.
 
-À ce stade, aucun retour de client réel n'est disponible dans les éléments du dossier. La mesure reste donc non réalisée. Elle ne vaut ni zéro ni cent pour cent. Les résultats des tests techniques ne remplacent pas une appréciation du besoin par un utilisateur.
+À ce stade, aucun retour de client réel n'est disponible dans les éléments du dossier. La mesure reste donc non réalisée. Les objectifs de NPS et de rétention du Bloc 1 restent des cibles, sans résultat constaté. Les résultats des tests techniques ne remplacent pas une appréciation du besoin par un utilisateur.
 
 Pendant une session pilote, je demanderais la tâche recherchée, le résultat obtenu et l'obstacle rencontré. Une réserve ou une difficulté doit ensuite rejoindre le suivi du projet avec une action identifiable, puis être vérifiée lors d'un nouveau passage.
 
@@ -401,7 +405,7 @@ Pendant une session pilote, je demanderais la tâche recherchée, le résultat o
 
 Je vais maintenant montrer le parcours sur lequel portent ces critères.
 
-Source : A07, indicateurs et questionnaire proposés.
+Source : A07, indicateurs et questionnaire proposés. Les objectifs de NPS, de rétention et d’acquisition du Bloc 1 sont des cibles ; aucun résultat client réel n’en découle. B4-C433-01 est une simulation de support.
 
 ### 19. Place à la démonstration
 
@@ -409,7 +413,7 @@ Repère : 23:00 à 23:30. Nature : C3.4.2, séquence de six minutes.
 
 **Texte oral proposé**
 
-Je passe maintenant au logiciel. La démonstration utilise des comptes locaux et des données de test. Je vais d'abord suivre le point de vue du grimpeur, puis celui du club. Les critères que je garde en tête sont la compréhension des états, la cohérence de l'inscription et la visibilité du participant pour le bon rôle.
+Je passe à la démonstration locale, sur le même parcours grimpeur et club que dans le Bloc 2. Les comptes contiennent des données fictives. Je montre d'abord la recherche d'un partenaire, puis les inscriptions et les participants côté club. Comme le rappelle le Bloc 4, une validation locale ne prouve pas une mise à jour de la production.
 
 **À montrer ou manipuler**
 
@@ -419,7 +423,7 @@ Ouvrir les deux sessions déjà connectées. Lancer le chronomètre de démonstr
 
 Je commence avec le compte grimpeur.
 
-Source : A08 et preuves/verification.json. Photo de marque existante escalade-falaise-gros-plan.jpeg, illustration de la pratique.
+Source : A08 et preuves/verification.json. B2 : F03-F08. B4 : B4-C421-02 et dossier-jury/01_CADRAGE_PROJET, distinction local, staging et production. État de production historique non réactualisé. Photo de marque existante escalade-falaise-gros-plan.jpeg, illustration de la pratique.
 
 ### 20. Trouver un partenaire
 
@@ -465,27 +469,25 @@ Je reviens au bilan du pilotage.
 
 Source : Capture réelle du 14 septembre 2026. A08 et preuves/verification.json.
 
-### 22. Un périmètre démontré
+### 22. La transmission à la maintenance
 
 Repère : 29:00 à 30:00. Nature : Bilan et ouverture des quinze minutes de questions.
 
 **Texte oral proposé**
 
-Cette présentation relie le besoin utilisateur à l'organisation du travail, puis aux décisions et à la validation. Le planning rend les dépendances visibles. Le tableau de bord permet d'anticiper les écarts. L'arbitrage tient compte de la capacité et des critères déjà engagés.
+Le Bloc 1 donne le besoin et la vision de Spity. Le Bloc 2 apporte le logiciel et les preuves de réalisation. Dans le Bloc 3, j'ai organisé un lot limité, interprété ses écarts et expliqué les décisions qui protègent la démonstration.
 
-Je distingue les preuves techniques observables du cas pédagogique utilisé pour le management, le budget et les échanges client. La satisfaction réelle reste à mesurer et les contributions personnelles doivent correspondre aux faits disponibles.
-
-L'amélioration prioritaire serait de recueillir des retours utilisateurs structurés et d'alimenter le suivi avec ces résultats. Je peux maintenant revenir sur une hypothèse du classeur, le choix d'un arbitrage ou l'un des critères de démonstration. Merci pour votre attention.
+Le relais vers le Bloc 4 repose sur des éléments concrets : version identifiée, anomalies qualifiées, réserves et critères de vérification. Son registre et son processus de support existent déjà dans le dossier de maintenance. Je peux m'appuyer sur eux pour préparer cette transmission. Je conserve les limites annoncées : le management présenté reste fictif et aucune validation client réelle n'est inventée. Le pilotage doit rendre la prochaine action compréhensible et vérifiable, y compris après la soutenance.
 
 **À montrer ou manipuler**
 
-Terminer à 30:00. Les annexes restent disponibles uniquement pour les questions.
+Relier les réserves de démonstration à une anomalie ou une amélioration suivie dans le cadre de maintenance.
 
 **Transition**
 
-Je suis prêt à répondre à vos questions.
+Je suis prêt à expliquer les choix et à retrouver les pièces correspondantes.
 
-Source : MATRICE_PREUVES, VERIFICATION et A01 à A08.
+Source : B4 : DOSSIER_BLOC_04, registres d’anomalies et de versions ; B4-C433-01, support simulé. B3 : A07 et A08.
 
 ### 23. Annexe : correspondance des preuves
 
@@ -507,22 +509,22 @@ Les charges incluent les temps de formation. Les quatre postes totalisent 4 465 
 
 Source : A03 et classeur Pilotage.
 
-### 25. Annexe : sources et portée des contrôles
+### 25. Des contrôles datés et contextualisés
 
-Repère : questions du jury, hors des trente minutes. Nature : Annexe documentaire.
+Repère : questions du jury, hors des trente minutes. Nature : Annexe, résultats historiques et contrôles locaux.
 
 **Texte oral proposé**
 
-Le règlement spécial n’a pas été fourni. Les contrôles datés ne prouvent pas le fonctionnement d’une autre version. La recette locale et le cas standalone historique correspondent à deux contextes explicitement séparés.
+Le dossier BC02 du 23 juillet rapporte 126 tests unitaires et six scénarios navigateur. Le Bloc 4 du 13 août rapporte 152 tests Jest et distingue 43 tests de maintenance, avec onze scénarios MariaDB et six recettes. La préparation locale du Bloc 3 du 14 septembre rapporte 389 tests unitaires dans 72 suites et six scénarios navigateur. Les versions, configurations et périmètres diffèrent. Ces totaux ne mesurent pas une progression de qualité et ne doivent pas être additionnés. La recette B3 utilise next dev localement ; elle ne rejoue pas la CI standalone historique. Aucun résultat client réel n'a été trouvé dans les pièces examinées.
 
-Source : Trois PDF fournis par le candidat. VERIFICATION et preuves/verification.json.
+Source : B2 : 16_DOSSIER_FINAL_BC02, Résultats vérifiés, 23 juillet 2026. B4 : DOSSIER_BLOC_04, résumé du 13 août 2026. B3 : VERIFICATION.md et preuves/verification.json, 14 septembre 2026. Cadre officiel : référentiel p. 11-14, modalités p. 6, 8 et 11, grille BC03. Voir COHERENCE_INTER_BLOCS.md.
 
 ## Questions probables du jury
 
 1. **Qu'avez-vous réellement fait et qu'avez-vous simulé ?** Présenter les contributions personnelles confirmées par le candidat. Les commits et les vérifications sont observables. L'équipe CP/DEV/QA, les jours J1-J15, les coûts et les comptes rendus client appartiennent au cas fictif. Un test réussi ne prouve pas un échange client.
 2. **Pourquoi Kanban ?** Le scénario retient un petit effectif, des priorités variables et des livraisons progressives. Une limite de travail en cours, des critères de terminé et des jalons structurent le suivi. Ne pas affirmer que Scrum a été pratiqué sans trace correspondante.
 3. **Quel est le chemin vers la soutenance ?** Accès/profils, matching, événements, recette/corrections et validation J14 avant la démonstration J15. La recette peut commencer sur les fonctions prêtes ; sa clôture attend les corrections. Montrer A01 et les dépendances.
-4. **Comment obtenez-vous 4 465 EUR ?** Valorisation du travail à terminaison : CP 29 h × 45 EUR, DEV 64 h × 35 EUR, QA 24 h × 30 EUR = 4 265 EUR ; ajouter 200 EUR de frais. Les taux et charges sont des hypothèses du cas.
+4. **Comment obtenez-vous 4 465 EUR ?** Valorisation du travail à terminaison : CP 29 h × 45 EUR, DEV 64 h × 35 EUR, QA 24 h × 30 EUR = 4 265 EUR ; ajouter 200 EUR de frais. Les taux et charges sont des hypothèses du lot. Le budget global B1 est de 38 126 EUR HT dans les fiches détaillées, sur 79 j-h. Il ne faut ni remplacer ce total par les coûts B3, ni les additionner. L’ancien diaporama B1 affiche une autre estimation, documentée dans COHERENCE_INTER_BLOCS.md.
 5. **La réserve fait-elle disparaître le dépassement ?** Non : le coût reste supérieur de 195 EUR à la référence de 4 270 EUR. La réserve de 427 EUR porte le plafond à 4 697 EUR et laisse 232 EUR de marge. Un écart doit rester visible même s'il est absorbable.
 6. **Pourquoi 50 % de tâches terminées ne signifie pas 50 % de produit livré ?** Le dénominateur est dix tâches du cas, de tailles différentes. Les 77 h consommées mesurent un effort, pas une valeur acquise. Les critères de recette déterminent la validation fonctionnelle.
 7. **Pourquoi reporter la demande nouvelle ?** Elle ajoute 540 EUR et conduit à 5 005 EUR, soit 308 EUR au-dessus du plafond. La charge DEV atteindrait 76 h pour 72 disponibles. Le report préserve les critères du lot et doit être validé par le commanditaire du scénario.
@@ -531,8 +533,8 @@ Source : Trois PDF fournis par le candidat. VERIFICATION et preuves/verification
 10. **Comment équilibrez-vous la charge ?** Comparer charge et capacité par rôle, pas seulement leur somme. CP est à 29/30 h, DEV à 64/72 h et QA à 24/30 h. Un transfert suppose la compétence nécessaire et doit préserver l'indépendance de la recette.
 11. **Que change une situation de handicap ou une équipe internationale ?** Convenir des besoins avec la personne : supports structurés, sous-titres, clavier, pauses et modalités adaptées. Prévoir horaires avec fuseau, préparation asynchrone et reformulation des décisions. Ne pas inventer de diagnostic ou de situation réelle.
 12. **Comment prouvez-vous l'efficacité d'une formation ?** Définir un niveau attendu, un exercice observable et un contrôle après pratique. Exemples : inscriptions concurrentes, scénario navigateur reproductible et mise à jour autonome du tableau de bord. Les ateliers du cas ne sont pas déclarés réellement suivis.
-13. **Quel client a validé et est-il satisfait ?** Aucun résultat réel n'est disponible dans les éléments fournis. Les trois comptes rendus sont simulés. Le dispositif proposé mesure critères acceptés, réussite sans aide, utilité et blocages, avec date et nombre de répondants. Présenter les retours réels seulement lorsqu'ils existent.
-14. **Que prouvent vos vérifications ?** Le 14 septembre, lint, typage, build, 389 tests unitaires et six scénarios navigateur ont réussi. La recette locale utilise next dev et une MariaDB dédiée. Elle ne prouve ni une validation client, ni une recette actuelle du déploiement distant, ni une couverture de 100 %.
+13. **Quel client a validé et est-il satisfait ?** Aucun résultat réel n'est disponible dans les éléments fournis. Les trois comptes rendus sont simulés, avec Claire Martin pour le Collectif Altitude Grimpe, commanditaire fictif du Bloc 1. Les objectifs de NPS du cadrage ne sont pas des résultats. Le dispositif proposé mesure critères acceptés, réussite sans aide, utilité et blocages, avec date et nombre de répondants. Présenter les retours réels seulement lorsqu'ils existent.
+14. **Que prouvent vos vérifications ?** Le 14 septembre, lint, typage, build, 389 tests unitaires et six scénarios navigateur ont réussi. La recette locale utilise next dev et une MariaDB dédiée. Elle ne prouve ni une validation client, ni une recette actuelle du déploiement distant, ni une couverture de 100 %. Les 126 tests du Bloc 2 en juillet et les 152 tests Jest du Bloc 4 en août décrivent d’autres périmètres datés ; ne pas les additionner.
 15. **Que faites-vous si la démonstration échoue ?** Annoncer l'incident, utiliser les captures du 14 septembre et la dernière recette identifiée, puis préciser les critères non revalidés en direct. Revenir au besoin client et proposer une nouvelle vérification après correction.
 
 ## Exercices de répétition
@@ -545,4 +547,4 @@ Source : Trois PDF fournis par le candidat. VERIFICATION et preuves/verification
 
 ## Pièces à garder ouvertes
 
-Le diaporama et ses notes, le classeur, le dossier PDF, A08 et les captures. Les confirmations de date, d'équipe et de dépôt sont suivies dans CHECKLIST_REMISE.md.
+Le diaporama et ses notes, le classeur, le dossier PDF, A08, les captures et COHERENCE_INTER_BLOCS.md. Les confirmations de date, d'équipe et de dépôt sont suivies dans CHECKLIST_REMISE.md.

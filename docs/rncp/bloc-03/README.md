@@ -10,13 +10,16 @@
 | --- | --- |
 | Tout récupérer pour la répétition | [Kit ZIP](../../../output/bloc-03/kit-soutenance-spity.zip) |
 | Lire le dossier et les huit annexes | [PDF](../../../output/pdf/dossier-bloc-03-spity.pdf) ; [source modifiable](DOSSIER_BLOC_03.md) |
-| Présenter en trente minutes | [PowerPoint visuel avec texte oral et timing](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v3.pptx) ; [guide d'oral](GUIDE_ORAL.md) |
+| Présenter en trente minutes | [PowerPoint visuel avec texte oral et timing](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v4.pptx) ; [guide d'oral](GUIDE_ORAL.md) |
 | Manipuler les coûts, charges et risques | [Classeur Excel](../../../outputs/bloc03-01a09eba/pilotage-spity.xlsx) ; [données du cas](donnees/pilotage.json) |
 | Retrouver les preuves par compétence | [Matrice](MATRICE_PREUVES.md) ; [vérifications datées](VERIFICATION.md) |
+| Relier les quatre blocs | [Revue de cohérence](COHERENCE_INTER_BLOCS.md) : commanditaire, budget global, lot B3 et preuves datées. |
 | Lancer ou répéter la démonstration | [Procédure A08](annexes/A08_DEMONSTRATION.md) ; [outils](../../../tools/bloc3/README.md) |
 | Finaliser les informations et le dépôt | [Checklist de remise](CHECKLIST_REMISE.md) |
 
 Le kit distingue les faits techniques observés d'une mise en situation fictive de management. Les charges, coûts, rôles et comptes rendus du scénario sont des hypothèses explicites. L'équipe réelle, les échanges client et les dates du campus restent à préciser avec Dorian.
+
+Le commanditaire fictif reprend celui du Bloc 1 : Collectif Altitude Grimpe, représenté par Claire Martin. Le budget global cité est celui des fiches détaillées B1, 38 126 EUR HT sur 79 jours-homme. Le lot pédagogique B3 est distinct. Les anciens diaporamas B1 affichent 44 250 EUR et 82 jours-homme ; cet écart est documenté dans la revue de cohérence et reste à harmoniser avant une remise commune.
 
 Le diaporama visuel comporte 22 slides principales et 3 annexes. Sept graphiques modifiables présentent le planning, les coûts, la charge et la formation. Une matrice montre les risques, des captures agrandies accompagnent la démonstration et une illustration représente l'équipe fictive. Les [sources des visuels](visuels/README.md) sont documentées. Les notes développent le texte à dire, les transitions et les manipulations. Les repères totalisent 24 minutes d'explications et 6 minutes de démonstration. Prévoir une répétition chronométrée pour ajuster le débit ; le PowerPoint avance manuellement. Les fichiers soutenance-bloc-03-spity.pptx et spity-bloc-3-30-minutes.pptx conservent les versions précédentes comme archives.
 

@@ -8,6 +8,8 @@ Spity propose des profils de grimpeurs et de clubs, la recherche de partenaires,
 
 Le dépôt apporte des réalisations techniques et un historique vérifiables. Ce dossier y ajoute une mise en situation professionnelle fictive, explicitement autorisée par le référentiel, pour démontrer les méthodes de planification, de management et de suivi client. Une réalisation technique ne prouve pas à elle seule qu'une équipe a été managée ou qu'un client a validé une décision.
 
+Le Bloc 3 reprend le même projet que les autres livrables. Le Bloc 1 en définit le besoin, le commanditaire fictif et l'estimation globale. Le Bloc 2 apporte le prototype F01-F10 et les preuves de réalisation. Le Bloc 4 documente la maintenance, les anomalies et le support. Cette articulation des compétences n'est pas un calendrier : le dossier Bloc 4 du 13 août précède la préparation du Bloc 3 du 14 septembre. Le détail des rapprochements figure dans [la revue inter-blocs](COHERENCE_INTER_BLOCS.md).
+
 | Nature | Utilisation dans ce dossier |
 | --- | --- |
 | Observé | Fichiers et commits inspectés, commandes effectivement exécutées et résultats datés. |
@@ -21,7 +23,7 @@ Les documents parlent d'un oral individuel de 45 minutes, dont 30 minutes de pr�
 
 Le besoin présenté consiste à faciliter l'organisation d'une pratique collective de l'escalade. La démonstration doit montrer un parcours compréhensible pour le client : se connecter, identifier un partenaire compatible, consulter une sortie, s'inscrire et retrouver cette inscription côté club.
 
-Le cas pédagogique retient un commanditaire fictif, « club pilote », un chef de projet jouant également un rôle technique, un développeur fictif et un testeur UX fictif. Les noms des comptes de démonstration désignent des données de test ; ils ne désignent ni des collaborateurs ni des personnes interrogées.
+Le cas pédagogique reprend le commanditaire du Bloc 1 : le Collectif Altitude Grimpe, association régionale fictive représentée par Claire Martin, présidente fictive, pour une zone pilote Lyon-Grenoble. Il répartit le travail entre un chef de projet jouant également un rôle technique, un développeur fictif et un testeur UX fictif. Cette répartition ne remplace pas les contributions personnelles décrites dans le Bloc 2. Les noms des comptes de démonstration désignent des données de test ; ils ne désignent ni des collaborateurs ni des personnes interrogées.
 
 | Objectif du cas | Critère d'acceptation | Mode de contrôle |
 | --- | --- | --- |
@@ -42,6 +44,8 @@ Ce choix correspond à un petit effectif et à des priorités qui peuvent évolu
 Linear est l'outil de backlog repéré dans la documentation du projet. L'état archivé du 9 septembre 2026 sert d'exemple réel de remise en cohérence des tickets avec le code. Le classeur de pilotage joint complète ce suivi par les charges, les jalons et les coûts. Git assure la traçabilité des modifications ; il ne remplace pas une mesure du temps passé.
 
 Le planning pédagogique couvre quinze jours ouvrés relatifs, J1 à J15, sans leur attribuer des dates de réalisation historiques. Il distingue étude, mesure des besoins, conception de l'organisation, réalisation, recette et restitution. Les dépendances et les jalons sont détaillés dans A01. T07 peut commencer sur les parcours déjà livrés, mais sa clôture dépend aussi de la recette des événements et des corrections T10. La démonstration J15 reste conditionnée à ces deux validations.
+
+Ce lot de préparation et de stabilisation s'appuie sur le logiciel existant. Il ne représente pas le développement complet de Spity, estimé à 79 jours-homme dans la fiche C1.4.1 du Bloc 1. Les jalons J1-J5 de cette fiche sont distincts des jours relatifs J1-J15 du présent exercice.
 
 Les ressources sont trois rôles, une machine de développement, Node.js 22 comme référence projet, MariaDB, un navigateur, Git, Linear et un espace documentaire partagé. Les charges et taux du scénario sont des hypothèses économiques ; ils ne représentent pas des salaires versés ou des dépenses réellement engagées.
 
@@ -69,6 +73,8 @@ Le tableau de bord pédagogique est arrêté à J10. Chaque mise à jour renseig
 | Réserve initiale | 10 % de 4 270 = 427 EUR | Plafond du cas de 4 697 EUR ; marge prévisionnelle de 232 EUR. |
 
 Les heures consommées ne sont pas un pourcentage d'achèvement. Le passage à Terminé repose sur la validation du résultat. Les coûts sont des valorisations de charge en euros, hors taxes conventionnellement dans la simulation ; aucune facture réelle n'est représentée.
+
+La référence globale retenue est la fiche C1.4.2 du Bloc 1 : 79 jours-homme à 420 EUR HT, soit 33 180 EUR, plus 1 480 EUR d'exploitation annuelle et 3 466 EUR de provision, pour un total de 38 126 EUR HT. Les 4 270 EUR du lot B3 ne remplacent pas cette estimation et ne lui sont pas ajoutés. Les périmètres et hypothèses diffèrent ; aucune économie réelle ne peut être déduite de leur comparaison. L'ancien diaporama B1 affiche 82 jours-homme et 44 250 EUR : cette divergence avec les fiches détaillées est identifiée dans la revue inter-blocs et reste à harmoniser avant une remise commune.
 
 Le classeur recalcule les totaux et la charge par rôle après modification des entrées. Les risques sont suivis séparément avec responsable, déclencheur et réponse. Les données et les calculs sont exposés dans A03 et dans le fichier pilotage.json afin que le jury puisse vérifier les résultats.
 
@@ -112,6 +118,8 @@ Dans ce cas de courte durée, un recrutement permanent n'est pas retenu. Si la c
 
 Les trois comptes rendus d'A07 sont des mises en situation fictives. Le premier fixe le périmètre et les critères, le deuxième présente les écarts et l'arbitrage, le troisième décrit une répétition de validation et les réserves de démonstration. Aucun n'est signé au nom d'une personne réelle et aucun envoi n'est affirmé.
 
+Le rôle CL représente ici Claire Martin pour le Collectif Altitude Grimpe. Le cas support B4-C433-01 fournit un exemple de transmission entre besoins fonctionnels, cause technique et vérifications. Il reste une simulation de support et ne constitue pas un retour client réel à réutiliser comme preuve de satisfaction. De même, les objectifs de NPS et de rétention du Bloc 1 restent des cibles non mesurées.
+
 Chaque compte rendu indique le jour relatif, les rôles présents dans le scénario, ce qui a été présenté, les écarts, les décisions et les prochaines actions. Une décision précise son responsable et son échéance. Le suivi qualité s'appuie sur une grille qui relie chaque fonctionnalité attendue à son résultat.
 
 Les indicateurs de satisfaction proposés sont : proportion de critères acceptés, proportion de scénarios réussis sans aide, note d'utilité de 1 à 5 et nombre de blocages signalés. Le nombre de répondants et la date doivent accompagner tout résultat. À ce stade, aucune réponse de client réel n'est disponible. Une mesure manquante reste « non mesurée » ; elle ne vaut ni zéro ni 100 %.
@@ -136,6 +144,8 @@ Les points restant à confirmer par le candidat sont la composition réelle de l
 
 Le guide d'oral contient les notes de présentation, une répartition totalisant trente minutes et des questions probables. Le candidat doit reformuler les explications avec ses mots et être capable de modifier une hypothèse du classeur, d'expliquer un écart et de retrouver une preuve.
 
+La transmission vers la maintenance s'appuie sur les registres déjà documentés au Bloc 4 : version identifiée, anomalies qualifiées, responsables, réserves et critères de vérification. Le constat de production en retard de 19 commits du 13 août reste historique. Il ne décrit pas l'état actuel du site. Les preuves de juillet, août et septembre conservent leurs dates et leurs périmètres, sans additionner les nombres de tests ni assimiler une réussite locale à une promotion en production.
+
 ## 12. Sources et pièces jointes
 
 S1 : référentiel Expert en développement logiciel RNCP39583, p. 11 à 14, copie archivée dans docs/rncp/referentiel. S2 : modalités YNOV M2 2025-2026, p. 4, 6, 8, 10 et 11, fichier fourni par le candidat. S3 : grille d'évaluation BC03, page unique, fichier fourni par le candidat.
@@ -143,3 +153,5 @@ S1 : référentiel Expert en développement logiciel RNCP39583, p. 11 à 14, cop
 Preuves projet : historique Git, commit 689e59d ; docs/bc02/10_CAHIER_RECETTES_C231.md ; docs/bc02/19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES.md ; docs/audits/2026-09-09-synchronisation-linear.md ; captures du 14 septembre 2026 dans preuves/captures ; résultats de vérification produits pendant cette préparation.
 
 Annexes : A01 planning, A02 responsabilités, A03 indicateurs et risques, A04 arbitrages, A05 management, A06 compétences et formations, A07 suivi client, A08 démonstration. Les données numériques du cas sont centralisées dans donnees/pilotage.json et reprises dans le classeur joint. La matrice de preuves donne les correspondances avec la grille officielle.
+
+Continuité du projet : Bloc 1, C1.1.1 p. 2, C1.4.1 p. 7-8 et C1.4.2 p. 2-4 ; Bloc 2, dossier final du 23 juillet et retour d'expérience ; Bloc 4, dossier du 13 août, anomalie B4-C421-02 et cas support B4-C433-01. La revue COHERENCE_INTER_BLOCS.md conserve les références précises et les divergences documentaires.

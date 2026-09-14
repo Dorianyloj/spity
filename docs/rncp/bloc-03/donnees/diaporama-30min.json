@@ -20,9 +20,9 @@
     },
     {
       "number": 2,
-      "title": "Le besoin des grimpeurs et des clubs",
+      "title": "Le besoin d’Altitude Grimpe",
       "minutes": 1,
-      "nature": "Produit Spity",
+      "nature": "B1, commanditaire fictif et produit réel",
       "layout": "photo",
       "content": {
         "image": "docs/rncp/bloc-03/preuves/captures/lieux-2026-09-14.png",
@@ -37,15 +37,15 @@
           ]
         ]
       },
-      "script": "Le besoin retenu pour cette présentation est concret : préparer une sortie avec des personnes compatibles avec sa pratique. Un grimpeur doit pouvoir comprendre les profils proposés, consulter les informations d'un événement et savoir si son inscription a abouti. Le club a un autre besoin : organiser la sortie et retrouver les participants autorisés.\n\nCes deux points de vue déterminent ce que je vais montrer. Une page qui s'affiche correctement reste insuffisante si l'utilisateur ne comprend pas l'état de sa demande ou le nombre de places disponibles. Je retiens donc des critères observables sur le parcours complet. La capture présente le répertoire de lieux, qui apporte le contexte géographique de la pratique.",
-      "source": "DOSSIER_BLOC_03 §1-2. Capture locale du 14 septembre 2026, données de démonstration.",
+      "script": "Je reprends le commanditaire du Bloc 1 : le Collectif Altitude Grimpe, association fictive représentée par Claire Martin. Le cadre reste une zone pilote autour de Lyon et Grenoble. Son besoin est de centraliser des usages aujourd'hui dispersés : trouver un partenaire, consulter les lieux et organiser des sorties.\n\nPour cette soutenance, je retiens le parcours déjà développé dans le Bloc 2. Le grimpeur recherche une personne compatible et rejoint un événement. Le club organise cette sortie et retrouve les participants autorisés. Ce choix relie le besoin initial à un résultat démontrable. La capture montre le répertoire de lieux du produit local. Elle illustre le contexte géographique, sans prétendre que toutes les fonctions de la vision initiale sont validées.",
+      "source": "B1 : C1.1.1, p. 2 ; C1.4.1, p. 4-5. B2 : 16_DOSSIER_FINAL_BC02, F01-F10. Capture locale du 14 septembre 2026, données de test.",
       "action": "",
-      "transition": "Il faut ensuite préciser sur quelles preuves repose cette présentation.",
+      "transition": "Les quatre blocs abordent ce même projet sous des angles complémentaires.",
       "demo": false
     },
     {
       "number": 3,
-      "title": "Périmètre et nature des preuves",
+      "title": "Un projet, quatre blocs",
       "minutes": 1,
       "nature": "Produit réel et mise en situation fictive",
       "layout": "columns",
@@ -61,10 +61,10 @@
           ]
         ]
       },
-      "script": "Cette présentation combine deux ensembles que je distingue clairement. D'un côté, le logiciel existe. Le dépôt contient le code, des modifications datées et des résultats de vérification. Je peux montrer ces éléments et préciser leur portée.\n\nDe l'autre, j'utilise un cas professionnel fictif pour expliquer le pilotage d'une petite équipe. Les rôles, les charges, les coûts et les réunions client de ce cas sont des hypothèses pédagogiques. Le référentiel autorise une mise en situation réelle ou fictive. Je présente donc ces éléments comme un scénario. Les comptes de démonstration ne correspondent pas à des personnes interrogées. Cette distinction permet au jury de comprendre exactement ce qui est observé et ce qui relève de mon raisonnement de pilotage.",
-      "source": "Référentiel p. 11. DOSSIER_BLOC_03 §1-2.",
-      "action": "",
-      "transition": "Dans ce cadre, je retiens une organisation simple, adaptée au lot.",
+      "script": "Le Bloc 1 pose le besoin, les acteurs, l'architecture cible et le budget global. Le Bloc 2 présente le prototype développé, ses tests, ses corrections et sa livraison. Le Bloc 3 explique comment piloter un lot : planifier, suivre les écarts, arbitrer et préparer la validation. Le Bloc 4 documente ensuite les responsabilités de maintenance, les anomalies et le support.\n\nCette lecture est une articulation de compétences. Le dossier de maintenance d'août existe déjà avant cette préparation de septembre. Le logiciel et ses traces sont réels. Le commanditaire du Bloc 1 et l'équipe CP, DEV, QA du scénario sont fictifs. Je conserve cette distinction, également présente dans le cas support du Bloc 4, sans transformer une simulation en échange client réel.",
+      "source": "B1 : C1.1.1 et C1.4.2. B2 : 16_DOSSIER_FINAL_BC02. B4 : DOSSIER_BLOC_04 et B4-C433-01. Référentiel p. 11. COHERENCE_INTER_BLOCS.md.",
+      "action": "Montrer les quatre blocs, puis préciser la nature réelle ou fictive des éléments.",
+      "transition": "Je zoome maintenant sur l'organisation du lot pédagogique.",
       "demo": false
     },
     {
@@ -153,8 +153,8 @@
           332
         ]
       },
-      "script": "Le planning couvre quinze jours ouvrés relatifs. J1 à J15 désignent les jours du cas, pas des dates historiques du développement de Spity. Je conserve la référence initiale pour pouvoir expliquer les changements au lieu d'effacer les retards.\n\nLe travail commence par l'étude du besoin et la mesure des critères attendus. Il comprend ensuite la conception de l'organisation, la réalisation des parcours, leur recette et la restitution. À J3, le client fictif valide le périmètre. À J8, le parcours partenaire doit être vérifié. J10 sert à examiner les écarts et à arbitrer les demandes nouvelles. La recette se clôt à J14 avant la démonstration de J15.\n\nLes dépendances sont essentielles. La recette peut commencer sur les fonctions déjà prêtes, mais sa clôture attend la vérification des événements et des corrections. La préparation des slides peut avancer en parallèle. En revanche, la démonstration finale exige un parcours stabilisé. Le planning relie donc des résultats attendus, des responsabilités et des conditions de passage, plutôt qu'une simple succession de dates.",
-      "source": "A01. donnees/pilotage.json.",
+      "script": "Le planning porte sur un lot pédagogique de préparation et de stabilisation d'une démonstration, adossé au produit existant. Ses quinze jours ouvrés relatifs ne représentent pas tout le développement de Spity. Les soixante-dix-neuf jours-homme du Bloc 1 concernent l'estimation globale du MVP. Ici, J1 à J15 désignent des jours du cas, et non les jalons J1 à J5 du cadrage.\n\nLe travail commence par l'étude du besoin et la mesure des critères attendus. Il comprend ensuite la conception de l'organisation, la réalisation des parcours, leur recette et la restitution. À J3, le client fictif valide le périmètre. À J8, le parcours partenaire doit être vérifié. J10 sert à examiner les écarts et à arbitrer les demandes nouvelles. La recette se clôt à J14 avant la démonstration de J15.\n\nLes dépendances sont essentielles. La recette peut commencer sur les fonctions déjà prêtes, mais sa clôture attend la vérification des événements et des corrections. La préparation des slides peut avancer en parallèle. En revanche, la démonstration finale exige un parcours stabilisé. Le planning relie donc des résultats attendus, des responsabilités et des conditions de passage, plutôt qu'une simple succession de dates.",
+      "source": "A01. donnees/pilotage.json. B1 : C1.4.1, p. 7-8, estimation globale et jalons distincts du lot B3.",
       "action": "Pointer J10, puis la dépendance entre recette J14 et démonstration J15.",
       "transition": "Pour tenir ces jalons, chacun doit connaître sa responsabilité.",
       "demo": false
@@ -200,8 +200,8 @@
         ],
         "takeaway": "Une seule autorité de décision par activité dans la matrice RACI"
       },
-      "script": "Le scénario distingue un chef de projet, un développeur et un testeur UX. Leurs capacités représentent respectivement trente, soixante-douze et trente heures sur le lot. Le client intervient aux points de validation.\n\nLa matrice RACI précise qui réalise, qui décide, qui doit être consulté et qui doit être informé. Une seule autorité de décision est désignée pour chaque activité. Par exemple, le développeur corrige une fonction, QA vérifie le résultat et le chef de projet suit la clôture. Le client reste responsable de l'acceptation du périmètre.\n\nCette organisation évite les tâches sans responsable et les validations implicites. Les capacités restent des hypothèses du cas. Elles ne correspondent pas à des feuilles de temps réellement renseignées par des collaborateurs.",
-      "source": "A02 et A03.",
+      "script": "Le Bloc 2 décrit les réalisations de Dorian. Ici, le scénario répartit les responsabilités entre trois rôles fictifs : chef de projet, développeur et testeur UX. Leurs capacités représentent respectivement trente, soixante-douze et trente heures sur le lot. Le client intervient aux points de validation.\n\nLa matrice RACI précise qui réalise, qui décide, qui doit être consulté et qui doit être informé. Une seule autorité de décision est désignée pour chaque activité. Par exemple, le développeur corrige une fonction, QA vérifie le résultat et le chef de projet suit la clôture. Le client reste responsable de l'acceptation du périmètre.\n\nCette organisation évite les tâches sans responsable et les validations implicites. Les capacités restent des hypothèses du cas. Elles ne correspondent pas à des feuilles de temps réellement renseignées par des collaborateurs.",
+      "source": "A02 et A03. B1 : C1.1.1, p. 3. B2 : déclaration de périmètre du dossier final. La répartition CP/DEV/QA reste simulée.",
       "action": "",
       "transition": "Une fois le travail réparti, je peux comparer le prévu et la prévision.",
       "demo": false
@@ -238,7 +238,7 @@
     },
     {
       "number": 8,
-      "title": "Budget prévisionnel du cas",
+      "title": "Le budget du lot de démonstration",
       "minutes": 1.5,
       "nature": "C3.2.1, montants fictifs en euros",
       "layout": "table",
@@ -277,9 +277,9 @@
         ],
         "takeaway": "Le dépassement reste visible même lorsque la réserve peut l’absorber"
       },
-      "script": "Le budget valorise le travail à partir de taux horaires fictifs. Il ne représente pas des salaires versés ni des factures. La référence initiale comprend quatre mille quatre-vingt-dix euros de travail et cent quatre-vingts euros de frais, soit quatre mille deux cent soixante-dix euros.\n\nAvec les charges revues à J10, le travail atteint quatre mille deux cent soixante-cinq euros. Les frais prévisionnels sont de deux cents euros. Le total à terminaison est donc de quatre mille quatre cent soixante-cinq euros. L'écart est de cent quatre-vingt-quinze euros, soit environ quatre virgule six pour cent.\n\nLa réserve initiale de dix pour cent représente quatre cent vingt-sept euros. Elle porte le plafond à quatre mille six cent quatre-vingt-dix-sept euros. Il reste deux cent trente-deux euros de marge. La réserve n'efface pas le dépassement de la référence. Elle indique seulement que le scénario peut encore l'absorber. Une nouvelle demande doit être comparée à cette marge et à la capacité de l'équipe avant tout engagement.",
-      "source": "A03. Classeur Pilotage. Taux et charges du cas fictif.",
-      "action": "Pointer successivement référence, prévision, plafond et marge.",
+      "script": "Il faut distinguer deux périmètres. Les fiches détaillées du Bloc 1 estiment le lancement du MVP et sa première année à trente-huit mille cent vingt-six euros hors taxes, sur une base de soixante-dix-neuf jours-homme. Ici, je valorise seulement le lot pédagogique de démonstration, avec des taux horaires fictifs. Ce montant ne remplace pas le budget global et ne permet pas de calculer une économie du projet.\n\nLa référence du lot est de quatre mille deux cent soixante-dix euros, frais compris. À J10, la prévision passe à quatre mille quatre cent soixante-cinq euros. L'écart atteint cent quatre-vingt-quinze euros, soit environ quatre virgule six pour cent. Il doit rester visible même si une réserve existe.\n\nLa réserve initiale de quatre cent vingt-sept euros porte le plafond à quatre mille six cent quatre-vingt-dix-sept euros. Il reste deux cent trente-deux euros de marge. Je compare toute demande nouvelle à cette marge et à la disponibilité des rôles. Le classeur permet de retrouver le détail du calcul. Ces valeurs sont des hypothèses d'exercice, sans facture ni consommation réelle du budget du Bloc 1.",
+      "source": "A03 et classeur Pilotage. B1 : fiches C1.4.1 p. 7 et C1.4.2 p. 2-4, 79 j-h et 38 126 EUR HT. L’ancien diaporama B1 porte une autre estimation, voir COHERENCE_INTER_BLOCS.md.",
+      "action": "Séparer le budget global B1 du budget du lot B3, puis comparer référence, prévision et plafond.",
       "transition": "La marge financière doit être lue avec la disponibilité de chaque rôle.",
       "demo": false
     },
@@ -408,7 +408,7 @@
         "takeaway": "Commit 689e59d du 20 juillet 2026 : recette CI sur le build standalone"
       },
       "script": "Un arbitrage réel du dépôt concerne la recette navigateur. Le dossier historique de juillet rapporte un échec pendant l'utilisation du serveur de développement, avec des compilations à froid au cours des scénarios. Cela créait un écart entre l'environnement de recette et l'artefact destiné à être livré.\n\nJ'ai comparé rétrospectivement trois options pour expliquer le raisonnement. La première consiste à augmenter les délais ou à ajouter des tentatives. Elle est rapide à mettre en place, mais peut masquer la cause. La deuxième consiste à préchauffer le serveur de développement. Elle réduit certaines compilations pendant la recette, à condition d'avoir préparé toutes les routes utiles. La troisième consiste à tester le serveur standalone issu du build. Elle ajoute un temps de construction, mais rapproche la recette du livrable.\n\nLe commit visible dans Git retient cette troisième option et ajuste aussi l'utilisation de localhost pour les sessions. Le dossier historique rapporte une exécution réussie après consolidation. Je précise la portée de la preuve : la modification est vérifiable dans Git. Les résultats distants sont rapportés par le dossier de l'époque. La comparaison présentée ici est une analyse rétrospective, pas un procès-verbal rédigé le jour de la décision.\n\nCe cas montre l'intérêt de rechercher la cause avant de modifier un seuil. Une recette utile doit rester reproductible et suffisamment proche des conditions de livraison pour éclairer une décision.",
-      "source": "A04. git show 689e59d. Cahier de recettes Bloc 2, consolidation standalone.",
+      "source": "A04. git show 689e59d. Cahier de recettes Bloc 2, consolidation standalone. B2 : 19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES, section 8. L’arbitrage B3 reprend le même événement et en explicite le raisonnement de pilotage.",
       "action": "Comparer les trois options et pointer le choix visible dans Git.",
       "transition": "Un arbitrage peut aussi porter sur le périmètre plutôt que sur un choix technique.",
       "demo": false
@@ -451,7 +451,7 @@
         "detail": "12 h DEV + 4 h QA = 540 €. Le plafond serait dépassé de 308 €."
       },
       "script": "À J10, le client fictif demande un lot supplémentaire de contributions aux topos. Il s'agit d'une demande pédagogique, distincte de l'état actuel du code. Son estimation est de douze heures de développement et de quatre heures de recette, soit cinq cent quarante euros.\n\nL'ajout porterait la prévision à cinq mille cinq euros, au-dessus du plafond de trois cent huit euros. Il porterait également la charge du développeur à soixante-seize heures pour soixante-douze disponibles. La difficulté concerne donc à la fois le budget et la capacité.\n\nJe compare l'ajout, le retrait d'une partie de la recette et le report. Réduire la recette ferait perdre des contrôles sur le périmètre déjà engagé. Le scénario retient le report du lot supplémentaire. Le client fictif valide cette décision dans le compte rendu J10. Les critères restent dans le backlog pour une estimation ultérieure. Cette réponse explique ce qui peut être livré, à quel moment, et pourquoi la demande ne peut pas simplement être ajoutée sans conséquence.",
-      "source": "A04 et CR02 dans A07. Simulation explicitement distincte du code actuel.",
+      "source": "A04 et CR02 dans A07. Simulation explicitement distincte du code actuel. B1 : C1.4.1, contributions aux topos dans la vision cible. Le report concerne ce lot pédagogique ; il ne supprime pas la fonctionnalité du projet.",
       "action": "Faire lire les deux dépassements, puis exposer le report.",
       "transition": "Pour appliquer cette décision, je dois aussi la faire comprendre à l’équipe.",
       "demo": false
@@ -498,8 +498,8 @@
           ]
         ]
       },
-      "script": "Les outils doivent aider l'équipe à retrouver une décision et à agir. Dans le cas présenté, Linear porte les tâches et les blocages. Git conserve les modifications. Les documents partagés regroupent les décisions et les comptes rendus. La visioconférence sert lorsqu'un échange direct est nécessaire.\n\nJ'envoie l'ordre du jour avant la réunion et je diffuse une synthèse qui précise l'action, son responsable et son échéance. Une personne absente doit pouvoir comprendre la décision sans reconstituer toute une conversation.\n\nLes adaptations se discutent avec la personne concernée. Elles peuvent inclure un support structuré, du sous-titrage, des pauses ou davantage de temps pour un exercice. Je n'attribue pas de situation de handicap à une personne sans information. Le scénario prévoit une organisation adaptable.\n\nDans un contexte international, j'indique le fuseau des rendez-vous, j'explique les acronymes et je permets une préparation asynchrone. Je vérifie la compréhension par reformulation. L'absence de question ou le silence en réunion ne suffisent pas à établir que chacun a compris la priorité ou le résultat attendu.",
-      "source": "A02 et A05, inclusion et contexte international fictif.",
+      "script": "Les outils doivent aider l'équipe à retrouver une décision et à agir. Dans le cas présenté, Linear porte les tâches et les blocages. Git conserve les modifications. Les documents partagés regroupent les décisions et les comptes rendus. La visioconférence sert lorsqu'un échange direct est nécessaire.\n\nJ'envoie l'ordre du jour avant la réunion et je diffuse une synthèse qui précise l'action, son responsable et son échéance. Le Bloc 4 applique aussi ce principe dans son cas support fictif : contexte fonctionnel transmis au mainteneur, puis retour sur la cause et les vérifications.\n\nLes adaptations se discutent avec la personne concernée. Elles peuvent inclure un support structuré, du sous-titrage, des pauses ou davantage de temps pour un exercice. Je n'attribue pas de situation de handicap à une personne sans information. Le scénario prévoit une organisation adaptable.\n\nDans un contexte international, j'indique le fuseau des rendez-vous, j'explique les acronymes et je permets une préparation asynchrone. Je vérifie la compréhension par reformulation. L'absence de question ou le silence en réunion ne suffisent pas à établir que chacun a compris la priorité ou le résultat attendu.",
+      "source": "A02 et A05, inclusion et contexte international fictif. B4 : B4-C433-01, exemple de transmission support/mainteneur explicitement simulée, réutilisable comme méthode de communication.",
       "action": "Donner un exemple d’action datée puis un exemple d’adaptation convenue.",
       "transition": "La répartition du travail suppose également de connaître les compétences disponibles.",
       "demo": false
@@ -629,8 +629,8 @@
         ],
         "takeaway": "Chaque action possède un responsable, une échéance et un prochain point"
       },
-      "script": "Le suivi client repose sur trois points dans le scénario. Le premier valide le périmètre et les critères attendus. Le deuxième présente l'avancement, les écarts et la décision sur la demande supplémentaire. Le troisième porte sur le parcours démontré et ses réserves.\n\nLes trois comptes rendus sont fictifs et aucun accord réel n'est attesté. Leur structure montre toutefois comment préparer un échange utile : ce qui a été présenté, ce qui reste à faire, la difficulté rencontrée et la décision attendue. Une action comprend un responsable et une échéance. Le prochain point de suivi est identifié.\n\nPar exemple, le compte rendu J10 reprend la prévision de quatre mille quatre cent soixante-cinq euros et le report du lot supplémentaire. Il conserve le lien entre une donnée de pilotage et une décision de périmètre.\n\nLa validation se fait par critère, avec les statuts accepté, accepté avec réserve ou refusé. Une réserve devient une action suivie. Ce dispositif permet de rechercher une confirmation explicite, au lieu de déduire l'acceptation du seul fait que le logiciel a été montré.",
-      "source": "A07, CR01 à CR03. Référentiel p. 13-14.",
+      "script": "Je reprends Claire Martin pour le Collectif Altitude Grimpe, commanditaire fictif du Bloc 1. Son suivi repose sur trois points dans le scénario. Le premier valide le périmètre et les critères attendus. Le deuxième présente l'avancement, les écarts et la décision sur la demande supplémentaire. Le troisième porte sur le parcours démontré et ses réserves.\n\nLes trois comptes rendus sont fictifs et aucun accord réel n'est attesté. Leur structure montre toutefois comment préparer un échange utile : ce qui a été présenté, ce qui reste à faire, la difficulté rencontrée et la décision attendue. Une action comprend un responsable et une échéance. Le prochain point de suivi est identifié.\n\nPar exemple, le compte rendu J10 reprend la prévision de quatre mille quatre cent soixante-cinq euros et le report du lot supplémentaire. Il conserve le lien entre une donnée de pilotage et une décision de périmètre.\n\nLa validation se fait par critère, avec les statuts accepté, accepté avec réserve ou refusé. Une réserve devient une action suivie. Ce dispositif permet de rechercher une confirmation explicite, au lieu de déduire l'acceptation du seul fait que le logiciel a été montré.",
+      "source": "A07, CR01 à CR03. Référentiel p. 13-14. B1 : C1.1.1 p. 2. CL représente Claire Martin pour le Collectif Altitude Grimpe, tous deux fictifs. A07 ne constitue pas un échange réel.",
       "action": "Décrire le compte rendu J10 : écart, décision, responsable et échéance.",
       "transition": "La validation du périmètre et la satisfaction méritent chacune une mesure explicite.",
       "demo": false
@@ -670,8 +670,8 @@
         ],
         "takeaway": "Satisfaction réelle : non mesurée à ce stade"
       },
-      "script": "Je propose quatre indicateurs complémentaires : la part des critères acceptés, la réussite des parcours sans aide, une note d'utilité et les blocages critiques signalés. Chaque résultat doit être accompagné de la date et du nombre de participants.\n\nÀ ce stade, aucun retour de client réel n'est disponible dans les éléments du dossier. La mesure reste donc non réalisée. Elle ne vaut ni zéro ni cent pour cent. Les résultats des tests techniques ne remplacent pas une appréciation du besoin par un utilisateur.\n\nPendant une session pilote, je demanderais la tâche recherchée, le résultat obtenu et l'obstacle rencontré. Une réserve ou une difficulté doit ensuite rejoindre le suivi du projet avec une action identifiable, puis être vérifiée lors d'un nouveau passage.",
-      "source": "A07, indicateurs et questionnaire proposés.",
+      "script": "Je propose quatre indicateurs complémentaires : la part des critères acceptés, la réussite des parcours sans aide, une note d'utilité et les blocages critiques signalés. Chaque résultat doit être accompagné de la date et du nombre de participants.\n\nÀ ce stade, aucun retour de client réel n'est disponible dans les éléments du dossier. La mesure reste donc non réalisée. Les objectifs de NPS et de rétention du Bloc 1 restent des cibles, sans résultat constaté. Les résultats des tests techniques ne remplacent pas une appréciation du besoin par un utilisateur.\n\nPendant une session pilote, je demanderais la tâche recherchée, le résultat obtenu et l'obstacle rencontré. Une réserve ou une difficulté doit ensuite rejoindre le suivi du projet avec une action identifiable, puis être vérifiée lors d'un nouveau passage.",
+      "source": "A07, indicateurs et questionnaire proposés. Les objectifs de NPS, de rétention et d’acquisition du Bloc 1 sont des cibles ; aucun résultat client réel n’en découle. B4-C433-01 est une simulation de support.",
       "action": "",
       "transition": "Je vais maintenant montrer le parcours sur lequel portent ces critères.",
       "demo": false
@@ -695,8 +695,8 @@
         ],
         "takeaway": "Critères : état compréhensible, capacité respectée et participant visible"
       },
-      "script": "Je passe maintenant au logiciel. La démonstration utilise des comptes locaux et des données de test. Je vais d'abord suivre le point de vue du grimpeur, puis celui du club. Les critères que je garde en tête sont la compréhension des états, la cohérence de l'inscription et la visibilité du participant pour le bon rôle.",
-      "source": "A08 et preuves/verification.json.",
+      "script": "Je passe à la démonstration locale, sur le même parcours grimpeur et club que dans le Bloc 2. Les comptes contiennent des données fictives. Je montre d'abord la recherche d'un partenaire, puis les inscriptions et les participants côté club. Comme le rappelle le Bloc 4, une validation locale ne prouve pas une mise à jour de la production.",
+      "source": "A08 et preuves/verification.json. B2 : F03-F08. B4 : B4-C421-02 et dossier-jury/01_CADRAGE_PROJET, distinction local, staging et production. État de production historique non réactualisé.",
       "action": "Ouvrir les deux sessions déjà connectées. Lancer le chronomètre de démonstration.",
       "transition": "Je commence avec le compte grimpeur.",
       "demo": true
@@ -753,7 +753,7 @@
     },
     {
       "number": 22,
-      "title": "Bilan du pilotage",
+      "title": "La transmission à la maintenance",
       "minutes": 1,
       "nature": "Bilan et ouverture des quinze minutes de questions",
       "layout": "columns",
@@ -769,10 +769,10 @@
           ]
         ]
       },
-      "script": "Cette présentation relie le besoin utilisateur à l'organisation du travail, puis aux décisions et à la validation. Le planning rend les dépendances visibles. Le tableau de bord permet d'anticiper les écarts. L'arbitrage tient compte de la capacité et des critères déjà engagés.\n\nJe distingue les preuves techniques observables du cas pédagogique utilisé pour le management, le budget et les échanges client. La satisfaction réelle reste à mesurer et les contributions personnelles doivent correspondre aux faits disponibles.\n\nL'amélioration prioritaire serait de recueillir des retours utilisateurs structurés et d'alimenter le suivi avec ces résultats. Je peux maintenant revenir sur une hypothèse du classeur, le choix d'un arbitrage ou l'un des critères de démonstration. Merci pour votre attention.",
-      "source": "MATRICE_PREUVES, VERIFICATION et A01 à A08.",
-      "action": "Terminer à 30:00. Les annexes restent disponibles uniquement pour les questions.",
-      "transition": "Je suis prêt à répondre à vos questions.",
+      "script": "Le Bloc 1 donne le besoin et la vision de Spity. Le Bloc 2 apporte le logiciel et les preuves de réalisation. Dans le Bloc 3, j'ai organisé un lot limité, interprété ses écarts et expliqué les décisions qui protègent la démonstration.\n\nLe relais vers le Bloc 4 repose sur des éléments concrets : version identifiée, anomalies qualifiées, réserves et critères de vérification. Son registre et son processus de support existent déjà dans le dossier de maintenance. Je peux m'appuyer sur eux pour préparer cette transmission. Je conserve les limites annoncées : le management présenté reste fictif et aucune validation client réelle n'est inventée. Le pilotage doit rendre la prochaine action compréhensible et vérifiable, y compris après la soutenance.",
+      "source": "B4 : DOSSIER_BLOC_04, registres d’anomalies et de versions ; B4-C433-01, support simulé. B3 : A07 et A08.",
+      "action": "Relier les réserves de démonstration à une anomalie ou une amélioration suivie dans le cadre de maintenance.",
+      "transition": "Je suis prêt à expliquer les choix et à retrouver les pièces correspondantes.",
       "demo": false
     },
     {
@@ -868,9 +868,9 @@
     },
     {
       "number": 25,
-      "title": "Annexe : sources et portée des contrôles",
+      "title": "Des contrôles datés et contextualisés",
       "minutes": 0,
-      "nature": "Annexe documentaire",
+      "nature": "Annexe, résultats historiques et contrôles locaux",
       "layout": "columns",
       "content": {
         "items": [
@@ -884,8 +884,8 @@
           ]
         ]
       },
-      "script": "Le règlement spécial n’a pas été fourni. Les contrôles datés ne prouvent pas le fonctionnement d’une autre version. La recette locale et le cas standalone historique correspondent à deux contextes explicitement séparés.",
-      "source": "Trois PDF fournis par le candidat. VERIFICATION et preuves/verification.json.",
+      "script": "Le dossier BC02 du 23 juillet rapporte 126 tests unitaires et six scénarios navigateur. Le Bloc 4 du 13 août rapporte 152 tests Jest et distingue 43 tests de maintenance, avec onze scénarios MariaDB et six recettes. La préparation locale du Bloc 3 du 14 septembre rapporte 389 tests unitaires dans 72 suites et six scénarios navigateur. Les versions, configurations et périmètres diffèrent. Ces totaux ne mesurent pas une progression de qualité et ne doivent pas être additionnés. La recette B3 utilise next dev localement ; elle ne rejoue pas la CI standalone historique. Aucun résultat client réel n'a été trouvé dans les pièces examinées.",
+      "source": "B2 : 16_DOSSIER_FINAL_BC02, Résultats vérifiés, 23 juillet 2026. B4 : DOSSIER_BLOC_04, résumé du 13 août 2026. B3 : VERIFICATION.md et preuves/verification.json, 14 septembre 2026. Cadre officiel : référentiel p. 11-14, modalités p. 6, 8 et 11, grille BC03. Voir COHERENCE_INTER_BLOCS.md.",
       "action": "",
       "transition": "",
       "demo": false
