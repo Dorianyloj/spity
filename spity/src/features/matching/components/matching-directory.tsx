@@ -4,7 +4,7 @@ import { ArrowUpRight, Clock3, Handshake, MapPin, RotateCcw, Search, Send, Users
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import { z } from 'zod'
-import { AppHero, Avatar, Badge, Button, Card, CardContent, EmptyState, Input } from '@/components/ui'
+import { AppHero, Avatar, Badge, Button, Card, EmptyState, Input } from '@/components/ui'
 import { availabilityLabels, disciplineLabels, environmentLabels, partnerStyleLabels } from '@/features/profile/lib/presentation'
 import { demoClimbingAssets } from '@/lib/brand-assets'
 import { cn } from '@/lib/class-names'
@@ -219,7 +219,7 @@ export default function MatchingDirectory({ climbers, initialStatuses }: Matchin
 
               return (
               <Card key={climber.userId} hover={false} className="overflow-hidden">
-                <CardContent className="flex h-full flex-col p-5 sm:p-6">
+                <div className="flex h-full flex-col p-5 sm:p-6">
                   <div className="flex min-w-0 items-start gap-4">
                     <Avatar src={climber.avatarUrl ?? undefined} alt="" fallback={climber.displayName} size="xl" className="shrink-0 border border-border bg-secondary" unoptimized={climber.avatarUrl?.startsWith('http') ?? false} />
                     <div className="min-w-0 flex-1">
@@ -273,7 +273,7 @@ export default function MatchingDirectory({ climbers, initialStatuses }: Matchin
                     </Link>
                   </div>
                   {feedback?.userId === climber.userId && <p className={cn('mt-3 text-sm font-medium', feedback.error ? 'text-destructive' : 'text-accent-foreground')} role={feedback.error ? 'alert' : 'status'}>{feedback.message}</p>}
-                </CardContent>
+                </div>
               </Card>
               )
             })}
