@@ -71,6 +71,7 @@ describe('MatchingDirectory', () => {
     expect(screen.getByText('Semaine · soir')).toBeInTheDocument()
     expect(screen.getAllByText('Ambiance · Entraînement')).toHaveLength(2)
     expect(screen.queryByText('mixed')).not.toBeInTheDocument()
+    expect(screen.getByLabelText('Environnement')).toBeInstanceOf(HTMLSelectElement)
 
     fireEvent.change(screen.getByLabelText('Nom ou localisation'), { target: { value: 'Lyon' } })
     expect(screen.getByText('Lina Martin')).toBeInTheDocument()

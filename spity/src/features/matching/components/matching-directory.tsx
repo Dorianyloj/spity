@@ -242,7 +242,7 @@ export default function MatchingDirectory({ climbers, initialStatuses }: Matchin
                     {climber.bio || climber.partnerSearch.notes || 'Ce grimpeur cherche de nouvelles personnes avec qui partager ses séances.'}
                   </p>
 
-                  <div className="mt-4 flex flex-wrap gap-2" aria-label="Pratiques et environnement">
+                  <div className="mt-4 flex flex-wrap gap-2">
                     {climber.disciplines.map((discipline) => (
                       <Badge key={discipline} variant="secondary">{disciplineLabels[discipline] ?? discipline}</Badge>
                     ))}
