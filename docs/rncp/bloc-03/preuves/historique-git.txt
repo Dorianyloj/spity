@@ -1,0 +1,30 @@
+dd2bee5 2026-09-14 docs: prepare RNCP bloc 3 requirements and evidence checklist
+dc9e81e 2026-09-11 fix: align place filter controls
+4924d66 2026-09-11 fix: align place search filters
+947dcfd 2026-09-11 feat: sync route types with crags
+c892d68 2026-09-11 feat: summarize crag grade ranges
+0589242 2026-09-11 feat: animate place filter dropdowns
+8a37dc1 2026-09-11 style: make place cards more visual
+b6e35ee 2026-09-11 style: balance filter toolbar spacing
+529bb05 2026-09-11 style: streamline places filters
+24d5ef6 2026-09-11 fix: preserve demo admin account
+cff0cad 2026-09-11 chore: refresh demo place data
+dc09d0f 2026-09-11 feat: add Spity browser icon
+f588162 2026-09-11 style: compact route filter reset
+e162e90 2026-09-11 feat: add topology app background
+28f7983 2026-09-11 feat: split places maps by climbing venue
+39c44e9 2026-09-11 style: improve places map marker contrast
+18fbaf6 2026-09-11 fix: clean up map cluster labels
+92b93b0 2026-09-11 feat: toggle expanded places map
+672b4d2 2026-09-11 feat: expand and cluster places map
+f22ee9f 2026-09-11 feat: color crag grades by difficulty
+
+Arbitrage :
+commit 689e59dccf15dc611dbddccea9cf81ccc187c40c
+Date: 2026-07-20
+Subject: test(ci): run acceptance on standalone build
+
+ .github/workflows/ci.yml                   |  7 +++++++
+ spity/playwright.config.ts                 | 13 +++++++++++--
+ spity/tests/acceptance/bc02-recipe.spec.ts |  3 ++-
+ 3 files changed, 20 insertions(+), 3 deletions(-)

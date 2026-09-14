@@ -1,0 +1,23 @@
+[
+  {
+    "role": "grimpeur",
+    "route": "/app/matching",
+    "file": "matching-2026-09-14.png",
+    "observedAt": "2026-09-14T07:54:11.396Z",
+    "nature": "Capture réelle de la base dédiée contenant uniquement les données de démonstration"
+  },
+  {
+    "role": "grimpeur",
+    "route": "/app/places",
+    "file": "lieux-2026-09-14.png",
+    "observedAt": "2026-09-14T07:54:17.526Z",
+    "nature": "Capture réelle de la base dédiée contenant uniquement les données de démonstration"
+  },
+  {
+    "role": "club",
+    "route": "/app/events",
+    "file": "evenements-2026-09-14.png",
+    "observedAt": "2026-09-14T07:54:20.021Z",
+    "nature": "Capture réelle de la base dédiée contenant uniquement les données de démonstration"
+  }
+]

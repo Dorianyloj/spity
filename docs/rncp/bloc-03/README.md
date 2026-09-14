@@ -1,8 +1,24 @@
-# Bloc 3 - Attendus et préparation de la soutenance Spity
+# Bloc 3 - Kit de soutenance Spity
 
-État au 14 septembre 2026 : analyse des documents fournis et plan de préparation. Ce document ne constitue pas un dossier final ni une validation des compétences.
+État au 14 septembre 2026 : dossier, support oral, classeur, annexes et démonstration préparés. Le kit est disponible pour la répétition. Les confirmations personnelles et administratives de la checklist restent nécessaires avant remise ; aucune validation de compétence par le jury n'est présumée.
 
 **Intitulé : Coordonner et piloter un projet de développement d'applications logicielles.**
+
+## Commencer ici
+
+| Besoin | Fichier |
+| --- | --- |
+| Tout récupérer pour la répétition | [Kit ZIP](../../../output/bloc-03/kit-soutenance-spity.zip) |
+| Lire le dossier et les huit annexes | [PDF](../../../output/pdf/dossier-bloc-03-spity.pdf) ; [source modifiable](DOSSIER_BLOC_03.md) |
+| Présenter en trente minutes | [PowerPoint avec notes](../../../output/presentations/soutenance-bloc-03-spity.pptx) ; [guide d'oral](GUIDE_ORAL.md) |
+| Manipuler les coûts, charges et risques | [Classeur Excel](../../../outputs/bloc03-01a09eba/pilotage-spity.xlsx) ; [données du cas](donnees/pilotage.json) |
+| Retrouver les preuves par compétence | [Matrice](MATRICE_PREUVES.md) ; [vérifications datées](VERIFICATION.md) |
+| Lancer ou répéter la démonstration | [Procédure A08](annexes/A08_DEMONSTRATION.md) ; [outils](../../../tools/bloc3/README.md) |
+| Finaliser les informations et le dépôt | [Checklist de remise](CHECKLIST_REMISE.md) |
+
+Le kit distingue les faits techniques observés d'une mise en situation fictive de management. Les charges, coûts, rôles et comptes rendus du scénario sont des hypothèses explicites. L'équipe réelle, les échanges client et les dates du campus restent à préciser avec Dorian.
+
+Le 14 septembre, les contrôles ont réussi : lint, TypeScript, build, 389 tests unitaires dans 72 suites et six scénarios navigateur avec une MariaDB dédiée. La démonstration se lance sur http://127.0.0.1:3313 avec `powershell -File tools/bloc3/demo.ps1` depuis la racine. Premier lancement sur une nouvelle machine : utiliser `-Prepare` selon A08. Les résultats détaillés et leur portée figurent dans VERIFICATION.md.
 
 ## 1. Modalités établies par les documents fournis
 
@@ -33,7 +49,7 @@ Les éléments ci-dessous synthétisent S1 p. 11 à 14 et S3. Les formats propos
 | **C3.4.1 - Assurer le suivi client** | Comptes rendus clairs qui facilitent les décisions, points de validation organisés et indicateurs de satisfaction cohérents. | Comptes rendus d'avancement, calendrier et traces des validations, indicateurs de satisfaction définis et résultats disponibles. |
 | **C3.4.2 - Démontrer le logiciel** | Dernière version utilisable, fonctionnalités attendues présentées avec un vocabulaire adapté au client et démonstration permettant la validation. | Logiciel opérationnel, scénario de démonstration relié aux besoins et critères d'acceptation. |
 
-### Détails à couvrir dans les preuves
+### Critères à contrôler pendant la relecture et la répétition
 
 - [ ] **C.3.1** : justifier la méthode réellement utilisée ; choisir un outil cohérent (Gantt, rétroplanning, etc.) ; rendre visibles les phases d'étude, de mesure, de conception, de réalisation et de restitution ; affecter les tâches selon les compétences et tenir compte des situations de handicap ; identifier les points de vigilance.
 - [ ] **C3.2.1** : documenter la fréquence du suivi et les décisions qu'il déclenche ; donner la date, la source et la méthode de calcul de chaque indicateur ; couvrir coûts, délais, avancement, risques et charge/capacité de l'équipe. Un décompte de tickets ne couvre pas tous ces critères.
@@ -45,7 +61,7 @@ Les éléments ci-dessous synthétisent S1 p. 11 à 14 et S3. Les formats propos
 
 ## 3. Éléments Spity déjà repérés
 
-Cette lecture est un premier inventaire documentaire, pas un audit complet de conformité. L'état de Linear et l'application n'ont pas été vérifiés en direct pendant cette analyse.
+L'inventaire ci-dessous a servi de point de départ. Le kit et les vérifications listés plus haut le complètent. L'état de Linear reste celui de l'archive du 9 septembre ; il n'a pas été actualisé en direct.
 
 | Base existante | Utilité possible pour le Bloc 3 | Limite ou complément nécessaire |
 | --- | --- | --- |

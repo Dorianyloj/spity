@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "nature": "Simulation pédagogique de pilotage, distincte de l'historique réel de Spity",
+  "snapshotDay": 10,
+  "horizonDays": 15,
+  "currency": "EUR",
+  "reserveRate": 0.1,
+  "roles": [
+    {"id": "CP", "label": "Chef de projet", "hourlyRate": 45, "capacityHours": 30},
+    {"id": "DEV", "label": "Développeur fictif", "hourlyRate": 35, "capacityHours": 72},
+    {"id": "QA", "label": "Testeur UX fictif", "hourlyRate": 30, "capacityHours": 30}
+  ],
+  "tasks": [
+    {"id":"T01","title":"Cadrage et périmètre","role":"CP","phase":"Étude","start":1,"finish":2,"forecastFinish":2,"plannedHours":6,"spentHours":6,"remainingHours":0,"status":"Terminé","dependencies":[]},
+    {"id":"T02","title":"Besoins et critères de recette","role":"QA","phase":"Mesure","start":1,"finish":3,"forecastFinish":3,"plannedHours":8,"spentHours":8,"remainingHours":0,"status":"Terminé","dependencies":[]},
+    {"id":"T03","title":"Planning et ressources","role":"CP","phase":"Conception","start":2,"finish":3,"forecastFinish":4,"plannedHours":6,"spentHours":7,"remainingHours":0,"status":"Terminé","dependencies":[]},
+    {"id":"T04","title":"Accès et profils","role":"DEV","phase":"Réalisation","start":3,"finish":5,"forecastFinish":6,"plannedHours":18,"spentHours":20,"remainingHours":0,"status":"Terminé","dependencies":["T01"]},
+    {"id":"T05","title":"Matching et partenariats","role":"DEV","phase":"Réalisation","start":6,"finish":8,"forecastFinish":8,"plannedHours":16,"spentHours":16,"remainingHours":0,"status":"Terminé","dependencies":["T04"]},
+    {"id":"T06","title":"Événements et capacité","role":"DEV","phase":"Réalisation","start":9,"finish":11,"forecastFinish":12,"plannedHours":18,"spentHours":10,"remainingHours":10,"status":"En cours","dependencies":["T05"]},
+    {"id":"T07","title":"Recette et accessibilité","role":"QA","phase":"Mesure","start":10,"finish":13,"forecastFinish":14,"plannedHours":14,"spentHours":4,"remainingHours":12,"status":"En cours","dependencies":["T02","T05"]},
+    {"id":"T08","title":"Suivi et validations client","role":"CP","phase":"Pilotage","start":1,"finish":14,"forecastFinish":14,"plannedHours":8,"spentHours":6,"remainingHours":2,"status":"En cours","dependencies":[]},
+    {"id":"T09","title":"Restitution et démonstration","role":"CP","phase":"Restitution","start":14,"finish":15,"forecastFinish":15,"plannedHours":8,"spentHours":0,"remainingHours":8,"status":"À faire","dependencies":["T07"]},
+    {"id":"T10","title":"Corrections de recette","role":"DEV","phase":"Réalisation","start":12,"finish":14,"forecastFinish":14,"plannedHours":10,"spentHours":0,"remainingHours":8,"status":"À faire","dependencies":["T06"]}
+  ],
+  "expenses": [
+    {"label":"Infrastructure de démonstration","planned":120,"spent":120,"forecast":140},
+    {"label":"Formation ciblée","planned":60,"spent":0,"forecast":60}
+  ],
+  "risks": [
+    {"id":"R01","title":"Environnement de démonstration indisponible","probability":3,"impact":3,"owner":"CP","response":"Tester l'installation à J12, répéter à J14 et conserver des captures datées de secours","trigger":"Sonde de santé indisponible ou base inaccessible"},
+    {"id":"R02","title":"Surcharge du chef de projet","probability":2,"impact":3,"owner":"CP","response":"Limiter le travail simultané et faire préparer la grille de recette par QA","trigger":"Prévision de charge supérieure à 90 % de la capacité"},
+    {"id":"R03","title":"Ajout tardif de contributions aux topos","probability":2,"impact":3,"owner":"CP","response":"Reporter ce lot après la démonstration et consigner la décision client simulée","trigger":"Nouvelle demande sans capacité ni recette disponible"},
+    {"id":"R04","title":"Défaut de capacité des événements","probability":2,"impact":3,"owner":"DEV","response":"Vérifier l'inscription concurrente et les refus d'accès","trigger":"Deux inscriptions acceptées sur la dernière place"},
+    {"id":"R05","title":"Consignes de dépôt non confirmées","probability":2,"impact":3,"owner":"CP","response":"Consulter la convocation et le règlement spécial avant le dépôt","trigger":"Date limite ou livrable demandé non identifié"}
+  ]
+}

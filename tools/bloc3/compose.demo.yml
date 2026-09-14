@@ -1,0 +1,20 @@
+services:
+  database:
+    image: mariadb:11.4
+    environment:
+      MARIADB_ROOT_PASSWORD: ${BLOC3_ROOT_PASSWORD:?required}
+      MARIADB_DATABASE: spity_bloc3_demo
+      MARIADB_USER: spity_demo
+      MARIADB_PASSWORD: ${BLOC3_DB_PASSWORD:?required}
+    ports:
+      - "127.0.0.1:33313:3306"
+    volumes:
+      - demo_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 15s
+volumes:
+  demo_data:

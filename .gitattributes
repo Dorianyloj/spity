@@ -1,2 +1,7 @@
 *.pdf binary
 *.sh text eol=lf
+*.pptx binary
+*.xlsx binary
+*.zip binary
+docs/rncp/bloc-03/** text=auto eol=lf
+tools/bloc3/** text=auto eol=lf

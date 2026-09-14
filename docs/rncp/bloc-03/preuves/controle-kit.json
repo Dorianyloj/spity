@@ -1,0 +1,14 @@
+{
+  "case": "simulation explicite",
+  "planningTasks": 10,
+  "baselineEUR": 4270,
+  "forecastEUR": 4465,
+  "marginEUR": 232,
+  "slides": 18,
+  "presentationMinutes": 30,
+  "pdfPages": 21,
+  "workbookSheets": 3,
+  "workbookFormulas": 70,
+  "applicationTree": "69c2374f919f7876f4eaff477e7d5d68370b59d9",
+  "scope": "Cohérence documentaire et structure des exports ; aucun nouveau test applicatif ou dépôt externe."
+}

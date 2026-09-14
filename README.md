@@ -17,6 +17,7 @@ Spity est une application web dédiée à la communauté de l'escalade. Elle ré
 ## Parcours de lecture
 
 - **Vue projet (5 min)** : [cadrage produit](CADRAGE_PROJET.md), puis [documentation applicative](spity/README.md).
+- **Soutenance RNCP Bloc 3** : [kit de préparation](docs/rncp/bloc-03/README.md), avec dossier, slides, classeur, guide d'oral et démonstration locale.
 - **Dossier RNCP Bloc 4 (15 min)** : [dossier de remise](docs/rncp/bloc-04/dossier-jury/README.md), [revue finale](docs/rncp/bloc-04/REVUE_FINALE_BLOC_04.md) et [preuves](docs/rncp/bloc-04/preuves/README.md).
 - **Vérification complète** : suivre les commandes de [JURY.md](JURY.md) et consulter le [manifeste SHA-256](docs/rncp/bloc-04/preuves/MANIFEST.sha256).
 
