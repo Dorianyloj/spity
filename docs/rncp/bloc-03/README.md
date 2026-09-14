@@ -10,13 +10,15 @@
 | --- | --- |
 | Tout récupérer pour la répétition | [Kit ZIP](../../../output/bloc-03/kit-soutenance-spity.zip) |
 | Lire le dossier et les huit annexes | [PDF](../../../output/pdf/dossier-bloc-03-spity.pdf) ; [source modifiable](DOSSIER_BLOC_03.md) |
-| Présenter en trente minutes | [PowerPoint avec notes](../../../output/presentations/soutenance-bloc-03-spity.pptx) ; [guide d'oral](GUIDE_ORAL.md) |
+| Présenter en trente minutes | [PowerPoint avec texte oral et timing](../../../output/presentations/spity-bloc-3-30-minutes.pptx) ; [guide d'oral](GUIDE_ORAL.md) |
 | Manipuler les coûts, charges et risques | [Classeur Excel](../../../outputs/bloc03-01a09eba/pilotage-spity.xlsx) ; [données du cas](donnees/pilotage.json) |
 | Retrouver les preuves par compétence | [Matrice](MATRICE_PREUVES.md) ; [vérifications datées](VERIFICATION.md) |
 | Lancer ou répéter la démonstration | [Procédure A08](annexes/A08_DEMONSTRATION.md) ; [outils](../../../tools/bloc3/README.md) |
 | Finaliser les informations et le dépôt | [Checklist de remise](CHECKLIST_REMISE.md) |
 
 Le kit distingue les faits techniques observés d'une mise en situation fictive de management. Les charges, coûts, rôles et comptes rendus du scénario sont des hypothèses explicites. L'équipe réelle, les échanges client et les dates du campus restent à préciser avec Dorian.
+
+Le diaporama comporte 22 slides principales et 3 annexes. Les notes développent le texte à dire, les transitions et les manipulations. Les repères totalisent 24 minutes d'explications et 6 minutes de démonstration. Prévoir une répétition chronométrée pour ajuster le débit ; le PowerPoint avance manuellement. Le fichier soutenance-bloc-03-spity.pptx conserve la première version comme archive.
 
 Le 14 septembre, les contrôles ont réussi : lint, TypeScript, build, 389 tests unitaires dans 72 suites et six scénarios navigateur avec une MariaDB dédiée. La démonstration se lance sur http://127.0.0.1:3313 avec `powershell -File tools/bloc3/demo.ps1` depuis la racine. Premier lancement sur une nouvelle machine : utiliser `-Prepare` selon A08. Les résultats détaillés et leur portée figurent dans VERIFICATION.md.
 
@@ -88,13 +90,13 @@ Cette répartition est une recommandation de préparation, pas une exigence offi
 
 | Séquence | Durée |
 | --- | --- |
-| Contexte Spity, besoin et rôle personnel | 2 min |
+| Contexte Spity, besoin et nature des preuves | 2 min 30 |
 | C.3.1 - Méthode, planning et ressources | 4 min |
-| C3.2.1 - Suivi et indicateurs | 4 min |
-| C3.2.2 - Cas d'arbitrage | 3 min |
-| C3.3.1 - Management et communication | 4 min |
-| C3.3.2 - Compétences et formations | 3 min |
-| C3.4.1 - Suivi client et validations | 3 min |
+| C3.2.1 - Suivi et indicateurs | 5 min |
+| C3.2.2 - Cas d'arbitrage | 3 min 30 |
+| C3.3.1 - Management et communication | 3 min |
+| C3.3.2 - Compétences et formations | 2 min 30 |
+| C3.4.1 - Suivi client et validations | 2 min 30 |
 | C3.4.2 - Démonstration | 6 min |
 | Bilan et transition vers les questions | 1 min |
 | **Total présentation, démonstration incluse** | **30 min** |

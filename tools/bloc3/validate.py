@@ -12,7 +12,7 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / 'docs/rncp/bloc-03'
 PDF = ROOT / 'output/pdf/dossier-bloc-03-spity.pdf'
-PPTX = ROOT / 'output/presentations/soutenance-bloc-03-spity.pptx'
+PPTX = ROOT / 'output/presentations/spity-bloc-3-30-minutes.pptx'
 XLSX = ROOT / 'outputs/bloc03-01a09eba/pilotage-spity.xlsx'
 ZIP = ROOT / 'output/bloc-03/kit-soutenance-spity.zip'
 S = {'s':'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
@@ -48,8 +48,14 @@ def main(package):
     assert indicators['plannedCost']==planned and indicators['forecastCost']==forecast
     assert abs(indicators['margin']-232)<1e-8
     slides = read(DOCS/'donnees/support-oral.json')
-    assert len(slides)==18 and sum(s['minutes'] for s in slides)==30
-    assert slides[13]['minutes']==6 and all(s['minutes']==0 for s in slides[15:])
+    assert len(slides)==25 and sum(s['minutes'] for s in slides)==30
+    assert len([s for s in slides if s['minutes']>0])==22
+    assert sum(s['minutes'] for s in slides if s['demo'])==6
+    assert all(s['minutes']==0 for s in slides[22:])
+    for s in slides[:22]:
+        assert s['endMinute']-s['startMinute']==s['minutes']
+        if not s['demo']:
+            assert 100 <= s['spokenWords']/s['minutes'] <= 145, f"Densité orale incohérente : slide {s['number']}"
     assert len(list((DOCS/'annexes').glob('A*.md')))==8
     matrix = (DOCS/'MATRICE_PREUVES.md').read_text(encoding='utf-8')
     for competency in ['C.3.1','C3.2.1','C3.2.2','C3.3.1','C3.3.2','C3.4.1','C3.4.2']:
@@ -75,9 +81,9 @@ def main(package):
             assert float(cells[cell])==value, f'Cache Excel incorrect : {cell}'
     with zipfile.ZipFile(PPTX) as z:
         assert z.testzip() is None
-        assert len([n for n in z.namelist() if re.fullmatch(r'ppt/slides/slide\d+\.xml',n)])==18
+        assert len([n for n in z.namelist() if re.fullmatch(r'ppt/slides/slide\d+\.xml',n)])==len(slides)
         notes=[n for n in z.namelist() if re.fullmatch(r'ppt/notesSlides/notesSlide\d+\.xml',n)]
-        assert len(notes)==18
+        assert len(notes)==len(slides)
         for note in notes:
             assert len(''.join(ET.fromstring(z.read(note)).itertext()).strip())>80
     reader=PdfReader(PDF)
@@ -98,7 +104,7 @@ def main(package):
         ZIP.parent.mkdir(parents=True,exist_ok=True)
         with zipfile.ZipFile(ZIP,'w',zipfile.ZIP_DEFLATED) as z:
             for p in included: z.write(p,p.relative_to(ROOT).as_posix())
-            z.writestr('LIRE_EN_PREMIER.txt', 'KIT BLOC 3 SPITY\n\nDossier : output/pdf/dossier-bloc-03-spity.pdf\nSlides : output/presentations/soutenance-bloc-03-spity.pptx\nClasseur : outputs/bloc03-01a09eba/pilotage-spity.xlsx\nGuide et checklist : docs/rncp/bloc-03/\n\nLes situations de management sont fictives et identifiées. Les données personnelles et dates du campus restent à confirmer. Aucun dépôt externe effectué. La démonstration nécessite le dépôt Spity complet ; les fichiers techniques seuls ne contiennent pas toute l’application.\n')
+            z.writestr('LIRE_EN_PREMIER.txt', 'KIT BLOC 3 SPITY\n\nDossier : output/pdf/dossier-bloc-03-spity.pdf\nSlides : output/presentations/spity-bloc-3-30-minutes.pptx\nClasseur : outputs/bloc03-01a09eba/pilotage-spity.xlsx\nGuide et checklist : docs/rncp/bloc-03/\n\nLe diaporama comprend 22 slides pour 30 minutes, dont 6 de démonstration, et 3 annexes. Le guide contient le texte oral et les transitions. La durée effective se règle après une répétition chronométrée. Les situations de management sont fictives et identifiées. Les données personnelles et dates du campus restent à confirmer. Aucun dépôt externe effectué. La démonstration nécessite le dépôt Spity complet ; les fichiers techniques seuls ne contiennent pas toute l’application.\n')
         with zipfile.ZipFile(ZIP) as z: assert z.testzip() is None
         report['zip']=str(ZIP.relative_to(ROOT))
         report['zipSHA256']=digest(ZIP)

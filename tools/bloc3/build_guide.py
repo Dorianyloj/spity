@@ -13,29 +13,33 @@ def clock(minutes):
 
 parts = ['''# Guide de répétition — Bloc 3 Spity
 
-Support associé : soutenance-bloc-03-spity.pptx. Quinze diapositives principales couvrent trente minutes, démonstration comprise. Les trois dernières sont des annexes de secours ou de réponse aux questions ; elles ne prolongent pas la présentation.
+Support associé : spity-bloc-3-30-minutes.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation.
 
 ## Fil conducteur
 
 Expliquer comment organiser et sécuriser la livraison d'un parcours utile : trouver un partenaire puis participer à une sortie organisée par un club. Annoncer dès le début la distinction entre le logiciel et ses preuves réelles, l'analyse historique et la mise en situation fictive de pilotage.
 
-Les notes ci-dessous servent à préparer une explication personnelle. Elles ne constituent pas un texte à réciter. Le rôle personnel et les échanges réels doivent être précisés avec le candidat avant la remise.
+Le texte oral ci-dessous développe chaque diapositive et propose ses transitions. Le rythme prévu est d'environ 120 à 130 mots par minute, avec des pauses pour montrer les chiffres, et six minutes de manipulation commentée. La durée effective dépend du débit et de la démonstration : une répétition chronométrée permet d'ajuster les pauses et les exemples. Les diapositives avancent manuellement. Le rôle personnel et les échanges réels doivent être précisés avec le candidat avant la remise.
 
 ## Repères de temps
 
 | Slide | Sujet | Durée | Temps cumulé |
 | --- | --- | --- | --- |''']
 elapsed = 0
-for s in slides[:15]:
+for s in [slide for slide in slides if slide['minutes']>0]:
     elapsed += s['minutes']
     parts.append(f"| {s['number']} | {s['title']} | {clock(s['minutes'])} | {clock(elapsed)} |")
 parts.append('''
-À 13:00, terminer l'arbitrage de périmètre. À 23:00, quitter le suivi client pour lancer les six minutes de démonstration. À 29:00, revenir au bilan. Si une explication dépasse, condenser un exemple ; ne pas supprimer entièrement une compétence ni la démonstration.
+À 15:00, terminer l'arbitrage de périmètre. À 23:00, quitter le suivi client pour lancer les six minutes de démonstration. À 29:00, revenir au bilan. Si une explication dépasse, condenser un exemple ; ne pas supprimer entièrement une compétence ni la démonstration.
 
 ## Notes par diapositive
 ''')
 for s in slides:
-    parts.append(f"### {s['number']}. {s['title']}\n\nNature : {s['nature']}.\n\n{s['notes']}\n")
+    timing=f"{clock(s['startMinute'])} à {clock(s['endMinute'])}" if s['minutes'] else 'questions du jury, hors des trente minutes'
+    parts.append(f"### {s['number']}. {s['title']}\n\nRepère : {timing}. Nature : {s['nature']}.\n\n**Texte oral proposé**\n\n{s['script']}\n")
+    if s.get('action'): parts.append(f"**À montrer ou manipuler**\n\n{s['action']}\n")
+    if s.get('transition'): parts.append(f"**Transition**\n\n{s['transition']}\n")
+    parts.append(f"Source : {s['source']}\n")
 parts.append('''## Questions probables du jury
 
 1. **Qu'avez-vous réellement fait et qu'avez-vous simulé ?** Présenter les contributions personnelles confirmées par le candidat. Les commits et les vérifications sont observables. L'équipe CP/DEV/QA, les jours J1-J15, les coûts et les comptes rendus client appartiennent au cas fictif. Un test réussi ne prouve pas un échange client.
@@ -67,4 +71,4 @@ parts.append('''## Questions probables du jury
 Le diaporama et ses notes, le classeur, le dossier PDF, A08 et les captures. Les confirmations de date, d'équipe et de dépôt sont suivies dans CHECKLIST_REMISE.md.
 ''')
 (DOCS / 'GUIDE_ORAL.md').write_text('\n'.join(parts).strip() + '\n', encoding='utf-8', newline='\n')
-print('Guide généré : 30 minutes, 18 notes et 15 questions.')
+print('Guide généré : 30 minutes, 25 notes et 15 questions.')

@@ -5,7 +5,7 @@
 ## Livrables préparés
 
 - [x] Dossier PDF comprenant les sept compétences, la matrice des preuves et les huit annexes.
-- [x] Support PowerPoint : 15 diapositives principales, notes de présentation et 3 annexes ; répartition prévue de 30 minutes, dont 6 de démonstration.
+- [x] Support PowerPoint : 22 diapositives principales, texte oral développé et 3 annexes ; répartition prévue de 30 minutes, dont 6 de démonstration.
 - [x] Classeur modifiable : pilotage, planning et risques, avec formules vérifiées.
 - [x] Guide d'oral : timing, notes, questions probables et réponses à reformuler.
 - [x] Démonstration locale avec base dédiée, comptes de test, scénario et captures de secours datées.
