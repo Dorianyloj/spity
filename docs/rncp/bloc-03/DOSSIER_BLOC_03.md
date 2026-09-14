@@ -41,7 +41,7 @@ Pour la mise en situation, je retiens Kanban avec des jalons de validation. Les 
 
 Ce choix correspond à un petit effectif et à des priorités qui peuvent évoluer. Scrum apporterait des rôles et cérémonies supplémentaires sans preuve d'une pratique historique correspondante dans le projet. Le cycle en V donnerait une structure stable, mais retarderait les retours sur les parcours. Kanban permet de conserver des livraisons progressives tout en rendant la date de démonstration visible.
 
-Linear est l'outil de backlog repéré dans la documentation du projet. L'état archivé du 9 septembre 2026 sert d'exemple réel de remise en cohérence des tickets avec le code. Le classeur de pilotage joint complète ce suivi par les charges, les jalons et les coûts. Git assure la traçabilité des modifications ; il ne remplace pas une mesure du temps passé.
+Linear a été consulté directement le 14 septembre 2026 : 25 tickets, dont 12 Done, 4 Todo, 1 In Progress, 7 Backlog et 1 Canceled. A09 conserve le relevé et les liens. Le ticket actif SPI-27 concerne les médias et conditionne le parcours de publication SPI-15 puis SPI-18, d'après les descriptions lues. Le classeur de pilotage joint complète ce suivi par les charges, les jalons et les coûts. Git assure la traçabilité des modifications ; il ne remplace pas une mesure du temps passé.
 
 Le planning pédagogique couvre quinze jours ouvrés relatifs, J1 à J15, sans leur attribuer des dates de réalisation historiques. Il distingue étude, mesure des besoins, conception de l'organisation, réalisation, recette et restitution. Les dépendances et les jalons sont détaillés dans A01. T07 peut commencer sur les parcours déjà livrés, mais sa clôture dépend aussi de la recette des événements et des corrections T10. La démonstration J15 reste conditionnée à ces deux validations.
 
@@ -76,7 +76,7 @@ Les heures consommées ne sont pas un pourcentage d'achèvement. Le passage à T
 
 La référence globale retenue est la fiche C1.4.2 du Bloc 1 : 79 jours-homme à 420 EUR HT, soit 33 180 EUR, plus 1 480 EUR d'exploitation annuelle et 3 466 EUR de provision, pour un total de 38 126 EUR HT. Les 4 270 EUR du lot B3 ne remplacent pas cette estimation et ne lui sont pas ajoutés. Les périmètres et hypothèses diffèrent ; aucune économie réelle ne peut être déduite de leur comparaison. L'ancien diaporama B1 affiche 82 jours-homme et 44 250 EUR : cette divergence avec les fiches détaillées est identifiée dans la revue inter-blocs et reste à harmoniser avant une remise commune.
 
-Le classeur recalcule les totaux et la charge par rôle après modification des entrées. Les risques sont suivis séparément avec responsable, déclencheur et réponse. Les données et les calculs sont exposés dans A03 et dans le fichier pilotage.json afin que le jury puisse vérifier les résultats.
+Le classeur recalcule les totaux et la charge par rôle après modification des entrées. Les risques sont suivis séparément avec responsable, déclencheur et réponse. Les 112 h initiales sont décomposées en 30 activités dans la feuille Estimations. Planning et Pilotage calculent leurs totaux à partir de ces entrées. A09 explique les causes des 5 h supplémentaires et les tests de sensibilité : 8 h DEV de plus dépassent le budget de 48 EUR ; 2 h CP de plus respectent le budget mais dépassent sa capacité d'une heure. Le relevé réel des 25 tickets Linear reste dans une feuille distincte.
 
 ## 6. C3.2.2 - Arbitrage documenté sur la recette
 
@@ -152,6 +152,6 @@ S1 : référentiel Expert en développement logiciel RNCP39583, p. 11 à 14, cop
 
 Preuves projet : historique Git, commit 689e59d ; docs/bc02/10_CAHIER_RECETTES_C231.md ; docs/bc02/19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES.md ; docs/audits/2026-09-09-synchronisation-linear.md ; captures du 14 septembre 2026 dans preuves/captures ; résultats de vérification produits pendant cette préparation.
 
-Annexes : A01 planning, A02 responsabilités, A03 indicateurs et risques, A04 arbitrages, A05 management, A06 compétences et formations, A07 suivi client, A08 démonstration. Les données numériques du cas sont centralisées dans donnees/pilotage.json et reprises dans le classeur joint. La matrice de preuves donne les correspondances avec la grille officielle.
+Annexes : A01 planning, A02 responsabilités, A03 indicateurs et risques, A04 arbitrages, A05 management, A06 compétences et formations, A07 suivi client, A08 démonstration, A09 données et rapprochement Linear. Les données numériques du cas sont centralisées dans donnees/pilotage.json et reprises dans le classeur joint. La matrice de preuves donne les correspondances avec la grille officielle.
 
 Continuité du projet : Bloc 1, C1.1.1 p. 2, C1.4.1 p. 7-8 et C1.4.2 p. 2-4 ; Bloc 2, dossier final du 23 juillet et retour d'expérience ; Bloc 4, dossier du 13 août, anomalie B4-C421-02 et cas support B4-C433-01. La revue COHERENCE_INTER_BLOCS.md conserve les références précises et les divergences documentaires.

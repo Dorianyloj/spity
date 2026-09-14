@@ -5,7 +5,7 @@ Cette matrice constate une couverture documentaire ; elle n’attribue pas la me
 | Compétence | Critères couverts | Pièces | Nature |
 | --- | --- | --- | --- |
 | C.3.1 | Méthode, planning, phases, ressources, affectations, handicap, vigilances | A01 ; A02 | Simulation et traces Git |
-| C3.2.1 | Outil cohérent, indicateurs mesurables, coûts, délais, risques, RH | A03 ; classeur ; vérification | Simulation et tests observés |
+| C3.2.1 | Outil cohérent, indicateurs mesurables, coûts, délais, risques, RH | A03 ; A09 ; classeur ; vérification | Linear observé, simulation et tests datés |
 | C3.2.2 | Problème, conséquences, options et décision argumentée | A04 ; commit 689e59d | Git observé, analyse rétrospective et simulation |
 | C3.3.1 | Missions, charge, style, communication, critique et adaptations | A02 ; A05 | Simulation |
 | C3.3.2 | Grille commentée, écarts, formations adaptées et besoin RH | A06 | Simulation |

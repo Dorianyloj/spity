@@ -1,6 +1,6 @@
 # Guide de répétition — Bloc 3 Spity
 
-Support associé : spity-bloc-3-30-minutes-visuel-v4.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
+Support associé : spity-bloc-3-30-minutes-visuel-v7.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
 
 ## Fil conducteur
 
@@ -15,10 +15,10 @@ Le texte oral ci-dessous développe chaque diapositive et propose ses transition
 | 1 | Spity | 00:30 | 00:30 |
 | 2 | Le besoin d’Altitude Grimpe | 01:00 | 01:30 |
 | 3 | Un projet, quatre blocs | 01:00 | 02:30 |
-| 4 | Le travail avance jusqu’à la recette | 01:30 | 04:00 |
+| 4 | Le backlog Linear au 14 septembre | 01:30 | 04:00 |
 | 5 | Un lot sur quinze jours ouvrés | 01:30 | 05:30 |
 | 6 | Qui fait quoi ? | 01:00 | 06:30 |
-| 7 | 5 heures de plus à anticiper | 01:30 | 08:00 |
+| 7 | Les causes des 5 heures supplémentaires | 01:30 | 08:00 |
 | 8 | Le budget du lot de démonstration | 01:30 | 09:30 |
 | 9 | Le chef de projet approche sa limite | 01:00 | 10:30 |
 | 10 | Des risques qui déclenchent une action | 01:00 | 11:30 |
@@ -89,27 +89,27 @@ Je zoome maintenant sur l'organisation du lot pédagogique.
 
 Source : B1 : C1.1.1 et C1.4.2. B2 : 16_DOSSIER_FINAL_BC02. B4 : DOSSIER_BLOC_04 et B4-C433-01. Référentiel p. 11. COHERENCE_INTER_BLOCS.md.
 
-### 4. Le travail avance jusqu’à la recette
+### 4. Le backlog Linear au 14 septembre
 
-Repère : 02:30 à 04:00. Nature : C.3.1, simulation pédagogique.
+Repère : 02:30 à 04:00. Nature : Linear observé, 14 septembre 2026.
 
 **Texte oral proposé**
 
-Pour ce cas, je retiens Kanban, avec des jalons de validation. Le lot est court, l'effectif réduit et les priorités peuvent évoluer. L'objectif est de rendre le travail visible et d'éviter de commencer trop de fonctions avant de terminer leur vérification.
+J'utilise Linear pour retrouver les sujets du projet, leurs priorités et leurs dépendances. La lecture du quatorze septembre montre vingt-cinq tickets : douze terminés, quatre à faire, un en cours, sept en backlog et un annulé. En excluant l'annulé, douze sur vingt-quatre sont terminés. Ce taux de cinquante pour cent compte des tickets de tailles différentes. Il ne signifie donc pas que la moitié du produit est livrée.
 
-Une tâche entre dans le tableau lorsque son besoin et ses critères sont compréhensibles. Elle passe en cours lorsqu'un responsable dispose de la capacité nécessaire. Elle rejoint ensuite la colonne à vérifier, puis terminé après la recette. Je limite à deux le nombre de tâches de réalisation simultanées. Si une tâche reste bloquée, la priorité est de traiter ce blocage avant d'ouvrir un nouveau chantier.
+Le ticket en cours est SPI-27, l'upload sécurisé. Sa description indique que le service existe, avec des validations de persistance encore attendues avant clôture. Ce service est nécessaire à l'API de publication SPI-15 et au formulaire SPI-18. Cette dépendance explique pourquoi je traite la sécurisation du service avant d'ouvrir davantage de travaux de publication.
 
-Je conserve des jalons pour le périmètre, les écarts et la réception. Linear sert au suivi des tâches, Git à la traçabilité des changements, et le classeur aux charges et aux coûts. Je n'affirme pas que toutes les cérémonies Scrum ont été pratiquées sur le projet. Le choix présenté ici répond aux contraintes du scénario et reste contrôlable par des critères simples.
+Dans le cas de management, je propose une limite de deux tâches de réalisation simultanées et une vérification des critères avant passage à terminé. Les vingt-quatre tickets non annulés sont affectés à Dorian dans l'outil. La répartition entre chef de projet, développeur et testeur qui suit représente une équipe fictive pour l'exercice.
 
 **À montrer ou manipuler**
 
-Montrer le flux des quatre états et expliquer la limite de deux tâches en cours.
+Montrer les statuts observés, puis la dépendance SPI-27, SPI-15 et SPI-18. La limite de deux tâches appartient au cas.
 
 **Transition**
 
-Ces règles de travail se placent dans un planning de quinze jours ouvrés.
+Je distingue ce backlog observé du lot pédagogique chiffré sur quinze jours.
 
-Source : DOSSIER_BLOC_03 §3. A01 et A03.
+Source : Lecture directe du tableau https://linear.app/spitywa/team/SPI/all et des fiches SPI-27, SPI-15, SPI-18 et SPI-6 le 14 septembre 2026. A09 et donnees/linear-2026-09-14.json. Descriptions détaillées datées du 9 septembre.
 
 ### 5. Un lot sur quinze jours ouvrés
 
@@ -151,27 +151,27 @@ Une fois le travail réparti, je peux comparer le prévu et la prévision.
 
 Source : A02 et A03. B1 : C1.1.1, p. 3. B2 : déclaration de périmètre du dossier final. La répartition CP/DEV/QA reste simulée.
 
-### 7. 5 heures de plus à anticiper
+### 7. Les causes des 5 heures supplémentaires
 
 Repère : 06:30 à 08:00. Nature : C3.2.1, simulation pédagogique.
 
 **Texte oral proposé**
 
-Le tableau de bord est arrêté à J10. La charge initiale du lot est de cent douze heures. Soixante-dix-sept heures sont consommées dans le scénario et le reste à faire est estimé à quarante heures. La prévision à terminaison atteint donc cent dix-sept heures, soit cinq heures de plus que la référence.
+Les chiffres du lot reposent maintenant sur trente activités détaillées, regroupées dans dix tâches. Chaque ligne décrit un travail identifiable, son estimation initiale, son consommé simulé à J10 et son reste à faire. Les trente estimations initiales totalisent cent douze heures. Le consommé atteint soixante-dix-sept heures et le reste à faire quarante heures. La prévision totale devient donc cent dix-sept heures.
 
-Je distingue trois notions. Le consommé indique l'effort déjà mobilisé. Le reste à faire exprime l'effort encore nécessaire. Le statut terminé indique qu'un résultat a été vérifié. Cinq tâches sur dix sont terminées, mais ce ratio ne signifie pas que la moitié de la valeur du produit est livrée. Les tâches n'ont pas toutes la même taille.
+Le graphique explique les cinq heures supplémentaires. La clarification des dépendances ajoute une heure de pilotage. Les contrôles d'accès ajoutent deux heures, la stabilisation des événements deux heures et la recette deux heures. En sens inverse, la réestimation des corrections retire deux heures. Cette économie reste une hypothèse à surveiller, elle ne justifie pas de réduire les critères de validation.
 
-Chaque rôle actualise ses estimations. Deux fois par semaine, le chef de projet vérifie les écarts et leur effet sur les jalons. Par exemple, si une fonction semble presque codée mais que sa recette reste importante, le reste à faire doit encore intégrer ce travail. Je préfère constater cet écart avant la démonstration pour pouvoir décider tant qu'une marge existe.
+Je conserve la référence initiale et les causes d'écart pour rendre la décision traçable. Les heures sont des données du scénario, pas des temps saisis dans Linear. Les soixante-dix-sept heures consommées ne donnent pas non plus un pourcentage de fonctionnalités terminées. Pour décider, je rapproche ce consommé des livrables vérifiés et des contrôles encore nécessaires.
 
 **À montrer ou manipuler**
 
-Montrer le calcul 77 + 40 = 117, puis distinguer les heures du taux de tâches terminées.
+Lire chaque cause de variation puis montrer le total net de cinq heures.
 
 **Transition**
 
-La même prévision permet de réévaluer le coût du lot.
+Ces heures ont un effet différent sur le budget selon le rôle concerné.
 
-Source : A03. Classeur Pilotage et Planning. Données simulées à J10.
+Source : A09, section 4 et 5 ; donnees/pilotage.json, 30 estimateDetails ; classeur Estimations et Planning. Simulation pédagogique, sans relevés horaires réels.
 
 ### 8. Le budget du lot de démonstration
 
@@ -267,13 +267,13 @@ Je compare l'ajout, le retrait d'une partie de la recette et le report. Réduire
 
 **À montrer ou manipuler**
 
-Faire lire les deux dépassements, puis exposer le report.
+Montrer le rattachement de la demande au contexte SPI-22, puis comparer les coûts et la capacité DEV.
 
 **Transition**
 
 Pour appliquer cette décision, je dois aussi la faire comprendre à l’équipe.
 
-Source : A04 et CR02 dans A07. Simulation explicitement distincte du code actuel. B1 : C1.4.1, contributions aux topos dans la vision cible. Le report concerne ce lot pédagogique ; il ne supprime pas la fonctionnalité du projet.
+Source : A04 et CR02 dans A07. Simulation explicitement distincte du code actuel. B1 : C1.4.1, contributions aux topos dans la vision cible. Le report concerne ce lot pédagogique ; il ne supprime pas la fonctionnalité du projet. Linear SPI-22 est observé en Backlog au 14 septembre. Le chiffrage additionnel 12 h DEV et 4 h QA est une hypothèse du lot, pas une estimation extraite de ce ticket.
 
 ### 13. Un désaccord à traiter ensemble
 
@@ -499,15 +499,19 @@ Cette annexe sert à retrouver rapidement une pièce. La matrice du dossier dét
 
 Source : MATRICE_PREUVES. Référentiel p. 11-14 et grille BC03.
 
-### 24. Annexe : calcul de la prévision
+### 24. La sensibilité du budget et de la capacité
 
-Repère : questions du jury, hors des trente minutes. Nature : Annexe, données fictives en euros.
+Repère : questions du jury, hors des trente minutes. Nature : Annexe, scénarios pédagogiques.
 
 **Texte oral proposé**
 
-Les charges incluent les temps de formation. Les quatre postes totalisent 4 465 euros. Les taux sont fictifs et le montant est une valorisation économique du cas, sans facture réelle correspondante.
+Chaque ligne ajoute une hypothèse isolée à la prévision J10. Six heures QA consomment cent quatre-vingts euros et laissent cinquante-deux euros de marge. Huit heures DEV dépassent le budget de quarante-huit euros, malgré une capacité encore respectée. Deux heures CP conservent cent quarante-deux euros de marge mais portent sa charge à trente et une heures pour trente heures disponibles. La demande topo dépasse les deux contraintes. Les lignes ne se cumulent pas. Les formules de la feuille Pilotage permettent de modifier les heures supplémentaires et de vérifier les effets.
 
-Source : A03 et classeur Pilotage.
+**À montrer ou manipuler**
+
+Choisir un scénario dans le tableau et expliquer séparément la contrainte budgétaire et la capacité.
+
+Source : A09 section 6 ; classeur Pilotage, sensibilité ; donnees/pilotage.json. Taux et capacités fictifs du lot.
 
 ### 25. Des contrôles datés et contextualisés
 
@@ -526,7 +530,7 @@ Source : B2 : 16_DOSSIER_FINAL_BC02, Résultats vérifiés, 23 juillet 2026. B4 
 3. **Quel est le chemin vers la soutenance ?** Accès/profils, matching, événements, recette/corrections et validation J14 avant la démonstration J15. La recette peut commencer sur les fonctions prêtes ; sa clôture attend les corrections. Montrer A01 et les dépendances.
 4. **Comment obtenez-vous 4 465 EUR ?** Valorisation du travail à terminaison : CP 29 h × 45 EUR, DEV 64 h × 35 EUR, QA 24 h × 30 EUR = 4 265 EUR ; ajouter 200 EUR de frais. Les taux et charges sont des hypothèses du lot. Le budget global B1 est de 38 126 EUR HT dans les fiches détaillées, sur 79 j-h. Il ne faut ni remplacer ce total par les coûts B3, ni les additionner. L’ancien diaporama B1 affiche une autre estimation, documentée dans COHERENCE_INTER_BLOCS.md.
 5. **La réserve fait-elle disparaître le dépassement ?** Non : le coût reste supérieur de 195 EUR à la référence de 4 270 EUR. La réserve de 427 EUR porte le plafond à 4 697 EUR et laisse 232 EUR de marge. Un écart doit rester visible même s'il est absorbable.
-6. **Pourquoi 50 % de tâches terminées ne signifie pas 50 % de produit livré ?** Le dénominateur est dix tâches du cas, de tailles différentes. Les 77 h consommées mesurent un effort, pas une valeur acquise. Les critères de recette déterminent la validation fonctionnelle.
+6. **Pourquoi 50 % de tâches terminées ne signifie pas 50 % de produit livré ?** Le dénominateur est dix tâches du cas, de tailles différentes. Les 77 h consommées mesurent un effort, pas une valeur acquise. Linear donne aussi 12 Done sur 24 non annulés : ce second 50 % concerne un autre dénominateur et reste non pondéré. Les critères de recette déterminent la validation fonctionnelle.
 7. **Pourquoi reporter la demande nouvelle ?** Elle ajoute 540 EUR et conduit à 5 005 EUR, soit 308 EUR au-dessus du plafond. La charge DEV atteindrait 76 h pour 72 disponibles. Le report préserve les critères du lot et doit être validé par le commanditaire du scénario.
 8. **Quelle preuve existe pour votre arbitrage réel ?** Le commit 689e59d du 20 juillet décrit le passage de la recette CI au standalone. Les résultats des runs sont rapportés par le dossier historique ; la comparaison des options est une analyse rétrospective. Ne pas la présenter comme un compte rendu rédigé à l'époque.
 9. **Comment traitez-vous un conflit DEV/QA ?** Faire expliciter les impacts, identifier les critères non négociables, comparer charge et échéance, décider puis rendre la décision accessible. A05 décrit une situation fictive et critique les limites d'une réponse seulement directive.

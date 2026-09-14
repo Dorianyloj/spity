@@ -5,12 +5,12 @@
   "forecastEUR": 4465,
   "marginEUR": 232,
   "slides": 25,
-  "nativeCharts": 7,
-  "chartWorkbooks": 7,
+  "nativeCharts": 8,
+  "chartWorkbooks": 8,
   "presentationMinutes": 30,
-  "pdfPages": 22,
-  "workbookSheets": 3,
-  "workbookFormulas": 70,
+  "pdfPages": 26,
+  "workbookSheets": 5,
+  "workbookFormulas": 175,
   "applicationTree": "69c2374f919f7876f4eaff477e7d5d68370b59d9",
   "scope": "Cohérence documentaire et structure des exports ; aucun nouveau test applicatif ou dépôt externe."
 }

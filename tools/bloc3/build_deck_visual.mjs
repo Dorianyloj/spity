@@ -4,7 +4,7 @@ import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 
-const root=process.cwd(),tmp=path.join(root,'tmp/bloc3/visual-v4');
+const root=process.cwd(),tmp=path.join(root,'tmp/bloc3/visual-v7');
 await fs.mkdir(tmp,{recursive:true});
 const modules=process.env.RUNTIME_NODE_MODULES??path.join(root,'tmp/bloc3/build/node_modules');
 process.env.RUNTIME_NODE_MODULES=modules;
@@ -16,6 +16,8 @@ const {finalizePresentation,resolvePresentationFont,applyPresentationChartFont}=
 const font=resolvePresentationFont({fontFamily:'Arial',availableFonts:['Arial']});
 const doc=JSON.parse(await fs.readFile(path.join(root,'docs/rncp/bloc-03/donnees/diaporama-30min.json'),'utf8'));
 const pilotage=JSON.parse(await fs.readFile(path.join(root,'docs/rncp/bloc-03/donnees/pilotage.json'),'utf8'));
+const linear=JSON.parse(await fs.readFile(path.join(root,'docs/rncp/bloc-03/donnees/linear-2026-09-14.json'),'utf8'));
+const indicators=JSON.parse(await fs.readFile(path.join(root,'docs/rncp/bloc-03/donnees/indicateurs.json'),'utf8'));
 const P=Presentation.create({slideSize:{width:1280,height:720}});
 const ink='#18312D',green='#28725F',sage='#91AE91',lime='#C5DC83',orange='#C77952',muted='#5D7068',paper='#F5F3EA',gray='#DADFD4';
 const tableOwners=[],chartOwners=[],chartContracts=[];
@@ -47,13 +49,13 @@ let elapsed=0;
 for(const item of doc.slides){
   const s=P.slides.add();s.background.fill=paper;
   item.startMinute=elapsed;elapsed+=item.minutes;item.endMinute=elapsed;
-  const alignedTitles={2:'Le besoin d’Altitude Grimpe',3:'Un projet, quatre blocs',5:'Un lot sur quinze jours ouvrés',8:'Le budget du lot de démonstration',22:'La transmission à la maintenance',25:'Des contrôles datés et contextualisés'};
+  const alignedTitles={2:'Le besoin d’Altitude Grimpe',3:'Un projet, quatre blocs',4:'Le backlog Linear au 14 septembre',5:'Un lot sur quinze jours ouvrés',7:'Les causes des 5 heures supplémentaires',8:'Le budget du lot de démonstration',22:'La transmission à la maintenance',25:'Des contrôles datés et contextualisés'};
   item.title=alignedTitles[item.number]??mainTitles[item.number]??item.title;
   if(item.number===13)item.source+=' Illustration fictive générée avec ImageGen, visuels/equipe-illustration.png. Aucune personne réelle représentée.';
   if(item.number===19)item.source+=' Photo de marque existante escalade-falaise-gros-plan.jpeg, illustration de la pratique.';
   if(item.number===5)item.source+=' Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01.';
   item.spokenWords=[item.script,item.transition].filter(Boolean).join(' ').trim().split(/\s+/).length;
-  if(item.number===4)item.action='Montrer le flux des quatre états et expliquer la limite de deux tâches en cours.';
+  if(item.number===4)item.action='Montrer les statuts observés, puis la dépendance SPI-27, SPI-15 et SPI-18. La limite de deux tâches appartient au cas.';
   if(item.number===5)item.action='Lire les phases du planning, puis montrer la recette à J14 avant la démonstration J15.';
   if(item.number===8)item.action='Comparer les barres du budget initial, de la prévision et du plafond. Expliquer les 232 euros de marge.';
   if(item.number===11)item.action='Comparer oralement les trois options. Mettre en avant le standalone et le commit qui atteste le choix.';
@@ -89,9 +91,10 @@ for(const item of doc.slides){
       groups(s,[['01','Cadrage','Besoin et\nbudget global.'],['02','Logiciel','Prototype,\ntests et livraison.'],['03','Pilotage','Lot, écarts\net arbitrages.'],['04','Maintenance','Anomalies\net support.']],194);
       takeaway(s,'Produit réel. Commanditaire et management fictifs.',609);break;
     case 4:{
-      const t=table(s,[['À faire','En cours','À vérifier','Terminé'],['Besoin clair','Capacité libre','Fonction prête','Critères validés']],[288,288,288,288],4,220,270);
-      ['#738E7E',green,'#578577','#18312D'].forEach((fill,c)=>{t.getCell(0,c).fill=fill;t.getCell(0,c).text.style={typeface:font,fontSize:34,bold:true,color:'#FFFFFF'};t.getCell(1,c).text.style={typeface:font,fontSize:28,color:ink};});
-      takeaway(s,'2 tâches de réalisation simultanées au maximum',556);break;
+      const values=['Backlog','Todo','In Progress','Done'].map(status=>linear.issues.filter(x=>x.status===status).length);
+      chart(s,4,['Backlog','À faire','En cours','Terminé'],[{name:'Tickets',values,fill:green,points:[{idx:0,fill:gray},{idx:1,fill:sage},{idx:2,fill:orange},{idx:3,fill:green}]}],{position:{left:68,top:180,width:800,height:390}});
+      aside(s,'12 / 24','Tickets terminés','1 ticket annulé exclu.\nComptage non pondéré.');
+      takeaway(s,'Dépendance : SPI-27 médias, SPI-15 API, SPI-18 formulaire.',605);break;
     }
     case 5:{
       const cats=['Restitution','Recette','Réalisation','Conception','Étude'];
@@ -103,10 +106,10 @@ for(const item of doc.slides){
       groups(s,[['30 h','Chef de projet','Organiser et arbitrer.'],['72 h','Développeur','Réaliser et corriger.'],['30 h','Testeur UX','Recetter les parcours.']],204);
       takeaway(s,'Le client valide le périmètre aux trois jalons.',604);break;
     case 7:
-      chart(s,7,['Référence','Prévision'],[{name:'Heures',values:[112,117],valuesFormatCode:'0" h"',fill:green,points:[{idx:0,fill:sage},{idx:1,fill:green}]}],{position:{left:68,top:205,width:800,height:350}});
-      aside(s,'+5 h','Écart prévu','77 h consommées\n40 h restantes');takeaway(s,'5 tâches terminées sur 10, de tailles différentes.',607);break;
+      chart(s,7,['Corrections','Recette','Événements','Accès','Planning'],[{name:'Écart en heures',values:['T10','T07','T06','T04','T03'].map(id=>{const t=pilotage.tasks.find(t=>t.id===id);return t.spentHours+t.remainingHours-t.plannedHours;}),valuesFormatCode:'+0" h";-0" h";0" h"',fill:orange,points:[{idx:0,fill:green}],dataLabelOverrides:[0,1,2,3,4].map(idx=>({idx,showValue:true,position:idx===0?'center':'outEnd',...(idx===0?{text:'Corrections −2 h'}:{}),textStyle:{typeface:font,fontSize:idx===0?22:26,bold:true,fill:idx===0?'#FFFFFF':ink}}))}],{position:{left:68,top:180,width:800,height:400},xAxis:{visible:true,tickLabelPosition:'low',textStyle:{typeface:font,fontSize:24,fill:ink},majorGridlines:null},yAxis:{visible:true,min:-3,max:3,majorUnit:1,numberFormatCode:'0" h"',textStyle:{typeface:font,fontSize:22,fill:ink},majorGridlines:{fill:'#DBDFD5',width:1}}});
+      aside(s,'+5 h','Écart net prévu','112 h initiales\n117 h à terminaison');takeaway(s,'30 activités détaillées. 77 h consommées, 40 h restantes.',607);break;
     case 8:
-      chart(s,8,['Initial','Prévision','Plafond'],[{name:'Euros',values:[4270,4465,4697],valuesFormatCode:'0" €"',fill:green,points:[{idx:0,fill:sage},{idx:1,fill:orange},{idx:2,fill:green}]}]);
+      chart(s,8,['Initial','Prévision','Plafond'],[{name:'Euros',values:[indicators.plannedCost,indicators.forecastCost,indicators.ceiling],valuesFormatCode:'0" €"',fill:green,points:[{idx:0,fill:sage},{idx:1,fill:orange},{idx:2,fill:green}]}]);
       aside(s,'232 €','Marge du lot','195 € au-dessus\nde sa référence.');
       text(s,'Budget global B1 : 38 126 € HT. Exercice B3 distinct.',72,610,1136,48,27,true,green);break;
     case 9:
@@ -170,7 +173,7 @@ assert.equal(elapsed,30);assert.equal(doc.slides.length,25);
 await fs.writeFile(path.join(root,'docs/rncp/bloc-03/donnees/support-oral.json'),JSON.stringify(doc.slides,null,2)+'\n');
 await fs.writeFile(path.join(tmp,'chart-data.json'),JSON.stringify(chartContracts,null,2)+'\n');
 const candidate=path.join(tmp,'candidate.pptx');await(await PresentationFile.exportPptx(P)).save(candidate);
-const finalPath=path.join(root,'output/presentations/spity-bloc-3-30-minutes-visuel-v4.pptx');
+const finalPath=path.join(root,'output/presentations/spity-bloc-3-30-minutes-visuel-v7.pptx');
 await finalizePresentation({workspaceDir:root,candidatePath:candidate,finalPath,pythonExecutable:python,integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-heading-fit',...tableOwners.flatMap(n=>['--require-native-table-slide',String(n)])],requiredNativeTableOwnerSlides:tableOwners,requiredNativeChartOwnerSlides:chartOwners,materializeLiteralChartWorkbooks:true,fontPolicy:{basis:'design',families:[font]},verifyArtifactToolImport:true,receiptPath:path.join(tmp,'validation.json')});
 const checked=await PresentationFile.importPptx(await FileBlob.load(finalPath));
 for(let i=0;i<checked.slides.items.length;i++){const png=await checked.export({slide:checked.slides.items[i],format:'png',scale:1});await fs.writeFile(path.join(tmp,`slide-${String(i+1).padStart(2,'0')}.png`),new Uint8Array(await png.arrayBuffer()));}

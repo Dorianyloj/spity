@@ -1,0 +1,222 @@
+{
+  "observedDate": "2026-09-14",
+  "source": "https://linear.app/spitywa/team/SPI/all",
+  "method": "Transcription du tableau authentifié via navigateur ; lecture détaillée de SPI-27, SPI-15, SPI-18 et SPI-6.",
+  "nature": "Observation des statuts Linear, pas nouvelle validation fonctionnelle du code",
+  "issues": [
+    {
+      "id": "SPI-5",
+      "title": "SPITY-001: Prisma schema User + Club",
+      "status": "Canceled",
+      "priority": "Urgent",
+      "assignee": null,
+      "url": "https://linear.app/spitywa/issue/SPI-5/spity-001-prisma-schema-user-club"
+    },
+    {
+      "id": "SPI-6",
+      "title": "SPITY-002: JWT auth grimpeur/club",
+      "status": "Todo",
+      "priority": "High",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-6/spity-002-jwt-auth-grimpeurclub"
+    },
+    {
+      "id": "SPI-7",
+      "title": "SPITY-003: Login/register pages",
+      "status": "Done",
+      "priority": "High",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-7/spity-003-loginregister-pages"
+    },
+    {
+      "id": "SPI-8",
+      "title": "SPITY-004: Docker compose Next+MariaDB+phpMyAdmin",
+      "status": "Done",
+      "priority": "Urgent",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-8/spity-004-docker-compose-nextmariadbphpmyadmin"
+    },
+    {
+      "id": "SPI-9",
+      "title": "SPITY-005: Drizzle schema initial",
+      "status": "Done",
+      "priority": "Urgent",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-9/spity-005-drizzle-schema-initial"
+    },
+    {
+      "id": "SPI-10",
+      "title": "SPITY-006: GitHub Actions CI/CD",
+      "status": "Done",
+      "priority": "Medium",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-10/spity-006-github-actions-cicd"
+    },
+    {
+      "id": "SPI-11",
+      "title": "SPITY-007: CRUD profil grimpeur (disciplines, niveaux, matos)",
+      "status": "Todo",
+      "priority": "High",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-11/spity-007-crud-profil-grimpeur-disciplines-niveaux-matos"
+    },
+    {
+      "id": "SPI-12",
+      "title": "SPITY-008: CRUD profil club (coachs, validation)",
+      "status": "Backlog",
+      "priority": "Medium",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-12/spity-008-crud-profil-club-coachs-validation"
+    },
+    {
+      "id": "SPI-13",
+      "title": "SPITY-009: Page profil grimpeur + édition",
+      "status": "Done",
+      "priority": "High",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-13/spity-009-page-profil-grimpeur-edition"
+    },
+    {
+      "id": "SPI-14",
+      "title": "SPITY-010: Page profil club",
+      "status": "Done",
+      "priority": "Medium",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-14/spity-010-page-profil-club"
+    },
+    {
+      "id": "SPI-15",
+      "title": "SPITY-011: CRUD Post (texte, media, tags, cotation)",
+      "status": "Todo",
+      "priority": "High",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-15/spity-011-crud-post-texte-media-tags-cotation"
+    },
+    {
+      "id": "SPI-16",
+      "title": "SPITY-012: Likes + commentaires",
+      "status": "Backlog",
+      "priority": "Medium",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-16/spity-012-likes-commentaires"
+    },
+    {
+      "id": "SPI-17",
+      "title": "SPITY-013: Feed principal (posts + events épinglés)",
+      "status": "Backlog",
+      "priority": "High",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-17/spity-013-feed-principal-posts-events-epingles"
+    },
+    {
+      "id": "SPI-18",
+      "title": "SPITY-014: Create post + upload images",
+      "status": "Todo",
+      "priority": "High",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-18/spity-014-create-post-upload-images"
+    },
+    {
+      "id": "SPI-19",
+      "title": "SPITY-015: Modèles Salle/Falaise (géoloc)",
+      "status": "Backlog",
+      "priority": "High",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-19/spity-015-modeles-sallefalaise-geoloc"
+    },
+    {
+      "id": "SPI-20",
+      "title": "SPITY-016: Modèle Voie + topos (cotation, état)",
+      "status": "Done",
+      "priority": "Medium",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-20/spity-016-modele-voie-topos-cotation-etat"
+    },
+    {
+      "id": "SPI-21",
+      "title": "SPITY-017: Carte interactive salles/falaises/clubs",
+      "status": "Backlog",
+      "priority": "Medium",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-21/spity-017-carte-interactive-sallesfalaisesclubs"
+    },
+    {
+      "id": "SPI-22",
+      "title": "SPITY-018: Fiche falaise + topos collaboratifs",
+      "status": "Backlog",
+      "priority": "Medium",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-22/spity-018-fiche-falaise-topos-collaboratifs"
+    },
+    {
+      "id": "SPI-23",
+      "title": "SPITY-019: CRUD Event club (inscriptions, capacité)",
+      "status": "Done",
+      "priority": "Medium",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-23/spity-019-crud-event-club-inscriptions-capacite"
+    },
+    {
+      "id": "SPI-24",
+      "title": "SPITY-020: Club dashboard (stats, events)",
+      "status": "Backlog",
+      "priority": "Medium",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-24/spity-020-club-dashboard-stats-events"
+    },
+    {
+      "id": "SPI-25",
+      "title": "SPITY-021: Calendrier events + inscription",
+      "status": "Done",
+      "priority": "Medium",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-25/spity-021-calendrier-events-inscription"
+    },
+    {
+      "id": "SPI-26",
+      "title": "SPITY-022: Club dashboard",
+      "status": "Done",
+      "priority": "Medium",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-26/spity-022-club-dashboard"
+    },
+    {
+      "id": "SPI-27",
+      "title": "SPITY-023: Upload media sécurisé",
+      "status": "In Progress",
+      "priority": "High",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-27/spity-023-upload-media-securise"
+    },
+    {
+      "id": "SPI-28",
+      "title": "SPITY-024: Tests unitaires critiques (auth, posts)",
+      "status": "Done",
+      "priority": "Low",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-28/spity-024-tests-unitaires-critiques-auth-posts"
+    },
+    {
+      "id": "SPI-29",
+      "title": "SPITY-025: Sécurité OWASP + accessibilité RGAA",
+      "status": "Done",
+      "priority": "Low",
+      "assignee": "dorian joly",
+      "url": "https://linear.app/spitywa/issue/SPI-29/spity-025-securite-owasp-accessibilite-rgaa"
+    }
+  ],
+  "detailSummaries": {
+    "SPI-27": "Description lue : service média privé implémenté au commit bafa599. Migration MariaDB et persistance du volume cible restent à valider avant clôture. Intégration avatar/posts et règles de partage restent distinctes. Statut In Progress.",
+    "SPI-15": "Description lue : modèle et lecture existants. API de création, modification et suppression des posts, contrôle propriétaire, validation et tests restent à fournir. Dépendance média SPI-27.",
+    "SPI-18": "Description lue : formulaire de publication, aperçu, erreurs, envoi et actualisation du fil. Dépend de SPI-15 et SPI-27, puis recette de bout en bout.",
+    "SPI-6": "Description lue : connexion et JWT existent. Renouvellement, rotation et révocation des sessions restent dans le périmètre du ticket."
+  },
+  "counts": {
+    "Canceled": 1,
+    "Todo": 4,
+    "Done": 12,
+    "Backlog": 7,
+    "In Progress": 1
+  },
+  "caveat": "Les descriptions détaillées datent du 9 septembre. Aucun délai, estimation, temps passé ni taux de livraison pondéré extrait. Les liens Related ne sont pas assimilés à une relation native blocks."
+}

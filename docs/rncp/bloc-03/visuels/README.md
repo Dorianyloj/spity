@@ -27,7 +27,7 @@ Les photos illustrent la pratique de l'escalade. Elles n'attestent ni l'identit�
 
 ## Graphiques modifiables
 
-Les sept graphiques des diapositives 5, 7, 8, 9, 12, 15 et 16 sont des objets PowerPoint natifs. Chacun possède un petit classeur intégré contenant un instantané des valeurs du cas. Ces instantanés ne sont pas liés automatiquement au classeur de pilotage et ne remplacent pas ses formules.
+Les huit graphiques des diapositives 4, 5, 7, 8, 9, 12, 15 et 16 sont des objets PowerPoint natifs. Chacun possède un petit classeur intégré. La diapositive 4 reprend le relevé Linear du 14 septembre, conservé dans donnees/linear-2026-09-14.json ; les autres présentent les hypothèses du cas. Ces instantanés ne sont pas liés automatiquement au classeur de pilotage et ne remplacent pas ses formules. La diapositive 7 explique les écarts par tâche ; l'annexe 24 compare les scénarios de budget et de capacité.
 
 Les valeurs viennent du [cas de pilotage](../donnees/pilotage.json), de ses [indicateurs calculés](../donnees/indicateurs.json) et des annexes A01, A04 et A06. Le planning est exprimé en jours relatifs J1 à J15. La matrice de risques et les tableaux des annexes restent également modifiables dans PowerPoint.
 

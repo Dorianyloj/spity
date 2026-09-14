@@ -40,4 +40,4 @@ Le consommé économique du cas vaut 2 945 EUR, dont 2 825 EUR de travail et 120
 
 Chaque rôle actualise son consommé et son reste à faire. CP vérifie deux fois par semaine l'écart, les dates et la capacité. Une variation de budget dépassant la réserve, une charge supérieure à la capacité ou un critère critique non vérifié déclenche un arbitrage documenté. Les indicateurs de qualité s'appuient sur les résultats réellement exécutés dans VERIFICATION.md.
 
-L'archive Linear du 9 septembre contient 25 tickets, dont un annulé : 12 Done, 5 Todo et 7 Backlog sur les 24 non annulés. Le taux de tickets Done est donc de 50 % sur ce périmètre daté. Il ne représente ni une mesure de la totalité du produit ni le tableau actuel. Le classeur conserve ce fait à part du scénario de dix tâches.
+Linear a été relu directement le 14 septembre : 12 Done, 4 Todo, 1 In Progress, 7 Backlog et 1 Canceled. Le taux de tickets Done est de 12 / 24 = 50 % hors annulé. Il ne mesure pas la part de produit livrée. A09 conserve le relevé, les dépendances lues, les 30 activités estimées et les tests de sensibilité. La feuille Linear reste distincte du scénario.

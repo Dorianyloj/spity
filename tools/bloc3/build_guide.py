@@ -13,7 +13,7 @@ def clock(minutes):
 
 parts = ['''# Guide de répétition — Bloc 3 Spity
 
-Support associé : spity-bloc-3-30-minutes-visuel-v4.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
+Support associé : spity-bloc-3-30-minutes-visuel-v7.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
 
 ## Fil conducteur
 
@@ -47,7 +47,7 @@ parts.append('''## Questions probables du jury
 3. **Quel est le chemin vers la soutenance ?** Accès/profils, matching, événements, recette/corrections et validation J14 avant la démonstration J15. La recette peut commencer sur les fonctions prêtes ; sa clôture attend les corrections. Montrer A01 et les dépendances.
 4. **Comment obtenez-vous 4 465 EUR ?** Valorisation du travail à terminaison : CP 29 h × 45 EUR, DEV 64 h × 35 EUR, QA 24 h × 30 EUR = 4 265 EUR ; ajouter 200 EUR de frais. Les taux et charges sont des hypothèses du lot. Le budget global B1 est de 38 126 EUR HT dans les fiches détaillées, sur 79 j-h. Il ne faut ni remplacer ce total par les coûts B3, ni les additionner. L’ancien diaporama B1 affiche une autre estimation, documentée dans COHERENCE_INTER_BLOCS.md.
 5. **La réserve fait-elle disparaître le dépassement ?** Non : le coût reste supérieur de 195 EUR à la référence de 4 270 EUR. La réserve de 427 EUR porte le plafond à 4 697 EUR et laisse 232 EUR de marge. Un écart doit rester visible même s'il est absorbable.
-6. **Pourquoi 50 % de tâches terminées ne signifie pas 50 % de produit livré ?** Le dénominateur est dix tâches du cas, de tailles différentes. Les 77 h consommées mesurent un effort, pas une valeur acquise. Les critères de recette déterminent la validation fonctionnelle.
+6. **Pourquoi 50 % de tâches terminées ne signifie pas 50 % de produit livré ?** Le dénominateur est dix tâches du cas, de tailles différentes. Les 77 h consommées mesurent un effort, pas une valeur acquise. Linear donne aussi 12 Done sur 24 non annulés : ce second 50 % concerne un autre dénominateur et reste non pondéré. Les critères de recette déterminent la validation fonctionnelle.
 7. **Pourquoi reporter la demande nouvelle ?** Elle ajoute 540 EUR et conduit à 5 005 EUR, soit 308 EUR au-dessus du plafond. La charge DEV atteindrait 76 h pour 72 disponibles. Le report préserve les critères du lot et doit être validé par le commanditaire du scénario.
 8. **Quelle preuve existe pour votre arbitrage réel ?** Le commit 689e59d du 20 juillet décrit le passage de la recette CI au standalone. Les résultats des runs sont rapportés par le dossier historique ; la comparaison des options est une analyse rétrospective. Ne pas la présenter comme un compte rendu rédigé à l'époque.
 9. **Comment traitez-vous un conflit DEV/QA ?** Faire expliciter les impacts, identifier les critères non négociables, comparer charge et échéance, décider puis rendre la décision accessible. A05 décrit une situation fictive et critique les limites d'une réponse seulement directive.

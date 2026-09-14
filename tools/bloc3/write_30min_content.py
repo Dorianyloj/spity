@@ -186,6 +186,8 @@ add('Annexe : sources et portée des contrôles',0,'Annexe documentaire','column
 
 from bloc_context import align
 align(slides)
+from linear_context import align as align_linear
+align_linear(slides)
 
 assert len(slides)==25
 assert sum(s['minutes'] for s in slides)==30

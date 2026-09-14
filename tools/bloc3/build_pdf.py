@@ -55,6 +55,9 @@ def markdown(path):
             columns=len(rows[0]); widths=[1]*columns
             if columns==3: widths=[1.15,1.75,1.6]
             if columns==4: widths=[1,1.5,1.2,1.8]
+            if rows[0]==['ID','Statut observé','Priorité','Intitulé']: widths=[0.6,0.9,0.7,3.8]
+            if rows[0]==['Tâche','Détail initial en heures','Total','Référence de contexte']: widths=[0.7,3.45,0.5,1.6]
+            if rows[0]==['Cause du scénario','Écart h','Effet coût','Réponse']: widths=[2.1,0.55,0.8,2.2]
             if columns==5: widths=[0.65,1.65,0.75,0.7,2]
             if columns==6: widths=[0.45,2.4,0.5,0.5,0.6,0.9]
             if columns==7: widths=[0.5,2.4,0.6,0.85,0.8,0.8,1.1]

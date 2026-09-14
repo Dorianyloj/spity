@@ -21,7 +21,7 @@ Un avertissement décoratif VANTA « No THREE defined on window » est apparu pe
 
 ## Vérification des livrables
 
-Le classeur contrôle les totaux et le recalcul après modification du reste à faire, du taux horaire, d'une capacité nulle et d'une entrée manquante. Les entrées de test sont restaurées avant export. Les trois feuilles sont rendues et inspectées. La valeur de 50 % désigne les cinq tâches terminées sur dix du cas fictif.
+Le classeur contrôle les totaux et le recalcul après modification du reste à faire, du taux horaire, d'une capacité nulle et d'une entrée manquante. Les entrées de test sont restaurées avant export. Les cinq feuilles sont rendues et inspectées. La révision du 14 septembre ajoute les 30 activités sources, le relevé Linear daté et les scénarios de sensibilité. Les 175 formules du classeur sont contrôlées sans erreur exportée. La valeur de 50 % désigne les cinq tâches terminées sur dix du cas fictif.
 
 Le PDF est rendu page par page pour vérifier les tableaux et les sauts de page. Le PowerPoint est contrôlé et rendu pour vérifier la lisibilité ; ces vérifications ne prétendent pas être une ouverture dans Microsoft PowerPoint. Les sources et la matrice permettent de retrouver les justifications.
 

@@ -4,7 +4,8 @@
 
 ## Livrables préparés
 
-- [x] Dossier PDF comprenant les sept compétences, la matrice des preuves et les huit annexes.
+- [x] Dossier PDF comprenant les sept compétences, la matrice des preuves et les neuf annexes.
+- [x] Relevé Linear du 14 septembre : 25 tickets observés, dépendances et limites explicites ; 30 activités détaillées pour les estimations du cas.
 - [x] Support PowerPoint : 22 diapositives principales, texte oral développé et 3 annexes ; répartition prévue de 30 minutes, dont 6 de démonstration.
 - [x] Classeur modifiable : pilotage, planning et risques, avec formules vérifiées.
 - [x] Guide d'oral : timing, notes, questions probables et réponses à reformuler.

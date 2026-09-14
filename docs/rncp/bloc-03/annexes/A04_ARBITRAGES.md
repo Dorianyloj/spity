@@ -18,7 +18,7 @@ Sources : `git show 689e59d` ; dossier Bloc 2, cahier de recettes, section « Co
 
 ## 2. Cas simulé : demande de contributions aux topos à J10
 
-Le client fictif demande une fonction de contribution aux topos pendant le lot de préparation de démonstration. Cette demande représente, dans le scénario, 12 h DEV et 4 h QA supplémentaires. Il s'agit d'une hypothèse pédagogique, pas d'une estimation historique de la fonction actuelle.
+Le client fictif demande une contribution aux topos, dans le contexte de SPI-22 observé en Backlog le 14 septembre (A09). Le scénario ajoute 12 h DEV et 4 h QA. Ces heures sont des hypothèses pédagogiques ; aucun chiffrage n'est extrait du ticket.
 
 | Option du scénario | Coût économique à terminaison | Conséquence |
 | --- | --- | --- |

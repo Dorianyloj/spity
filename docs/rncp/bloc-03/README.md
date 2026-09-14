@@ -9,10 +9,11 @@
 | Besoin | Fichier |
 | --- | --- |
 | Tout récupérer pour la répétition | [Kit ZIP](../../../output/bloc-03/kit-soutenance-spity.zip) |
-| Lire le dossier et les huit annexes | [PDF](../../../output/pdf/dossier-bloc-03-spity.pdf) ; [source modifiable](DOSSIER_BLOC_03.md) |
-| Présenter en trente minutes | [PowerPoint visuel avec texte oral et timing](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v4.pptx) ; [guide d'oral](GUIDE_ORAL.md) |
+| Lire le dossier et les neuf annexes | [PDF](../../../output/pdf/dossier-bloc-03-spity.pdf) ; [source modifiable](DOSSIER_BLOC_03.md) |
+| Présenter en trente minutes | [PowerPoint visuel avec texte oral et timing](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v7.pptx) ; [guide d'oral](GUIDE_ORAL.md) |
 | Manipuler les coûts, charges et risques | [Classeur Excel](../../../outputs/bloc03-01a09eba/pilotage-spity.xlsx) ; [données du cas](donnees/pilotage.json) |
 | Retrouver les preuves par compétence | [Matrice](MATRICE_PREUVES.md) ; [vérifications datées](VERIFICATION.md) |
+| Justifier les données et retrouver Linear | [A09 : relevé et estimations](annexes/A09_DONNEES_LINEAR.md) ; [25 tickets observés](donnees/linear-2026-09-14.json) |
 | Relier les quatre blocs | [Revue de cohérence](COHERENCE_INTER_BLOCS.md) : commanditaire, budget global, lot B3 et preuves datées. |
 | Lancer ou répéter la démonstration | [Procédure A08](annexes/A08_DEMONSTRATION.md) ; [outils](../../../tools/bloc3/README.md) |
 | Finaliser les informations et le dépôt | [Checklist de remise](CHECKLIST_REMISE.md) |
@@ -21,7 +22,7 @@ Le kit distingue les faits techniques observés d'une mise en situation fictive 
 
 Le commanditaire fictif reprend celui du Bloc 1 : Collectif Altitude Grimpe, représenté par Claire Martin. Le budget global cité est celui des fiches détaillées B1, 38 126 EUR HT sur 79 jours-homme. Le lot pédagogique B3 est distinct. Les anciens diaporamas B1 affichent 44 250 EUR et 82 jours-homme ; cet écart est documenté dans la revue de cohérence et reste à harmoniser avant une remise commune.
 
-Le diaporama visuel comporte 22 slides principales et 3 annexes. Sept graphiques modifiables présentent le planning, les coûts, la charge et la formation. Une matrice montre les risques, des captures agrandies accompagnent la démonstration et une illustration représente l'équipe fictive. Les [sources des visuels](visuels/README.md) sont documentées. Les notes développent le texte à dire, les transitions et les manipulations. Les repères totalisent 24 minutes d'explications et 6 minutes de démonstration. Prévoir une répétition chronométrée pour ajuster le débit ; le PowerPoint avance manuellement. Les fichiers soutenance-bloc-03-spity.pptx et spity-bloc-3-30-minutes.pptx conservent les versions précédentes comme archives.
+Le diaporama visuel comporte 22 slides principales et 3 annexes. Huit graphiques modifiables présentent le planning, les coûts, la charge et la formation. Une matrice montre les risques, des captures agrandies accompagnent la démonstration et une illustration représente l'équipe fictive. Les [sources des visuels](visuels/README.md) sont documentées. Les notes développent le texte à dire, les transitions et les manipulations. Les repères totalisent 24 minutes d'explications et 6 minutes de démonstration. Prévoir une répétition chronométrée pour ajuster le débit ; le PowerPoint avance manuellement. Les fichiers soutenance-bloc-03-spity.pptx et spity-bloc-3-30-minutes.pptx conservent les versions précédentes comme archives.
 
 Le 14 septembre, les contrôles ont réussi : lint, TypeScript, build, 389 tests unitaires dans 72 suites et six scénarios navigateur avec une MariaDB dédiée. La démonstration se lance sur http://127.0.0.1:3313 avec `powershell -File tools/bloc3/demo.ps1` depuis la racine. Premier lancement sur une nouvelle machine : utiliser `-Prepare` selon A08. Les résultats détaillés et leur portée figurent dans VERIFICATION.md.
 
@@ -66,12 +67,12 @@ Les éléments ci-dessous synthétisent S1 p. 11 à 14 et S3. Les formats propos
 
 ## 3. Éléments Spity déjà repérés
 
-L'inventaire ci-dessous a servi de point de départ. Le kit et les vérifications listés plus haut le complètent. L'état de Linear reste celui de l'archive du 9 septembre ; il n'a pas été actualisé en direct.
+L'inventaire ci-dessous a servi de point de départ. Le kit et les vérifications listés plus haut le complètent. Le tableau Linear a été relu en direct le 14 septembre. Le relevé actuel, les 30 activités estimées et les règles de calcul figurent dans [A09](annexes/A09_DONNEES_LINEAR.md).
 
 | Base existante | Utilité possible pour le Bloc 3 | Limite ou complément nécessaire |
 | --- | --- | --- |
 | [Cadrage produit](../../../CADRAGE_PROJET.md) et [livrables Bloc 1](../bloc-01/) | Besoins, périmètre, parties prenantes, risques et budget prévisionnel. | Confirmer le périmètre réellement retenu, les acteurs impliqués et les écarts au prévisionnel. La cartographie des acteurs ne remplace pas une affectation des tâches de l'équipe. |
-| [État daté du backlog Linear](../../audits/2026-09-09-synchronisation-linear.md) | Base pour expliquer le suivi, les priorités et les dépendances. | Document du 9 septembre : 12 Done, 5 Todo, 7 Backlog, 1 Canceled. Il n'invente ni dates cibles ni estimations et ne constitue pas à lui seul un suivi des coûts et délais. À actualiser au moment de la préparation. |
+| [État daté du backlog Linear](../../audits/2026-09-09-synchronisation-linear.md) | Base pour expliquer le suivi, les priorités et les dépendances. | Document du 9 septembre : 12 Done, 5 Todo, 7 Backlog, 1 Canceled. Il n'invente ni dates cibles ni estimations et ne constitue pas à lui seul un suivi des coûts et délais. Relecture directe du 14 septembre : 12 Done, 4 Todo, 1 In Progress, 7 Backlog, 1 Canceled ; voir A09. |
 | Historique Git et [retour d'expérience Bloc 2](../../bc02/19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES.md) | Traces des réalisations et pistes pour un cas d'arbitrage. | Un changement technique devient une preuve d'arbitrage lorsque l'écart, les options, le choix et les conséquences sont explicités. |
 | [Cahier de recettes Bloc 2](../../bc02/10_CAHIER_RECETTES_C231.md) et [preuves Bloc 4](../bloc-04/preuves/README.md) | Base pour les critères d'acceptation, la préparation de la démonstration et les indicateurs de qualité. | Rejouer les parcours utiles sur la version présentée. Les preuves de tests et de maintenance ne constituent pas automatiquement une validation ou une satisfaction client. |
 
