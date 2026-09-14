@@ -1,11 +1,13 @@
 'use client'
 
-import { Handshake, MapPin, RotateCcw, Search, Send, UsersRound } from 'lucide-react'
+import { ArrowUpRight, Clock3, Handshake, MapPin, RotateCcw, Search, Send, UsersRound } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import { z } from 'zod'
-import { AppHero, Badge, Button, Card, CardContent, EmptyState, Input } from '@/components/ui'
+import { AppHero, Avatar, Badge, Button, Card, CardContent, EmptyState, Input } from '@/components/ui'
+import { availabilityLabels, disciplineLabels, environmentLabels, partnerStyleLabels } from '@/features/profile/lib/presentation'
 import { demoClimbingAssets } from '@/lib/brand-assets'
+import { cn } from '@/lib/class-names'
 import { filterClimbers } from '../lib/matching-rules'
 import {
   partnershipResponseSchema,
@@ -66,8 +68,9 @@ export default function MatchingDirectory({ climbers, initialStatuses }: Matchin
   const [filters, setFilters] = useState<MatchingFilters>({ query: '' })
   const [statuses, setStatuses] = useState(initialStatuses)
   const [pendingUserId, setPendingUserId] = useState<string | null>(null)
-  const [feedback, setFeedback] = useState<string | null>(null)
+  const [feedback, setFeedback] = useState<{ userId: string; message: string; error: boolean } | null>(null)
   const visibleClimbers = useMemo(() => filterClimbers(climbers, filters), [climbers, filters])
+  const hasActiveFilters = Object.values(filters).some(Boolean)
 
   const requestPartnership = async (recipientId: string) => {
     setPendingUserId(recipientId)
@@ -80,7 +83,7 @@ export default function MatchingDirectory({ climbers, initialStatuses }: Matchin
     })
 
     if (!response.ok) {
-      setFeedback(await parseApiError(response))
+      setFeedback({ userId: recipientId, message: await parseApiError(response), error: true })
       setPendingUserId(null)
       return
     }
@@ -90,7 +93,7 @@ export default function MatchingDirectory({ climbers, initialStatuses }: Matchin
 
     if (parsedPayload.success) {
       setStatuses((current) => ({ ...current, [recipientId]: parsedPayload.data.request.status }))
-      setFeedback(`Demande envoyée à ${parsedPayload.data.request.otherParticipant.displayName}.`)
+      setFeedback({ userId: recipientId, message: `Demande envoyée à ${parsedPayload.data.request.otherParticipant.displayName}.`, error: false })
     }
 
     setPendingUserId(null)
@@ -114,15 +117,18 @@ export default function MatchingDirectory({ climbers, initialStatuses }: Matchin
         </Link>
       </AppHero>
 
-      <section className="rounded-lg border border-white/70 bg-[#fbfdf8]/92 p-4 backdrop-blur-xl" aria-label="Filtres de recherche">
-        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-          <Input
-            icon={<Search size={18} aria-hidden="true" />}
-            label="Nom ou localisation"
-            onChange={(event) => setFilters((current) => ({ ...current, query: event.target.value }))}
-            placeholder="Lyon, Camille..."
-            value={filters.query}
-          />
+      <section className="rounded-lg border border-white/70 bg-card p-4 shadow-sm sm:p-5" aria-label="Filtres de recherche">
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+          <div className="sm:col-span-2 xl:col-span-1">
+            <Input
+              icon={<Search size={18} aria-hidden="true" />}
+              label="Nom ou localisation"
+              onChange={(event) => setFilters((current) => ({ ...current, query: event.target.value }))}
+              placeholder="Lyon, Camille..."
+              type="search"
+              value={filters.query}
+            />
+          </div>
           <label className="text-sm font-medium text-foreground">
             Discipline
             <select
@@ -176,7 +182,10 @@ export default function MatchingDirectory({ climbers, initialStatuses }: Matchin
             </select>
           </label>
         </div>
-        <div className="mt-3 flex justify-end">
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-3">
+          <p className="text-sm text-muted-foreground" role="status" aria-live="polite">
+            <span className="font-semibold tabular-nums text-foreground">{visibleClimbers.length}</span> {visibleClimbers.length === 1 ? 'profil trouvé' : 'profils trouvés'}
+          </p>
           <Button onClick={() => setFilters({ query: '' })} size="sm" variant="ghost">
             <RotateCcw size={16} aria-hidden="true" />
             Réinitialiser les filtres
@@ -184,62 +193,71 @@ export default function MatchingDirectory({ climbers, initialStatuses }: Matchin
         </div>
       </section>
 
-      <p className="min-h-6 text-sm font-semibold text-foreground" aria-live="polite">{feedback}</p>
-
       {visibleClimbers.length === 0 ? (
-        <EmptyState
-          icon={UsersRound}
-          title="Aucun profil ne correspond"
-          description="Modifiez les filtres ou complétez votre propre profil public pour améliorer le matching."
-        />
+        <div className="space-y-3">
+          <EmptyState
+            icon={UsersRound}
+            title={climbers.length === 0 ? 'Aucun grimpeur disponible pour le moment' : 'Aucun profil ne correspond'}
+            description={climbers.length === 0 ? 'Revenez bientôt pour découvrir de nouveaux partenaires.' : 'Essayez une autre pratique, un autre niveau ou une autre localisation.'}
+          />
+          {hasActiveFilters && <Button onClick={() => setFilters({ query: '' })} size="sm" variant="secondary">Effacer les filtres</Button>}
+          {climbers.length === 0 && <Link className="spity-btn spity-btn--secondary" href="/profile/me">Vérifier mon profil public</Link>}
+        </div>
       ) : (
-        <section className="grid gap-4 lg:grid-cols-2" aria-label="Profils disponibles">
-          {visibleClimbers.map((climber) => {
-            const status = statuses[climber.userId]
-            const primaryGrade = Object.values(climber.niveaux)[0]
+        <section aria-labelledby="matching-results-heading">
+          <div className="mb-4 flex flex-wrap items-end justify-between gap-2">
+            <div>
+              <h2 id="matching-results-heading" className="text-balance text-xl font-bold text-white sm:text-2xl">Grimpeurs à rencontrer</h2>
+              <p className="text-sm text-white/75">Découvrez leur pratique avant de proposer une sortie.</p>
+            </div>
+          </div>
+          <div className="grid items-stretch gap-4 lg:grid-cols-2">
+            {visibleClimbers.map((climber) => {
+              const status = statuses[climber.userId]
+              const primaryGrade = Object.values(climber.niveaux)[0]
+              const availability = climber.availability.slice(0, 2)
 
-            return (
+              return (
               <Card key={climber.userId} hover={false} className="overflow-hidden">
-                <CardContent className="p-5">
-                  <div className="flex items-start gap-4">
-                    <Link
-                      aria-label={`Voir le profil de ${climber.displayName}`}
-                      className="shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
-                      href={`/app/profiles/${climber.userId}`}
-                    >
-                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-lg font-black text-primary-foreground">
-                        {climber.displayName.slice(0, 1).toLocaleUpperCase('fr')}
-                      </div>
-                    </Link>
+                <CardContent className="flex h-full flex-col p-5 sm:p-6">
+                  <div className="flex min-w-0 items-start gap-4">
+                    <Avatar src={climber.avatarUrl ?? undefined} alt="" fallback={climber.displayName} size="xl" className="shrink-0 border border-border bg-secondary" unoptimized={climber.avatarUrl?.startsWith('http') ?? false} />
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-start justify-between gap-2">
-                        <div>
-                          <h2 className="text-lg font-bold text-foreground">
-                            <Link
-                              aria-label={`Voir le profil de ${climber.displayName}`}
-                              className="rounded underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                              href={`/app/profiles/${climber.userId}`}
-                            >
-                              {climber.displayName}
-                            </Link>
-                          </h2>
-                          <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
+                        <div className="min-w-0">
+                          <h3 className="text-balance text-lg font-bold leading-tight text-foreground">
+                            <Link className="rounded underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" href={`/app/profiles/${climber.userId}`}>{climber.displayName}</Link>
+                          </h3>
+                          <p className="mt-1.5 flex items-center gap-1.5 text-sm text-muted-foreground">
                             <MapPin size={15} aria-hidden="true" />
                             {climber.location ?? 'Localisation non renseignée'}
                           </p>
                         </div>
-                        <Badge variant="primary">{primaryGrade ?? 'Niveau libre'}</Badge>
-                      </div>
-                      {climber.bio && <p className="mt-3 text-sm text-muted-foreground">{climber.bio}</p>}
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {climber.disciplines.map((discipline) => (
-                          <Badge key={discipline} variant="secondary">{discipline}</Badge>
-                        ))}
-                        {climber.climbingEnvironment && <Badge variant="default">{climber.climbingEnvironment}</Badge>}
+                        <Badge variant="primary" className="shrink-0 tabular-nums">{primaryGrade ? `Niveau ${primaryGrade}` : 'Niveau libre'}</Badge>
                       </div>
                     </div>
                   </div>
-                  <div className="mt-5 border-t border-border pt-4">
+
+                  <p className="mt-4 line-clamp-2 min-h-10 text-pretty text-sm text-muted-foreground">
+                    {climber.bio || climber.partnerSearch.notes || 'Ce grimpeur cherche de nouvelles personnes avec qui partager ses séances.'}
+                  </p>
+
+                  <div className="mt-4 flex flex-wrap gap-2" aria-label="Pratiques et environnement">
+                    {climber.disciplines.map((discipline) => (
+                      <Badge key={discipline} variant="secondary">{disciplineLabels[discipline] ?? discipline}</Badge>
+                    ))}
+                    {climber.climbingEnvironment && <Badge variant="default">{environmentLabels[climber.climbingEnvironment]}</Badge>}
+                  </div>
+
+                  <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 border-t border-border pt-4 text-sm text-foreground">
+                    <p className="flex items-start gap-2">
+                      <Clock3 className="mt-0.5 shrink-0 text-accent-foreground" size={16} aria-hidden="true" />
+                      <span>{availability.length ? availability.map((slot) => availabilityLabels[slot]).join(' · ') + (climber.availability.length > 2 ? ` · +${climber.availability.length - 2}` : '') : 'Disponibilités à préciser'}</span>
+                    </p>
+                    <p className="text-muted-foreground">Ambiance · {partnerStyleLabels[climber.partnerSearch.style]}</p>
+                  </div>
+
+                  <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-5">
                     <Button
                       disabled={status === 'pending' || status === 'accepted'}
                       isLoading={pendingUserId === climber.userId}
@@ -247,14 +265,19 @@ export default function MatchingDirectory({ climbers, initialStatuses }: Matchin
                       size="sm"
                       variant={status ? 'secondary' : 'primary'}
                     >
-                      {status === 'accepted' ? <Handshake size={17} aria-hidden="true" /> : <Send size={17} aria-hidden="true" />}
+                      {status === 'accepted' ? <Handshake size={17} aria-hidden="true" /> : status === 'pending' ? <Clock3 size={17} aria-hidden="true" /> : <Send size={17} aria-hidden="true" />}
                       {status ? statusLabels[status] : 'Envoyer une demande'}
                     </Button>
+                    <Link className="inline-flex min-h-11 items-center gap-1 rounded px-1 text-sm font-semibold text-foreground underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" href={`/app/profiles/${climber.userId}`}>
+                      Voir le profil <ArrowUpRight size={16} aria-hidden="true" />
+                    </Link>
                   </div>
+                  {feedback?.userId === climber.userId && <p className={cn('mt-3 text-sm font-medium', feedback.error ? 'text-destructive' : 'text-accent-foreground')} role={feedback.error ? 'alert' : 'status'}>{feedback.message}</p>}
                 </CardContent>
               </Card>
-            )
-          })}
+              )
+            })}
+          </div>
         </section>
       )}
     </div>
