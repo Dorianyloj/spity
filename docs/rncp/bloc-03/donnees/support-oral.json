@@ -18,7 +18,7 @@
   },
   {
     "number": 2,
-    "title": "Le besoin des grimpeurs et des clubs",
+    "title": "Une sortie, deux points de vue",
     "minutes": 1,
     "nature": "Produit Spity",
     "layout": "photo",
@@ -47,7 +47,7 @@
   },
   {
     "number": 3,
-    "title": "Périmètre et nature des preuves",
+    "title": "Des preuves réelles, un cas explicite",
     "minutes": 1,
     "nature": "Produit réel et mise en situation fictive",
     "layout": "columns",
@@ -75,7 +75,7 @@
   },
   {
     "number": 4,
-    "title": "Kanban et critères de fin",
+    "title": "Le travail avance jusqu’à la recette",
     "minutes": 1.5,
     "nature": "C.3.1, simulation pédagogique",
     "layout": "table",
@@ -110,17 +110,17 @@
     },
     "script": "Pour ce cas, je retiens Kanban, avec des jalons de validation. Le lot est court, l'effectif réduit et les priorités peuvent évoluer. L'objectif est de rendre le travail visible et d'éviter de commencer trop de fonctions avant de terminer leur vérification.\n\nUne tâche entre dans le tableau lorsque son besoin et ses critères sont compréhensibles. Elle passe en cours lorsqu'un responsable dispose de la capacité nécessaire. Elle rejoint ensuite la colonne à vérifier, puis terminé après la recette. Je limite à deux le nombre de tâches de réalisation simultanées. Si une tâche reste bloquée, la priorité est de traiter ce blocage avant d'ouvrir un nouveau chantier.\n\nJe conserve des jalons pour le périmètre, les écarts et la réception. Linear sert au suivi des tâches, Git à la traçabilité des changements, et le classeur aux charges et aux coûts. Je n'affirme pas que toutes les cérémonies Scrum ont été pratiquées sur le projet. Le choix présenté ici répond aux contraintes du scénario et reste contrôlable par des critères simples.",
     "source": "DOSSIER_BLOC_03 §3. A01 et A03.",
-    "action": "Montrer les quatre états, puis expliquer le blocage avec un exemple.",
+    "action": "Montrer le flux des quatre états et expliquer la limite de deux tâches en cours.",
     "transition": "Ces règles de travail se placent dans un planning de quinze jours ouvrés.",
     "demo": false,
     "startMinute": 2.5,
     "endMinute": 4,
     "spokenWords": 181,
-    "notes": "REPÈRE : 02:30 à 04:00. Durée prévue : 01:30.\n\nTEXTE ORAL\nPour ce cas, je retiens Kanban, avec des jalons de validation. Le lot est court, l'effectif réduit et les priorités peuvent évoluer. L'objectif est de rendre le travail visible et d'éviter de commencer trop de fonctions avant de terminer leur vérification.\n\nUne tâche entre dans le tableau lorsque son besoin et ses critères sont compréhensibles. Elle passe en cours lorsqu'un responsable dispose de la capacité nécessaire. Elle rejoint ensuite la colonne à vérifier, puis terminé après la recette. Je limite à deux le nombre de tâches de réalisation simultanées. Si une tâche reste bloquée, la priorité est de traiter ce blocage avant d'ouvrir un nouveau chantier.\n\nJe conserve des jalons pour le périmètre, les écarts et la réception. Linear sert au suivi des tâches, Git à la traçabilité des changements, et le classeur aux charges et aux coûts. Je n'affirme pas que toutes les cérémonies Scrum ont été pratiquées sur le projet. Le choix présenté ici répond aux contraintes du scénario et reste contrôlable par des critères simples.\n\nGESTE OU MANIPULATION\nMontrer les quatre états, puis expliquer le blocage avec un exemple.\n\nTRANSITION\nCes règles de travail se placent dans un planning de quinze jours ouvrés.\n\nSOURCE ET NATURE\nC.3.1, simulation pédagogique. DOSSIER_BLOC_03 §3. A01 et A03."
+    "notes": "REPÈRE : 02:30 à 04:00. Durée prévue : 01:30.\n\nTEXTE ORAL\nPour ce cas, je retiens Kanban, avec des jalons de validation. Le lot est court, l'effectif réduit et les priorités peuvent évoluer. L'objectif est de rendre le travail visible et d'éviter de commencer trop de fonctions avant de terminer leur vérification.\n\nUne tâche entre dans le tableau lorsque son besoin et ses critères sont compréhensibles. Elle passe en cours lorsqu'un responsable dispose de la capacité nécessaire. Elle rejoint ensuite la colonne à vérifier, puis terminé après la recette. Je limite à deux le nombre de tâches de réalisation simultanées. Si une tâche reste bloquée, la priorité est de traiter ce blocage avant d'ouvrir un nouveau chantier.\n\nJe conserve des jalons pour le périmètre, les écarts et la réception. Linear sert au suivi des tâches, Git à la traçabilité des changements, et le classeur aux charges et aux coûts. Je n'affirme pas que toutes les cérémonies Scrum ont été pratiquées sur le projet. Le choix présenté ici répond aux contraintes du scénario et reste contrôlable par des critères simples.\n\nGESTE OU MANIPULATION\nMontrer le flux des quatre états et expliquer la limite de deux tâches en cours.\n\nTRANSITION\nCes règles de travail se placent dans un planning de quinze jours ouvrés.\n\nSOURCE ET NATURE\nC.3.1, simulation pédagogique. DOSSIER_BLOC_03 §3. A01 et A03."
   },
   {
     "number": 5,
-    "title": "Planning et jalons du lot",
+    "title": "Le chemin vers la démonstration",
     "minutes": 1.5,
     "nature": "C.3.1, simulation sur quinze jours ouvrés",
     "layout": "table",
@@ -164,18 +164,18 @@
       ]
     },
     "script": "Le planning couvre quinze jours ouvrés relatifs. J1 à J15 désignent les jours du cas, pas des dates historiques du développement de Spity. Je conserve la référence initiale pour pouvoir expliquer les changements au lieu d'effacer les retards.\n\nLe travail commence par l'étude du besoin et la mesure des critères attendus. Il comprend ensuite la conception de l'organisation, la réalisation des parcours, leur recette et la restitution. À J3, le client fictif valide le périmètre. À J8, le parcours partenaire doit être vérifié. J10 sert à examiner les écarts et à arbitrer les demandes nouvelles. La recette se clôt à J14 avant la démonstration de J15.\n\nLes dépendances sont essentielles. La recette peut commencer sur les fonctions déjà prêtes, mais sa clôture attend la vérification des événements et des corrections. La préparation des slides peut avancer en parallèle. En revanche, la démonstration finale exige un parcours stabilisé. Le planning relie donc des résultats attendus, des responsabilités et des conditions de passage, plutôt qu'une simple succession de dates.",
-    "source": "A01. donnees/pilotage.json.",
-    "action": "Pointer J10, puis la dépendance entre recette J14 et démonstration J15.",
+    "source": "A01. donnees/pilotage.json. Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01.",
+    "action": "Lire les phases du planning, puis montrer la recette à J14 avant la démonstration J15.",
     "transition": "Pour tenir ces jalons, chacun doit connaître sa responsabilité.",
     "demo": false,
     "startMinute": 4,
     "endMinute": 5.5,
     "spokenWords": 176,
-    "notes": "REPÈRE : 04:00 à 05:30. Durée prévue : 01:30.\n\nTEXTE ORAL\nLe planning couvre quinze jours ouvrés relatifs. J1 à J15 désignent les jours du cas, pas des dates historiques du développement de Spity. Je conserve la référence initiale pour pouvoir expliquer les changements au lieu d'effacer les retards.\n\nLe travail commence par l'étude du besoin et la mesure des critères attendus. Il comprend ensuite la conception de l'organisation, la réalisation des parcours, leur recette et la restitution. À J3, le client fictif valide le périmètre. À J8, le parcours partenaire doit être vérifié. J10 sert à examiner les écarts et à arbitrer les demandes nouvelles. La recette se clôt à J14 avant la démonstration de J15.\n\nLes dépendances sont essentielles. La recette peut commencer sur les fonctions déjà prêtes, mais sa clôture attend la vérification des événements et des corrections. La préparation des slides peut avancer en parallèle. En revanche, la démonstration finale exige un parcours stabilisé. Le planning relie donc des résultats attendus, des responsabilités et des conditions de passage, plutôt qu'une simple succession de dates.\n\nGESTE OU MANIPULATION\nPointer J10, puis la dépendance entre recette J14 et démonstration J15.\n\nTRANSITION\nPour tenir ces jalons, chacun doit connaître sa responsabilité.\n\nSOURCE ET NATURE\nC.3.1, simulation sur quinze jours ouvrés. A01. donnees/pilotage.json."
+    "notes": "REPÈRE : 04:00 à 05:30. Durée prévue : 01:30.\n\nTEXTE ORAL\nLe planning couvre quinze jours ouvrés relatifs. J1 à J15 désignent les jours du cas, pas des dates historiques du développement de Spity. Je conserve la référence initiale pour pouvoir expliquer les changements au lieu d'effacer les retards.\n\nLe travail commence par l'étude du besoin et la mesure des critères attendus. Il comprend ensuite la conception de l'organisation, la réalisation des parcours, leur recette et la restitution. À J3, le client fictif valide le périmètre. À J8, le parcours partenaire doit être vérifié. J10 sert à examiner les écarts et à arbitrer les demandes nouvelles. La recette se clôt à J14 avant la démonstration de J15.\n\nLes dépendances sont essentielles. La recette peut commencer sur les fonctions déjà prêtes, mais sa clôture attend la vérification des événements et des corrections. La préparation des slides peut avancer en parallèle. En revanche, la démonstration finale exige un parcours stabilisé. Le planning relie donc des résultats attendus, des responsabilités et des conditions de passage, plutôt qu'une simple succession de dates.\n\nGESTE OU MANIPULATION\nLire les phases du planning, puis montrer la recette à J14 avant la démonstration J15.\n\nTRANSITION\nPour tenir ces jalons, chacun doit connaître sa responsabilité.\n\nSOURCE ET NATURE\nC.3.1, simulation sur quinze jours ouvrés. A01. donnees/pilotage.json. Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01."
   },
   {
     "number": 6,
-    "title": "Rôles et responsabilités",
+    "title": "Qui fait quoi ?",
     "minutes": 1,
     "nature": "C.3.1, équipe fictive du cas",
     "layout": "table",
@@ -226,7 +226,7 @@
   },
   {
     "number": 7,
-    "title": "Avancement à J10",
+    "title": "5 heures de plus à anticiper",
     "minutes": 1.5,
     "nature": "C3.2.1, simulation pédagogique",
     "layout": "numbers",
@@ -260,7 +260,7 @@
   },
   {
     "number": 8,
-    "title": "Budget prévisionnel du cas",
+    "title": "232 € de marge sous le plafond",
     "minutes": 1.5,
     "nature": "C3.2.1, montants fictifs en euros",
     "layout": "table",
@@ -301,17 +301,17 @@
     },
     "script": "Le budget valorise le travail à partir de taux horaires fictifs. Il ne représente pas des salaires versés ni des factures. La référence initiale comprend quatre mille quatre-vingt-dix euros de travail et cent quatre-vingts euros de frais, soit quatre mille deux cent soixante-dix euros.\n\nAvec les charges revues à J10, le travail atteint quatre mille deux cent soixante-cinq euros. Les frais prévisionnels sont de deux cents euros. Le total à terminaison est donc de quatre mille quatre cent soixante-cinq euros. L'écart est de cent quatre-vingt-quinze euros, soit environ quatre virgule six pour cent.\n\nLa réserve initiale de dix pour cent représente quatre cent vingt-sept euros. Elle porte le plafond à quatre mille six cent quatre-vingt-dix-sept euros. Il reste deux cent trente-deux euros de marge. La réserve n'efface pas le dépassement de la référence. Elle indique seulement que le scénario peut encore l'absorber. Une nouvelle demande doit être comparée à cette marge et à la capacité de l'équipe avant tout engagement.",
     "source": "A03. Classeur Pilotage. Taux et charges du cas fictif.",
-    "action": "Pointer successivement référence, prévision, plafond et marge.",
+    "action": "Comparer les barres du budget initial, de la prévision et du plafond. Expliquer les 232 euros de marge.",
     "transition": "La marge financière doit être lue avec la disponibilité de chaque rôle.",
     "demo": false,
     "startMinute": 8,
     "endMinute": 9.5,
     "spokenWords": 172,
-    "notes": "REPÈRE : 08:00 à 09:30. Durée prévue : 01:30.\n\nTEXTE ORAL\nLe budget valorise le travail à partir de taux horaires fictifs. Il ne représente pas des salaires versés ni des factures. La référence initiale comprend quatre mille quatre-vingt-dix euros de travail et cent quatre-vingts euros de frais, soit quatre mille deux cent soixante-dix euros.\n\nAvec les charges revues à J10, le travail atteint quatre mille deux cent soixante-cinq euros. Les frais prévisionnels sont de deux cents euros. Le total à terminaison est donc de quatre mille quatre cent soixante-cinq euros. L'écart est de cent quatre-vingt-quinze euros, soit environ quatre virgule six pour cent.\n\nLa réserve initiale de dix pour cent représente quatre cent vingt-sept euros. Elle porte le plafond à quatre mille six cent quatre-vingt-dix-sept euros. Il reste deux cent trente-deux euros de marge. La réserve n'efface pas le dépassement de la référence. Elle indique seulement que le scénario peut encore l'absorber. Une nouvelle demande doit être comparée à cette marge et à la capacité de l'équipe avant tout engagement.\n\nGESTE OU MANIPULATION\nPointer successivement référence, prévision, plafond et marge.\n\nTRANSITION\nLa marge financière doit être lue avec la disponibilité de chaque rôle.\n\nSOURCE ET NATURE\nC3.2.1, montants fictifs en euros. A03. Classeur Pilotage. Taux et charges du cas fictif."
+    "notes": "REPÈRE : 08:00 à 09:30. Durée prévue : 01:30.\n\nTEXTE ORAL\nLe budget valorise le travail à partir de taux horaires fictifs. Il ne représente pas des salaires versés ni des factures. La référence initiale comprend quatre mille quatre-vingt-dix euros de travail et cent quatre-vingts euros de frais, soit quatre mille deux cent soixante-dix euros.\n\nAvec les charges revues à J10, le travail atteint quatre mille deux cent soixante-cinq euros. Les frais prévisionnels sont de deux cents euros. Le total à terminaison est donc de quatre mille quatre cent soixante-cinq euros. L'écart est de cent quatre-vingt-quinze euros, soit environ quatre virgule six pour cent.\n\nLa réserve initiale de dix pour cent représente quatre cent vingt-sept euros. Elle porte le plafond à quatre mille six cent quatre-vingt-dix-sept euros. Il reste deux cent trente-deux euros de marge. La réserve n'efface pas le dépassement de la référence. Elle indique seulement que le scénario peut encore l'absorber. Une nouvelle demande doit être comparée à cette marge et à la capacité de l'équipe avant tout engagement.\n\nGESTE OU MANIPULATION\nComparer les barres du budget initial, de la prévision et du plafond. Expliquer les 232 euros de marge.\n\nTRANSITION\nLa marge financière doit être lue avec la disponibilité de chaque rôle.\n\nSOURCE ET NATURE\nC3.2.1, montants fictifs en euros. A03. Classeur Pilotage. Taux et charges du cas fictif."
   },
   {
     "number": 9,
-    "title": "Charge et capacité par rôle",
+    "title": "Le chef de projet approche sa limite",
     "minutes": 1,
     "nature": "C3.2.1, simulation pédagogique",
     "layout": "table",
@@ -362,7 +362,7 @@
   },
   {
     "number": 10,
-    "title": "Risques et réponses prévues",
+    "title": "Des risques qui déclenchent une action",
     "minutes": 1,
     "nature": "C3.2.1, extrait du registre fictif",
     "layout": "table",
@@ -407,7 +407,7 @@
   },
   {
     "number": 11,
-    "title": "Arbitrage technique sur la recette",
+    "title": "Le choix du build standalone",
     "minutes": 2,
     "nature": "C3.2.2, fait Git et analyse rétrospective",
     "layout": "table",
@@ -443,17 +443,17 @@
     },
     "script": "Un arbitrage réel du dépôt concerne la recette navigateur. Le dossier historique de juillet rapporte un échec pendant l'utilisation du serveur de développement, avec des compilations à froid au cours des scénarios. Cela créait un écart entre l'environnement de recette et l'artefact destiné à être livré.\n\nJ'ai comparé rétrospectivement trois options pour expliquer le raisonnement. La première consiste à augmenter les délais ou à ajouter des tentatives. Elle est rapide à mettre en place, mais peut masquer la cause. La deuxième consiste à préchauffer le serveur de développement. Elle réduit certaines compilations pendant la recette, à condition d'avoir préparé toutes les routes utiles. La troisième consiste à tester le serveur standalone issu du build. Elle ajoute un temps de construction, mais rapproche la recette du livrable.\n\nLe commit visible dans Git retient cette troisième option et ajuste aussi l'utilisation de localhost pour les sessions. Le dossier historique rapporte une exécution réussie après consolidation. Je précise la portée de la preuve : la modification est vérifiable dans Git. Les résultats distants sont rapportés par le dossier de l'époque. La comparaison présentée ici est une analyse rétrospective, pas un procès-verbal rédigé le jour de la décision.\n\nCe cas montre l'intérêt de rechercher la cause avant de modifier un seuil. Une recette utile doit rester reproductible et suffisamment proche des conditions de livraison pour éclairer une décision.",
     "source": "A04. git show 689e59d. Cahier de recettes Bloc 2, consolidation standalone.",
-    "action": "Comparer les trois options et pointer le choix visible dans Git.",
+    "action": "Comparer oralement les trois options. Mettre en avant le standalone et le commit qui atteste le choix.",
     "transition": "Un arbitrage peut aussi porter sur le périmètre plutôt que sur un choix technique.",
     "demo": false,
     "startMinute": 11.5,
     "endMinute": 13.5,
     "spokenWords": 238,
-    "notes": "REPÈRE : 11:30 à 13:30. Durée prévue : 02:00.\n\nTEXTE ORAL\nUn arbitrage réel du dépôt concerne la recette navigateur. Le dossier historique de juillet rapporte un échec pendant l'utilisation du serveur de développement, avec des compilations à froid au cours des scénarios. Cela créait un écart entre l'environnement de recette et l'artefact destiné à être livré.\n\nJ'ai comparé rétrospectivement trois options pour expliquer le raisonnement. La première consiste à augmenter les délais ou à ajouter des tentatives. Elle est rapide à mettre en place, mais peut masquer la cause. La deuxième consiste à préchauffer le serveur de développement. Elle réduit certaines compilations pendant la recette, à condition d'avoir préparé toutes les routes utiles. La troisième consiste à tester le serveur standalone issu du build. Elle ajoute un temps de construction, mais rapproche la recette du livrable.\n\nLe commit visible dans Git retient cette troisième option et ajuste aussi l'utilisation de localhost pour les sessions. Le dossier historique rapporte une exécution réussie après consolidation. Je précise la portée de la preuve : la modification est vérifiable dans Git. Les résultats distants sont rapportés par le dossier de l'époque. La comparaison présentée ici est une analyse rétrospective, pas un procès-verbal rédigé le jour de la décision.\n\nCe cas montre l'intérêt de rechercher la cause avant de modifier un seuil. Une recette utile doit rester reproductible et suffisamment proche des conditions de livraison pour éclairer une décision.\n\nGESTE OU MANIPULATION\nComparer les trois options et pointer le choix visible dans Git.\n\nTRANSITION\nUn arbitrage peut aussi porter sur le périmètre plutôt que sur un choix technique.\n\nSOURCE ET NATURE\nC3.2.2, fait Git et analyse rétrospective. A04. git show 689e59d. Cahier de recettes Bloc 2, consolidation standalone."
+    "notes": "REPÈRE : 11:30 à 13:30. Durée prévue : 02:00.\n\nTEXTE ORAL\nUn arbitrage réel du dépôt concerne la recette navigateur. Le dossier historique de juillet rapporte un échec pendant l'utilisation du serveur de développement, avec des compilations à froid au cours des scénarios. Cela créait un écart entre l'environnement de recette et l'artefact destiné à être livré.\n\nJ'ai comparé rétrospectivement trois options pour expliquer le raisonnement. La première consiste à augmenter les délais ou à ajouter des tentatives. Elle est rapide à mettre en place, mais peut masquer la cause. La deuxième consiste à préchauffer le serveur de développement. Elle réduit certaines compilations pendant la recette, à condition d'avoir préparé toutes les routes utiles. La troisième consiste à tester le serveur standalone issu du build. Elle ajoute un temps de construction, mais rapproche la recette du livrable.\n\nLe commit visible dans Git retient cette troisième option et ajuste aussi l'utilisation de localhost pour les sessions. Le dossier historique rapporte une exécution réussie après consolidation. Je précise la portée de la preuve : la modification est vérifiable dans Git. Les résultats distants sont rapportés par le dossier de l'époque. La comparaison présentée ici est une analyse rétrospective, pas un procès-verbal rédigé le jour de la décision.\n\nCe cas montre l'intérêt de rechercher la cause avant de modifier un seuil. Une recette utile doit rester reproductible et suffisamment proche des conditions de livraison pour éclairer une décision.\n\nGESTE OU MANIPULATION\nComparer oralement les trois options. Mettre en avant le standalone et le commit qui atteste le choix.\n\nTRANSITION\nUn arbitrage peut aussi porter sur le périmètre plutôt que sur un choix technique.\n\nSOURCE ET NATURE\nC3.2.2, fait Git et analyse rétrospective. A04. git show 689e59d. Cahier de recettes Bloc 2, consolidation standalone."
   },
   {
     "number": 12,
-    "title": "Arbitrage d’une demande supplémentaire",
+    "title": "Une demande qui dépasse le lot",
     "minutes": 1.5,
     "nature": "C3.2.2, demande fictive à J10",
     "layout": "table",
@@ -500,7 +500,7 @@
   },
   {
     "number": 13,
-    "title": "Management et désaccord DEV / QA",
+    "title": "Un désaccord à traiter ensemble",
     "minutes": 1.5,
     "nature": "C3.3.1, situation managériale fictive",
     "layout": "columns",
@@ -517,18 +517,18 @@
       ]
     },
     "script": "Dans la situation fictive, le développeur souhaite avancer sur une nouvelle fonction alors que QA attend une version stable pour terminer la recette. Le désaccord exprime deux besoins légitimes : faire évoluer le produit et sécuriser ce qui doit être présenté.\n\nJe commence par demander les faits, les impacts et l'aide nécessaire, sans attribuer une faute personnelle. J'utilise une posture participative pour comparer les estimations. J'adopte ensuite une posture persuasive pour expliquer les conséquences du report au client. Je reste directif sur les critères critiques de livraison, par exemple le contrôle de la capacité d'un événement.\n\nLa délégation conserve un résultat attendu et un point de contrôle. DEV traite les corrections et QA choisit les cas permettant de les vérifier. La décision rejoint le compte rendu et les tâches concernées.\n\nAvec du recul, une réponse uniquement directive aurait pu faire taire le désaccord sans traiter la surcharge. À l'inverse, une discussion sans échéance aurait retardé le lot. Je retiens donc un échange court, préparé avec des faits, puis une décision explicite dont je vérifie l'application.",
-    "source": "A05, situation analysée et analyse critique.",
-    "action": "Expliquer ce que chaque rôle cherche à protéger, puis la limite de chaque posture.",
+    "source": "A05, situation analysée et analyse critique. Illustration fictive générée avec ImageGen, visuels/equipe-illustration.png. Aucune personne réelle représentée.",
+    "action": "Présenter les deux besoins DEV et QA. L’illustration représente une équipe fictive.",
     "transition": "Cette organisation doit permettre à chacun de comprendre et de contribuer.",
     "demo": false,
     "startMinute": 15,
     "endMinute": 16.5,
     "spokenWords": 186,
-    "notes": "REPÈRE : 15:00 à 16:30. Durée prévue : 01:30.\n\nTEXTE ORAL\nDans la situation fictive, le développeur souhaite avancer sur une nouvelle fonction alors que QA attend une version stable pour terminer la recette. Le désaccord exprime deux besoins légitimes : faire évoluer le produit et sécuriser ce qui doit être présenté.\n\nJe commence par demander les faits, les impacts et l'aide nécessaire, sans attribuer une faute personnelle. J'utilise une posture participative pour comparer les estimations. J'adopte ensuite une posture persuasive pour expliquer les conséquences du report au client. Je reste directif sur les critères critiques de livraison, par exemple le contrôle de la capacité d'un événement.\n\nLa délégation conserve un résultat attendu et un point de contrôle. DEV traite les corrections et QA choisit les cas permettant de les vérifier. La décision rejoint le compte rendu et les tâches concernées.\n\nAvec du recul, une réponse uniquement directive aurait pu faire taire le désaccord sans traiter la surcharge. À l'inverse, une discussion sans échéance aurait retardé le lot. Je retiens donc un échange court, préparé avec des faits, puis une décision explicite dont je vérifie l'application.\n\nGESTE OU MANIPULATION\nExpliquer ce que chaque rôle cherche à protéger, puis la limite de chaque posture.\n\nTRANSITION\nCette organisation doit permettre à chacun de comprendre et de contribuer.\n\nSOURCE ET NATURE\nC3.3.1, situation managériale fictive. A05, situation analysée et analyse critique."
+    "notes": "REPÈRE : 15:00 à 16:30. Durée prévue : 01:30.\n\nTEXTE ORAL\nDans la situation fictive, le développeur souhaite avancer sur une nouvelle fonction alors que QA attend une version stable pour terminer la recette. Le désaccord exprime deux besoins légitimes : faire évoluer le produit et sécuriser ce qui doit être présenté.\n\nJe commence par demander les faits, les impacts et l'aide nécessaire, sans attribuer une faute personnelle. J'utilise une posture participative pour comparer les estimations. J'adopte ensuite une posture persuasive pour expliquer les conséquences du report au client. Je reste directif sur les critères critiques de livraison, par exemple le contrôle de la capacité d'un événement.\n\nLa délégation conserve un résultat attendu et un point de contrôle. DEV traite les corrections et QA choisit les cas permettant de les vérifier. La décision rejoint le compte rendu et les tâches concernées.\n\nAvec du recul, une réponse uniquement directive aurait pu faire taire le désaccord sans traiter la surcharge. À l'inverse, une discussion sans échéance aurait retardé le lot. Je retiens donc un échange court, préparé avec des faits, puis une décision explicite dont je vérifie l'application.\n\nGESTE OU MANIPULATION\nPrésenter les deux besoins DEV et QA. L’illustration représente une équipe fictive.\n\nTRANSITION\nCette organisation doit permettre à chacun de comprendre et de contribuer.\n\nSOURCE ET NATURE\nC3.3.1, situation managériale fictive. A05, situation analysée et analyse critique. Illustration fictive générée avec ImageGen, visuels/equipe-illustration.png. Aucune personne réelle représentée."
   },
   {
     "number": 14,
-    "title": "Communication et adaptations",
+    "title": "La décision doit rester accessible",
     "minutes": 1.5,
     "nature": "C3.3.1, dispositions du scénario",
     "layout": "columns",
@@ -556,7 +556,7 @@
   },
   {
     "number": 15,
-    "title": "Compétences actuelles et attendues",
+    "title": "La cible : l’autonomie",
     "minutes": 1,
     "nature": "C3.3.2, niveaux hypothétiques du cas",
     "layout": "table",
@@ -607,7 +607,7 @@
   },
   {
     "number": 16,
-    "title": "Plan de formation et vérification",
+    "title": "6 heures pour réduire les écarts",
     "minutes": 1.5,
     "nature": "C3.3.2, actions fictives intégrées au lot",
     "layout": "table",
@@ -653,7 +653,7 @@
   },
   {
     "number": 17,
-    "title": "Suivi client et points de validation",
+    "title": "Trois rendez-vous pour décider",
     "minutes": 1.5,
     "nature": "C3.4.1, comptes rendus simulés",
     "layout": "table",
@@ -699,7 +699,7 @@
   },
   {
     "number": 18,
-    "title": "Mesure de satisfaction proposée",
+    "title": "La satisfaction reste à mesurer",
     "minutes": 1,
     "nature": "C3.4.1, aucun résultat client réel disponible",
     "layout": "table",
@@ -744,7 +744,7 @@
   },
   {
     "number": 19,
-    "title": "Démonstration du parcours",
+    "title": "Place à la démonstration",
     "minutes": 0.5,
     "nature": "C3.4.2, séquence de six minutes",
     "layout": "demo_intro",
@@ -762,18 +762,18 @@
       "takeaway": "Critères : état compréhensible, capacité respectée et participant visible"
     },
     "script": "Je passe maintenant au logiciel. La démonstration utilise des comptes locaux et des données de test. Je vais d'abord suivre le point de vue du grimpeur, puis celui du club. Les critères que je garde en tête sont la compréhension des états, la cohérence de l'inscription et la visibilité du participant pour le bon rôle.",
-    "source": "A08 et preuves/verification.json.",
+    "source": "A08 et preuves/verification.json. Photo de marque existante escalade-falaise-gros-plan.jpeg, illustration de la pratique.",
     "action": "Ouvrir les deux sessions déjà connectées. Lancer le chronomètre de démonstration.",
     "transition": "Je commence avec le compte grimpeur.",
     "demo": true,
     "startMinute": 23,
     "endMinute": 23.5,
     "spokenWords": 61,
-    "notes": "REPÈRE : 23:00 à 23:30. Durée prévue : 00:30.\n\nTEXTE ORAL\nJe passe maintenant au logiciel. La démonstration utilise des comptes locaux et des données de test. Je vais d'abord suivre le point de vue du grimpeur, puis celui du club. Les critères que je garde en tête sont la compréhension des états, la cohérence de l'inscription et la visibilité du participant pour le bon rôle.\n\nGESTE OU MANIPULATION\nOuvrir les deux sessions déjà connectées. Lancer le chronomètre de démonstration.\n\nTRANSITION\nJe commence avec le compte grimpeur.\n\nSOURCE ET NATURE\nC3.4.2, séquence de six minutes. A08 et preuves/verification.json."
+    "notes": "REPÈRE : 23:00 à 23:30. Durée prévue : 00:30.\n\nTEXTE ORAL\nJe passe maintenant au logiciel. La démonstration utilise des comptes locaux et des données de test. Je vais d'abord suivre le point de vue du grimpeur, puis celui du club. Les critères que je garde en tête sont la compréhension des états, la cohérence de l'inscription et la visibilité du participant pour le bon rôle.\n\nGESTE OU MANIPULATION\nOuvrir les deux sessions déjà connectées. Lancer le chronomètre de démonstration.\n\nTRANSITION\nJe commence avec le compte grimpeur.\n\nSOURCE ET NATURE\nC3.4.2, séquence de six minutes. A08 et preuves/verification.json. Photo de marque existante escalade-falaise-gros-plan.jpeg, illustration de la pratique."
   },
   {
     "number": 20,
-    "title": "Parcours grimpeur",
+    "title": "Trouver un partenaire",
     "minutes": 3,
     "nature": "C3.4.2, application locale et données de test",
     "layout": "photo",
@@ -802,7 +802,7 @@
   },
   {
     "number": 21,
-    "title": "Parcours club et validation",
+    "title": "Retrouver les participants",
     "minutes": 2.5,
     "nature": "C3.4.2, application locale et données de test",
     "layout": "photo",
@@ -831,7 +831,7 @@
   },
   {
     "number": 22,
-    "title": "Bilan du pilotage",
+    "title": "Un périmètre démontré",
     "minutes": 1,
     "nature": "Bilan et ouverture des quinze minutes de questions",
     "layout": "columns",
@@ -899,7 +899,7 @@
     "startMinute": 30,
     "endMinute": 30,
     "spokenWords": 30,
-    "notes": "REPÈRE : Questions du jury. Durée prévue : 00:00.\n\nTEXTE ORAL\nCette annexe sert à retrouver rapidement une pièce. La matrice du dossier détaille la nature de chaque preuve et les limites des situations fictives. La mention Acquis relève du jury.\n\nSOURCE ET NATURE\nAnnexe pour les questions. MATRICE_PREUVES. Référentiel p. 11-14 et grille BC03."
+    "notes": "REPÈRE : 30:00 à 30:00. Durée prévue : 00:00.\n\nTEXTE ORAL\nCette annexe sert à retrouver rapidement une pièce. La matrice du dossier détaille la nature de chaque preuve et les limites des situations fictives. La mention Acquis relève du jury.\n\nSOURCE ET NATURE\nAnnexe pour les questions. MATRICE_PREUVES. Référentiel p. 11-14 et grille BC03."
   },
   {
     "number": 24,
@@ -954,7 +954,7 @@
     "startMinute": 30,
     "endMinute": 30,
     "spokenWords": 31,
-    "notes": "REPÈRE : Questions du jury. Durée prévue : 00:00.\n\nTEXTE ORAL\nLes charges incluent les temps de formation. Les quatre postes totalisent 4 465 euros. Les taux sont fictifs et le montant est une valorisation économique du cas, sans facture réelle correspondante.\n\nSOURCE ET NATURE\nAnnexe, données fictives en euros. A03 et classeur Pilotage."
+    "notes": "REPÈRE : 30:00 à 30:00. Durée prévue : 00:00.\n\nTEXTE ORAL\nLes charges incluent les temps de formation. Les quatre postes totalisent 4 465 euros. Les taux sont fictifs et le montant est une valorisation économique du cas, sans facture réelle correspondante.\n\nSOURCE ET NATURE\nAnnexe, données fictives en euros. A03 et classeur Pilotage."
   },
   {
     "number": 25,
@@ -982,6 +982,6 @@
     "startMinute": 30,
     "endMinute": 30,
     "spokenWords": 32,
-    "notes": "REPÈRE : Questions du jury. Durée prévue : 00:00.\n\nTEXTE ORAL\nLe règlement spécial n’a pas été fourni. Les contrôles datés ne prouvent pas le fonctionnement d’une autre version. La recette locale et le cas standalone historique correspondent à deux contextes explicitement séparés.\n\nSOURCE ET NATURE\nAnnexe documentaire. Trois PDF fournis par le candidat. VERIFICATION et preuves/verification.json."
+    "notes": "REPÈRE : 30:00 à 30:00. Durée prévue : 00:00.\n\nTEXTE ORAL\nLe règlement spécial n’a pas été fourni. Les contrôles datés ne prouvent pas le fonctionnement d’une autre version. La recette locale et le cas standalone historique correspondent à deux contextes explicitement séparés.\n\nSOURCE ET NATURE\nAnnexe documentaire. Trois PDF fournis par le candidat. VERIFICATION et preuves/verification.json."
   }
 ]

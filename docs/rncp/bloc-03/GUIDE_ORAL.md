@@ -1,6 +1,6 @@
 # Guide de répétition — Bloc 3 Spity
 
-Support associé : spity-bloc-3-30-minutes.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation.
+Support associé : spity-bloc-3-30-minutes-visuel-v3.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
 
 ## Fil conducteur
 
@@ -13,27 +13,27 @@ Le texte oral ci-dessous développe chaque diapositive et propose ses transition
 | Slide | Sujet | Durée | Temps cumulé |
 | --- | --- | --- | --- |
 | 1 | Spity | 00:30 | 00:30 |
-| 2 | Le besoin des grimpeurs et des clubs | 01:00 | 01:30 |
-| 3 | Périmètre et nature des preuves | 01:00 | 02:30 |
-| 4 | Kanban et critères de fin | 01:30 | 04:00 |
-| 5 | Planning et jalons du lot | 01:30 | 05:30 |
-| 6 | Rôles et responsabilités | 01:00 | 06:30 |
-| 7 | Avancement à J10 | 01:30 | 08:00 |
-| 8 | Budget prévisionnel du cas | 01:30 | 09:30 |
-| 9 | Charge et capacité par rôle | 01:00 | 10:30 |
-| 10 | Risques et réponses prévues | 01:00 | 11:30 |
-| 11 | Arbitrage technique sur la recette | 02:00 | 13:30 |
-| 12 | Arbitrage d’une demande supplémentaire | 01:30 | 15:00 |
-| 13 | Management et désaccord DEV / QA | 01:30 | 16:30 |
-| 14 | Communication et adaptations | 01:30 | 18:00 |
-| 15 | Compétences actuelles et attendues | 01:00 | 19:00 |
-| 16 | Plan de formation et vérification | 01:30 | 20:30 |
-| 17 | Suivi client et points de validation | 01:30 | 22:00 |
-| 18 | Mesure de satisfaction proposée | 01:00 | 23:00 |
-| 19 | Démonstration du parcours | 00:30 | 23:30 |
-| 20 | Parcours grimpeur | 03:00 | 26:30 |
-| 21 | Parcours club et validation | 02:30 | 29:00 |
-| 22 | Bilan du pilotage | 01:00 | 30:00 |
+| 2 | Une sortie, deux points de vue | 01:00 | 01:30 |
+| 3 | Des preuves réelles, un cas explicite | 01:00 | 02:30 |
+| 4 | Le travail avance jusqu’à la recette | 01:30 | 04:00 |
+| 5 | Le chemin vers la démonstration | 01:30 | 05:30 |
+| 6 | Qui fait quoi ? | 01:00 | 06:30 |
+| 7 | 5 heures de plus à anticiper | 01:30 | 08:00 |
+| 8 | 232 € de marge sous le plafond | 01:30 | 09:30 |
+| 9 | Le chef de projet approche sa limite | 01:00 | 10:30 |
+| 10 | Des risques qui déclenchent une action | 01:00 | 11:30 |
+| 11 | Le choix du build standalone | 02:00 | 13:30 |
+| 12 | Une demande qui dépasse le lot | 01:30 | 15:00 |
+| 13 | Un désaccord à traiter ensemble | 01:30 | 16:30 |
+| 14 | La décision doit rester accessible | 01:30 | 18:00 |
+| 15 | La cible : l’autonomie | 01:00 | 19:00 |
+| 16 | 6 heures pour réduire les écarts | 01:30 | 20:30 |
+| 17 | Trois rendez-vous pour décider | 01:30 | 22:00 |
+| 18 | La satisfaction reste à mesurer | 01:00 | 23:00 |
+| 19 | Place à la démonstration | 00:30 | 23:30 |
+| 20 | Trouver un partenaire | 03:00 | 26:30 |
+| 21 | Retrouver les participants | 02:30 | 29:00 |
+| 22 | Un périmètre démontré | 01:00 | 30:00 |
 
 À 15:00, terminer l'arbitrage de périmètre. À 23:00, quitter le suivi client pour lancer les six minutes de démonstration. À 29:00, revenir au bilan. Si une explication dépasse, condenser un exemple ; ne pas supprimer entièrement une compétence ni la démonstration.
 
@@ -53,7 +53,7 @@ Je commence par le besoin auquel répond le produit.
 
 Source : Référentiel RNCP39583, p. 11 à 14. Photo de marque du dépôt, illustration sans lien avec une équipe réelle.
 
-### 2. Le besoin des grimpeurs et des clubs
+### 2. Une sortie, deux points de vue
 
 Repère : 00:30 à 01:30. Nature : Produit Spity.
 
@@ -69,7 +69,7 @@ Il faut ensuite préciser sur quelles preuves repose cette présentation.
 
 Source : DOSSIER_BLOC_03 §1-2. Capture locale du 14 septembre 2026, données de démonstration.
 
-### 3. Périmètre et nature des preuves
+### 3. Des preuves réelles, un cas explicite
 
 Repère : 01:30 à 02:30. Nature : Produit réel et mise en situation fictive.
 
@@ -85,7 +85,7 @@ Dans ce cadre, je retiens une organisation simple, adaptée au lot.
 
 Source : Référentiel p. 11. DOSSIER_BLOC_03 §1-2.
 
-### 4. Kanban et critères de fin
+### 4. Le travail avance jusqu’à la recette
 
 Repère : 02:30 à 04:00. Nature : C.3.1, simulation pédagogique.
 
@@ -99,7 +99,7 @@ Je conserve des jalons pour le périmètre, les écarts et la réception. Linear
 
 **À montrer ou manipuler**
 
-Montrer les quatre états, puis expliquer le blocage avec un exemple.
+Montrer le flux des quatre états et expliquer la limite de deux tâches en cours.
 
 **Transition**
 
@@ -107,7 +107,7 @@ Ces règles de travail se placent dans un planning de quinze jours ouvrés.
 
 Source : DOSSIER_BLOC_03 §3. A01 et A03.
 
-### 5. Planning et jalons du lot
+### 5. Le chemin vers la démonstration
 
 Repère : 04:00 à 05:30. Nature : C.3.1, simulation sur quinze jours ouvrés.
 
@@ -121,15 +121,15 @@ Les dépendances sont essentielles. La recette peut commencer sur les fonctions 
 
 **À montrer ou manipuler**
 
-Pointer J10, puis la dépendance entre recette J14 et démonstration J15.
+Lire les phases du planning, puis montrer la recette à J14 avant la démonstration J15.
 
 **Transition**
 
 Pour tenir ces jalons, chacun doit connaître sa responsabilité.
 
-Source : A01. donnees/pilotage.json.
+Source : A01. donnees/pilotage.json. Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01.
 
-### 6. Rôles et responsabilités
+### 6. Qui fait quoi ?
 
 Repère : 05:30 à 06:30. Nature : C.3.1, équipe fictive du cas.
 
@@ -147,7 +147,7 @@ Une fois le travail réparti, je peux comparer le prévu et la prévision.
 
 Source : A02 et A03.
 
-### 7. Avancement à J10
+### 7. 5 heures de plus à anticiper
 
 Repère : 06:30 à 08:00. Nature : C3.2.1, simulation pédagogique.
 
@@ -169,7 +169,7 @@ La même prévision permet de réévaluer le coût du lot.
 
 Source : A03. Classeur Pilotage et Planning. Données simulées à J10.
 
-### 8. Budget prévisionnel du cas
+### 8. 232 € de marge sous le plafond
 
 Repère : 08:00 à 09:30. Nature : C3.2.1, montants fictifs en euros.
 
@@ -183,7 +183,7 @@ La réserve initiale de dix pour cent représente quatre cent vingt-sept euros. 
 
 **À montrer ou manipuler**
 
-Pointer successivement référence, prévision, plafond et marge.
+Comparer les barres du budget initial, de la prévision et du plafond. Expliquer les 232 euros de marge.
 
 **Transition**
 
@@ -191,7 +191,7 @@ La marge financière doit être lue avec la disponibilité de chaque rôle.
 
 Source : A03. Classeur Pilotage. Taux et charges du cas fictif.
 
-### 9. Charge et capacité par rôle
+### 9. Le chef de projet approche sa limite
 
 Repère : 09:30 à 10:30. Nature : C3.2.1, simulation pédagogique.
 
@@ -207,7 +207,7 @@ Je relie ensuite ces points de vigilance à un registre des risques.
 
 Source : A03. Classeur Pilotage, charges à terminaison.
 
-### 10. Risques et réponses prévues
+### 10. Des risques qui déclenchent une action
 
 Repère : 10:30 à 11:30. Nature : C3.2.1, extrait du registre fictif.
 
@@ -225,7 +225,7 @@ Je vais illustrer cette logique de décision avec un changement réel du projet.
 
 Source : A03, registre des cinq risques.
 
-### 11. Arbitrage technique sur la recette
+### 11. Le choix du build standalone
 
 Repère : 11:30 à 13:30. Nature : C3.2.2, fait Git et analyse rétrospective.
 
@@ -241,7 +241,7 @@ Ce cas montre l'intérêt de rechercher la cause avant de modifier un seuil. Une
 
 **À montrer ou manipuler**
 
-Comparer les trois options et pointer le choix visible dans Git.
+Comparer oralement les trois options. Mettre en avant le standalone et le commit qui atteste le choix.
 
 **Transition**
 
@@ -249,7 +249,7 @@ Un arbitrage peut aussi porter sur le périmètre plutôt que sur un choix techn
 
 Source : A04. git show 689e59d. Cahier de recettes Bloc 2, consolidation standalone.
 
-### 12. Arbitrage d’une demande supplémentaire
+### 12. Une demande qui dépasse le lot
 
 Repère : 13:30 à 15:00. Nature : C3.2.2, demande fictive à J10.
 
@@ -271,7 +271,7 @@ Pour appliquer cette décision, je dois aussi la faire comprendre à l’équipe
 
 Source : A04 et CR02 dans A07. Simulation explicitement distincte du code actuel.
 
-### 13. Management et désaccord DEV / QA
+### 13. Un désaccord à traiter ensemble
 
 Repère : 15:00 à 16:30. Nature : C3.3.1, situation managériale fictive.
 
@@ -287,15 +287,15 @@ Avec du recul, une réponse uniquement directive aurait pu faire taire le désac
 
 **À montrer ou manipuler**
 
-Expliquer ce que chaque rôle cherche à protéger, puis la limite de chaque posture.
+Présenter les deux besoins DEV et QA. L’illustration représente une équipe fictive.
 
 **Transition**
 
 Cette organisation doit permettre à chacun de comprendre et de contribuer.
 
-Source : A05, situation analysée et analyse critique.
+Source : A05, situation analysée et analyse critique. Illustration fictive générée avec ImageGen, visuels/equipe-illustration.png. Aucune personne réelle représentée.
 
-### 14. Communication et adaptations
+### 14. La décision doit rester accessible
 
 Repère : 16:30 à 18:00. Nature : C3.3.1, dispositions du scénario.
 
@@ -319,7 +319,7 @@ La répartition du travail suppose également de connaître les compétences dis
 
 Source : A02 et A05, inclusion et contexte international fictif.
 
-### 15. Compétences actuelles et attendues
+### 15. La cible : l’autonomie
 
 Repère : 18:00 à 19:00. Nature : C3.3.2, niveaux hypothétiques du cas.
 
@@ -337,7 +337,7 @@ Je transforme ces écarts en actions courtes, avec une vérification du résulta
 
 Source : A06, grille de compétences du scénario.
 
-### 16. Plan de formation et vérification
+### 16. 6 heures pour réduire les écarts
 
 Repère : 19:00 à 20:30. Nature : C3.3.2, actions fictives intégrées au lot.
 
@@ -361,7 +361,7 @@ Les résultats du lot doivent enfin être partagés et validés avec le client.
 
 Source : A06, plan de développement et fiche RH fictive.
 
-### 17. Suivi client et points de validation
+### 17. Trois rendez-vous pour décider
 
 Repère : 20:30 à 22:00. Nature : C3.4.1, comptes rendus simulés.
 
@@ -385,7 +385,7 @@ La validation du périmètre et la satisfaction méritent chacune une mesure exp
 
 Source : A07, CR01 à CR03. Référentiel p. 13-14.
 
-### 18. Mesure de satisfaction proposée
+### 18. La satisfaction reste à mesurer
 
 Repère : 22:00 à 23:00. Nature : C3.4.1, aucun résultat client réel disponible.
 
@@ -403,7 +403,7 @@ Je vais maintenant montrer le parcours sur lequel portent ces critères.
 
 Source : A07, indicateurs et questionnaire proposés.
 
-### 19. Démonstration du parcours
+### 19. Place à la démonstration
 
 Repère : 23:00 à 23:30. Nature : C3.4.2, séquence de six minutes.
 
@@ -419,9 +419,9 @@ Ouvrir les deux sessions déjà connectées. Lancer le chronomètre de démonstr
 
 Je commence avec le compte grimpeur.
 
-Source : A08 et preuves/verification.json.
+Source : A08 et preuves/verification.json. Photo de marque existante escalade-falaise-gros-plan.jpeg, illustration de la pratique.
 
-### 20. Parcours grimpeur
+### 20. Trouver un partenaire
 
 Repère : 23:30 à 26:30. Nature : C3.4.2, application locale et données de test.
 
@@ -443,7 +443,7 @@ Je bascule sur la session du club organisateur.
 
 Source : Capture réelle du 14 septembre 2026. A08, recette navigateur datée.
 
-### 21. Parcours club et validation
+### 21. Retrouver les participants
 
 Repère : 26:30 à 29:00. Nature : C3.4.2, application locale et données de test.
 
@@ -465,7 +465,7 @@ Je reviens au bilan du pilotage.
 
 Source : Capture réelle du 14 septembre 2026. A08 et preuves/verification.json.
 
-### 22. Bilan du pilotage
+### 22. Un périmètre démontré
 
 Repère : 29:00 à 30:00. Nature : Bilan et ouverture des quinze minutes de questions.
 

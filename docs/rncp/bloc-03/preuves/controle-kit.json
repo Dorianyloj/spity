@@ -5,6 +5,8 @@
   "forecastEUR": 4465,
   "marginEUR": 232,
   "slides": 25,
+  "nativeCharts": 7,
+  "chartWorkbooks": 7,
   "presentationMinutes": 30,
   "pdfPages": 21,
   "workbookSheets": 3,
