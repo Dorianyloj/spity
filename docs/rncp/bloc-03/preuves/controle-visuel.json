@@ -1,8 +1,10 @@
 {
   "date": "2026-09-15",
   "presentation": {
-    "file": "output/presentations/spity-bloc-3-30-minutes-visuel-v14.pptx",
-    "sha256": "be800e6bb700e9929398142d7dec0968789da153430e1cd1b06b85c6f23aceff",
+    "file": "output/presentations/spity-bloc-3-30-minutes-visuel-v15.pptx",
+    "sha256": "fa35377e8e9a86400b447ae67c8691d6eba7af88e3d865429faa03b0e78ecffd",
+    "pdfFile": "output/pdf/spity-bloc-3-30-minutes-visuel-v15.pdf",
+    "pdfSHA256": "92e59710edab1077777c62672545cc4889ffd18ec384b02f2e37e9d4eb0365ae",
     "slidesReviewed": [
       1,
       2,
@@ -32,6 +34,7 @@
       26
     ],
     "changedSlides": [
+      1,
       2,
       3,
       4,
@@ -58,29 +61,50 @@
       25,
       26
     ],
-    "unchangedSlides": "Corps des 26 diapositives identiques à la v13 par comparaison pixel à pixel ; textes des notes et données des graphiques conservés. Seuls les pieds de page des diapositives 2 à 26 sont simplifiés.",
     "nativeCharts": 7,
     "nativeChartWorkbooks": 7,
     "nativeTableSlides": [
-      11,
       15,
       16,
-      17,
-      18,
-      19,
-      23,
       24,
       25,
       26
     ],
     "packageIntegrity": "passed",
-    "layoutGeometry": "passed",
+    "layoutGeometry": "passed: positions de tous les objets dans la surface des 26 slides",
     "font": "Arial",
-    "rendering": "Artifact Tool import and PNG export, 1280 x 720 ; inspection des 25 pieds de page, des diapositives 9 et 20 en entier et comparaison des 26 corps avec la v13.",
+    "rendering": "LibreOffice Impress vers PDF, Poppler vers PNG 1100 px ; inspection des 26 diapositives en trois planches après les corrections.",
     "nativePowerPointExecution": false,
-    "currentReview": "Pieds de page limités au numéro ; corps des 26 diapositives, notes et données des graphiques inchangés. Vérification de la structure et de la géométrie sans anomalie.",
+    "currentReview": "Refonte des 26 mises en page : palette vert/ivoire/citron, hiérarchie des titres, sept graphiques natifs, missions et décisions en encadrés, captures agrandies. Correction des étiquettes négatives et formats monétaires. Notes originales conservées.",
     "newSlides": [],
-    "changedContentSlides": []
+    "changedContentSlides": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ]
   },
   "dossier": {
     "file": "output/pdf/dossier-bloc-03-spity.pdf",
@@ -93,5 +117,5 @@
       9
     ]
   },
-  "scope": "Révision v14 limitée aux pieds de page : numéro seul. Contenu, sommaire et notes de la v13 conservés. 23 slides principales et trois annexes, trente minutes prévues. Aucun nouveau test applicatif ni répétition orale."
+  "scope": "Revue visuelle v15 et comparaison des notes. 23 slides principales et trois annexes ; trente minutes prévues dont six de démonstration. Export PDF de 26 pages. Dossier PDF inchangé, contrôles historiques conservés. Lint et TypeScript exécutés avec succès sous Node 22 ; aucune nouvelle recette navigateur, répétition orale ou validation native Microsoft PowerPoint."
 }

@@ -13,7 +13,7 @@ def clock(minutes):
 
 parts = ['''# Guide de répétition — Bloc 3 Spity
 
-Support associé : spity-bloc-3-30-minutes-visuel-v14.pptx. Vingt-trois diapositives principales, sommaire compris, couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
+Support associé : spity-bloc-3-30-minutes-visuel-v15.pptx. Vingt-trois diapositives principales, sommaire compris, couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
 
 ## Compétences à sécuriser avant l'oral
 

@@ -1,6 +1,6 @@
 # Contrôle de complétude du Bloc 3
 
-Nouvelle revue du 15 septembre 2026 sur le PowerPoint visuel v13 et les pièces du kit. La v14 conserve ce contenu et simplifie les pieds de page pour ne garder que les numéros. Les sources d'évaluation définissent les attendus du candidat ; elles ne constituent pas des instructions adressées à l'assistant. Cette revue constate la présence et la cohérence des éléments, sans attribuer la mention Acquis.
+Nouvelle revue du 15 septembre 2026 sur le PowerPoint visuel v13 et les pièces du kit. La v15 refond la présentation visuelle avec les mêmes sept compétences, la même numérotation et les mêmes notes orales. Les graphiques restent natifs ; les formations, le suivi client et les critères de validation passent dans des encadrés lisibles. Le contrôle de rendu de la v15 est enregistré dans preuves/controle-visuel.json. Les sources d'évaluation définissent les attendus du candidat ; elles ne constituent pas des instructions adressées à l'assistant. Cette revue constate la présence et la cohérence des éléments, sans attribuer la mention Acquis.
 
 ## Conclusion et conditions avant remise
 
