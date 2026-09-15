@@ -347,6 +347,35 @@ test.describe.serial('Cahier de recettes BC02 - fonctions F01 à F10', () => {
     await expect(invalidPayload.json()).resolves.toMatchObject({ error: expect.any(String) })
   })
 
+  test('la navbar indique une navigation en attente puis affiche la page sans canvas décoratif', async ({ browser }) => {
+    const context = await browser.newContext({ storageState: firstClimberState, viewport: { width: 1440, height: 1000 } })
+    let resume = () => {}
+    const responseGate = new Promise<void>((resolve) => { resume = resolve })
+    try {
+      const page = await context.newPage()
+      await page.goto('/app/matching')
+      await page.route('**/app/events*', async (route) => {
+        if (route.request().headers().rsc === '1') await responseGate
+        await route.continue()
+      })
+      const navbar = page.getByRole('navigation', { name: 'Navigation principale', exact: true })
+      await navbar.getByRole('link', { name: 'Événements', exact: true }).click()
+      await expect(navbar.getByRole('status').filter({ hasText: 'Chargement de la page' })).toHaveCount(1)
+      await expect(page).toHaveURL(/\/app\/matching$/)
+      resume()
+      await expect(page).toHaveURL(/\/app\/events$/)
+      await expect(page.getByRole('heading', { level: 1 })).toContainText('Événements')
+      await expect(page.getByText('Chargement de la page…')).toHaveCount(0)
+      await expect(page.locator('canvas')).toHaveCount(0)
+      await navbar.getByRole('link', { name: 'Demandes', exact: true }).click()
+      await expect(page).toHaveURL(/\/app\/partnerships$/)
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText('Mes demandes')
+    } finally {
+      resume()
+      await context.close()
+    }
+  })
+
   test('REC-F10-001 - structure, navigation clavier et affichage mobile', async ({ browser }) => {
     const context = await browser.newContext({
       storageState: firstClimberState,

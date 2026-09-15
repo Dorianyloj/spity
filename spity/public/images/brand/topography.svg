@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+<defs><path id="contour" d="M-90-50C-65-95 12-110 62-65S118 14 80 66 3 85-47 63-120-5-90-50Z"/></defs>
+<g stroke="#8bb957" stroke-width="1" opacity="0.16">
+<use href="#contour" transform="translate(160 130) scale(0.65)"/>
+<use href="#contour" transform="translate(160 130) scale(0.85)"/>
+<use href="#contour" transform="translate(160 130) scale(1.05)"/>
+<use href="#contour" transform="translate(160 130) scale(1.25)"/>
+<use href="#contour" transform="translate(160 130) scale(1.45)"/>
+<use href="#contour" transform="translate(160 130) scale(1.65)"/>
+<use href="#contour" transform="translate(160 130) scale(1.85)"/>
+<use href="#contour" transform="translate(160 130) scale(2.05)"/>
+<use href="#contour" transform="translate(160 130) scale(2.25)"/>
+<use href="#contour" transform="translate(160 130) scale(2.45)"/>
+<use href="#contour" transform="translate(160 130) scale(2.65)"/>
+<use href="#contour" transform="translate(160 130) scale(2.85)"/>
+<use href="#contour" transform="translate(600 460) scale(0.65)"/>
+<use href="#contour" transform="translate(600 460) scale(0.85)"/>
+<use href="#contour" transform="translate(600 460) scale(1.05)"/>
+<use href="#contour" transform="translate(600 460) scale(1.25)"/>
+<use href="#contour" transform="translate(600 460) scale(1.45)"/>
+<use href="#contour" transform="translate(600 460) scale(1.65)"/>
+<use href="#contour" transform="translate(600 460) scale(1.85)"/>
+<use href="#contour" transform="translate(600 460) scale(2.05)"/>
+<use href="#contour" transform="translate(600 460) scale(2.25)"/>
+<use href="#contour" transform="translate(600 460) scale(2.45)"/>
+<use href="#contour" transform="translate(600 460) scale(2.65)"/>
+<use href="#contour" transform="translate(600 460) scale(2.85)"/>
+</g>
+</svg>
