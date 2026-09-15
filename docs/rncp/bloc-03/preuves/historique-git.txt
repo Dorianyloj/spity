@@ -1,3 +1,4 @@
+98e7b6f 2026-09-15 docs(bloc3): corriger la couverture des competences et le support visuel
 9d166c0 2026-09-15 docs(bloc3): auditer toutes les competences et les criteres de la grille
 2f644db 2026-09-15 docs(bloc3): rendre les amenagements du cas fictif visibles dans le diaporama
 817f4c7 2026-09-15 docs(bloc3): clarifier les exigences de prise en compte du handicap
@@ -17,7 +18,6 @@ c892d68 2026-09-11 feat: summarize crag grade ranges
 0589242 2026-09-11 feat: animate place filter dropdowns
 8a37dc1 2026-09-11 style: make place cards more visual
 b6e35ee 2026-09-11 style: balance filter toolbar spacing
-529bb05 2026-09-11 style: streamline places filters
 
 Arbitrage :
 commit 689e59dccf15dc611dbddccea9cf81ccc187c40c

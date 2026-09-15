@@ -1,8 +1,8 @@
 {
   "date": "2026-09-15",
   "presentation": {
-    "file": "output/presentations/spity-bloc-3-30-minutes-visuel-v10.pptx",
-    "sha256": "5e1acaa14a2f8788b8396a33512450ff0b7f229adcdb1a62de1d9580065db112",
+    "file": "output/presentations/spity-bloc-3-30-minutes-visuel-v11.pptx",
+    "sha256": "5ee1b4687582871178c8d43c64635c0216bb31716ae2d6fa85a2430185d97d8b",
     "slidesReviewed": [
       1,
       2,
@@ -30,6 +30,12 @@
       24,
       25
     ],
+    "changedSlides": [
+      4,
+      13,
+      17
+    ],
+    "unchangedSlides": "Rendus identiques à la v10, déjà inspectés individuellement",
     "nativeCharts": 7,
     "nativeChartWorkbooks": 7,
     "nativeTableSlides": [
@@ -47,14 +53,14 @@
     "packageIntegrity": "passed",
     "layoutGeometry": "passed",
     "font": "Arial",
-    "rendering": "Artifact Tool import and PNG export, 1280 x 720; individual slide review and contact sheets",
+    "rendering": "Artifact Tool import and PNG export, 1280 x 720; changed slides individually reviewed and entire deck in contact sheets",
     "nativePowerPointExecution": false
   },
   "dossier": {
     "file": "output/pdf/dossier-bloc-03-spity.pdf",
-    "sha256": "147bfe81fe7218415ab3aaa86b1fd1d0ecb9cc9f2e7694ed58fbcbbe740a5d53",
-    "pages": 29,
+    "sha256": "b6aacf56c801d96296f0ba09174c0590944edb24e4a1e7129d18868e0dcf1011",
+    "pages": 30,
     "rendering": "Poppler PNG, 85 dpi; every page in contact sheets, modified pages individually reviewed"
   },
-  "scope": "Vérification documentaire, visuelle et structurelle ; ne remplace pas une répétition chronométrée ou la validation du jury."
+  "scope": "Révision documentaire des rituels de suivi, vérifications visuelles et structurelles ; aucune nouvelle recette applicative ni répétition orale déclarée."
 }

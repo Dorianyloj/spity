@@ -4,7 +4,7 @@ import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 
-const root=process.cwd(),tmp=path.join(root,'tmp/bloc3/visual-v10');
+const root=process.cwd(),tmp=path.join(root,'tmp/bloc3/visual-v11');
 await fs.mkdir(tmp,{recursive:true});
 const modules=process.env.RUNTIME_NODE_MODULES??path.join(root,'tmp/bloc3/build/node_modules');
 process.env.RUNTIME_NODE_MODULES=modules;
@@ -96,11 +96,12 @@ for(const item of doc.slides){
     case 4:{
       const values=['Backlog','Todo','In Progress','Done'].map(status=>linear.issues.filter(x=>x.status===status).length);
       chart(s,4,['Backlog','À faire','En cours','Terminé'],[{name:'Tickets',values,fill:green,points:[{idx:0,fill:gray},{idx:1,fill:sage},{idx:2,fill:orange},{idx:3,fill:green}]}],{position:{left:64,top:190,width:697,height:367}});
-      text(s,'Kanban',808,195,404,70,43,true,green);
-      text(s,'2 tâches en réalisation.\nCritères avant clôture.\nJalons pour décider.',808,292,404,178,28);
-      text(s,'12 / 24 terminés\n1 annulé exclu, sans pondération.',808,483,404,94,24);
-      takeaway(s,'SPI-27 médias, SPI-15 API, SPI-18 formulaire.',594);
-      text(s,'Ressources partagées : critères et CR dans A07, code dans Git.',72,638,1136,32,23,false,muted);break;
+      [['Planning','J3 : objectif et capacité.'],['Daily','Chaque jour : 10 minutes.'],['Review','J10 et J15 : retour client.'],['Rétrospective','J15 : une amélioration.']].forEach(([label,detail],i)=>{
+        text(s,label,808,172+i*98,404,43,30,true,green);
+        text(s,detail,808,218+i*98,404,46,24);
+      });
+      takeaway(s,'Kanban : 2 tâches en réalisation. Rituels inspirés de Scrum.',590);
+      text(s,'Linear : 12/24 terminés, sans pondération. Réunions et traces : A05/A07.',72,638,1136,32,22,false,muted);break;
     }
     case 5:{
       const cats=['Restitution','Recette','Réalisation','Conception','Mesure','Étude'];
@@ -144,7 +145,7 @@ for(const item of doc.slides){
       text(s,'Persuasif',72,404,285,50,32,true,green);text(s,'Expliquer le report.',72,460,292,74,26);
       text(s,'Directif',941,198,277,50,32,true,green);text(s,'Fixer les critères\nde livraison.',941,254,277,92,26);
       text(s,'Délégatif',941,404,277,50,32,true,green);text(s,'Confier un résultat\net un contrôle.',941,460,277,92,26);
-      takeaway(s,'15 minutes préparées. Une décision datée, puis un suivi.',608);break;
+      takeaway(s,'Rétro J15 : un constat, une action, un responsable.',608);break;
     case 14:
       text(s,'Camille, QA malentendante. Équipe fictive Paris / Montréal.',72,155,1136,55,27,false,muted);
       table(s,item.content.rows,item.content.widths,14,220,264);
@@ -163,7 +164,7 @@ for(const item of doc.slides){
     case 17:
       table(s,[['CR02 à J10','Extrait du compte rendu fictif'],['Écart','Événements J11 à J12. Prévision : 4 465 €.'],['Décision client','Reporter les topos, maintenir les critères de recette.'],['Actions','DEV : T06 à J12. QA : recette à J14. CP : restitution J15.'],['Suite','Claire Martin, Altitude Grimpe. Validation du parcours à J15.']],[250,902],17,194,370,24);
       text(s,'Ressource partagée : A07, compte rendu CR02 et critères.',72,586,1136,46,27,true,green);
-      text(s,'J3 : périmètre. J10 : écarts. J15 : validation.',72,633,1136,35,23);break;
+      text(s,'Planning J3. Reviews J10 et J15. Rétrospective après la review J15.',72,633,1136,35,22);break;
     case 18:
       text(s,'Protocole proposé. Résultats réels non mesurés.',72,151,1136,51,27,false,muted);
       table(s,[['Indicateur','Calcul ou méthode','Seuil visé'],['Critères critiques','Acceptés / évalués','100 %'],['Parcours sans aide','Réussis sans aide / tentés','Au moins 80 %'],['Utilité perçue','Moyenne des notes, avec effectif','Au moins 4/5'],['Blocages critiques','Nombre de tâches empêchées','0 ouvert']],[314,564,274],18,217,341,24);
@@ -193,7 +194,7 @@ assert.equal(elapsed,30);assert.equal(doc.slides.length,25);
 await fs.writeFile(path.join(root,'docs/rncp/bloc-03/donnees/support-oral.json'),JSON.stringify(doc.slides,null,2)+'\n');
 await fs.writeFile(path.join(tmp,'chart-data.json'),JSON.stringify(chartContracts,null,2)+'\n');
 const candidate=path.join(tmp,'candidate.pptx');await(await PresentationFile.exportPptx(P)).save(candidate);
-const finalPath=path.join(root,'output/presentations/spity-bloc-3-30-minutes-visuel-v10.pptx');
+const finalPath=path.join(root,'output/presentations/spity-bloc-3-30-minutes-visuel-v11.pptx');
 await finalizePresentation({workspaceDir:root,candidatePath:candidate,finalPath,pythonExecutable:python,integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-heading-fit',...tableOwners.flatMap(n=>['--require-native-table-slide',String(n)])],requiredNativeTableOwnerSlides:tableOwners,requiredNativeChartOwnerSlides:chartOwners,materializeLiteralChartWorkbooks:true,fontPolicy:{basis:'design',families:[font]},verifyArtifactToolImport:true,receiptPath:path.join(tmp,'validation.json')});
 const checked=await PresentationFile.importPptx(await FileBlob.load(finalPath));
 for(let i=0;i<checked.slides.items.length;i++){const png=await checked.export({slide:checked.slides.items[i],format:'png',scale:1});await fs.writeFile(path.join(tmp,`slide-${String(i+1).padStart(2,'0')}.png`),new Uint8Array(await png.arrayBuffer()));}

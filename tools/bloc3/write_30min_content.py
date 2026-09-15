@@ -192,6 +192,8 @@ from inclusion_context import align as align_inclusion
 align_inclusion(slides)
 from competence_context import align as align_competences
 align_competences(slides)
+from scrum_context import align as align_scrum
+align_scrum(slides)
 
 assert len(slides)==25
 assert sum(s['minutes'] for s in slides)==30

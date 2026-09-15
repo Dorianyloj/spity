@@ -1,6 +1,6 @@
 # Guide de répétition — Bloc 3 Spity
 
-Support associé : spity-bloc-3-30-minutes-visuel-v10.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
+Support associé : spity-bloc-3-30-minutes-visuel-v11.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
 
 ## Fil conducteur
 
@@ -15,7 +15,7 @@ Le texte oral ci-dessous développe chaque diapositive et propose ses transition
 | 1 | Spity | 00:30 | 00:30 |
 | 2 | Le besoin d’Altitude Grimpe | 01:00 | 01:30 |
 | 3 | Le planning global de Spity | 01:00 | 02:30 |
-| 4 | Kanban pour suivre, des jalons pour décider | 01:30 | 04:00 |
+| 4 | Le suivi : Linear et les rituels Scrum | 01:30 | 04:00 |
 | 5 | Le lot : phases, mesures et dépendances | 01:30 | 05:30 |
 | 6 | Les missions et les aménagements | 01:00 | 06:30 |
 | 7 | Les causes des 5 heures supplémentaires | 01:30 | 08:00 |
@@ -28,7 +28,7 @@ Le texte oral ci-dessous développe chaque diapositive et propose ses transition
 | 14 | Camille et une équipe à distance | 01:30 | 18:00 |
 | 15 | La grille des compétences du lot | 01:00 | 19:00 |
 | 16 | Un plan de formation pour chaque rôle | 01:30 | 20:30 |
-| 17 | CR02 : une décision à J10 | 01:30 | 22:00 |
+| 17 | Review J10 : une décision dans CR02 | 01:30 | 22:00 |
 | 18 | Mesurer la satisfaction et agir | 01:00 | 23:00 |
 | 19 | Place à la démonstration | 00:30 | 23:30 |
 | 20 | Trouver un partenaire | 03:00 | 26:30 |
@@ -85,27 +85,27 @@ Je choisis une méthode adaptée au suivi de ce travail.
 
 Source : B1 C1.4.1 p. 7-8 ; A01 ; consolidation.json. Charges source 16+15+17+14+17=79 j-h. Calendrier relatif dérivé, capacité constante de 5 j-h/semaine.
 
-### 4. Kanban pour suivre, des jalons pour décider
+### 4. Le suivi : Linear et les rituels Scrum
 
-Repère : 02:30 à 04:00. Nature : Linear observé, 14 septembre 2026.
+Repère : 02:30 à 04:00. Nature : Linear observé et réunions du scénario fictif.
 
 **Texte oral proposé**
 
-Je retiens Kanban pour le cas : un petit effectif, des priorités évolutives et des retours rapides. La limite de deux tâches de réalisation simultanées réduit la dispersion. Une tâche ne passe à terminé qu'après vérification de ses critères. Scrum demanderait ici des cérémonies supplémentaires ; le cycle en V rendrait les retours intermédiaires moins fréquents.
+Pour suivre le projet, le scénario combine un tableau Kanban dans Linear et des réunions inspirées de Scrum. Le tableau limite la réalisation à deux tâches simultanées. Les critères de recette conditionnent le passage à terminé. Les réunions donnent un rythme commun aux échanges.
 
-Linear rend visibles les sujets, leurs statuts et leurs dépendances. Le relevé réel du quatorze septembre contient vingt-cinq tickets, dont douze terminés et un annulé. Douze sur vingt-quatre donne cinquante pour cent de tickets, pas cinquante pour cent de produit livré. SPI-27, le service médias, conditionne l'API SPI-15 puis le formulaire SPI-18.
+À J3, le planning précise l'objectif du lot, les tâches retenues et la capacité disponible. Chaque jour, le daily dure dix minutes : où en sommes-nous, quel obstacle faut-il lever et quelle action adapter ? Le diagnostic technique se poursuit ensuite avec les personnes concernées. À J10 et J15, la review confronte les parcours aux attentes du client. Après la dernière revue, la rétrospective choisit une amélioration de notre fonctionnement.
 
-Le planning à barres complète ce flux : il expose les dates, les chevauchements et les conditions de passage. Kanban pilote le travail courant ; les jalons encadrent les engagements. Les critères et comptes rendus sont partagés dans A07, le code dans Git. Ces documents pédagogiques restent distincts des tickets réellement observés dans Linear.
+Cette organisation est adaptée au lot de quinze jours. Elle ne revendique pas l'application complète du cadre Scrum. Linear conserve ses données réellement observées : douze tickets terminés sur vingt-quatre non annulés, sans pondération. Les dépendances médias, API et formulaire restent visibles. A05 détaille les réunions et A07 conserve les comptes rendus du cas. Une réunion doit conduire à une action retrouvable.
 
 **À montrer ou manipuler**
 
-Montrer les statuts, nommer Kanban et retrouver A07 depuis les ressources du dossier.
+Associer chaque rituel à son objectif et à sa trace. Distinguer le flux Linear observé des réunions du scénario.
 
 **Transition**
 
-Je zoome maintenant sur le planning du lot.
+Le planning montre les phases et les rendez-vous du lot.
 
-Source : Dossier §3 ; A01/A05/A07/A09. Linear observé le 14 septembre, sans nouvelle modification des tickets. A07 et Git contiennent les ressources réellement consultables.
+Source : A01/A05/A07 ; rituels.json. Linear observé le 14 septembre 2026. Guide Scrum 2020, p. 9-10 : https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-French.pdf
 
 ### 5. Le lot : phases, mesures et dépendances
 
@@ -115,7 +115,7 @@ Repère : 04:00 à 05:30. Nature : C.3.1, planning fictif du lot à J10.
 
 Ce planning détaille quinze jours ouvrés relatifs. L'étude cadre le besoin. La mesure transforme ce besoin en critères observables, par exemple une seule inscription acceptée sur la dernière place. La conception fixe les responsabilités et les moyens. La réalisation fournit les parcours, la recette mesure leur conformité et la restitution prépare la décision du client.
 
-Le diagramme à barres rend les chevauchements lisibles. Il complète Kanban sans imposer que toutes les activités attendent la fin de la précédente. QA peut préparer et tester les fonctions déjà disponibles. La clôture de la recette dépend toutefois de la stabilisation des événements et des corrections. La démonstration reste prévue à J15, après la recette J14.
+Le diagramme à barres rend les chevauchements lisibles. Il complète le tableau Kanban et les réunions sans imposer que toutes les activités attendent la fin de la précédente. QA peut préparer et tester les fonctions déjà disponibles. La clôture de la recette dépend toutefois de la stabilisation des événements et des corrections. La démonstration reste prévue à J15, après la recette J14.
 
 Je conserve les dates initiales dans le classeur pour mesurer les dérives. À J10, les événements sont prévus à J12 au lieu de J11 et la recette à J14 au lieu de J13. Chaque glissement vaut un jour. Ce décalage de date est distinct de l'augmentation de charge. A01 conserve les dix tâches et les trente activités estimées sont détaillées dans A09.
 
@@ -127,7 +127,7 @@ Lire la phase Mesure, les chevauchements puis les dates initiales et revues.
 
 La répartition des missions permet de tenir ces engagements.
 
-Source : A01, A03, A09 et Planning. Étude T01, mesure T02, conception T03, réalisation T04-T06, recette T07/T10, restitution T09. Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01.
+Source : A01, A03, A09 et Planning. Étude T01, mesure T02, conception T03, réalisation T04-T06, recette T07/T10, restitution T09. A05 : planning J3, reviews J10/J15 et rétrospective J15. Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01.
 
 ### 6. Les missions et les aménagements
 
@@ -283,7 +283,7 @@ Le développeur souhaite ajouter une fonction alors que Camille attend une versi
 
 La posture participative sert à comparer leurs propositions. La posture persuasive permet d'expliquer au client les conséquences du report. Je reste directif sur les critères critiques de livraison : on ne valide pas une capacité non vérifiée. La délégation porte sur un résultat et un contrôle. DEV choisit l'implémentation ; Camille choisit les cas de recette dans les critères convenus.
 
-Une réponse seulement directive ferait taire le désaccord sans traiter sa cause. Une discussion sans échéance consommerait la faible marge du chef de projet. Je retiens quinze minutes, avec les options préparées par écrit, une autorité de décision identifiée et une prochaine action datée. Je vérifie ensuite l'application de cette décision. Ce fonctionnement donne de l'autonomie à l'équipe tout en protégeant les engagements du lot. Le résultat managérial décrit ici appartient au scénario fictif.
+Une réponse seulement directive ferait taire le désaccord sans traiter sa cause. Une discussion sans échéance consommerait la faible marge du chef de projet. Je retiens quinze minutes, avec les options préparées par écrit, une autorité de décision identifiée et une prochaine action datée. La rétrospective J15 complète cette analyse : nous séparons le daily des diagnostics techniques. CP vérifie cette amélioration aux trois premiers points du prochain lot. Cette décision appartient au scénario fictif.
 
 **À montrer ou manipuler**
 
@@ -293,7 +293,7 @@ Associer chaque style à une action, puis expliquer la limite d’une réponse s
 
 Ces échanges doivent être accessibles à toute l’équipe.
 
-Source : A05, situation de désaccord, styles et analyse critique. Illustration fictive conservée. Illustration fictive générée avec ImageGen, visuels/equipe-illustration.png. Aucune personne réelle représentée.
+Source : A05, situation de désaccord, styles et analyse critique. Illustration fictive conservée. A05, RT01 : amélioration du daily lors de la rétrospective J15. Illustration fictive générée avec ImageGen, visuels/equipe-illustration.png. Aucune personne réelle représentée.
 
 ### 14. Camille et une équipe à distance
 
@@ -361,27 +361,27 @@ Le client reçoit ensuite un compte rendu qui permet de décider.
 
 Source : A06 et consolidation.json. Formation CP 1 h/T03, DEV 2 h/T06, QA 3 h/T07. Variante RH séparée, annexe 25.
 
-### 17. CR02 : une décision à J10
+### 17. Review J10 : une décision dans CR02
 
 Repère : 20:30 à 22:00. Nature : C3.4.1, comptes rendus simulés.
 
 **Texte oral proposé**
 
-Voici un extrait du compte rendu pédagogique adressé à Claire Martin, pour le Collectif Altitude Grimpe. Il reprend le même commanditaire fictif que le Bloc 1. Les points de validation ont lieu à J3 pour le périmètre, à J10 pour les écarts et à J15 pour la démonstration.
+La review est un échange sur le produit avec Claire Martin, pour le Collectif Altitude Grimpe. Dans le scénario, nous regardons les parcours disponibles et leurs critères, puis nous adaptons les priorités. Le planning J3 fixe le périmètre. Les reviews J10 et J15 organisent les retours intermédiaires puis la validation du parcours démontré.
 
-À J10, les événements glissent de J11 à J12. La prévision atteint quatre mille quatre cent soixante-cinq euros, avec deux cent trente-deux euros sous le plafond. Ajouter les contributions aux topos dépasserait le budget et la capacité DEV. Le client fictif retient donc le report de cette demande, avec maintien des critères de recette.
+À J10, le matching est disponible dans le cas, mais les événements restent à stabiliser. Leur fin glisse de J11 à J12. La prévision atteint quatre mille quatre cent soixante-cinq euros, avec deux cent trente-deux euros sous le plafond. La nouvelle demande de contributions aux topos dépasserait le budget et la capacité DEV. Le client fictif retient son report, en conservant les critères de recette.
 
-Le compte rendu rend les actions vérifiables : DEV termine T06 à J12, QA clôt la recette après corrections à J14 et CP prépare la validation J15. Chacun retrouve le même document dans A07. Les évolutions, le risque, la décision, les responsables et les échéances restent liés. Une réserve devient une tâche suivie, et non une remarque oubliée. Cet exemple montre la forme d'un échange client utile ; il ne prouve pas un accord réellement obtenu.
+CR02 garde la trace de cette décision. DEV termine T06 à J12, Camille clôt la recette après corrections à J14 et CP prépare la validation J15. Le document partagé relie l'écart, le choix et la prochaine action. La rétrospective examine ensuite notre façon de travailler, tandis que la review porte sur le produit. Les comptes rendus décrivent un exercice pédagogique, sans accord client réel attesté.
 
 **À montrer ou manipuler**
 
-Montrer l’écart, la décision et les responsables ; ouvrir A07 si le jury demande le compte rendu complet.
+Montrer le résultat présenté, la décision issue du retour client et les actions datées.
 
 **Transition**
 
-Je complète cette validation par un protocole de satisfaction.
+Les retours du client sont aussi suivis par un protocole de satisfaction.
 
-Source : A07 CR02, A01, A04. Document partagé accessible dans le dépôt ; compte rendu et accord client fictifs.
+Source : A05, protocole des reviews ; A07, CR02 ; rituels.json. Compte rendu et accord client fictifs.
 
 ### 18. Mesurer la satisfaction et agir
 
@@ -526,7 +526,7 @@ Source : A06 et consolidation.json, variante RH non activée.
 ## Questions probables du jury
 
 1. **Qu'avez-vous réellement fait et qu'avez-vous simulé ?** Présenter les contributions personnelles confirmées par le candidat. Les commits et les vérifications sont observables. L'équipe CP/DEV/QA, les jours J1-J15, les coûts et les comptes rendus client appartiennent au cas fictif. Un test réussi ne prouve pas un échange client.
-2. **Pourquoi Kanban ?** Le scénario retient un petit effectif, des priorités variables et des livraisons progressives. Une limite de travail en cours, des critères de terminé et des jalons structurent le suivi. Ne pas affirmer que Scrum a été pratiqué sans trace correspondante.
+2. **Pourquoi Kanban et des réunions Scrum ?** Le tableau Kanban suit le flux et limite la réalisation à deux tâches. Le planning J3 fixe l'objectif et la capacité, le daily de dix minutes adapte la prochaine action, les reviews J10/J15 recueillent les retours client et la rétrospective J15 améliore la collaboration. Ce fonctionnement s'inspire de Scrum et reste adapté au lot ; les réunions du cas ne sont pas des preuves d'une application historique complète du cadre.
 3. **Quel est le chemin vers la soutenance ?** Accès/profils, matching, événements, recette/corrections et validation J14 avant la démonstration J15. La recette peut commencer sur les fonctions prêtes ; sa clôture attend les corrections. Montrer A01 et les dépendances.
 4. **Comment obtenez-vous 4 465 EUR ?** Valorisation du travail à terminaison : CP 29 h × 45 EUR, DEV 64 h × 35 EUR, QA 24 h × 30 EUR = 4 265 EUR ; ajouter 200 EUR de frais. Les taux et charges sont des hypothèses du lot. Le budget global B1 est de 38 126 EUR HT dans les fiches détaillées, sur 79 j-h. Il ne faut ni remplacer ce total par les coûts B3, ni les additionner. L’ancien diaporama B1 affiche une autre estimation, documentée dans COHERENCE_INTER_BLOCS.md.
 5. **La réserve fait-elle disparaître le dépassement ?** Non : le coût reste supérieur de 195 EUR à la référence de 4 270 EUR. La réserve de 427 EUR porte le plafond à 4 697 EUR et laisse 232 EUR de marge. Un écart doit rester visible même s'il est absorbable.
@@ -549,6 +549,8 @@ Source : A06 et consolidation.json, variante RH non activée.
 - Le plan comprend CP 1 h à J3, DEV 2 h à J9-J12 et Camille 3 h à J10-J14. Les niveaux techniques sont indépendants du handicap.
 - La fiche RH de l'annexe 25 reste conditionnelle : 202,50 EUR supplémentaires, marge 29,50 EUR, CP 29,5/30 h. Le budget de base reste 4 465 EUR.
 - CR02 relie un écart à une décision puis à une action datée. Les mesures client sont définies, mais leurs résultats restent non mesurés.
+
+La review porte sur le résultat du produit et les retours du client. La rétrospective porte sur la façon de travailler. Pour illustrer cette distinction, expliquer CR02 (report des topos) puis RT01 (sortir le diagnostic technique du daily). Les cibles d'animation sont 30 minutes pour planning/review, dix pour le daily et vingt pour la rétrospective.
 
 ## Exercices de répétition
 

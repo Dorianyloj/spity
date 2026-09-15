@@ -12,7 +12,7 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / 'docs/rncp/bloc-03'
 PDF = ROOT / 'output/pdf/dossier-bloc-03-spity.pdf'
-PPTX = ROOT / 'output/presentations/spity-bloc-3-30-minutes-visuel-v10.pptx'
+PPTX = ROOT / 'output/presentations/spity-bloc-3-30-minutes-visuel-v11.pptx'
 XLSX = ROOT / 'outputs/bloc03-01a09eba/pilotage-spity.xlsx'
 ZIP = ROOT / 'output/bloc-03/kit-soutenance-spity.zip'
 S = {'s':'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
@@ -72,6 +72,9 @@ def main(package):
     assert indicators['plannedCost']==planned and indicators['forecastCost']==forecast
     assert abs(indicators['margin']-232)<1e-8
     consolidation=read(DOCS/'donnees/consolidation.json')
+    rituals=read(DOCS/'donnees/rituels.json')
+    assert [x['id'] for x in rituals['events']]==['planning','daily','review','retro']
+    assert next(x for x in rituals['events'] if x['id']=='daily')['targetMinutes']==10
     global_plan=consolidation['globalPlanning']
     assert sum(x['personDays'] for x in global_plan['sequence'])==79
     assert sum(x['personDays'] for x in global_plan['sequence'])/global_plan['capacityPersonDaysPerWeek']==15.8
@@ -128,11 +131,14 @@ def main(package):
             visible=' '.join(ET.fromstring(z.read(f'ppt/slides/slide{number}.xml')).itertext())
             assert inclusion['name'] in visible, f'Cas absent de la diapositive {number}'
         assert re.search(r'ficti[fv]', ' '.join(ET.fromstring(z.read('ppt/slides/slide14.xml')).itertext()))
-        for number,terms in {4:['Kanban'],5:['Mesure'],7:['J11','J12','J13','J14'],13:['Participatif','Persuasif','Directif','Délégatif'],15:['Actuel','Cible','Concurrence'],16:['CP','DEV','Camille'],17:['CR02','J12','J14'],18:['80','4/5'],22:['accepté','refusé'],25:['202,50','29,50']}.items():
+        for number,terms in {4:['Kanban','Scrum','Planning','Daily','Review','Rétrospective'],5:['Mesure'],7:['J11','J12','J13','J14'],13:['Participatif','Persuasif','Directif','Délégatif','Rétro'],15:['Actuel','Cible','Concurrence'],16:['CP','DEV','Camille'],17:['CR02','J12','J14','Review'],18:['80','4/5'],22:['accepté','refusé'],25:['202,50','29,50']}.items():
             visible=' '.join(ET.fromstring(z.read(f'ppt/slides/slide{number}.xml')).itertext())
             assert all(term.casefold() in visible.casefold() for term in terms), f'Élément attendu absent de la slide {number}'
     reader=PdfReader(PDF)
     assert all(len(page.extract_text().strip())>90 for page in reader.pages)
+    visual=read(DOCS/'preuves/controle-visuel.json')
+    assert visual['presentation']['file']==PPTX.relative_to(ROOT).as_posix() and visual['presentation']['sha256']==digest(PPTX)
+    assert visual['dossier']['pages']==len(reader.pages) and visual['dossier']['sha256']==digest(PDF)
     evidence=read(DOCS/'preuves/verification.json')
     current_tree=subprocess.check_output(['git','rev-parse','HEAD:spity'],cwd=ROOT,text=True).strip()
     verified_tree=subprocess.check_output(['git','rev-parse',f"{evidence['gitRevision']}:spity"],cwd=ROOT,text=True).strip()
@@ -153,7 +159,7 @@ def main(package):
         ZIP.parent.mkdir(parents=True,exist_ok=True)
         with zipfile.ZipFile(ZIP,'w',zipfile.ZIP_DEFLATED) as z:
             for p in included: z.write(p,p.relative_to(ROOT).as_posix())
-            z.writestr('LIRE_EN_PREMIER.txt', 'KIT BLOC 3 SPITY\n\nDossier : output/pdf/dossier-bloc-03-spity.pdf\nSlides : output/presentations/spity-bloc-3-30-minutes-visuel-v10.pptx\nClasseur : outputs/bloc03-01a09eba/pilotage-spity.xlsx\nGuide et checklist : docs/rncp/bloc-03/\n\nLe diaporama comprend 22 slides pour 30 minutes, dont 6 de démonstration, et 3 annexes. Le guide contient le texte oral et les transitions. La durée effective se règle après une répétition chronométrée. Les situations de management sont fictives et identifiées. Les données personnelles et dates du campus restent à confirmer. Aucun dépôt externe effectué. La démonstration nécessite le dépôt Spity complet ; les fichiers techniques seuls ne contiennent pas toute l’application.\n')
+            z.writestr('LIRE_EN_PREMIER.txt', 'KIT BLOC 3 SPITY\n\nDossier : output/pdf/dossier-bloc-03-spity.pdf\nSlides : output/presentations/spity-bloc-3-30-minutes-visuel-v11.pptx\nClasseur : outputs/bloc03-01a09eba/pilotage-spity.xlsx\nGuide et checklist : docs/rncp/bloc-03/\n\nLe diaporama comprend 22 slides pour 30 minutes, dont 6 de démonstration, et 3 annexes. Le guide contient le texte oral et les transitions. La durée effective se règle après une répétition chronométrée. Les situations de management sont fictives et identifiées. Les données personnelles et dates du campus restent à confirmer. Aucun dépôt externe effectué. La démonstration nécessite le dépôt Spity complet ; les fichiers techniques seuls ne contiennent pas toute l’application.\n')
         with zipfile.ZipFile(ZIP) as z: assert z.testzip() is None
         report['zip']=str(ZIP.relative_to(ROOT))
         report['zipSHA256']=digest(ZIP)

@@ -1,6 +1,6 @@
 # A08 - Démonstration de six minutes
 
-Le scénario porte sur le parcours grimpeur/club. Les trois captures de secours ont été réalisées le 14 septembre 2026 sur la base dédiée et figurent dans preuves/captures. Elles complètent la recette exécutée à cette date ; elles ne dispensent pas de vérifier le logiciel avant chaque nouvelle soutenance.
+Le scénario porte sur le parcours grimpeur/club. Les trois captures de secours actuelles ont été réalisées le 15 septembre 2026 sur la base dédiée et figurent dans preuves/captures. Elles complètent la recette exécutée à cette date ; elles ne dispensent pas de vérifier le logiciel avant chaque nouvelle soutenance.
 
 ## Installation de démonstration isolée
 

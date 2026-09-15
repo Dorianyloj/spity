@@ -13,7 +13,7 @@ def clock(minutes):
 
 parts = ['''# Guide de répétition — Bloc 3 Spity
 
-Support associé : spity-bloc-3-30-minutes-visuel-v10.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
+Support associé : spity-bloc-3-30-minutes-visuel-v11.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
 
 ## Fil conducteur
 
@@ -43,7 +43,7 @@ for s in slides:
 parts.append('''## Questions probables du jury
 
 1. **Qu'avez-vous réellement fait et qu'avez-vous simulé ?** Présenter les contributions personnelles confirmées par le candidat. Les commits et les vérifications sont observables. L'équipe CP/DEV/QA, les jours J1-J15, les coûts et les comptes rendus client appartiennent au cas fictif. Un test réussi ne prouve pas un échange client.
-2. **Pourquoi Kanban ?** Le scénario retient un petit effectif, des priorités variables et des livraisons progressives. Une limite de travail en cours, des critères de terminé et des jalons structurent le suivi. Ne pas affirmer que Scrum a été pratiqué sans trace correspondante.
+2. **Pourquoi Kanban et des réunions Scrum ?** Le tableau Kanban suit le flux et limite la réalisation à deux tâches. Le planning J3 fixe l'objectif et la capacité, le daily de dix minutes adapte la prochaine action, les reviews J10/J15 recueillent les retours client et la rétrospective J15 améliore la collaboration. Ce fonctionnement s'inspire de Scrum et reste adapté au lot ; les réunions du cas ne sont pas des preuves d'une application historique complète du cadre.
 3. **Quel est le chemin vers la soutenance ?** Accès/profils, matching, événements, recette/corrections et validation J14 avant la démonstration J15. La recette peut commencer sur les fonctions prêtes ; sa clôture attend les corrections. Montrer A01 et les dépendances.
 4. **Comment obtenez-vous 4 465 EUR ?** Valorisation du travail à terminaison : CP 29 h × 45 EUR, DEV 64 h × 35 EUR, QA 24 h × 30 EUR = 4 265 EUR ; ajouter 200 EUR de frais. Les taux et charges sont des hypothèses du lot. Le budget global B1 est de 38 126 EUR HT dans les fiches détaillées, sur 79 j-h. Il ne faut ni remplacer ce total par les coûts B3, ni les additionner. L’ancien diaporama B1 affiche une autre estimation, documentée dans COHERENCE_INTER_BLOCS.md.
 5. **La réserve fait-elle disparaître le dépassement ?** Non : le coût reste supérieur de 195 EUR à la référence de 4 270 EUR. La réserve de 427 EUR porte le plafond à 4 697 EUR et laisse 232 EUR de marge. Un écart doit rester visible même s'il est absorbable.
@@ -66,6 +66,8 @@ parts.append('''## Questions probables du jury
 - Le plan comprend CP 1 h à J3, DEV 2 h à J9-J12 et Camille 3 h à J10-J14. Les niveaux techniques sont indépendants du handicap.
 - La fiche RH de l'annexe 25 reste conditionnelle : 202,50 EUR supplémentaires, marge 29,50 EUR, CP 29,5/30 h. Le budget de base reste 4 465 EUR.
 - CR02 relie un écart à une décision puis à une action datée. Les mesures client sont définies, mais leurs résultats restent non mesurés.
+
+La review porte sur le résultat du produit et les retours du client. La rétrospective porte sur la façon de travailler. Pour illustrer cette distinction, expliquer CR02 (report des topos) puis RT01 (sortir le diagnostic technique du daily). Les cibles d'animation sont 30 minutes pour planning/review, dix pour le daily et vingt pour la rétrospective.
 
 ## Exercices de répétition
 

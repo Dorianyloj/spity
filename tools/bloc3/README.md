@@ -27,6 +27,7 @@ Le dossier se modifie dans docs/rncp/bloc-03/. Les valeurs du cas sont centralis
 | bloc_context.py | Contexte issu des Blocs 1, 2 et 4, appliqué par write_30min_content.py aux notes, sources et titres du support courant. |
 | inclusion_context.py | Cas fictif de Camille lu dans inclusion.json, appliqué aux diapositives 6, 14 et 16 : missions, aménagements et formation. |
 | competence_context.py | Corrections de couverture appliquées aux notes et titres : planning global, compétences, formation, management, suivi client et validation. |
+| scrum_context.py | Rituels inspirés de Scrum, notes des slides 4/5/13/17 et distinction review/rétrospective. |
 | competence_annexes.py | Compléments générés dans A01/A03 et la matrice, lus dans consolidation.json. |
 | build_deck_visual.mjs | Version courante : 30 minutes, notes natives, 7 graphiques et leurs classeurs intégrés, tableaux modifiables, illustration et captures. Contrôles de structure et de géométrie, import et rendus. |
 | build_deck_30min.mjs | Générateur de la version précédente, conservée en archive. |

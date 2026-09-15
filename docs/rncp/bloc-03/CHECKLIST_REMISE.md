@@ -15,6 +15,8 @@
 - [x] Cas de Camille, QA malentendante fictive : missions, management et formation sur les slides 6, 14 et 16, avec les mêmes modalités dans A02, A05 et A06.
 - [x] Reprise du commanditaire fictif du Bloc 1 et rapprochement des preuves des Blocs 2 et 4 dans COHERENCE_INTER_BLOCS.md.
 
+- [x] Réunions inspirées de Scrum : planning, daily, review et rétrospective, objectifs et traces reliés dans A05/A07 et le diaporama.
+
 ## Informations à compléter avec Dorian
 
 - [x] Nouvelle vérification du 15 septembre intégrant les dernières évolutions du matching, avec captures actualisées.

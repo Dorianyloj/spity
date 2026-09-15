@@ -68,7 +68,7 @@ Le consommé économique du cas vaut 2 945 EUR, dont 2 825 EUR de travail et 120
 
 ## Règles de suivi
 
-Chaque rôle actualise son consommé et son reste à faire. CP vérifie deux fois par semaine l'écart, les dates et la capacité. Une variation de budget dépassant la réserve, une charge supérieure à la capacité ou un critère critique non vérifié déclenche un arbitrage documenté. Les indicateurs de qualité s'appuient sur les résultats réellement exécutés dans VERIFICATION.md.
+Chaque rôle actualise son consommé et son reste à faire. Le daily de dix minutes permet d'adapter le plan du jour et de traiter les blocages. Les reviews J10/J15 examinent les parcours avec le client, puis CR02/CR03 conservent les décisions. CP vérifie aussi deux fois par semaine l'écart, les dates et la capacité. A05 distingue ces rendez-vous de la rétrospective d'équipe. Une variation de budget dépassant la réserve, une charge supérieure à la capacité ou un critère critique non vérifié déclenche un arbitrage documenté. Les indicateurs de qualité s'appuient sur les résultats réellement exécutés dans VERIFICATION.md.
 
 Linear a été relu directement le 14 septembre : 12 Done, 4 Todo, 1 In Progress, 7 Backlog et 1 Canceled. Le taux de tickets Done est de 12 / 24 = 50 % hors annulé. Il ne mesure pas la part de produit livrée. A09 conserve le relevé, les dépendances lues, les 30 activités estimées et les tests de sensibilité. La feuille Linear reste distincte du scénario.
 ''')

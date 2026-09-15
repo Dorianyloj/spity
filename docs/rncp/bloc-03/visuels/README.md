@@ -35,4 +35,4 @@ Les valeurs viennent du [cas de pilotage](../donnees/pilotage.json), de ses [ind
 
 Les rôles, charges, coûts et niveaux de compétences du scénario sont fictifs. Les notes et les pieds de page conservent cette distinction.
 
-Les tableaux natifs des slides 15 et 16 montrent la grille détaillée et les formations. Le complément donnees/consolidation.json documente la projection globale, le cas Paris/Montréal, la session pilote prévue et la variante RH indépendante de l’annexe 25.
+Les tableaux natifs des slides 15 et 16 montrent la grille détaillée et les formations. Le complément donnees/consolidation.json documente la projection globale, le cas Paris/Montréal, la session pilote prévue et la variante RH indépendante de l’annexe 25. La version v11 ajoute les réunions inspirées de Scrum sur la slide 4, la rétrospective sur la slide 13 et la review sur la slide 17 ; donnees/rituels.json et A05/A07 décrivent le scénario correspondant.

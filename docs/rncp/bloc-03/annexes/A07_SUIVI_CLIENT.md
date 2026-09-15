@@ -4,15 +4,15 @@ Tous les comptes rendus de cette annexe sont des SIMULATIONS PÉDAGOGIQUES. Aucu
 
 Continuité du Bloc 1 : CL représente Claire Martin, présidente fictive du Collectif Altitude Grimpe. Ces comptes rendus portent sur un lot pédagogique de démonstration et ne révisent pas le budget global du MVP.
 
-## CR01 - Validation du périmètre à J3
+## CR01 - Planning et périmètre à J3
 
-Participants fictifs : CP, CL et QA. Objet : fixer le parcours de démonstration et les critères de validation. Le client fictif attend la recherche de partenaires, les événements et la visibilité des inscriptions côté club. La recette vérifie aussi les droits et la capacité.
+Participants fictifs : CP, DEV, QA et CL pour la confirmation du périmètre. Le planning a pour objectif de convenir du résultat du lot, sélectionner les tâches compatibles avec la capacité et fixer les critères de validation. Le client fictif attend la recherche de partenaires, les événements et la visibilité des inscriptions côté club. La recette vérifie aussi les droits et la capacité.
 
 Décision du scénario : retenir ce parcours pour J15 ; traiter les autres demandes dans un lot séparé. CP publie le planning et la répartition à J4. QA formalise les critères ; DEV estime les tâches avant engagement. Point suivant : revue des écarts à J10. La validation porte sur le périmètre proposé, pas encore sur le logiciel.
 
-## CR02 - Avancement et arbitrage à J10
+## CR02 - Review, avancement et arbitrage à J10
 
-Participants fictifs : CP, CL, DEV, QA. Le tableau de bord indique cinq tâches terminées sur dix, 77 h consommées et 40 h restantes. La prévision de 4 465 EUR dépasse de 195 EUR le budget initial hors réserve mais reste sous le plafond de 4 697 EUR.
+Participants fictifs : CP, CL, DEV, QA. Dans cette review intermédiaire, le scénario présente le matching disponible et les événements encore à stabiliser. Le client confronte ces parcours à son besoin, puis l'équipe examine l'effet d'une demande nouvelle. Le tableau de bord indique cinq tâches terminées sur dix, 77 h consommées et 40 h restantes. La prévision de 4 465 EUR dépasse de 195 EUR le budget initial hors réserve mais reste sous le plafond de 4 697 EUR.
 
 Le développement des événements est prévu à J12 au lieu de J11. La recette s'étend jusqu'à J14. La demande supplémentaire de contributions aux topos ajouterait 540 EUR et dépasserait la capacité DEV.
 
@@ -26,7 +26,9 @@ Décision fictive : reporter cette demande et maintenir les critères de recette
 
 Ressources communes : [planning A01](A01_PLANNING.md), [arbitrage A04](A04_ARBITRAGES.md) et grille de critères ci-dessous. Dans l'exercice, le CP dépose la synthèse écrite au même emplacement partagé et vérifie que chaque rôle retrouve sa prochaine action. Les liens sont disponibles dans ce kit ; aucune diffusion réelle à des interlocuteurs n'est attestée.
 
-## CR03 - Répétition de validation à J15
+<!-- pagebreak -->
+
+## CR03 - Review et répétition de validation à J15
 
 Participants fictifs : CP, CL et QA. Ce compte rendu décrit un exercice de clôture ; il ne remplace pas les résultats de la vérification technique réelle jointe au dossier.
 
@@ -53,7 +55,7 @@ Session pilote prévue à J15 : deux grimpeurs et un représentant de club, tous
 
 Si un critère critique est refusé ou un blocage critique observé, le périmètre concerné reste sous réserve avec une correction et une nouvelle vérification. Si les parcours sans aide passent sous 80 % ou l'utilité sous 4/5, CP qualifie les obstacles avec QA, affecte une action au prochain lot et organise un nouvel essai. Ces seuils guident une décision ; un échantillon de trois personnes ne justifie aucune conclusion statistique générale.
 
-Les objectifs sont proposés, pas issus d'un sondage. Les seuils servent à déclencher une action, sans prétendre à une représentativité statistique sur un faible effectif.
+Après cette review du produit, la rétrospective RT01 d'A05 traite les pratiques de l'équipe.
 
 Questionnaire de session : quelle tâche cherchiez-vous à accomplir ? L'avez-vous terminée sans aide ? Quel obstacle avez-vous rencontré ? Quelle note d'utilité donnez-vous de 1 à 5 ? Quelle amélioration est prioritaire ? Noter la date, le nombre de participants et les résultats avec leur consentement, sans publier de données personnelles inutiles.
 
