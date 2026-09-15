@@ -161,9 +161,9 @@
     },
     {
       "number": 6,
-      "title": "Rôles et responsabilités",
+      "title": "Les missions et les aménagements",
       "minutes": 1,
-      "nature": "C.3.1, équipe fictive du cas",
+      "nature": "C.3.1, équipe et situation fictives",
       "layout": "table",
       "content": {
         "rows": [
@@ -200,10 +200,10 @@
         ],
         "takeaway": "Une seule autorité de décision par activité dans la matrice RACI"
       },
-      "script": "Le Bloc 2 décrit les réalisations de Dorian. Ici, le scénario répartit les responsabilités entre trois rôles fictifs : chef de projet, développeur et testeur UX. Leurs capacités représentent respectivement trente, soixante-douze et trente heures sur le lot. Le client intervient aux points de validation.\n\nLa matrice RACI précise qui réalise, qui décide, qui doit être consulté et qui doit être informé. Une seule autorité de décision est désignée pour chaque activité. Par exemple, le développeur corrige une fonction, QA vérifie le résultat et le chef de projet suit la clôture. Le client reste responsable de l'acceptation du périmètre.\n\nCette organisation évite les tâches sans responsable et les validations implicites. Les capacités restent des hypothèses du cas. Elles ne correspondent pas à des feuilles de temps réellement renseignées par des collaborateurs.",
-      "source": "A02 et A03. B1 : C1.1.1, p. 3. B2 : déclaration de périmètre du dossier final. La répartition CP/DEV/QA reste simulée.",
-      "action": "",
-      "transition": "Une fois le travail réparti, je peux comparer le prévu et la prévision.",
+      "script": "Le scénario distingue un chef de projet, un développeur et une testeuse QA nommée Camille. Camille est un personnage fictif malentendant. Je lui confie la préparation des critères et la recette, selon ses compétences. Ce sont les tâches T02 et T07. Sa capacité reste de trente heures pour vingt-quatre heures prévues à terminaison.\n\nL'aménagement porte sur les échanges : consignes écrites, réunions sous-titrées et décisions accessibles après la réunion. Le chef de projet prépare ces modalités avec elle. Une heure de préparation est incluse dans les tâches de pilotage existantes. La matrice RACI conserve une autorité de décision par activité. Camille reste responsable de la recette et le client de l'acceptation du périmètre.",
+      "source": "A02 ; donnees/inclusion.json. Camille est un personnage fictif. C.3.1 : référentiel RNCP39583, p. 11-12. Capacités et charges du cas conservées.",
+      "action": "Présenter les trois rôles et identifier les missions T02/T07 de Camille. Distinguer sa capacité de sa charge prévue.",
+      "transition": "Je vérifie ensuite les écarts de charge avant d'engager le reste du lot.",
       "demo": false
     },
     {
@@ -482,26 +482,38 @@
     },
     {
       "number": 14,
-      "title": "Communication et adaptations",
+      "title": "Camille, QA malentendante",
       "minutes": 1.5,
-      "nature": "C3.3.1, dispositions du scénario",
-      "layout": "columns",
+      "nature": "C3.3.1, cas pédagogique fictif",
+      "layout": "table",
       "content": {
-        "items": [
+        "rows": [
           [
-            "Décisions accessibles",
-            "Ordre du jour en amont.\nSynthèse écrite et actions datées.\nLiens regroupés dans la tâche."
+            "Situation",
+            "Aménagement retenu"
           ],
           [
-            "Modalités adaptées",
-            "Supports structurés et sous-titrage.\nPauses et temps de pratique adaptés.\nFuseaux explicites et travail asynchrone."
+            "Réunions",
+            "Sous-titres testés, une personne parle à la fois."
+          ],
+          [
+            "Décisions",
+            "Synthèse écrite avec responsable et échéance."
+          ],
+          [
+            "Formation",
+            "Consignes écrites, démonstration sous-titrée."
           ]
+        ],
+        "widths": [
+          270,
+          882
         ]
       },
-      "script": "Les outils doivent aider l'équipe à retrouver une décision et à agir. Dans le cas présenté, Linear porte les tâches et les blocages. Git conserve les modifications. Les documents partagés regroupent les décisions et les comptes rendus. La visioconférence sert lorsqu'un échange direct est nécessaire.\n\nJ'envoie l'ordre du jour avant la réunion et je diffuse une synthèse qui précise l'action, son responsable et son échéance. Le Bloc 4 applique aussi ce principe dans son cas support fictif : contexte fonctionnel transmis au mainteneur, puis retour sur la cause et les vérifications.\n\nLes adaptations se discutent avec la personne concernée. Elles peuvent inclure un support structuré, du sous-titrage, des pauses ou davantage de temps pour un exercice. Je n'attribue pas de situation de handicap à une personne sans information. Le scénario prévoit une organisation adaptable.\n\nDans un contexte international, j'indique le fuseau des rendez-vous, j'explique les acronymes et je permets une préparation asynchrone. Je vérifie la compréhension par reformulation. L'absence de question ou le silence en réunion ne suffisent pas à établir que chacun a compris la priorité ou le résultat attendu.",
-      "source": "A02 et A05, inclusion et contexte international fictif. B4 : B4-C433-01, exemple de transmission support/mainteneur explicitement simulée, réutilisable comme méthode de communication.",
-      "action": "Donner un exemple d’action datée puis un exemple d’adaptation convenue.",
-      "transition": "La répartition du travail suppose également de connaître les compétences disponibles.",
+      "script": "Je rends la prise en compte du handicap concrète avec Camille, testeuse QA malentendante dans notre équipe fictive. Le besoin retenu dans ce scénario est d'accéder aux informations orales et de pouvoir participer aux décisions. Je définis les modalités avec elle, sans déduire ses compétences techniques de sa situation.\n\nPour les réunions, les sous-titres sont testés avant le point et une seule personne parle à la fois. L'ordre du jour est disponible à l'avance. Pour les décisions, le compte rendu indique l'action, son responsable et son échéance. Pour la formation, les consignes sont écrites et la démonstration est sous-titrée.\n\nJe prévois un contrôle à chaque étape. À J3, Camille doit pouvoir accéder au support et reformuler une consigne. À J10, elle doit retrouver la décision et son échéance dans la synthèse. À J14, elle doit réaliser un cas sans aide. Ce sont des critères du scénario, sans résultat réel annoncé. Si les sous-titres sont insuffisants, je reprends par écrit et j'ajuste les modalités avec elle. Le fonctionnement asynchrone aide aussi les personnes absentes ou dans un autre fuseau.",
+      "source": "A02, A05, A06 et donnees/inclusion.json. Cas fictif autorisé par le référentiel p. 11 ; critères C3.3.1 p. 12 et C3.3.2 p. 13. La note d’audit du 15 septembre distingue obligation de prise en compte et composition de l’équipe.",
+      "action": "Lire chaque situation et son aménagement. Terminer par les critères de vérification, sans annoncer un résultat réel.",
+      "transition": "La formation doit elle aussi être accessible et conduire à un résultat observable.",
       "demo": false
     },
     {
@@ -553,7 +565,7 @@
     },
     {
       "number": 16,
-      "title": "Plan de formation et vérification",
+      "title": "Une formation accessible à Camille",
       "minutes": 1.5,
       "nature": "C3.3.2, actions fictives intégrées au lot",
       "layout": "table",
@@ -587,10 +599,10 @@
         ],
         "takeaway": "6 h incluses dans les tâches. 60 € de ressources complémentaires fictives."
       },
-      "script": "Le plan prévoit une heure pour la lecture du tableau de bord par le chef de projet, deux heures sur la concurrence pour le développeur et trois heures sur la recette et le clavier pour QA. Ces six heures sont déjà incluses dans les tâches du planning. Les ajouter à nouveau créerait un double comptage de la charge.\n\nJe définis une preuve de réussite pour chaque action. Le chef de projet modifie le reste à faire et explique le nouvel écart. Le développeur explique pourquoi une seule inscription peut être acceptée sur une dernière place. QA exécute un scénario de manière autonome et décrit un contrôle au clavier.\n\nLa consultation d'un support ne suffit pas à démontrer l'acquisition. Je prévois une pratique, puis un second cas réalisé avec davantage d'autonomie. Si l'écart persiste, je réévalue l'accompagnement et sa charge.\n\nLe cas ne retient pas de recrutement permanent. Si une compétence critique reste indisponible, la demande de renfort aux RH doit préciser la mission, la durée, le budget et le résultat attendu. Cette fiche reste une proposition, sans envoi ni recrutement réellement effectué.",
-      "source": "A06, plan de développement et fiche RH fictive.",
-      "action": "Relier une heure de formation à un résultat observable, puis expliquer le non-double-comptage.",
-      "transition": "Les résultats du lot doivent enfin être partagés et validés avec le client.",
+      "script": "Le plan de formation comporte six heures : une heure pour le chef de projet, deux pour le développeur et trois pour Camille, notre testeuse QA fictive. Ces temps sont déjà compris dans les tâches du lot. Le budget de soixante euros correspond à des ressources complémentaires hypothétiques, sans achat déclaré.\n\nLes trois heures de Camille se répartissent entre deux heures de recette navigateur et une heure de parcours clavier. Elle reçoit les consignes écrites avant l'atelier. La démonstration est sous-titrée et les échanges restent disponibles par écrit. Elle réalise ensuite le même exercice technique que celui prévu pour le rôle QA. Le besoin d'aménagement ne modifie pas le niveau de compétence attendu.\n\nLa vérification porte sur son autonomie : rejouer un cas, expliquer les préconditions, identifier le résultat et retrouver la preuve. Si une instruction reste inaccessible, nous corrigeons le support. Si une difficulté technique persiste, nous prévoyons un accompagnement et réestimons la charge. Je distingue ainsi l'accessibilité de la formation de l'acquisition de la compétence. Les résultats de cet exercice restent à constater dans le scénario.",
+      "source": "A06 ; donnees/inclusion.json. Formation QA de 3 h dans T07, déjà comprise dans les 6 h du plan. Aménagements et évaluation simulés ; aucun résultat réel attesté.",
+      "action": "Montrer les 3 h QA du graphique, puis les supports adaptés et le critère de réussite autonome.",
+      "transition": "Ces modalités accompagnent les jalons de suivi et de validation du client fictif.",
       "demo": false
     },
     {

@@ -8,9 +8,17 @@
   "nativeCharts": 8,
   "chartWorkbooks": 8,
   "presentationMinutes": 30,
-  "pdfPages": 26,
+  "pdfPages": 27,
   "workbookSheets": 5,
   "workbookFormulas": 175,
-  "applicationTree": "69c2374f919f7876f4eaff477e7d5d68370b59d9",
-  "scope": "Cohérence documentaire et structure des exports ; aucun nouveau test applicatif ou dépôt externe."
+  "applicationTree": "9109ce976825a6536fa1c7219a2b5ef5e8c3b64c",
+  "verifiedApplicationTree": "69c2374f919f7876f4eaff477e7d5d68370b59d9",
+  "applicationMatchesDatedEvidence": false,
+  "inclusionCase": "Camille",
+  "inclusionSlides": [
+    6,
+    14,
+    16
+  ],
+  "scope": "Cohérence documentaire et structure des exports ; aucun nouveau test applicatif ou dépôt externe. Les tests conservent leur révision et leur date."
 }

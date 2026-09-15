@@ -1,0 +1,28 @@
+{
+  "nature": "Simulation pédagogique explicite, ajoutée le 15 septembre 2026",
+  "name": "Camille",
+  "role": "QA",
+  "fictional": true,
+  "situation": "Testeuse QA malentendante",
+  "tasks": ["T02", "T07"],
+  "capacityHours": 30,
+  "forecastHours": 24,
+  "adaptations": [
+    ["Réunions", "Sous-titres testés, une personne parle à la fois."],
+    ["Décisions", "Synthèse écrite avec responsable et échéance."],
+    ["Formation", "Consignes écrites, démonstration sous-titrée."]
+  ],
+  "preparationIncluded": [
+    {"task": "T03", "activity": "T03.3", "role": "CP", "hours": 0.5, "purpose": "Définir les modalités avec Camille"},
+    {"task": "T08", "activity": "T08.2", "role": "CP", "hours": 0.5, "purpose": "Préparer les synthèses et vérifier le sous-titrage"}
+  ],
+  "trainingIncluded": {"task": "T07", "role": "QA", "hours": 3, "split": "2 h de recette navigateur et 1 h de parcours clavier"},
+  "checkpoints": [
+    {"day": 3, "expected": "Camille accède aux supports et reformule une consigne"},
+    {"day": 10, "expected": "Camille retrouve la décision, le responsable et l'échéance dans la synthèse"},
+    {"day": 14, "expected": "Camille rejoue un cas de recette sans aide, avec les mêmes critères techniques"}
+  ],
+  "fallback": "Si les sous-titres ne suffisent pas, reprendre la consigne par écrit, vérifier sa compréhension et ajuster les modalités avec Camille.",
+  "budgetAssumption": "Préparation incluse dans les activités CP existantes et formation incluse dans T07. Outil de visioconférence adapté supposé déjà disponible dans le cas. Aucun achat ni heure supplémentaire ajouté. Si cette hypothèse ne tient pas, réestimer avant engagement.",
+  "scope": "Le cas décrit des besoins et des adaptations convenus dans une simulation. Il ne concerne aucune personne réelle et n'atteste aucun résultat réellement obtenu. Les niveaux de compétences QA décrivent les besoins techniques du projet, sans déduction liée au handicap."
+}

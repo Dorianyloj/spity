@@ -12,7 +12,7 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / 'docs/rncp/bloc-03'
 PDF = ROOT / 'output/pdf/dossier-bloc-03-spity.pdf'
-PPTX = ROOT / 'output/presentations/spity-bloc-3-30-minutes-visuel-v7.pptx'
+PPTX = ROOT / 'output/presentations/spity-bloc-3-30-minutes-visuel-v8.pptx'
 XLSX = ROOT / 'outputs/bloc03-01a09eba/pilotage-spity.xlsx'
 ZIP = ROOT / 'output/bloc-03/kit-soutenance-spity.zip'
 S = {'s':'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
@@ -49,6 +49,19 @@ def main(package):
     for t in tasks:
         for field in ['plannedHours','spentHours','remainingHours']:
             assert sum(x[field] for x in details if x['task']==t['id'])==t[field]
+    inclusion=read(DOCS/'donnees/inclusion.json')
+    assert inclusion['fictional'] and inclusion['role']=='QA'
+    assert roles['QA']['capacityHours']==inclusion['capacityHours']
+    qa_tasks=[t for t in tasks if t['role']=='QA']
+    assert {t['id'] for t in qa_tasks}==set(inclusion['tasks'])
+    assert sum(t['spentHours']+t['remainingHours'] for t in qa_tasks)==inclusion['forecastHours']
+    for allocation in inclusion['preparationIncluded']:
+        activity=next(x for x in details if x['id']==allocation['activity'])
+        task=next(t for t in tasks if t['id']==allocation['task'])
+        assert activity['task']==task['id'] and task['role']==allocation['role']
+        assert 0 < allocation['hours'] <= activity['plannedHours']
+    training=inclusion['trainingIncluded']
+    assert 0 < training['hours'] <= next(t for t in qa_tasks if t['id']==training['task'])['plannedHours']
     snapshot=read(DOCS/'donnees/linear-2026-09-14.json')
     from collections import Counter
     assert len(snapshot['issues'])==25
@@ -101,15 +114,23 @@ def main(package):
         chart_workbooks=[n for n in z.namelist() if '/embeddings/' in n and n.endswith('.xlsx')]
         assert len(chart_parts)==8, 'Les huit graphiques doivent rester natifs'
         assert len(chart_workbooks)==8, 'Chaque graphique doit conserver ses données intégrées'
+        for number in [6,14,16]:
+            visible=' '.join(ET.fromstring(z.read(f'ppt/slides/slide{number}.xml')).itertext())
+            assert inclusion['name'] in visible, f'Cas absent de la diapositive {number}'
+        assert 'fictif' in ' '.join(ET.fromstring(z.read('ppt/slides/slide14.xml')).itertext())
     reader=PdfReader(PDF)
     assert all(len(page.extract_text().strip())>90 for page in reader.pages)
     evidence=read(DOCS/'preuves/verification.json')
     current_tree=subprocess.check_output(['git','rev-parse','HEAD:spity'],cwd=ROOT,text=True).strip()
-    assert current_tree==evidence['applicationTree'], 'Le code applicatif diffère des preuves datées'
+    verified_tree=subprocess.check_output(['git','rev-parse',f"{evidence['gitRevision']}:spity"],cwd=ROOT,text=True).strip()
+    assert verified_tree==evidence['applicationTree'], 'La preuve doit correspondre à sa révision datée'
+    application_matches=current_tree==verified_tree
+    if not application_matches:
+        assert 'ne certifient pas la version courante' in (DOCS/'VERIFICATION.md').read_text(encoding='utf-8'), 'Documenter la portée historique des tests'
     assert not subprocess.check_output(['git','diff','HEAD','--','spity'],cwd=ROOT,text=True).strip()
     for capture in read(DOCS/'preuves/captures/manifest.json'):
         assert (DOCS/'preuves/captures'/capture['file']).exists()
-    report={'case':'simulation explicite','planningTasks':len(tasks),'baselineEUR':planned,'forecastEUR':forecast,'marginEUR':232,'slides':len(slides),'nativeCharts':len(chart_parts),'chartWorkbooks':len(chart_workbooks),'presentationMinutes':30,'pdfPages':len(reader.pages),'workbookSheets':len(sheets),'workbookFormulas':formulas,'applicationTree':current_tree,'scope':'Cohérence documentaire et structure des exports ; aucun nouveau test applicatif ou dépôt externe.'}
+    report={'case':'simulation explicite','planningTasks':len(tasks),'baselineEUR':planned,'forecastEUR':forecast,'marginEUR':232,'slides':len(slides),'nativeCharts':len(chart_parts),'chartWorkbooks':len(chart_workbooks),'presentationMinutes':30,'pdfPages':len(reader.pages),'workbookSheets':len(sheets),'workbookFormulas':formulas,'applicationTree':current_tree,'verifiedApplicationTree':verified_tree,'applicationMatchesDatedEvidence':application_matches,'inclusionCase':inclusion['name'],'inclusionSlides':[6,14,16],'scope':'Cohérence documentaire et structure des exports ; aucun nouveau test applicatif ou dépôt externe. Les tests conservent leur révision et leur date.'}
     (DOCS/'preuves/controle-kit.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
     if package:
         included=sorted([p for p in DOCS.rglob('*') if p.is_file() and p.name!='MANIFEST.sha256']+[p for p in (ROOT/'tools/bloc3').glob('*') if p.is_file()]+[PDF,PPTX,XLSX])
@@ -119,7 +140,7 @@ def main(package):
         ZIP.parent.mkdir(parents=True,exist_ok=True)
         with zipfile.ZipFile(ZIP,'w',zipfile.ZIP_DEFLATED) as z:
             for p in included: z.write(p,p.relative_to(ROOT).as_posix())
-            z.writestr('LIRE_EN_PREMIER.txt', 'KIT BLOC 3 SPITY\n\nDossier : output/pdf/dossier-bloc-03-spity.pdf\nSlides : output/presentations/spity-bloc-3-30-minutes-visuel-v7.pptx\nClasseur : outputs/bloc03-01a09eba/pilotage-spity.xlsx\nGuide et checklist : docs/rncp/bloc-03/\n\nLe diaporama comprend 22 slides pour 30 minutes, dont 6 de démonstration, et 3 annexes. Le guide contient le texte oral et les transitions. La durée effective se règle après une répétition chronométrée. Les situations de management sont fictives et identifiées. Les données personnelles et dates du campus restent à confirmer. Aucun dépôt externe effectué. La démonstration nécessite le dépôt Spity complet ; les fichiers techniques seuls ne contiennent pas toute l’application.\n')
+            z.writestr('LIRE_EN_PREMIER.txt', 'KIT BLOC 3 SPITY\n\nDossier : output/pdf/dossier-bloc-03-spity.pdf\nSlides : output/presentations/spity-bloc-3-30-minutes-visuel-v8.pptx\nClasseur : outputs/bloc03-01a09eba/pilotage-spity.xlsx\nGuide et checklist : docs/rncp/bloc-03/\n\nLe diaporama comprend 22 slides pour 30 minutes, dont 6 de démonstration, et 3 annexes. Le guide contient le texte oral et les transitions. La durée effective se règle après une répétition chronométrée. Les situations de management sont fictives et identifiées. Les données personnelles et dates du campus restent à confirmer. Aucun dépôt externe effectué. La démonstration nécessite le dépôt Spity complet ; les fichiers techniques seuls ne contiennent pas toute l’application.\n')
         with zipfile.ZipFile(ZIP) as z: assert z.testzip() is None
         report['zip']=str(ZIP.relative_to(ROOT))
         report['zipSHA256']=digest(ZIP)

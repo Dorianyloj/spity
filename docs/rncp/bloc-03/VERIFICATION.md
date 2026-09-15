@@ -2,6 +2,8 @@
 
 Contrôles exécutés le 14 septembre 2026. La révision de départ est dd2bee5 ; l'arbre applicatif correspondant est enregistré dans preuves/verification.json. Les modifications du kit concernent les documents et les outils de préparation.
 
+Portée vérifiée le 15 septembre : les commits ea957b6, 3742f56 et 67dedd8 ont ensuite modifié l'affichage et les filtres du matching. Les résultats ci-dessous restent ceux de la révision dd2bee5 et ne certifient pas la version courante. La révision documentaire sur Camille n'exécute pas une nouvelle recette applicative. Avant la soutenance, relancer les contrôles sur la version effectivement démontrée et actualiser les preuves.
+
 | Contrôle réellement exécuté | Résultat | Portée |
 | --- | --- | --- |
 | Lint | Réussi | Analyse ESLint du projet. |
@@ -23,6 +25,4 @@ Un avertissement décoratif VANTA « No THREE defined on window » est apparu pe
 
 Le classeur contrôle les totaux et le recalcul après modification du reste à faire, du taux horaire, d'une capacité nulle et d'une entrée manquante. Les entrées de test sont restaurées avant export. Les cinq feuilles sont rendues et inspectées. La révision du 14 septembre ajoute les 30 activités sources, le relevé Linear daté et les scénarios de sensibilité. Les 175 formules du classeur sont contrôlées sans erreur exportée. La valeur de 50 % désigne les cinq tâches terminées sur dix du cas fictif.
 
-Le PDF est rendu page par page pour vérifier les tableaux et les sauts de page. Le PowerPoint est contrôlé et rendu pour vérifier la lisibilité ; ces vérifications ne prétendent pas être une ouverture dans Microsoft PowerPoint. Les sources et la matrice permettent de retrouver les justifications.
-
-La checklist de remise contient les confirmations personnelles encore nécessaires : équipe et client réels, dates du campus, règlement spécial et appropriation orale. La présence des fichiers ne signifie pas que le dépôt sur DigiformaCertif a été effectué.
+PDF et PowerPoint sont rendus pour contrôler leur lisibilité, sans ouverture déclarée dans Microsoft PowerPoint. La checklist regroupe les confirmations restantes : équipe réelle, dates, règlement spécial et répétition. Aucun dépôt sur DigiformaCertif n'est effectué.

@@ -2,6 +2,8 @@
 
 Le support courant privilégie les graphiques, les chiffres lisibles et les captures de l'application. Les explications détaillées restent dans les notes du PowerPoint et dans le guide oral. La durée prévue reste de trente minutes, dont six de démonstration.
 
+Le cas d'inclusion ajouté le 15 septembre apparaît sur trois diapositives : 6 pour les missions de Camille, 14 pour le tableau des aménagements et les points de contrôle, 16 pour ses 3 h de formation adaptée. Camille est une testeuse QA malentendante fictive. Les modalités viennent de [inclusion.json](../donnees/inclusion.json) et d'A02/A05/A06. Le tableau de la diapositive 14 est modifiable ; les critères affichés ne sont pas des résultats réellement obtenus.
+
 ## Illustration de management
 
 - Fichier : [equipe-illustration.png](equipe-illustration.png), 1 536 × 1 024 pixels.

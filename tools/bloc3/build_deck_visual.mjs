@@ -4,7 +4,7 @@ import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 
-const root=process.cwd(),tmp=path.join(root,'tmp/bloc3/visual-v7');
+const root=process.cwd(),tmp=path.join(root,'tmp/bloc3/visual-v8');
 await fs.mkdir(tmp,{recursive:true});
 const modules=process.env.RUNTIME_NODE_MODULES??path.join(root,'tmp/bloc3/build/node_modules');
 process.env.RUNTIME_NODE_MODULES=modules;
@@ -50,7 +50,7 @@ for(const item of doc.slides){
   const s=P.slides.add();s.background.fill=paper;
   item.startMinute=elapsed;elapsed+=item.minutes;item.endMinute=elapsed;
   const alignedTitles={2:'Le besoin d’Altitude Grimpe',3:'Un projet, quatre blocs',4:'Le backlog Linear au 14 septembre',5:'Un lot sur quinze jours ouvrés',7:'Les causes des 5 heures supplémentaires',8:'Le budget du lot de démonstration',22:'La transmission à la maintenance',25:'Des contrôles datés et contextualisés'};
-  item.title=alignedTitles[item.number]??mainTitles[item.number]??item.title;
+  item.title=[6,14,16].includes(item.number)?item.title:alignedTitles[item.number]??mainTitles[item.number]??item.title;
   if(item.number===13)item.source+=' Illustration fictive générée avec ImageGen, visuels/equipe-illustration.png. Aucune personne réelle représentée.';
   if(item.number===19)item.source+=' Photo de marque existante escalade-falaise-gros-plan.jpeg, illustration de la pratique.';
   if(item.number===5)item.source+=' Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01.';
@@ -103,8 +103,8 @@ for(const item of doc.slides){
       takeaway(s,'Recette à J14. Démonstration à J15.',603);break;
     }
     case 6:
-      groups(s,[['30 h','Chef de projet','Organiser et arbitrer.'],['72 h','Développeur','Réaliser et corriger.'],['30 h','Testeur UX','Recetter les parcours.']],204);
-      takeaway(s,'Le client valide le périmètre aux trois jalons.',604);break;
+      groups(s,[['30 h','Chef de projet','Organiser et arbitrer.'],['72 h','Développeur','Réaliser et corriger.'],['30 h','Camille, QA','Critères et recette.\nT02 et T07.']],204);
+      takeaway(s,'Cas fictif : Camille est malentendante, les échanges sont adaptés.',604);break;
     case 7:
       chart(s,7,['Corrections','Recette','Événements','Accès','Planning'],[{name:'Écart en heures',values:['T10','T07','T06','T04','T03'].map(id=>{const t=pilotage.tasks.find(t=>t.id===id);return t.spentHours+t.remainingHours-t.plannedHours;}),valuesFormatCode:'+0" h";-0" h";0" h"',fill:orange,points:[{idx:0,fill:green}],dataLabelOverrides:[0,1,2,3,4].map(idx=>({idx,showValue:true,position:idx===0?'center':'outEnd',...(idx===0?{text:'Corrections −2 h'}:{}),textStyle:{typeface:font,fontSize:idx===0?22:26,bold:true,fill:idx===0?'#FFFFFF':ink}}))}],{position:{left:68,top:180,width:800,height:400},xAxis:{visible:true,tickLabelPosition:'low',textStyle:{typeface:font,fontSize:24,fill:ink},majorGridlines:null},yAxis:{visible:true,min:-3,max:3,majorUnit:1,numberFormatCode:'0" h"',textStyle:{typeface:font,fontSize:22,fill:ink},majorGridlines:{fill:'#DBDFD5',width:1}}});
       aside(s,'+5 h','Écart net prévu','112 h initiales\n117 h à terminaison');takeaway(s,'30 activités détaillées. 77 h consommées, 40 h restantes.',607);break;
@@ -138,14 +138,16 @@ for(const item of doc.slides){
       text(s,'QA',1068,203,145,55,34,true,green);text(s,'Stabiliser\nla recette',1042,275,175,130,28);
       takeaway(s,'Écouter les impacts, décider, puis suivre.',613);break;
     case 14:
-      groups(s,[['Avant','Préparer','Ordre du jour.\nSupports structurés.'],['Pendant','Comprendre','Reformulation.\nModalités adaptées.'],['Après','Retrouver','Décision écrite.\nActions datées.']],207);
-      takeaway(s,'Clavier, sous-titres, pauses et fuseaux explicites.',612);break;
+      text(s,'Personnage fictif. Modalités définies avec elle dans le scénario.',72,155,1136,55,27,false,muted);
+      table(s,item.content.rows,item.content.widths,14,233,304);
+      takeaway(s,'J3 : comprendre. J10 : retrouver. J14 : réaliser sans aide.',580);
+      text(s,'Critères de vérification prévus, résultats à constater.',72,632,1136,32,21,false,muted);break;
     case 15:
       chart(s,15,['CP','DEV','QA'],[{name:'Niveau du cas',values:[1,1,1],fill:sage},{name:'Cible',values:[2,2,2],fill:green}],{position:{left:68,top:182,width:795,height:410},hasLegend:true,dataLabels:{showValue:false},barOptions:{direction:'column',grouping:'clustered',gapWidth:85},yAxis:{min:0,max:3,majorUnit:1,textStyle:{typeface:font,fontSize:23,fill:ink},majorGridlines:{fill:'#DBDFD5',width:1}}});
       aside(s,'1 à 2','De l’aide à l’autonomie','Suivi des écarts.\nConcurrence.\nRecette et clavier.');break;
     case 16:{
       chart(s,16,['CP','DEV','QA'],[{name:'Formation',values:[1,2,3],valuesFormatCode:'0" h"',points:[{idx:0,fill:orange},{idx:1,fill:sage},{idx:2,fill:green}],dataLabelOverrides:[0,1,2].map(idx=>({idx,showValue:true,textStyle:{typeface:font,fontSize:28,bold:true,fill:idx===2?'#FFFFFF':ink}}))}],{type:'doughnut',position:{left:70,top:178,width:570,height:445},doughnutOptions:{holeSize:65},hasLegend:true,legend:{position:'bottom',textStyle:{typeface:font,fontSize:24,fill:ink}},dataLabels:{showValue:true,position:'center',textStyle:{typeface:font,fontSize:28,bold:true,fill:ink}}});
-      text(s,'6 h',295,327,270,100,64,true,green);text(s,'Pratiquer',734,218,460,65,38,true);text(s,'Puis réussir un cas\nen autonomie.',734,310,460,114,35);text(s,'Temps inclus dans les tâches.\n60 € de ressources fictives.',734,505,460,115,26);break;
+      text(s,'6 h',295,327,270,100,64,true,green);text(s,'Camille : 3 h adaptées',734,218,460,75,34,true);text(s,'Consignes écrites.\nDémonstration sous-titrée.\nPuis un cas en autonomie.',734,310,460,155,28);text(s,'Temps inclus dans les tâches.\n60 € de ressources fictives.',734,505,460,115,26);break;
     }
     case 17:
       groups(s,[['J3','Périmètre','CR01\nCritères attendus.'],['J10','Écarts','CR02\nDécision sur le lot.'],['J15','Validation','CR03\nAcceptation et réserves.']],205);
@@ -173,7 +175,7 @@ assert.equal(elapsed,30);assert.equal(doc.slides.length,25);
 await fs.writeFile(path.join(root,'docs/rncp/bloc-03/donnees/support-oral.json'),JSON.stringify(doc.slides,null,2)+'\n');
 await fs.writeFile(path.join(tmp,'chart-data.json'),JSON.stringify(chartContracts,null,2)+'\n');
 const candidate=path.join(tmp,'candidate.pptx');await(await PresentationFile.exportPptx(P)).save(candidate);
-const finalPath=path.join(root,'output/presentations/spity-bloc-3-30-minutes-visuel-v7.pptx');
+const finalPath=path.join(root,'output/presentations/spity-bloc-3-30-minutes-visuel-v8.pptx');
 await finalizePresentation({workspaceDir:root,candidatePath:candidate,finalPath,pythonExecutable:python,integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-heading-fit',...tableOwners.flatMap(n=>['--require-native-table-slide',String(n)])],requiredNativeTableOwnerSlides:tableOwners,requiredNativeChartOwnerSlides:chartOwners,materializeLiteralChartWorkbooks:true,fontPolicy:{basis:'design',families:[font]},verifyArtifactToolImport:true,receiptPath:path.join(tmp,'validation.json')});
 const checked=await PresentationFile.importPptx(await FileBlob.load(finalPath));
 for(let i=0;i<checked.slides.items.length;i++){const png=await checked.export({slide:checked.slides.items[i],format:'png',scale:1});await fs.writeFile(path.join(tmp,`slide-${String(i+1).padStart(2,'0')}.png`),new Uint8Array(await png.arrayBuffer()));}

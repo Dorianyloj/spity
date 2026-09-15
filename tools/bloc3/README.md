@@ -25,6 +25,7 @@ Le dossier se modifie dans docs/rncp/bloc-03/. Les valeurs du cas sont centralis
 | build_workbook.mjs | Classeur natif avec formules, contrôles de recalcul et rendus. |
 | write_30min_content.py | Contenu des 22 slides principales et des trois annexes, texte oral et transitions. |
 | bloc_context.py | Contexte issu des Blocs 1, 2 et 4, appliqué par write_30min_content.py aux notes, sources et titres du support courant. |
+| inclusion_context.py | Cas fictif de Camille lu dans inclusion.json, appliqué aux diapositives 6, 14 et 16 : missions, aménagements et formation. |
 | build_deck_visual.mjs | Version courante : 30 minutes, notes natives, 8 graphiques et leurs classeurs intégrés, tableaux modifiables, illustration et captures. Contrôles de structure et de géométrie, import et rendus. |
 | build_deck_30min.mjs | Générateur de la version précédente, conservée en archive. |
 | build_guide.py | Notes et timing à partir de donnees/support-oral.json. |

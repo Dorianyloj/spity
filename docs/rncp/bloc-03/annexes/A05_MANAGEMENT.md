@@ -1,6 +1,6 @@
 # A05 - Management et communication
 
-Nature : mise en situation fictive. Les rôles DEV, QA et client ne correspondent pas à des personnes réellement interrogées.
+Nature : mise en situation fictive. Les rôles DEV, QA et client ne correspondent pas à des personnes réellement interrogées. QA est représenté par Camille, testeuse fictive malentendante, comme dans A02.
 
 ## Cadre de communication
 
@@ -33,6 +33,16 @@ Le scénario prévoit 29 h CP pour 30 h disponibles. Cette marge d'une heure est
 
 ## Inclusion et contexte international
 
-Les supports sont envoyés en avance, structurés par titres et lisibles au clavier. Le sous-titrage, les pauses ou un temps supplémentaire sont possibles selon les besoins exprimés. Une démonstration n'utilise pas uniquement la couleur pour signaler un état. Les tâches sont réparties selon les compétences et les disponibilités, avec un aménagement convenu si nécessaire.
+Pour Camille, les modalités du cas sont concrètes : supports écrits avant la réunion, sous-titres testés et une seule personne qui parle à la fois. La synthèse écrite comporte chaque décision, son responsable et son échéance. Le chef de projet lui propose de reformuler l'action attendue et ajuste le support avec elle si un élément reste inaccessible. Un silence en réunion ne vaut pas accord.
+
+Lors du désaccord DEV/QA à J10, chacun prépare ses arguments par écrit. Camille dispose du même temps de contribution que DEV. Le CP consigne l'arbitrage dans CR02 et rend la prochaine action retrouvable sans devoir réécouter l'échange oral. Si le sous-titrage ne suffit pas, les points clés sont repris par écrit avant de poursuivre la décision.
+
+| Point de contrôle prévu | Critère observable | Trace à produire dans le scénario |
+| --- | --- | --- |
+| J3 : accéder et comprendre | Camille accède au support et reformule une consigne. | Vérification d'accès et reformulation de la consigne. |
+| J10 : retrouver la décision | Camille retrouve l'action, le responsable et l'échéance dans la synthèse. | Référence à la décision de CR02. |
+| J14 : réaliser sans aide | Camille rejoue un cas de recette et explique le résultat. | Cas, préconditions, résultat et preuve de recette. |
+
+Ces vérifications sont planifiées, sans résultat réel attesté. En cas d'échec, le CP distingue une information inaccessible d'un besoin de formation technique, corrige la cause et réestime le travail restant si nécessaire. A02 précise l'heure de préparation CP déjà comprise dans T03 et T08 ; A06 décrit la formation. Les supports restent structurés et utilisables au clavier ; une démonstration n'utilise pas uniquement la couleur pour signaler un état.
 
 Dans une équipe internationale fictive, le compte rendu devient la référence commune. Les fuseaux sont explicites, les acronymes sont expliqués et la confirmation de compréhension passe par une reformulation. Une personne indisponible en réunion peut contribuer avant et après le point synchrone.

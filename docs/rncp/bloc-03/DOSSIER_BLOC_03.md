@@ -53,7 +53,9 @@ Les ressources sont trois rôles, une machine de développement, Node.js 22 comm
 
 La matrice RACI d'A02 affecte un seul responsable de décision par activité. Le développeur réalise les fonctions, QA prépare et exécute la recette, le chef de projet organise et arbitre, le client valide le périmètre et les résultats attendus. Les rôles sont distincts même lorsqu'une personne réelle pourrait en cumuler plusieurs.
 
-Le cadre de travail prévoit des documents structurés, un ordre du jour envoyé avant les réunions, une synthèse écrite et des outils accessibles au clavier. En cas de besoin identifié, le responsable adapte les modalités avec la personne concernée : sous-titrage, temps supplémentaire, pauses, support compatible avec un lecteur d'écran ou matériel adapté. Aucune situation de handicap réelle n'est attribuée à un collaborateur sans information fournie.
+Le rôle QA est incarné par Camille, testeuse malentendante entièrement fictive. Elle prépare les critères T02 et réalise la recette T07 selon ses compétences, avec 30 h disponibles pour 24 h prévues à terminaison. Le scénario prévoit de convenir avec elle de consignes écrites, de réunions sous-titrées et d'une synthèse des décisions avec responsable et échéance. A02 précise les responsabilités ; aucune situation de santé n'est attribuée à une personne réelle.
+
+La préparation des aménagements est comprise dans les tâches existantes : 0,5 h CP dans T03.3 et 0,5 h CP dans T08.2. L'outil de visioconférence est supposé déjà fournir un sous-titrage adapté. Ces hypothèses conservent les charges et le budget du lot ; si elles ne suffisent pas, le CP réestime avant engagement. Le cas est explicité dans donnees/inclusion.json et visible sur les diapositives 6, 14 et 16.
 
 Dans un contexte multiculturel ou international simulé, les décisions sont rédigées en français simple et les termes techniques sont expliqués dans un glossaire. Les horaires indiquent le fuseau Europe/Paris ; une décision peut être préparée de façon asynchrone. La compréhension est vérifiée par reformulation, et non déduite du silence en réunion.
 
@@ -102,7 +104,9 @@ Dans la simulation, j'utilise un style participatif pour estimer et répartir le
 
 La situation analysée dans A05 met en scène une demande de nouvelle fonctionnalité alors que QA attend un parcours stable. Une réponse uniquement directive ferait taire le désaccord sans traiter la surcharge. Je fais expliciter les impacts par chaque rôle, conserve les critères de qualité et propose au client un report documenté de la demande. La décision et ses conséquences restent accessibles à tous.
 
-Les outils ont chacun une finalité : Linear pour tâches et blocages, Git pour les changements, Markdown pour décisions et comptes rendus, visioconférence pour les échanges synchrones. Les liens utiles sont regroupés dans la même tâche afin d'éviter une décision perdue dans une conversation. A05 contient le protocole d'animation, les aménagements possibles et le retour critique.
+Les outils ont chacun une finalité : Linear pour tâches et blocages, Git pour les changements, Markdown pour décisions et comptes rendus, visioconférence pour les échanges synchrones. Les liens utiles sont regroupés dans la même tâche afin d'éviter une décision perdue dans une conversation. A05 contient le protocole d'animation, les aménagements de Camille et le retour critique. Une seule personne parle à la fois, les sous-titres sont testés et les informations inaccessibles sont reprises par écrit avant de poursuivre.
+
+Les contrôles prévus sont observables : à J3, Camille accède au support et reformule une consigne ; à J10, elle retrouve la décision, le responsable et l'échéance ; à J14, elle réalise un cas de recette sans aide. Ce sont des critères du scénario, sans résultat réel attesté. Un échec conduit à identifier si le besoin concerne l'accès à l'information ou la compétence technique, puis à ajuster le support ou l'accompagnement.
 
 ## 8. C3.3.2 - Évaluation et développement des compétences
 
@@ -110,7 +114,7 @@ La grille A06 utilise une échelle explicite : 0 non abordé, 1 réalisé avec a
 
 Les écarts retenus concernent les transactions et la concurrence pour DEV, les tests navigateur et l'accessibilité pour QA, ainsi que le pilotage de la charge pour CP. Le plan prévoit des ateliers courts intégrés aux tâches, de la pratique accompagnée et une vérification par un résultat observable. La formation n'est pas déclarée réussie parce qu'un lien a été consulté.
 
-L'efficacité est vérifiée par une démonstration ou un exercice : deux inscriptions concurrentes sur une dernière place, scénario navigateur reproductible, contrôle au clavier et mise à jour autonome du tableau de bord. Les contenus restent adaptables au profil et aux besoins d'accessibilité. Le budget de formation fictif de 60 EUR couvre des ressources complémentaires ; le temps d'apprentissage est inclus dans les charges, sans double comptage.
+L'efficacité est vérifiée par une démonstration ou un exercice : deux inscriptions concurrentes sur une dernière place, scénario navigateur reproductible, contrôle au clavier et mise à jour autonome du tableau de bord. Le plan de 6 h comprend 1 h CP dans T03, 2 h DEV dans T06 et 3 h QA dans T07. Pour Camille, les 2 h de recette navigateur et l'heure de parcours clavier utilisent des consignes écrites, une démonstration sous-titrée et des échanges disponibles par écrit. Le critère technique reste la réalisation autonome d'un cas. Les écarts de compétences QA ne sont pas déduits de sa malentendance. Le budget de formation fictif de 60 EUR couvre des ressources complémentaires ; le temps d'apprentissage est inclus dans les charges, sans double comptage.
 
 Dans ce cas de courte durée, un recrutement permanent n'est pas retenu. Si la compétence critique reste indisponible et bloque le jalon, le chef de projet transmet aux RH une demande de renfort précisant mission, compétence, durée, charge, budget et critères de sélection. A06 propose la fiche correspondante sans prétendre qu'elle a été envoyée.
 

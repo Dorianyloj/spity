@@ -20,7 +20,7 @@ for name,file in [('Arial','arial.ttf'),('Arial-Bold','arialbd.ttf'),('Arial-Ita
 pdfmetrics.registerFontFamily('Arial',normal='Arial',bold='Arial-Bold',italic='Arial-Italic',boldItalic='Arial-Bold')
 INK=colors.HexColor('#18312D'); GREEN=colors.HexColor('#246B58'); LIGHT=colors.HexColor('#EAF1ED')
 styles={
-    'body':ParagraphStyle('body',fontName='Arial',fontSize=9.8,leading=13.5,spaceAfter=6,textColor=INK,allowWidows=0,allowOrphans=0),
+    'body':ParagraphStyle('body',fontName='Arial',fontSize=9.8,leading=13,spaceAfter=6,textColor=INK,allowWidows=0,allowOrphans=0),
     'h1':ParagraphStyle('h1',fontName='Arial-Bold',fontSize=24,leading=29,spaceAfter=16,textColor=INK,keepWithNext=True),
     'h2':ParagraphStyle('h2',fontName='Arial-Bold',fontSize=15,leading=20,spaceBefore=12,spaceAfter=9,textColor=GREEN,keepWithNext=True),
     'h3':ParagraphStyle('h3',fontName='Arial-Bold',fontSize=11,leading=15,spaceBefore=8,spaceAfter=6,keepWithNext=True),
@@ -44,6 +44,7 @@ def markdown(path):
         line=lines[i].strip()
         if line.startswith('```'): code=not code; i+=1; continue
         if not line: i+=1; continue
+        if line=='<!-- pagebreak -->': story.append(PageBreak()); i+=1; continue
         if code:
             story.append(Paragraph(inline(line),styles['code'])); i+=1; continue
         if line.startswith('|'):
@@ -87,7 +88,7 @@ def footer(canvas,doc):
 
 def main():
     OUTPUT.parent.mkdir(parents=True,exist_ok=True)
-    story=[Spacer(1,32*mm),Paragraph('SPITY',ParagraphStyle('cover',fontName='Arial-Bold',fontSize=45,leading=50,textColor=GREEN)),Spacer(1,10*mm),Paragraph('Coordonner et piloter<br/>un projet logiciel',styles['h1']),Paragraph('Dossier de soutenance - Bloc 3',styles['h2']),Paragraph('Dorian Joly<br/>Expert en développement logiciel - RNCP39583<br/>Préparation du 14 septembre 2026',styles['body']),Spacer(1,12*mm),Paragraph('Réalisations vérifiables du projet et mise en situation pédagogique explicitement identifiée. Le dossier accompagne un oral de 30 minutes, démonstration incluse, suivi de 15 minutes de questions.',styles['body']),PageBreak()]
+    story=[Spacer(1,32*mm),Paragraph('SPITY',ParagraphStyle('cover',fontName='Arial-Bold',fontSize=45,leading=50,textColor=GREEN)),Spacer(1,10*mm),Paragraph('Coordonner et piloter<br/>un projet logiciel',styles['h1']),Paragraph('Dossier de soutenance - Bloc 3',styles['h2']),Paragraph('Dorian Joly<br/>Expert en développement logiciel - RNCP39583<br/>Révision documentaire du 15 septembre 2026',styles['body']),Spacer(1,12*mm),Paragraph('Réalisations vérifiables du projet et mise en situation pédagogique explicitement identifiée. Le dossier accompagne un oral de 30 minutes, démonstration incluse, suivi de 15 minutes de questions.',styles['body']),PageBreak()]
     files=[DOCS/'DOSSIER_BLOC_03.md',DOCS/'MATRICE_PREUVES.md',*sorted((DOCS/'annexes').glob('A*.md')),DOCS/'VERIFICATION.md']
     for n,f in enumerate(files):
         if not f.exists():raise FileNotFoundError(f)

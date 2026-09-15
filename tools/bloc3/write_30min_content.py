@@ -188,6 +188,8 @@ from bloc_context import align
 align(slides)
 from linear_context import align as align_linear
 align_linear(slides)
+from inclusion_context import align as align_inclusion
+align_inclusion(slides)
 
 assert len(slides)==25
 assert sum(s['minutes'] for s in slides)==30

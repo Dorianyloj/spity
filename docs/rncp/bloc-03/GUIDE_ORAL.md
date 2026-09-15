@@ -1,6 +1,6 @@
 # Guide de répétition — Bloc 3 Spity
 
-Support associé : spity-bloc-3-30-minutes-visuel-v7.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
+Support associé : spity-bloc-3-30-minutes-visuel-v8.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
 
 ## Fil conducteur
 
@@ -17,7 +17,7 @@ Le texte oral ci-dessous développe chaque diapositive et propose ses transition
 | 3 | Un projet, quatre blocs | 01:00 | 02:30 |
 | 4 | Le backlog Linear au 14 septembre | 01:30 | 04:00 |
 | 5 | Un lot sur quinze jours ouvrés | 01:30 | 05:30 |
-| 6 | Qui fait quoi ? | 01:00 | 06:30 |
+| 6 | Les missions et les aménagements | 01:00 | 06:30 |
 | 7 | Les causes des 5 heures supplémentaires | 01:30 | 08:00 |
 | 8 | Le budget du lot de démonstration | 01:30 | 09:30 |
 | 9 | Le chef de projet approche sa limite | 01:00 | 10:30 |
@@ -25,9 +25,9 @@ Le texte oral ci-dessous développe chaque diapositive et propose ses transition
 | 11 | Le choix du build standalone | 02:00 | 13:30 |
 | 12 | Une demande qui dépasse le lot | 01:30 | 15:00 |
 | 13 | Un désaccord à traiter ensemble | 01:30 | 16:30 |
-| 14 | La décision doit rester accessible | 01:30 | 18:00 |
+| 14 | Camille, QA malentendante | 01:30 | 18:00 |
 | 15 | La cible : l’autonomie | 01:00 | 19:00 |
-| 16 | 6 heures pour réduire les écarts | 01:30 | 20:30 |
+| 16 | Une formation accessible à Camille | 01:30 | 20:30 |
 | 17 | Trois rendez-vous pour décider | 01:30 | 22:00 |
 | 18 | La satisfaction reste à mesurer | 01:00 | 23:00 |
 | 19 | Place à la démonstration | 00:30 | 23:30 |
@@ -133,23 +133,25 @@ Pour tenir ces jalons, chacun doit connaître sa responsabilité.
 
 Source : A01. donnees/pilotage.json. B1 : C1.4.1, p. 7-8, estimation globale et jalons distincts du lot B3. Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01.
 
-### 6. Qui fait quoi ?
+### 6. Les missions et les aménagements
 
-Repère : 05:30 à 06:30. Nature : C.3.1, équipe fictive du cas.
+Repère : 05:30 à 06:30. Nature : C.3.1, équipe et situation fictives.
 
 **Texte oral proposé**
 
-Le Bloc 2 décrit les réalisations de Dorian. Ici, le scénario répartit les responsabilités entre trois rôles fictifs : chef de projet, développeur et testeur UX. Leurs capacités représentent respectivement trente, soixante-douze et trente heures sur le lot. Le client intervient aux points de validation.
+Le scénario distingue un chef de projet, un développeur et une testeuse QA nommée Camille. Camille est un personnage fictif malentendant. Je lui confie la préparation des critères et la recette, selon ses compétences. Ce sont les tâches T02 et T07. Sa capacité reste de trente heures pour vingt-quatre heures prévues à terminaison.
 
-La matrice RACI précise qui réalise, qui décide, qui doit être consulté et qui doit être informé. Une seule autorité de décision est désignée pour chaque activité. Par exemple, le développeur corrige une fonction, QA vérifie le résultat et le chef de projet suit la clôture. Le client reste responsable de l'acceptation du périmètre.
+L'aménagement porte sur les échanges : consignes écrites, réunions sous-titrées et décisions accessibles après la réunion. Le chef de projet prépare ces modalités avec elle. Une heure de préparation est incluse dans les tâches de pilotage existantes. La matrice RACI conserve une autorité de décision par activité. Camille reste responsable de la recette et le client de l'acceptation du périmètre.
 
-Cette organisation évite les tâches sans responsable et les validations implicites. Les capacités restent des hypothèses du cas. Elles ne correspondent pas à des feuilles de temps réellement renseignées par des collaborateurs.
+**À montrer ou manipuler**
+
+Présenter les trois rôles et identifier les missions T02/T07 de Camille. Distinguer sa capacité de sa charge prévue.
 
 **Transition**
 
-Une fois le travail réparti, je peux comparer le prévu et la prévision.
+Je vérifie ensuite les écarts de charge avant d'engager le reste du lot.
 
-Source : A02 et A03. B1 : C1.1.1, p. 3. B2 : déclaration de périmètre du dossier final. La répartition CP/DEV/QA reste simulée.
+Source : A02 ; donnees/inclusion.json. Camille est un personnage fictif. C.3.1 : référentiel RNCP39583, p. 11-12. Capacités et charges du cas conservées.
 
 ### 7. Les causes des 5 heures supplémentaires
 
@@ -299,29 +301,27 @@ Cette organisation doit permettre à chacun de comprendre et de contribuer.
 
 Source : A05, situation analysée et analyse critique. Illustration fictive générée avec ImageGen, visuels/equipe-illustration.png. Aucune personne réelle représentée.
 
-### 14. La décision doit rester accessible
+### 14. Camille, QA malentendante
 
-Repère : 16:30 à 18:00. Nature : C3.3.1, dispositions du scénario.
+Repère : 16:30 à 18:00. Nature : C3.3.1, cas pédagogique fictif.
 
 **Texte oral proposé**
 
-Les outils doivent aider l'équipe à retrouver une décision et à agir. Dans le cas présenté, Linear porte les tâches et les blocages. Git conserve les modifications. Les documents partagés regroupent les décisions et les comptes rendus. La visioconférence sert lorsqu'un échange direct est nécessaire.
+Je rends la prise en compte du handicap concrète avec Camille, testeuse QA malentendante dans notre équipe fictive. Le besoin retenu dans ce scénario est d'accéder aux informations orales et de pouvoir participer aux décisions. Je définis les modalités avec elle, sans déduire ses compétences techniques de sa situation.
 
-J'envoie l'ordre du jour avant la réunion et je diffuse une synthèse qui précise l'action, son responsable et son échéance. Le Bloc 4 applique aussi ce principe dans son cas support fictif : contexte fonctionnel transmis au mainteneur, puis retour sur la cause et les vérifications.
+Pour les réunions, les sous-titres sont testés avant le point et une seule personne parle à la fois. L'ordre du jour est disponible à l'avance. Pour les décisions, le compte rendu indique l'action, son responsable et son échéance. Pour la formation, les consignes sont écrites et la démonstration est sous-titrée.
 
-Les adaptations se discutent avec la personne concernée. Elles peuvent inclure un support structuré, du sous-titrage, des pauses ou davantage de temps pour un exercice. Je n'attribue pas de situation de handicap à une personne sans information. Le scénario prévoit une organisation adaptable.
-
-Dans un contexte international, j'indique le fuseau des rendez-vous, j'explique les acronymes et je permets une préparation asynchrone. Je vérifie la compréhension par reformulation. L'absence de question ou le silence en réunion ne suffisent pas à établir que chacun a compris la priorité ou le résultat attendu.
+Je prévois un contrôle à chaque étape. À J3, Camille doit pouvoir accéder au support et reformuler une consigne. À J10, elle doit retrouver la décision et son échéance dans la synthèse. À J14, elle doit réaliser un cas sans aide. Ce sont des critères du scénario, sans résultat réel annoncé. Si les sous-titres sont insuffisants, je reprends par écrit et j'ajuste les modalités avec elle. Le fonctionnement asynchrone aide aussi les personnes absentes ou dans un autre fuseau.
 
 **À montrer ou manipuler**
 
-Donner un exemple d’action datée puis un exemple d’adaptation convenue.
+Lire chaque situation et son aménagement. Terminer par les critères de vérification, sans annoncer un résultat réel.
 
 **Transition**
 
-La répartition du travail suppose également de connaître les compétences disponibles.
+La formation doit elle aussi être accessible et conduire à un résultat observable.
 
-Source : A02 et A05, inclusion et contexte international fictif. B4 : B4-C433-01, exemple de transmission support/mainteneur explicitement simulée, réutilisable comme méthode de communication.
+Source : A02, A05, A06 et donnees/inclusion.json. Cas fictif autorisé par le référentiel p. 11 ; critères C3.3.1 p. 12 et C3.3.2 p. 13. La note d’audit du 15 septembre distingue obligation de prise en compte et composition de l’équipe.
 
 ### 15. La cible : l’autonomie
 
@@ -341,29 +341,27 @@ Je transforme ces écarts en actions courtes, avec une vérification du résulta
 
 Source : A06, grille de compétences du scénario.
 
-### 16. 6 heures pour réduire les écarts
+### 16. Une formation accessible à Camille
 
 Repère : 19:00 à 20:30. Nature : C3.3.2, actions fictives intégrées au lot.
 
 **Texte oral proposé**
 
-Le plan prévoit une heure pour la lecture du tableau de bord par le chef de projet, deux heures sur la concurrence pour le développeur et trois heures sur la recette et le clavier pour QA. Ces six heures sont déjà incluses dans les tâches du planning. Les ajouter à nouveau créerait un double comptage de la charge.
+Le plan de formation comporte six heures : une heure pour le chef de projet, deux pour le développeur et trois pour Camille, notre testeuse QA fictive. Ces temps sont déjà compris dans les tâches du lot. Le budget de soixante euros correspond à des ressources complémentaires hypothétiques, sans achat déclaré.
 
-Je définis une preuve de réussite pour chaque action. Le chef de projet modifie le reste à faire et explique le nouvel écart. Le développeur explique pourquoi une seule inscription peut être acceptée sur une dernière place. QA exécute un scénario de manière autonome et décrit un contrôle au clavier.
+Les trois heures de Camille se répartissent entre deux heures de recette navigateur et une heure de parcours clavier. Elle reçoit les consignes écrites avant l'atelier. La démonstration est sous-titrée et les échanges restent disponibles par écrit. Elle réalise ensuite le même exercice technique que celui prévu pour le rôle QA. Le besoin d'aménagement ne modifie pas le niveau de compétence attendu.
 
-La consultation d'un support ne suffit pas à démontrer l'acquisition. Je prévois une pratique, puis un second cas réalisé avec davantage d'autonomie. Si l'écart persiste, je réévalue l'accompagnement et sa charge.
-
-Le cas ne retient pas de recrutement permanent. Si une compétence critique reste indisponible, la demande de renfort aux RH doit préciser la mission, la durée, le budget et le résultat attendu. Cette fiche reste une proposition, sans envoi ni recrutement réellement effectué.
+La vérification porte sur son autonomie : rejouer un cas, expliquer les préconditions, identifier le résultat et retrouver la preuve. Si une instruction reste inaccessible, nous corrigeons le support. Si une difficulté technique persiste, nous prévoyons un accompagnement et réestimons la charge. Je distingue ainsi l'accessibilité de la formation de l'acquisition de la compétence. Les résultats de cet exercice restent à constater dans le scénario.
 
 **À montrer ou manipuler**
 
-Relier une heure de formation à un résultat observable, puis expliquer le non-double-comptage.
+Montrer les 3 h QA du graphique, puis les supports adaptés et le critère de réussite autonome.
 
 **Transition**
 
-Les résultats du lot doivent enfin être partagés et validés avec le client.
+Ces modalités accompagnent les jalons de suivi et de validation du client fictif.
 
-Source : A06, plan de développement et fiche RH fictive.
+Source : A06 ; donnees/inclusion.json. Formation QA de 3 h dans T07, déjà comprise dans les 6 h du plan. Aménagements et évaluation simulés ; aucun résultat réel attesté.
 
 ### 17. Trois rendez-vous pour décider
 
@@ -535,7 +533,7 @@ Source : B2 : 16_DOSSIER_FINAL_BC02, Résultats vérifiés, 23 juillet 2026. B4 
 8. **Quelle preuve existe pour votre arbitrage réel ?** Le commit 689e59d du 20 juillet décrit le passage de la recette CI au standalone. Les résultats des runs sont rapportés par le dossier historique ; la comparaison des options est une analyse rétrospective. Ne pas la présenter comme un compte rendu rédigé à l'époque.
 9. **Comment traitez-vous un conflit DEV/QA ?** Faire expliciter les impacts, identifier les critères non négociables, comparer charge et échéance, décider puis rendre la décision accessible. A05 décrit une situation fictive et critique les limites d'une réponse seulement directive.
 10. **Comment équilibrez-vous la charge ?** Comparer charge et capacité par rôle, pas seulement leur somme. CP est à 29/30 h, DEV à 64/72 h et QA à 24/30 h. Un transfert suppose la compétence nécessaire et doit préserver l'indépendance de la recette.
-11. **Que change une situation de handicap ou une équipe internationale ?** Convenir des besoins avec la personne : supports structurés, sous-titres, clavier, pauses et modalités adaptées. Prévoir horaires avec fuseau, préparation asynchrone et reformulation des décisions. Ne pas inventer de diagnostic ou de situation réelle.
+11. **Que change une situation de handicap ou une équipe internationale ?** Présenter Camille, QA malentendante fictive : consignes écrites, sous-titres testés, une personne parle à la fois, décisions avec responsable et échéance. Expliquer les contrôles attendus à J3, J10 et J14, sans annoncer de résultat réel. Ses 3 h de formation dans T07 utilisent des consignes écrites et une démonstration sous-titrée. Prévoir horaires avec fuseau, préparation asynchrone et reformulation des décisions. Ne pas inventer de diagnostic ou de situation réelle.
 12. **Comment prouvez-vous l'efficacité d'une formation ?** Définir un niveau attendu, un exercice observable et un contrôle après pratique. Exemples : inscriptions concurrentes, scénario navigateur reproductible et mise à jour autonome du tableau de bord. Les ateliers du cas ne sont pas déclarés réellement suivis.
 13. **Quel client a validé et est-il satisfait ?** Aucun résultat réel n'est disponible dans les éléments fournis. Les trois comptes rendus sont simulés, avec Claire Martin pour le Collectif Altitude Grimpe, commanditaire fictif du Bloc 1. Les objectifs de NPS du cadrage ne sont pas des résultats. Le dispositif proposé mesure critères acceptés, réussite sans aide, utilité et blocages, avec date et nombre de répondants. Présenter les retours réels seulement lorsqu'ils existent.
 14. **Que prouvent vos vérifications ?** Le 14 septembre, lint, typage, build, 389 tests unitaires et six scénarios navigateur ont réussi. La recette locale utilise next dev et une MariaDB dédiée. Elle ne prouve ni une validation client, ni une recette actuelle du déploiement distant, ni une couverture de 100 %. Les 126 tests du Bloc 2 en juillet et les 152 tests Jest du Bloc 4 en août décrivent d’autres périmètres datés ; ne pas les additionner.
