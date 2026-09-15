@@ -208,3 +208,22 @@ Le support affecte un seul A par activité. **RASCI** ajoute **S, Support** : ap
 | **B1-L01…** | Identifiants ajoutés pour repérer les neuf lots repris du diaporama Bloc 1. |
 
 **Exemple de traduction complète :** « À J10, la prévision à terminaison dépasse la référence initiale, mais reste sous le plafond. » Cela veut dire : « Au dixième jour du cas, on estime que finir coûtera plus cher que prévu au départ. On reste toutefois dans la limite qui inclut la réserve pour imprévus. »
+
+## Question d'oral : le PO et la délégation
+
+La question rapportée par un ami est : « Est-ce que le PO était quantitatif ou s'il déléguait ? » Le mot exact reste incertain. **Quantitatif** signifie fondé sur des quantités ou des chiffres. Cela ne s'oppose pas à la délégation. Si la question portait sur le style de management, un mot comme directif ou participatif a peut-être été employé. Il faut garder cette interprétation comme une hypothèse.
+
+**PO** signifie **Product Owner**. En Scrum, il est responsable de la valeur du produit et de la gestion du backlog produit. Il peut déléguer des activités de cette gestion tout en conservant sa responsabilité. Les Developers organisent leur travail technique. Le PO n'est pas automatiquement leur supérieur hiérarchique. [Guide Scrum officiel, responsabilités de l'équipe et du PO, p. 6-7](https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-French.pdf).
+
+| Mot possible | Comportement concret |
+| --- | --- |
+| Directif | Donne une consigne précise et fixe les limites. |
+| Participatif | Demande les avis et construit la décision avec les personnes concernées. |
+| Délégatif | Confie un résultat et laisse une autonomie définie, avec un suivi convenu. |
+| Quantitatif | S'appuie sur des chiffres, par exemple le taux de réussite des inscriptions. |
+
+Ces comportements peuvent se combiner. Pour répondre au jury, décris une situation, la décision concernée et l'autonomie laissée à chacun.
+
+**Exemple pédagogique si un projet possède réellement un PO :** « Le PO discutait des priorités avec l'équipe. Il pouvait confier la préparation des éléments du backlog tout en gardant la responsabilité de leur ordre. Les développeurs décidaient de l'implémentation technique. » Cet exemple n'atteste pas l'organisation réelle du projet de l'ami.
+
+**Pour le cas Spity présenté :** « Dans mon scénario, je prévois une posture participative pour comparer les options et une délégation sur les choix techniques. Le développeur propose l'implémentation, QA prépare les tests et CP organise le suivi. Le client confirme les priorités métier. » Les rôles du cas restent CP/DEV/QA/CL, sans PO officiellement établi dans les éléments disponibles.
