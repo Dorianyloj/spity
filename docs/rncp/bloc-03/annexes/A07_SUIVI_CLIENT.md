@@ -18,6 +18,14 @@ Le développement des événements est prévu à J12 au lieu de J11. La recette 
 
 Décision fictive : reporter cette demande et maintenir les critères de recette. DEV termine T06 puis traite T10 ; QA clôt T07 après la vérification des corrections ; CP suit quotidiennement les écarts et prépare la restitution. La réserve restante est de 232 EUR. Tout nouvel écart qui dépasse cette marge déclenche une nouvelle décision client.
 
+| Prochaine action du compte rendu | Responsable | Échéance du cas | Condition de clôture |
+| --- | --- | --- | --- |
+| Terminer les événements T06 | DEV | J12, au lieu de J11 | Critères événement et capacité vérifiés. |
+| Clore la recette T07 après T10 | Camille, QA | J14, au lieu de J13 | Cas rejoués, corrections contrôlées, réserves décrites. |
+| Préparer la décision finale | CP | J15 | Version et grille de validation accessibles au client. |
+
+Ressources communes : [planning A01](A01_PLANNING.md), [arbitrage A04](A04_ARBITRAGES.md) et grille de critères ci-dessous. Dans l'exercice, le CP dépose la synthèse écrite au même emplacement partagé et vérifie que chaque rôle retrouve sa prochaine action. Les liens sont disponibles dans ce kit ; aucune diffusion réelle à des interlocuteurs n'est attestée.
+
 ## CR03 - Répétition de validation à J15
 
 Participants fictifs : CP, CL et QA. Ce compte rendu décrit un exercice de clôture ; il ne remplace pas les résultats de la vérification technique réelle jointe au dossier.
@@ -40,6 +48,10 @@ Dans le scénario pédagogique, les critères métier de la grille ci-dessous so
 | Parcours sans aide | Parcours terminés sans aide / parcours tentés | Au moins 80 % dans une session pilote | Non mesurée. |
 | Utilité perçue | Question de 1 à 5, moyenne et nombre de répondants | Moyenne au moins 4/5 | Non mesurée. |
 | Blocages critiques | Comptage des obstacles empêchant la tâche | Aucun avant livraison du périmètre | Non mesurée auprès d'un client réel. |
+
+Session pilote prévue à J15 : deux grimpeurs et un représentant de club, tous fictifs dans ce protocole ; aucun participant réellement recruté. CP recueille la décision sur les critères et la note d'utilité, QA observe chaque tentative de parcours avec une grille identique. Le compte rendu conserve les numérateurs, dénominateurs, obstacles et effectifs réels si la session a lieu. Une absence de réponse reste une donnée manquante.
+
+Si un critère critique est refusé ou un blocage critique observé, le périmètre concerné reste sous réserve avec une correction et une nouvelle vérification. Si les parcours sans aide passent sous 80 % ou l'utilité sous 4/5, CP qualifie les obstacles avec QA, affecte une action au prochain lot et organise un nouvel essai. Ces seuils guident une décision ; un échantillon de trois personnes ne justifie aucune conclusion statistique générale.
 
 Les objectifs sont proposés, pas issus d'un sondage. Les seuils servent à déclencher une action, sans prétendre à une représentativité statistique sur un faible effectif.
 

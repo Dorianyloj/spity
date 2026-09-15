@@ -12,11 +12,11 @@ add('Spity',.5,'RNCP39583, Bloc 3','cover',{},'''
 Bonjour, je suis Dorian Joly. Je vais présenter le pilotage de Spity, une application destinée à la communauté de l'escalade. Mon fil conducteur est la préparation d'une sortie, depuis la recherche d'un partenaire jusqu'à l'inscription à un événement. Je présenterai l'organisation du projet, les décisions de pilotage, puis une démonstration du logiciel.
 ''','Référentiel RNCP39583, p. 11 à 14. Photo de marque du dépôt, illustration sans lien avec une équipe réelle.',transition='Je commence par le besoin auquel répond le produit.')
 
-add('Le besoin des grimpeurs et des clubs',1,'Produit Spity','photo',dict(image='docs/rncp/bloc-03/preuves/captures/lieux-2026-09-14.png',items=[['Grimpeur','Trouver un partenaire et rejoindre une sortie.'],['Club','Organiser un événement et suivre les participants.']]),'''
+add('Le besoin des grimpeurs et des clubs',1,'Produit Spity','photo',dict(image='docs/rncp/bloc-03/preuves/captures/lieux-2026-09-15.png',items=[['Grimpeur','Trouver un partenaire et rejoindre une sortie.'],['Club','Organiser un événement et suivre les participants.']]),'''
 Le besoin retenu pour cette présentation est concret : préparer une sortie avec des personnes compatibles avec sa pratique. Un grimpeur doit pouvoir comprendre les profils proposés, consulter les informations d'un événement et savoir si son inscription a abouti. Le club a un autre besoin : organiser la sortie et retrouver les participants autorisés.
 
 Ces deux points de vue déterminent ce que je vais montrer. Une page qui s'affiche correctement reste insuffisante si l'utilisateur ne comprend pas l'état de sa demande ou le nombre de places disponibles. Je retiens donc des critères observables sur le parcours complet. La capture présente le répertoire de lieux, qui apporte le contexte géographique de la pratique.
-''','DOSSIER_BLOC_03 §1-2. Capture locale du 14 septembre 2026, données de démonstration.',transition='Il faut ensuite préciser sur quelles preuves repose cette présentation.')
+''','DOSSIER_BLOC_03 §1-2. Capture locale du 15 septembre 2026, données de démonstration.',transition='Il faut ensuite préciser sur quelles preuves repose cette présentation.')
 
 add('Périmètre et nature des preuves',1,'Produit réel et mise en situation fictive','columns',dict(items=[['Éléments observés','Code, historique Git et tests datés.\nApplication et comptes de démonstration.'],['Cas pédagogique','Équipe CP, DEV et QA.\nPlanning, coûts et réunions simulés.']]),'''
 Cette présentation combine deux ensembles que je distingue clairement. D'un côté, le logiciel existe. Le dépôt contient le code, des modifications datées et des résultats de vérification. Je peux montrer ces éléments et préciser leur portée.
@@ -156,21 +156,21 @@ add('Démonstration du parcours',.5,'C3.4.2, séquence de six minutes','demo_int
 Je passe maintenant au logiciel. La démonstration utilise des comptes locaux et des données de test. Je vais d'abord suivre le point de vue du grimpeur, puis celui du club. Les critères que je garde en tête sont la compréhension des états, la cohérence de l'inscription et la visibilité du participant pour le bon rôle.
 ''','A08 et preuves/verification.json.',action='Ouvrir les deux sessions déjà connectées. Lancer le chronomètre de démonstration.',transition='Je commence avec le compte grimpeur.',demo=True)
 
-add('Parcours grimpeur',3,'C3.4.2, application locale et données de test','photo',dict(image='docs/rncp/bloc-03/preuves/captures/matching-2026-09-14.png',items=[['Profil et recherche','Vérifier le niveau et les disponibilités.'],['Demande et sortie','Lire l’état, consulter l’événement et s’inscrire.']]),'''
+add('Parcours grimpeur',3,'C3.4.2, application locale et données de test','photo',dict(image='docs/rncp/bloc-03/preuves/captures/matching-2026-09-15.png',items=[['Profil et recherche','Vérifier le niveau et les disponibilités.'],['Demande et sortie','Lire l’état, consulter l’événement et s’inscrire.']]),'''
 Je suis connecté en tant que grimpeur. Le profil donne les informations utiles pour ma pratique. Dans la recherche de partenaires, les filtres permettent de réduire les résultats. Je montre un filtre et j'explique ce qui change dans la liste. L'état de la demande permet ensuite de savoir si un échange est déjà engagé.
 
 Je rejoins maintenant la page des événements. Je lis la date, le lieu et la capacité avant de m'inscrire. Je vérifie que l'interface confirme l'inscription et que l'état affiché reste cohérent. Si le compte était déjà inscrit, je l'annonce et j'utilise l'événement préparé pour la répétition.
 
 Je décris le résultat du point de vue de l'utilisateur : il sait quelle sortie il rejoint et peut retrouver son inscription. Je vais vérifier ce même résultat depuis le rôle club.
-''','Capture réelle du 14 septembre 2026. A08, recette navigateur datée.',action='0:00–0:40 : profil. 0:40–1:35 : filtre et demande. 1:35–2:40 : événement et inscription. 2:40–3:00 : confirmation. Laisser le navigateur affiché pendant les manipulations. La capture sert de secours.',transition='Je bascule sur la session du club organisateur.',demo=True)
+''','Capture réelle du 15 septembre 2026. A08, recette navigateur datée.',action='0:00–0:40 : profil. 0:40–1:35 : filtre et demande. 1:35–2:40 : événement et inscription. 2:40–3:00 : confirmation. Laisser le navigateur affiché pendant les manipulations. La capture sert de secours.',transition='Je bascule sur la session du club organisateur.',demo=True)
 
-add('Parcours club et validation',2.5,'C3.4.2, application locale et données de test','photo',dict(image='docs/rncp/bloc-03/preuves/captures/evenements-2026-09-14.png',items=[['Organisation','Retrouver l’événement et les participants.'],['Contrôles','Vérifier les droits et expliciter les réserves.']]),'''
+add('Parcours club et validation',2.5,'C3.4.2, application locale et données de test','photo',dict(image='docs/rncp/bloc-03/preuves/captures/evenements-2026-09-15.png',items=[['Organisation','Retrouver l’événement et les participants.'],['Contrôles','Vérifier les droits et expliciter les réserves.']]),'''
 Je suis maintenant connecté avec le rôle club. Je retrouve l'événement et je consulte les participants. L'inscription effectuée côté grimpeur doit apparaître de façon cohérente. Les commandes de gestion correspondent au rôle de l'organisateur.
 
 Je montre aussi un passage au clavier sur les commandes utiles. Les règles de capacité et les refus d'accès disposent de scénarios de recette identifiés. Si je ne reproduis pas un contrôle en direct, je précise la preuve de test utilisée et sa date.
 
 Je termine en reprenant les critères annoncés : un partenaire recherché, un état de demande compréhensible, une inscription cohérente et un participant visible pour le club. Je distingue les critères vérifiés de ceux qui restent hors du parcours. La validation attendue porte sur ce périmètre explicite, avec ses réserves éventuelles.
-''','Capture réelle du 14 septembre 2026. A08 et preuves/verification.json.',action='0:00–1:15 : événement, commandes et participants. 1:15–2:00 : clavier et portée des preuves de capacité. 2:00–2:30 : critères et réserves. En cas d’incident, annoncer le contrôle non revalidé et utiliser la capture datée.',transition='Je reviens au bilan du pilotage.',demo=True)
+''','Capture réelle du 15 septembre 2026. A08 et preuves/verification.json.',action='0:00–1:15 : événement, commandes et participants. 1:15–2:00 : clavier et portée des preuves de capacité. 2:00–2:30 : critères et réserves. En cas d’incident, annoncer le contrôle non revalidé et utiliser la capture datée.',transition='Je reviens au bilan du pilotage.',demo=True)
 
 add('Bilan du pilotage',1,'Bilan et ouverture des quinze minutes de questions','columns',dict(items=[['Résultats présentés','Parcours logiciel démontré.\nDécisions reliées aux coûts et à la capacité.\nPreuves classées par compétence.'],['Limites explicites','Management et budget du cas fictif.\nSatisfaction réelle non mesurée.\nContributions réelles à préciser.']]),'''
 Cette présentation relie le besoin utilisateur à l'organisation du travail, puis aux décisions et à la validation. Le planning rend les dépendances visibles. Le tableau de bord permet d'anticiper les écarts. L'arbitrage tient compte de la capacité et des critères déjà engagés.
@@ -190,6 +190,8 @@ from linear_context import align as align_linear
 align_linear(slides)
 from inclusion_context import align as align_inclusion
 align_inclusion(slides)
+from competence_context import align as align_competences
+align_competences(slides)
 
 assert len(slides)==25
 assert sum(s['minutes'] for s in slides)==30

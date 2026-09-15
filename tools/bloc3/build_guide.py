@@ -13,7 +13,7 @@ def clock(minutes):
 
 parts = ['''# Guide de répétition — Bloc 3 Spity
 
-Support associé : spity-bloc-3-30-minutes-visuel-v8.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
+Support associé : spity-bloc-3-30-minutes-visuel-v10.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
 
 ## Fil conducteur
 
@@ -55,8 +55,17 @@ parts.append('''## Questions probables du jury
 11. **Que change une situation de handicap ou une équipe internationale ?** Présenter Camille, QA malentendante fictive : consignes écrites, sous-titres testés, une personne parle à la fois, décisions avec responsable et échéance. Expliquer les contrôles attendus à J3, J10 et J14, sans annoncer de résultat réel. Ses 3 h de formation dans T07 utilisent des consignes écrites et une démonstration sous-titrée. Prévoir horaires avec fuseau, préparation asynchrone et reformulation des décisions. Ne pas inventer de diagnostic ou de situation réelle.
 12. **Comment prouvez-vous l'efficacité d'une formation ?** Définir un niveau attendu, un exercice observable et un contrôle après pratique. Exemples : inscriptions concurrentes, scénario navigateur reproductible et mise à jour autonome du tableau de bord. Les ateliers du cas ne sont pas déclarés réellement suivis.
 13. **Quel client a validé et est-il satisfait ?** Aucun résultat réel n'est disponible dans les éléments fournis. Les trois comptes rendus sont simulés, avec Claire Martin pour le Collectif Altitude Grimpe, commanditaire fictif du Bloc 1. Les objectifs de NPS du cadrage ne sont pas des résultats. Le dispositif proposé mesure critères acceptés, réussite sans aide, utilité et blocages, avec date et nombre de répondants. Présenter les retours réels seulement lorsqu'ils existent.
-14. **Que prouvent vos vérifications ?** Le 14 septembre, lint, typage, build, 389 tests unitaires et six scénarios navigateur ont réussi. La recette locale utilise next dev et une MariaDB dédiée. Elle ne prouve ni une validation client, ni une recette actuelle du déploiement distant, ni une couverture de 100 %. Les 126 tests du Bloc 2 en juillet et les 152 tests Jest du Bloc 4 en août décrivent d’autres périmètres datés ; ne pas les additionner.
-15. **Que faites-vous si la démonstration échoue ?** Annoncer l'incident, utiliser les captures du 14 septembre et la dernière recette identifiée, puis préciser les critères non revalidés en direct. Revenir au besoin client et proposer une nouvelle vérification après correction.
+14. **Que prouvent vos vérifications ?** Le 15 septembre, lint, typage, build, 389 tests unitaires et six scénarios navigateur ont réussi. La recette locale utilise next dev et une MariaDB dédiée. Elle ne prouve ni une validation client, ni une recette actuelle du déploiement distant, ni une couverture de 100 %. Les 126 tests du Bloc 2 en juillet et les 152 tests Jest du Bloc 4 en août décrivent d’autres périmètres datés ; ne pas les additionner.
+15. **Que faites-vous si la démonstration échoue ?** Annoncer l'incident, utiliser les captures du 15 septembre et la dernière recette identifiée, puis préciser les critères non revalidés en direct. Revenir au besoin client et proposer une nouvelle vérification après correction.
+
+## Compléments de réponse après correction
+
+- Le planning global dérive de 79 j-h à 5 j-h/semaine, soit 15,8 semaines sous hypothèse séquentielle. Les quinze jours du lot B3 ne représentent pas tout le développement.
+- Les 5 h supplémentaires mesurent la charge. T06 et T07 glissent chacun d'un jour ; leur retard ne s'additionne pas, et le jalon reste J15.
+- Les quatre styles sont participatif, persuasif, directif et délégatif. QA avait déjà la recette : préserver cette affectation n'est pas une réallocation nouvelle.
+- Le plan comprend CP 1 h à J3, DEV 2 h à J9-J12 et Camille 3 h à J10-J14. Les niveaux techniques sont indépendants du handicap.
+- La fiche RH de l'annexe 25 reste conditionnelle : 202,50 EUR supplémentaires, marge 29,50 EUR, CP 29,5/30 h. Le budget de base reste 4 465 EUR.
+- CR02 relie un écart à une décision puis à une action datée. Les mesures client sont définies, mais leurs résultats restent non mesurés.
 
 ## Exercices de répétition
 

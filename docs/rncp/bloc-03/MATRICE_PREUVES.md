@@ -13,3 +13,15 @@ Cette matrice constate une couverture documentaire ; elle n’attribue pas la me
 | C3.4.2 | Logiciel utilisable, fonctions attendues, vocabulaire client, validation | A08 ; recette ; captures | Résultats explicités dans VERIFICATION.md |
 
 Le règlement spécial n'est pas fourni. La règle de 50 % des compétences et l'absence d'éliminatoire non acquise est rappelée, mais aucune compétence n'est déclarée éliminatoire sur simple supposition. Les preuves d'une situation fictive ne sont pas des attestations de management réel.
+
+## Repères dans le support corrigé
+
+| Compétence | Diapositives à présenter | Pièce détaillée |
+| --- | --- | --- |
+| C.3.1 | 3 : global ; 4 : Kanban ; 5 : phases ; 6 : missions | A01/A02 ; RACI en annexe 23 |
+| C3.2.1 | 4 à 10 : flux, dates, charge, coûts et risques | A03/A09 ; classeur |
+| C3.2.2 | 11-12 : problème, options et décision | A04 ; sensibilité en annexe 24 |
+| C3.3.1 | 6, 9, 13-14 : missions, capacité, styles, handicap et contexte international | A02/A05 |
+| C3.3.2 | 15 : grille ; 16 : formations et déclencheur RH | A06 ; variante RH en annexe 25 |
+| C3.4.1 | 17 : CR02 ; 18 : protocole de satisfaction | A07 |
+| C3.4.2 | 19-21 : manipulation ; 22 : validation et réserves | A07/A08 ; vérification de la version |

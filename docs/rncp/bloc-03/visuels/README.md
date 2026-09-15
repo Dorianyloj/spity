@@ -21,16 +21,18 @@ Prompt utilisé :
 | --- | --- | --- |
 | 1 | spity/public/images/brand/escalade-falaise-coucher-soleil.jpeg | Photographie de marque déjà présente dans le dépôt, couverture. |
 | 19 | spity/public/images/brand/escalade-falaise-gros-plan.jpeg | Photographie de marque déjà présente dans le dépôt, ouverture de la démonstration. |
-| 2 | [Lieux, capture du 14 septembre](../preuves/captures/lieux-2026-09-14.png) | Présentation du produit local et de ses données de test. |
-| 20 | [Matching, capture du 14 septembre](../preuves/captures/matching-2026-09-14.png) | Parcours grimpeur, capture de secours agrandie. |
-| 21 | [Événements, capture du 14 septembre](../preuves/captures/evenements-2026-09-14.png) | Parcours club, capture de secours agrandie. |
+| 2 | [Lieux, capture du 15 septembre](../preuves/captures/lieux-2026-09-15.png) | Présentation du produit local et de ses données de test. |
+| 20 | [Matching, capture du 15 septembre](../preuves/captures/matching-2026-09-15.png) | Parcours grimpeur, capture de secours agrandie. |
+| 21 | [Événements, capture du 15 septembre](../preuves/captures/evenements-2026-09-15.png) | Parcours club, capture de secours agrandie. |
 
 Les photos illustrent la pratique de l'escalade. Elles n'attestent ni l'identité des membres de Spity ni une sortie organisée par l'application. Les captures conservent le contenu des preuves datées, sans retouche des résultats.
 
 ## Graphiques modifiables
 
-Les huit graphiques des diapositives 4, 5, 7, 8, 9, 12, 15 et 16 sont des objets PowerPoint natifs. Chacun possède un petit classeur intégré. La diapositive 4 reprend le relevé Linear du 14 septembre, conservé dans donnees/linear-2026-09-14.json ; les autres présentent les hypothèses du cas. Ces instantanés ne sont pas liés automatiquement au classeur de pilotage et ne remplacent pas ses formules. La diapositive 7 explique les écarts par tâche ; l'annexe 24 compare les scénarios de budget et de capacité.
+Les sept graphiques des diapositives 3, 4, 5, 7, 8, 9 et 12 sont des objets PowerPoint natifs. Chacun possède un petit classeur intégré. La diapositive 4 reprend le relevé Linear du 14 septembre, conservé dans donnees/linear-2026-09-14.json ; la diapositive 3 reprend les charges globales du Bloc 1 avec une projection explicitement hypothétique ; les autres présentent les hypothèses du lot. Ces instantanés ne sont pas liés automatiquement au classeur de pilotage et ne remplacent pas ses formules. La diapositive 7 explique les écarts par tâche ; l'annexe 24 compare les scénarios de budget et de capacité.
 
 Les valeurs viennent du [cas de pilotage](../donnees/pilotage.json), de ses [indicateurs calculés](../donnees/indicateurs.json) et des annexes A01, A04 et A06. Le planning est exprimé en jours relatifs J1 à J15. La matrice de risques et les tableaux des annexes restent également modifiables dans PowerPoint.
 
 Les rôles, charges, coûts et niveaux de compétences du scénario sont fictifs. Les notes et les pieds de page conservent cette distinction.
+
+Les tableaux natifs des slides 15 et 16 montrent la grille détaillée et les formations. Le complément donnees/consolidation.json documente la projection globale, le cas Paris/Montréal, la session pilote prévue et la variante RH indépendante de l’annexe 25.

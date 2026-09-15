@@ -1,3 +1,10 @@
+9d166c0 2026-09-15 docs(bloc3): auditer toutes les competences et les criteres de la grille
+2f644db 2026-09-15 docs(bloc3): rendre les amenagements du cas fictif visibles dans le diaporama
+817f4c7 2026-09-15 docs(bloc3): clarifier les exigences de prise en compte du handicap
+67dedd8 2026-09-14 Fix partner card inner spacing
+3742f56 2026-09-14 Fix matching filter accessibility label collision
+ea957b6 2026-09-14 Polish partner matching directory
+a9da83c 2026-09-14 docs(bloc3): ancrer le pilotage dans Linear et détailler les estimations
 90e269b 2026-09-14 docs: align bloc 3 with existing certification dossiers
 8c026f6 2026-09-14 docs: redesign bloc 3 slideshow with charts and visual layouts
 0ae14e1 2026-09-14 docs: develop bloc 3 slideshow and speaker script for 30 minutes
@@ -11,13 +18,6 @@ c892d68 2026-09-11 feat: summarize crag grade ranges
 8a37dc1 2026-09-11 style: make place cards more visual
 b6e35ee 2026-09-11 style: balance filter toolbar spacing
 529bb05 2026-09-11 style: streamline places filters
-24d5ef6 2026-09-11 fix: preserve demo admin account
-cff0cad 2026-09-11 chore: refresh demo place data
-dc09d0f 2026-09-11 feat: add Spity browser icon
-f588162 2026-09-11 style: compact route filter reset
-e162e90 2026-09-11 feat: add topology app background
-28f7983 2026-09-11 feat: split places maps by climbing venue
-39c44e9 2026-09-11 style: improve places map marker contrast
 
 Arbitrage :
 commit 689e59dccf15dc611dbddccea9cf81ccc187c40c

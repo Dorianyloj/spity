@@ -85,6 +85,8 @@ Linear a été relu directement le 14 septembre : 12 Done, 4 Todo, 1 In Progress
 
 Le règlement spécial n'est pas fourni. La règle de 50 % des compétences et l'absence d'éliminatoire non acquise est rappelée, mais aucune compétence n'est déclarée éliminatoire sur simple supposition. Les preuves d'une situation fictive ne sont pas des attestations de management réel.
 ''')
+    from competence_annexes import enrich
+    enrich(DOCS)
     def git(*args):
         return subprocess.check_output(['git',*args],cwd=ROOT,text=True,encoding='utf-8').strip()
     # Les preuves datées ne sont pas régénérées : produire des documents ne rejoue pas les tests.

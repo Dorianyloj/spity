@@ -1,0 +1,60 @@
+{
+  "date": "2026-09-15",
+  "presentation": {
+    "file": "output/presentations/spity-bloc-3-30-minutes-visuel-v10.pptx",
+    "sha256": "5e1acaa14a2f8788b8396a33512450ff0b7f229adcdb1a62de1d9580065db112",
+    "slidesReviewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25
+    ],
+    "nativeCharts": 7,
+    "nativeChartWorkbooks": 7,
+    "nativeTableSlides": [
+      10,
+      14,
+      15,
+      16,
+      17,
+      18,
+      22,
+      23,
+      24,
+      25
+    ],
+    "packageIntegrity": "passed",
+    "layoutGeometry": "passed",
+    "font": "Arial",
+    "rendering": "Artifact Tool import and PNG export, 1280 x 720; individual slide review and contact sheets",
+    "nativePowerPointExecution": false
+  },
+  "dossier": {
+    "file": "output/pdf/dossier-bloc-03-spity.pdf",
+    "sha256": "147bfe81fe7218415ab3aaa86b1fd1d0ecb9cc9f2e7694ed58fbcbbe740a5d53",
+    "pages": 29,
+    "rendering": "Poppler PNG, 85 dpi; every page in contact sheets, modified pages individually reviewed"
+  },
+  "scope": "Vérification documentaire, visuelle et structurelle ; ne remplace pas une répétition chronométrée ou la validation du jury."
+}

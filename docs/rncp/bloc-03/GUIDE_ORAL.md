@@ -1,6 +1,6 @@
 # Guide de répétition — Bloc 3 Spity
 
-Support associé : spity-bloc-3-30-minutes-visuel-v8.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
+Support associé : spity-bloc-3-30-minutes-visuel-v10.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
 
 ## Fil conducteur
 
@@ -14,9 +14,9 @@ Le texte oral ci-dessous développe chaque diapositive et propose ses transition
 | --- | --- | --- | --- |
 | 1 | Spity | 00:30 | 00:30 |
 | 2 | Le besoin d’Altitude Grimpe | 01:00 | 01:30 |
-| 3 | Un projet, quatre blocs | 01:00 | 02:30 |
-| 4 | Le backlog Linear au 14 septembre | 01:30 | 04:00 |
-| 5 | Un lot sur quinze jours ouvrés | 01:30 | 05:30 |
+| 3 | Le planning global de Spity | 01:00 | 02:30 |
+| 4 | Kanban pour suivre, des jalons pour décider | 01:30 | 04:00 |
+| 5 | Le lot : phases, mesures et dépendances | 01:30 | 05:30 |
 | 6 | Les missions et les aménagements | 01:00 | 06:30 |
 | 7 | Les causes des 5 heures supplémentaires | 01:30 | 08:00 |
 | 8 | Le budget du lot de démonstration | 01:30 | 09:30 |
@@ -24,16 +24,16 @@ Le texte oral ci-dessous développe chaque diapositive et propose ses transition
 | 10 | Des risques qui déclenchent une action | 01:00 | 11:30 |
 | 11 | Le choix du build standalone | 02:00 | 13:30 |
 | 12 | Une demande qui dépasse le lot | 01:30 | 15:00 |
-| 13 | Un désaccord à traiter ensemble | 01:30 | 16:30 |
-| 14 | Camille, QA malentendante | 01:30 | 18:00 |
-| 15 | La cible : l’autonomie | 01:00 | 19:00 |
-| 16 | Une formation accessible à Camille | 01:30 | 20:30 |
-| 17 | Trois rendez-vous pour décider | 01:30 | 22:00 |
-| 18 | La satisfaction reste à mesurer | 01:00 | 23:00 |
+| 13 | Des styles adaptés à la situation | 01:30 | 16:30 |
+| 14 | Camille et une équipe à distance | 01:30 | 18:00 |
+| 15 | La grille des compétences du lot | 01:00 | 19:00 |
+| 16 | Un plan de formation pour chaque rôle | 01:30 | 20:30 |
+| 17 | CR02 : une décision à J10 | 01:30 | 22:00 |
+| 18 | Mesurer la satisfaction et agir | 01:00 | 23:00 |
 | 19 | Place à la démonstration | 00:30 | 23:30 |
 | 20 | Trouver un partenaire | 03:00 | 26:30 |
 | 21 | Retrouver les participants | 02:30 | 29:00 |
-| 22 | La transmission à la maintenance | 01:00 | 30:00 |
+| 22 | Les critères de validation du parcours | 01:00 | 30:00 |
 
 À 15:00, terminer l'arbitrage de périmètre. À 23:00, quitter le suivi client pour lancer les six minutes de démonstration. À 29:00, revenir au bilan. Si une explication dépasse, condenser un exemple ; ne pas supprimer entièrement une compétence ni la démonstration.
 
@@ -67,71 +67,67 @@ Pour cette soutenance, je retiens le parcours déjà développé dans le Bloc 2.
 
 Les quatre blocs abordent ce même projet sous des angles complémentaires.
 
-Source : B1 : C1.1.1, p. 2 ; C1.4.1, p. 4-5. B2 : 16_DOSSIER_FINAL_BC02, F01-F10. Capture locale du 14 septembre 2026, données de test.
+Source : B1 : C1.1.1, p. 2 ; C1.4.1, p. 4-5. B2 : 16_DOSSIER_FINAL_BC02, F01-F10. Capture locale du 15 septembre 2026, données de test.
 
-### 3. Un projet, quatre blocs
+### 3. Le planning global de Spity
 
-Repère : 01:30 à 02:30. Nature : Produit réel et mise en situation fictive.
+Repère : 01:30 à 02:30. Nature : C.3.1, ordonnancement pédagogique dérivé du Bloc 1.
 
 **Texte oral proposé**
 
-Le Bloc 1 pose le besoin, les acteurs, l'architecture cible et le budget global. Le Bloc 2 présente le prototype développé, ses tests, ses corrections et sa livraison. Le Bloc 3 explique comment piloter un lot : planifier, suivre les écarts, arbitrer et préparer la validation. Le Bloc 4 documente ensuite les responsabilités de maintenance, les anomalies et le support.
+Le Bloc 1 prévoit soixante-dix-neuf jours-homme pour le MVP. Ses cinq jalons couvrent le socle, la découverte, l'organisation des sorties, la communauté et la stabilisation. Je représente ici leur ordre à raison de cinq jours-homme par semaine, soit environ seize semaines. C'est un ordonnancement pédagogique, pas la reconstitution des dates réellement travaillées.
 
-Cette lecture est une articulation de compétences. Le dossier de maintenance d'août existe déjà avant cette préparation de septembre. Le logiciel et ses traces sont réels. Le commanditaire du Bloc 1 et l'équipe CP, DEV, QA du scénario sont fictifs. Je conserve cette distinction, également présente dans le cas support du Bloc 4, sans transformer une simulation en échange client réel.
-
-**À montrer ou manipuler**
-
-Montrer les quatre blocs, puis préciser la nature réelle ou fictive des éléments.
+Chaque jalon correspond à un résultat vérifiable, depuis un profil exploitable jusqu'à une recette documentée. Les fonctions du MVP cible dépassent le prototype évalué au Bloc 2. Le lot de quinze jours que je détaille ensuite permet d'expliquer le suivi sur un périmètre plus réduit. Ses heures ne s'ajoutent pas automatiquement au budget global. Le Bloc 4 prépare la suite, avec les anomalies et le support.
 
 **Transition**
 
-Je zoome maintenant sur l'organisation du lot pédagogique.
+Je choisis une méthode adaptée au suivi de ce travail.
 
-Source : B1 : C1.1.1 et C1.4.2. B2 : 16_DOSSIER_FINAL_BC02. B4 : DOSSIER_BLOC_04 et B4-C433-01. Référentiel p. 11. COHERENCE_INTER_BLOCS.md.
+Source : B1 C1.4.1 p. 7-8 ; A01 ; consolidation.json. Charges source 16+15+17+14+17=79 j-h. Calendrier relatif dérivé, capacité constante de 5 j-h/semaine.
 
-### 4. Le backlog Linear au 14 septembre
+### 4. Kanban pour suivre, des jalons pour décider
 
 Repère : 02:30 à 04:00. Nature : Linear observé, 14 septembre 2026.
 
 **Texte oral proposé**
 
-J'utilise Linear pour retrouver les sujets du projet, leurs priorités et leurs dépendances. La lecture du quatorze septembre montre vingt-cinq tickets : douze terminés, quatre à faire, un en cours, sept en backlog et un annulé. En excluant l'annulé, douze sur vingt-quatre sont terminés. Ce taux de cinquante pour cent compte des tickets de tailles différentes. Il ne signifie donc pas que la moitié du produit est livrée.
+Je retiens Kanban pour le cas : un petit effectif, des priorités évolutives et des retours rapides. La limite de deux tâches de réalisation simultanées réduit la dispersion. Une tâche ne passe à terminé qu'après vérification de ses critères. Scrum demanderait ici des cérémonies supplémentaires ; le cycle en V rendrait les retours intermédiaires moins fréquents.
 
-Le ticket en cours est SPI-27, l'upload sécurisé. Sa description indique que le service existe, avec des validations de persistance encore attendues avant clôture. Ce service est nécessaire à l'API de publication SPI-15 et au formulaire SPI-18. Cette dépendance explique pourquoi je traite la sécurisation du service avant d'ouvrir davantage de travaux de publication.
+Linear rend visibles les sujets, leurs statuts et leurs dépendances. Le relevé réel du quatorze septembre contient vingt-cinq tickets, dont douze terminés et un annulé. Douze sur vingt-quatre donne cinquante pour cent de tickets, pas cinquante pour cent de produit livré. SPI-27, le service médias, conditionne l'API SPI-15 puis le formulaire SPI-18.
 
-Dans le cas de management, je propose une limite de deux tâches de réalisation simultanées et une vérification des critères avant passage à terminé. Les vingt-quatre tickets non annulés sont affectés à Dorian dans l'outil. La répartition entre chef de projet, développeur et testeur qui suit représente une équipe fictive pour l'exercice.
+Le planning à barres complète ce flux : il expose les dates, les chevauchements et les conditions de passage. Kanban pilote le travail courant ; les jalons encadrent les engagements. Les critères et comptes rendus sont partagés dans A07, le code dans Git. Ces documents pédagogiques restent distincts des tickets réellement observés dans Linear.
 
 **À montrer ou manipuler**
 
-Montrer les statuts observés, puis la dépendance SPI-27, SPI-15 et SPI-18. La limite de deux tâches appartient au cas.
+Montrer les statuts, nommer Kanban et retrouver A07 depuis les ressources du dossier.
 
 **Transition**
 
-Je distingue ce backlog observé du lot pédagogique chiffré sur quinze jours.
+Je zoome maintenant sur le planning du lot.
 
-Source : Lecture directe du tableau https://linear.app/spitywa/team/SPI/all et des fiches SPI-27, SPI-15, SPI-18 et SPI-6 le 14 septembre 2026. A09 et donnees/linear-2026-09-14.json. Descriptions détaillées datées du 9 septembre.
+Source : Dossier §3 ; A01/A05/A07/A09. Linear observé le 14 septembre, sans nouvelle modification des tickets. A07 et Git contiennent les ressources réellement consultables.
 
-### 5. Un lot sur quinze jours ouvrés
+### 5. Le lot : phases, mesures et dépendances
 
-Repère : 04:00 à 05:30. Nature : C.3.1, simulation sur quinze jours ouvrés.
+Repère : 04:00 à 05:30. Nature : C.3.1, planning fictif du lot à J10.
 
 **Texte oral proposé**
 
-Le planning porte sur un lot pédagogique de préparation et de stabilisation d'une démonstration, adossé au produit existant. Ses quinze jours ouvrés relatifs ne représentent pas tout le développement de Spity. Les soixante-dix-neuf jours-homme du Bloc 1 concernent l'estimation globale du MVP. Ici, J1 à J15 désignent des jours du cas, et non les jalons J1 à J5 du cadrage.
+Ce planning détaille quinze jours ouvrés relatifs. L'étude cadre le besoin. La mesure transforme ce besoin en critères observables, par exemple une seule inscription acceptée sur la dernière place. La conception fixe les responsabilités et les moyens. La réalisation fournit les parcours, la recette mesure leur conformité et la restitution prépare la décision du client.
 
-Le travail commence par l'étude du besoin et la mesure des critères attendus. Il comprend ensuite la conception de l'organisation, la réalisation des parcours, leur recette et la restitution. À J3, le client fictif valide le périmètre. À J8, le parcours partenaire doit être vérifié. J10 sert à examiner les écarts et à arbitrer les demandes nouvelles. La recette se clôt à J14 avant la démonstration de J15.
+Le diagramme à barres rend les chevauchements lisibles. Il complète Kanban sans imposer que toutes les activités attendent la fin de la précédente. QA peut préparer et tester les fonctions déjà disponibles. La clôture de la recette dépend toutefois de la stabilisation des événements et des corrections. La démonstration reste prévue à J15, après la recette J14.
 
-Les dépendances sont essentielles. La recette peut commencer sur les fonctions déjà prêtes, mais sa clôture attend la vérification des événements et des corrections. La préparation des slides peut avancer en parallèle. En revanche, la démonstration finale exige un parcours stabilisé. Le planning relie donc des résultats attendus, des responsabilités et des conditions de passage, plutôt qu'une simple succession de dates.
+Je conserve les dates initiales dans le classeur pour mesurer les dérives. À J10, les événements sont prévus à J12 au lieu de J11 et la recette à J14 au lieu de J13. Chaque glissement vaut un jour. Ce décalage de date est distinct de l'augmentation de charge. A01 conserve les dix tâches et les trente activités estimées sont détaillées dans A09.
 
 **À montrer ou manipuler**
 
-Lire les phases du planning, puis montrer la recette à J14 avant la démonstration J15.
+Lire la phase Mesure, les chevauchements puis les dates initiales et revues.
 
 **Transition**
 
-Pour tenir ces jalons, chacun doit connaître sa responsabilité.
+La répartition des missions permet de tenir ces engagements.
 
-Source : A01. donnees/pilotage.json. B1 : C1.4.1, p. 7-8, estimation globale et jalons distincts du lot B3. Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01.
+Source : A01, A03, A09 et Planning. Étude T01, mesure T02, conception T03, réalisation T04-T06, recette T07/T10, restitution T09. Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01.
 
 ### 6. Les missions et les aménagements
 
@@ -163,7 +159,7 @@ Les chiffres du lot reposent maintenant sur trente activités détaillées, regr
 
 Le graphique explique les cinq heures supplémentaires. La clarification des dépendances ajoute une heure de pilotage. Les contrôles d'accès ajoutent deux heures, la stabilisation des événements deux heures et la recette deux heures. En sens inverse, la réestimation des corrections retire deux heures. Cette économie reste une hypothèse à surveiller, elle ne justifie pas de réduire les critères de validation.
 
-Je conserve la référence initiale et les causes d'écart pour rendre la décision traçable. Les heures sont des données du scénario, pas des temps saisis dans Linear. Les soixante-dix-sept heures consommées ne donnent pas non plus un pourcentage de fonctionnalités terminées. Pour décider, je rapproche ce consommé des livrables vérifiés et des contrôles encore nécessaires.
+Je conserve la référence initiale et les causes d'écart pour rendre la décision traçable. Les heures sont des données du scénario, pas des temps saisis dans Linear. Les soixante-dix-sept heures consommées ne donnent pas non plus un pourcentage de fonctionnalités terminées. Pour décider, je rapproche ce consommé des livrables vérifiés et des contrôles encore nécessaires. Les dates évoluent aussi : événements J11 à J12, recette J13 à J14. Dans les deux cas, le retard prévu vaut un jour.
 
 **À montrer ou manipuler**
 
@@ -205,7 +201,7 @@ Repère : 09:30 à 10:30. Nature : C3.2.1, simulation pédagogique.
 
 La charge totale reste inférieure à la capacité globale, mais cette somme peut masquer une tension sur un rôle. Le chef de projet est à vingt-neuf heures pour trente disponibles. Il ne conserve qu'une heure de marge. Le développeur dispose de huit heures et QA de six heures.
 
-Ces heures ne sont pas librement interchangeables. Transférer une tâche suppose de vérifier la compétence de la personne et l'effet sur la qualité. Le développeur doit pouvoir corriger son travail, tandis que QA conserve un regard sur sa validation. Je protège donc le temps d'arbitrage du chef de projet et je limite les demandes supplémentaires. Le suivi par rôle rend cette décision plus précise qu'un simple total d'heures disponibles.
+Ces heures ne sont pas librement interchangeables. Transférer une tâche suppose de vérifier la compétence de la personne et l'effet sur la qualité. Le développeur doit pouvoir corriger son travail, tandis que QA conserve un regard sur sa validation. Je protège donc le temps d'arbitrage du chef de projet et je limite les demandes supplémentaires. Le suivi par rôle rend cette décision plus précise qu'un simple total d'heures disponibles. CP dépasse l'alerte de 90 %. QA était déjà chargé de la recette.
 
 **Transition**
 
@@ -277,133 +273,137 @@ Pour appliquer cette décision, je dois aussi la faire comprendre à l’équipe
 
 Source : A04 et CR02 dans A07. Simulation explicitement distincte du code actuel. B1 : C1.4.1, contributions aux topos dans la vision cible. Le report concerne ce lot pédagogique ; il ne supprime pas la fonctionnalité du projet. Linear SPI-22 est observé en Backlog au 14 septembre. Le chiffrage additionnel 12 h DEV et 4 h QA est une hypothèse du lot, pas une estimation extraite de ce ticket.
 
-### 13. Un désaccord à traiter ensemble
+### 13. Des styles adaptés à la situation
 
 Repère : 15:00 à 16:30. Nature : C3.3.1, situation managériale fictive.
 
 **Texte oral proposé**
 
-Dans la situation fictive, le développeur souhaite avancer sur une nouvelle fonction alors que QA attend une version stable pour terminer la recette. Le désaccord exprime deux besoins légitimes : faire évoluer le produit et sécuriser ce qui doit être présenté.
+Le développeur souhaite ajouter une fonction alors que Camille attend une version stable. Leurs besoins sont différents : faire évoluer le produit et vérifier le périmètre engagé. Je demande les faits, les impacts et l'aide nécessaire avant de choisir une réponse.
 
-Je commence par demander les faits, les impacts et l'aide nécessaire, sans attribuer une faute personnelle. J'utilise une posture participative pour comparer les estimations. J'adopte ensuite une posture persuasive pour expliquer les conséquences du report au client. Je reste directif sur les critères critiques de livraison, par exemple le contrôle de la capacité d'un événement.
+La posture participative sert à comparer leurs propositions. La posture persuasive permet d'expliquer au client les conséquences du report. Je reste directif sur les critères critiques de livraison : on ne valide pas une capacité non vérifiée. La délégation porte sur un résultat et un contrôle. DEV choisit l'implémentation ; Camille choisit les cas de recette dans les critères convenus.
 
-La délégation conserve un résultat attendu et un point de contrôle. DEV traite les corrections et QA choisit les cas permettant de les vérifier. La décision rejoint le compte rendu et les tâches concernées.
-
-Avec du recul, une réponse uniquement directive aurait pu faire taire le désaccord sans traiter la surcharge. À l'inverse, une discussion sans échéance aurait retardé le lot. Je retiens donc un échange court, préparé avec des faits, puis une décision explicite dont je vérifie l'application.
+Une réponse seulement directive ferait taire le désaccord sans traiter sa cause. Une discussion sans échéance consommerait la faible marge du chef de projet. Je retiens quinze minutes, avec les options préparées par écrit, une autorité de décision identifiée et une prochaine action datée. Je vérifie ensuite l'application de cette décision. Ce fonctionnement donne de l'autonomie à l'équipe tout en protégeant les engagements du lot. Le résultat managérial décrit ici appartient au scénario fictif.
 
 **À montrer ou manipuler**
 
-Présenter les deux besoins DEV et QA. L’illustration représente une équipe fictive.
+Associer chaque style à une action, puis expliquer la limite d’une réponse seulement directive.
 
 **Transition**
 
-Cette organisation doit permettre à chacun de comprendre et de contribuer.
+Ces échanges doivent être accessibles à toute l’équipe.
 
-Source : A05, situation analysée et analyse critique. Illustration fictive générée avec ImageGen, visuels/equipe-illustration.png. Aucune personne réelle représentée.
+Source : A05, situation de désaccord, styles et analyse critique. Illustration fictive conservée. Illustration fictive générée avec ImageGen, visuels/equipe-illustration.png. Aucune personne réelle représentée.
 
-### 14. Camille, QA malentendante
+### 14. Camille et une équipe à distance
 
-Repère : 16:30 à 18:00. Nature : C3.3.1, cas pédagogique fictif.
+Repère : 16:30 à 18:00. Nature : C3.3.1, handicap et contexte international simulés.
 
 **Texte oral proposé**
 
-Je rends la prise en compte du handicap concrète avec Camille, testeuse QA malentendante dans notre équipe fictive. Le besoin retenu dans ce scénario est d'accéder aux informations orales et de pouvoir participer aux décisions. Je définis les modalités avec elle, sans déduire ses compétences techniques de sa situation.
+Camille est notre testeuse QA malentendante fictive. Nous convenons de supports écrits, de sous-titres testés et d'une seule personne qui parle à la fois. La synthèse conserve l'action, le responsable et l'échéance. La formation utilise des consignes écrites et une démonstration sous-titrée.
 
-Pour les réunions, les sous-titres sont testés avant le point et une seule personne parle à la fois. L'ordre du jour est disponible à l'avance. Pour les décisions, le compte rendu indique l'action, son responsable et son échéance. Pour la formation, les consignes sont écrites et la démonstration est sous-titrée.
+Dans le même scénario, le développeur travaille depuis Montréal, tandis que CP et Camille sont à Paris. L'invitation indique les deux fuseaux et propose un créneau commun. Comme la maîtrise du français peut varier, j'utilise un résumé simple et un glossaire français-anglais. DEV peut transmettre son avis par écrit avant la décision. Je ne déduis pas un accord du silence ou d'une différence de style d'expression.
 
-Je prévois un contrôle à chaque étape. À J3, Camille doit pouvoir accéder au support et reformuler une consigne. À J10, elle doit retrouver la décision et son échéance dans la synthèse. À J14, elle doit réaliser un cas sans aide. Ce sont des critères du scénario, sans résultat réel annoncé. Si les sous-titres sont insuffisants, je reprends par écrit et j'ajuste les modalités avec elle. Le fonctionnement asynchrone aide aussi les personnes absentes ou dans un autre fuseau.
+Le contrôle porte sur l'accès à l'information : reformuler une consigne à J3, retrouver une décision à J10, réaliser un cas sans aide à J14. Les résultats restent à constater. Si les sous-titres ou une formulation ne suffisent pas, je reprends par écrit et ajuste les modalités avec la personne. Le compte rendu partagé devient la référence commune.
 
 **À montrer ou manipuler**
 
-Lire chaque situation et son aménagement. Terminer par les critères de vérification, sans annoncer un résultat réel.
+Présenter les adaptations de Camille puis le cas Paris/Montréal et le contrôle commun.
 
 **Transition**
 
-La formation doit elle aussi être accessible et conduire à un résultat observable.
+Je compare ensuite les compétences disponibles aux besoins du projet.
 
-Source : A02, A05, A06 et donnees/inclusion.json. Cas fictif autorisé par le référentiel p. 11 ; critères C3.3.1 p. 12 et C3.3.2 p. 13. La note d’audit du 15 septembre distingue obligation de prise en compte et composition de l’équipe.
+Source : A02/A05/A06 ; inclusion.json et consolidation.json. Camille et le contexte Paris/Montréal sont fictifs ; aucune nationalité ou situation réelle inférée.
 
-### 15. La cible : l’autonomie
+### 15. La grille des compétences du lot
 
 Repère : 18:00 à 19:00. Nature : C3.3.2, niveaux hypothétiques du cas.
 
 **Texte oral proposé**
 
-J'évalue les besoins avant de choisir une formation. La grille utilise quatre niveaux : non abordé, réalisé avec accompagnement, autonome sur un cas courant, puis capable de traiter des cas complexes et d'accompagner une autre personne.
+Cette grille compare une compétence précise à un niveau attendu. Zéro signifie non abordé, un réalisé avec accompagnement, deux autonome sur un cas courant et trois capable de traiter les cas complexes. Les niveaux sont ceux de l'exercice fictif, pas des évaluations réelles des personnes.
 
-Les niveaux affichés sont hypothétiques. Ils ne constituent pas une évaluation réelle de collaborateurs. Le chef de projet doit progresser sur le suivi des écarts. Le développeur doit maîtriser les inscriptions concurrentes. QA doit pouvoir rejouer la recette et contrôler le parcours au clavier.
+Le chef de projet progresse sur le suivi des écarts. DEV doit sécuriser les inscriptions concurrentes. Camille doit rendre la recette navigateur et le contrôle clavier reproductibles. L'animation et le développement typé sont maintenus au niveau deux dans le cas.
 
-La cible est l'autonomie sur un cas courant. Elle reste reliée à un résultat utile pour le lot. Cette grille évite de proposer une formation générale sans pouvoir expliquer quel risque ou quelle difficulté elle doit résoudre.
-
-**Transition**
-
-Je transforme ces écarts en actions courtes, avec une vérification du résultat.
-
-Source : A06, grille de compétences du scénario.
-
-### 16. Une formation accessible à Camille
-
-Repère : 19:00 à 20:30. Nature : C3.3.2, actions fictives intégrées au lot.
-
-**Texte oral proposé**
-
-Le plan de formation comporte six heures : une heure pour le chef de projet, deux pour le développeur et trois pour Camille, notre testeuse QA fictive. Ces temps sont déjà compris dans les tâches du lot. Le budget de soixante euros correspond à des ressources complémentaires hypothétiques, sans achat déclaré.
-
-Les trois heures de Camille se répartissent entre deux heures de recette navigateur et une heure de parcours clavier. Elle reçoit les consignes écrites avant l'atelier. La démonstration est sous-titrée et les échanges restent disponibles par écrit. Elle réalise ensuite le même exercice technique que celui prévu pour le rôle QA. Le besoin d'aménagement ne modifie pas le niveau de compétence attendu.
-
-La vérification porte sur son autonomie : rejouer un cas, expliquer les préconditions, identifier le résultat et retrouver la preuve. Si une instruction reste inaccessible, nous corrigeons le support. Si une difficulté technique persiste, nous prévoyons un accompagnement et réestimons la charge. Je distingue ainsi l'accessibilité de la formation de l'acquisition de la compétence. Les résultats de cet exercice restent à constater dans le scénario.
+Je commente l'écart avec un exemple observable : expliquer pourquoi une seule demande obtient la dernière place. Une note globale par personne masquerait ce besoin. L'objectif reste la compétence utile au projet, indépendamment de la situation de handicap.
 
 **À montrer ou manipuler**
 
-Montrer les 3 h QA du graphique, puis les supports adaptés et le critère de réussite autonome.
+Commenter une ligne complète : rôle, compétence, niveau actuel et cible.
 
 **Transition**
 
-Ces modalités accompagnent les jalons de suivi et de validation du client fictif.
+Chaque écart conduit à une action de formation ciblée.
 
-Source : A06 ; donnees/inclusion.json. Formation QA de 3 h dans T07, déjà comprise dans les 6 h du plan. Aménagements et évaluation simulés ; aucun résultat réel attesté.
+Source : A06 : six compétences et échelle 0-3. Besoins et niveaux simulés.
 
-### 17. Trois rendez-vous pour décider
+### 16. Un plan de formation pour chaque rôle
+
+Repère : 19:00 à 20:30. Nature : C3.3.2, formations et besoin RH simulés.
+
+**Texte oral proposé**
+
+Les six heures de formation sont déjà comprises dans les tâches. À J3, le chef de projet consacre une heure au tableau de bord et doit expliquer un écart recalculé. DEV dispose de deux heures pendant T06, entre J9 et J12, pour pratiquer les inscriptions concurrentes. Camille dispose de trois heures dans T07, entre J10 et J14 : deux pour la recette navigateur et une pour le clavier.
+
+Les ateliers commencent par une pratique accompagnée, puis un cas autonome. Camille reçoit des consignes écrites et une démonstration sous-titrée. Si le support est inaccessible, on le corrige ; si la difficulté reste technique, on ajuste l'accompagnement. Soixante euros de ressources sont prévus dans le budget fictif.
+
+À J12, si une compétence critique reste indisponible, CP prépare une demande de renfort aux RH. La fiche précise mission, délai, exercice de sélection et coût maximal. L'annexe présente une variante chiffrée qui doit être arbitrée avant engagement. Elle n'est pas activée dans le budget de base et aucune demande réelle n'est envoyée.
+
+**À montrer ou manipuler**
+
+Lire les trois actions et leurs critères de réussite, puis indiquer le déclencheur RH.
+
+**Transition**
+
+Le client reçoit ensuite un compte rendu qui permet de décider.
+
+Source : A06 et consolidation.json. Formation CP 1 h/T03, DEV 2 h/T06, QA 3 h/T07. Variante RH séparée, annexe 25.
+
+### 17. CR02 : une décision à J10
 
 Repère : 20:30 à 22:00. Nature : C3.4.1, comptes rendus simulés.
 
 **Texte oral proposé**
 
-Je reprends Claire Martin pour le Collectif Altitude Grimpe, commanditaire fictif du Bloc 1. Son suivi repose sur trois points dans le scénario. Le premier valide le périmètre et les critères attendus. Le deuxième présente l'avancement, les écarts et la décision sur la demande supplémentaire. Le troisième porte sur le parcours démontré et ses réserves.
+Voici un extrait du compte rendu pédagogique adressé à Claire Martin, pour le Collectif Altitude Grimpe. Il reprend le même commanditaire fictif que le Bloc 1. Les points de validation ont lieu à J3 pour le périmètre, à J10 pour les écarts et à J15 pour la démonstration.
 
-Les trois comptes rendus sont fictifs et aucun accord réel n'est attesté. Leur structure montre toutefois comment préparer un échange utile : ce qui a été présenté, ce qui reste à faire, la difficulté rencontrée et la décision attendue. Une action comprend un responsable et une échéance. Le prochain point de suivi est identifié.
+À J10, les événements glissent de J11 à J12. La prévision atteint quatre mille quatre cent soixante-cinq euros, avec deux cent trente-deux euros sous le plafond. Ajouter les contributions aux topos dépasserait le budget et la capacité DEV. Le client fictif retient donc le report de cette demande, avec maintien des critères de recette.
 
-Par exemple, le compte rendu J10 reprend la prévision de quatre mille quatre cent soixante-cinq euros et le report du lot supplémentaire. Il conserve le lien entre une donnée de pilotage et une décision de périmètre.
-
-La validation se fait par critère, avec les statuts accepté, accepté avec réserve ou refusé. Une réserve devient une action suivie. Ce dispositif permet de rechercher une confirmation explicite, au lieu de déduire l'acceptation du seul fait que le logiciel a été montré.
+Le compte rendu rend les actions vérifiables : DEV termine T06 à J12, QA clôt la recette après corrections à J14 et CP prépare la validation J15. Chacun retrouve le même document dans A07. Les évolutions, le risque, la décision, les responsables et les échéances restent liés. Une réserve devient une tâche suivie, et non une remarque oubliée. Cet exemple montre la forme d'un échange client utile ; il ne prouve pas un accord réellement obtenu.
 
 **À montrer ou manipuler**
 
-Décrire le compte rendu J10 : écart, décision, responsable et échéance.
+Montrer l’écart, la décision et les responsables ; ouvrir A07 si le jury demande le compte rendu complet.
 
 **Transition**
 
-La validation du périmètre et la satisfaction méritent chacune une mesure explicite.
+Je complète cette validation par un protocole de satisfaction.
 
-Source : A07, CR01 à CR03. Référentiel p. 13-14. B1 : C1.1.1 p. 2. CL représente Claire Martin pour le Collectif Altitude Grimpe, tous deux fictifs. A07 ne constitue pas un échange réel.
+Source : A07 CR02, A01, A04. Document partagé accessible dans le dépôt ; compte rendu et accord client fictifs.
 
-### 18. La satisfaction reste à mesurer
+### 18. Mesurer la satisfaction et agir
 
 Repère : 22:00 à 23:00. Nature : C3.4.1, aucun résultat client réel disponible.
 
 **Texte oral proposé**
 
-Je propose quatre indicateurs complémentaires : la part des critères acceptés, la réussite des parcours sans aide, une note d'utilité et les blocages critiques signalés. Chaque résultat doit être accompagné de la date et du nombre de participants.
+À J15, je prévois une session pilote fictive avec deux grimpeurs et un représentant de club. Aucun participant n'a réellement été recruté pour cette mesure. Les résultats restent non mesurés.
 
-À ce stade, aucun retour de client réel n'est disponible dans les éléments du dossier. La mesure reste donc non réalisée. Les objectifs de NPS et de rétention du Bloc 1 restent des cibles, sans résultat constaté. Les résultats des tests techniques ne remplacent pas une appréciation du besoin par un utilisateur.
+Je relève la part de critères critiques acceptés, avec une cible de cent pour cent. Je compte les parcours réussis sans aide, avec une cible de quatre-vingts pour cent. L'utilité attendue est au moins quatre sur cinq et aucun blocage critique ne doit rester ouvert.
 
-Pendant une session pilote, je demanderais la tâche recherchée, le résultat obtenu et l'obstacle rencontré. Une réserve ou une difficulté doit ensuite rejoindre le suivi du projet avec une action identifiable, puis être vérifiée lors d'un nouveau passage.
+Chaque résultat indique sa date, son effectif et sa méthode. Un faible effectif ne représente pas tous les utilisateurs. Sous le seuil, je qualifie l'obstacle, affecte une correction et vérifie le parcours à nouveau. Les tests techniques ne remplacent pas cette appréciation du besoin par les utilisateurs.
+
+**À montrer ou manipuler**
+
+Lire un indicateur avec son calcul et son seuil, puis expliquer l’action déclenchée.
 
 **Transition**
 
-Je vais maintenant montrer le parcours sur lequel portent ces critères.
+Je montre maintenant le parcours qui sera évalué.
 
-Source : A07, indicateurs et questionnaire proposés. Les objectifs de NPS, de rétention et d’acquisition du Bloc 1 sont des cibles ; aucun résultat client réel n’en découle. B4-C433-01 est une simulation de support.
+Source : A07 : définitions, seuils et questionnaire ; consolidation.json : effectif prévu uniquement, résultats null.
 
 ### 19. Place à la démonstration
 
@@ -443,7 +443,7 @@ Je décris le résultat du point de vue de l'utilisateur : il sait quelle sortie
 
 Je bascule sur la session du club organisateur.
 
-Source : Capture réelle du 14 septembre 2026. A08, recette navigateur datée.
+Source : Capture réelle du 15 septembre 2026. A08, recette navigateur datée.
 
 ### 21. Retrouver les participants
 
@@ -465,37 +465,39 @@ Je termine en reprenant les critères annoncés : un partenaire recherché, un �
 
 Je reviens au bilan du pilotage.
 
-Source : Capture réelle du 14 septembre 2026. A08 et preuves/verification.json.
+Source : Capture réelle du 15 septembre 2026. A08 et preuves/verification.json.
 
-### 22. La transmission à la maintenance
+### 22. Les critères de validation du parcours
 
-Repère : 29:00 à 30:00. Nature : Bilan et ouverture des quinze minutes de questions.
+Repère : 29:00 à 30:00. Nature : C3.4.2, décision attendue après démonstration.
 
 **Texte oral proposé**
 
-Le Bloc 1 donne le besoin et la vision de Spity. Le Bloc 2 apporte le logiciel et les preuves de réalisation. Dans le Bloc 3, j'ai organisé un lot limité, interprété ses écarts et expliqué les décisions qui protègent la démonstration.
+Je termine par les critères annoncés : trouver un partenaire adapté, comprendre l'état de la demande, confirmer une inscription et retrouver le participant côté club. Je rappelle les contrôles montrés au clavier ainsi que la portée des preuves de capacité.
 
-Le relais vers le Bloc 4 repose sur des éléments concrets : version identifiée, anomalies qualifiées, réserves et critères de vérification. Son registre et son processus de support existent déjà dans le dossier de maintenance. Je peux m'appuyer sur eux pour préparer cette transmission. Je conserve les limites annoncées : le management présenté reste fictif et aucune validation client réelle n'est inventée. Le pilotage doit rendre la prochaine action compréhensible et vérifiable, y compris après la soutenance.
+Pour chacun, la décision attendue est accepté, accepté avec réserve ou refusé. Le constat doit correspondre à ce qui a réellement été observé pendant la démonstration. Si une fonction n'a pas été parcourue ou un contrôle a échoué, je l'indique et je conserve la réserve avec son responsable et sa prochaine vérification.
+
+Je demande alors si ce périmètre répond aux critères convenus. Les réserves alimentent le suivi de maintenance du Bloc 4 avec la version identifiée. Aucun accord réel n'est prérempli au nom du client.
 
 **À montrer ou manipuler**
 
-Relier les réserves de démonstration à une anomalie ou une amélioration suivie dans le cadre de maintenance.
+Demander la décision sur les critères. Terminer à 30:00.
 
 **Transition**
 
-Je suis prêt à expliquer les choix et à retrouver les pièces correspondantes.
+Je suis prêt à répondre aux questions et à retrouver les preuves.
 
-Source : B4 : DOSSIER_BLOC_04, registres d’anomalies et de versions ; B4-C433-01, support simulé. B3 : A07 et A08.
+Source : A07 grille de validation ; A08 ; Bloc 4 suivi des réserves et anomalies.
 
-### 23. Annexe : correspondance des preuves
+### 23. Annexe : responsabilités du lot
 
-Repère : questions du jury, hors des trente minutes. Nature : Annexe pour les questions.
+Repère : questions du jury, hors des trente minutes. Nature : Annexe, organisation fictive.
 
 **Texte oral proposé**
 
-Cette annexe sert à retrouver rapidement une pièce. La matrice du dossier détaille la nature de chaque preuve et les limites des situations fictives. La mention Acquis relève du jury.
+La matrice RACI distingue réalisation, décision, consultation et information. Une seule autorité A est retenue par activité. Camille est le rôle QA fictif. Les aménagements modifient les échanges, sans retirer sa responsabilité de recette.
 
-Source : MATRICE_PREUVES. Référentiel p. 11-14 et grille BC03.
+Source : A02, matrice RACI du scénario.
 
 ### 24. La sensibilité du budget et de la capacité
 
@@ -511,15 +513,15 @@ Choisir un scénario dans le tableau et expliquer séparément la contrainte bud
 
 Source : A09 section 6 ; classeur Pilotage, sensibilité ; donnees/pilotage.json. Taux et capacités fictifs du lot.
 
-### 25. Des contrôles datés et contextualisés
+### 25. Annexe : demande de renfort aux RH
 
-Repère : questions du jury, hors des trente minutes. Nature : Annexe, résultats historiques et contrôles locaux.
+Repère : questions du jury, hors des trente minutes. Nature : Annexe, demande et devis pédagogiques.
 
 **Texte oral proposé**
 
-Le dossier BC02 du 23 juillet rapporte 126 tests unitaires et six scénarios navigateur. Le Bloc 4 du 13 août rapporte 152 tests Jest et distingue 43 tests de maintenance, avec onze scénarios MariaDB et six recettes. La préparation locale du Bloc 3 du 14 septembre rapporte 389 tests unitaires dans 72 suites et six scénarios navigateur. Les versions, configurations et périmètres diffèrent. Ces totaux ne mesurent pas une progression de qualité et ne doivent pas être additionnés. La recette B3 utilise next dev localement ; elle ne rejoue pas la CI standalone historique. Aucun résultat client réel n'a été trouvé dans les pièces examinées.
+Si une compétence critique reste indisponible à J12, le scénario prévoit une demande au service RH fictif. Quatre heures de spécialiste à 45 euros ajoutent 180 euros, et une demi-heure de CP ajoute 22,50 euros. La prévision de cette variante devient 4 667,50 euros, soit 29,50 euros sous le plafond. La disponibilité J12-J13, le devis et le résultat attendu restent à confirmer. Cette variante indépendante n’est ni activée dans le classeur de base ni présentée comme une embauche réelle.
 
-Source : B2 : 16_DOSSIER_FINAL_BC02, Résultats vérifiés, 23 juillet 2026. B4 : DOSSIER_BLOC_04, résumé du 13 août 2026. B3 : VERIFICATION.md et preuves/verification.json, 14 septembre 2026. Cadre officiel : référentiel p. 11-14, modalités p. 6, 8 et 11, grille BC03. Voir COHERENCE_INTER_BLOCS.md.
+Source : A06 et consolidation.json, variante RH non activée.
 
 ## Questions probables du jury
 
@@ -536,8 +538,17 @@ Source : B2 : 16_DOSSIER_FINAL_BC02, Résultats vérifiés, 23 juillet 2026. B4 
 11. **Que change une situation de handicap ou une équipe internationale ?** Présenter Camille, QA malentendante fictive : consignes écrites, sous-titres testés, une personne parle à la fois, décisions avec responsable et échéance. Expliquer les contrôles attendus à J3, J10 et J14, sans annoncer de résultat réel. Ses 3 h de formation dans T07 utilisent des consignes écrites et une démonstration sous-titrée. Prévoir horaires avec fuseau, préparation asynchrone et reformulation des décisions. Ne pas inventer de diagnostic ou de situation réelle.
 12. **Comment prouvez-vous l'efficacité d'une formation ?** Définir un niveau attendu, un exercice observable et un contrôle après pratique. Exemples : inscriptions concurrentes, scénario navigateur reproductible et mise à jour autonome du tableau de bord. Les ateliers du cas ne sont pas déclarés réellement suivis.
 13. **Quel client a validé et est-il satisfait ?** Aucun résultat réel n'est disponible dans les éléments fournis. Les trois comptes rendus sont simulés, avec Claire Martin pour le Collectif Altitude Grimpe, commanditaire fictif du Bloc 1. Les objectifs de NPS du cadrage ne sont pas des résultats. Le dispositif proposé mesure critères acceptés, réussite sans aide, utilité et blocages, avec date et nombre de répondants. Présenter les retours réels seulement lorsqu'ils existent.
-14. **Que prouvent vos vérifications ?** Le 14 septembre, lint, typage, build, 389 tests unitaires et six scénarios navigateur ont réussi. La recette locale utilise next dev et une MariaDB dédiée. Elle ne prouve ni une validation client, ni une recette actuelle du déploiement distant, ni une couverture de 100 %. Les 126 tests du Bloc 2 en juillet et les 152 tests Jest du Bloc 4 en août décrivent d’autres périmètres datés ; ne pas les additionner.
-15. **Que faites-vous si la démonstration échoue ?** Annoncer l'incident, utiliser les captures du 14 septembre et la dernière recette identifiée, puis préciser les critères non revalidés en direct. Revenir au besoin client et proposer une nouvelle vérification après correction.
+14. **Que prouvent vos vérifications ?** Le 15 septembre, lint, typage, build, 389 tests unitaires et six scénarios navigateur ont réussi. La recette locale utilise next dev et une MariaDB dédiée. Elle ne prouve ni une validation client, ni une recette actuelle du déploiement distant, ni une couverture de 100 %. Les 126 tests du Bloc 2 en juillet et les 152 tests Jest du Bloc 4 en août décrivent d’autres périmètres datés ; ne pas les additionner.
+15. **Que faites-vous si la démonstration échoue ?** Annoncer l'incident, utiliser les captures du 15 septembre et la dernière recette identifiée, puis préciser les critères non revalidés en direct. Revenir au besoin client et proposer une nouvelle vérification après correction.
+
+## Compléments de réponse après correction
+
+- Le planning global dérive de 79 j-h à 5 j-h/semaine, soit 15,8 semaines sous hypothèse séquentielle. Les quinze jours du lot B3 ne représentent pas tout le développement.
+- Les 5 h supplémentaires mesurent la charge. T06 et T07 glissent chacun d'un jour ; leur retard ne s'additionne pas, et le jalon reste J15.
+- Les quatre styles sont participatif, persuasif, directif et délégatif. QA avait déjà la recette : préserver cette affectation n'est pas une réallocation nouvelle.
+- Le plan comprend CP 1 h à J3, DEV 2 h à J9-J12 et Camille 3 h à J10-J14. Les niveaux techniques sont indépendants du handicap.
+- La fiche RH de l'annexe 25 reste conditionnelle : 202,50 EUR supplémentaires, marge 29,50 EUR, CP 29,5/30 h. Le budget de base reste 4 465 EUR.
+- CR02 relie un écart à une décision puis à une action datée. Les mesures client sont définies, mais leurs résultats restent non mesurés.
 
 ## Exercices de répétition
 

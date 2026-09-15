@@ -45,4 +45,15 @@ Lors du désaccord DEV/QA à J10, chacun prépare ses arguments par écrit. Cami
 
 Ces vérifications sont planifiées, sans résultat réel attesté. En cas d'échec, le CP distingue une information inaccessible d'un besoin de formation technique, corrige la cause et réestime le travail restant si nécessaire. A02 précise l'heure de préparation CP déjà comprise dans T03 et T08 ; A06 décrit la formation. Les supports restent structurés et utilisables au clavier ; une démonstration n'utilise pas uniquement la couleur pour signaler un état.
 
-Dans une équipe internationale fictive, le compte rendu devient la référence commune. Les fuseaux sont explicites, les acronymes sont expliqués et la confirmation de compréhension passe par une reformulation. Une personne indisponible en réunion peut contribuer avant et après le point synchrone.
+Dans le contexte international simulé, CP et Camille travaillent à Paris, tandis que DEV travaille depuis Montréal. La maîtrise du français varie dans l'équipe ; aucune aptitude n'est déduite de la nationalité. L'invitation indique Europe/Paris et America/Toronto, avec un créneau commun confirmé par les participants. DEV prépare son avis écrit avant l'arbitrage. CP rédige un résumé en français simple et explique les termes dans un glossaire FR/EN : reste à faire / remaining effort, recette / acceptance testing. Chaque rôle reformule ensuite l'action, le responsable et l'échéance. Le contrôle consiste à retrouver la même décision dans CR02, y compris sans assister à toute la réunion.
+
+## Ressources communes accessibles
+
+| Ressource partagée | Utilisation et accès dans le cas |
+| --- | --- |
+| [Backlog Linear](https://linear.app/spitywa/team/SPI/all) | Statuts et dépendances réellement observés le 14 septembre ; CP vérifie l'accès de chaque rôle avant de l'utiliser dans le scénario. |
+| [CR02 et critères de validation](A07_SUIVI_CLIENT.md#cr02---avancement-et-arbitrage-à-j10) | Même version écrite pour CP, DEV, Camille et client ; décisions, responsables et échéances. |
+| [Planning du lot](A01_PLANNING.md) | Dépendances, fin prévisionnelle et jalons. |
+| [Procédure de démonstration](A08_DEMONSTRATION.md) | Préconditions, manipulations et solution de secours. |
+
+Ces liens rendent la préparation consultable dans le dossier partagé. Ils ne prétendent pas qu'un collaborateur fictif possède un compte réel ni qu'un compte rendu a été publié dans Linear. La recommandation est de limiter la discussion J10 à quinze minutes, préparer les options par écrit et vérifier à la revue suivante que l'action décidée est retrouvable et exécutée.

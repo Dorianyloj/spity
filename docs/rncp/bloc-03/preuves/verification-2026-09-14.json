@@ -1,7 +1,7 @@
 {
-  "observedAt": "2026-09-15T07:32:41.012Z",
-  "gitRevision": "9d166c02c94f39578061bad97fab85f0004a58c0",
-  "applicationTree": "9109ce976825a6536fa1c7219a2b5ef5e8c3b64c",
+  "observedAt": "2026-09-14T07:46:52.223722+00:00",
+  "gitRevision": "dd2bee57a9854bb4c2fb841769a5effe52fa3d7b",
+  "applicationTree": "69c2374f919f7876f4eaff477e7d5d68370b59d9",
   "runtime": "Node.js 24.14.0 local ; Node.js 22 est la référence du projet",
   "lint": {
     "status": "passed",
@@ -23,7 +23,7 @@
     "status": "passed",
     "command": "npm run build",
     "nextVersion": "16.3.4",
-    "note": "Build réussi le 15 septembre avec accès réseau aux polices Google."
+    "note": "Premier essai bloqué par la récupération des polices Google dans le bac à sable ; nouvel essai avec accès réseau autorisé réussi."
   },
   "acceptance": {
     "status": "passed",
@@ -32,44 +32,18 @@
     "unexpected": 0,
     "skipped": 0,
     "flaky": 0,
-    "durationMs": 64709.414000000004,
+    "durationMs": 86197.189,
     "environment": "MariaDB 11.4 dédiée, 127.0.0.1:33313 ; Next.js dev local 3313 ; Chromium Playwright",
     "notes": [
       "Aucun retry configuré.",
       "Avertissement décoratif VANTA : No THREE defined on window. Les six parcours passent.",
       "Cette recette locale utilise next dev ; le cas standalone de juillet est historique."
-    ],
-    "startTime": "2026-09-15T07:23:56.277Z"
+    ]
   },
   "privacy": "Aucun secret, cookie, identifiant de base ou chemin de test personnel dans cette synthèse.",
   "demo": {
-    "database": "Dedicated database already prepared; reused, no reset during this verification",
+    "database": "prepared",
     "server": "http://127.0.0.1:3313",
     "dedicated": true
-  },
-  "checkExecution": {
-    "startedAt": "2026-09-15T07:19:50.5524838Z",
-    "checks": [
-      {
-        "name": "lint",
-        "exitCode": 0,
-        "seconds": 19.8
-      },
-      {
-        "name": "typecheck",
-        "exitCode": 0,
-        "seconds": 7.0
-      },
-      {
-        "name": "unit",
-        "exitCode": 0,
-        "seconds": 48.8
-      },
-      {
-        "name": "build",
-        "exitCode": 0,
-        "seconds": 19.8
-      }
-    ]
   }
 }

@@ -41,3 +41,14 @@ Le consommé économique du cas vaut 2 945 EUR, dont 2 825 EUR de travail et 120
 Chaque rôle actualise son consommé et son reste à faire. CP vérifie deux fois par semaine l'écart, les dates et la capacité. Une variation de budget dépassant la réserve, une charge supérieure à la capacité ou un critère critique non vérifié déclenche un arbitrage documenté. Les indicateurs de qualité s'appuient sur les résultats réellement exécutés dans VERIFICATION.md.
 
 Linear a été relu directement le 14 septembre : 12 Done, 4 Todo, 1 In Progress, 7 Backlog et 1 Canceled. Le taux de tickets Done est de 12 / 24 = 50 % hors annulé. Il ne mesure pas la part de produit livrée. A09 conserve le relevé, les dépendances lues, les 30 activités estimées et les tests de sensibilité. La feuille Linear reste distincte du scénario.
+
+## Écarts de dates et décision de suivi
+
+| Tâche | Fin initiale | Fin revue à J10 | Retard prévisionnel | Conséquence |
+| --- | --- | --- | --- | --- |
+| T06 - Événements | J11 | J12 | 1 jour | Préserver les critères de capacité et préparer les corrections. |
+| T07 - Recette | J13 | J14 | 1 jour | Clôturer après T06 et T10, avant la démonstration J15. |
+
+Le retard se calcule par fin revue moins fin initiale. Ces deux écarts ne s'additionnent pas pour annoncer deux jours de retard de la démonstration : celle-ci reste prévue à J15. Les +5 h de charge ne sont pas cinq jours de retard. Exemple de mise à jour : renseigner le reste à faire T06 et sa nouvelle fin, relire charge/coût, vérifier la dépendance de T07 puis consigner l'effet dans CR02.
+
+CP atteint 96,7 % de sa capacité, au-dessus de l'alerte de 90 %. Le scénario limite les demandes nouvelles et protège ses créneaux d'arbitrage. La recette est déjà confiée à QA ; ce n'est pas une nouvelle réaffectation faisant gagner des heures à CP. Tout ajout mobilisant plus que sa marge d'une heure nécessite un arbitrage. La capacité restante des autres rôles ne prouve pas qu'ils disposent de la compétence requise pour reprendre une tâche.

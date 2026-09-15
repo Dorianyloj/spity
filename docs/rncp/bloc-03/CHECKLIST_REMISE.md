@@ -1,6 +1,6 @@
 # Checklist de remise et de répétition — Bloc 3
 
-État documentaire : 15 septembre 2026. Les vérifications techniques et le relevé Linear restent datés du 14 septembre. Les cases personnelles et administratives ci-dessous restent ouvertes jusqu'à leur confirmation par le candidat.
+État documentaire : 15 septembre 2026. Vérifications techniques du 15 septembre ; relevé Linear du 14 septembre. Les cases personnelles et administratives ci-dessous restent ouvertes jusqu'à leur confirmation par le candidat.
 
 ## Livrables préparés
 
@@ -10,14 +10,14 @@
 - [x] Classeur modifiable : pilotage, planning et risques, avec formules vérifiées.
 - [x] Guide d'oral : timing, notes, questions probables et réponses à reformuler.
 - [x] Démonstration locale avec base dédiée, comptes de test, scénario et captures de secours datées.
-- [x] Preuves du 14 septembre sur dd2bee5 : lint, TypeScript, build, 389 tests unitaires et 6 scénarios navigateur réussis ; portée datée précisée dans VERIFICATION.md.
+- [x] Preuves du 15 septembre sur 9d166c0 : lint, TypeScript, build, 389 tests unitaires et 6 scénarios navigateur réussis ; portée datée précisée dans VERIFICATION.md.
 - [x] Situations fictives identifiées ; absence de mesure de satisfaction réelle explicitée.
 - [x] Cas de Camille, QA malentendante fictive : missions, management et formation sur les slides 6, 14 et 16, avec les mêmes modalités dans A02, A05 et A06.
 - [x] Reprise du commanditaire fictif du Bloc 1 et rapprochement des preuves des Blocs 2 et 4 dans COHERENCE_INTER_BLOCS.md.
 
 ## Informations à compléter avec Dorian
 
-- [ ] Relancer les vérifications sur la version effectivement démontrée : le matching a évolué depuis la recette du 14 septembre.
+- [x] Nouvelle vérification du 15 septembre intégrant les dernières évolutions du matching, avec captures actualisées.
 
 - [ ] Confirmer l'identité de présentation, la formation et le campus à afficher.
 - [ ] Préciser le rôle personnel, les personnes réellement impliquées et leurs contributions.
@@ -43,7 +43,7 @@
 - [ ] Expliquer pourquoi le budget du lot B3 et les jours J1-J15 sont distincts du budget global et des jalons J1-J5 du Bloc 1.
 - [ ] Expliquer l'arbitrage réel 689e59d, ses limites documentaires et l'arbitrage fictif de périmètre.
 - [ ] Refaire le parcours grimpeur/club, contrôler les dates des événements et ouvrir les deux sessions.
-- [ ] Identifier la version présentée et noter toute modification postérieure aux vérifications du 14 septembre.
+- [ ] Identifier la version présentée et noter toute modification postérieure aux vérifications du 15 septembre.
 - [ ] Garder les fichiers et captures accessibles hors connexion ; tester le matériel de projection.
 - [ ] Préparer les 15 minutes de questions à partir de GUIDE_ORAL.md et retrouver les annexes rapidement.
 

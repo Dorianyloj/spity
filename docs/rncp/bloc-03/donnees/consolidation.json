@@ -1,0 +1,35 @@
+{
+  "nature": "Compléments pédagogiques explicites du 15 septembre 2026",
+  "globalPlanning": {
+    "source": "Bloc 1, C1.4.1, tableau Découpage recommandé par jalons",
+    "capacityPersonDaysPerWeek": 5,
+    "sequence": [
+      {"milestone": "J1", "title": "Socle", "personDays": 16, "result": "Compte et profil exploitables"},
+      {"milestone": "J2", "title": "Découverte", "personDays": 15, "result": "Lieux et partenaires recherchables"},
+      {"milestone": "J3", "title": "Organisation", "personDays": 17, "result": "Topos et événements du MVP cible"},
+      {"milestone": "J4", "title": "Communauté", "personDays": 14, "result": "Fil social et médias limités"},
+      {"milestone": "J5", "title": "Stabilisation", "personDays": 17, "result": "Recette et documentation de livraison"}
+    ],
+    "assumption": "Ordonnancement séquentiel pédagogique à capacité constante, dérivé des charges B1 : 79 j-h / 5 = 15,8 semaines. Pas un calendrier historique. Le lot B3 est un zoom de pilotage distinct, sans addition automatique de ses heures au budget B1."
+  },
+  "internationalCase": {
+    "fictional": true,
+    "context": "CP et Camille à Paris, DEV travaillant depuis Montréal dans le scénario",
+    "needs": "Créneau commun, maîtrise variable du français et accès aux décisions hors réunion",
+    "adaptations": "Invitation avec fuseaux Europe/Paris et America/Toronto, résumé en français simple et glossaire FR/EN, avis écrit de DEV avant la décision, reformulation sans assimiler silence et accord",
+    "check": "Chaque rôle retrouve la même action, le même responsable et la même échéance dans CR02"
+  },
+  "conditionalRecruitment": {
+    "activated": false,
+    "trigger": "À J12, compétence critique de recette encore indisponible malgré un support accessible et la pratique accompagnée",
+    "requester": "Chef de projet", "recipient": "Service RH fictif",
+    "mission": "Accompagner la recette navigateur et les cas de capacité, puis transmettre un cas reproductible à Camille",
+    "availability": "J12-J13 pour préserver la recette J14",
+    "specialistHours": 4, "specialistHourlyRate": 45,
+    "additionalCPHours": 0.5, "cpHourlyRate": 45,
+    "selection": "Exercice pratique accessible et preuve de maîtrise Playwright, formulaires et capacité",
+    "acceptance": "Cas reproductible documenté et passage de relais à QA",
+    "scope": "Variante indépendante, non activée dans le classeur de base. 180 EUR de renfort + 22,50 EUR CP = 202,50 EUR. Prévision 4 667,50 EUR, marge 29,50 EUR ; CP 29,5/30 h. Devis et disponibilité à confirmer avant engagement. Aucune demande réellement envoyée."
+  },
+  "clientSession": {"day": 15, "plannedClimbers": 2, "plannedClubRepresentatives": 1, "actualParticipants": null, "results": "Non mesurés", "scope": "Protocole d'une session pilote fictive, aucun effectif réellement recruté"}
+}

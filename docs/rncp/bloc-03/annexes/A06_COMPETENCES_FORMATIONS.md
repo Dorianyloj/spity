@@ -13,10 +13,10 @@ Nature : grille et plan fictifs appliqués aux rôles du cas. Les niveaux ne son
 
 | Action prévue | Public | Charge et moment | Modalité | Critère de réussite |
 | --- | --- | --- | --- | --- |
-| Lire un tableau de bord et arbitrer | CP | 1 h dans T03 | Exercice sur le classeur | Modifier le reste à faire et expliquer l'écart recalculé. |
-| Tester une inscription concurrente | DEV | 2 h dans T06 | Lecture du test puis pratique accompagnée | Expliquer pourquoi une seule demande doit être acceptée. |
-| Recette navigateur | Camille, QA | 2 h dans T07 | Consignes écrites, démonstration sous-titrée, pratique guidée puis autonome | Rejouer un cas et identifier preuve, précondition et résultat. |
-| Parcours clavier | Camille, QA | 1 h dans T07 | Atelier avec critères écrits et échanges disponibles par écrit | Décrire un défaut et proposer un contrôle de non-régression. |
+| Lire un tableau de bord et arbitrer | CP | 1 h à J3 dans T03 | Exercice sur le classeur | Modifier le reste à faire et expliquer l'écart recalculé. |
+| Tester une inscription concurrente | DEV | 2 h à J9-J12 dans T06 | Lecture du test puis pratique accompagnée | Expliquer pourquoi une seule demande doit être acceptée. |
+| Recette navigateur | Camille, QA | 2 h à J10-J14 dans T07 | Consignes écrites, démonstration sous-titrée, pratique guidée puis autonome | Rejouer un cas et identifier preuve, précondition et résultat. |
+| Parcours clavier | Camille, QA | 1 h à J10-J14 dans T07 | Atelier avec critères écrits et échanges disponibles par écrit | Décrire un défaut et proposer un contrôle de non-régression. |
 
 Ces six heures sont incluses dans les tâches du planning ; elles ne sont pas ajoutées une seconde fois. Le budget de ressources complémentaires est de 60 EUR dans le cas, sans achat effectué. Les supports initiaux sont les tests et guides du dépôt ; une formation externe reste une proposition si l'exercice pratique révèle un besoin supplémentaire.
 
@@ -32,4 +32,17 @@ Le contrôle après formation porte sur un résultat observable, puis sur la ré
 
 ## Fiche de besoin RH préparée
 
-Statut : proposition fictive, non envoyée. Le recrutement permanent n'est pas nécessaire dans le cas de base. Si une compétence critique reste indisponible : demander un renfort ponctuel en recette web, capable d'utiliser Playwright et de documenter l'accessibilité ; préciser le lot, la disponibilité, le nombre d'heures, le budget restant, le responsable d'accueil et le résultat attendu. La sélection repose sur un exercice pratique accessible et des critères identiques pour les candidats.
+Statut : fiche pédagogique conditionnelle, non envoyée et non activée dans le classeur de base. Un recrutement permanent n'est pas retenu pour ce lot. La difficulté technique doit être constatée malgré un support accessible et une pratique accompagnée ; elle n'est jamais présumée à partir du handicap de Camille.
+
+| Champ transmis aux RH dans le scénario | Besoin préparé |
+| --- | --- |
+| Demandeur et destinataire | CP vers le service RH fictif ; arbitrage du client avant engagement. |
+| Déclencheur | À J12, compétence critique de recette encore indisponible et jalon J14 menacé. |
+| Mission | Accompagner la recette navigateur et les contrôles de capacité ; transmettre un cas reproductible à Camille. |
+| Compétences et sélection | Playwright, formulaires, capacité ; exercice pratique accessible et critères identiques pour les candidats. |
+| Disponibilité | Quatre heures de spécialiste à J12-J13 pour préserver la recette J14 ; disponibilité à confirmer. |
+| Accueil et résultat | CP prépare le contexte pendant 0,5 h ; QA reçoit un cas documenté avec préconditions, exécution et preuve. |
+| Coût additionnel simulé | Renfort : 4 h à 45 EUR = 180 EUR ; CP : 0,5 h à 45 EUR = 22,50 EUR ; total 202,50 EUR. |
+| Effet de la variante | 4 465 + 202,50 = 4 667,50 EUR ; marge 29,50 EUR sous 4 697 EUR ; CP passe à 29,5/30 h. |
+
+Le spécialiste est une ressource distincte : ses quatre heures ne sont pas ajoutées à la capacité de Camille. Devis, disponibilité et arbitrage restent à confirmer avant engagement. La faible marge de 29,50 EUR nécessite un suivi quotidien. Si le renfort n'est pas disponible, le CP propose de réduire le périmètre ou de revoir le jalon ; il ne déclare pas la compétence acquise. Cette variante indépendante n'est pas cumulée automatiquement avec les scénarios de sensibilité d'A09. Les valeurs sources figurent dans donnees/consolidation.json.

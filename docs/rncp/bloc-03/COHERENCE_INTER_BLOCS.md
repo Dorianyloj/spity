@@ -1,6 +1,6 @@
 # Cohérence de Spity entre les Blocs 1, 2, 3 et 4
 
-Revue documentaire du 14 septembre 2026. Elle rapproche les livrables existants et précise leur reprise dans le Bloc 3. Elle ne vaut ni validation du jury ni nouvelle mesure de production.
+Revue documentaire du 14 septembre, complétée le 15 septembre 2026. Elle rapproche les livrables existants et précise leur reprise dans le Bloc 3. Elle ne vaut ni validation du jury ni nouvelle mesure de production.
 
 ## Un projet, quatre compétences complémentaires
 
@@ -39,7 +39,7 @@ Les 4 270 EUR ne remplacent pas les 38 126 EUR. On ne les additionne pas : aucun
 
 Le Bloc 1 décrit une vision large : profils, matching, lieux, topos, événements et social. Le Bloc 2 sélectionne F01-F10 et déclare notamment la cartographie interactive, les contributions aux topos et le social complet hors de son prototype évalué de juillet. Ces limites sont celles d'une version datée.
 
-L'[archive de backlog du 9 septembre](../../audits/2026-09-09-synchronisation-linear.md) signale ensuite un périmètre partiellement livré, avec 12 Done, 5 Todo, 7 Backlog et 1 Canceled. Le Bloc 3 se concentre sur les parcours effectivement vérifiés le 14 septembre. Il ne présente pas le lot comme un redéveloppement historique de tout Spity. Le report fictif d'une contribution aux topos concerne le lot étudié, pas l'abandon de la vision du Bloc 1.
+L'[archive de backlog du 9 septembre](../../audits/2026-09-09-synchronisation-linear.md) signale ensuite un périmètre partiellement livré, avec 12 Done, 5 Todo, 7 Backlog et 1 Canceled. Le Bloc 3 se concentre sur les parcours effectivement vérifiés à nouveau le 15 septembre. Il ne présente pas le lot comme un redéveloppement historique de tout Spity. Le report fictif d'une contribution aux topos concerne le lot étudié, pas l'abandon de la vision du Bloc 1.
 
 J1-J5 désignent des **jalons** dans C1.4.1. J1-J15 désignent des **jours ouvrés relatifs** dans le Bloc 3. Les 79 jours-homme du Bloc 1 ne sont donc pas comprimés en quinze jours. Les codes de risques du Bloc 3 sont propres au lot : ils ne renumérotent pas le registre du Bloc 1. Le risque de dérive de périmètre a un lien thématique avec le risque R5 de l'ancien support B1, sans identité de fiche.
 
@@ -49,7 +49,7 @@ J1-J5 désignent des **jalons** dans C1.4.1. J1-J15 désignent des **jours ouvr�
 | --- | --- | --- |
 | [Bloc 2, 23 juillet](../../bc02/16_DOSSIER_FINAL_BC02.md) | 126 tests unitaires dans 23 suites, 11 résultats HTTP/MariaDB et 6 scénarios navigateur. | Preuves historiques du prototype BC02, avec couverture globale documentée. |
 | [Bloc 4, 13 août](../bloc-04/DOSSIER_BLOC_04.md) | 152 tests Jest, 43 tests de maintenance, 11 scénarios MariaDB et 6 recettes Playwright. | Catégories distinctes, conservées comme résultats du dossier de maintenance. |
-| [Bloc 3, 14 septembre](VERIFICATION.md) | 389 tests unitaires dans 72 suites et 6 scénarios navigateur, lint, types et build réussis. | Contrôles locaux datés ; recette sous next dev, sans nouvelle validation distante du standalone. |
+| [Bloc 3, 15 septembre](VERIFICATION.md) | 389 tests unitaires dans 72 suites et 6 scénarios navigateur, lint, types et build réussis. | Contrôles locaux datés ; recette sous next dev, sans nouvelle validation distante du standalone. |
 
 Ces nombres ne doivent pas être fusionnés ni transformés en courbe de qualité : les versions et périmètres de tests diffèrent. Une hausse du nombre de tests ne mesure ni la satisfaction client ni la couverture globale actuelle.
 
@@ -59,6 +59,6 @@ Les objectifs d'acquisition, de rétention, de NPS et de note d'application du B
 
 ## Reprise dans les livrables
 
-Le diaporama conserve les trente minutes, ses graphiques modifiables, les grandes captures et les trois annexes. Le commanditaire apparaît dans le contexte, une vue des quatre blocs explique la continuité, le budget du lot cite la référence globale et l'annexe de preuves distingue juillet, août et septembre. Le guide oral, le dossier et les comptes rendus simulés reprennent ces précisions.
+Le diaporama conserve les trente minutes, ses graphiques modifiables, les grandes captures et les trois annexes. Le commanditaire apparaît dans le contexte, un planning global des cinq jalons B1 précède le zoom sur les quinze jours du lot, le budget du lot cite la référence globale et la matrice de preuves et cette revue distinguent juillet, août et septembre. Le guide oral, le dossier et les comptes rendus simulés reprennent ces précisions.
 
 La palette verte, les photos d'escalade et les parcours grimpeur/club prolongent l'identité des autres livrables. Les tableaux complets restent dans les annexes. Le support visuel du Bloc 3 conserve sa propre composition pour rester lisible à l'oral.

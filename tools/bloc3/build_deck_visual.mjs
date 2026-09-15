@@ -4,7 +4,7 @@ import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 
-const root=process.cwd(),tmp=path.join(root,'tmp/bloc3/visual-v8');
+const root=process.cwd(),tmp=path.join(root,'tmp/bloc3/visual-v10');
 await fs.mkdir(tmp,{recursive:true});
 const modules=process.env.RUNTIME_NODE_MODULES??path.join(root,'tmp/bloc3/build/node_modules');
 process.env.RUNTIME_NODE_MODULES=modules;
@@ -18,6 +18,7 @@ const doc=JSON.parse(await fs.readFile(path.join(root,'docs/rncp/bloc-03/donnees
 const pilotage=JSON.parse(await fs.readFile(path.join(root,'docs/rncp/bloc-03/donnees/pilotage.json'),'utf8'));
 const linear=JSON.parse(await fs.readFile(path.join(root,'docs/rncp/bloc-03/donnees/linear-2026-09-14.json'),'utf8'));
 const indicators=JSON.parse(await fs.readFile(path.join(root,'docs/rncp/bloc-03/donnees/indicateurs.json'),'utf8'));
+const consolidation=JSON.parse(await fs.readFile(path.join(root,'docs/rncp/bloc-03/donnees/consolidation.json'),'utf8'));
 const P=Presentation.create({slideSize:{width:1280,height:720}});
 const ink='#18312D',green='#28725F',sage='#91AE91',lime='#C5DC83',orange='#C77952',muted='#5D7068',paper='#F5F3EA',gray='#DADFD4';
 const tableOwners=[],chartOwners=[],chartContracts=[];
@@ -32,11 +33,11 @@ async function image(s,file,x,y,w,h,fit='contain',crop){
 function heading(s,title){text(s,title,64,42,1152,110,46,true);}
 function footer(s,item,light=false){text(s,`${item.nature}    ${item.minutes?`${fmt(item.startMinute)} à ${fmt(item.endMinute)}`:'Questions du jury'}    ${item.number}`,64,672,1152,25,16,false,light?'#EAF1E6':muted);}
 function takeaway(s,value,y=592){text(s,value,72,y,1136,63,28,true,green);}
-function groups(s,items,y=210){const width=1136/items.length;items.forEach(([big,label,detail],i)=>{const x=72+i*width;text(s,big,x,y,width-36,110,76,true,i===1?green:ink);text(s,label,x,y+134,width-36,95,30,true,green);if(detail)text(s,detail,x,y+252,width-36,104,25);});}
-function table(s,rows,widths,number,top=185,height=422){
+function groups(s,items,y=210,highlight=1){const width=1136/items.length;items.forEach(([big,label,detail],i)=>{const x=72+i*width;text(s,big,x,y,width-36,110,76,true,i===highlight?green:ink);text(s,label,x,y+134,width-36,95,30,true,green);if(detail)text(s,detail,x,y+252,width-36,104,25);});}
+function table(s,rows,widths,number,top=185,height=422,fontSize=24){
   const t=s.tables.add({rows:rows.length,columns:rows[0].length,left:64,top,width:1152,height,values:rows,columnWidths:widths});
   t.borders.assign({style:'solid',fill:paper,width:2});
-  for(let r=0;r<rows.length;r++){t.rows[r].height=height/rows.length;for(let c=0;c<rows[0].length;c++){const cell=t.getCell(r,c);cell.fill=r===0?green:r%2?'#E9EEE4':paper;cell.text.style={typeface:font,fontSize:24,bold:r===0,color:r===0?'#FFFFFF':ink};}}
+  for(let r=0;r<rows.length;r++){t.rows[r].height=height/rows.length;for(let c=0;c<rows[0].length;c++){const cell=t.getCell(r,c);cell.fill=r===0?green:r%2?'#E9EEE4':paper;cell.text.style={typeface:font,fontSize,bold:r===0,color:r===0?'#FFFFFF':ink};}}
   tableOwners.push(number);return t;
 }
 function chart(s,number,categories,series,options={}){
@@ -50,16 +51,13 @@ for(const item of doc.slides){
   const s=P.slides.add();s.background.fill=paper;
   item.startMinute=elapsed;elapsed+=item.minutes;item.endMinute=elapsed;
   const alignedTitles={2:'Le besoin d’Altitude Grimpe',3:'Un projet, quatre blocs',4:'Le backlog Linear au 14 septembre',5:'Un lot sur quinze jours ouvrés',7:'Les causes des 5 heures supplémentaires',8:'Le budget du lot de démonstration',22:'La transmission à la maintenance',25:'Des contrôles datés et contextualisés'};
-  item.title=[6,14,16].includes(item.number)?item.title:alignedTitles[item.number]??mainTitles[item.number]??item.title;
+  item.title=[3,4,5,6,13,14,15,16,17,18,22,23,25].includes(item.number)?item.title:alignedTitles[item.number]??mainTitles[item.number]??item.title;
   if(item.number===13)item.source+=' Illustration fictive générée avec ImageGen, visuels/equipe-illustration.png. Aucune personne réelle représentée.';
   if(item.number===19)item.source+=' Photo de marque existante escalade-falaise-gros-plan.jpeg, illustration de la pratique.';
   if(item.number===5)item.source+=' Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01.';
   item.spokenWords=[item.script,item.transition].filter(Boolean).join(' ').trim().split(/\s+/).length;
-  if(item.number===4)item.action='Montrer les statuts observés, puis la dépendance SPI-27, SPI-15 et SPI-18. La limite de deux tâches appartient au cas.';
-  if(item.number===5)item.action='Lire les phases du planning, puis montrer la recette à J14 avant la démonstration J15.';
   if(item.number===8)item.action='Comparer les barres du budget initial, de la prévision et du plafond. Expliquer les 232 euros de marge.';
   if(item.number===11)item.action='Comparer oralement les trois options. Mettre en avant le standalone et le commit qui atteste le choix.';
-  if(item.number===13)item.action='Présenter les deux besoins DEV et QA. L’illustration représente une équipe fictive.';
   item.notes=`REPÈRE : ${fmt(item.startMinute)} à ${fmt(item.endMinute)}. Durée prévue : ${fmt(item.minutes)}.\n\nTEXTE ORAL\n${item.script}\n\n${item.action?'GESTE OU MANIPULATION\n'+item.action+'\n\n':''}${item.transition?'TRANSITION\n'+item.transition+'\n\n':''}SOURCE ET NATURE\n${item.nature}. ${item.source}`;
   s.speakerNotes.textFrame.setText(item.notes);
   if(item.number===1){
@@ -78,27 +76,35 @@ for(const item of doc.slides){
     const matching=item.number===20;
     text(s,matching?'Trouver un\npartenaire':'Retrouver les\nparticipants',48,76,275,205,42,true);
     text(s,matching?'01  Profil\n\n02  Filtres\n\n03  Demande':'01  Événement\n\n02  Inscription\n\n03  Participants',48,352,275,272,26,true,green);
-    await image(s,`docs/rncp/bloc-03/preuves/captures/${matching?'matching':'evenements'}-2026-09-14.png`,326,20,936,640,'contain');
+    await image(s,`docs/rncp/bloc-03/preuves/captures/${matching?'matching':'evenements'}-2026-09-15.png`,326,20,936,640,'contain');
     footer(s,item);continue;
   }
   heading(s,item.title);footer(s,item);
   switch(item.number){
     case 2:
-      await image(s,'docs/rncp/bloc-03/preuves/captures/lieux-2026-09-14.png',402,168,808,469,'contain');
+      await image(s,'docs/rncp/bloc-03/preuves/captures/lieux-2026-09-15.png',402,168,808,469,'contain');
       text(s,'Grimpeur',72,223,315,60,38,true,green);text(s,'Trouver\nun partenaire',72,307,310,115,35);
       text(s,'Club',72,477,315,60,38,true,green);text(s,'Organiser\nune sortie',72,557,310,85,30);break;
-    case 3:
-      groups(s,[['01','Cadrage','Besoin et\nbudget global.'],['02','Logiciel','Prototype,\ntests et livraison.'],['03','Pilotage','Lot, écarts\net arbitrages.'],['04','Maintenance','Anomalies\net support.']],194);
-      takeaway(s,'Produit réel. Commanditaire et management fictifs.',609);break;
+    case 3:{
+      const sequence=consolidation.globalPlanning.sequence,capacity=consolidation.globalPlanning.capacityPersonDaysPerWeek;
+      let total=0;const starts=sequence.map(x=>{const start=total/capacity;total+=x.personDays;return start;});
+      const cats=sequence.map(x=>`${x.title} (${x.personDays} j-h)`),durations=sequence.map(x=>x.personDays/capacity);
+      chart(s,3,cats.reverse(),[{name:'Début',values:starts.reverse(),fill:'none',line:{fill:'none',width:0}},{name:'Durée de capacité',values:durations.reverse(),fill:green}],{position:{left:64,top:173,width:1136,height:409},barOptions:{direction:'bar',grouping:'stacked',gapWidth:70},dataLabels:{showValue:false},xAxis:{visible:true,textStyle:{typeface:font,fontSize:25,fill:ink},majorGridlines:null},yAxis:{visible:true,min:0,max:16,majorUnit:4,numberFormatCode:'0" sem."',textStyle:{typeface:font,fontSize:23,fill:ink},majorGridlines:{fill:'#DBDFD5',width:1}}});
+      takeaway(s,'79 j-h à 5 j-h/semaine : 15,8 semaines de capacité.',598);
+      text(s,'Ordre pédagogique du MVP cible. Le lot B3 est un zoom distinct.',72,641,1136,29,21,false,muted);break;
+    }
     case 4:{
       const values=['Backlog','Todo','In Progress','Done'].map(status=>linear.issues.filter(x=>x.status===status).length);
-      chart(s,4,['Backlog','À faire','En cours','Terminé'],[{name:'Tickets',values,fill:green,points:[{idx:0,fill:gray},{idx:1,fill:sage},{idx:2,fill:orange},{idx:3,fill:green}]}],{position:{left:68,top:180,width:800,height:390}});
-      aside(s,'12 / 24','Tickets terminés','1 ticket annulé exclu.\nComptage non pondéré.');
-      takeaway(s,'Dépendance : SPI-27 médias, SPI-15 API, SPI-18 formulaire.',605);break;
+      chart(s,4,['Backlog','À faire','En cours','Terminé'],[{name:'Tickets',values,fill:green,points:[{idx:0,fill:gray},{idx:1,fill:sage},{idx:2,fill:orange},{idx:3,fill:green}]}],{position:{left:64,top:190,width:697,height:367}});
+      text(s,'Kanban',808,195,404,70,43,true,green);
+      text(s,'2 tâches en réalisation.\nCritères avant clôture.\nJalons pour décider.',808,292,404,178,28);
+      text(s,'12 / 24 terminés\n1 annulé exclu, sans pondération.',808,483,404,94,24);
+      takeaway(s,'SPI-27 médias, SPI-15 API, SPI-18 formulaire.',594);
+      text(s,'Ressources partagées : critères et CR dans A07, code dans Git.',72,638,1136,32,23,false,muted);break;
     }
     case 5:{
-      const cats=['Restitution','Recette','Réalisation','Conception','Étude'];
-      const starts=[14,10,3,2,1],ends=[15,14,12,4,3];
+      const cats=['Restitution','Recette','Réalisation','Conception','Mesure','Étude'];
+      const starts=[14,10,3,2,1,1],ends=[15,14,12,4,3,2];
       chart(s,5,cats,[{name:'Début',values:starts,fill:'none',line:{fill:'none',width:0},dataLabelOverrides:starts.map((_,idx)=>({idx,showValue:false}))},{name:'Intervalle',values:ends.map((end,i)=>end-starts[i]),fill:green,line:{fill:'none',width:0}}],{position:{left:70,top:175,width:1100,height:415},barOptions:{direction:'bar',grouping:'stacked',gapWidth:80},dataLabels:{showValue:false},xAxis:{visible:true,textStyle:{typeface:font,fontSize:24,fill:ink},majorGridlines:null},yAxis:{visible:true,min:1,max:15,majorUnit:2,numberFormatCode:'"J"0',textStyle:{typeface:font,fontSize:22,fill:ink},majorGridlines:{fill:'#DBDFD5',width:1}}});
       takeaway(s,'Recette à J14. Démonstration à J15.',603);break;
     }
@@ -107,14 +113,14 @@ for(const item of doc.slides){
       takeaway(s,'Cas fictif : Camille est malentendante, les échanges sont adaptés.',604);break;
     case 7:
       chart(s,7,['Corrections','Recette','Événements','Accès','Planning'],[{name:'Écart en heures',values:['T10','T07','T06','T04','T03'].map(id=>{const t=pilotage.tasks.find(t=>t.id===id);return t.spentHours+t.remainingHours-t.plannedHours;}),valuesFormatCode:'+0" h";-0" h";0" h"',fill:orange,points:[{idx:0,fill:green}],dataLabelOverrides:[0,1,2,3,4].map(idx=>({idx,showValue:true,position:idx===0?'center':'outEnd',...(idx===0?{text:'Corrections −2 h'}:{}),textStyle:{typeface:font,fontSize:idx===0?22:26,bold:true,fill:idx===0?'#FFFFFF':ink}}))}],{position:{left:68,top:180,width:800,height:400},xAxis:{visible:true,tickLabelPosition:'low',textStyle:{typeface:font,fontSize:24,fill:ink},majorGridlines:null},yAxis:{visible:true,min:-3,max:3,majorUnit:1,numberFormatCode:'0" h"',textStyle:{typeface:font,fontSize:22,fill:ink},majorGridlines:{fill:'#DBDFD5',width:1}}});
-      aside(s,'+5 h','Écart net prévu','112 h initiales\n117 h à terminaison');takeaway(s,'30 activités détaillées. 77 h consommées, 40 h restantes.',607);break;
+      aside(s,'+5 h','Écart de charge','Événements : J11 à J12\nRecette : J13 à J14');takeaway(s,'T06 : +1 jour. T07 : +1 jour. La charge et le délai se distinguent.',607);break;
     case 8:
       chart(s,8,['Initial','Prévision','Plafond'],[{name:'Euros',values:[indicators.plannedCost,indicators.forecastCost,indicators.ceiling],valuesFormatCode:'0" €"',fill:green,points:[{idx:0,fill:sage},{idx:1,fill:orange},{idx:2,fill:green}]}]);
       aside(s,'232 €','Marge du lot','195 € au-dessus\nde sa référence.');
       text(s,'Budget global B1 : 38 126 € HT. Exercice B3 distinct.',72,610,1136,48,27,true,green);break;
     case 9:
       chart(s,9,['QA','DEV','CP'],[{name:'Charge',values:[24,64,29],valuesFormatCode:'0" h"',fill:green,dataLabelOverrides:[0,1,2].map(idx=>({idx,showValue:true,position:'center',textStyle:{typeface:font,fontSize:24,fill:'#FFFFFF'}}))},{name:'Marge',values:[6,8,1],valuesFormatCode:'0" h"',fill:gray,dataLabelOverrides:[0,1,2].map(idx=>({idx,showValue:idx!==2,position:'center',textStyle:{typeface:font,fontSize:24,fill:ink}}))}],{position:{left:70,top:185,width:805,height:420},barOptions:{direction:'bar',grouping:'stacked',gapWidth:95},hasLegend:true,dataLabels:{showValue:true,position:'center',textStyle:{typeface:font,fontSize:24,fill:ink}}});
-      aside(s,'1 h','Marge du CP','Capacités du lot :\n30 h, 72 h, 30 h.');break;
+      aside(s,'1 h','Marge du CP','Alerte au-delà de 90 %.\nCP atteint 96,7 %.');takeaway(s,'Limiter les demandes. Protéger les créneaux d’arbitrage.',616);break;
     case 10:{
       const rows=[['','','R01'],['','','R02  R03\nR04  R05'],['','','']];
       const t=s.tables.add({rows:3,columns:3,left:140,top:215,width:555,height:330,values:rows,columnWidths:[185,185,185]});
@@ -127,47 +133,59 @@ for(const item of doc.slides){
       text(s,'Responsable, déclencheur\net réponse pour chaque risque.',766,532,450,108,26,false,green);break;
     }
     case 11:
-      groups(s,[['01','Retries','Plus de temps.\nCause possiblement masquée.'],['02','Préchauffage','Compilations réduites.\nRoutes à préparer.'],['03','Standalone','Un test proche\ndu livrable.']],200);
+      groups(s,[['01','Retries','Plus de temps.\nCause possiblement masquée.'],['02','Préchauffage','Compilations réduites.\nRoutes à préparer.'],['03','Standalone','Un test proche\ndu livrable.']],200,2);
       takeaway(s,'Choix visible dans Git : 689e59d, 20 juillet 2026.',610);break;
     case 12:
       chart(s,12,['Lot engagé','Avec demande','Plafond'],[{name:'Euros',values:[4465,5005,4697],valuesFormatCode:'0" €"',fill:green,points:[{idx:0,fill:green},{idx:1,fill:orange},{idx:2,fill:sage}]}]);
       aside(s,'Report','Décision du cas','Ajout au lot : +540 €\nDEV : 76 h / 72 h');break;
     case 13:
-      await image(s,'docs/rncp/bloc-03/visuels/equipe-illustration.png',240,198,800,425,'contain');
-      text(s,'DEV',72,203,165,55,34,true,green);text(s,'Ajouter\nune fonction',72,275,208,125,28);
-      text(s,'QA',1068,203,145,55,34,true,green);text(s,'Stabiliser\nla recette',1042,275,175,130,28);
-      takeaway(s,'Écouter les impacts, décider, puis suivre.',613);break;
+      await image(s,'docs/rncp/bloc-03/visuels/equipe-illustration.png',360,220,540,335,'contain');
+      text(s,'Participatif',72,198,285,50,32,true,green);text(s,'Comparer les options.',72,254,292,74,26);
+      text(s,'Persuasif',72,404,285,50,32,true,green);text(s,'Expliquer le report.',72,460,292,74,26);
+      text(s,'Directif',941,198,277,50,32,true,green);text(s,'Fixer les critères\nde livraison.',941,254,277,92,26);
+      text(s,'Délégatif',941,404,277,50,32,true,green);text(s,'Confier un résultat\net un contrôle.',941,460,277,92,26);
+      takeaway(s,'15 minutes préparées. Une décision datée, puis un suivi.',608);break;
     case 14:
-      text(s,'Personnage fictif. Modalités définies avec elle dans le scénario.',72,155,1136,55,27,false,muted);
-      table(s,item.content.rows,item.content.widths,14,233,304);
-      takeaway(s,'J3 : comprendre. J10 : retrouver. J14 : réaliser sans aide.',580);
-      text(s,'Critères de vérification prévus, résultats à constater.',72,632,1136,32,21,false,muted);break;
+      text(s,'Camille, QA malentendante. Équipe fictive Paris / Montréal.',72,155,1136,55,27,false,muted);
+      table(s,item.content.rows,item.content.widths,14,220,264);
+      text(s,'Paris / Montréal : avis écrits avant décision, glossaire FR/EN.',72,514,1136,46,26,true,green);
+      text(s,'Créneau commun avec fuseaux. Reformulation de l’action attendue.',72,558,1136,42,24);
+      takeaway(s,'J3 : comprendre. J10 : retrouver. J14 : réaliser sans aide.',615);break;
     case 15:
-      chart(s,15,['CP','DEV','QA'],[{name:'Niveau du cas',values:[1,1,1],fill:sage},{name:'Cible',values:[2,2,2],fill:green}],{position:{left:68,top:182,width:795,height:410},hasLegend:true,dataLabels:{showValue:false},barOptions:{direction:'column',grouping:'clustered',gapWidth:85},yAxis:{min:0,max:3,majorUnit:1,textStyle:{typeface:font,fontSize:23,fill:ink},majorGridlines:{fill:'#DBDFD5',width:1}}});
-      aside(s,'1 à 2','De l’aide à l’autonomie','Suivi des écarts.\nConcurrence.\nRecette et clavier.');break;
+      table(s,[['Rôle','Compétence','Actuel','Cible'],['CP','Planning et suivi des écarts','1','2'],['CP','Animation et arbitrage','2','2'],['DEV','Développement typé et validation','2','2'],['DEV','Transactions et concurrence','1','2'],['Camille, QA','Recette navigateur reproductible','1','2'],['Camille, QA','Clavier et formulaires','1','2']],[182,650,160,160],15,180,414,24);
+      text(s,'0 : non abordé. 1 : accompagné. 2 : autonome. 3 : cas complexes.',72,620,1136,45,23,true,green);break;
     case 16:{
-      chart(s,16,['CP','DEV','QA'],[{name:'Formation',values:[1,2,3],valuesFormatCode:'0" h"',points:[{idx:0,fill:orange},{idx:1,fill:sage},{idx:2,fill:green}],dataLabelOverrides:[0,1,2].map(idx=>({idx,showValue:true,textStyle:{typeface:font,fontSize:28,bold:true,fill:idx===2?'#FFFFFF':ink}}))}],{type:'doughnut',position:{left:70,top:178,width:570,height:445},doughnutOptions:{holeSize:65},hasLegend:true,legend:{position:'bottom',textStyle:{typeface:font,fontSize:24,fill:ink}},dataLabels:{showValue:true,position:'center',textStyle:{typeface:font,fontSize:28,bold:true,fill:ink}}});
-      text(s,'6 h',295,327,270,100,64,true,green);text(s,'Camille : 3 h adaptées',734,218,460,75,34,true);text(s,'Consignes écrites.\nDémonstration sous-titrée.\nPuis un cas en autonomie.',734,310,460,155,28);text(s,'Temps inclus dans les tâches.\n60 € de ressources fictives.',734,505,460,115,26);break;
+      text(s,'6 h incluses dans les tâches. 60 € de ressources du cas.',72,151,1136,51,27,false,muted);
+      table(s,[['Rôle et moment','Atelier prévu','Critère de réussite'],['CP, J3','Tableau de bord : 1 h','Expliquer un écart recalculé.'],['DEV, J9-J12','Concurrence : 2 h','Une place, une inscription acceptée.'],['Camille, J10-J14','Recette : 2 h. Clavier : 1 h.','Rejouer un cas sans aide.']],[249,454,449],16,221,292,24);
+      text(s,'Camille : consignes écrites et démonstration sous-titrée.',72,543,1136,50,27,true,green);
+      text(s,'À J12, compétence critique indisponible : demande RH à arbitrer.',72,610,1136,48,25);break;
     }
     case 17:
-      groups(s,[['J3','Périmètre','CR01\nCritères attendus.'],['J10','Écarts','CR02\nDécision sur le lot.'],['J15','Validation','CR03\nAcceptation et réserves.']],205);
-      takeaway(s,'Collectif Altitude Grimpe, commanditaire fictif du Bloc 1.',612);break;
+      table(s,[['CR02 à J10','Extrait du compte rendu fictif'],['Écart','Événements J11 à J12. Prévision : 4 465 €.'],['Décision client','Reporter les topos, maintenir les critères de recette.'],['Actions','DEV : T06 à J12. QA : recette à J14. CP : restitution J15.'],['Suite','Claire Martin, Altitude Grimpe. Validation du parcours à J15.']],[250,902],17,194,370,24);
+      text(s,'Ressource partagée : A07, compte rendu CR02 et critères.',72,586,1136,46,27,true,green);
+      text(s,'J3 : périmètre. J10 : écarts. J15 : validation.',72,633,1136,35,23);break;
     case 18:
-      text(s,'Non mesurée',72,222,1136,130,94,true,green);text(s,'Aucun résultat client réel disponible.',78,383,1080,70,34);
-      [['Critères\nacceptés',72],['Parcours\nsans aide',363],['Utilité\nsur 5',654],['Blocages\ncritiques',945]].forEach(([value,x])=>text(s,value,x,533,260,104,28,true));break;
+      text(s,'Protocole proposé. Résultats réels non mesurés.',72,151,1136,51,27,false,muted);
+      table(s,[['Indicateur','Calcul ou méthode','Seuil visé'],['Critères critiques','Acceptés / évalués','100 %'],['Parcours sans aide','Réussis sans aide / tentés','Au moins 80 %'],['Utilité perçue','Moyenne des notes, avec effectif','Au moins 4/5'],['Blocages critiques','Nombre de tâches empêchées','0 ouvert']],[314,564,274],18,217,341,24);
+      text(s,'J15 : 2 grimpeurs et 1 club prévus. Date et effectif à relever.',72,589,1136,48,25,true,green);
+      text(s,'Sous le seuil : qualifier, affecter une correction, vérifier à nouveau.',72,637,1136,33,22);break;
     case 20:
-      await image(s,'docs/rncp/bloc-03/preuves/captures/matching-2026-09-14.png',64,156,1152,479,'contain',undefined);
+      await image(s,'docs/rncp/bloc-03/preuves/captures/matching-2026-09-15.png',64,156,1152,479,'contain',undefined);
       break;
     case 21:
-      await image(s,'docs/rncp/bloc-03/preuves/captures/evenements-2026-09-14.png',64,156,1152,479,'contain',undefined);
+      await image(s,'docs/rncp/bloc-03/preuves/captures/evenements-2026-09-15.png',64,156,1152,479,'contain',undefined);
       break;
     case 22:
-      text(s,'Livrable identifié',72,214,1080,90,64,true,green);text(s,'Version, recette et réserves de démonstration.',72,317,1090,65,32);
-      text(s,'Suite documentée',72,425,1080,90,64,true,green);text(s,'Anomalies, responsables et vérifications du Bloc 4.',72,528,1110,80,32);break;
-    case 23:case 24:table(s,item.content.rows,item.content.widths,item.number,185,430);break;
+      table(s,[['Critère à valider','Constat attendu pendant la démonstration'],['Partenaire','Filtres cohérents et état de demande compréhensible.'],['Inscription','Confirmation et capacité respectée.'],['Organisation club','Participant visible et commandes autorisées.'],['Utilisation','Commandes nommées, parcours au clavier.']],[326,826],22,190,353,25);
+      takeaway(s,'Décision : accepté, accepté avec réserve ou refusé.',573);
+      text(s,'Réserve : action, responsable, échéance. Transmission au Bloc 4.',72,626,1136,40,24);break;
+    case 23:
+      table(s,[['Activité','CP','DEV','QA','Client'],['Périmètre et critères','R','C','C','A'],['Planification et affectation','A/R','C','C','I'],['Réalisation','A','R','C','I'],['Recette des parcours','A','C','R','C'],['Corrections','A','R','C','I'],['Arbitrage délai, coût, périmètre','R','C','C','A'],['Acceptation de la démonstration','R','C','C','A']],[632,130,130,130,130],23,180,422,24);
+      text(s,'R : réalise. A : décide. C : consulté. I : informé. QA : Camille.',72,626,1136,40,23,true,green);break;
+    case 24:table(s,item.content.rows,item.content.widths,item.number,185,430);break;
     case 25:
-      groups(s,[['126','Bloc 2, 23 juillet','Tests unitaires\ndu prototype.'],['152','Bloc 4, 13 août','Tests Jest.\n43 tests de maintenance à part.'],['389','Bloc 3, 14 sept.','Tests unitaires\nlocaux.']],190);
-      text(s,'2026. Périmètres différents, sans mesure de satisfaction client.',72,615,1136,45,26,true,green);break;
+      table(s,[['Demande conditionnelle','Fiche préparée par CP, non envoyée'],['Déclencheur à J12','Compétence critique encore indisponible après formation.'],['Mission et délai','Renfort QA de 4 h à J12-J13, recette transmissible à Camille.'],['Sélection et accueil','Exercice accessible. Disponibilité à confirmer. Accueil CP : 0,5 h.'],['Chiffrage de la variante','180 € de renfort + 22,50 € CP = 202,50 € supplémentaires.'],['Arbitrage avant engagement','Prévision : 4 667,50 €. Marge : 29,50 €. CP : 29,5/30 h.']],[350,802],25,182,426,24);
+      text(s,'Variante indépendante, non activée dans le classeur de base.',72,629,1136,40,24,true,green);break;
     default:throw new Error(`Slide inconnue ${item.number}`);
   }
 }
@@ -175,7 +193,7 @@ assert.equal(elapsed,30);assert.equal(doc.slides.length,25);
 await fs.writeFile(path.join(root,'docs/rncp/bloc-03/donnees/support-oral.json'),JSON.stringify(doc.slides,null,2)+'\n');
 await fs.writeFile(path.join(tmp,'chart-data.json'),JSON.stringify(chartContracts,null,2)+'\n');
 const candidate=path.join(tmp,'candidate.pptx');await(await PresentationFile.exportPptx(P)).save(candidate);
-const finalPath=path.join(root,'output/presentations/spity-bloc-3-30-minutes-visuel-v8.pptx');
+const finalPath=path.join(root,'output/presentations/spity-bloc-3-30-minutes-visuel-v10.pptx');
 await finalizePresentation({workspaceDir:root,candidatePath:candidate,finalPath,pythonExecutable:python,integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-heading-fit',...tableOwners.flatMap(n=>['--require-native-table-slide',String(n)])],requiredNativeTableOwnerSlides:tableOwners,requiredNativeChartOwnerSlides:chartOwners,materializeLiteralChartWorkbooks:true,fontPolicy:{basis:'design',families:[font]},verifyArtifactToolImport:true,receiptPath:path.join(tmp,'validation.json')});
 const checked=await PresentationFile.importPptx(await FileBlob.load(finalPath));
 for(let i=0;i<checked.slides.items.length;i++){const png=await checked.export({slide:checked.slides.items[i],format:'png',scale:1});await fs.writeFile(path.join(tmp,`slide-${String(i+1).padStart(2,'0')}.png`),new Uint8Array(await png.arrayBuffer()));}
