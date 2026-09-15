@@ -19,7 +19,7 @@
     { "at": "2026-08-13T09:25:00.000+02:00", "to": "approved", "actorRole": "product-owner", "reason": "La collecte reste anonymisée et la source fictive est clairement identifiée." }
   ],
   "evidence": [
-    { "kind": "repository-path", "value": "spity/SUPPORT.md" },
+    { "kind": "repository-path", "value": "spity/docs/operations/SUPPORT.md" },
     { "kind": "repository-path", "value": ".github/ISSUE_TEMPLATE/support-client.yml" }
   ]
 }

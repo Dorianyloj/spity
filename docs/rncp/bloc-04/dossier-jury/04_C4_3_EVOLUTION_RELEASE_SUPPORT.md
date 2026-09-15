@@ -21,7 +21,7 @@ La revue mensuelle est automatisée et conserve son rapport. Le product owner ar
 
 **Vérifier :** `npm run improvements:check` puis `npm run improvements:exercise`.
 
-**Sources et preuves :** `spity/IMPROVEMENT_MANAGEMENT.md`, `spity/improvements/`, `spity/improvement-policy.json`, `.github/workflows/improvement-review.yml` et `B4-C431-01` à `B4-C431-03`.
+**Sources et preuves :** `spity/docs/operations/IMPROVEMENT_MANAGEMENT.md`, `spity/improvements/`, `spity/improvement-policy.json`, `.github/workflows/improvement-review.yml` et `B4-C431-01` à `B4-C431-03`.
 
 ## C4.3.2 — Établir le journal des versions déployées
 
@@ -39,7 +39,7 @@ Une fiche contient la version SemVer, le SHA complet, les évolutions, les corre
 
 **Vérifier :** `npm run releases:check` puis `npm run releases:exercise`.
 
-**Sources et preuves :** `spity/RELEASE_JOURNAL.md`, `spity/release-journal/`, `spity/release-journal-policy.json`, `.github/workflows/release-journal.yml` et `B4-C432-01` à `B4-C432-03`.
+**Sources et preuves :** `spity/docs/operations/RELEASE_JOURNAL.md`, `spity/release-journal/`, `spity/release-journal-policy.json`, `.github/workflows/release-journal.yml` et `B4-C432-01` à `B4-C432-03`.
 
 ## C4.3.3 — Collaborer avec le support
 
@@ -60,7 +60,7 @@ Le contrôleur rejette une fiche sans simulation déclarée, sans escalade, sans
 
 **Vérifier :** `npm run support:check` puis `npm run support:exercise`.
 
-**Sources et preuves :** `spity/SUPPORT.md`, `spity/support-collaborations/`, `spity/support-collaboration-policy.json`, `.github/workflows/support-collaboration.yml` et `B4-C433-01` à `B4-C433-03`.
+**Sources et preuves :** `spity/docs/operations/SUPPORT.md`, `spity/support-collaborations/`, `spity/support-collaboration-policy.json`, `.github/workflows/support-collaboration.yml` et `B4-C433-01` à `B4-C433-03`.
 
 ## À retenir pour l'entretien
 

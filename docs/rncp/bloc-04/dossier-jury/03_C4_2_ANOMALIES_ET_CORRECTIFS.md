@@ -30,7 +30,7 @@ npm run incidents:exercise
 
 L'exercice teste le registre sain et des erreurs représentatives, sans modifier les données versionnées.
 
-**Sources et preuves :** `spity/INCIDENT_MANAGEMENT.md`, `spity/incidents/`, `spity/incident-policy.json`, `spity/scripts/check-incident-registry.mjs`, et les preuves `B4-C421-01` à `B4-C421-04` dans `../preuves/`.
+**Sources et preuves :** `spity/docs/operations/INCIDENT_MANAGEMENT.md`, `spity/incidents/`, `spity/incident-policy.json`, `spity/scripts/check-incident-registry.mjs`, et les preuves `B4-C421-01` à `B4-C421-04` dans `../preuves/`.
 
 ## C4.2.2 — Créer et déployer un correctif via CI/CD
 
@@ -67,7 +67,7 @@ Cette preuve dit exactement ce qu'elle prouve : un staging validé. Elle ne pré
 
 Un rollback remet le tag d'image immuable précédent, rejoue le contrôle de version/révision et journalise la décision. Une restauration MariaDB exige une sauvegarde et une validation explicite si une migration empêche le retour de l'ancienne application. L'historique Git n'est jamais réécrit.
 
-**Sources et preuves :** `spity/RELEASE_VERIFICATION.md`, `spity/DEPLOYMENT.md`, `spity/scripts/verify-deployment.mjs`, `.github/workflows/ci.yml`, `.github/workflows/release.yml`, et `B4-C422-01` à `B4-C422-04` dans `../preuves/`.
+**Sources et preuves :** `spity/docs/operations/RELEASE_VERIFICATION.md`, `spity/docs/operations/DEPLOYMENT.md`, `spity/scripts/verify-deployment.mjs`, `.github/workflows/ci.yml`, `.github/workflows/release.yml`, et `B4-C422-01` à `B4-C422-04` dans `../preuves/`.
 
 ## À retenir pour l'entretien
 

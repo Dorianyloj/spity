@@ -35,7 +35,7 @@ L'écart de couverture découvert pendant l'audit a été corrigé par des tests
 La séparation retenue est désormais la suivante :
 
 - `spity/` contient uniquement l'application et son exploitation ;
-- `docs/bc02/` conserve le dossier bloc 2 et ses chemins historiques ;
+- `docs/rncp/bloc-02/` conserve le dossier bloc 2 et ses chemins historiques ;
 - `docs/rncp/bloc-01/` regroupe les anciens fichiers RNCP dispersés sous l'application ;
 - `docs/rncp/bloc-04/` accueille le nouveau dossier bloc 4 ;
 - `docs/rncp/referentiel/` contient la source officielle de contrôle ;

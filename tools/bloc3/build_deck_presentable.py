@@ -18,7 +18,7 @@ from pptx.util import Inches, Pt
 
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / 'docs/rncp/bloc-03'
-OUT = ROOT / 'output/presentations/spity-bloc-3-30-minutes-visuel-v16.pptx'
+OUT = ROOT / 'output/bloc-03/spity-bloc-3-30-minutes-visuel-v16.pptx'
 SOURCE = json.loads((DOCS / 'donnees/support-oral.json').read_text())
 PLAN = json.loads((DOCS / 'donnees/consolidation.json').read_text())
 INK, GREEN, LIME, PAPER = '12332D', '286957', 'D8F28B', 'F6F5EF'

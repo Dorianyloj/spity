@@ -21,7 +21,7 @@ git rev-list --count 49c4ea0..main
 
 ## Décision
 
-Ne pas déployer uniquement pour fermer l'écart documentaire. La promotion doit suivre une release versionnée, une sauvegarde, les migrations, la CI complète, la validation des images candidates et le contrôle post-déploiement décrit dans `spity/DEPLOYMENT.md`.
+Ne pas déployer uniquement pour fermer l'écart documentaire. La promotion doit suivre une release versionnée, une sauvegarde, les migrations, la CI complète, la validation des images candidates et le contrôle post-déploiement décrit dans `spity/docs/operations/DEPLOYMENT.md`.
 
 ## Action proposée
 

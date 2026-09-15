@@ -5,7 +5,7 @@ import { pathToFileURL } from 'node:url'
 import { chromium, request } from '@playwright/test'
 
 const baseURL = process.env.EVIDENCE_BASE_URL ?? 'http://localhost:3000'
-const outputDirectory = resolve('../docs/bc02/annexes/captures')
+const outputDirectory = resolve('../docs/rncp/bloc-02/annexes/captures')
 const password = 'SpityDemo2026!'
 const captures = [
   {

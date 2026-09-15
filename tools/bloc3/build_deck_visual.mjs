@@ -208,7 +208,7 @@ assert.equal(elapsed,30);assert.equal(doc.slides.length,26);
 await fs.writeFile(path.join(root,'docs/rncp/bloc-03/donnees/support-oral.json'),JSON.stringify(doc.slides,null,2)+'\n');
 await fs.writeFile(path.join(tmp,'chart-data.json'),JSON.stringify(chartContracts,null,2)+'\n');
 const candidate=path.join(tmp,'candidate.pptx');await(await PresentationFile.exportPptx(P)).save(candidate);
-const finalPath=path.join(root,'output/presentations/spity-bloc-3-30-minutes-visuel-v14.pptx');
+const finalPath=path.join(root,'output/bloc-03/archives/spity-bloc-3-30-minutes-visuel-v14.pptx');
 await finalizePresentation({workspaceDir:root,candidatePath:candidate,finalPath,pythonExecutable:python,integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-heading-fit',...tableOwners.flatMap(n=>['--require-native-table-slide',String(n)])],requiredNativeTableOwnerSlides:tableOwners,requiredNativeChartOwnerSlides:chartOwners,materializeLiteralChartWorkbooks:true,fontPolicy:{basis:'design',families:[font]},verifyArtifactToolImport:true,receiptPath:path.join(tmp,'validation.json')});
 const checked=await PresentationFile.importPptx(await FileBlob.load(finalPath));
 for(let i=0;i<checked.slides.items.length;i++){const png=await checked.export({slide:checked.slides.items[i],format:'png',scale:1});await fs.writeFile(path.join(tmp,`slide-${String(i+1).padStart(2,'0')}.png`),new Uint8Array(await png.arrayBuffer()));}

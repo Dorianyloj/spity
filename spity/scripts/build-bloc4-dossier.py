@@ -33,7 +33,7 @@ from reportlab.platypus.tableofcontents import TableOfContents
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "docs" / "rncp" / "bloc-04" / "DOSSIER_BLOC_04.md"
-OUTPUT = ROOT / "output" / "pdf" / "dossier-bloc-04-spity.pdf"
+OUTPUT = ROOT / "output" / "bloc-04" / "dossier-bloc-04-spity.pdf"
 LOGO = ROOT / "spity" / "public" / "images" / "brand" / "logo-spity-transparent.png"
 VISUAL_EVIDENCE_DIR = ROOT / "docs" / "rncp" / "bloc-04" / "preuves" / "captures"
 VISUAL_EVIDENCE = [

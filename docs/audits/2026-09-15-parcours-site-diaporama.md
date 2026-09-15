@@ -2,7 +2,7 @@
 
 ## Périmètre
 
-Référence : `output/presentations/spity-bloc-3-30-minutes-visuel-v16.pptx`, diapositives 3 et 20 à 23, et scénario `docs/rncp/bloc-03/annexes/A08_DEMONSTRATION.md`.
+Référence : `output/bloc-03/spity-bloc-3-30-minutes-visuel-v16.pptx`, diapositives 3 et 20 à 23, et scénario `docs/rncp/bloc-03/annexes/A08_DEMONSTRATION.md`.
 
 Le parcours annoncé est : profil grimpeur → recherche de partenaire → demande → événement → inscription → participants côté club. Les éléments de gestion de projet (planning, budget, RACI, renfort RH) décrivent l'exercice de soutenance ; ils ne sont pas des fonctionnalités à ajouter au réseau social.
 

@@ -11,6 +11,7 @@ Spity est une application web dédiée à la communauté de l'escalade. Elle ré
 | [`spity/`](spity/) | Application Next.js, base MariaDB, migrations, tests, scripts et Docker. |
 | [`docs/`](docs/) | Documentation produit, dossiers RNCP, audits et preuves. |
 | [`output/`](output/) | Exports générés et relus, jamais les sources à modifier. |
+| [`tools/`](tools/) | Outils de génération et de vérification des livrables. |
 | [`CADRAGE_PROJET.md`](CADRAGE_PROJET.md) | Vision produit, périmètre, parties prenantes et objectifs. |
 | [`CHANGELOG.md`](CHANGELOG.md) | Historique des évolutions notables. |
 
@@ -48,16 +49,23 @@ Les contrôles sont versionnés et s'exécutent également dans GitHub Actions. 
 
 ## Organisation des livrables
 
-La documentation est rangée par objectif :
+Chaque dossier a un rôle :
 
 ```text
+spity/                  # application, tests, base et déploiement
+  docs/operations/      # guides techniques et procédures d'exploitation
 docs/
-├── audits/             # états des lieux datés
-├── bc02/               # livrables du Bloc 2 conservés
-└── rncp/
-    ├── bloc-01/        # livrables du Bloc 1
-    ├── bloc-04/        # dossier, preuves et dossier jury du Bloc 4
-    └── referentiel/    # référentiel officiel archivé
+  audits/               # comptes rendus datés
+  rncp/                 # sources et preuves des blocs 01, 02, 03 et 04
+output/                 # livrables à ouvrir ou remettre
+  bloc-02/              # dossier HTML et PDF
+  bloc-03/              # diapo actuel, PDF, classeur et kit ZIP
+    archives/           # anciennes versions du diaporama
+  bloc-04/              # dossier PDF
+tools/bloc3/            # génération et contrôle de la soutenance
+tmp/                    # fichiers de travail locaux, ignorés par Git
 ```
+
+Pour retrouver un fichier, consulter [l'index des documents](docs/README.md), [les livrables](output/README.md) ou [les guides techniques](spity/docs/README.md). Les exports sont regroupés dans `output/` ; chaque ancienne version va dans le sous-dossier `archives/` du bloc concerné. Les sources et exports historiques du Bloc 1 restent ensemble dans `docs/rncp/bloc-01/`.
 
 Les fichiers temporaires et secrets locaux sont ignorés par Git. Aucun LXC n'est requis pour utiliser ou vérifier ce dépôt.

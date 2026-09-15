@@ -1,0 +1,42 @@
+{
+  "generatedAt": "2026-09-15T21:13:13.908Z",
+  "internalNavigation": {
+    "anchors": 75,
+    "links": 10,
+    "missingTargets": 0
+  },
+  "outputs": {
+    "html": {
+      "file": "DOSSIER_BC02_SPITY.html",
+      "bytes": 98180,
+      "sha256": "90d84d642f552576e38185cf68f9fc377b4f270c1bd7534a17c53b6863c852a9"
+    },
+    "pdf": {
+      "file": "DOSSIER_BC02_SPITY.pdf",
+      "bytes": 6852021,
+      "sha256": "fb61c7a6ef8d6918e5a877c3fbf4848079c7fe199c01ceac41d320294b04ba70"
+    }
+  },
+  "sources": [
+    {
+      "file": "16_DOSSIER_FINAL_BC02.md",
+      "sha256": "6f1794345dcae4f97eeaf60e7ad7b8b41d99a6d10a34d481aeefc28b5847e985"
+    },
+    {
+      "file": "20_FOCUS_COMPETENCES_DETERMINANTES_BC02.md",
+      "sha256": "792bf8b2a5ab7874e8ee6a6a28f726b2e43bcd55a0741406cce08972e3cdba50"
+    },
+    {
+      "file": "19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES.md",
+      "sha256": "b0148f2ee69dfc8e96704a6aa4faad52d4b98383098b9055323594165b130927"
+    },
+    {
+      "file": "15_INDEX_PREUVES_GRILLE_BC02.md",
+      "sha256": "b5d0e2ca0372f92c69fb375e5961056df54d05dfe3e7a548ab0580788a1d46f1"
+    },
+    {
+      "file": "18_ANNEXES_VISUELLES_BC02.md",
+      "sha256": "f5fb41d163f7b6dea8bb208cf4fd1f2f153051c67ae957c95bc577a81232db74"
+    }
+  ]
+}

@@ -51,6 +51,8 @@ python tools/bloc3/build_pdf.py
 python tools/bloc3/validate.py --package
 ```
 
+Sous Linux, `build_pdf.py` accepte `BLOC3_FONT_DIR` pour désigner le dossier contenant `arial.ttf`, `arialbd.ttf` et `ariali.ttf`. Exemple : `BLOC3_FONT_DIR=/usr/share/fonts/truetype/msttcorefonts python3 tools/bloc3/build_pdf.py`.
+
 Le ZIP est un kit documentaire hors connexion. La démonstration exige le dépôt applicatif complet et ses dépendances ; l'archive n'embarque ni base de données, ni node_modules, ni secrets locaux. Le contrôle distingue l'arbre applicatif enregistré et les modifications locales (fichiers suivis ou nouveaux non ignorés). S'ils diffèrent de la preuve datée, VERIFICATION.md doit en expliciter la limite et applicationMatchesDatedEvidence vaut false. La réussite du contrôle documentaire ne vaut pas une nouvelle recette de l'application. Le cadre d'évaluation sourcé et les trois compétences éliminatoires sont conservés dans donnees/cadre-evaluation.json.
 
 ## Données et relevé Linear du 14 septembre
@@ -65,7 +67,7 @@ La v16 contient 23 diapositives présentées en trente minutes et trois annexes.
 python3 -m venv tmp/bloc3/presentation-venv
 tmp/bloc3/presentation-venv/bin/pip install -r tools/bloc3/requirements-presentation.txt
 tmp/bloc3/presentation-venv/bin/python tools/bloc3/build_deck_presentable.py
-libreoffice --headless --convert-to pdf --outdir output/pdf output/presentations/spity-bloc-3-30-minutes-visuel-v16.pptx
+libreoffice --headless --convert-to pdf --outdir output/bloc-03 output/bloc-03/spity-bloc-3-30-minutes-visuel-v16.pptx
 ```
 
 Sous Windows, utiliser les exécutables du dossier `Scripts` de l’environnement Python. Arial doit être disponible pour un rendu cohérent. Le PowerPoint contient des objets modifiables et les notes ; le PDF est destiné à la consultation et à la projection.

@@ -49,7 +49,7 @@
     },
     {
       "kind": "repository-path",
-      "value": "spity/RELEASE_VERIFICATION.md",
+      "value": "spity/docs/operations/RELEASE_VERIFICATION.md",
       "purpose": "Procédure de contrôle version/révision post-promotion."
     }
   ],

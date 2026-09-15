@@ -83,7 +83,7 @@ table(s,[['Compétences','Pièces de référence'],['C.3.1 et C3.2.1','A01 à A0
 if(plan.reduce((a,b)=>a+b.minutes,0)!==30)throw new Error('Durée de présentation incorrecte');
 await fs.writeFile(path.join(root,'docs/rncp/bloc-03/donnees/support-oral.json'),JSON.stringify(plan,null,2)+'\n');
 const candidate=path.join(tmp,'soutenance-candidate.pptx');await(await PresentationFile.exportPptx(p)).save(candidate);
-const finalPath=path.join(root,'output/presentations/soutenance-bloc-03-spity.pptx');await fs.mkdir(path.dirname(finalPath),{recursive:true});
+const finalPath=path.join(root,'output/bloc-03/archives/soutenance-bloc-03-spity.pptx');await fs.mkdir(path.dirname(finalPath),{recursive:true});
 await finalizePresentation({workspaceDir:root,candidatePath:candidate,finalPath,pythonExecutable:runtimePython,integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-bullet-geometry','--validate-heading-fit',...tableOwners.flatMap(n=>['--require-native-table-slide',String(n)])],requiredNativeTableOwnerSlides:tableOwners,fontPolicy:{basis:'design',families:[font]},verifyArtifactToolImport:true,receiptPath:path.join(tmp,'deck-validation.json')});
 const checked=await PresentationFile.importPptx(await FileBlob.load(finalPath));
 for(let i=0;i<checked.slides.items.length;i++){const b=await checked.export({slide:checked.slides.items[i],format:'png',scale:1});await fs.writeFile(path.join(tmp,`slide-${String(i+1).padStart(2,'0')}.png`),new Uint8Array(await b.arrayBuffer()));}

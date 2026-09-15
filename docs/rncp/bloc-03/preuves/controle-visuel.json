@@ -1,9 +1,9 @@
 {
   "date": "2026-09-15",
   "presentation": {
-    "file": "output/presentations/spity-bloc-3-30-minutes-visuel-v16.pptx",
+    "file": "output/bloc-03/spity-bloc-3-30-minutes-visuel-v16.pptx",
     "sha256": "8bcca22d28671f502c1faa259328b9e123c300a3f6afdb8c4f2cb262ecaad51a",
-    "pdfFile": "output/pdf/spity-bloc-3-30-minutes-visuel-v16.pdf",
+    "pdfFile": "output/bloc-03/spity-bloc-3-30-minutes-visuel-v16.pdf",
     "pdfSHA256": "f5deef5e9609a8ebbfea1d8ec5c09c5b930022062941d5260bb704b08db5a3b0",
     "slidesReviewed": [
       4,
@@ -38,7 +38,17 @@
     ]
   },
   "dossier": {
-    "file": "output/pdf/dossier-bloc-03-spity.pdf",
+    "file": "output/bloc-03/dossier-bloc-03-spity.pdf",
+    "sha256": "62ada20086fc06aadd2cea55fe950b29694328d1067f3ff5409c762376189ad0",
+    "pages": 30,
+    "rendering": "Régénération après rangement des dossiers. Comparaison du texte des 30 pages avec le PDF précédent : seule la page 8 change (chemins du Bloc 2). Page 8 rendue avec Poppler à 1300 px et inspectée.",
+    "changedPages": [
+      8
+    ]
+  },
+  "scope": "Rangement des dossiers le 15 septembre 2026 : présentation et PDF v16 déplacés avec SHA-256 identiques ; vérification du diaporama conservée à sa portée précédente. Dossier PDF régénéré pour les chemins du Bloc 2, 30 pages conservées. Ancien contrôle du dossier conservé dans previousDossierReview. Aucun nouveau scénario utilisateur exécuté dans le cadre de ce rangement.",
+  "previousDossierReview": {
+    "file": "output/bloc-03/dossier-bloc-03-spity.pdf",
     "sha256": "29be82c9a52c2d8fde98cf76306560278caea79e2de79b3a0522acbb563a5732",
     "pages": 30,
     "rendering": "Poppler PNG, 85 dpi pour les trente pages ; planches de contact complètes et inspection individuelle des pages modifiées 4, 6 et 9.",
@@ -47,6 +57,5 @@
       6,
       9
     ]
-  },
-  "scope": "Clarification de la durée réelle du projet, des estimations et de la simulation. 26 diapositives, sept graphiques natifs, trente minutes prévues. Lint et TypeScript réussis ; pas de nouvelle recette du logiciel ni répétition orale. Dossier PDF et sa preuve historique inchangés."
+  }
 }
