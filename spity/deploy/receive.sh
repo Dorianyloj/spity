@@ -12,6 +12,13 @@ root=/opt/spity
 mkdir -p "$root/incoming"
 exec 9>"$root/deploy.lock"
 flock --nonblock 9 || { echo 'A Spity deployment is already running.' >&2; exit 1; }
+
+# A new transfer needs a little free space before its release script can run.
+# Remove only unused images built by this repository. Docker preserves every
+# image referenced by a container, including the application currently online.
+docker image prune --all --force \
+  --filter 'label=org.opencontainers.image.source=https://github.com/Dorianyloj/spity'
+
 incoming=$(mktemp -d "$root/incoming/release.XXXXXXXX")
 cleanup() {
   # Only this invocation's private temporary directory, never releases or data.

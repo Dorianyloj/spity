@@ -23,6 +23,13 @@ test('workflow deploys only successful same-repository main pushes and never can
   assert.ok(transfer.includes('StrictHostKeyChecking=yes'))
   assert.ok(transfer.includes('IdentitiesOnly=yes'))
   assert.ok(!transfer.includes('ssh-keyscan'))
+  assert.ok(transfer.includes('spity/deploy/receive.sh'))
+
+  const receiver = readFileSync(new URL('../../deploy/receive.sh', import.meta.url), 'utf8')
+  const prune = "docker image prune --all --force"
+  assert.ok(receiver.includes(prune))
+  assert.ok(receiver.includes("label=org.opencontainers.image.source=https://github.com/Dorianyloj/spity"))
+  assert.ok(receiver.indexOf(prune) < receiver.indexOf('incoming=$(mktemp'))
 })
 
 const manifest = {
@@ -45,11 +52,16 @@ function fixture(t, failure) {
   writeFileSync(join(incoming, 'manifest.json'), JSON.stringify(manifest))
   writeFileSync(join(incoming, 'registry-token'), 'temporary-test-token')
   writeFileSync(join(incoming, 'docker-compose.production.yml'), 'name: spity-production\n')
+  writeFileSync(join(incoming, 'receive.sh'), '#!/usr/bin/env bash\nset -Eeuo pipefail\n')
   const calls = []
   const healthCalls = []
   const db = { State: { Health: { Status: 'healthy' } }, Mounts: [{ Destination: '/var/lib/mysql', Name: 'spity-production_mariadb_production_data' }] }
   const run = (command, args, options = {}) => {
     calls.push({ command, args })
+    if (command === 'bash') {
+      assert.deepEqual(args, ['-n', join(incoming, 'receive.sh')])
+      return ''
+    }
     assert.equal(command, 'docker')
     if (args[0] === 'inspect') {
       if (args[1].includes('mariadb')) return JSON.stringify([db])
@@ -112,13 +124,22 @@ test('backs up before migration, updates only app, verifies local and public com
   const result = await deploy(f.options)
   assert.equal(result.status, 'deployed')
   assert.ok(f.calls.findIndex(({ args }) => args[0] === 'exec') < f.calls.findIndex(({ args }) => args.includes('run')))
+  const cleanup = f.calls.find(({ args }) => args[0] === 'image' && args[1] === 'prune')
+  assert.deepEqual(cleanup.args, [
+    'image', 'prune', '--all', '--force', '--filter',
+    'label=org.opencontainers.image.source=https://github.com/Dorianyloj/spity',
+  ])
+  assert.ok(f.calls.indexOf(cleanup) < f.calls.findIndex(({ args }) => args[0] === 'image' && args[1] === 'tag'))
+  assert.ok(f.calls.indexOf(cleanup) < f.calls.findIndex(({ args }) => args.includes('pull')))
+  assert.ok(f.calls.some(({ command, args }) => command === 'bash' && args[0] === '-n'))
   const start = f.calls.find(({ args }) => args.includes('up'))
   assert.deepEqual(start.args.slice(-7), ['up', '--detach', '--no-deps', '--no-build', '--pull', 'never', 'app'])
-  assert.ok(!f.calls.some(({ args }) => args.includes('down') || args.includes('prune') || args.includes('seed-demo')))
+  assert.ok(!f.calls.some(({ args }) => args[0] === 'system' || args[0] === 'volume' || args.includes('down') || args.includes('seed-demo')))
   assert.equal(f.healthCalls.length, 3)
   assert.ok(existsSync(result.backup.file))
   assert.equal(readFileSync(`${result.backup.file}.sha256`, 'utf8').trim(), result.backup.sha256)
   assert.equal(JSON.parse(readFileSync(join(f.root, 'current.json'), 'utf8')).revision, manifest.revision)
+  assert.match(readFileSync(join(f.root, 'automation/receive.sh'), 'utf8'), /set -Eeuo pipefail/)
   assert.ok(!existsSync(join(f.incoming, 'registry-token')))
   const current = JSON.parse(readFileSync(join(f.root, 'current.json'), 'utf8'))
   const rollback = JSON.parse(readFileSync(join(current.releaseDir, 'rollback.compose.json'), 'utf8'))

@@ -8,13 +8,16 @@ Le workflow ne traite que les événements `push` de `main` de ce dépôt. Une p
 
 Sur le VPS, le récepteur verrouille le déploiement puis :
 
-1. Vérifie la base, son volume existant et l'application actuellement saine.
-2. Enregistre la configuration précédente et son image exacte pour le retour arrière.
-3. Télécharge les images vérifiées, avec une authentification GHCR temporaire.
-4. Sauvegarde la base avant migration (`mariadb-dump --single-transaction`, fichier privé et SHA-256).
-5. Exécute les migrations sans données de démonstration.
-6. Remplace uniquement le conteneur applicatif, sans recréer MariaDB.
-7. Vérifie la santé, la version et le commit en local et en HTTPS public.
+1. Supprime les images inutilisées portant le label du dépôt Spity afin de garantir l'espace du transfert, sans toucher aux volumes, aux conteneurs ni aux autres projets Docker.
+2. Vérifie la base, son volume existant et l'application actuellement saine.
+3. Enregistre la configuration précédente et son image exacte pour le retour arrière.
+4. Télécharge les images vérifiées, avec une authentification GHCR temporaire.
+5. Sauvegarde la base avant migration (`mariadb-dump --single-transaction`, fichier privé et SHA-256).
+6. Exécute les migrations sans données de démonstration.
+7. Remplace uniquement le conteneur applicatif, sans recréer MariaDB.
+8. Vérifie la santé, la version et le commit en local et en HTTPS public.
+
+Après une mise à jour saine, le script remplace atomiquement le récepteur par la version vérifiée transportée dans le même bundle. Le nettoyage préalable est ainsi disponible dès le transfert suivant, avant la création de son dossier temporaire.
 
 Si le remplacement ou la vérification échoue, il tente de redémarrer **l'image précédente de l'application** et signale l'échec dans GitHub. Il ne restaure jamais automatiquement la base : une migration SQL peut être partiellement appliquée ou incompatible avec l'ancienne version. Les migrations doivent donc rester rétrocompatibles (ajout avant suppression). Une restauration nécessite une décision humaine pour éviter de perdre les écritures récentes.
 
@@ -37,7 +40,7 @@ Une courte indisponibilité est possible pendant le remplacement du conteneur : 
   deploy.lock                   verrou côté serveur
 ```
 
-Le projet Docker reste `spity-production`. Le volume existant `spity-production_mariadb_production_data` est obligatoire : s'il manque, le déploiement refuse de créer une base vide. Les images envoyées sont conservées dans `spity-production_media_production_data`, indépendamment des versions applicatives. Aucun `down -v`, nettoyage Docker global, effacement de volume ou `db:seed` n'est exécuté.
+Le projet Docker reste `spity-production`. Le volume existant `spity-production_mariadb_production_data` est obligatoire : s'il manque, le déploiement refuse de créer une base vide. Les médias envoyés sont conservés dans `spity-production_media_production_data`, indépendamment des versions applicatives. Le nettoyage Docker est limité par le label OCI `org.opencontainers.image.source=https://github.com/Dorianyloj/spity` et Docker conserve toute image référencée par un conteneur. Aucun `down -v`, nettoyage Docker global, effacement de volume ou `db:seed` n'est exécuté.
 
 L'application reste sur `127.0.0.1:3100`, derrière le nginx/HTTPS existant. Les autres applications du VPS ne sont pas modifiées. Les builds et les tests s'effectuent sur les runners GitHub, pas sur le VPS.
 
@@ -86,7 +89,7 @@ flock /opt/spity/deploy.lock docker compose --project-name spity-production \
 
 Contrôler ensuite la santé et la compatibilité du schéma. Après un retour arrière manuel, `current.json` n'est pas réécrit automatiquement : le signaler dans le suivi d'incident. Ne jamais restaurer un dump sans sauvegarder l'état courant et faire valider la perte potentielle des écritures postérieures au dump.
 
-Les sauvegardes et anciennes images restent conservées : surveiller l'espace disque et décider d'une rétention après vérification des restaurations. Ces sauvegardes locales **ne protègent pas d'une perte du VPS** ; une copie chiffrée hors serveur et des exercices de restauration restent nécessaires. Aucune purge automatique n'est installée.
+Les sauvegardes SQL et dossiers de release restent conservés. Les images de déploiement Spity qui ne sont plus utilisées sont supprimées avant chaque transfert ; l'image active reste disponible et devient l'image de retour arrière du déploiement suivant. Ces sauvegardes locales **ne protègent pas d'une perte du VPS** ; une copie chiffrée hors serveur et des exercices de restauration restent nécessaires.
 
 ## Vérification des scripts
 

@@ -198,7 +198,8 @@ jobs:
           printf '%s\n' "$VPS_SSH_KEY" > "$transfer/key"
           printf '%s\n' "$VPS_KNOWN_HOSTS" > "$transfer/known_hosts"
           printf '%s' "$GHCR_TOKEN" > "$transfer/bundle/registry-token"
-          cp spity/deploy/deploy-vps.mjs spity/docker-compose.production.yml "$transfer/bundle/"
+          cp spity/deploy/deploy-vps.mjs spity/deploy/receive.sh \
+            spity/docker-compose.production.yml "$transfer/bundle/"
           jq --null-input --arg revision "$REVISION" --arg version "$VERSION" \
             --arg appImage "$APP_IMAGE" --arg migrationImage "$MIGRATION_IMAGE" \
             --arg registryUser "$REGISTRY_USER" \

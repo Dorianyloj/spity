@@ -1,12 +1,13 @@
 import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { closeSync, copyFileSync, createReadStream, mkdirSync, openSync, readFileSync, realpathSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs'
+import { chmodSync, closeSync, copyFileSync, createReadStream, mkdirSync, openSync, readFileSync, realpathSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { isAbsolute, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const project = 'spity-production'
 const appContainer = `${project}-app-1`
 const dbContainer = `${project}-mariadb-1`
+const deploymentImageLabel = 'org.opencontainers.image.source=https://github.com/Dorianyloj/spity'
 
 export function validateManifest(manifest) {
   if (!/^[a-f0-9]{40}$/.test(manifest.revision ?? '')) throw new Error('Invalid commit SHA')
@@ -92,6 +93,14 @@ export async function deploy({ root, incoming, run = runCommand, health = waitFo
   if (!previousMetadata.version || !previousMetadata.revision || !/^sha256:[a-f0-9]{64}$/.test(previousApp.Image)) throw new Error('Previous release cannot be identified for rollback')
   await health(`http://127.0.0.1:${config.appPort}/api/health`, previousMetadata)
 
+  // Keep disk use bounded without touching volumes, containers or images from
+  // the other applications hosted on this VPS. The running image is protected
+  // by Docker and is tagged for rollback immediately after this cleanup.
+  log('Removing unused Spity deployment images before the release.')
+  run('docker', ['image', 'prune', '--all', '--force', '--filter', `label=${deploymentImageLabel}`])
+  const receiverFile = inside(root, join(incoming, 'receive.sh'))
+  run('bash', ['-n', receiverFile])
+
   const releaseId = `${now().toISOString().replace(/[:.]/g, '-')}-${manifest.revision.slice(0, 12)}`
   const releaseDir = join(root, 'releases', releaseId)
   const backupDir = join(root, 'backups')
@@ -102,6 +111,7 @@ export async function deploy({ root, incoming, run = runCommand, health = waitFo
   const rollbackFile = join(releaseDir, 'rollback.compose.json')
   const reportFile = join(releaseDir, 'deployment.json')
   const backupFile = join(backupDir, `${releaseId}.sql`)
+  const nextReceiverFile = join(root, 'automation', 'receive.sh.next')
   copyFileSync(join(incoming, 'docker-compose.production.yml'), composeFile)
   privateJson(join(releaseDir, 'manifest.json'), manifest)
   privateJson(overrideFile, { services: {
@@ -152,6 +162,10 @@ export async function deploy({ root, incoming, run = runCommand, health = waitFo
     const expected = { version: manifest.version, revision: manifest.revision }
     await health(`http://127.0.0.1:${config.appPort}/api/health`, expected)
     await health(config.healthUrl, expected)
+    stage = 'receiver'
+    copyFileSync(receiverFile, nextReceiverFile)
+    chmodSync(nextReceiverFile, 0o700)
+    renameSync(nextReceiverFile, join(root, 'automation', 'receive.sh'))
     report.status = 'deployed'
     report.finishedAt = now().toISOString()
     saveReport()
@@ -178,6 +192,7 @@ export async function deploy({ root, incoming, run = runCommand, health = waitFo
     saveReport()
     throw new Error(`Deployment failed at ${stage}: ${report.status}. Inspect ${reportFile}; no automatic database restore was performed.`)
   } finally {
+    rmSync(nextReceiverFile, { force: true })
     rmSync(join(incoming, 'registry-token'), { force: true })
   }
 }
