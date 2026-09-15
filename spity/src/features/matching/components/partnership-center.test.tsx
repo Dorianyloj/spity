@@ -51,6 +51,12 @@ describe('PartnershipCenter', () => {
     fetchMock.mockResolvedValueOnce(jsonResponse({ request: acceptedRequest }))
     render(<PartnershipCenter initialRequests={[pendingRequest]} />)
 
+    expect(screen.getByRole('heading', { name: 'Nassim Bernard' })).toBeInTheDocument()
+    expect(screen.getByText('Demande reçue')).toBeInTheDocument()
+    expect(screen.getByText('En attente de réponse')).toBeInTheDocument()
+    expect(screen.getByText('Niveau 7a')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Voir le profil' })).toHaveAttribute('href', `/app/profiles/${pendingRequest.otherParticipant.userId}`)
+
     fireEvent.click(screen.getByRole('button', { name: 'Accepter la demande de Nassim Bernard' }))
 
     await waitFor(() => expect(fetchMock).toHaveBeenCalledWith(
@@ -59,6 +65,7 @@ describe('PartnershipCenter', () => {
     ))
     expect(await screen.findByText('Demande acceptée.')).toBeInTheDocument()
     expect(screen.getByText('Acceptée')).toBeInTheDocument()
+    expect(screen.getByText('Vous pouvez maintenant organiser une sortie ensemble')).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /Accepter la demande/ })).not.toBeInTheDocument()
   })
 
