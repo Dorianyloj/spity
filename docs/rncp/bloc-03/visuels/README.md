@@ -33,7 +33,7 @@ Les sept graphiques des diapositives 4, 5, 6, 8, 9, 10 et 13 sont des objets Pow
 
 Les valeurs viennent du [cas de pilotage](../donnees/pilotage.json), de ses [indicateurs calculés](../donnees/indicateurs.json) et des annexes A01, A04 et A06. Le planning est exprimé en jours relatifs J1 à J15. La matrice de risques et les tableaux des annexes restent également modifiables dans PowerPoint.
 
-Les rôles, charges, coûts et niveaux de compétences du scénario sont fictifs. Les notes et les pieds de page conservent cette distinction.
+Les rôles, charges, coûts et niveaux de compétences du scénario sont fictifs. Les notes et les mentions dans le contenu conservent cette distinction. Depuis la v14, les pieds de page affichent uniquement le numéro de diapositive ; les horaires et les codes de compétences restent accessibles dans les notes et le guide oral.
 
 Les tableaux natifs des slides 16 et 17 montrent la grille détaillée et les formations. Le complément donnees/consolidation.json documente la projection globale, le cas Paris/Montréal, la session pilote prévue et la variante RH indépendante de l’annexe 26. La version v11 ajoute les réunions inspirées de Scrum sur la slide 4, la rétrospective sur la slide 13 et la review sur la slide 17 ; donnees/rituels.json et A05/A07 décrivent le scénario correspondant.
 

@@ -12,7 +12,7 @@
 | Comprendre les sigles et le vocabulaire | [Lexique simple : QA, CP, recette, RACI, budget et réunions](LEXIQUE_SIMPLE.md) |
 | Tout récupérer pour la répétition | [Kit ZIP](../../../output/bloc-03/kit-soutenance-spity.zip) |
 | Lire le dossier et les neuf annexes | [PDF](../../../output/pdf/dossier-bloc-03-spity.pdf) ; [source modifiable](DOSSIER_BLOC_03.md) |
-| Présenter en trente minutes | [PowerPoint visuel avec texte oral et timing](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v13.pptx) ; [guide d'oral](GUIDE_ORAL.md) |
+| Présenter en trente minutes | [PowerPoint visuel avec texte oral et timing](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v14.pptx) ; [guide d'oral](GUIDE_ORAL.md) |
 | Manipuler les coûts, charges et risques | [Classeur Excel](../../../outputs/bloc03-01a09eba/pilotage-spity.xlsx) ; [données du cas](donnees/pilotage.json) |
 | Retrouver les preuves par compétence | [Matrice](MATRICE_PREUVES.md) ; [vérifications datées](VERIFICATION.md) |
 | Justifier les données et retrouver Linear | [A09 : relevé et estimations](annexes/A09_DONNEES_LINEAR.md) ; [25 tickets observés](donnees/linear-2026-09-14.json) |

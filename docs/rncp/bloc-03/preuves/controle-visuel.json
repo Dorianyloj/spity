@@ -1,8 +1,8 @@
 {
   "date": "2026-09-15",
   "presentation": {
-    "file": "output/presentations/spity-bloc-3-30-minutes-visuel-v13.pptx",
-    "sha256": "5eaeefd1e12becb7df4955b98a54205477ebbd2649c86646cc4febe507473974",
+    "file": "output/presentations/spity-bloc-3-30-minutes-visuel-v14.pptx",
+    "sha256": "be800e6bb700e9929398142d7dec0968789da153430e1cd1b06b85c6f23aceff",
     "slidesReviewed": [
       1,
       2,
@@ -58,7 +58,7 @@
       25,
       26
     ],
-    "unchangedSlides": "Corps des anciennes slides 1 à 25 identiques après renumérotation, sauf la slide 7 enrichie ; sommaire ajouté en slide 2. Pieds de page renumérotés.",
+    "unchangedSlides": "Corps des 26 diapositives identiques à la v13 par comparaison pixel à pixel ; textes des notes et données des graphiques conservés. Seuls les pieds de page des diapositives 2 à 26 sont simplifiés.",
     "nativeCharts": 7,
     "nativeChartWorkbooks": 7,
     "nativeTableSlides": [
@@ -76,15 +76,11 @@
     "packageIntegrity": "passed",
     "layoutGeometry": "passed",
     "font": "Arial",
-    "rendering": "Artifact Tool import and PNG export, 1280 x 720; changed slides individually reviewed and entire deck in contact sheets",
+    "rendering": "Artifact Tool import and PNG export, 1280 x 720 ; inspection des 25 pieds de page, des diapositives 9 et 20 en entier et comparaison des 26 corps avec la v13.",
     "nativePowerPointExecution": false,
-    "currentReview": "26 diapositives inspectées individuellement en PNG 1280 x 720 ; comparaison des corps avec la v12 et contrôle des notes, du sommaire et des trente minutes.",
-    "newSlides": [
-      2
-    ],
-    "changedContentSlides": [
-      7
-    ]
+    "currentReview": "Pieds de page limités au numéro ; corps des 26 diapositives, notes et données des graphiques inchangés. Vérification de la structure et de la géométrie sans anomalie.",
+    "newSlides": [],
+    "changedContentSlides": []
   },
   "dossier": {
     "file": "output/pdf/dossier-bloc-03-spity.pdf",
@@ -97,5 +93,5 @@
       9
     ]
   },
-  "scope": "Relecture de la grille BC03 et des quatorze éléments attendus, ajout du sommaire, QA et moyens explicites. 23 slides principales, trois annexes, trente minutes prévues. Aucune nouvelle recette applicative ni répétition orale déclarée."
+  "scope": "Révision v14 limitée aux pieds de page : numéro seul. Contenu, sommaire et notes de la v13 conservés. 23 slides principales et trois annexes, trente minutes prévues. Aucun nouveau test applicatif ni répétition orale."
 }

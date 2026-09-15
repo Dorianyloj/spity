@@ -4,7 +4,7 @@ import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 
-const root=process.cwd(),tmp=path.join(root,'tmp/bloc3/visual-v13');
+const root=process.cwd(),tmp=path.join(root,'tmp/bloc3/visual-v14');
 await fs.mkdir(tmp,{recursive:true});
 const modules=process.env.RUNTIME_NODE_MODULES??path.join(root,'tmp/bloc3/build/node_modules');
 process.env.RUNTIME_NODE_MODULES=modules;
@@ -32,7 +32,7 @@ async function image(s,file,x,y,w,h,fit='contain',crop){
   s.images.add({blob:new Uint8Array(await fs.readFile(path.join(root,file))),contentType:file.endsWith('.png')?'image/png':'image/jpeg',position:{left:x,top:y,width:w,height:h},fit,alt:path.basename(file),...(crop?{crop}:{} )});
 }
 function heading(s,title){text(s,title,64,42,1152,110,46,true);}
-function footer(s,item,light=false){text(s,`${item.nature}    ${item.minutes?`${fmt(item.startMinute)} à ${fmt(item.endMinute)}`:'Questions du jury'}    ${item.number}`,64,672,1152,25,16,false,light?'#EAF1E6':muted);}
+function footer(s,item,light=false){text(s,String(item.number),64,672,1152,25,16,false,light?'#EAF1E6':muted);}
 function takeaway(s,value,y=592){text(s,value,72,y,1136,63,28,true,green);}
 function groups(s,items,y=210,highlight=1){const width=1136/items.length;items.forEach(([big,label,detail],i)=>{const x=72+i*width;text(s,big,x,y,width-36,110,76,true,i===highlight?green:ink);text(s,label,x,y+134,width-36,95,30,true,green);if(detail)text(s,detail,x,y+252,width-36,104,25);});}
 function table(s,rows,widths,number,top=185,height=422,fontSize=24){
@@ -208,7 +208,7 @@ assert.equal(elapsed,30);assert.equal(doc.slides.length,26);
 await fs.writeFile(path.join(root,'docs/rncp/bloc-03/donnees/support-oral.json'),JSON.stringify(doc.slides,null,2)+'\n');
 await fs.writeFile(path.join(tmp,'chart-data.json'),JSON.stringify(chartContracts,null,2)+'\n');
 const candidate=path.join(tmp,'candidate.pptx');await(await PresentationFile.exportPptx(P)).save(candidate);
-const finalPath=path.join(root,'output/presentations/spity-bloc-3-30-minutes-visuel-v13.pptx');
+const finalPath=path.join(root,'output/presentations/spity-bloc-3-30-minutes-visuel-v14.pptx');
 await finalizePresentation({workspaceDir:root,candidatePath:candidate,finalPath,pythonExecutable:python,integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-heading-fit',...tableOwners.flatMap(n=>['--require-native-table-slide',String(n)])],requiredNativeTableOwnerSlides:tableOwners,requiredNativeChartOwnerSlides:chartOwners,materializeLiteralChartWorkbooks:true,fontPolicy:{basis:'design',families:[font]},verifyArtifactToolImport:true,receiptPath:path.join(tmp,'validation.json')});
 const checked=await PresentationFile.importPptx(await FileBlob.load(finalPath));
 for(let i=0;i<checked.slides.items.length;i++){const png=await checked.export({slide:checked.slides.items[i],format:'png',scale:1});await fs.writeFile(path.join(tmp,`slide-${String(i+1).padStart(2,'0')}.png`),new Uint8Array(await png.arrayBuffer()));}

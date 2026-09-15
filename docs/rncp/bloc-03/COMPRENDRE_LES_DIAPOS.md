@@ -1,6 +1,6 @@
 # Comprendre les diapositives du Bloc 3 quand on est développeur
 
-Ce guide explique le [diaporama v13](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v13.pptx) avec des situations de développement. Lis-le pour comprendre le raisonnement, puis utilise le [guide oral](GUIDE_ORAL.md) pour travailler la durée. Les phrases courtes ci-dessous sont des points de départ : elles ne remplissent pas à elles seules les trente minutes.
+Ce guide explique le [diaporama v14](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v14.pptx) avec des situations de développement. Lis-le pour comprendre le raisonnement, puis utilise le [guide oral](GUIDE_ORAL.md) pour travailler la durée. Les phrases courtes ci-dessous sont des points de départ : elles ne remplissent pas à elles seules les trente minutes.
 
 Pour les sigles et le vocabulaire, consulte le [lexique simple du Bloc 3](LEXIQUE_SIMPLE.md), qui développe notamment QA, CP, RACI et les termes des plannings et budgets.
 

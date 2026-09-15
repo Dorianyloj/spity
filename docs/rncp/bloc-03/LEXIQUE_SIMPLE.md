@@ -1,6 +1,6 @@
 # Les termes du Bloc 3 expliqués simplement
 
-Ce lexique accompagne le [diaporama v13](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v13.pptx) et le [guide d'explication des diapositives](COMPRENDRE_LES_DIAPOS.md). Les exemples reprennent Spity. L'équipe, les réunions et les chiffres du cas de quinze jours restent une simulation.
+Ce lexique accompagne le [diaporama v14](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v14.pptx) et le [guide d'explication des diapositives](COMPRENDRE_LES_DIAPOS.md). Les exemples reprennent Spity. L'équipe, les réunions et les chiffres du cas de quinze jours restent une simulation.
 
 ## QA et les autres rôles
 
