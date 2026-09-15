@@ -2,6 +2,8 @@
 
 Ce guide explique le [diaporama v12](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v12.pptx) avec des situations de développement. Lis-le pour comprendre le raisonnement, puis utilise le [guide oral](GUIDE_ORAL.md) pour travailler la durée. Les phrases courtes ci-dessous sont des points de départ : elles ne remplissent pas à elles seules les trente minutes.
 
+Pour les sigles et le vocabulaire, consulte le [lexique simple du Bloc 3](LEXIQUE_SIMPLE.md), qui développe notamment QA, CP, RACI et les termes des plannings et budgets.
+
 ## L'histoire que tu racontes
 
 Tu développes Spity pour des grimpeurs et des clubs. Pour préparer une version à montrer, tu dois choisir les fonctionnalités, répartir le travail, suivre les problèmes et expliquer tes décisions. Le Bloc 3 présente cette organisation autour du code.

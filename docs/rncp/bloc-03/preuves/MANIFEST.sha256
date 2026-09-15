@@ -10,7 +10,7 @@ be0184d2113e3c4fa602e1dd8ba281c7923bd679692a5f86cd1fcaf72d5df16a  docs/rncp/bloc
 83b0910abbc0958ffdcbac242d975c6983d69d95099563550458610d3e6ab10f  docs/rncp/bloc-03/annexes/A09_DONNEES_LINEAR.md
 05b7a34c6741338ebb77d2361e89cf565f95f1fe500cad452976ee326094d2ef  docs/rncp/bloc-03/CHECKLIST_REMISE.md
 e304ca7467403c67b7fc5fff1891753426d8d24844f48f44b0179b8e4d0801f0  docs/rncp/bloc-03/COHERENCE_INTER_BLOCS.md
-73199a2d42349c06129328734e8e8744f699e49470637a24e782b22d3f7d542a  docs/rncp/bloc-03/COMPRENDRE_LES_DIAPOS.md
+351754a3e3f17386f9d28ea9cb1cce0e579a310a8be6d7a7a06bfc8e475cea4c  docs/rncp/bloc-03/COMPRENDRE_LES_DIAPOS.md
 cb7d20c312110531775780f13c12dc924ff1cf505886ec9a13ad420e3d0e8e35  docs/rncp/bloc-03/CONTROLE_COMPLETUDE.md
 731dea3f7b77b5bfed4e326df35e461bd952c4b41e1b141abb9726f97b2e7a6c  docs/rncp/bloc-03/donnees/cadre-evaluation.json
 8b8ba5e6f106af76c35e76cd4d60829be96bec5910fd479796d5bd32d8fe8a71  docs/rncp/bloc-03/donnees/consolidation.json
@@ -24,6 +24,7 @@ ed6476cc34bb6c8def813ce818aa1cb6c4afc14f8254aae1b98c1854ab50d17c  docs/rncp/bloc
 3161e22361413576173191a344a71141e92a484d528cc7e1d1b7efebc4c7e739  docs/rncp/bloc-03/donnees/support-oral.json
 1df96231d68f313b8e20e7b7aab0cc5d87c4aa72ed2d52e67dadc37140778a5d  docs/rncp/bloc-03/DOSSIER_BLOC_03.md
 f12aa5b7afd217ba7c4043cfcbdf3eda95a85e14e13eaa83cab70dc89a9dd859  docs/rncp/bloc-03/GUIDE_ORAL.md
+0b21e5788040262c52ccf1334732b34ab00ae6af40c78a58b8c239f6f74afcc9  docs/rncp/bloc-03/LEXIQUE_SIMPLE.md
 6283035ff626a62ca9b1842d08f9abd6128ef99e6b95f7b8f20dfb30ebe704bf  docs/rncp/bloc-03/MATRICE_PREUVES.md
 92e4d1bee62884039ca3c900b55756a09d7bca5e888f7a1395fea10923552adc  docs/rncp/bloc-03/preuves/captures/evenements-2026-09-14.png
 92e4d1bee62884039ca3c900b55756a09d7bca5e888f7a1395fea10923552adc  docs/rncp/bloc-03/preuves/captures/evenements-2026-09-15.png
@@ -37,7 +38,7 @@ fbdeaa9cb774f81c09147b1b722e73d9ce94df85f2c19d918177223d51c63ecc  docs/rncp/bloc
 03cd647083fe01b95561f597eb8960ee18954de6ec53c18e928ede0bd705c638  docs/rncp/bloc-03/preuves/historique-git.txt
 521fc6938cd00ead3f0c40fa9592e7d9f4a93803df2f2e0c013e56fee1341017  docs/rncp/bloc-03/preuves/verification-2026-09-14.json
 3c9d6a90531f3220e17ecd63b577751892fbf9fbfc21273b1b2d4bc7282854ec  docs/rncp/bloc-03/preuves/verification.json
-6538c84c7d0c6dc1b5bd9278313b0664f2297a7988e36888e563229dbf926ec2  docs/rncp/bloc-03/README.md
+04973796122647acb9e8c1e52ae1148f1dad9cd83c07266175161629e1d75e85  docs/rncp/bloc-03/README.md
 2ecdb9b2f7a70f8d4a390c1197545b4d1dcda10196b06ef6bcec015a9432a50e  docs/rncp/bloc-03/VERIFICATION.md
 fbcde77868a957bc93211106006f64e6f282b5268a6e5f13b3b8eb7c33439a5a  docs/rncp/bloc-03/visuels/equipe-illustration.png
 3b6f5eae0c21f65ebf73d92d5f591ae6192190c3f0c10fa454ab74c7c02b30a2  docs/rncp/bloc-03/visuels/README.md

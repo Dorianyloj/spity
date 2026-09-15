@@ -9,6 +9,7 @@
 | Besoin | Fichier |
 | --- | --- |
 | Comprendre les slides avec des exemples de développeur | [Explication simple des 25 diapositives](COMPRENDRE_LES_DIAPOS.md) |
+| Comprendre les sigles et le vocabulaire | [Lexique simple : QA, CP, recette, RACI, budget et réunions](LEXIQUE_SIMPLE.md) |
 | Tout récupérer pour la répétition | [Kit ZIP](../../../output/bloc-03/kit-soutenance-spity.zip) |
 | Lire le dossier et les neuf annexes | [PDF](../../../output/pdf/dossier-bloc-03-spity.pdf) ; [source modifiable](DOSSIER_BLOC_03.md) |
 | Présenter en trente minutes | [PowerPoint visuel avec texte oral et timing](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v12.pptx) ; [guide d'oral](GUIDE_ORAL.md) |
