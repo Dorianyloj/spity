@@ -4,7 +4,7 @@
   "baselineEUR": 4270,
   "forecastEUR": 4465,
   "marginEUR": 232,
-  "slides": 25,
+  "slides": 26,
   "nativeCharts": 7,
   "chartWorkbooks": 7,
   "presentationMinutes": 30,
@@ -16,9 +16,9 @@
   "applicationMatchesDatedEvidence": false,
   "inclusionCase": "Camille",
   "inclusionSlides": [
-    6,
-    14,
-    16
+    7,
+    15,
+    17
   ],
   "scope": "Cohérence documentaire et structure des exports ; aucun nouveau test applicatif ou dépôt externe. Les tests conservent leur révision et leur date.",
   "headApplicationMatchesDatedEvidence": false,

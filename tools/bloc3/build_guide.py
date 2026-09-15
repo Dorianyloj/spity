@@ -13,11 +13,11 @@ def clock(minutes):
 
 parts = ['''# Guide de répétition — Bloc 3 Spity
 
-Support associé : spity-bloc-3-30-minutes-visuel-v12.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
+Support associé : spity-bloc-3-30-minutes-visuel-v13.pptx. Vingt-trois diapositives principales, sommaire compris, couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
 
 ## Compétences à sécuriser avant l'oral
 
-Le règlement spécial v1.01 du 15 septembre 2025, consulté le 15 septembre 2026, identifie trois compétences éliminatoires : C.3.1 (planification), C3.2.1 (suivi) et C3.4.2 (démonstration), pages 3-4. La validation exige au moins quatre compétences acquises sur sept, dont ces trois compétences. La préparation couvre les sept ; seule l'évaluation du jury décide de leur acquisition. Les repères sont les slides 3-6 pour planifier, 4 et 7-10 pour suivre, 19-22 pour démontrer et obtenir une décision. La démonstration doit être exécutée sur la version identifiée ; les captures sont un secours. Le diplôme prérequis, la convocation et le dépôt sont suivis dans CHECKLIST_REMISE.md.
+Le règlement spécial v1.01 du 15 septembre 2025, consulté le 15 septembre 2026, identifie trois compétences éliminatoires : C.3.1 (planification), C3.2.1 (suivi) et C3.4.2 (démonstration), pages 3-4. La validation exige au moins quatre compétences acquises sur sept, dont ces trois compétences. La préparation couvre les sept ; seule l'évaluation du jury décide de leur acquisition. Les repères sont les slides 4-7 pour planifier, 5 et 8-11 pour suivre, 20-23 pour démontrer et obtenir une décision. La démonstration doit être exécutée sur la version identifiée ; les captures sont un secours. Le diplôme prérequis, la convocation et le dépôt sont suivis dans CHECKLIST_REMISE.md.
 
 ## Fil conducteur
 
@@ -68,7 +68,7 @@ parts.append('''## Questions probables du jury
 - Les 5 h supplémentaires mesurent la charge. T06 et T07 glissent chacun d'un jour ; leur retard ne s'additionne pas, et le jalon reste J15.
 - Les quatre styles sont participatif, persuasif, directif et délégatif. QA avait déjà la recette : préserver cette affectation n'est pas une réallocation nouvelle.
 - Le plan comprend CP 1 h à J3, DEV 2 h à J9-J12 et Camille 3 h à J10-J14. Les niveaux techniques sont indépendants du handicap.
-- La fiche RH de l'annexe 25 reste conditionnelle : 202,50 EUR supplémentaires, marge 29,50 EUR, CP 29,5/30 h. Le budget de base reste 4 465 EUR.
+- La fiche RH de l'annexe 26 reste conditionnelle : 202,50 EUR supplémentaires, marge 29,50 EUR, CP 29,5/30 h. Le budget de base reste 4 465 EUR.
 - CR02 relie un écart à une décision puis à une action datée. Les mesures client sont définies, mais leurs résultats restent non mesurés.
 
 La review porte sur le résultat du produit et les retours du client. La rétrospective porte sur la façon de travailler. Pour illustrer cette distinction, expliquer CR02 (report des topos) puis RT01 (sortir le diagnostic technique du daily). Les cibles d'animation sont 30 minutes pour planning/review, dix pour le daily et vingt pour la rétrospective.
@@ -86,4 +86,4 @@ La review porte sur le résultat du produit et les retours du client. La rétros
 Le diaporama et ses notes, le classeur, le dossier PDF, A08, les captures et COHERENCE_INTER_BLOCS.md. Les confirmations de date, d'équipe et de dépôt sont suivies dans CHECKLIST_REMISE.md.
 ''')
 (DOCS / 'GUIDE_ORAL.md').write_text('\n'.join(parts).strip() + '\n', encoding='utf-8', newline='\n')
-print('Guide généré : 30 minutes, 25 notes et 15 questions.')
+print('Guide généré : 30 minutes, 26 notes et 15 questions.')

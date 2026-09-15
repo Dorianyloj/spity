@@ -195,13 +195,16 @@ align_competences(slides)
 from scrum_context import align as align_scrum
 align_scrum(slides)
 
-assert len(slides)==25
+from presentation_revision import align as align_revision
+align_revision(slides)
+
+assert len(slides)==26
 assert sum(s['minutes'] for s in slides)==30
 assert sum(s['minutes'] for s in slides if s['demo'])==6
-document={'title':'Spity, soutenance Bloc 3 en trente minutes','mainSlideCount':22,'totalMinutes':30,'demoMinutes':6,'timingAssumption':'Environ 120 mots par minute hors manipulations, avec pauses et lecture des chiffres. À ajuster après une répétition chronométrée.','slides':slides}
+document={'title':'Spity, soutenance Bloc 3 en trente minutes','mainSlideCount':23,'totalMinutes':30,'demoMinutes':6,'timingAssumption':'Environ 120 mots par minute hors manipulations, avec pauses et lecture des chiffres. À ajuster après une répétition chronométrée.','slides':slides}
 target=ROOT/'docs/rncp/bloc-03/donnees/diaporama-30min.json'
 target.write_text(json.dumps(document,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
-for s in slides[:22]:
+for s in slides[:23]:
     words=len(s['script'].split())
     print(f"{s['number']:02d} {s['minutes']:3.1f} min {words:3d} mots {words/s['minutes']:5.1f} mots/min {'DEMO' if s['demo'] else ''}")
 print('Total hors démonstration :',sum(len(s['script'].split()) for s in slides if s['minutes'] and not s['demo']),'mots pour 24 minutes.')

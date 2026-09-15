@@ -4,7 +4,7 @@ import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 
-const root=process.cwd(),tmp=path.join(root,'tmp/bloc3/visual-v12');
+const root=process.cwd(),tmp=path.join(root,'tmp/bloc3/visual-v13');
 await fs.mkdir(tmp,{recursive:true});
 const modules=process.env.RUNTIME_NODE_MODULES??path.join(root,'tmp/bloc3/build/node_modules');
 process.env.RUNTIME_NODE_MODULES=modules;
@@ -22,6 +22,7 @@ const consolidation=JSON.parse(await fs.readFile(path.join(root,'docs/rncp/bloc-
 const P=Presentation.create({slideSize:{width:1280,height:720}});
 const ink='#18312D',green='#28725F',sage='#91AE91',lime='#C5DC83',orange='#C77952',muted='#5D7068',paper='#F5F3EA',gray='#DADFD4';
 const tableOwners=[],chartOwners=[],chartContracts=[];
+const ownerNumber=n=>n===1?1:n+1;
 const fmt=m=>`${String(Math.floor(m)).padStart(2,'0')}:${String(Math.round((m%1)*60)).padStart(2,'0')}`;
 function text(s,value,x,y,w,h,size=28,bold=false,color=ink){
   const b=s.shapes.add({geometry:'textbox',position:{left:x,top:y,width:w,height:h},fill:'none',line:{fill:'none',width:0}});
@@ -38,49 +39,61 @@ function table(s,rows,widths,number,top=185,height=422,fontSize=24){
   const t=s.tables.add({rows:rows.length,columns:rows[0].length,left:64,top,width:1152,height,values:rows,columnWidths:widths});
   t.borders.assign({style:'solid',fill:paper,width:2});
   for(let r=0;r<rows.length;r++){t.rows[r].height=height/rows.length;for(let c=0;c<rows[0].length;c++){const cell=t.getCell(r,c);cell.fill=r===0?green:r%2?'#E9EEE4':paper;cell.text.style={typeface:font,fontSize,bold:r===0,color:r===0?'#FFFFFF':ink};}}
-  tableOwners.push(number);return t;
+  tableOwners.push(ownerNumber(number));return t;
 }
 function chart(s,number,categories,series,options={}){
   const config={position:{left:68,top:180,width:800,height:420},categories,series,barOptions:{direction:'bar',grouping:'clustered',gapWidth:80},hasLegend:false,titlePlacement:'none',chartFill:paper,plotAreaFill:paper,chartLine:{fill:'none',width:0},plotAreaLine:{fill:'none',width:0},xAxis:{visible:true,min:0,textStyle:{typeface:font,fontSize:22,fill:muted},majorGridlines:null,line:{fill:'none',width:0}},yAxis:{visible:true,min:0,textStyle:{typeface:font,fontSize:24,fill:ink},majorGridlines:{fill:'#DBDFD5',width:1},line:{fill:'none',width:0}},dataLabels:{showValue:true,position:'outEnd',textStyle:{typeface:font,fontSize:26,bold:true,fill:ink}},legend:{position:'bottom',overlay:false,textStyle:{typeface:font,fontSize:22,fill:ink}},...options};
-  const ch=s.charts.add(options.type??'bar',config);applyPresentationChartFont(ch,{fontFamily:font,availableFonts:[font]});chartOwners.push(number);chartContracts.push({slide:number,categories,series:series.map(v=>({name:v.name,values:v.values}))});return ch;
+  const ch=s.charts.add(options.type??'bar',config);applyPresentationChartFont(ch,{fontFamily:font,availableFonts:[font]});chartOwners.push(ownerNumber(number));chartContracts.push({slide:ownerNumber(number),categories,series:series.map(v=>({name:v.name,values:v.values}))});return ch;
 }
 function aside(s,value,label,detail){text(s,value,912,235,300,100,66,true,green);text(s,label,912,346,300,85,28,true);if(detail)text(s,detail,912,463,300,143,25,false,muted);}
 const mainTitles={2:'Une sortie, deux points de vue',3:'Des preuves réelles, un cas explicite',4:'Le travail avance jusqu’à la recette',5:'Le chemin vers la démonstration',6:'Qui fait quoi ?',7:'5 heures de plus à anticiper',8:'232 € de marge sous le plafond',9:'Le chef de projet approche sa limite',10:'Des risques qui déclenchent une action',11:'Le choix du build standalone',12:'Une demande qui dépasse le lot',13:'Un désaccord à traiter ensemble',14:'La décision doit rester accessible',15:'La cible : l’autonomie',16:'6 heures pour réduire les écarts',17:'Trois rendez-vous pour décider',18:'La satisfaction reste à mesurer',19:'Place à la démonstration',20:'Trouver un partenaire',21:'Retrouver les participants',22:'Un périmètre démontré'};
 let elapsed=0;
 for(const item of doc.slides){
+  const contentNumber=item.contentNumber;
   const s=P.slides.add();s.background.fill=paper;
   item.startMinute=elapsed;elapsed+=item.minutes;item.endMinute=elapsed;
   const alignedTitles={2:'Le besoin d’Altitude Grimpe',3:'Un projet, quatre blocs',4:'Le backlog Linear au 14 septembre',5:'Un lot sur quinze jours ouvrés',7:'Les causes des 5 heures supplémentaires',8:'Le budget du lot de démonstration',22:'La transmission à la maintenance',25:'Des contrôles datés et contextualisés'};
-  item.title=[3,4,5,6,13,14,15,16,17,18,22,23,25].includes(item.number)?item.title:alignedTitles[item.number]??mainTitles[item.number]??item.title;
-  if(item.number===13)item.source+=' Illustration fictive générée avec ImageGen, visuels/equipe-illustration.png. Aucune personne réelle représentée.';
-  if(item.number===19)item.source+=' Photo de marque existante escalade-falaise-gros-plan.jpeg, illustration de la pratique.';
-  if(item.number===5)item.source+=' Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01.';
+  item.title=[3,4,5,6,13,14,15,16,17,18,22,23,25].includes(contentNumber)?item.title:alignedTitles[contentNumber]??mainTitles[contentNumber]??item.title;
+  if(contentNumber===13)item.source+=' Illustration fictive générée avec ImageGen, visuels/equipe-illustration.png. Aucune personne réelle représentée.';
+  if(contentNumber===19)item.source+=' Photo de marque existante escalade-falaise-gros-plan.jpeg, illustration de la pratique.';
+  if(contentNumber===5)item.source+=' Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01.';
   item.spokenWords=[item.script,item.transition].filter(Boolean).join(' ').trim().split(/\s+/).length;
-  if(item.number===8)item.action='Comparer les barres du budget initial, de la prévision et du plafond. Expliquer les 232 euros de marge.';
-  if(item.number===11)item.action='Comparer oralement les trois options. Mettre en avant le standalone et le commit qui atteste le choix.';
+  if(contentNumber===8)item.action='Comparer les barres du budget initial, de la prévision et du plafond. Expliquer les 232 euros de marge.';
+  if(contentNumber===11)item.action='Comparer oralement les trois options. Mettre en avant le standalone et le commit qui atteste le choix.';
   item.notes=`REPÈRE : ${fmt(item.startMinute)} à ${fmt(item.endMinute)}. Durée prévue : ${fmt(item.minutes)}.\n\nTEXTE ORAL\n${item.script}\n\n${item.action?'GESTE OU MANIPULATION\n'+item.action+'\n\n':''}${item.transition?'TRANSITION\n'+item.transition+'\n\n':''}SOURCE ET NATURE\n${item.nature}. ${item.source}`;
   s.speakerNotes.textFrame.setText(item.notes);
-  if(item.number===1){
+  if(item.layout==='agenda'){
+    heading(s,'Sommaire');
+    item.content.items.forEach(([n,label,timing],i)=>{
+      const y=166+i*86;
+      text(s,n,72,y,100,61,42,true,green);
+      text(s,label,210,y+4,720,57,35,true);
+      text(s,timing,975,y+11,237,45,24,false,muted);
+    });
+    text(s,'30 minutes, dont 6 minutes de démonstration.',72,616,1136,45,27,true,green);
+    footer(s,item);continue;
+  }
+  if(contentNumber===1){
     s.background.fill=ink;await image(s,'spity/public/images/brand/escalade-falaise-coucher-soleil.jpeg',700,0,580,720,'cover');
     text(s,'SPITY',64,95,620,120,96,true,'#FFFFFF');
     text(s,'Piloter le projet',64,277,600,90,52,true,'#FFFFFF');
     text(s,'Dorian Joly\nRNCP39583, Bloc 3',64,498,560,92,29,false,lime);
     text(s,'30 minutes, démonstration incluse',64,642,580,45,24,false,'#EAF1E6');continue;
   }
-  if(item.number===19){
+  if(contentNumber===19){
     await image(s,'spity/public/images/brand/escalade-falaise-gros-plan.jpeg',0,0,1280,720,'cover');
     text(s,item.title,64,40,1152,100,54,true,ink);text(s,'6 min',64,442,440,145,102,true,'#FFFFFF');
     text(s,'Grimpeur, puis club',64,594,700,50,33,true,'#FFFFFF');footer(s,item,true);continue;
   }
-  if(item.number===20||item.number===21){
-    const matching=item.number===20;
+  if(contentNumber===20||contentNumber===21){
+    const matching=contentNumber===20;
     text(s,matching?'Trouver un\npartenaire':'Retrouver les\nparticipants',48,76,275,205,42,true);
     text(s,matching?'01  Profil\n\n02  Filtres\n\n03  Demande':'01  Événement\n\n02  Inscription\n\n03  Participants',48,352,275,272,26,true,green);
     await image(s,`docs/rncp/bloc-03/preuves/captures/${matching?'matching':'evenements'}-2026-09-15.png`,326,20,936,640,'contain');
     footer(s,item);continue;
   }
   heading(s,item.title);footer(s,item);
-  switch(item.number){
+  switch(contentNumber){
     case 2:
       await image(s,'docs/rncp/bloc-03/preuves/captures/lieux-2026-09-15.png',402,168,808,469,'contain');
       text(s,'Grimpeur',72,223,315,60,38,true,green);text(s,'Trouver\nun partenaire',72,307,310,115,35);
@@ -111,7 +124,8 @@ for(const item of doc.slides){
     }
     case 6:
       groups(s,[['30 h','Chef de projet','Organiser et arbitrer.'],['72 h','Développeur','Réaliser et corriger.'],['30 h','Camille, QA','Critères et recette.\nT02 et T07.']],204);
-      takeaway(s,'Cas fictif : Camille est malentendante, les échanges sont adaptés.',604);break;
+      text(s,'Camille, QA malentendante fictive. QA : assurance qualité.',72,581,1136,40,25,true,green);
+      text(s,'Ordinateur, navigateur, base locale. Linear : tâches. Git : versions.',72,627,1136,38,22,false,muted);break;
     case 7:
       chart(s,7,['Corrections','Recette','Événements','Accès','Planning'],[{name:'Écart en heures',values:['T10','T07','T06','T04','T03'].map(id=>{const t=pilotage.tasks.find(t=>t.id===id);return t.spentHours+t.remainingHours-t.plannedHours;}),valuesFormatCode:'+0" h";-0" h";0" h"',fill:orange,points:[{idx:0,fill:green}],dataLabelOverrides:[0,1,2,3,4].map(idx=>({idx,showValue:true,position:idx===0?'center':'outEnd',...(idx===0?{text:'Corrections −2 h'}:{}),textStyle:{typeface:font,fontSize:idx===0?22:26,bold:true,fill:idx===0?'#FFFFFF':ink}}))}],{position:{left:68,top:180,width:800,height:400},xAxis:{visible:true,tickLabelPosition:'low',textStyle:{typeface:font,fontSize:24,fill:ink},majorGridlines:null},yAxis:{visible:true,min:-3,max:3,majorUnit:1,numberFormatCode:'0" h"',textStyle:{typeface:font,fontSize:22,fill:ink},majorGridlines:{fill:'#DBDFD5',width:1}}});
       aside(s,'+5 h','Écart de charge','Événements : J11 à J12\nRecette : J13 à J14');takeaway(s,'T06 : +1 jour. T07 : +1 jour. La charge et le délai se distinguent.',607);break;
@@ -127,7 +141,7 @@ for(const item of doc.slides){
       const t=s.tables.add({rows:3,columns:3,left:140,top:215,width:555,height:330,values:rows,columnWidths:[185,185,185]});
       t.borders.assign({style:'solid',fill:paper,width:5});
       for(let r=0;r<3;r++){t.rows[r].height=110;for(let c=0;c<3;c++){const score=(3-r)*(c+1),cell=t.getCell(r,c);cell.fill=score>=6?'#E6B08D':score>=3?'#D6DDAD':'#E0E8D7';cell.text.style={typeface:font,fontSize:26,bold:true,color:ink};}}
-      tableOwners.push(10);
+      tableOwners.push(ownerNumber(10));
       text(s,'Probabilité',70,160,250,45,24,true);[3,2,1].forEach((n,i)=>text(s,String(n),92,250+i*110,50,50,28,true));
       text(s,'Impact',144,578,120,43,24,true);[1,2,3].forEach((n,i)=>text(s,String(n),218+i*185,555,70,50,25));
       text(s,'R01  Démonstration\nR02  Charge du CP\nR03  Périmètre\nR04  Inscriptions\nR05  Dépôt',766,208,450,277,29,true);
@@ -183,19 +197,19 @@ for(const item of doc.slides){
     case 23:
       table(s,[['Activité','CP','DEV','QA','Client'],['Périmètre et critères','R','C','C','A'],['Planification et affectation','A/R','C','C','I'],['Réalisation','A','R','C','I'],['Recette des parcours','A','C','R','C'],['Corrections','A','R','C','I'],['Arbitrage délai, coût, périmètre','R','C','C','A'],['Acceptation de la démonstration','R','C','C','A']],[632,130,130,130,130],23,180,422,24);
       text(s,'R : réalise. A : décide. C : consulté. I : informé. QA : Camille.',72,626,1136,40,23,true,green);break;
-    case 24:table(s,item.content.rows,item.content.widths,item.number,185,430);break;
+    case 24:table(s,item.content.rows,item.content.widths,contentNumber,185,430);break;
     case 25:
       table(s,[['Demande conditionnelle','Fiche préparée par CP, non envoyée'],['Déclencheur à J12','Compétence critique encore indisponible après formation.'],['Mission et délai','Renfort QA de 4 h à J12-J13, recette transmissible à Camille.'],['Sélection et accueil','Exercice accessible. Disponibilité à confirmer. Accueil CP : 0,5 h.'],['Chiffrage de la variante','180 € de renfort + 22,50 € CP = 202,50 € supplémentaires.'],['Arbitrage avant engagement','Prévision : 4 667,50 €. Marge : 29,50 €. CP : 29,5/30 h.']],[350,802],25,182,426,24);
       text(s,'Variante indépendante, non activée dans le classeur de base.',72,629,1136,40,24,true,green);break;
-    default:throw new Error(`Slide inconnue ${item.number}`);
+    default:throw new Error(`Slide inconnue ${contentNumber}`);
   }
 }
-assert.equal(elapsed,30);assert.equal(doc.slides.length,25);
+assert.equal(elapsed,30);assert.equal(doc.slides.length,26);
 await fs.writeFile(path.join(root,'docs/rncp/bloc-03/donnees/support-oral.json'),JSON.stringify(doc.slides,null,2)+'\n');
 await fs.writeFile(path.join(tmp,'chart-data.json'),JSON.stringify(chartContracts,null,2)+'\n');
 const candidate=path.join(tmp,'candidate.pptx');await(await PresentationFile.exportPptx(P)).save(candidate);
-const finalPath=path.join(root,'output/presentations/spity-bloc-3-30-minutes-visuel-v12.pptx');
+const finalPath=path.join(root,'output/presentations/spity-bloc-3-30-minutes-visuel-v13.pptx');
 await finalizePresentation({workspaceDir:root,candidatePath:candidate,finalPath,pythonExecutable:python,integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-heading-fit',...tableOwners.flatMap(n=>['--require-native-table-slide',String(n)])],requiredNativeTableOwnerSlides:tableOwners,requiredNativeChartOwnerSlides:chartOwners,materializeLiteralChartWorkbooks:true,fontPolicy:{basis:'design',families:[font]},verifyArtifactToolImport:true,receiptPath:path.join(tmp,'validation.json')});
 const checked=await PresentationFile.importPptx(await FileBlob.load(finalPath));
 for(let i=0;i<checked.slides.items.length;i++){const png=await checked.export({slide:checked.slides.items[i],format:'png',scale:1});await fs.writeFile(path.join(tmp,`slide-${String(i+1).padStart(2,'0')}.png`),new Uint8Array(await png.arrayBuffer()));}
-console.log(JSON.stringify({file:finalPath,slides:25,minutes:30,chartOwners,tableOwners}));
+console.log(JSON.stringify({file:finalPath,slides:doc.slides.length,minutes:30,chartOwners,tableOwners}));

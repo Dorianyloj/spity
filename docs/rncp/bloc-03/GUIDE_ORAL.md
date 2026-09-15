@@ -1,10 +1,10 @@
 # Guide de répétition — Bloc 3 Spity
 
-Support associé : spity-bloc-3-30-minutes-visuel-v12.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
+Support associé : spity-bloc-3-30-minutes-visuel-v13.pptx. Vingt-trois diapositives principales, sommaire compris, couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
 
 ## Compétences à sécuriser avant l'oral
 
-Le règlement spécial v1.01 du 15 septembre 2025, consulté le 15 septembre 2026, identifie trois compétences éliminatoires : C.3.1 (planification), C3.2.1 (suivi) et C3.4.2 (démonstration), pages 3-4. La validation exige au moins quatre compétences acquises sur sept, dont ces trois compétences. La préparation couvre les sept ; seule l'évaluation du jury décide de leur acquisition. Les repères sont les slides 3-6 pour planifier, 4 et 7-10 pour suivre, 19-22 pour démontrer et obtenir une décision. La démonstration doit être exécutée sur la version identifiée ; les captures sont un secours. Le diplôme prérequis, la convocation et le dépôt sont suivis dans CHECKLIST_REMISE.md.
+Le règlement spécial v1.01 du 15 septembre 2025, consulté le 15 septembre 2026, identifie trois compétences éliminatoires : C.3.1 (planification), C3.2.1 (suivi) et C3.4.2 (démonstration), pages 3-4. La validation exige au moins quatre compétences acquises sur sept, dont ces trois compétences. La préparation couvre les sept ; seule l'évaluation du jury décide de leur acquisition. Les repères sont les slides 4-7 pour planifier, 5 et 8-11 pour suivre, 20-23 pour démontrer et obtenir une décision. La démonstration doit être exécutée sur la version identifiée ; les captures sont un secours. Le diplôme prérequis, la convocation et le dépôt sont suivis dans CHECKLIST_REMISE.md.
 
 ## Fil conducteur
 
@@ -17,27 +17,28 @@ Le texte oral ci-dessous développe chaque diapositive et propose ses transition
 | Slide | Sujet | Durée | Temps cumulé |
 | --- | --- | --- | --- |
 | 1 | Spity | 00:30 | 00:30 |
-| 2 | Le besoin d’Altitude Grimpe | 01:00 | 01:30 |
-| 3 | Le planning global du Bloc 1 | 01:00 | 02:30 |
-| 4 | Le suivi : Linear et les rituels Scrum | 01:30 | 04:00 |
-| 5 | Le lot : phases, mesures et dépendances | 01:30 | 05:30 |
-| 6 | Les missions et les aménagements | 01:00 | 06:30 |
-| 7 | Les causes des 5 heures supplémentaires | 01:30 | 08:00 |
-| 8 | Le budget du lot de démonstration | 01:30 | 09:30 |
-| 9 | Le chef de projet approche sa limite | 01:00 | 10:30 |
-| 10 | Des risques qui déclenchent une action | 01:00 | 11:30 |
-| 11 | Le choix du build standalone | 02:00 | 13:30 |
-| 12 | Une demande qui dépasse le lot | 01:30 | 15:00 |
-| 13 | Des styles adaptés à la situation | 01:30 | 16:30 |
-| 14 | Camille et une équipe à distance | 01:30 | 18:00 |
-| 15 | La grille des compétences du lot | 01:00 | 19:00 |
-| 16 | Un plan de formation pour chaque rôle | 01:30 | 20:30 |
-| 17 | Review J10 : une décision dans CR02 | 01:30 | 22:00 |
-| 18 | Mesurer la satisfaction et agir | 01:00 | 23:00 |
-| 19 | Place à la démonstration | 00:30 | 23:30 |
-| 20 | Trouver un partenaire | 03:00 | 26:30 |
-| 21 | Retrouver les participants | 02:30 | 29:00 |
-| 22 | Les critères de validation du parcours | 01:00 | 30:00 |
+| 2 | Sommaire | 00:30 | 01:00 |
+| 3 | Le besoin d’Altitude Grimpe | 01:00 | 02:00 |
+| 4 | Le planning global du Bloc 1 | 01:00 | 03:00 |
+| 5 | Le suivi : Linear et les rituels Scrum | 01:30 | 04:30 |
+| 6 | Le lot : phases, mesures et dépendances | 01:30 | 06:00 |
+| 7 | Les missions et les aménagements | 01:00 | 07:00 |
+| 8 | Les causes des 5 heures supplémentaires | 01:30 | 08:30 |
+| 9 | Le budget du lot de démonstration | 01:30 | 10:00 |
+| 10 | Le chef de projet approche sa limite | 01:00 | 11:00 |
+| 11 | Des risques qui déclenchent une action | 01:00 | 12:00 |
+| 12 | Le choix du build standalone | 01:30 | 13:30 |
+| 13 | Une demande qui dépasse le lot | 01:30 | 15:00 |
+| 14 | Des styles adaptés à la situation | 01:30 | 16:30 |
+| 15 | Camille et une équipe à distance | 01:30 | 18:00 |
+| 16 | La grille des compétences du lot | 01:00 | 19:00 |
+| 17 | Un plan de formation pour chaque rôle | 01:30 | 20:30 |
+| 18 | Review J10 : une décision dans CR02 | 01:30 | 22:00 |
+| 19 | Mesurer la satisfaction et agir | 01:00 | 23:00 |
+| 20 | Place à la démonstration | 00:30 | 23:30 |
+| 21 | Trouver un partenaire | 03:00 | 26:30 |
+| 22 | Retrouver les participants | 02:30 | 29:00 |
+| 23 | Les critères de validation du parcours | 01:00 | 30:00 |
 
 À 15:00, terminer l'arbitrage de périmètre. À 23:00, quitter le suivi client pour lancer les six minutes de démonstration. À 29:00, revenir au bilan. Si une explication dépasse, condenser un exemple ; ne pas supprimer entièrement une compétence ni la démonstration.
 
@@ -57,9 +58,27 @@ Je commence par le besoin auquel répond le produit.
 
 Source : Référentiel RNCP39583, p. 11 à 14. Photo de marque du dépôt, illustration sans lien avec une équipe réelle.
 
-### 2. Le besoin d’Altitude Grimpe
+### 2. Sommaire
 
-Repère : 00:30 à 01:30. Nature : B1, commanditaire fictif et produit réel.
+Repère : 00:30 à 01:00. Nature : Le déroulé de la présentation.
+
+**Texte oral proposé**
+
+Je commence par le besoin et le projet Spity. Je présente ensuite l'organisation du travail, puis le suivi et les décisions prises dans le scénario. J'explique comment accompagner l'équipe et échanger avec le client. À vingt-trois minutes, je passe à l'application pour montrer le parcours, puis faire le bilan des critères vérifiés.
+
+**À montrer ou manipuler**
+
+Annoncer les cinq parties sans détailler encore les chiffres.
+
+**Transition**
+
+Je commence par le besoin utilisateur.
+
+Source : Ordre du support et repères de répétition. Trente minutes, dont six minutes de démonstration.
+
+### 3. Le besoin d’Altitude Grimpe
+
+Repère : 01:00 à 02:00. Nature : B1, commanditaire fictif et produit réel.
 
 **Texte oral proposé**
 
@@ -69,13 +88,13 @@ Pour cette soutenance, je retiens le parcours déjà développé dans le Bloc 2.
 
 **Transition**
 
-Les quatre blocs abordent ce même projet sous des angles complémentaires.
+Je reprends ensuite le planning global défini dans le Bloc 1.
 
 Source : B1 : C1.1.1, p. 2 ; C1.4.1, p. 4-5. B2 : 16_DOSSIER_FINAL_BC02, F01-F10. Capture locale du 15 septembre 2026, données de test.
 
-### 3. Le planning global du Bloc 1
+### 4. Le planning global du Bloc 1
 
-Repère : 01:30 à 02:30. Nature : C.3.1, neuf lots du diaporama Bloc 1.
+Repère : 02:00 à 03:00. Nature : C.3.1, neuf lots du diaporama Bloc 1.
 
 **Texte oral proposé**
 
@@ -95,9 +114,9 @@ Je choisis une méthode adaptée au suivi de ce travail.
 
 Source : Diaporama B1, p. 21 : 8+6+10+9+12+10+9+8+10=82 j-h. A01 et reference-bloc-01.json. Séquence pédagogique à 5 j-h/semaine, soit 16,4 semaines.
 
-### 4. Le suivi : Linear et les rituels Scrum
+### 5. Le suivi : Linear et les rituels Scrum
 
-Repère : 02:30 à 04:00. Nature : Linear observé et réunions du scénario fictif.
+Repère : 03:00 à 04:30. Nature : Linear observé et réunions du scénario fictif.
 
 **Texte oral proposé**
 
@@ -117,9 +136,9 @@ Le planning montre les phases et les rendez-vous du lot.
 
 Source : A01/A05/A07 ; rituels.json. Linear observé le 14 septembre 2026. Guide Scrum 2020, p. 9-10 : https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-French.pdf
 
-### 5. Le lot : phases, mesures et dépendances
+### 6. Le lot : phases, mesures et dépendances
 
-Repère : 04:00 à 05:30. Nature : C.3.1, planning fictif du lot à J10.
+Repère : 04:30 à 06:00. Nature : C.3.1, planning fictif du lot à J10.
 
 **Texte oral proposé**
 
@@ -139,15 +158,17 @@ La répartition des missions permet de tenir ces engagements.
 
 Source : A01, A03, A09 et Planning. Étude T01, mesure T02, conception T03, réalisation T04-T06, recette T07/T10, restitution T09. A05 : planning J3, reviews J10/J15 et rétrospective J15. Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01.
 
-### 6. Les missions et les aménagements
+### 7. Les missions et les aménagements
 
-Repère : 05:30 à 06:30. Nature : C.3.1, équipe et situation fictives.
+Repère : 06:00 à 07:00. Nature : C.3.1, équipe et situation fictives.
 
 **Texte oral proposé**
 
-Le scénario distingue un chef de projet, un développeur et une testeuse QA nommée Camille. Camille est un personnage fictif malentendant. Je lui confie la préparation des critères et la recette, selon ses compétences. Ce sont les tâches T02 et T07. Sa capacité reste de trente heures pour vingt-quatre heures prévues à terminaison.
+Dans le scénario, le chef de projet organise, le développeur réalise et Camille prépare les tests. QA signifie assurance qualité ; son rôle consiste ici à vérifier les parcours et leurs critères. Camille est une testeuse malentendante fictive. Elle intervient sur T02 et T07, selon ses compétences, avec vingt-quatre heures prévues pour trente disponibles.
 
-L'aménagement porte sur les échanges : consignes écrites, réunions sous-titrées et décisions accessibles après la réunion. Le chef de projet prépare ces modalités avec elle. Une heure de préparation est incluse dans les tâches de pilotage existantes. La matrice RACI conserve une autorité de décision par activité. Camille reste responsable de la recette et le client de l'acceptation du périmètre.
+Les consignes sont écrites, les réunions sous-titrées et les décisions accessibles après chaque échange. Une heure de préparation est déjà comprise dans le pilotage. Le tableau des responsabilités précise qui réalise et qui décide.
+
+Nous utilisons un ordinateur, un navigateur et une base locale pour développer et tester. Linear suit les tâches, Git conserve les versions et les documents partagés gardent les décisions. Le budget présenté ensuite valorise les moyens du cas.
 
 **À montrer ou manipuler**
 
@@ -157,11 +178,11 @@ Présenter les trois rôles et identifier les missions T02/T07 de Camille. Disti
 
 Je vérifie ensuite les écarts de charge avant d'engager le reste du lot.
 
-Source : A02 ; donnees/inclusion.json. Camille est un personnage fictif. C.3.1 : référentiel RNCP39583, p. 11-12. Capacités et charges du cas conservées.
+Source : A02 ; donnees/inclusion.json. Camille est un personnage fictif. C.3.1 : référentiel RNCP39583, p. 11-12. Capacités et charges du cas conservées. A02 : moyens matériels, logiciels et collaboration. Rôles CP/DEV/QA/CL du scénario.
 
-### 7. Les causes des 5 heures supplémentaires
+### 8. Les causes des 5 heures supplémentaires
 
-Repère : 06:30 à 08:00. Nature : C3.2.1, simulation pédagogique.
+Repère : 07:00 à 08:30. Nature : C3.2.1, simulation pédagogique.
 
 **Texte oral proposé**
 
@@ -181,9 +202,9 @@ Ces heures ont un effet différent sur le budget selon le rôle concerné.
 
 Source : A09, section 4 et 5 ; donnees/pilotage.json, 30 estimateDetails ; classeur Estimations et Planning. Simulation pédagogique, sans relevés horaires réels.
 
-### 8. Le budget du lot de démonstration
+### 9. Le budget du lot de démonstration
 
-Repère : 08:00 à 09:30. Nature : C3.2.1, montants fictifs en euros.
+Repère : 08:30 à 10:00. Nature : C3.2.1, montants fictifs en euros.
 
 **Texte oral proposé**
 
@@ -205,9 +226,9 @@ La marge financière doit être lue avec la disponibilité de chaque rôle.
 
 Source : Diaporama B1, p. 21-22 : 82 j-h, 450 EUR/j, total 44 250 EUR. A03, A09 et classeur : cas B3 distinct. reference-bloc-01.json et COHERENCE_INTER_BLOCS.md.
 
-### 9. Le chef de projet approche sa limite
+### 10. Le chef de projet approche sa limite
 
-Repère : 09:30 à 10:30. Nature : C3.2.1, simulation pédagogique.
+Repère : 10:00 à 11:00. Nature : C3.2.1, simulation pédagogique.
 
 **Texte oral proposé**
 
@@ -221,9 +242,9 @@ Je relie ensuite ces points de vigilance à un registre des risques.
 
 Source : A03. Classeur Pilotage, charges à terminaison.
 
-### 10. Des risques qui déclenchent une action
+### 11. Des risques qui déclenchent une action
 
-Repère : 10:30 à 11:30. Nature : C3.2.1, extrait du registre fictif.
+Repère : 11:00 à 12:00. Nature : C3.2.1, extrait du registre fictif.
 
 **Texte oral proposé**
 
@@ -239,19 +260,19 @@ Je vais illustrer cette logique de décision avec un changement réel du projet.
 
 Source : A03, registre des cinq risques.
 
-### 11. Le choix du build standalone
+### 12. Le choix du build standalone
 
-Repère : 11:30 à 13:30. Nature : C3.2.2, fait Git et analyse rétrospective.
+Repère : 12:00 à 13:30. Nature : C3.2.2, fait Git et analyse rétrospective.
 
 **Texte oral proposé**
 
-Un arbitrage réel du dépôt concerne la recette navigateur. Le dossier historique de juillet rapporte un échec pendant l'utilisation du serveur de développement, avec des compilations à froid au cours des scénarios. Cela créait un écart entre l'environnement de recette et l'artefact destiné à être livré.
+Cet exemple part d'un problème technique documenté dans le Bloc 2. Les compilations du serveur de développement perturbaient la recette navigateur. Il fallait rendre les tests plus proches du logiciel livré.
 
-J'ai comparé rétrospectivement trois options pour expliquer le raisonnement. La première consiste à augmenter les délais ou à ajouter des tentatives. Elle est rapide à mettre en place, mais peut masquer la cause. La deuxième consiste à préchauffer le serveur de développement. Elle réduit certaines compilations pendant la recette, à condition d'avoir préparé toutes les routes utiles. La troisième consiste à tester le serveur standalone issu du build. Elle ajoute un temps de construction, mais rapproche la recette du livrable.
+Je compare trois options. Augmenter les délais ou ajouter des tentatives est rapide, mais peut masquer la cause. Préchauffer les routes réduit les compilations pendant les tests, à condition d'avoir préparé toutes les routes utiles. Tester le serveur standalone issu du build demande une construction préalable, mais rapproche la recette du livrable.
 
-Le commit visible dans Git retient cette troisième option et ajuste aussi l'utilisation de localhost pour les sessions. Le dossier historique rapporte une exécution réussie après consolidation. Je précise la portée de la preuve : la modification est vérifiable dans Git. Les résultats distants sont rapportés par le dossier de l'époque. La comparaison présentée ici est une analyse rétrospective, pas un procès-verbal rédigé le jour de la décision.
+Le commit visible dans Git retient cette troisième option et ajuste aussi localhost pour les sessions. Le dossier historique rapporte une exécution réussie après consolidation. La comparaison des options est mon analyse rétrospective ; elle n'est pas un compte rendu rédigé le jour de la décision. Les résultats gardent leur version et leur date.
 
-Ce cas montre l'intérêt de rechercher la cause avant de modifier un seuil. Une recette utile doit rester reproductible et suffisamment proche des conditions de livraison pour éclairer une décision.
+Ce cas montre comment je justifie un choix : je pars du problème, j'examine les conséquences des options et je relie la solution au résultat attendu.
 
 **À montrer ou manipuler**
 
@@ -263,7 +284,7 @@ Un arbitrage peut aussi porter sur le périmètre plutôt que sur un choix techn
 
 Source : A04. git show 689e59d. Cahier de recettes Bloc 2, consolidation standalone. B2 : 19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES, section 8. L’arbitrage B3 reprend le même événement et en explicite le raisonnement de pilotage.
 
-### 12. Une demande qui dépasse le lot
+### 13. Une demande qui dépasse le lot
 
 Repère : 13:30 à 15:00. Nature : C3.2.2, demande fictive à J10.
 
@@ -285,7 +306,7 @@ Pour appliquer cette décision, je dois aussi la faire comprendre à l’équipe
 
 Source : A04 et CR02 dans A07. Simulation explicitement distincte du code actuel. B1 : diaporama p. 20-21, topos Should dans la vision cible. Le report concerne ce lot pédagogique ; il ne supprime pas la fonctionnalité du projet. Linear SPI-22 est observé en Backlog au 14 septembre. Le chiffrage additionnel 12 h DEV et 4 h QA est une hypothèse du lot, pas une estimation extraite de ce ticket.
 
-### 13. Des styles adaptés à la situation
+### 14. Des styles adaptés à la situation
 
 Repère : 15:00 à 16:30. Nature : C3.3.1, situation managériale fictive.
 
@@ -307,7 +328,7 @@ Ces échanges doivent être accessibles à toute l’équipe.
 
 Source : A05, situation de désaccord, styles et analyse critique. Illustration fictive conservée. A05, RT01 : amélioration du daily lors de la rétrospective J15. Illustration fictive générée avec ImageGen, visuels/equipe-illustration.png. Aucune personne réelle représentée.
 
-### 14. Camille et une équipe à distance
+### 15. Camille et une équipe à distance
 
 Repère : 16:30 à 18:00. Nature : C3.3.1, handicap et contexte international simulés.
 
@@ -329,7 +350,7 @@ Je compare ensuite les compétences disponibles aux besoins du projet.
 
 Source : A02/A05/A06 ; inclusion.json et consolidation.json. Camille et le contexte Paris/Montréal sont fictifs ; aucune nationalité ou situation réelle inférée.
 
-### 15. La grille des compétences du lot
+### 16. La grille des compétences du lot
 
 Repère : 18:00 à 19:00. Nature : C3.3.2, niveaux hypothétiques du cas.
 
@@ -351,7 +372,7 @@ Chaque écart conduit à une action de formation ciblée.
 
 Source : A06 : six compétences et échelle 0-3. Besoins et niveaux simulés.
 
-### 16. Un plan de formation pour chaque rôle
+### 17. Un plan de formation pour chaque rôle
 
 Repère : 19:00 à 20:30. Nature : C3.3.2, formations et besoin RH simulés.
 
@@ -373,7 +394,7 @@ Le client reçoit ensuite un compte rendu qui permet de décider.
 
 Source : A06 et consolidation.json. Formation CP 1 h/T03, DEV 2 h/T06, QA 3 h/T07. Variante RH séparée, annexe 25.
 
-### 17. Review J10 : une décision dans CR02
+### 18. Review J10 : une décision dans CR02
 
 Repère : 20:30 à 22:00. Nature : C3.4.1, comptes rendus simulés.
 
@@ -395,7 +416,7 @@ Les retours du client sont aussi suivis par un protocole de satisfaction.
 
 Source : A05, protocole des reviews ; A07, CR02 ; rituels.json. Compte rendu et accord client fictifs.
 
-### 18. Mesurer la satisfaction et agir
+### 19. Mesurer la satisfaction et agir
 
 Repère : 22:00 à 23:00. Nature : C3.4.1, aucun résultat client réel disponible.
 
@@ -417,7 +438,7 @@ Je montre maintenant le parcours qui sera évalué.
 
 Source : A07 : définitions, seuils et questionnaire ; consolidation.json : effectif prévu uniquement, résultats null.
 
-### 19. Place à la démonstration
+### 20. Place à la démonstration
 
 Repère : 23:00 à 23:30. Nature : C3.4.2, séquence de six minutes.
 
@@ -435,7 +456,7 @@ Je commence avec le compte grimpeur.
 
 Source : A08 et preuves/verification.json. B2 : F03-F08. B4 : B4-C421-02 et dossier-jury/01_CADRAGE_PROJET, distinction local, staging et production. État de production historique non réactualisé. Photo de marque existante escalade-falaise-gros-plan.jpeg, illustration de la pratique.
 
-### 20. Trouver un partenaire
+### 21. Trouver un partenaire
 
 Repère : 23:30 à 26:30. Nature : C3.4.2, application locale et données de test.
 
@@ -457,7 +478,7 @@ Je bascule sur la session du club organisateur.
 
 Source : Capture réelle du 15 septembre 2026. A08, recette navigateur datée.
 
-### 21. Retrouver les participants
+### 22. Retrouver les participants
 
 Repère : 26:30 à 29:00. Nature : C3.4.2, application locale et données de test.
 
@@ -479,7 +500,7 @@ Je reviens au bilan du pilotage.
 
 Source : Capture réelle du 15 septembre 2026. A08 et preuves/verification.json.
 
-### 22. Les critères de validation du parcours
+### 23. Les critères de validation du parcours
 
 Repère : 29:00 à 30:00. Nature : C3.4.2, décision attendue après démonstration.
 
@@ -501,7 +522,7 @@ Je suis prêt à répondre aux questions et à retrouver les preuves.
 
 Source : A07 grille de validation ; A08 ; Bloc 4 suivi des réserves et anomalies.
 
-### 23. Annexe : responsabilités du lot
+### 24. Annexe : responsabilités du lot
 
 Repère : questions du jury, hors des trente minutes. Nature : Annexe, organisation fictive.
 
@@ -511,7 +532,7 @@ La matrice RACI distingue réalisation, décision, consultation et information. 
 
 Source : A02, matrice RACI du scénario.
 
-### 24. La sensibilité du budget et de la capacité
+### 25. La sensibilité du budget et de la capacité
 
 Repère : questions du jury, hors des trente minutes. Nature : Annexe, scénarios pédagogiques.
 
@@ -525,7 +546,7 @@ Choisir un scénario dans le tableau et expliquer séparément la contrainte bud
 
 Source : A09 section 6 ; classeur Pilotage, sensibilité ; donnees/pilotage.json. Taux et capacités fictifs du lot.
 
-### 25. Annexe : demande de renfort aux RH
+### 26. Annexe : demande de renfort aux RH
 
 Repère : questions du jury, hors des trente minutes. Nature : Annexe, demande et devis pédagogiques.
 
@@ -559,7 +580,7 @@ Source : A06 et consolidation.json, variante RH non activée.
 - Les 5 h supplémentaires mesurent la charge. T06 et T07 glissent chacun d'un jour ; leur retard ne s'additionne pas, et le jalon reste J15.
 - Les quatre styles sont participatif, persuasif, directif et délégatif. QA avait déjà la recette : préserver cette affectation n'est pas une réallocation nouvelle.
 - Le plan comprend CP 1 h à J3, DEV 2 h à J9-J12 et Camille 3 h à J10-J14. Les niveaux techniques sont indépendants du handicap.
-- La fiche RH de l'annexe 25 reste conditionnelle : 202,50 EUR supplémentaires, marge 29,50 EUR, CP 29,5/30 h. Le budget de base reste 4 465 EUR.
+- La fiche RH de l'annexe 26 reste conditionnelle : 202,50 EUR supplémentaires, marge 29,50 EUR, CP 29,5/30 h. Le budget de base reste 4 465 EUR.
 - CR02 relie un écart à une décision puis à une action datée. Les mesures client sont définies, mais leurs résultats restent non mesurés.
 
 La review porte sur le résultat du produit et les retours du client. La rétrospective porte sur la façon de travailler. Pour illustrer cette distinction, expliquer CR02 (report des topos) puis RT01 (sortir le diagnostic technique du daily). Les cibles d'animation sont 30 minutes pour planning/review, dix pour le daily et vingt pour la rétrospective.

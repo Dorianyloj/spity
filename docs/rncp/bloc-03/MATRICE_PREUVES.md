@@ -18,10 +18,10 @@ Le règlement spécial v1.01 du 15 septembre 2025, consulté le 15 septembre 202
 
 | Compétence | Diapositives à présenter | Pièce détaillée |
 | --- | --- | --- |
-| C.3.1 | 3 : global ; 4 : Kanban ; 5 : phases ; 6 : missions | A01/A02 ; RACI en annexe 23 |
-| C3.2.1 | 4 à 10 : flux, dates, charge, coûts et risques | A03/A09 ; classeur |
-| C3.2.2 | 11-12 : problème, options et décision | A04 ; sensibilité en annexe 24 |
-| C3.3.1 | 6, 9, 13-14 : missions, capacité, styles, handicap et contexte international | A02/A05 |
-| C3.3.2 | 15 : grille ; 16 : formations et déclencheur RH | A06 ; variante RH en annexe 25 |
-| C3.4.1 | 17 : CR02 ; 18 : protocole de satisfaction | A07 |
-| C3.4.2 | 19-21 : manipulation ; 22 : validation et réserves | A07/A08 ; vérification de la version |
+| C.3.1 | 4 : global ; 5 : Kanban ; 6 : phases ; 7 : missions | A01/A02 ; RACI en annexe 24 |
+| C3.2.1 | 5 à 11 : flux, dates, charge, coûts et risques | A03/A09 ; classeur |
+| C3.2.2 | 12-13 : problème, options et décision | A04 ; sensibilité en annexe 25 |
+| C3.3.1 | 7, 10, 14-15 : missions, capacité, styles, handicap et contexte international | A02/A05 |
+| C3.3.2 | 16 : grille ; 17 : formations et déclencheur RH | A06 ; variante RH en annexe 26 |
+| C3.4.1 | 18 : CR02 ; 19 : protocole de satisfaction | A07 |
+| C3.4.2 | 20-22 : manipulation ; 23 : validation et réserves | A07/A08 ; vérification de la version |

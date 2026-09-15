@@ -1,3 +1,7 @@
+b4ef85b 2026-09-15 docs(bloc3): clarifier le role du PO et la delegation
+b648d31 2026-09-15 docs(bloc3): ajouter un lexique simple des termes du support
+d0d5d6a 2026-09-15 docs(bloc3): expliquer les diapositives pour un developpeur
+af50cc5 2026-09-15 docs(bloc3): harmoniser sur le diaporama du bloc 1
 6b90276 2026-09-15 docs(bloc3): verifier tous les criteres et les regles de certification
 4836e9a 2026-09-15 Polish partnership request cards
 551249e 2026-09-15 docs(bloc3): integrer les reunions inspirees de Scrum
@@ -14,10 +18,6 @@ a9da83c 2026-09-14 docs(bloc3): ancrer le pilotage dans Linear et détailler les
 0ae14e1 2026-09-14 docs: develop bloc 3 slideshow and speaker script for 30 minutes
 894bcd2 2026-09-14 docs: prepare complete RNCP bloc 3 presentation kit
 dd2bee5 2026-09-14 docs: prepare RNCP bloc 3 requirements and evidence checklist
-dc9e81e 2026-09-11 fix: align place filter controls
-4924d66 2026-09-11 fix: align place search filters
-947dcfd 2026-09-11 feat: sync route types with crags
-c892d68 2026-09-11 feat: summarize crag grade ranges
 
 Arbitrage :
 commit 689e59dccf15dc611dbddccea9cf81ccc187c40c

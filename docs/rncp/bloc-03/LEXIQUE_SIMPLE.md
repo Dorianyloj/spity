@@ -1,6 +1,6 @@
 # Les termes du Bloc 3 expliqués simplement
 
-Ce lexique accompagne le [diaporama v12](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v12.pptx) et le [guide d'explication des diapositives](COMPRENDRE_LES_DIAPOS.md). Les exemples reprennent Spity. L'équipe, les réunions et les chiffres du cas de quinze jours restent une simulation.
+Ce lexique accompagne le [diaporama v13](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v13.pptx) et le [guide d'explication des diapositives](COMPRENDRE_LES_DIAPOS.md). Les exemples reprennent Spity. L'équipe, les réunions et les chiffres du cas de quinze jours restent une simulation.
 
 ## QA et les autres rôles
 
@@ -107,7 +107,7 @@ Les définitions Scrum renvoient au [Guide Scrum officiel, édition 2020](https:
 | **Pondération** | Donner un poids différent aux éléments. Sans pondération, un ticket de trente minutes compte autant qu'un ticket de trois jours. |
 | **Analyse de sensibilité** | Modifier une hypothèse et regarder l'effet. Exemple : ajouter deux heures CP et vérifier coût et disponibilité. |
 | **Hypothèse** | Une valeur ou situation retenue pour raisonner, à distinguer d'un fait observé. |
-| **Variante / scénario** | Une possibilité étudiée. Les lignes de l'annexe 24 sont des variantes indépendantes. |
+| **Variante / scénario** | Une possibilité étudiée. Les lignes de l'annexe 25 sont des variantes indépendantes. |
 
 La réserve budgétaire est fixée au départ. La marge restante évolue avec la prévision. Le projet global B1 et le lot B3 ont des périmètres différents : leurs budgets ne sont pas additionnés dans le dossier.
 
@@ -134,7 +134,7 @@ La réserve budgétaire est fixée au départ. La marge restante évolue avec la
 | **Matrice** | Tableau qui croise des informations. La matrice de risques croise probabilité et impact. |
 | **Déclencheur** | Événement ou seuil qui indique qu'il faut agir. |
 | **Plan d'action** | Ce qu'on prévoit de faire, par qui et pour quand. |
-| **Session pilote** | Premier essai avec un petit groupe pour observer les difficultés. Les participants de la slide 18 sont prévus, sans résultats réellement mesurés. |
+| **Session pilote** | Premier essai avec un petit groupe pour observer les difficultés. Les participants de la slide 19 sont prévus, sans résultats réellement mesurés. |
 | **Cible / objectif** | Résultat que l'on souhaite atteindre. La cible 4/5 n'est pas une note déjà obtenue. |
 | **Taux de réussite** | Nombre de réussites divisé par le nombre de tentatives. Quatre parcours réussis sur cinq donnent 80 %. |
 | **Effectif** | Nombre de personnes ou d'observations utilisées dans une mesure. |

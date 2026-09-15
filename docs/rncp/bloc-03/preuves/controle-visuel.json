@@ -1,8 +1,8 @@
 {
   "date": "2026-09-15",
   "presentation": {
-    "file": "output/presentations/spity-bloc-3-30-minutes-visuel-v12.pptx",
-    "sha256": "0c88f8629495fefa1e0f23a84c262d014d71cb1dc372b195cf5b93c7ae356bb5",
+    "file": "output/presentations/spity-bloc-3-30-minutes-visuel-v13.pptx",
+    "sha256": "5eaeefd1e12becb7df4955b98a54205477ebbd2649c86646cc4febe507473974",
     "slidesReviewed": [
       1,
       2,
@@ -28,45 +28,74 @@
       22,
       23,
       24,
-      25
+      25,
+      26
     ],
     "changedSlides": [
+      2,
       3,
-      8
-    ],
-    "unchangedSlides": "23 rendus identiques à la v11, conservés et revus en planches de contact.",
-    "nativeCharts": 7,
-    "nativeChartWorkbooks": 7,
-    "nativeTableSlides": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
       10,
+      11,
+      12,
+      13,
       14,
       15,
       16,
       17,
       18,
+      19,
+      20,
+      21,
       22,
       23,
       24,
-      25
+      25,
+      26
+    ],
+    "unchangedSlides": "Corps des anciennes slides 1 à 25 identiques après renumérotation, sauf la slide 7 enrichie ; sommaire ajouté en slide 2. Pieds de page renumérotés.",
+    "nativeCharts": 7,
+    "nativeChartWorkbooks": 7,
+    "nativeTableSlides": [
+      11,
+      15,
+      16,
+      17,
+      18,
+      19,
+      23,
+      24,
+      25,
+      26
     ],
     "packageIntegrity": "passed",
     "layoutGeometry": "passed",
     "font": "Arial",
     "rendering": "Artifact Tool import and PNG export, 1280 x 720; changed slides individually reviewed and entire deck in contact sheets",
     "nativePowerPointExecution": false,
-    "currentReview": "25 diapositives relues par extraction et planches de contact ; slides 3 et 8 inspectées individuellement après harmonisation sur le diaporama du Bloc 1."
+    "currentReview": "26 diapositives inspectées individuellement en PNG 1280 x 720 ; comparaison des corps avec la v12 et contrôle des notes, du sommaire et des trente minutes.",
+    "newSlides": [
+      2
+    ],
+    "changedContentSlides": [
+      7
+    ]
   },
   "dossier": {
     "file": "output/pdf/dossier-bloc-03-spity.pdf",
-    "sha256": "7193a462af63c8980591f405dac5261538edbff8966b6141457947a0de0da3ff",
+    "sha256": "29be82c9a52c2d8fde98cf76306560278caea79e2de79b3a0522acbb563a5732",
     "pages": 30,
-    "rendering": "Poppler PNG, 85 dpi pour les 30 pages ; toutes revues en planches de contact, pages modifiées 3, 5, 8 et 11 inspectées individuellement.",
+    "rendering": "Poppler PNG, 85 dpi pour les trente pages ; planches de contact complètes et inspection individuelle des pages modifiées 4, 6 et 9.",
     "changedPages": [
-      3,
-      5,
-      8,
-      11
+      4,
+      6,
+      9
     ]
   },
-  "scope": "Harmonisation sur le diaporama du Bloc 1 : neuf lots, 82 jours-homme, 450 EUR/jour et 44 250 EUR. Le support reste prévu pour trente minutes. Aucune nouvelle recette applicative ni répétition orale déclarée."
+  "scope": "Relecture de la grille BC03 et des quatorze éléments attendus, ajout du sommaire, QA et moyens explicites. 23 slides principales, trois annexes, trente minutes prévues. Aucune nouvelle recette applicative ni répétition orale déclarée."
 }

@@ -1,6 +1,6 @@
 {
   "title": "Spity, soutenance Bloc 3 en trente minutes",
-  "mainSlideCount": 22,
+  "mainSlideCount": 23,
   "totalMinutes": 30,
   "demoMinutes": 6,
   "timingAssumption": "Environ 120 mots par minute hors manipulations, avec pauses et lecture des chiffres. À ajuster après une répétition chronométrée.",
@@ -16,10 +16,53 @@
       "source": "Référentiel RNCP39583, p. 11 à 14. Photo de marque du dépôt, illustration sans lien avec une équipe réelle.",
       "action": "",
       "transition": "Je commence par le besoin auquel répond le produit.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 1
     },
     {
       "number": 2,
+      "title": "Sommaire",
+      "minutes": 0.5,
+      "nature": "Le déroulé de la présentation",
+      "layout": "agenda",
+      "content": {
+        "items": [
+          [
+            "01",
+            "Le projet Spity",
+            "01:00 à 03:00"
+          ],
+          [
+            "02",
+            "Organiser le travail",
+            "03:00 à 07:00"
+          ],
+          [
+            "03",
+            "Suivre et décider",
+            "07:00 à 15:00"
+          ],
+          [
+            "04",
+            "L'équipe et le client",
+            "15:00 à 23:00"
+          ],
+          [
+            "05",
+            "Démontrer et valider",
+            "23:00 à 30:00"
+          ]
+        ]
+      },
+      "script": "Je commence par le besoin et le projet Spity. Je présente ensuite l'organisation du travail, puis le suivi et les décisions prises dans le scénario. J'explique comment accompagner l'équipe et échanger avec le client. À vingt-trois minutes, je passe à l'application pour montrer le parcours, puis faire le bilan des critères vérifiés.",
+      "source": "Ordre du support et repères de répétition. Trente minutes, dont six minutes de démonstration.",
+      "action": "Annoncer les cinq parties sans détailler encore les chiffres.",
+      "transition": "Je commence par le besoin utilisateur.",
+      "demo": false,
+      "contentNumber": 0
+    },
+    {
+      "number": 3,
       "title": "Le besoin d’Altitude Grimpe",
       "minutes": 1,
       "nature": "B1, commanditaire fictif et produit réel",
@@ -40,11 +83,12 @@
       "script": "Je reprends le commanditaire du Bloc 1 : le Collectif Altitude Grimpe, association fictive représentée par Claire Martin. Le cadre reste une zone pilote autour de Lyon et Grenoble. Son besoin est de centraliser des usages aujourd'hui dispersés : trouver un partenaire, consulter les lieux et organiser des sorties.\n\nPour cette soutenance, je retiens le parcours déjà développé dans le Bloc 2. Le grimpeur recherche une personne compatible et rejoint un événement. Le club organise cette sortie et retrouve les participants autorisés. Ce choix relie le besoin initial à un résultat démontrable. La capture montre le répertoire de lieux du produit local. Elle illustre le contexte géographique, sans prétendre que toutes les fonctions de la vision initiale sont validées.",
       "source": "B1 : C1.1.1, p. 2 ; C1.4.1, p. 4-5. B2 : 16_DOSSIER_FINAL_BC02, F01-F10. Capture locale du 15 septembre 2026, données de test.",
       "action": "",
-      "transition": "Les quatre blocs abordent ce même projet sous des angles complémentaires.",
-      "demo": false
+      "transition": "Je reprends ensuite le planning global défini dans le Bloc 1.",
+      "demo": false,
+      "contentNumber": 2
     },
     {
-      "number": 3,
+      "number": 4,
       "title": "Le planning global du Bloc 1",
       "minutes": 1,
       "nature": "C.3.1, neuf lots du diaporama Bloc 1",
@@ -65,10 +109,11 @@
       "source": "Diaporama B1, p. 21 : 8+6+10+9+12+10+9+8+10=82 j-h. A01 et reference-bloc-01.json. Séquence pédagogique à 5 j-h/semaine, soit 16,4 semaines.",
       "action": "Lire les neuf lots du Bloc 1, puis distinguer le planning global du suivi détaillé.",
       "transition": "Je choisis une méthode adaptée au suivi de ce travail.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 3
     },
     {
-      "number": 4,
+      "number": 5,
       "title": "Le suivi : Linear et les rituels Scrum",
       "minutes": 1.5,
       "nature": "Linear observé et réunions du scénario fictif",
@@ -106,10 +151,11 @@
       "source": "A01/A05/A07 ; rituels.json. Linear observé le 14 septembre 2026. Guide Scrum 2020, p. 9-10 : https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-French.pdf",
       "action": "Associer chaque rituel à son objectif et à sa trace. Distinguer le flux Linear observé des réunions du scénario.",
       "transition": "Le planning montre les phases et les rendez-vous du lot.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 4
     },
     {
-      "number": 5,
+      "number": 6,
       "title": "Le lot : phases, mesures et dépendances",
       "minutes": 1.5,
       "nature": "C.3.1, planning fictif du lot à J10",
@@ -157,10 +203,11 @@
       "source": "A01, A03, A09 et Planning. Étude T01, mesure T02, conception T03, réalisation T04-T06, recette T07/T10, restitution T09. A05 : planning J3, reviews J10/J15 et rétrospective J15.",
       "action": "Lire la phase Mesure, les chevauchements puis les dates initiales et revues.",
       "transition": "La répartition des missions permet de tenir ces engagements.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 5
     },
     {
-      "number": 6,
+      "number": 7,
       "title": "Les missions et les aménagements",
       "minutes": 1,
       "nature": "C.3.1, équipe et situation fictives",
@@ -200,14 +247,15 @@
         ],
         "takeaway": "Une seule autorité de décision par activité dans la matrice RACI"
       },
-      "script": "Le scénario distingue un chef de projet, un développeur et une testeuse QA nommée Camille. Camille est un personnage fictif malentendant. Je lui confie la préparation des critères et la recette, selon ses compétences. Ce sont les tâches T02 et T07. Sa capacité reste de trente heures pour vingt-quatre heures prévues à terminaison.\n\nL'aménagement porte sur les échanges : consignes écrites, réunions sous-titrées et décisions accessibles après la réunion. Le chef de projet prépare ces modalités avec elle. Une heure de préparation est incluse dans les tâches de pilotage existantes. La matrice RACI conserve une autorité de décision par activité. Camille reste responsable de la recette et le client de l'acceptation du périmètre.",
-      "source": "A02 ; donnees/inclusion.json. Camille est un personnage fictif. C.3.1 : référentiel RNCP39583, p. 11-12. Capacités et charges du cas conservées.",
+      "script": "Dans le scénario, le chef de projet organise, le développeur réalise et Camille prépare les tests. QA signifie assurance qualité ; son rôle consiste ici à vérifier les parcours et leurs critères. Camille est une testeuse malentendante fictive. Elle intervient sur T02 et T07, selon ses compétences, avec vingt-quatre heures prévues pour trente disponibles.\n\nLes consignes sont écrites, les réunions sous-titrées et les décisions accessibles après chaque échange. Une heure de préparation est déjà comprise dans le pilotage. Le tableau des responsabilités précise qui réalise et qui décide.\n\nNous utilisons un ordinateur, un navigateur et une base locale pour développer et tester. Linear suit les tâches, Git conserve les versions et les documents partagés gardent les décisions. Le budget présenté ensuite valorise les moyens du cas.",
+      "source": "A02 ; donnees/inclusion.json. Camille est un personnage fictif. C.3.1 : référentiel RNCP39583, p. 11-12. Capacités et charges du cas conservées. A02 : moyens matériels, logiciels et collaboration. Rôles CP/DEV/QA/CL du scénario.",
       "action": "Présenter les trois rôles et identifier les missions T02/T07 de Camille. Distinguer sa capacité de sa charge prévue.",
       "transition": "Je vérifie ensuite les écarts de charge avant d'engager le reste du lot.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 6
     },
     {
-      "number": 7,
+      "number": 8,
       "title": "Les causes des 5 heures supplémentaires",
       "minutes": 1.5,
       "nature": "C3.2.1, simulation pédagogique",
@@ -234,10 +282,11 @@
       "source": "A09, section 4 et 5 ; donnees/pilotage.json, 30 estimateDetails ; classeur Estimations et Planning. Simulation pédagogique, sans relevés horaires réels.",
       "action": "Lire chaque cause de variation puis montrer le total net de cinq heures.",
       "transition": "Ces heures ont un effet différent sur le budget selon le rôle concerné.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 7
     },
     {
-      "number": 8,
+      "number": 9,
       "title": "Le budget de référence et le suivi du lot",
       "minutes": 1.5,
       "nature": "C3.2.1, montants fictifs en euros",
@@ -281,10 +330,11 @@
       "source": "Diaporama B1, p. 21-22 : 82 j-h, 450 EUR/j, total 44 250 EUR. A03, A09 et classeur : cas B3 distinct. reference-bloc-01.json et COHERENCE_INTER_BLOCS.md.",
       "action": "Nommer le budget global B1, puis lire les trois repères du suivi détaillé du lot.",
       "transition": "La marge financière doit être lue avec la disponibilité de chaque rôle.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 8
     },
     {
-      "number": 9,
+      "number": 10,
       "title": "Charge et capacité par rôle",
       "minutes": 1,
       "nature": "C3.2.1, simulation pédagogique",
@@ -328,10 +378,11 @@
       "source": "A03. Classeur Pilotage, charges à terminaison.",
       "action": "",
       "transition": "Je relie ensuite ces points de vigilance à un registre des risques.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 9
     },
     {
-      "number": 10,
+      "number": 11,
       "title": "Risques et réponses prévues",
       "minutes": 1,
       "nature": "C3.2.1, extrait du registre fictif",
@@ -369,12 +420,13 @@
       "source": "A03, registre des cinq risques.",
       "action": "",
       "transition": "Je vais illustrer cette logique de décision avec un changement réel du projet.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 10
     },
     {
-      "number": 11,
+      "number": 12,
       "title": "Arbitrage technique sur la recette",
-      "minutes": 2,
+      "minutes": 1.5,
       "nature": "C3.2.2, fait Git et analyse rétrospective",
       "layout": "table",
       "content": {
@@ -407,14 +459,15 @@
         ],
         "takeaway": "Commit 689e59d du 20 juillet 2026 : recette CI sur le build standalone"
       },
-      "script": "Un arbitrage réel du dépôt concerne la recette navigateur. Le dossier historique de juillet rapporte un échec pendant l'utilisation du serveur de développement, avec des compilations à froid au cours des scénarios. Cela créait un écart entre l'environnement de recette et l'artefact destiné à être livré.\n\nJ'ai comparé rétrospectivement trois options pour expliquer le raisonnement. La première consiste à augmenter les délais ou à ajouter des tentatives. Elle est rapide à mettre en place, mais peut masquer la cause. La deuxième consiste à préchauffer le serveur de développement. Elle réduit certaines compilations pendant la recette, à condition d'avoir préparé toutes les routes utiles. La troisième consiste à tester le serveur standalone issu du build. Elle ajoute un temps de construction, mais rapproche la recette du livrable.\n\nLe commit visible dans Git retient cette troisième option et ajuste aussi l'utilisation de localhost pour les sessions. Le dossier historique rapporte une exécution réussie après consolidation. Je précise la portée de la preuve : la modification est vérifiable dans Git. Les résultats distants sont rapportés par le dossier de l'époque. La comparaison présentée ici est une analyse rétrospective, pas un procès-verbal rédigé le jour de la décision.\n\nCe cas montre l'intérêt de rechercher la cause avant de modifier un seuil. Une recette utile doit rester reproductible et suffisamment proche des conditions de livraison pour éclairer une décision.",
+      "script": "Cet exemple part d'un problème technique documenté dans le Bloc 2. Les compilations du serveur de développement perturbaient la recette navigateur. Il fallait rendre les tests plus proches du logiciel livré.\n\nJe compare trois options. Augmenter les délais ou ajouter des tentatives est rapide, mais peut masquer la cause. Préchauffer les routes réduit les compilations pendant les tests, à condition d'avoir préparé toutes les routes utiles. Tester le serveur standalone issu du build demande une construction préalable, mais rapproche la recette du livrable.\n\nLe commit visible dans Git retient cette troisième option et ajuste aussi localhost pour les sessions. Le dossier historique rapporte une exécution réussie après consolidation. La comparaison des options est mon analyse rétrospective ; elle n'est pas un compte rendu rédigé le jour de la décision. Les résultats gardent leur version et leur date.\n\nCe cas montre comment je justifie un choix : je pars du problème, j'examine les conséquences des options et je relie la solution au résultat attendu.",
       "source": "A04. git show 689e59d. Cahier de recettes Bloc 2, consolidation standalone. B2 : 19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES, section 8. L’arbitrage B3 reprend le même événement et en explicite le raisonnement de pilotage.",
       "action": "Comparer les trois options et pointer le choix visible dans Git.",
       "transition": "Un arbitrage peut aussi porter sur le périmètre plutôt que sur un choix technique.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 11
     },
     {
-      "number": 12,
+      "number": 13,
       "title": "Arbitrage d’une demande supplémentaire",
       "minutes": 1.5,
       "nature": "C3.2.2, demande fictive à J10",
@@ -454,10 +507,11 @@
       "source": "A04 et CR02 dans A07. Simulation explicitement distincte du code actuel. B1 : diaporama p. 20-21, topos Should dans la vision cible. Le report concerne ce lot pédagogique ; il ne supprime pas la fonctionnalité du projet. Linear SPI-22 est observé en Backlog au 14 septembre. Le chiffrage additionnel 12 h DEV et 4 h QA est une hypothèse du lot, pas une estimation extraite de ce ticket.",
       "action": "Montrer le rattachement de la demande au contexte SPI-22, puis comparer les coûts et la capacité DEV.",
       "transition": "Pour appliquer cette décision, je dois aussi la faire comprendre à l’équipe.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 12
     },
     {
-      "number": 13,
+      "number": 14,
       "title": "Des styles adaptés à la situation",
       "minutes": 1.5,
       "nature": "C3.3.1, situation managériale fictive",
@@ -478,10 +532,11 @@
       "source": "A05, situation de désaccord, styles et analyse critique. Illustration fictive conservée. A05, RT01 : amélioration du daily lors de la rétrospective J15.",
       "action": "Associer chaque style à une action, puis expliquer la limite d’une réponse seulement directive.",
       "transition": "Ces échanges doivent être accessibles à toute l’équipe.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 13
     },
     {
-      "number": 14,
+      "number": 15,
       "title": "Camille et une équipe à distance",
       "minutes": 1.5,
       "nature": "C3.3.1, handicap et contexte international simulés",
@@ -514,10 +569,11 @@
       "source": "A02/A05/A06 ; inclusion.json et consolidation.json. Camille et le contexte Paris/Montréal sont fictifs ; aucune nationalité ou situation réelle inférée.",
       "action": "Présenter les adaptations de Camille puis le cas Paris/Montréal et le contrôle commun.",
       "transition": "Je compare ensuite les compétences disponibles aux besoins du projet.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 14
     },
     {
-      "number": 15,
+      "number": 16,
       "title": "La grille des compétences du lot",
       "minutes": 1,
       "nature": "C3.3.2, niveaux hypothétiques du cas",
@@ -561,10 +617,11 @@
       "source": "A06 : six compétences et échelle 0-3. Besoins et niveaux simulés.",
       "action": "Commenter une ligne complète : rôle, compétence, niveau actuel et cible.",
       "transition": "Chaque écart conduit à une action de formation ciblée.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 15
     },
     {
-      "number": 16,
+      "number": 17,
       "title": "Un plan de formation pour chaque rôle",
       "minutes": 1.5,
       "nature": "C3.3.2, formations et besoin RH simulés",
@@ -603,10 +660,11 @@
       "source": "A06 et consolidation.json. Formation CP 1 h/T03, DEV 2 h/T06, QA 3 h/T07. Variante RH séparée, annexe 25.",
       "action": "Lire les trois actions et leurs critères de réussite, puis indiquer le déclencheur RH.",
       "transition": "Le client reçoit ensuite un compte rendu qui permet de décider.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 16
     },
     {
-      "number": 17,
+      "number": 18,
       "title": "Review J10 : une décision dans CR02",
       "minutes": 1.5,
       "nature": "C3.4.1, comptes rendus simulés",
@@ -645,10 +703,11 @@
       "source": "A05, protocole des reviews ; A07, CR02 ; rituels.json. Compte rendu et accord client fictifs.",
       "action": "Montrer le résultat présenté, la décision issue du retour client et les actions datées.",
       "transition": "Les retours du client sont aussi suivis par un protocole de satisfaction.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 17
     },
     {
-      "number": 18,
+      "number": 19,
       "title": "Mesurer la satisfaction et agir",
       "minutes": 1,
       "nature": "C3.4.1, aucun résultat client réel disponible",
@@ -686,10 +745,11 @@
       "source": "A07 : définitions, seuils et questionnaire ; consolidation.json : effectif prévu uniquement, résultats null.",
       "action": "Lire un indicateur avec son calcul et son seuil, puis expliquer l’action déclenchée.",
       "transition": "Je montre maintenant le parcours qui sera évalué.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 18
     },
     {
-      "number": 19,
+      "number": 20,
       "title": "Démonstration du parcours",
       "minutes": 0.5,
       "nature": "C3.4.2, séquence de six minutes",
@@ -711,10 +771,11 @@
       "source": "A08 et preuves/verification.json. B2 : F03-F08. B4 : B4-C421-02 et dossier-jury/01_CADRAGE_PROJET, distinction local, staging et production. État de production historique non réactualisé.",
       "action": "Ouvrir les deux sessions déjà connectées. Lancer le chronomètre de démonstration.",
       "transition": "Je commence avec le compte grimpeur.",
-      "demo": true
+      "demo": true,
+      "contentNumber": 19
     },
     {
-      "number": 20,
+      "number": 21,
       "title": "Parcours grimpeur",
       "minutes": 3,
       "nature": "C3.4.2, application locale et données de test",
@@ -736,10 +797,11 @@
       "source": "Capture réelle du 15 septembre 2026. A08, recette navigateur datée.",
       "action": "0:00–0:40 : profil. 0:40–1:35 : filtre et demande. 1:35–2:40 : événement et inscription. 2:40–3:00 : confirmation. Laisser le navigateur affiché pendant les manipulations. La capture sert de secours.",
       "transition": "Je bascule sur la session du club organisateur.",
-      "demo": true
+      "demo": true,
+      "contentNumber": 20
     },
     {
-      "number": 21,
+      "number": 22,
       "title": "Parcours club et validation",
       "minutes": 2.5,
       "nature": "C3.4.2, application locale et données de test",
@@ -761,10 +823,11 @@
       "source": "Capture réelle du 15 septembre 2026. A08 et preuves/verification.json.",
       "action": "0:00–1:15 : événement, commandes et participants. 1:15–2:00 : clavier et portée des preuves de capacité. 2:00–2:30 : critères et réserves. En cas d’incident, annoncer le contrôle non revalidé et utiliser la capture datée.",
       "transition": "Je reviens au bilan du pilotage.",
-      "demo": true
+      "demo": true,
+      "contentNumber": 21
     },
     {
-      "number": 22,
+      "number": 23,
       "title": "Les critères de validation du parcours",
       "minutes": 1,
       "nature": "C3.4.2, décision attendue après démonstration",
@@ -785,10 +848,11 @@
       "source": "A07 grille de validation ; A08 ; Bloc 4 suivi des réserves et anomalies.",
       "action": "Demander la décision sur les critères. Terminer à 30:00.",
       "transition": "Je suis prêt à répondre aux questions et à retrouver les preuves.",
-      "demo": false
+      "demo": false,
+      "contentNumber": 22
     },
     {
-      "number": 23,
+      "number": 24,
       "title": "Annexe : responsabilités du lot",
       "minutes": 0,
       "nature": "Annexe, organisation fictive",
@@ -825,10 +889,11 @@
       "source": "A02, matrice RACI du scénario.",
       "action": "",
       "transition": "",
-      "demo": false
+      "demo": false,
+      "contentNumber": 23
     },
     {
-      "number": 24,
+      "number": 25,
       "title": "La sensibilité du budget et de la capacité",
       "minutes": 0,
       "nature": "Annexe, scénarios pédagogiques",
@@ -883,10 +948,11 @@
       "source": "A09 section 6 ; classeur Pilotage, sensibilité ; donnees/pilotage.json. Taux et capacités fictifs du lot.",
       "action": "Choisir un scénario dans le tableau et expliquer séparément la contrainte budgétaire et la capacité.",
       "transition": "",
-      "demo": false
+      "demo": false,
+      "contentNumber": 24
     },
     {
-      "number": 25,
+      "number": 26,
       "title": "Annexe : demande de renfort aux RH",
       "minutes": 0,
       "nature": "Annexe, demande et devis pédagogiques",
@@ -907,7 +973,8 @@
       "source": "A06 et consolidation.json, variante RH non activée.",
       "action": "",
       "transition": "",
-      "demo": false
+      "demo": false,
+      "contentNumber": 25
     }
   ]
 }

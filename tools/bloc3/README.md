@@ -23,12 +23,13 @@ Le dossier se modifie dans docs/rncp/bloc-03/. Les valeurs du cas sont centralis
 | --- | --- |
 | prepare.py | Recalcul des indicateurs, génération d'A01/A03 et de la matrice ; extrait Git. Ne rejoue pas les tests. |
 | build_workbook.mjs | Classeur natif avec formules, contrôles de recalcul et rendus. |
-| write_30min_content.py | Contenu des 22 slides principales et des trois annexes, texte oral et transitions. |
+| write_30min_content.py | Contenu des 23 slides principales et des trois annexes, texte oral et transitions. |
 | bloc_context.py | Contexte issu des Blocs 1, 2 et 4, appliqué par write_30min_content.py aux notes, sources et titres du support courant. |
 | inclusion_context.py | Cas fictif de Camille lu dans inclusion.json, appliqué aux diapositives 6, 14 et 16 : missions, aménagements et formation. |
 | competence_context.py | Corrections de couverture appliquées aux notes et titres : planning global, compétences, formation, management, suivi client et validation. |
 | scrum_context.py | Rituels inspirés de Scrum, notes des slides 4/5/13/17 et distinction review/rétrospective. |
 | competence_annexes.py | Compléments générés dans A01/A03 et la matrice, lus dans consolidation.json. |
+| presentation_revision.py | Sommaire, notes ajustées et numérotation courante ; contentNumber conserve les identifiants des mises en page. |
 | build_deck_visual.mjs | Version courante : 30 minutes, notes natives, 7 graphiques et leurs classeurs intégrés, tableaux modifiables, illustration et captures. Contrôles de structure et de géométrie, import et rendus. |
 | build_deck_30min.mjs | Générateur de la version précédente, conservée en archive. |
 | build_guide.py | Notes et timing à partir de donnees/support-oral.json. |
@@ -54,3 +55,5 @@ Le ZIP est un kit documentaire hors connexion. La démonstration exige le dépô
 ## Données et relevé Linear du 14 septembre
 
 enrich_pilotage.py conserve la transcription de la session Linear du 14 septembre et la construction initiale des 30 activités. Il ne se connecte pas à Linear et ne constitue pas une actualisation automatique. Une nouvelle observation doit produire une nouvelle source datée. linear_context.py injecte ce relevé et les explications des écarts dans le support. Le classeur comporte cinq feuilles ; Estimations alimente Planning puis Pilotage, et Linear conserve les statuts observés séparément. Les entrées de sensibilité se modifient dans Pilotage.
+
+La v13 comprend 26 diapositives, dont 23 présentées en trente minutes et trois annexes. Les modules de contenu antérieurs gardent les identifiants de mise en page 1 à 25. presentation_revision.py ajoute le sommaire et attribue les numéros physiques ; le générateur visuel et les validateurs utilisent ces numéros physiques pour les références du PPTX.

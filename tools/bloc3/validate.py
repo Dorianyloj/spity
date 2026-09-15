@@ -12,7 +12,7 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / 'docs/rncp/bloc-03'
 PDF = ROOT / 'output/pdf/dossier-bloc-03-spity.pdf'
-PPTX = ROOT / 'output/presentations/spity-bloc-3-30-minutes-visuel-v12.pptx'
+PPTX = ROOT / 'output/presentations/spity-bloc-3-30-minutes-visuel-v13.pptx'
 XLSX = ROOT / 'outputs/bloc03-01a09eba/pilotage-spity.xlsx'
 ZIP = ROOT / 'output/bloc-03/kit-soutenance-spity.zip'
 S = {'s':'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
@@ -91,11 +91,18 @@ def main(package):
     cp_hours=sum(t['spentHours']+t['remainingHours'] for t in tasks if t['role']=='CP')
     assert cp_hours+recruitment['additionalCPHours']<=roles['CP']['capacityHours']
     slides = read(DOCS/'donnees/support-oral.json')
-    assert len(slides)==25 and sum(s['minutes'] for s in slides)==30
-    assert len([s for s in slides if s['minutes']>0])==22
+    assert len(slides)==26 and sum(s['minutes'] for s in slides)==30
+    assert [s['number'] for s in slides]==list(range(1,27))
+    assert sorted(s['contentNumber'] for s in slides)==list(range(26))
+    assert slides[1]['title']=='Sommaire' and slides[1]['minutes']==0.5
+    for start,end,expected in [(3,4,'01:00 à 03:00'),(5,7,'03:00 à 07:00'),(8,13,'07:00 à 15:00'),(14,19,'15:00 à 23:00'),(20,23,'23:00 à 30:00')]:
+        clock=lambda m:f'{int(m):02d}:{round((m%1)*60):02d}'
+        actual=f"{clock(slides[start-1]['startMinute'])} à {clock(slides[end-1]['endMinute'])}"
+        assert actual==expected and any(row[2]==actual for row in slides[1]['content']['items']), 'Sommaire incohérent avec les notes'
+    assert len([s for s in slides if s['minutes']>0])==23
     assert sum(s['minutes'] for s in slides if s['demo'])==6
-    assert all(s['minutes']==0 for s in slides[22:])
-    for s in slides[:22]:
+    assert all(s['minutes']==0 for s in slides[23:])
+    for s in slides[:23]:
         assert s['endMinute']-s['startMinute']==s['minutes']
         if not s['demo']:
             assert 100 <= s['spokenWords']/s['minutes'] <= 145, f"Densité orale incohérente : slide {s['number']}"
@@ -138,11 +145,11 @@ def main(package):
         chart_workbooks=[n for n in z.namelist() if '/embeddings/' in n and n.endswith('.xlsx')]
         assert len(chart_parts)==7, 'Les sept graphiques doivent rester natifs'
         assert len(chart_workbooks)==7, 'Chaque graphique doit conserver ses données intégrées'
-        for number in [6,14,16]:
+        for number in [7,15,17]:
             visible=' '.join(ET.fromstring(z.read(f'ppt/slides/slide{number}.xml')).itertext())
             assert inclusion['name'] in visible, f'Cas absent de la diapositive {number}'
-        assert re.search(r'ficti[fv]', ' '.join(ET.fromstring(z.read('ppt/slides/slide14.xml')).itertext()))
-        for number,terms in {3:['82','16,4'],8:['44 250'],4:['Kanban','Scrum','Planning','Daily','Review','Rétrospective'],5:['Mesure'],7:['J11','J12','J13','J14'],13:['Participatif','Persuasif','Directif','Délégatif','Rétro'],15:['Actuel','Cible','Concurrence'],16:['CP','DEV','Camille'],17:['CR02','J12','J14','Review'],18:['80','4/5'],22:['accepté','refusé'],25:['202,50','29,50']}.items():
+        assert re.search(r'ficti[fv]', ' '.join(ET.fromstring(z.read('ppt/slides/slide15.xml')).itertext()))
+        for number,terms in {2:['Sommaire','Organiser','Suivre','client','Démontrer'],4:['82','16,4'],9:['44 250'],5:['Kanban','Scrum','Planning','Daily','Review','Rétrospective'],6:['Mesure'],7:['assurance qualité','Ordinateur','Linear','Git'],8:['J11','J12','J13','J14'],14:['Participatif','Persuasif','Directif','Délégatif','Rétro'],16:['Actuel','Cible','Concurrence'],17:['CP','DEV','Camille'],18:['CR02','J12','J14','Review'],19:['80','4/5'],23:['accepté','refusé'],26:['202,50','29,50']}.items():
             visible=' '.join(ET.fromstring(z.read(f'ppt/slides/slide{number}.xml')).itertext())
             assert all(term.casefold() in visible.casefold() for term in terms), f'Élément attendu absent de la slide {number}'
     reader=PdfReader(PDF)
@@ -163,7 +170,7 @@ def main(package):
         assert 'ne certifient pas la version courante' in (DOCS/'VERIFICATION.md').read_text(encoding='utf-8'), 'Documenter la portée historique des tests'
     for capture in read(DOCS/'preuves/captures/manifest.json'):
         assert (DOCS/'preuves/captures'/capture['file']).exists()
-    report={'case':'simulation explicite','planningTasks':len(tasks),'baselineEUR':planned,'forecastEUR':forecast,'marginEUR':232,'slides':len(slides),'nativeCharts':len(chart_parts),'chartWorkbooks':len(chart_workbooks),'presentationMinutes':30,'pdfPages':len(reader.pages),'workbookSheets':len(sheets),'workbookFormulas':formulas,'applicationTree':current_tree,'verifiedApplicationTree':verified_tree,'applicationMatchesDatedEvidence':application_matches,'inclusionCase':inclusion['name'],'inclusionSlides':[6,14,16],'scope':'Cohérence documentaire et structure des exports ; aucun nouveau test applicatif ou dépôt externe. Les tests conservent leur révision et leur date.'}
+    report={'case':'simulation explicite','planningTasks':len(tasks),'baselineEUR':planned,'forecastEUR':forecast,'marginEUR':232,'slides':len(slides),'nativeCharts':len(chart_parts),'chartWorkbooks':len(chart_workbooks),'presentationMinutes':30,'pdfPages':len(reader.pages),'workbookSheets':len(sheets),'workbookFormulas':formulas,'applicationTree':current_tree,'verifiedApplicationTree':verified_tree,'applicationMatchesDatedEvidence':application_matches,'inclusionCase':inclusion['name'],'inclusionSlides':[7,15,17],'scope':'Cohérence documentaire et structure des exports ; aucun nouveau test applicatif ou dépôt externe. Les tests conservent leur révision et leur date.'}
     report.update({'headApplicationMatchesDatedEvidence':head_matches,'applicationWorkingTreeClean':not application_changes,'applicationWorkingTreeChanges':application_changes,'eliminatoryCompetencies':framework['eliminatoryCompetencies'],'minimumAcquiredCompetencies':framework['minimumAcquired'],'demonstrationReadyOnCurrentVersion':None})
     report['referenceBloc1']={'source':b1['source'],'personDays':b1['personDays'],'dailyRateEUR':b1['dailyRateEUR'],'totalEUR':b1['totalEUR'],'planningLots':len(b1['lots'])}
     (DOCS/'preuves/controle-kit.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
@@ -175,7 +182,7 @@ def main(package):
         ZIP.parent.mkdir(parents=True,exist_ok=True)
         with zipfile.ZipFile(ZIP,'w',zipfile.ZIP_DEFLATED) as z:
             for p in included: z.write(p,p.relative_to(ROOT).as_posix())
-            z.writestr('LIRE_EN_PREMIER.txt', 'KIT BLOC 3 SPITY\n\nDossier : output/pdf/dossier-bloc-03-spity.pdf\nSlides : output/presentations/spity-bloc-3-30-minutes-visuel-v12.pptx\nClasseur : outputs/bloc03-01a09eba/pilotage-spity.xlsx\nGuide et checklist : docs/rncp/bloc-03/\nContrôle détaillé : docs/rncp/bloc-03/CONTROLE_COMPLETUDE.md\n\nLe diaporama comprend 22 slides pour 30 minutes, dont 6 de démonstration, et 3 annexes. Le guide contient le texte oral et les transitions. La durée effective se règle après une répétition chronométrée. Les situations de management sont fictives et identifiées. Les données personnelles et dates du campus restent à confirmer. Aucun dépôt externe effectué. La démonstration nécessite le dépôt Spity complet ; les fichiers techniques seuls ne contiennent pas toute l’application.\n\nLe règlement spécial identifie C.3.1, C3.2.1 et C3.4.2 comme éliminatoires. Les tests de la révision 9d166c0 restent datés : consulter VERIFICATION.md et le contrôle du kit pour la correspondance de la version présentée. La réussite du contrôle documentaire ne vaut pas nouvelle recette du logiciel.\n')
+            z.writestr('LIRE_EN_PREMIER.txt', 'KIT BLOC 3 SPITY\n\nDossier : output/pdf/dossier-bloc-03-spity.pdf\nSlides : output/presentations/spity-bloc-3-30-minutes-visuel-v13.pptx\nClasseur : outputs/bloc03-01a09eba/pilotage-spity.xlsx\nGuide et checklist : docs/rncp/bloc-03/\nContrôle détaillé : docs/rncp/bloc-03/CONTROLE_COMPLETUDE.md\n\nLe diaporama comprend 23 slides pour 30 minutes, dont 6 de démonstration, et 3 annexes. Le guide contient le texte oral et les transitions. La durée effective se règle après une répétition chronométrée. Les situations de management sont fictives et identifiées. Les données personnelles et dates du campus restent à confirmer. Aucun dépôt externe effectué. La démonstration nécessite le dépôt Spity complet ; les fichiers techniques seuls ne contiennent pas toute l’application.\n\nLe règlement spécial identifie C.3.1, C3.2.1 et C3.4.2 comme éliminatoires. Les tests de la révision 9d166c0 restent datés : consulter VERIFICATION.md et le contrôle du kit pour la correspondance de la version présentée. La réussite du contrôle documentaire ne vaut pas nouvelle recette du logiciel.\n')
         with zipfile.ZipFile(ZIP) as z: assert z.testzip() is None
         report['zip']=str(ZIP.relative_to(ROOT))
         report['zipSHA256']=digest(ZIP)

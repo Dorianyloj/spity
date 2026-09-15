@@ -6,13 +6,14 @@
 
 - [x] Dossier PDF comprenant les sept compétences, la matrice des preuves et les neuf annexes.
 - [x] Relevé Linear du 14 septembre : 25 tickets observés, dépendances et limites explicites ; 30 activités détaillées pour les estimations du cas.
-- [x] Support PowerPoint : 22 diapositives principales, texte oral développé et 3 annexes ; répartition prévue de 30 minutes, dont 6 de démonstration.
+- [x] Sommaire en cinq parties ajouté en slide 2 ; notes et repères renumérotés.
+- [x] Support PowerPoint : 23 diapositives principales, texte oral développé et 3 annexes ; répartition prévue de 30 minutes, dont 6 de démonstration.
 - [x] Classeur modifiable : pilotage, planning et risques, avec formules vérifiées.
 - [x] Guide d'oral : timing, notes, questions probables et réponses à reformuler.
 - [x] Démonstration locale avec base dédiée, comptes de test, scénario et captures de secours datées.
 - [x] Preuves du 15 septembre sur 9d166c0 : lint, TypeScript, build, 389 tests unitaires et 6 scénarios navigateur réussis ; portée datée précisée dans VERIFICATION.md.
 - [x] Situations fictives identifiées ; absence de mesure de satisfaction réelle explicitée.
-- [x] Cas de Camille, QA malentendante fictive : missions, management et formation sur les slides 6, 14 et 16, avec les mêmes modalités dans A02, A05 et A06.
+- [x] Cas de Camille, QA malentendante fictive : missions, management et formation sur les slides 7, 15 et 17, avec les mêmes modalités dans A02, A05 et A06.
 - [x] Reprise du commanditaire fictif du Bloc 1 et rapprochement des preuves des Blocs 2 et 4 dans COHERENCE_INTER_BLOCS.md.
 
 - [x] Réunions inspirées de Scrum : planning, daily, review et rétrospective, objectifs et traces reliés dans A05/A07 et le diaporama.

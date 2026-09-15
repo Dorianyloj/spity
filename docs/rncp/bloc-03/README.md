@@ -8,11 +8,11 @@
 
 | Besoin | Fichier |
 | --- | --- |
-| Comprendre les slides avec des exemples de développeur | [Explication simple des 25 diapositives](COMPRENDRE_LES_DIAPOS.md) |
+| Comprendre les slides avec des exemples de développeur | [Explication simple des 26 diapositives](COMPRENDRE_LES_DIAPOS.md) |
 | Comprendre les sigles et le vocabulaire | [Lexique simple : QA, CP, recette, RACI, budget et réunions](LEXIQUE_SIMPLE.md) |
 | Tout récupérer pour la répétition | [Kit ZIP](../../../output/bloc-03/kit-soutenance-spity.zip) |
 | Lire le dossier et les neuf annexes | [PDF](../../../output/pdf/dossier-bloc-03-spity.pdf) ; [source modifiable](DOSSIER_BLOC_03.md) |
-| Présenter en trente minutes | [PowerPoint visuel avec texte oral et timing](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v12.pptx) ; [guide d'oral](GUIDE_ORAL.md) |
+| Présenter en trente minutes | [PowerPoint visuel avec texte oral et timing](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v13.pptx) ; [guide d'oral](GUIDE_ORAL.md) |
 | Manipuler les coûts, charges et risques | [Classeur Excel](../../../outputs/bloc03-01a09eba/pilotage-spity.xlsx) ; [données du cas](donnees/pilotage.json) |
 | Retrouver les preuves par compétence | [Matrice](MATRICE_PREUVES.md) ; [vérifications datées](VERIFICATION.md) |
 | Justifier les données et retrouver Linear | [A09 : relevé et estimations](annexes/A09_DONNEES_LINEAR.md) ; [25 tickets observés](donnees/linear-2026-09-14.json) |
@@ -24,7 +24,7 @@ Le kit distingue les faits techniques observés d'une mise en situation fictive 
 
 Le commanditaire fictif reprend celui du Bloc 1 : Collectif Altitude Grimpe, représenté par Claire Martin. Le budget global repris est celui du diaporama Bloc 1 : 44 250 EUR, sur une base de 82 jours-homme à 450 EUR/jour. Le planning global reprend ses neuf lots. Le cas B3 détaille le suivi d'un lot en heures sans ajouter son coût au budget global. Les fiches B1 à 79 j-h et 38 126 EUR HT sont conservées comme une autre version, non retenue pour cette harmonisation ; voir la revue de cohérence.
 
-Le diaporama visuel comporte 22 slides principales et 3 annexes. Les diapositives 6, 14 et 16 présentent Camille, QA malentendante fictive : missions, aménagements concrets et formation. A02, A05, A06 et donnees/inclusion.json conservent les mêmes hypothèses et les critères de vérification attendus. La slide 4 montre les quatre réunions inspirées de Scrum ; les slides 13 et 17 les relient à la rétrospective et au compte rendu de review. A05/A07 et donnees/rituels.json détaillent le protocole. Sept graphiques modifiables présentent les plannings global et détaillé, le flux Linear, les coûts et la charge. Des tableaux montrent les six compétences, les formations par rôle, CR02, les mesures de satisfaction et les critères de validation. Les annexes 23 à 25 présentent le RACI, la sensibilité et le besoin RH conditionnel. Une matrice montre les risques, des captures agrandies accompagnent la démonstration et une illustration représente l'équipe fictive. Les [sources des visuels](visuels/README.md) sont documentées. Les notes développent le texte à dire, les transitions et les manipulations. Les repères totalisent 24 minutes d'explications et 6 minutes de démonstration. Prévoir une répétition chronométrée pour ajuster le débit ; le PowerPoint avance manuellement. Les fichiers soutenance-bloc-03-spity.pptx et spity-bloc-3-30-minutes.pptx conservent les versions précédentes comme archives.
+Le diaporama visuel v13 comporte 23 slides principales, dont un sommaire en slide 2, et 3 annexes. Les diapositives 7, 15 et 17 présentent Camille, QA malentendante fictive : missions, aménagements concrets et formation. A02, A05, A06 et donnees/inclusion.json conservent les mêmes hypothèses et les critères de vérification attendus. La slide 5 montre les quatre réunions inspirées de Scrum ; les slides 14 et 18 les relient à la rétrospective et au compte rendu de review. A05/A07 et donnees/rituels.json détaillent le protocole. Sept graphiques modifiables présentent les plannings global et détaillé, le flux Linear, les coûts et la charge. Des tableaux montrent les six compétences, les formations par rôle, CR02, les mesures de satisfaction et les critères de validation. Les annexes 24 à 26 présentent le RACI, la sensibilité et le besoin RH conditionnel. Une matrice montre les risques, des captures agrandies accompagnent la démonstration et une illustration représente l'équipe fictive. Les [sources des visuels](visuels/README.md) sont documentées. Les notes développent le texte à dire, les transitions et les manipulations. Les repères totalisent 24 minutes d'explications et 6 minutes de démonstration. Prévoir une répétition chronométrée pour ajuster le débit ; le PowerPoint avance manuellement. Les fichiers soutenance-bloc-03-spity.pptx et spity-bloc-3-30-minutes.pptx conservent les versions précédentes comme archives.
 
 Le 15 septembre, les contrôles ont réussi : lint, TypeScript, build, 389 tests unitaires dans 72 suites et six scénarios navigateur avec une MariaDB dédiée. La démonstration se lance sur http://127.0.0.1:3313 avec `powershell -File tools/bloc3/demo.ps1` depuis la racine. Premier lancement sur une nouvelle machine : utiliser `-Prepare` selon A08. Les résultats détaillés et leur portée figurent dans VERIFICATION.md.
 
@@ -96,15 +96,13 @@ Cette répartition est une recommandation de préparation, pas une exigence offi
 
 | Séquence | Durée |
 | --- | --- |
-| Contexte Spity, besoin et nature des preuves (slides 1-2) | 1 min 30 |
-| C.3.1 - Méthode, planning global et détaillé, ressources (slides 3-6) | 5 min |
-| C3.2.1 - Suivi et indicateurs | 5 min |
-| C3.2.2 - Cas d'arbitrage | 3 min 30 |
-| C3.3.1 - Management et communication | 3 min |
-| C3.3.2 - Compétences et formations | 2 min 30 |
-| C3.4.1 - Suivi client et validations | 2 min 30 |
-| C3.4.2 - Démonstration | 6 min |
-| Bilan et transition vers les questions | 1 min |
+| Introduction et sommaire (slides 1-2) | 1 min |
+| Le projet Spity (slides 3-4) | 2 min |
+| Organiser le travail (slides 5-7) | 4 min |
+| Suivre et décider (slides 8-13) | 8 min |
+| L'équipe et le client (slides 14-19) | 8 min |
+| Démonstration (slides 20-22) | 6 min |
+| Validation du parcours (slide 23) | 1 min |
 | **Total présentation, démonstration incluse** | **30 min** |
 
 ### Informations à préciser ensemble
