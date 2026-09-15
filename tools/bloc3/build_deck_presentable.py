@@ -1,4 +1,4 @@
-"""Build the editable v15 deck from the reviewed v14 notes and project evidence.
+"""Build the editable v16 deck from the reviewed v14 notes and project evidence.
 
 Run from any directory: python tools/bloc3/build_deck_presentable.py
 Dependencies: tools/bloc3/requirements-presentation.txt.
@@ -18,7 +18,7 @@ from pptx.util import Inches, Pt
 
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / 'docs/rncp/bloc-03'
-OUT = ROOT / 'output/presentations/spity-bloc-3-30-minutes-visuel-v15.pptx'
+OUT = ROOT / 'output/presentations/spity-bloc-3-30-minutes-visuel-v16.pptx'
 SOURCE = json.loads((DOCS / 'donnees/support-oral.json').read_text())
 PLAN = json.loads((DOCS / 'donnees/consolidation.json').read_text())
 INK, GREEN, LIME, PAPER = '12332D', '286957', 'D8F28B', 'F6F5EF'
@@ -257,24 +257,20 @@ rect(s, 6.85, 2.68, 8.5, 4.82, INK, True)
 picture(s, 'docs/rncp/bloc-03/preuves/captures/lieux-2026-09-15.png', 7.03, 2.83, 8.14, 4.46)
 callout(s, 'Un parcours démontré : partenaire → événement → inscription.')
 
-# 04 — Global planning; native editable Gantt.
-s = base(4, 'Situer le lot dans le projet complet', '01 / Le projet Spity', 'Neuf lots repris du diaporama du Bloc 1 ; séquence pédagogique du MVP cible.')
+# 04 — Actual elapsed time and estimated effort use different units.
+s = base(4, 'Spity : un an de développement', '01 / Le projet Spity', 'Un projet développé sur une année. Les barres présentent la charge estimée dans le Bloc 1.')
 seq = PLAN['globalPlanning']['sequence']
-starts, total = [], 0
-for row in seq:
-    starts.append(total/5)
-    total += row['personDays']
-chart(s, [f"{r['title']} · {r['personDays']} j-h" for r in seq],
-      [('Début', starts), ('Durée', [r['personDays']/5 for r in seq])], .6, 2.6, 10.5, 4.75, 18,
-      stacked=True, fmt='0" s"', colors=[None, GREEN], labels=False)
+chart(s, [r['title'] for r in seq],
+      [('Charge estimée', [r['personDays'] for r in seq])], .6, 2.6, 10.5, 4.75, 14,
+      fmt='0" j-h"', colors=[GREEN])
 rect(s, 11.55, 2.7, 3.8, 4.65, PALE, True)
-stat(s, '82 j-h', 'charge du MVP', 11.85, 3.08, 3.15)
-txt(s, '16,4 semaines', 11.85, 5.27, 3.1, .5, 22, True)
-txt(s, 'à 5 j-h / semaine\nHypothèse séquentielle', 11.85, 5.96, 3.1, .85, 17, False, MUTED)
-callout(s, 'Le lot B3 est un zoom de pilotage, pas le planning de tout le développement.')
+stat(s, '1 an', 'durée réelle du projet', 11.85, 3.08, 3.15)
+txt(s, '82 j-h estimés', 11.85, 5.27, 3.1, .5, 22, True)
+txt(s, 'Charge estimée du MVP.\nRéférence de cadrage B1.', 11.85, 5.96, 3.1, .85, 17, False, MUTED)
+callout(s, 'La suite : un scénario fictif de préparation sur 15 jours, à partir de Spity déjà développé.')
 
 # 05 — Flow and ceremonies.
-s = base(5, 'Un flux visible, des rendez-vous utiles', '02 / Organiser le travail', 'Kanban dans Linear, complété par des rituels inspirés de Scrum.')
+s = base(5, 'Un flux visible, des rendez-vous utiles', '02 / Organiser le travail', 'Linear : relevé réel. Kanban et rituels Scrum : scénario fictif de 15 jours.')
 chart(s, ['Terminé', 'En cours', 'À faire', 'Backlog'], [('Tickets', [12, 1, 4, 7])], .6, 2.75, 7.0, 3.7, 14)
 pill(s, '12 / 24 TERMINÉS', 1.1, 6.8, 2.6)
 txt(s, 'Relevé du 14/09 · sans pondération', 1.1, 7.25, 6.2, .35, 15, False, MUTED)
@@ -289,7 +285,7 @@ for i, (name, when, detail) in enumerate([
 callout(s, '2 tâches en réalisation au maximum. Une réunion produit une action retrouvable.')
 
 # 06 — Relative lot planning.
-s = base(6, 'Quinze jours pour préparer la démonstration', '02 / Organiser le travail', 'Étude, Mesure, conception, réalisation, recette et restitution : un résultat par phase.')
+s = base(6, 'Scénario fictif : 15 jours de préparation', '02 / Organiser le travail', 'Développement réel : 1 an. J1 à J15 désignent uniquement les jours ouvrés de cet exercice.')
 chart(s, ['Étude', 'Mesure', 'Conception', 'Réalisation', 'Recette', 'Restitution'],
       [('Début', [1,1,2,3,10,14]), ('Durée', [1,2,2,9,4,1])], .65, 2.65, 10.7, 4.5, 15,
       minimum=1, stacked=True, fmt='"J"0', colors=[None, GREEN], labels=False)
@@ -297,7 +293,7 @@ for i,(day,label) in enumerate([('J3','Périmètre et critères'),('J10','Écart
     y=2.88+i*1.06
     pill(s,day,11.85,y,1.0)
     txt(s,label,11.85,y+.44,3.4,.42,18,True)
-callout(s, 'Les phases se chevauchent ; la recette dépend de la stabilisation des événements.')
+callout(s, 'Sur le logiciel existant : préciser les critères, stabiliser les parcours, tester et démontrer.')
 
 # 07 — Team allocation.
 s = base(7, 'Des missions claires, des moyens adaptés', '02 / Organiser le travail', 'Équipe et capacités du scénario. QA signifie assurance qualité.')

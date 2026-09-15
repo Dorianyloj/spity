@@ -197,6 +197,8 @@ align_scrum(slides)
 
 from presentation_revision import align as align_revision
 align_revision(slides)
+from timeline_context import align as align_timeline
+align_timeline(slides)
 
 assert len(slides)==26
 assert sum(s['minutes'] for s in slides)==30

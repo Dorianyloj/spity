@@ -74,3 +74,9 @@ Les objectifs d'acquisition, de rétention, de NPS et de note d'application du B
 Le diaporama conserve les trente minutes, ses graphiques modifiables, les grandes captures et les trois annexes. Le commanditaire apparaît dans le contexte, un planning global des neuf lots du diaporama B1 précède le zoom sur les quinze jours du lot, le budget du lot cite la référence globale et la matrice de preuves et cette revue distinguent juillet, août et septembre. Le guide oral, le dossier et les comptes rendus simulés reprennent ces précisions.
 
 La palette verte, les photos d'escalade et les parcours grimpeur/club prolongent l'identité des autres livrables. Les tableaux complets restent dans les annexes. Le support visuel du Bloc 3 conserve sa propre composition pour rester lisible à l'oral.
+
+## Clarification du candidat : un an de développement réel
+
+Le 15 septembre 2026, Dorian confirme avoir développé Spity sur un an. Aucune date exacte ni ventilation mensuelle n’est déduite de cette déclaration. Les 82 j-h du Bloc 1 restent une estimation de charge ; les 16,4 semaines des anciennes projections restent un calcul théorique à pleine capacité, pas la durée réelle.
+
+La v16 affiche explicitement cette durée d’un an en slide 4. Le graphique montre désormais les charges estimées des neuf lots, sans axe calendaire. Les slides 5 et 6 introduisent les quinze jours comme un scénario fictif de préparation d’une démonstration sur le logiciel existant. Les notes et guides conservent cette distinction. Le planning théorique d’A01 et les chiffres du classeur sont inchangés ; ils ne prouvent pas l’historique du projet.

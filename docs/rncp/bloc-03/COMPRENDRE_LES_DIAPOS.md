@@ -1,6 +1,6 @@
 # Comprendre les diapositives du Bloc 3 quand on est développeur
 
-Ce guide explique le [diaporama v15](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v15.pptx) avec des situations de développement. Lis-le pour comprendre le raisonnement, puis utilise le [guide oral](GUIDE_ORAL.md) pour travailler la durée. Les phrases courtes ci-dessous sont des points de départ : elles ne remplissent pas à elles seules les trente minutes.
+Ce guide explique le [diaporama v16](../../../output/presentations/spity-bloc-3-30-minutes-visuel-v16.pptx) avec des situations de développement. Lis-le pour comprendre le raisonnement, puis utilise le [guide oral](GUIDE_ORAL.md) pour travailler la durée. Les phrases courtes ci-dessous sont des points de départ : elles ne remplissent pas à elles seules les trente minutes.
 
 Pour les sigles et le vocabulaire, consulte le [lexique simple du Bloc 3](LEXIQUE_SIMPLE.md), qui développe notamment QA, CP, RACI et les termes des plannings et budgets.
 
@@ -12,16 +12,17 @@ Une situation suffit pour comprendre le fil conducteur : **le client demande une
 
 L'application, le code et les preuves datées existent. L'équipe CP/DEV/QA, Camille, les heures, les réunions et les demandes client de ce cas sont fictifs. À l'oral, annonce cette mise en situation. Pour ces passages, « dans le scénario, je prévois… » décrit correctement ce que tu présentes.
 
-## Les deux échelles du support
+## Durée réelle, estimation et scénario fictif
 
 | Ce que tu regardes | Ce que cela signifie |
 | --- | --- |
+| Développement réel | **Un an**, durée confirmée par Dorian. Les dates exactes et le temps passé ne sont pas fournis. |
 | Projet global du Bloc 1 | La vision de lancement de Spity : neuf lots, 82 jours-homme et 44 250 € de budget estimé. |
 | Cas détaillé du Bloc 3 | Un exercice de préparation de démonstration sur quinze jours ouvrés, à partir des fonctions déjà développées. On suit ses heures, ses personnes et ses décisions. |
 
 **Un lot** est un ensemble de travaux. Le support emploie ce mot pour les neuf grandes parties du B1 et pour le cas détaillé B3. Ces deux échelles expliquent la présence de deux plannings et de deux budgets.
 
-**Un jour-homme** représente une journée de travail d'une personne. Les 82 jours-homme sont une quantité de travail. Pour dessiner le planning, le scénario suppose une capacité de cinq jours-homme par semaine : 82 ÷ 5 = 16,4 semaines. Cette projection n'est pas une durée historique mesurée. J10 signifie simplement le dixième jour ouvré du cas B3.
+**Un jour-homme** représente une journée de travail d'une personne. Les 82 jours-homme sont une quantité de travail. La v16 les montre comme des charges estimées par lot, sans les convertir en durée de développement. Le projet réel a duré un an. J10 signifie simplement le dixième jour ouvré du cas B3.
 
 Les 4 465 € du cas B3 ne s'ajoutent pas aux 44 250 € du B1. Le dossier n'établit pas de comptabilité permettant de cumuler ces montants. Le budget global est une référence, le petit cas permet d'expliquer un suivi détaillé.
 
@@ -45,11 +46,11 @@ Tu présentes le problème utilisateur qui justifie le développement. Un grimpe
 
 **Avec tes mots :** « Ces besoins me servent à choisir les parcours à montrer et à vérifier si ce qu'on livre est utile. »
 
-### 4. Le planning global du Bloc 1
+### 4. Spity : un an de développement
 
-Les neuf barres représentent les grandes parties du projet : cadrage, setup, authentification, profils, feed, répertoire, topos, événements et qualité. Lis leur ordre et leur durée estimée. Les 82 jours-homme viennent du diaporama B1. La capacité de cinq jours-homme par semaine sert à construire le graphique.
+La durée réelle du projet est **un an**. Les neuf barres représentent uniquement les charges estimées au Bloc 1 : leur somme est de 82 jours-homme. Ce n’est pas un relevé de ton temps de travail. Il n’y a pas de dates historiques inventées pour les lots.
 
-**Avec tes mots :** « Je garde le découpage de mon Bloc 1 pour situer les travaux. Ensuite, je vais détailler le suivi d'un cas plus petit. »
+**Avec tes mots :** « J’ai développé Spity sur un an. Pour montrer ma démarche de pilotage, je vais ensuite utiliser un scénario fictif de préparation de démonstration sur quinze jours. »
 
 ### 5. Le suivi : Linear et les rituels Scrum
 
@@ -63,7 +64,7 @@ Le support décrit des réunions inspirées de Scrum, adaptées à un flux Kanba
 
 ### 6. Le lot : phases, mesures et dépendances
 
-Tu zoomes sur les quinze jours du cas. On précise le besoin, on définit comment vérifier le résultat, on prépare la solution, on réalise, on teste, puis on présente. « Mesure » signifie ici rendre l'attente vérifiable : par exemple, une seule inscription acceptée quand il reste une place.
+Tu passes à un **exercice fictif de quinze jours ouvrés**, appliqué au logiciel déjà développé pendant un an. On précise le besoin, on définit comment vérifier le résultat, on prépare la solution, on réalise, on teste, puis on présente. « Mesure » signifie ici rendre l'attente vérifiable : par exemple, une seule inscription acceptée quand il reste une place.
 
 Une **dépendance** signifie qu'un travail attend un autre travail. La validation finale des événements attend les corrections nécessaires. Les tests peuvent commencer avant, sur ce qui fonctionne déjà.
 

@@ -29,7 +29,7 @@ Les photos illustrent la pratique de l'escalade. Elles n'attestent ni l'identit�
 
 ## Graphiques modifiables
 
-Les sept graphiques des diapositives 4, 5, 6, 8, 9, 10 et 13 sont des objets PowerPoint natifs. Chacun possède un petit classeur intégré. La diapositive 5 reprend le relevé Linear du 14 septembre, conservé dans donnees/linear-2026-09-14.json ; la diapositive 4 reprend les charges globales du Bloc 1 avec une projection explicitement hypothétique ; les autres présentent les hypothèses du lot. Ces instantanés ne sont pas liés automatiquement au classeur de pilotage et ne remplacent pas ses formules. La diapositive 8 explique les écarts par tâche ; l'annexe 25 compare les scénarios de budget et de capacité.
+Les sept graphiques des diapositives 4, 5, 6, 8, 9, 10 et 13 sont des objets PowerPoint natifs. Chacun possède un petit classeur intégré. La diapositive 5 reprend le relevé Linear du 14 septembre, conservé dans donnees/linear-2026-09-14.json ; la diapositive 4 reprend les charges estimées du Bloc 1 sans projection calendaire dans la v16 ; les autres présentent les hypothèses du lot. Ces instantanés ne sont pas liés automatiquement au classeur de pilotage et ne remplacent pas ses formules. La diapositive 8 explique les écarts par tâche ; l'annexe 25 compare les scénarios de budget et de capacité.
 
 Les valeurs viennent du [cas de pilotage](../donnees/pilotage.json), de ses [indicateurs calculés](../donnees/indicateurs.json) et des annexes A01, A04 et A06. Le planning est exprimé en jours relatifs J1 à J15. La matrice de risques et les tableaux des annexes restent également modifiables dans PowerPoint.
 
@@ -44,3 +44,5 @@ La v13 ajoute un sommaire en slide 2. Les contenus des anciennes slides 2 à 25 
 ## Refonte visuelle v15
 
 Le générateur `tools/bloc3/build_deck_presentable.py` utilise python-pptx. Palette vert profond, ivoire et citron ; textes Arial, graphiques et tableaux natifs. Les deux photos de marque et les captures datées sont réutilisées ; aucune nouvelle image n’est générée. L’illustration d’équipe des anciennes versions n’apparaît plus sur la slide 14. Le PDF est exporté avec LibreOffice ; le rendu natif dans Microsoft PowerPoint reste à contrôler sur le poste de soutenance.
+
+La v16 clarifie les diapositives 4 à 6 : durée réelle d’un an confirmée par Dorian, charge B1 estimée de 82 j-h, scénario fictif B3 de quinze jours. Le graphique 4 est désormais un histogramme de charges et ne représente plus un calendrier. Les notes 3, 4 et 6 sont actualisées.

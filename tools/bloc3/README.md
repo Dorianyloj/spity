@@ -30,7 +30,7 @@ Le dossier se modifie dans docs/rncp/bloc-03/. Les valeurs du cas sont centralis
 | scrum_context.py | Rituels inspirés de Scrum, notes des slides 4/5/13/17 et distinction review/rétrospective. |
 | competence_annexes.py | Compléments générés dans A01/A03 et la matrice, lus dans consolidation.json. |
 | presentation_revision.py | Sommaire, notes ajustées et numérotation courante ; contentNumber conserve les identifiants des mises en page. |
-| build_deck_presentable.py | Version courante v15 : python-pptx, 26 slides, notes natives, 7 graphiques et PDF exporté avec LibreOffice. |
+| build_deck_presentable.py | Version courante v16 : python-pptx, 26 slides, notes natives, 7 graphiques et PDF exporté avec LibreOffice. |
 | build_deck_visual.mjs | Archive v14 : 30 minutes, notes natives, 7 graphiques et leurs classeurs intégrés, tableaux modifiables, illustration et captures. Contrôles de structure et de géométrie, import et rendus. |
 | build_deck_30min.mjs | Générateur de la version précédente, conservée en archive. |
 | build_guide.py | Notes et timing à partir de donnees/support-oral.json. |
@@ -39,7 +39,7 @@ Le dossier se modifie dans docs/rncp/bloc-03/. Les valeurs du cas sont centralis
 
 Les générateurs XLSX/PPTX utilisent le module @oai/artifact-tool du runtime documentaire Codex, résolu depuis tmp/bloc3/build/node_modules. Il ne s'agit pas d'une dépendance de l'application. Le PPTX utilise aussi les validateurs du skill Presentations ; les chemins locaux peuvent être remplacés par BLOC3_PRESENTATION_SKILL et BLOC3_PYTHON. Le PDF utilise Python, ReportLab et les polices Arial de Windows. La validation utilise pypdf et la bibliothèque standard Python.
 
-Pour la v15, suivre la procédure ci-dessous à partir des données relues de `support-oral.json`. Les générateurs antérieurs `build_deck_visual.mjs`, `build_deck_30min.mjs` et `build_deck.mjs` restent des archives. Ils ne doivent pas remplacer le support courant. Le classeur, le dossier PDF et les preuves datées conservent leurs propres procédures. Une évolution du scénario demande une vérification des valeurs affichées dans le générateur, des notes, du classeur et des assertions de `validate.py`.
+Pour la v16, suivre la procédure ci-dessous à partir des données relues de `support-oral.json`. Les générateurs antérieurs `build_deck_visual.mjs`, `build_deck_30min.mjs` et `build_deck.mjs` restent des archives. Ils ne doivent pas remplacer le support courant. Le classeur, le dossier PDF et les preuves datées conservent leurs propres procédures. Une évolution du scénario demande une vérification des valeurs affichées dans le générateur, des notes, du classeur et des assertions de `validate.py`.
 
 Les textes explicatifs contiennent aussi des montants et des hypothèses : une modification de pilotage.json demande leur mise à jour cohérente. Les fichiers de preuves datées ne sont jamais une conséquence automatique de la génération des documents ; ne les actualiser qu'après exécution des contrôles concernés.
 
@@ -57,15 +57,15 @@ Le ZIP est un kit documentaire hors connexion. La démonstration exige le dépô
 
 enrich_pilotage.py conserve la transcription de la session Linear du 14 septembre et la construction initiale des 30 activités. Il ne se connecte pas à Linear et ne constitue pas une actualisation automatique. Une nouvelle observation doit produire une nouvelle source datée. linear_context.py injecte ce relevé et les explications des écarts dans le support. Le classeur comporte cinq feuilles ; Estimations alimente Planning puis Pilotage, et Linear conserve les statuts observés séparément. Les entrées de sensibilité se modifient dans Pilotage.
 
-## Générer et vérifier la présentation v15
+## Générer et vérifier la présentation v16
 
-La v15 contient 23 diapositives présentées en trente minutes et trois annexes. Elle reprend les notes et l’ordre de la v14, avec une nouvelle mise en page. Les titres visibles sont reformulés ; les numéros du guide restent les repères de correspondance. Le générateur est indépendant du runtime documentaire Windows des anciennes versions.
+La v16 contient 23 diapositives présentées en trente minutes et trois annexes. Elle reprend la mise en page de la v15 et clarifie les notes 3, 4 et 6 grâce à timeline_context.py : un an réel, 82 j-h estimés, quinze jours fictifs. Les titres visibles sont reformulés ; les numéros du guide restent les repères de correspondance. Le générateur est indépendant du runtime documentaire Windows des anciennes versions.
 
 ```bash
 python3 -m venv tmp/bloc3/presentation-venv
 tmp/bloc3/presentation-venv/bin/pip install -r tools/bloc3/requirements-presentation.txt
 tmp/bloc3/presentation-venv/bin/python tools/bloc3/build_deck_presentable.py
-libreoffice --headless --convert-to pdf --outdir output/pdf output/presentations/spity-bloc-3-30-minutes-visuel-v15.pptx
+libreoffice --headless --convert-to pdf --outdir output/pdf output/presentations/spity-bloc-3-30-minutes-visuel-v16.pptx
 ```
 
 Sous Windows, utiliser les exécutables du dossier `Scripts` de l’environnement Python. Arial doit être disponible pour un rendu cohérent. Le PowerPoint contient des objets modifiables et les notes ; le PDF est destiné à la consultation et à la projection.
