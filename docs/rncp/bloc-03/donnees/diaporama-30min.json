@@ -83,15 +83,16 @@
       "script": "Je reprends le commanditaire du Bloc 1 : le Collectif Altitude Grimpe, association fictive représentée par Claire Martin. Le cadre reste une zone pilote autour de Lyon et Grenoble. Son besoin est de centraliser des usages aujourd'hui dispersés : trouver un partenaire, consulter les lieux et organiser des sorties.\n\nPour cette soutenance, je retiens le parcours déjà développé dans le Bloc 2. Le grimpeur recherche une personne compatible et rejoint un événement. Le club organise cette sortie et retrouve les participants autorisés. Ce choix relie le besoin initial à un résultat démontrable. La capture montre le répertoire de lieux du produit local. Elle illustre le contexte géographique, sans prétendre que toutes les fonctions de la vision initiale sont validées.",
       "source": "B1 : C1.1.1, p. 2 ; C1.4.1, p. 4-5. B2 : 16_DOSSIER_FINAL_BC02, F01-F10. Capture locale du 15 septembre 2026, données de test.",
       "action": "",
-      "transition": "Je reprends ensuite le planning global défini dans le Bloc 1.",
+      "transition": "Je distingue maintenant la durée réelle du projet et le scénario de pilotage.",
       "demo": false,
-      "contentNumber": 2
+      "contentNumber": 2,
+      "spokenWords": 132
     },
     {
       "number": 4,
-      "title": "Le planning global du Bloc 1",
+      "title": "Un an de développement ; un cas fictif de quinze jours",
       "minutes": 1,
-      "nature": "C.3.1, neuf lots du diaporama Bloc 1",
+      "nature": "Durée réelle déclarée par le candidat ; estimation B1 et scénario fictif B3 distincts",
       "layout": "columns",
       "content": {
         "items": [
@@ -105,12 +106,13 @@
           ]
         ]
       },
-      "script": "Le diaporama du Bloc 1 prévoit quatre-vingt-deux jours-homme pour le MVP. Je reprends ses neuf lots et leurs charges : cadrage, socle technique, authentification, profils, fil social, répertoire, topos, événements et qualité. Leur total correspond à la référence de lancement.\n\nJe représente ici une séquence pédagogique à cinq jours-homme par semaine. Elle demande seize virgule quatre semaines de capacité. Les barres ne reconstituent pas les dates réellement travaillées. Chaque lot doit produire un résultat vérifiable avant sa clôture.\n\nLe suivi détaillé présenté ensuite porte sur un lot de préparation de démonstration, avec les parcours déjà développés au Bloc 2. Ses jours J1 à J15 désignent des jours relatifs de ce cas. Le budget global reste celui du Bloc 1.",
-      "source": "Diaporama B1, p. 21 : 8+6+10+9+12+10+9+8+10=82 j-h. A01 et reference-bloc-01.json. Séquence pédagogique à 5 j-h/semaine, soit 16,4 semaines.",
-      "action": "Lire les neuf lots du Bloc 1, puis distinguer le planning global du suivi détaillé.",
+      "script": "J'ai développé Spity sur un an. C'est la durée réelle du projet, depuis son démarrage jusqu'à la version présentée. Le découpage affiché reprend les neuf lots du Bloc 1.\n\nLes quatre-vingt-deux jours-homme correspondent à une estimation de charge du MVP. Ils ne mesurent pas mon temps réellement passé. Une quantité de travail estimée et une durée calendaire sont deux informations différentes. Je ne transforme donc pas cette estimation en calendrier réel.\n\nPour illustrer le Bloc 3, je présente ensuite un scénario fictif de préparation de démonstration sur quinze jours ouvrés, à partir du logiciel existant. J1 à J15 sont les jours de cet exercice. Les charges, les réunions et le budget associés restent des hypothèses pédagogiques.",
+      "source": "Durée d'un an confirmée par Dorian le 15 septembre 2026. Dates exactes et temps passé non fournis. Diaporama B1 p. 21 : neuf lots, 82 j-h estimés. Cas B3 : quinze jours ouvrés fictifs.",
+      "action": "Montrer un an de développement réel, puis distinguer la charge estimée et les quinze jours fictifs.",
       "transition": "Je choisis une méthode adaptée au suivi de ce travail.",
       "demo": false,
-      "contentNumber": 3
+      "contentNumber": 3,
+      "spokenWords": 126
     },
     {
       "number": 5,
@@ -156,7 +158,7 @@
     },
     {
       "number": 6,
-      "title": "Le lot : phases, mesures et dépendances",
+      "title": "Scénario fictif : quinze jours de préparation",
       "minutes": 1.5,
       "nature": "C.3.1, planning fictif du lot à J10",
       "layout": "table",
@@ -199,12 +201,13 @@
           332
         ]
       },
-      "script": "Ce planning détaille quinze jours ouvrés relatifs. L'étude cadre le besoin. La mesure transforme ce besoin en critères observables, par exemple une seule inscription acceptée sur la dernière place. La conception fixe les responsabilités et les moyens. La réalisation fournit les parcours, la recette mesure leur conformité et la restitution prépare la décision du client.\n\nLe diagramme à barres rend les chevauchements lisibles. Il complète le tableau Kanban et les réunions sans imposer que toutes les activités attendent la fin de la précédente. QA peut préparer et tester les fonctions déjà disponibles. La clôture de la recette dépend toutefois de la stabilisation des événements et des corrections. La démonstration reste prévue à J15, après la recette J14.\n\nJe conserve les dates initiales dans le classeur pour mesurer les dérives. À J10, les événements sont prévus à J12 au lieu de J11 et la recette à J14 au lieu de J13. Chaque glissement vaut un jour. Ce décalage de date est distinct de l'augmentation de charge. A01 conserve les dix tâches et les trente activités estimées sont détaillées dans A09.",
+      "script": "Ce planning est un exercice fictif de préparation de démonstration sur quinze jours ouvrés. Le développement réel de Spity a duré un an. L'étude cadre le besoin. La mesure transforme ce besoin en critères observables, par exemple une seule inscription acceptée sur la dernière place. La conception fixe les responsabilités et les moyens. La réalisation fournit les parcours, la recette mesure leur conformité et la restitution prépare la décision du client.\n\nLe diagramme à barres rend les chevauchements lisibles. Il complète le tableau Kanban et les réunions sans imposer que toutes les activités attendent la fin de la précédente. QA peut préparer et tester les fonctions déjà disponibles. La clôture de la recette dépend toutefois de la stabilisation des événements et des corrections. La démonstration reste prévue à J15, après la recette J14.\n\nJe conserve les dates initiales dans le classeur pour mesurer les dérives. À J10, les événements sont prévus à J12 au lieu de J11 et la recette à J14 au lieu de J13. Chaque glissement vaut un jour. Ce décalage de date est distinct de l'augmentation de charge. A01 conserve les dix tâches et les trente activités estimées sont détaillées dans A09.",
       "source": "A01, A03, A09 et Planning. Étude T01, mesure T02, conception T03, réalisation T04-T06, recette T07/T10, restitution T09. A05 : planning J3, reviews J10/J15 et rétrospective J15.",
       "action": "Lire la phase Mesure, les chevauchements puis les dates initiales et revues.",
       "transition": "La répartition des missions permet de tenir ces engagements.",
       "demo": false,
-      "contentNumber": 5
+      "contentNumber": 5,
+      "spokenWords": 204
     },
     {
       "number": 7,

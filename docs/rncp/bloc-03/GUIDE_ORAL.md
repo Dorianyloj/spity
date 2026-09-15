@@ -1,6 +1,6 @@
 # Guide de répétition — Bloc 3 Spity
 
-Support associé : spity-bloc-3-30-minutes-visuel-v14.pptx. Vingt-trois diapositives principales, sommaire compris, couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
+Support associé : spity-bloc-3-30-minutes-visuel-v16.pptx. Vingt-trois diapositives principales, sommaire compris, couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
 
 ## Compétences à sécuriser avant l'oral
 
@@ -19,9 +19,9 @@ Le texte oral ci-dessous développe chaque diapositive et propose ses transition
 | 1 | Spity | 00:30 | 00:30 |
 | 2 | Sommaire | 00:30 | 01:00 |
 | 3 | Le besoin d’Altitude Grimpe | 01:00 | 02:00 |
-| 4 | Le planning global du Bloc 1 | 01:00 | 03:00 |
+| 4 | Un an de développement ; un cas fictif de quinze jours | 01:00 | 03:00 |
 | 5 | Le suivi : Linear et les rituels Scrum | 01:30 | 04:30 |
-| 6 | Le lot : phases, mesures et dépendances | 01:30 | 06:00 |
+| 6 | Scénario fictif : quinze jours de préparation | 01:30 | 06:00 |
 | 7 | Les missions et les aménagements | 01:00 | 07:00 |
 | 8 | Les causes des 5 heures supplémentaires | 01:30 | 08:30 |
 | 9 | Le budget du lot de démonstration | 01:30 | 10:00 |
@@ -88,31 +88,31 @@ Pour cette soutenance, je retiens le parcours déjà développé dans le Bloc 2.
 
 **Transition**
 
-Je reprends ensuite le planning global défini dans le Bloc 1.
+Je distingue maintenant la durée réelle du projet et le scénario de pilotage.
 
 Source : B1 : C1.1.1, p. 2 ; C1.4.1, p. 4-5. B2 : 16_DOSSIER_FINAL_BC02, F01-F10. Capture locale du 15 septembre 2026, données de test.
 
-### 4. Le planning global du Bloc 1
+### 4. Un an de développement ; un cas fictif de quinze jours
 
-Repère : 02:00 à 03:00. Nature : C.3.1, neuf lots du diaporama Bloc 1.
+Repère : 02:00 à 03:00. Nature : Durée réelle déclarée par le candidat ; estimation B1 et scénario fictif B3 distincts.
 
 **Texte oral proposé**
 
-Le diaporama du Bloc 1 prévoit quatre-vingt-deux jours-homme pour le MVP. Je reprends ses neuf lots et leurs charges : cadrage, socle technique, authentification, profils, fil social, répertoire, topos, événements et qualité. Leur total correspond à la référence de lancement.
+J'ai développé Spity sur un an. C'est la durée réelle du projet, depuis son démarrage jusqu'à la version présentée. Le découpage affiché reprend les neuf lots du Bloc 1.
 
-Je représente ici une séquence pédagogique à cinq jours-homme par semaine. Elle demande seize virgule quatre semaines de capacité. Les barres ne reconstituent pas les dates réellement travaillées. Chaque lot doit produire un résultat vérifiable avant sa clôture.
+Les quatre-vingt-deux jours-homme correspondent à une estimation de charge du MVP. Ils ne mesurent pas mon temps réellement passé. Une quantité de travail estimée et une durée calendaire sont deux informations différentes. Je ne transforme donc pas cette estimation en calendrier réel.
 
-Le suivi détaillé présenté ensuite porte sur un lot de préparation de démonstration, avec les parcours déjà développés au Bloc 2. Ses jours J1 à J15 désignent des jours relatifs de ce cas. Le budget global reste celui du Bloc 1.
+Pour illustrer le Bloc 3, je présente ensuite un scénario fictif de préparation de démonstration sur quinze jours ouvrés, à partir du logiciel existant. J1 à J15 sont les jours de cet exercice. Les charges, les réunions et le budget associés restent des hypothèses pédagogiques.
 
 **À montrer ou manipuler**
 
-Lire les neuf lots du Bloc 1, puis distinguer le planning global du suivi détaillé.
+Montrer un an de développement réel, puis distinguer la charge estimée et les quinze jours fictifs.
 
 **Transition**
 
 Je choisis une méthode adaptée au suivi de ce travail.
 
-Source : Diaporama B1, p. 21 : 8+6+10+9+12+10+9+8+10=82 j-h. A01 et reference-bloc-01.json. Séquence pédagogique à 5 j-h/semaine, soit 16,4 semaines.
+Source : Durée d'un an confirmée par Dorian le 15 septembre 2026. Dates exactes et temps passé non fournis. Diaporama B1 p. 21 : neuf lots, 82 j-h estimés. Cas B3 : quinze jours ouvrés fictifs.
 
 ### 5. Le suivi : Linear et les rituels Scrum
 
@@ -136,13 +136,13 @@ Le planning montre les phases et les rendez-vous du lot.
 
 Source : A01/A05/A07 ; rituels.json. Linear observé le 14 septembre 2026. Guide Scrum 2020, p. 9-10 : https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-French.pdf
 
-### 6. Le lot : phases, mesures et dépendances
+### 6. Scénario fictif : quinze jours de préparation
 
 Repère : 04:30 à 06:00. Nature : C.3.1, planning fictif du lot à J10.
 
 **Texte oral proposé**
 
-Ce planning détaille quinze jours ouvrés relatifs. L'étude cadre le besoin. La mesure transforme ce besoin en critères observables, par exemple une seule inscription acceptée sur la dernière place. La conception fixe les responsabilités et les moyens. La réalisation fournit les parcours, la recette mesure leur conformité et la restitution prépare la décision du client.
+Ce planning est un exercice fictif de préparation de démonstration sur quinze jours ouvrés. Le développement réel de Spity a duré un an. L'étude cadre le besoin. La mesure transforme ce besoin en critères observables, par exemple une seule inscription acceptée sur la dernière place. La conception fixe les responsabilités et les moyens. La réalisation fournit les parcours, la recette mesure leur conformité et la restitution prépare la décision du client.
 
 Le diagramme à barres rend les chevauchements lisibles. Il complète le tableau Kanban et les réunions sans imposer que toutes les activités attendent la fin de la précédente. QA peut préparer et tester les fonctions déjà disponibles. La clôture de la recette dépend toutefois de la stabilisation des événements et des corrections. La démonstration reste prévue à J15, après la recette J14.
 

@@ -43,7 +43,7 @@
     },
     {
       "kind": "repository-path",
-      "value": "spity/RELEASE_VERIFICATION.md",
+      "value": "spity/docs/operations/RELEASE_VERIFICATION.md",
       "purpose": "Condition de promotion version/révision avant mise en production."
     }
   ],

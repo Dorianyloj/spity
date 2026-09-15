@@ -3,7 +3,7 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { chromium } from '@playwright/test'
 
-const outputDirectory = resolve('../docs/bc02/annexes/github')
+const outputDirectory = resolve('../docs/rncp/bloc-02/annexes/github')
 const captures = [
   {
     file: '01-historique-commits-develop.png',

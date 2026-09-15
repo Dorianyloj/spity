@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import posixpath
 import re
 import subprocess
 import zipfile
@@ -11,9 +12,10 @@ from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / 'docs/rncp/bloc-03'
-PDF = ROOT / 'output/pdf/dossier-bloc-03-spity.pdf'
-PPTX = ROOT / 'output/presentations/spity-bloc-3-30-minutes-visuel-v14.pptx'
-XLSX = ROOT / 'outputs/bloc03-01a09eba/pilotage-spity.xlsx'
+PDF = ROOT / 'output/bloc-03/dossier-bloc-03-spity.pdf'
+PPTX = ROOT / 'output/bloc-03/spity-bloc-3-30-minutes-visuel-v16.pptx'
+DECK_PDF = ROOT / 'output/bloc-03/spity-bloc-3-30-minutes-visuel-v16.pdf'
+XLSX = ROOT / 'output/bloc-03/pilotage-spity.xlsx'
 ZIP = ROOT / 'output/bloc-03/kit-soutenance-spity.zip'
 S = {'s':'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
 
@@ -141,6 +143,11 @@ def main(package):
         assert len(notes)==len(slides)
         for note in notes:
             assert len(''.join(ET.fromstring(z.read(note)).itertext()).strip())>80
+        a={'a':'http://schemas.openxmlformats.org/drawingml/2006/main'}
+        for slide in slides:
+            note=ET.fromstring(z.read(f"ppt/notesSlides/notesSlide{slide['number']}.xml"))
+            native_text='\n'.join(''.join(t.text or '' for t in p.findall('.//a:t',a)) for p in note.findall('.//a:p',a))
+            assert slide['notes'] in native_text, f"Notes différentes : slide {slide['number']}"
         chart_parts=[n for n in z.namelist() if re.search(r'/charts/chart\d+\.xml$',n)]
         chart_workbooks=[n for n in z.namelist() if '/embeddings/' in n and n.endswith('.xlsx')]
         assert len(chart_parts)==7, 'Les sept graphiques doivent rester natifs'
@@ -149,13 +156,22 @@ def main(package):
             visible=' '.join(ET.fromstring(z.read(f'ppt/slides/slide{number}.xml')).itertext())
             assert inclusion['name'] in visible, f'Cas absent de la diapositive {number}'
         assert re.search(r'ficti[fv]', ' '.join(ET.fromstring(z.read('ppt/slides/slide15.xml')).itertext()))
-        for number,terms in {2:['Sommaire','Organiser','Suivre','client','Démontrer'],4:['82','16,4'],9:['44 250'],5:['Kanban','Scrum','Planning','Daily','Review','Rétrospective'],6:['Mesure'],7:['assurance qualité','Ordinateur','Linear','Git'],8:['J11','J12','J13','J14'],14:['Participatif','Persuasif','Directif','Délégatif','Rétro'],16:['Actuel','Cible','Concurrence'],17:['CP','DEV','Camille'],18:['CR02','J12','J14','Review'],19:['80','4/5'],23:['accepté','refusé'],26:['202,50','29,50']}.items():
+        for number,terms in {2:['Sommaire','Organiser','Suivre','client','Démontrer'],4:['82','1 an','15 jours','fictif'],9:['44 250'],5:['Kanban','Scrum','Planning','Daily','Review','Rétrospective'],6:['1 an','15 jours','fictif','Mesure'],7:['assurance qualité','Ordinateur','Linear','Git'],8:['J11','J12','J13','J14'],14:['Participatif','Persuasif','Directif','Délégatif','Rétro'],16:['Actuel','Cible','Concurrence'],17:['CP','DEV','Camille'],18:['CR02','J12','J14','Review'],19:['80','4/5'],23:['accepté','refusé'],26:['202,50','29,50']}.items():
             visible=' '.join(ET.fromstring(z.read(f'ppt/slides/slide{number}.xml')).itertext())
+            relationships=ET.fromstring(z.read(f'ppt/slides/_rels/slide{number}.xml.rels'))
+            for relationship in relationships:
+                if relationship.attrib['Type'].endswith('/chart'):
+                    target=posixpath.normpath(posixpath.join('ppt/slides',relationship.attrib['Target']))
+                    visible+=' '+' '.join(ET.fromstring(z.read(target)).itertext())
             assert all(term.casefold() in visible.casefold() for term in terms), f'Élément attendu absent de la slide {number}'
     reader=PdfReader(PDF)
     assert all(len(page.extract_text().strip())>90 for page in reader.pages)
+    deck_reader=PdfReader(DECK_PDF)
+    assert len(deck_reader.pages)==26
+    assert all(len(page.extract_text().strip())>90 for page in deck_reader.pages)
     visual=read(DOCS/'preuves/controle-visuel.json')
     assert visual['presentation']['file']==PPTX.relative_to(ROOT).as_posix() and visual['presentation']['sha256']==digest(PPTX)
+    assert visual['presentation']['pdfSHA256']==digest(DECK_PDF)
     assert visual['dossier']['pages']==len(reader.pages) and visual['dossier']['sha256']==digest(PDF)
     evidence=read(DOCS/'preuves/verification.json')
     current_tree=subprocess.check_output(['git','rev-parse','HEAD:spity'],cwd=ROOT,text=True).strip()
@@ -175,14 +191,14 @@ def main(package):
     report['referenceBloc1']={'source':b1['source'],'personDays':b1['personDays'],'dailyRateEUR':b1['dailyRateEUR'],'totalEUR':b1['totalEUR'],'planningLots':len(b1['lots'])}
     (DOCS/'preuves/controle-kit.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
     if package:
-        included=sorted([p for p in DOCS.rglob('*') if p.is_file() and p.name!='MANIFEST.sha256']+[p for p in (ROOT/'tools/bloc3').glob('*') if p.is_file()]+[PDF,PPTX,XLSX,ROOT/b1['source']])
+        included=sorted([p for p in DOCS.rglob('*') if p.is_file() and p.name!='MANIFEST.sha256']+[p for p in (ROOT/'tools/bloc3').glob('*') if p.is_file()]+[PDF,PPTX,DECK_PDF,XLSX,ROOT/b1['source']])
         manifest=''.join(f'{digest(p)}  {p.relative_to(ROOT).as_posix()}\n' for p in included)
         (DOCS/'preuves/MANIFEST.sha256').write_text(manifest,encoding='utf-8',newline='\n')
         included.append(DOCS/'preuves/MANIFEST.sha256')
         ZIP.parent.mkdir(parents=True,exist_ok=True)
         with zipfile.ZipFile(ZIP,'w',zipfile.ZIP_DEFLATED) as z:
             for p in included: z.write(p,p.relative_to(ROOT).as_posix())
-            z.writestr('LIRE_EN_PREMIER.txt', 'KIT BLOC 3 SPITY\n\nDossier : output/pdf/dossier-bloc-03-spity.pdf\nSlides : output/presentations/spity-bloc-3-30-minutes-visuel-v14.pptx\nClasseur : outputs/bloc03-01a09eba/pilotage-spity.xlsx\nGuide et checklist : docs/rncp/bloc-03/\nContrôle détaillé : docs/rncp/bloc-03/CONTROLE_COMPLETUDE.md\n\nLe diaporama comprend 23 slides pour 30 minutes, dont 6 de démonstration, et 3 annexes. Le guide contient le texte oral et les transitions. La durée effective se règle après une répétition chronométrée. Les situations de management sont fictives et identifiées. Les données personnelles et dates du campus restent à confirmer. Aucun dépôt externe effectué. La démonstration nécessite le dépôt Spity complet ; les fichiers techniques seuls ne contiennent pas toute l’application.\n\nLe règlement spécial identifie C.3.1, C3.2.1 et C3.4.2 comme éliminatoires. Les tests de la révision 9d166c0 restent datés : consulter VERIFICATION.md et le contrôle du kit pour la correspondance de la version présentée. La réussite du contrôle documentaire ne vaut pas nouvelle recette du logiciel.\n')
+            z.writestr('LIRE_EN_PREMIER.txt', 'KIT BLOC 3 SPITY\n\nDossier : output/bloc-03/dossier-bloc-03-spity.pdf\nSlides : output/bloc-03/spity-bloc-3-30-minutes-visuel-v16.pptx\nClasseur : output/bloc-03/pilotage-spity.xlsx\nGuide et checklist : docs/rncp/bloc-03/\nContrôle détaillé : docs/rncp/bloc-03/CONTROLE_COMPLETUDE.md\n\nLe diaporama comprend 23 slides pour 30 minutes, dont 6 de démonstration, et 3 annexes. Le guide contient le texte oral et les transitions. La durée effective se règle après une répétition chronométrée. Les situations de management sont fictives et identifiées. Les données personnelles et dates du campus restent à confirmer. Aucun dépôt externe effectué. La démonstration nécessite le dépôt Spity complet ; les fichiers techniques seuls ne contiennent pas toute l’application.\n\nLe règlement spécial identifie C.3.1, C3.2.1 et C3.4.2 comme éliminatoires. Les tests de la révision 9d166c0 restent datés : consulter VERIFICATION.md et le contrôle du kit pour la correspondance de la version présentée. La réussite du contrôle documentaire ne vaut pas nouvelle recette du logiciel.\n')
         with zipfile.ZipFile(ZIP) as z: assert z.testzip() is None
         report['zip']=str(ZIP.relative_to(ROOT))
         report['zipSHA256']=digest(ZIP)

@@ -7,7 +7,7 @@ import { ownerFixture } from '../../../tests/fixtures/profile'
 jest.mock('next/navigation', () => ({ useRouter: () => ({ push: jest.fn(), refresh: jest.fn() }) }))
 jest.mock('next/link', () => {
   const React = jest.requireActual('react')
-  return { __esModule: true, default: React.forwardRef(function MockLink({ href, onNavigate, ...props }: { href: string; onNavigate?: () => void }, ref: React.Ref<HTMLAnchorElement>) {
+  return { __esModule: true, useLinkStatus: () => ({ pending: false }), default: React.forwardRef(function MockLink({ href, onNavigate, ...props }: { href: string; onNavigate?: () => void }, ref: React.Ref<HTMLAnchorElement>) {
     return <a {...props} href={href} ref={ref} onClick={(event) => { event.preventDefault(); if (!event.metaKey && !event.ctrlKey) onNavigate?.() }} />
   }) }
 })

@@ -106,11 +106,31 @@ describe('MatchingDirectory', () => {
 
   it('displays the API error and preserves existing request states', async () => {
     fetchMock.mockResolvedValueOnce(jsonResponse({ error: 'Demande déjà existante' }, 409))
+      .mockResolvedValueOnce(jsonResponse({ climbers: [lina, sam], statuses: { [lina.userId]: 'pending', [sam.userId]: 'accepted' } }))
     render(<MatchingDirectory climbers={[lina, sam]} initialStatuses={{ [sam.userId]: 'accepted' }} />)
 
     expect(screen.getByRole('button', { name: 'Partenaire confirmé' })).toBeDisabled()
     fireEvent.click(screen.getByRole('button', { name: 'Envoyer une demande' }))
 
     expect(await screen.findByText('Demande déjà existante')).toBeInTheDocument()
+    expect(await screen.findByRole('button', { name: 'Demande en attente' })).toBeDisabled()
+  })
+
+  it('updates a request accepted by the other account while keeping the filters', async () => {
+    fetchMock.mockResolvedValueOnce(jsonResponse({ climbers: [lina, sam], statuses: { [lina.userId]: 'accepted' } }))
+    render(<MatchingDirectory climbers={[lina, sam]} initialStatuses={{ [lina.userId]: 'pending' }} />)
+    fireEvent.change(screen.getByLabelText('Nom ou localisation'), { target: { value: 'Lyon' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Actualiser les profils' }))
+    expect(await screen.findByRole('button', { name: 'Partenaire confirmé' })).toBeDisabled()
+    expect(screen.getByLabelText('Nom ou localisation')).toHaveValue('Lyon')
+    expect(screen.queryByText('Sam Dupont')).not.toBeInTheDocument()
+  })
+
+  it('reports network failure without leaving the send button busy', async () => {
+    fetchMock.mockRejectedValueOnce(new TypeError('offline'))
+    render(<MatchingDirectory climbers={[lina]} initialStatuses={{}} />)
+    fireEvent.click(screen.getByRole('button', { name: 'Envoyer une demande' }))
+    expect(await screen.findByRole('alert')).toHaveTextContent('Connexion interrompue')
+    expect(screen.getByRole('button', { name: 'Envoyer une demande' })).toBeEnabled()
   })
 })

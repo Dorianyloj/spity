@@ -69,4 +69,4 @@ Elle est une simulation contrôlée, clairement indiquée. Elle démontre le for
 
 ## 6. Restitution finale
 
-Le dossier détaillé, la revue finale, les preuves structurées et l'export PDF sont cohérents par le manifeste. Pour une consultation hors dépôt, l'export PDF est disponible sous `output/pdf/dossier-bloc-04-spity.pdf`; il doit être régénéré avec `npm run bloc4:pdf` dès qu'un document source évolue.
+Le dossier détaillé, la revue finale, les preuves structurées et l'export PDF sont cohérents par le manifeste. Pour une consultation hors dépôt, l'export PDF est disponible sous `output/bloc-04/dossier-bloc-04-spity.pdf`; il doit être régénéré avec `npm run bloc4:pdf` dès qu'un document source évolue.

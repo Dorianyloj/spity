@@ -1,11 +1,12 @@
 'use client'
 
-import { CalendarDays, CalendarPlus, Check, MapPin, Pencil, TicketCheck, UsersRound, X } from 'lucide-react'
+import { CalendarDays, CalendarPlus, Check, MapPin, Pencil, RefreshCw, TicketCheck, UsersRound, X } from 'lucide-react'
 import { useMemo, useState } from 'react'
-import { z } from 'zod'
 import { AppHero, Badge, Button, Card, CardContent, EmptyState } from '@/components/ui'
+import { useLiveResource } from '@/hooks/use-live-resource'
+import { ApiRequestError, requestJson } from '@/lib/api-client'
 import { demoClimbingAssets } from '@/lib/brand-assets'
-import { eventResponseSchema, type SpityEvent } from '../schemas'
+import { eventListResponseSchema, eventResponseSchema, type SpityEvent } from '../schemas'
 import EventForm from './event-form'
 
 type EventsBoardProps = {
@@ -20,36 +21,36 @@ const typeLabels = {
   initiation: 'Initiation',
 } as const
 
-const parseError = async (response: Response) => {
-  const payload: unknown = await response.json().catch(() => null)
-  const result = z.object({ error: z.string() }).safeParse(payload)
-
-  return result.success ? result.data.error : 'L’opération n’a pas pu être réalisée'
-}
-
 const formatEventDate = (value: string) => new Intl.DateTimeFormat('fr-FR', {
   dateStyle: 'long',
   timeStyle: 'short',
 }).format(new Date(value))
 
 export default function EventsBoard({ initialEvents, role }: EventsBoardProps) {
-  const [events, setEvents] = useState(initialEvents)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [showCreateForm, setShowCreateForm] = useState(false)
   const [pendingId, setPendingId] = useState<string | null>(null)
   const [feedback, setFeedback] = useState<string | null>(null)
+  const { data, update, refresh, isRefreshing, error: refreshError } = useLiveResource({
+    initialData: { events: initialEvents },
+    url: '/api/events',
+    schema: eventListResponseSchema,
+    paused: pendingId !== null || showCreateForm || editingId !== null,
+  })
+  const events = data.events
   const editingEvent = events.find((event) => event.id === editingId)
   const orderedEvents = useMemo(() => [...events].sort((first, second) => (
     new Date(first.startsAt).getTime() - new Date(second.startsAt).getTime()
   )), [events])
 
   const mergeEvent = (freshEvent: SpityEvent) => {
-    setEvents((current) => {
+    update((currentData) => {
+      const current = currentData.events
       const exists = current.some((event) => event.id === freshEvent.id)
 
-      return exists
+      return { events: exists
         ? current.map((event) => event.id === freshEvent.id ? freshEvent : event)
-        : [...current, freshEvent]
+        : [...current, freshEvent] }
     })
     setEditingId(null)
     setShowCreateForm(false)
@@ -57,34 +58,28 @@ export default function EventsBoard({ initialEvents, role }: EventsBoardProps) {
   }
 
   const mutateEvent = async (event: SpityEvent, action: 'register' | 'cancel-registration' | 'cancel-event') => {
+    if (pendingId !== null) return
     setPendingId(event.id)
     setFeedback(null)
     const endpoint = action === 'cancel-event'
       ? `/api/events/${event.id}`
       : `/api/events/${event.id}/registrations`
-    const response = await fetch(endpoint, {
-      method: action === 'register' ? 'POST' : action === 'cancel-registration' ? 'DELETE' : 'PATCH',
-      headers: action === 'cancel-event' ? { 'Content-Type': 'application/json' } : undefined,
-      body: action === 'cancel-event' ? JSON.stringify({ status: 'cancelled' }) : undefined,
-    })
-
-    if (!response.ok) {
-      setFeedback(await parseError(response))
-      setPendingId(null)
-      return
-    }
-
-    const payload: unknown = await response.json()
-    const parsedPayload = eventResponseSchema.safeParse(payload)
-
-    if (parsedPayload.success) {
-      setEvents((current) => current.map((item) => item.id === event.id ? parsedPayload.data.event : item))
+    try {
+      const result = await requestJson(endpoint, eventResponseSchema, {
+        method: action === 'register' ? 'POST' : action === 'cancel-registration' ? 'DELETE' : 'PATCH',
+        headers: action === 'cancel-event' ? { 'Content-Type': 'application/json' } : undefined,
+        body: action === 'cancel-event' ? JSON.stringify({ status: 'cancelled' }) : undefined,
+      })
+      update((current) => ({ events: current.events.map((item) => item.id === event.id ? result.event : item) }))
       setFeedback(action === 'register'
         ? 'Inscription confirmée.'
         : action === 'cancel-registration' ? 'Inscription annulée.' : 'Événement annulé.')
+    } catch (error) {
+      setFeedback(error instanceof Error ? error.message : 'L’opération n’a pas pu être réalisée.')
+      if (error instanceof ApiRequestError && error.status === 409) await refresh()
+    } finally {
+      setPendingId(null)
     }
-
-    setPendingId(null)
   }
 
   return (
@@ -101,6 +96,10 @@ export default function EventsBoard({ initialEvents, role }: EventsBoardProps) {
         ]}
         title="Événements Spity"
       >
+        <Button onClick={() => void refresh()} isLoading={isRefreshing} disabled={pendingId !== null || showCreateForm || editingId !== null} variant="secondary">
+          <RefreshCw size={18} aria-hidden="true" />
+          Actualiser les événements
+        </Button>
         {role === 'club' && (
           <Button onClick={() => { setEditingId(null); setShowCreateForm((current) => !current) }} variant="primary">
             <CalendarPlus size={18} aria-hidden="true" />
@@ -117,6 +116,7 @@ export default function EventsBoard({ initialEvents, role }: EventsBoardProps) {
       )}
 
       <p className="min-h-6 text-sm font-semibold text-foreground" aria-live="polite">{feedback}</p>
+      {refreshError && <p role="alert" className="text-sm text-destructive">{refreshError}</p>}
 
       {orderedEvents.length === 0 ? (
         <EmptyState
@@ -133,6 +133,7 @@ export default function EventsBoard({ initialEvents, role }: EventsBoardProps) {
                   <div>
                     <div className="flex flex-wrap items-center gap-2">
                       <Badge variant="primary">{typeLabels[event.type]}</Badge>
+                      {event.status === 'scheduled' && event.remainingCapacity === 0 && <Badge variant="warning">Complet</Badge>}
                       {event.status === 'cancelled' && <Badge variant="destructive">Annulé</Badge>}
                       {event.isRegistered && <Badge variant="success">Inscrit</Badge>}
                     </div>
@@ -152,9 +153,10 @@ export default function EventsBoard({ initialEvents, role }: EventsBoardProps) {
                 </div>
                 {event.description && <p className="mt-4 border-t border-border pt-4 text-sm text-muted-foreground">{event.description}</p>}
 
-                {event.isOwner && event.participants.length > 0 && (
+                {event.isOwner && (
                   <div className="mt-4 rounded-lg border border-border bg-white/[0.04] p-3">
                     <p className="text-sm font-bold text-foreground">Participants</p>
+                    {event.participants.length === 0 && <p className="mt-2 text-sm text-muted-foreground">Aucun participant pour le moment.</p>}
                     <ul className="mt-2 grid gap-1 text-sm text-muted-foreground sm:grid-cols-2">
                       {event.participants.map((participant) => <li key={participant.userId}>{participant.displayName}</li>)}
                     </ul>
@@ -164,7 +166,7 @@ export default function EventsBoard({ initialEvents, role }: EventsBoardProps) {
                 <div className="mt-5 flex flex-wrap gap-2 border-t border-border pt-4">
                   {role === 'grimpeur' && event.status === 'scheduled' && (
                     <Button
-                      disabled={!event.isRegistered && event.remainingCapacity === 0}
+                      disabled={pendingId !== null || (!event.isRegistered && event.remainingCapacity === 0)}
                       isLoading={pendingId === event.id}
                       onClick={() => void mutateEvent(event, event.isRegistered ? 'cancel-registration' : 'register')}
                       size="sm"
@@ -176,11 +178,12 @@ export default function EventsBoard({ initialEvents, role }: EventsBoardProps) {
                   )}
                   {event.isOwner && event.status === 'scheduled' && (
                     <>
-                      <Button onClick={() => { setShowCreateForm(false); setEditingId(event.id) }} size="sm" variant="secondary">
+                      <Button disabled={pendingId !== null} onClick={() => { setShowCreateForm(false); setEditingId(event.id) }} size="sm" variant="secondary">
                         <Pencil size={17} aria-hidden="true" />
                         Modifier
                       </Button>
                       <Button
+                        disabled={pendingId !== null}
                         isLoading={pendingId === event.id}
                         onClick={() => void mutateEvent(event, 'cancel-event')}
                         size="sm"

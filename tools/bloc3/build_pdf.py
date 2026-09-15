@@ -1,5 +1,6 @@
 """Create a readable A4 dossier from the Bloc 3 Markdown sources."""
 from pathlib import Path
+import os
 import re
 from xml.sax.saxutils import escape
 from reportlab.lib import colors
@@ -13,8 +14,8 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Tabl
 
 ROOT=Path(__file__).resolve().parents[2]
 DOCS=ROOT/'docs/rncp/bloc-03'
-OUTPUT=ROOT/'output/pdf/dossier-bloc-03-spity.pdf'
-FONTDIR=Path('C:/Windows/Fonts')
+OUTPUT=ROOT/'output/bloc-03/dossier-bloc-03-spity.pdf'
+FONTDIR=Path(os.environ.get('BLOC3_FONT_DIR', 'C:/Windows/Fonts'))
 for name,file in [('Arial','arial.ttf'),('Arial-Bold','arialbd.ttf'),('Arial-Italic','ariali.ttf')]:
     pdfmetrics.registerFont(TTFont(name,str(FONTDIR/file)))
 pdfmetrics.registerFontFamily('Arial',normal='Arial',bold='Arial-Bold',italic='Arial-Italic',boldItalic='Arial-Bold')

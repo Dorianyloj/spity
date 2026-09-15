@@ -94,7 +94,7 @@ assert.equal(doc.slides.filter(s=>s.demo).reduce((sum,s)=>sum+s.minutes,0),6);
 await fs.writeFile(path.join(root,'docs/rncp/bloc-03/donnees/support-oral.json'),JSON.stringify(doc.slides,null,2)+'\n');
 const candidate=path.join(tmp,'candidate.pptx');
 await(await PresentationFile.exportPptx(presentation)).save(candidate);
-const finalPath=path.join(root,'output/presentations/spity-bloc-3-30-minutes.pptx');
+const finalPath=path.join(root,'output/bloc-03/archives/spity-bloc-3-30-minutes.pptx');
 await fs.mkdir(path.dirname(finalPath),{recursive:true});
 await finalizePresentation({workspaceDir:root,candidatePath:candidate,finalPath,pythonExecutable:python,integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-bullet-geometry','--validate-heading-fit',...tableOwners.flatMap(n=>['--require-native-table-slide',String(n)])],requiredNativeTableOwnerSlides:tableOwners,fontPolicy:{basis:'design',families:[font]},verifyArtifactToolImport:true,receiptPath:path.join(tmp,'validation.json')});
 const checked=await PresentationFile.importPptx(await FileBlob.load(finalPath));

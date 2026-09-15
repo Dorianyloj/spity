@@ -29,14 +29,20 @@ Les photos illustrent la pratique de l'escalade. Elles n'attestent ni l'identit�
 
 ## Graphiques modifiables
 
-Les sept graphiques des diapositives 4, 5, 6, 8, 9, 10 et 13 sont des objets PowerPoint natifs. Chacun possède un petit classeur intégré. La diapositive 5 reprend le relevé Linear du 14 septembre, conservé dans donnees/linear-2026-09-14.json ; la diapositive 4 reprend les charges globales du Bloc 1 avec une projection explicitement hypothétique ; les autres présentent les hypothèses du lot. Ces instantanés ne sont pas liés automatiquement au classeur de pilotage et ne remplacent pas ses formules. La diapositive 8 explique les écarts par tâche ; l'annexe 25 compare les scénarios de budget et de capacité.
+Les sept graphiques des diapositives 4, 5, 6, 8, 9, 10 et 13 sont des objets PowerPoint natifs. Chacun possède un petit classeur intégré. La diapositive 5 reprend le relevé Linear du 14 septembre, conservé dans donnees/linear-2026-09-14.json ; la diapositive 4 reprend les charges estimées du Bloc 1 sans projection calendaire dans la v16 ; les autres présentent les hypothèses du lot. Ces instantanés ne sont pas liés automatiquement au classeur de pilotage et ne remplacent pas ses formules. La diapositive 8 explique les écarts par tâche ; l'annexe 25 compare les scénarios de budget et de capacité.
 
 Les valeurs viennent du [cas de pilotage](../donnees/pilotage.json), de ses [indicateurs calculés](../donnees/indicateurs.json) et des annexes A01, A04 et A06. Le planning est exprimé en jours relatifs J1 à J15. La matrice de risques et les tableaux des annexes restent également modifiables dans PowerPoint.
 
-Les rôles, charges, coûts et niveaux de compétences du scénario sont fictifs. Les notes et les mentions dans le contenu conservent cette distinction. Depuis la v14, les pieds de page affichent uniquement le numéro de diapositive ; les horaires et les codes de compétences restent accessibles dans les notes et le guide oral.
+Les rôles, charges, coûts et niveaux de compétences du scénario sont fictifs. Les notes et les mentions dans le contenu conservent cette distinction. La v15 affiche le nom du candidat, le bloc et le numéro en pied de page ; les horaires et les codes de compétences restent accessibles dans les notes et le guide oral.
 
-Les tableaux natifs des slides 16 et 17 montrent la grille détaillée et les formations. Le complément donnees/consolidation.json documente la projection globale, le cas Paris/Montréal, la session pilote prévue et la variante RH indépendante de l’annexe 26. La version v11 ajoute les réunions inspirées de Scrum sur la slide 4, la rétrospective sur la slide 13 et la review sur la slide 17 ; donnees/rituels.json et A05/A07 décrivent le scénario correspondant.
+La slide 16 conserve un tableau natif pour la grille détaillée ; la slide 17 présente les formations dans trois encadrés modifiables. Le complément donnees/consolidation.json documente la projection globale, le cas Paris/Montréal, la session pilote prévue et la variante RH indépendante de l’annexe 26. La version v11 ajoute les réunions inspirées de Scrum sur la slide 4, la rétrospective sur la slide 13 et la review sur la slide 17 ; donnees/rituels.json et A05/A07 décrivent le scénario correspondant.
 
 La version v12 aligne la slide 3 sur les neuf lots et 82 j-h du diaporama Bloc 1 (p. 21), avec une séquence pédagogique de 16,4 semaines à 5 j-h/semaine. La slide 8 reprend son budget global de 44 250 EUR (p. 22). Les données et l'empreinte de la référence sont dans donnees/reference-bloc-01.json ; les coûts du lot B3 gardent leur périmètre et ne s'ajoutent pas au budget global.
 
 La v13 ajoute un sommaire en slide 2. Les contenus des anciennes slides 2 à 25 sont désormais aux positions 3 à 26. Le support conserve trente minutes en ramenant le cas technique à une minute trente. La slide 7 explicite QA et les moyens matériels et logiciels.
+
+## Refonte visuelle v15
+
+Le générateur `tools/bloc3/build_deck_presentable.py` utilise python-pptx. Palette vert profond, ivoire et citron ; textes Arial, graphiques et tableaux natifs. Les deux photos de marque et les captures datées sont réutilisées ; aucune nouvelle image n’est générée. L’illustration d’équipe des anciennes versions n’apparaît plus sur la slide 14. Le PDF est exporté avec LibreOffice ; le rendu natif dans Microsoft PowerPoint reste à contrôler sur le poste de soutenance.
+
+La v16 clarifie les diapositives 4 à 6 : durée réelle d’un an confirmée par Dorian, charge B1 estimée de 82 j-h, scénario fictif B3 de quinze jours. Le graphique 4 est désormais un histogramme de charges et ne représente plus un calendrier. Les notes 3, 4 et 6 sont actualisées.

@@ -10,25 +10,25 @@ Ce répertoire est le chantier Bloc 4 de Spity selon le référentiel Ynov 2024,
 - [`REVUE_FINALE_BLOC_04.md`](REVUE_FINALE_BLOC_04.md) : grille jury liant chaque attendu, mécanisme, commande et preuve ;
 - [`preuves/`](preuves) : preuves figées, fiches d'anomalie, recommandations, journal et collaboration support contrôlée ;
 - [`preuves/captures/`](preuves/captures/) : parcours applicatifs, état Git, CI/CD et audit des compétences, avec manifestes de capture reproductibles ;
-- [`../../../output/pdf/dossier-bloc-04-spity.pdf`](../../../output/pdf/dossier-bloc-04-spity.pdf) : export de travail vérifié visuellement, à régénérer après chaque compétence ;
+- [`../../../output/bloc-04/dossier-bloc-04-spity.pdf`](../../../output/bloc-04/dossier-bloc-04-spity.pdf) : export de travail vérifié visuellement, à régénérer après chaque compétence ;
 - [`../referentiel/2024-referentiel-expert-developpement-logiciel-ynov.pdf`](../referentiel/2024-referentiel-expert-developpement-logiciel-ynov.pdf) : source officielle.
 
 ## Sources opérationnelles
 
-- [`../../../spity/INCIDENT_MANAGEMENT.md`](../../../spity/INCIDENT_MANAGEMENT.md) : cycle de gestion des anomalies, rôles et portes qualité ;
+- [`../../../spity/docs/operations/INCIDENT_MANAGEMENT.md`](../../../spity/docs/operations/INCIDENT_MANAGEMENT.md) : cycle de gestion des anomalies, rôles et portes qualité ;
 
-- [`../../../spity/RELEASE_VERIFICATION.md`](../../../spity/RELEASE_VERIFICATION.md) : vérification version/révision avant promotion d'un candidat ;
+- [`../../../spity/docs/operations/RELEASE_VERIFICATION.md`](../../../spity/docs/operations/RELEASE_VERIFICATION.md) : vérification version/révision avant promotion d'un candidat ;
 
-- [`../../../spity/RELEASE_JOURNAL.md`](../../../spity/RELEASE_JOURNAL.md) : registre des versions, correctifs documentés et preuve de déploiement ;
+- [`../../../spity/docs/operations/RELEASE_JOURNAL.md`](../../../spity/docs/operations/RELEASE_JOURNAL.md) : registre des versions, correctifs documentés et preuve de déploiement ;
 
-- [`../../../spity/SUPPORT.md`](../../../spity/SUPPORT.md) : processus, registre de transmissions support/mainteneur et confidentialité ;
+- [`../../../spity/docs/operations/SUPPORT.md`](../../../spity/docs/operations/SUPPORT.md) : processus, registre de transmissions support/mainteneur et confidentialité ;
 
-- [`../../../spity/IMPROVEMENT_MANAGEMENT.md`](../../../spity/IMPROVEMENT_MANAGEMENT.md) : registre d'améliorations, priorisation et revue mensuelle ;
+- [`../../../spity/docs/operations/IMPROVEMENT_MANAGEMENT.md`](../../../spity/docs/operations/IMPROVEMENT_MANAGEMENT.md) : registre d'améliorations, priorisation et revue mensuelle ;
 
-- [`../../../spity/MAINTENANCE.md`](../../../spity/MAINTENANCE.md) ;
-- [`../../../spity/OBSERVABILITY.md`](../../../spity/OBSERVABILITY.md) ;
-- [`../../../spity/SUPPORT.md`](../../../spity/SUPPORT.md) ;
-- [`../../../spity/DEPLOYMENT.md`](../../../spity/DEPLOYMENT.md) ;
+- [`../../../spity/docs/operations/MAINTENANCE.md`](../../../spity/docs/operations/MAINTENANCE.md) ;
+- [`../../../spity/docs/operations/OBSERVABILITY.md`](../../../spity/docs/operations/OBSERVABILITY.md) ;
+- [`../../../spity/docs/operations/SUPPORT.md`](../../../spity/docs/operations/SUPPORT.md) ;
+- [`../../../spity/docs/operations/DEPLOYMENT.md`](../../../spity/docs/operations/DEPLOYMENT.md) ;
 - workflows CI, release et supervision sous `.github/workflows/`.
 
 ## Reproduction

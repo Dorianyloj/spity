@@ -30,7 +30,8 @@ Le dossier se modifie dans docs/rncp/bloc-03/. Les valeurs du cas sont centralis
 | scrum_context.py | Rituels inspirés de Scrum, notes des slides 4/5/13/17 et distinction review/rétrospective. |
 | competence_annexes.py | Compléments générés dans A01/A03 et la matrice, lus dans consolidation.json. |
 | presentation_revision.py | Sommaire, notes ajustées et numérotation courante ; contentNumber conserve les identifiants des mises en page. |
-| build_deck_visual.mjs | Version courante : 30 minutes, notes natives, 7 graphiques et leurs classeurs intégrés, tableaux modifiables, illustration et captures. Contrôles de structure et de géométrie, import et rendus. |
+| build_deck_presentable.py | Version courante v16 : python-pptx, 26 slides, notes natives, 7 graphiques et PDF exporté avec LibreOffice. |
+| build_deck_visual.mjs | Archive v14 : 30 minutes, notes natives, 7 graphiques et leurs classeurs intégrés, tableaux modifiables, illustration et captures. Contrôles de structure et de géométrie, import et rendus. |
 | build_deck_30min.mjs | Générateur de la version précédente, conservée en archive. |
 | build_guide.py | Notes et timing à partir de donnees/support-oral.json. |
 | build_pdf.py | Dossier et annexes en PDF avec ReportLab et Arial. |
@@ -38,7 +39,7 @@ Le dossier se modifie dans docs/rncp/bloc-03/. Les valeurs du cas sont centralis
 
 Les générateurs XLSX/PPTX utilisent le module @oai/artifact-tool du runtime documentaire Codex, résolu depuis tmp/bloc3/build/node_modules. Il ne s'agit pas d'une dépendance de l'application. Le PPTX utilise aussi les validateurs du skill Presentations ; les chemins locaux peuvent être remplacés par BLOC3_PRESENTATION_SKILL et BLOC3_PYTHON. Le PDF utilise Python, ReportLab et les polices Arial de Windows. La validation utilise pypdf et la bibliothèque standard Python.
 
-Ordre de préparation : prepare.py, classeur, write_30min_content.py, build_deck_visual.mjs, build_guide.py, relecture des textes, build_pdf.py, rendu et inspection de chaque page/slide/feuille, puis validate.py --package. Le finaliseur de présentation attend une nouvelle destination et un nouveau reçu pour chaque révision : modifier finalPath et tmp avant une nouvelle finalisation, puis synchroniser le chemin dans validate.py et les index. Les assertions chiffrées du classeur et de validate.py correspondent au scénario livré et doivent être réexaminées si ce scénario change. Les anciens build_deck.mjs et build_deck_30min.mjs correspondent aux versions archivées et ne doivent pas remplacer le support courant.
+Pour la v16, suivre la procédure ci-dessous à partir des données relues de `support-oral.json`. Les générateurs antérieurs `build_deck_visual.mjs`, `build_deck_30min.mjs` et `build_deck.mjs` restent des archives. Ils ne doivent pas remplacer le support courant. Le classeur, le dossier PDF et les preuves datées conservent leurs propres procédures. Une évolution du scénario demande une vérification des valeurs affichées dans le générateur, des notes, du classeur et des assertions de `validate.py`.
 
 Les textes explicatifs contiennent aussi des montants et des hypothèses : une modification de pilotage.json demande leur mise à jour cohérente. Les fichiers de preuves datées ne sont jamais une conséquence automatique de la génération des documents ; ne les actualiser qu'après exécution des contrôles concernés.
 
@@ -50,10 +51,25 @@ python tools/bloc3/build_pdf.py
 python tools/bloc3/validate.py --package
 ```
 
+Sous Linux, `build_pdf.py` accepte `BLOC3_FONT_DIR` pour désigner le dossier contenant `arial.ttf`, `arialbd.ttf` et `ariali.ttf`. Exemple : `BLOC3_FONT_DIR=/usr/share/fonts/truetype/msttcorefonts python3 tools/bloc3/build_pdf.py`.
+
 Le ZIP est un kit documentaire hors connexion. La démonstration exige le dépôt applicatif complet et ses dépendances ; l'archive n'embarque ni base de données, ni node_modules, ni secrets locaux. Le contrôle distingue l'arbre applicatif enregistré et les modifications locales (fichiers suivis ou nouveaux non ignorés). S'ils diffèrent de la preuve datée, VERIFICATION.md doit en expliciter la limite et applicationMatchesDatedEvidence vaut false. La réussite du contrôle documentaire ne vaut pas une nouvelle recette de l'application. Le cadre d'évaluation sourcé et les trois compétences éliminatoires sont conservés dans donnees/cadre-evaluation.json.
 
 ## Données et relevé Linear du 14 septembre
 
 enrich_pilotage.py conserve la transcription de la session Linear du 14 septembre et la construction initiale des 30 activités. Il ne se connecte pas à Linear et ne constitue pas une actualisation automatique. Une nouvelle observation doit produire une nouvelle source datée. linear_context.py injecte ce relevé et les explications des écarts dans le support. Le classeur comporte cinq feuilles ; Estimations alimente Planning puis Pilotage, et Linear conserve les statuts observés séparément. Les entrées de sensibilité se modifient dans Pilotage.
 
-La v14 comprend 26 diapositives, dont 23 présentées en trente minutes et trois annexes. Elle conserve le contenu de la v13 et affiche uniquement les numéros dans les pieds de page. Les modules de contenu antérieurs gardent les identifiants de mise en page 1 à 25. presentation_revision.py ajoute le sommaire et attribue les numéros physiques ; le générateur visuel et les validateurs utilisent ces numéros physiques pour les références du PPTX.
+## Générer et vérifier la présentation v16
+
+La v16 contient 23 diapositives présentées en trente minutes et trois annexes. Elle reprend la mise en page de la v15 et clarifie les notes 3, 4 et 6 grâce à timeline_context.py : un an réel, 82 j-h estimés, quinze jours fictifs. Les titres visibles sont reformulés ; les numéros du guide restent les repères de correspondance. Le générateur est indépendant du runtime documentaire Windows des anciennes versions.
+
+```bash
+python3 -m venv tmp/bloc3/presentation-venv
+tmp/bloc3/presentation-venv/bin/pip install -r tools/bloc3/requirements-presentation.txt
+tmp/bloc3/presentation-venv/bin/python tools/bloc3/build_deck_presentable.py
+libreoffice --headless --convert-to pdf --outdir output/bloc-03 output/bloc-03/spity-bloc-3-30-minutes-visuel-v16.pptx
+```
+
+Sous Windows, utiliser les exécutables du dossier `Scripts` de l’environnement Python. Arial doit être disponible pour un rendu cohérent. Le PowerPoint contient des objets modifiables et les notes ; le PDF est destiné à la consultation et à la projection.
+
+Après génération : rendre et inspecter les 26 diapositives, contrôler les graphiques et les notes, puis actualiser les empreintes et la portée de `preuves/controle-visuel.json` uniquement après ces contrôles. Enfin lancer `python tools/bloc3/validate.py --package` avec cet environnement Python pour vérifier et réunir le PPTX, le PDF, le dossier, le classeur et les guides. Une validation documentaire ne vaut pas recette de l’application ni répétition orale.

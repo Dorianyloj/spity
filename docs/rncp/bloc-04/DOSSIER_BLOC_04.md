@@ -40,13 +40,13 @@ La dérive n'a pas été corrigée par un déploiement non autorisé. Elle est t
 
 | Code compétence | Attendu principal | Réponse Spity | Preuves majeures | Statut |
 | --- | --- | --- | --- | --- |
-| C4.1.1 | Processus précis : fréquence, périmètre, type | Cadence hebdomadaire et mensuelle, politique exécutable, audit planifié, SBOM, revue PR et lot réel qualifié | `spity/MAINTENANCE.md`, C411-01 à C411-03 | Industrialisé et vérifié |
-| C4.1.2 | Supervision adaptée, sondes, critères qualité/performance, disponibilité | Politique versionnée, contrôle 15 min, qualification S1/S2/S3, artefacts 90 jours, incident/rétablissement unique et SLO 30 jours avec garde de couverture | `spity/OBSERVABILITY.md`, C412-01 à C412-04 | Industrialisé et vérifié |
-| C4.2.1 | Collecte structurée, fiche reproductible, analyse et préconisations | Registre versionné, machine à états, confidentialité contrôlée, formulaires, CI dédiée et deux anomalies réelles | `spity/INCIDENT_MANAGEMENT.md`, C421-01 à C421-04 | Industrialisé et vérifié |
-| C4.2.2 | Correctif décrit utilisant intégration/déploiement continu | Contrôle de promotion version/révision, staging CI, candidate de release, rapport conservé, exercice reproductible et staging vérifié | `spity/RELEASE_VERIFICATION.md`, C422-01 à C422-04 | Industrialisé et vérifié |
-| C4.3.1 | Recommandations réalistes, argumentées, coûts/délais/gains | Registre mesurable, indicateurs, coûts/délais, retours qualifiés, revue mensuelle et CI dédiée | `spity/IMPROVEMENT_MANAGEMENT.md`, C431-01 à C431-03 | Industrialisé et vérifié |
-| C4.3.2 | Journal des versions et correctifs déployés | Registre versionné, identité SemVer/SHA, correctifs documentés, preuve de santé et revue mensuelle | `spity/RELEASE_JOURNAL.md`, C432-01 à C432-03 | Industrialisé et vérifié |
-| C4.3.3 | Problème résolu avec contexte, résolution et contributions | Registre contrôlé de transmissions support/mainteneur, critères fonctionnels, expertise technique, confidentialité et validation simulée déclarée | `spity/SUPPORT.md`, C433-01 à C433-03 | Industrialisé et vérifié |
+| C4.1.1 | Processus précis : fréquence, périmètre, type | Cadence hebdomadaire et mensuelle, politique exécutable, audit planifié, SBOM, revue PR et lot réel qualifié | `spity/docs/operations/MAINTENANCE.md`, C411-01 à C411-03 | Industrialisé et vérifié |
+| C4.1.2 | Supervision adaptée, sondes, critères qualité/performance, disponibilité | Politique versionnée, contrôle 15 min, qualification S1/S2/S3, artefacts 90 jours, incident/rétablissement unique et SLO 30 jours avec garde de couverture | `spity/docs/operations/OBSERVABILITY.md`, C412-01 à C412-04 | Industrialisé et vérifié |
+| C4.2.1 | Collecte structurée, fiche reproductible, analyse et préconisations | Registre versionné, machine à états, confidentialité contrôlée, formulaires, CI dédiée et deux anomalies réelles | `spity/docs/operations/INCIDENT_MANAGEMENT.md`, C421-01 à C421-04 | Industrialisé et vérifié |
+| C4.2.2 | Correctif décrit utilisant intégration/déploiement continu | Contrôle de promotion version/révision, staging CI, candidate de release, rapport conservé, exercice reproductible et staging vérifié | `spity/docs/operations/RELEASE_VERIFICATION.md`, C422-01 à C422-04 | Industrialisé et vérifié |
+| C4.3.1 | Recommandations réalistes, argumentées, coûts/délais/gains | Registre mesurable, indicateurs, coûts/délais, retours qualifiés, revue mensuelle et CI dédiée | `spity/docs/operations/IMPROVEMENT_MANAGEMENT.md`, C431-01 à C431-03 | Industrialisé et vérifié |
+| C4.3.2 | Journal des versions et correctifs déployés | Registre versionné, identité SemVer/SHA, correctifs documentés, preuve de santé et revue mensuelle | `spity/docs/operations/RELEASE_JOURNAL.md`, C432-01 à C432-03 | Industrialisé et vérifié |
+| C4.3.3 | Problème résolu avec contexte, résolution et contributions | Registre contrôlé de transmissions support/mainteneur, critères fonctionnels, expertise technique, confidentialité et validation simulée déclarée | `spity/docs/operations/SUPPORT.md`, C433-01 à C433-03 | Industrialisé et vérifié |
 
 ### 2.1 Revue transversale de clôture
 
@@ -433,34 +433,34 @@ Le principal risque ouvert n'est pas masqué : la production est saine mais en r
 
 | Annexe | Critère | Contenu |
 | --- | --- | --- |
-| A1 | C4.1.1 | `spity/MAINTENANCE.md` |
+| A1 | C4.1.1 | `spity/docs/operations/MAINTENANCE.md` |
 | A2 | C4.1.1 | `preuves/B4-C411-01-audit-dependances-2026-08-13.json` |
 | A3 | C4.1.1 | `preuves/B4-C411-02-decision-maintenance-2026-08-13.md` |
 | A4 | C4.1.1 | `preuves/B4-C411-03-controle-dependances-2026-08-13.json` |
-| A5 | C4.1.2 | `spity/OBSERVABILITY.md` |
+| A5 | C4.1.2 | `spity/docs/operations/OBSERVABILITY.md` |
 | A6 | C4.1.2 | `preuves/B4-C412-01-historique-supervision-2026-08-13.json` |
 | A7 | C4.1.2 | `preuves/B4-C412-02-sante-production-2026-08-13.json` |
 | A8 | C4.1.2/C4.2.1 | `preuves/B4-C412-03-exercice-alerte-2026-08-13.json` |
 | A8b | C4.1.2 | `preuves/B4-C412-04-slo-supervision-2026-08-13.json` |
 | A9 | C4.2.1 | `preuves/B4-C421-01-fiche-anomalie-accessibilite-2026-08-13.md` |
 | A10 | C4.2.1 | `preuves/B4-C421-02-anomalie-derive-production-2026-08-13.md` |
-| A10b | C4.2.1 | `spity/INCIDENT_MANAGEMENT.md` et `spity/incidents/` |
+| A10b | C4.2.1 | `spity/docs/operations/INCIDENT_MANAGEMENT.md` et `spity/incidents/` |
 | A10c | C4.2.1 | `preuves/B4-C421-03-registre-anomalies-2026-08-13.json` |
 | A10d | C4.2.1 | `preuves/B4-C421-04-exercice-registre-2026-08-13.json` |
 | A11 | C4.2.2 | `preuves/B4-C422-01-correctif-et-ci-2026-08-13.json` |
 | A12 | C4.2.2 | `preuves/B4-C422-02-traitement-correctif-ci-cd-2026-08-13.md` |
 | A12b | C4.2.2 | `preuves/B4-C422-03-exercice-verification-deploiement-2026-08-13.json` |
-| A12c | C4.2.2 | `spity/RELEASE_VERIFICATION.md` et `scripts/verify-deployment.mjs` |
+| A12c | C4.2.2 | `spity/docs/operations/RELEASE_VERIFICATION.md` et `scripts/verify-deployment.mjs` |
 | A12d | C4.2.2 | `preuves/B4-C422-04-staging-verifie-2026-08-13.json` |
 | A13 | C4.3.1 | `preuves/B4-C431-01-recommandations-2026-08-13.md` |
 | A13b | C4.3.1 | `preuves/B4-C431-02-registre-ameliorations-2026-08-13.json` |
 | A13c | C4.3.1 | `preuves/B4-C431-03-exercice-revue-ameliorations-2026-08-13.json` |
-| A13d | C4.3.1 | `spity/IMPROVEMENT_MANAGEMENT.md` et `spity/improvements/` |
+| A13d | C4.3.1 | `spity/docs/operations/IMPROVEMENT_MANAGEMENT.md` et `spity/improvements/` |
 | A14 | C4.3.2 | `preuves/B4-C432-01-journal-versions-deployees-2026-08-13.md` |
 | A14b | C4.3.2 | `preuves/B4-C432-02-registre-versions-2026-08-13.json` |
 | A14c | C4.3.2 | `preuves/B4-C432-03-exercice-journal-versions-2026-08-13.json` |
-| A14d | C4.3.2 | `spity/RELEASE_JOURNAL.md`, `release-journal/` et `check-release-journal.mjs` |
-| A15 | C4.3.3 | `spity/SUPPORT.md` et `preuves/B4-C433-01-collaboration-support-2026-08-13.md` |
+| A14d | C4.3.2 | `spity/docs/operations/RELEASE_JOURNAL.md`, `release-journal/` et `check-release-journal.mjs` |
+| A15 | C4.3.3 | `spity/docs/operations/SUPPORT.md` et `preuves/B4-C433-01-collaboration-support-2026-08-13.md` |
 | A15b | C4.3.3 | `preuves/B4-C433-02-registre-collaboration-support-2026-08-13.json` |
 | A15c | C4.3.3 | `preuves/B4-C433-03-exercice-collaboration-support-2026-08-13.json` |
 | A15d | C4.3.3 | `spity/support-collaborations/` et `check-support-collaborations.mjs` |

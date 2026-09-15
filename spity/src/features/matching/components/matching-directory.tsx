@@ -1,15 +1,17 @@
 'use client'
 
-import { ArrowUpRight, Clock3, Handshake, MapPin, RotateCcw, Search, Send, UsersRound } from 'lucide-react'
+import { ArrowUpRight, Clock3, Handshake, MapPin, RefreshCw, RotateCcw, Search, Send, UsersRound } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
-import { z } from 'zod'
 import { AppHero, Avatar, Badge, Button, Card, EmptyState, Input } from '@/components/ui'
 import { availabilityLabels, disciplineLabels, environmentLabels, partnerStyleLabels } from '@/features/profile/lib/presentation'
+import { useLiveResource } from '@/hooks/use-live-resource'
+import { ApiRequestError, requestJson } from '@/lib/api-client'
 import { demoClimbingAssets } from '@/lib/brand-assets'
 import { cn } from '@/lib/class-names'
 import { filterClimbers } from '../lib/matching-rules'
 import {
+  matchingResponseSchema,
   partnershipResponseSchema,
   type MatchingFilters,
   type PartnershipRequest,
@@ -57,46 +59,45 @@ const statusLabels: Record<PartnershipRequest['status'], string> = {
   declined: 'Relancer la demande',
 }
 
-const parseApiError = async (response: Response) => {
-  const payload: unknown = await response.json().catch(() => null)
-  const result = z.object({ error: z.string() }).safeParse(payload)
-
-  return result.success ? result.data.error : 'La demande n’a pas pu être envoyée'
-}
-
-export default function MatchingDirectory({ climbers, initialStatuses }: MatchingDirectoryProps) {
+export default function MatchingDirectory({ climbers: initialClimbers, initialStatuses }: MatchingDirectoryProps) {
   const [filters, setFilters] = useState<MatchingFilters>({ query: '' })
-  const [statuses, setStatuses] = useState(initialStatuses)
   const [pendingUserId, setPendingUserId] = useState<string | null>(null)
   const [feedback, setFeedback] = useState<{ userId: string; message: string; error: boolean } | null>(null)
+  const { data, update, refresh, isRefreshing, error: refreshError } = useLiveResource({
+    initialData: { climbers: initialClimbers, statuses: initialStatuses },
+    url: '/api/matching',
+    schema: matchingResponseSchema,
+    paused: pendingUserId !== null,
+  })
+  const { climbers, statuses } = data
   const visibleClimbers = useMemo(() => filterClimbers(climbers, filters), [climbers, filters])
   const hasActiveFilters = Object.values(filters).some(Boolean)
 
   const requestPartnership = async (recipientId: string) => {
+    if (pendingUserId !== null) return
     setPendingUserId(recipientId)
     setFeedback(null)
 
-    const response = await fetch('/api/partnerships', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ recipientId }),
-    })
-
-    if (!response.ok) {
-      setFeedback({ userId: recipientId, message: await parseApiError(response), error: true })
+    try {
+      const result = await requestJson('/api/partnerships', partnershipResponseSchema, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ recipientId }),
+      })
+      update((current) => ({ ...current, statuses: { ...current.statuses, [recipientId]: result.request.status } }))
+      setFeedback({
+        userId: recipientId,
+        message: result.request.status === 'accepted'
+          ? 'Vous êtes déjà partenaires.'
+          : `Demande envoyée à ${result.request.otherParticipant.displayName}.`,
+        error: false,
+      })
+    } catch (error) {
+      setFeedback({ userId: recipientId, message: error instanceof Error ? error.message : 'La demande n’a pas pu être envoyée.', error: true })
+      if (error instanceof ApiRequestError && error.status === 409) await refresh()
+    } finally {
       setPendingUserId(null)
-      return
     }
-
-    const payload: unknown = await response.json()
-    const parsedPayload = partnershipResponseSchema.safeParse(payload)
-
-    if (parsedPayload.success) {
-      setStatuses((current) => ({ ...current, [recipientId]: parsedPayload.data.request.status }))
-      setFeedback({ userId: recipientId, message: `Demande envoyée à ${parsedPayload.data.request.otherParticipant.displayName}.`, error: false })
-    }
-
-    setPendingUserId(null)
   }
 
   return (
@@ -111,11 +112,16 @@ export default function MatchingDirectory({ climbers, initialStatuses }: Matchin
         ]}
         title="Trouver un partenaire"
       >
+        <Button onClick={() => void refresh()} isLoading={isRefreshing} disabled={pendingUserId !== null} variant="secondary">
+          <RefreshCw size={18} aria-hidden="true" />
+          Actualiser les profils
+        </Button>
         <Link className="spity-btn spity-btn--secondary" href="/app/partnerships">
           <Handshake size={18} aria-hidden="true" />
           Suivre mes demandes
         </Link>
       </AppHero>
+      {refreshError && <p role="alert" className="text-sm text-destructive">{refreshError}</p>}
 
       <section className="rounded-lg border border-white/70 bg-card p-4 shadow-sm sm:p-5" aria-label="Filtres de recherche">
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
@@ -214,7 +220,9 @@ export default function MatchingDirectory({ climbers, initialStatuses }: Matchin
           <div className="grid items-stretch gap-4 lg:grid-cols-2">
             {visibleClimbers.map((climber) => {
               const status = statuses[climber.userId]
-              const primaryGrade = Object.values(climber.niveaux)[0]
+              const primaryGrade = filters.discipline
+                ? climber.niveaux[filters.discipline]
+                : Object.values(climber.niveaux)[0]
               const availability = climber.availability.slice(0, 2)
 
               return (
@@ -259,7 +267,7 @@ export default function MatchingDirectory({ climbers, initialStatuses }: Matchin
 
                   <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-5">
                     <Button
-                      disabled={status === 'pending' || status === 'accepted'}
+                      disabled={pendingUserId !== null || status === 'pending' || status === 'accepted'}
                       isLoading={pendingUserId === climber.userId}
                       onClick={() => void requestPartnership(climber.userId)}
                       size="sm"

@@ -93,21 +93,22 @@ npm run db:studio    # Ouvre Drizzle Studio
 - `src/lib` : services et validateurs partagés ;
 - `drizzle` : migrations SQL générées ;
 - `tests` : intégration et recette navigateur ;
-- `scripts` : audits, données de démonstration et validation de release.
+- `scripts` : audits, données de démonstration et validation de release ;
+- [`docs`](docs/README.md) : documentation technique et guides d’exploitation regroupés.
 
 ## Documentation d'exploitation
 
-- [Dossier synthétique BC02 au format PDF](../docs/bc02/livrable/DOSSIER_BC02_SPITY.pdf)
-- [Index exhaustif des critères et preuves](../docs/bc02/15_INDEX_PREUVES_GRILLE_BC02.md)
-- [Audit de conformité aux documents officiels](../docs/bc02/17_AUDIT_CONFORMITE_OFFICIEL_BC02.md)
-- [Manuel de déploiement](../docs/bc02/12_MANUEL_DEPLOIEMENT_C241.md)
-- [Manuel d'utilisation](../docs/bc02/13_MANUEL_UTILISATION_C241.md)
-- [Manuel de mise à jour et maintenance](../docs/bc02/14_MANUEL_MISE_A_JOUR_C241.md)
+- [Dossier synthétique BC02 au format PDF](../output/bloc-02/DOSSIER_BC02_SPITY.pdf)
+- [Index exhaustif des critères et preuves](../docs/rncp/bloc-02/15_INDEX_PREUVES_GRILLE_BC02.md)
+- [Audit de conformité aux documents officiels](../docs/rncp/bloc-02/17_AUDIT_CONFORMITE_OFFICIEL_BC02.md)
+- [Manuel de déploiement](../docs/rncp/bloc-02/12_MANUEL_DEPLOIEMENT_C241.md)
+- [Manuel d'utilisation](../docs/rncp/bloc-02/13_MANUEL_UTILISATION_C241.md)
+- [Manuel de mise à jour et maintenance](../docs/rncp/bloc-02/14_MANUEL_MISE_A_JOUR_C241.md)
 - [État des lieux et plan d'action du bloc 4](../docs/rncp/bloc-04/PLAN_ACTION_BLOC_04.md)
 - [Dossier de remise Bloc 4 pour le jury](../docs/rncp/bloc-04/dossier-jury/README.md)
-- [Procédure autonome incluse dans chaque bundle de release](DEPLOYMENT.md)
-- [Journal des versions et correctifs déployés](RELEASE_JOURNAL.md)
-- [Collaboration support et registre de transmissions](SUPPORT.md)
+- [Procédure autonome incluse dans chaque bundle de release](docs/operations/DEPLOYMENT.md)
+- [Journal des versions et correctifs déployés](docs/operations/RELEASE_JOURNAL.md)
+- [Collaboration support et registre de transmissions](docs/operations/SUPPORT.md)
 - [Revue finale de complétude Bloc 4](../docs/rncp/bloc-04/REVUE_FINALE_BLOC_04.md)
 
 Pour régénérer les captures puis le dossier HTML/PDF depuis une base locale de démonstration :

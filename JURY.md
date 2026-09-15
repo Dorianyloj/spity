@@ -13,7 +13,7 @@ Bienvenue dans le dépôt de Spity. Cette page permet d'accéder rapidement aux 
 
 Le [cadrage produit](CADRAGE_PROJET.md) présente le besoin, les utilisateurs, les fonctionnalités et les objectifs. Le [README applicatif](spity/README.md) décrit l'installation et l'architecture du code.
 
-Pour le **Bloc 3 — Coordonner et piloter**, commencer par le [kit de soutenance](docs/rncp/bloc-03/README.md), puis le [dossier PDF](output/pdf/dossier-bloc-03-spity.pdf) et la [matrice des sept compétences](docs/rncp/bloc-03/MATRICE_PREUVES.md). Le kit distingue les preuves techniques observées du cas de management fictif. La démonstration et la checklist sont accessibles depuis ce même index.
+Pour le **Bloc 3 — Coordonner et piloter**, commencer par le [kit de soutenance](docs/rncp/bloc-03/README.md), puis le [dossier PDF](output/bloc-03/dossier-bloc-03-spity.pdf) et la [matrice des sept compétences](docs/rncp/bloc-03/MATRICE_PREUVES.md). Le kit distingue les preuves techniques observées du cas de management fictif. La démonstration et la checklist sont accessibles depuis ce même index.
 
 ## 2. Trois parcours de consultation
 
@@ -21,7 +21,7 @@ Pour le **Bloc 3 — Coordonner et piloter**, commencer par le [kit de soutenanc
 
 1. Lire le [README du projet](README.md).
 2. Ouvrir la [revue finale Bloc 4](docs/rncp/bloc-04/REVUE_FINALE_BLOC_04.md).
-3. Consulter l'[export PDF](output/pdf/dossier-bloc-04-spity.pdf) si une lecture hors dépôt est souhaitée.
+3. Consulter l'[export PDF](output/bloc-04/dossier-bloc-04-spity.pdf) si une lecture hors dépôt est souhaitée.
 
 ### Parcours Bloc 4 — 20 minutes
 
@@ -85,6 +85,6 @@ Le principal point ouvert est documenté sans être masqué : une production sai
 - [Feuille de route et état réel](docs/rncp/bloc-04/PLAN_ACTION_BLOC_04.md)
 - [Preuves et manifeste](docs/rncp/bloc-04/preuves/README.md)
 - [Captures réelles : parcours, Git et CI/CD](docs/rncp/bloc-04/preuves/captures/README.md)
-- [Export PDF Bloc 4](output/pdf/dossier-bloc-04-spity.pdf)
+- [Export PDF Bloc 4](output/bloc-04/dossier-bloc-04-spity.pdf)
 
 Le dépôt est volontairement organisé pour que ces fichiers restent consultables sans dépendre d'un environnement externe : le code exécutable est dans `spity/`, les livrables dans `docs/` et les exports dans `output/`.

@@ -1,14 +1,15 @@
 'use client'
 
-import { ArrowUpRight, CalendarDays, Check, Clock3, Handshake, Inbox, MapPin, Search, Send, X } from 'lucide-react'
+import { ArrowUpRight, CalendarDays, Check, Clock3, Handshake, Inbox, MapPin, RefreshCw, Search, Send, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
-import { z } from 'zod'
 import { AppHero, Avatar, Badge, Button, Card, EmptyState } from '@/components/ui'
 import { disciplineLabels } from '@/features/profile/lib/presentation'
+import { useLiveResource } from '@/hooks/use-live-resource'
+import { ApiRequestError, requestJson } from '@/lib/api-client'
 import { demoClimbingAssets } from '@/lib/brand-assets'
 import { cn } from '@/lib/class-names'
-import { partnershipResponseSchema, type PartnershipRequest } from '../schemas'
+import { partnershipListResponseSchema, partnershipResponseSchema, type PartnershipRequest } from '../schemas'
 
 type PartnershipCenterProps = { initialRequests: PartnershipRequest[] }
 
@@ -30,42 +31,37 @@ const statusDescriptions = {
   declined: 'La demande n’a pas été retenue',
 } as const
 
-const parseError = async (response: Response) => {
-  const payload: unknown = await response.json().catch(() => null)
-  const result = z.object({ error: z.string() }).safeParse(payload)
-
-  return result.success ? result.data.error : 'La demande n’a pas pu être mise à jour'
-}
-
 export default function PartnershipCenter({ initialRequests }: PartnershipCenterProps) {
-  const [requests, setRequests] = useState(initialRequests)
   const [pendingId, setPendingId] = useState<string | null>(null)
   const [feedback, setFeedback] = useState<{ requestId: string; message: string; error: boolean } | null>(null)
 
+  const { data, update, refresh, isRefreshing, error: refreshError } = useLiveResource({
+    initialData: { requests: initialRequests },
+    url: '/api/partnerships',
+    schema: partnershipListResponseSchema,
+    paused: pendingId !== null,
+  })
+  const requests = data.requests
+
   const respond = async (requestId: string, status: 'accepted' | 'declined') => {
+    if (pendingId !== null) return
     setPendingId(requestId)
     setFeedback(null)
-    const response = await fetch(`/api/partnerships/${requestId}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status }),
-    })
-
-    if (!response.ok) {
-      setFeedback({ requestId, message: await parseError(response), error: true })
+    try {
+      const result = await requestJson(`/api/partnerships/${requestId}`, partnershipResponseSchema, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status }),
+      })
+      update((current) => ({ requests: current.requests.map((item) => item.id === requestId ? result.request : item) }))
+      const messages = { accepted: 'Demande acceptée.', declined: 'Demande refusée.', pending: 'Demande en attente.' }
+      setFeedback({ requestId, message: messages[result.request.status], error: false })
+    } catch (error) {
+      setFeedback({ requestId, message: error instanceof Error ? error.message : 'La demande n’a pas pu être mise à jour.', error: true })
+      if (error instanceof ApiRequestError && error.status === 409) await refresh()
+    } finally {
       setPendingId(null)
-      return
     }
-
-    const payload: unknown = await response.json()
-    const parsedPayload = partnershipResponseSchema.safeParse(payload)
-
-    if (parsedPayload.success) {
-      setRequests((current) => current.map((item) => item.id === requestId ? parsedPayload.data.request : item))
-      setFeedback({ requestId, message: status === 'accepted' ? 'Demande acceptée.' : 'Demande refusée.', error: false })
-    }
-
-    setPendingId(null)
   }
 
   return (
@@ -80,11 +76,16 @@ export default function PartnershipCenter({ initialRequests }: PartnershipCenter
         ]}
         title="Mes demandes"
       >
+        <Button onClick={() => void refresh()} isLoading={isRefreshing} disabled={pendingId !== null} variant="secondary">
+          <RefreshCw size={18} aria-hidden="true" />
+          Actualiser mes demandes
+        </Button>
         <Link className="spity-btn spity-btn--secondary" href="/app/matching">
           <Search size={18} aria-hidden="true" />
           Rechercher un profil
         </Link>
       </AppHero>
+      {refreshError && <p role="alert" className="text-sm text-destructive">{refreshError}</p>}
 
       {requests.length === 0 ? (
         <div className="space-y-3">
@@ -165,11 +166,17 @@ export default function PartnershipCenter({ initialRequests }: PartnershipCenter
                       </Link>
                     </div>
 
+                    {request.status === 'accepted' && (
+                      <Link className="spity-btn spity-btn--secondary mt-4" href="/app/events">
+                        <CalendarDays size={17} aria-hidden="true" />
+                        Trouver une sortie
+                      </Link>
+                    )}
                     {canRespond && (
                       <div className="mt-4 grid grid-cols-2 gap-2">
                         <Button
                           aria-label={`Refuser la demande de ${request.otherParticipant.displayName}`}
-                          disabled={isPending}
+                          disabled={pendingId !== null}
                           onClick={() => void respond(request.id, 'declined')}
                           size="sm"
                           variant="ghost"
@@ -179,6 +186,7 @@ export default function PartnershipCenter({ initialRequests }: PartnershipCenter
                         </Button>
                         <Button
                           aria-label={`Accepter la demande de ${request.otherParticipant.displayName}`}
+                          disabled={pendingId !== null}
                           isLoading={isPending}
                           onClick={() => void respond(request.id, 'accepted')}
                           size="sm"

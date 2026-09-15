@@ -42,6 +42,11 @@ export const partnershipParticipantSchema = publicClimberSchema.pick({
   niveaux: true,
 })
 
+export const matchingResponseSchema = z.object({
+  climbers: z.array(publicClimberSchema),
+  statuses: z.record(z.string().uuid(), partnershipStatusSchema),
+})
+
 export const partnershipRequestSchema = z.object({
   id: z.string().uuid(),
   senderId: z.string().uuid(),

@@ -66,6 +66,7 @@ describe('PartnershipCenter', () => {
     expect(await screen.findByText('Demande acceptée.')).toBeInTheDocument()
     expect(screen.getByText('Acceptée')).toBeInTheDocument()
     expect(screen.getByText('Vous pouvez maintenant organiser une sortie ensemble')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Trouver une sortie' })).toHaveAttribute('href', '/app/events')
     expect(screen.queryByRole('button', { name: /Accepter la demande/ })).not.toBeInTheDocument()
   })
 
@@ -77,5 +78,28 @@ describe('PartnershipCenter', () => {
 
     expect(await screen.findByText('Réponse impossible')).toBeInTheDocument()
     expect(screen.getByText('En attente')).toBeInTheDocument()
+  })
+
+  it('receives new requests without reloading the page', async () => {
+    fetchMock.mockResolvedValueOnce(jsonResponse({ requests: [pendingRequest] }))
+    render(<PartnershipCenter initialRequests={[]} />)
+    fireEvent.click(screen.getByRole('button', { name: 'Actualiser mes demandes' }))
+    expect(await screen.findByRole('button', { name: 'Accepter la demande de Nassim Bernard' })).toBeEnabled()
+  })
+
+  it('recovers after a network error when answering', async () => {
+    fetchMock.mockRejectedValueOnce(new TypeError('offline'))
+    render(<PartnershipCenter initialRequests={[pendingRequest]} />)
+    fireEvent.click(screen.getByRole('button', { name: 'Accepter la demande de Nassim Bernard' }))
+    expect(await screen.findByRole('alert')).toHaveTextContent('Connexion interrompue')
+    expect(screen.getByRole('button', { name: 'Accepter la demande de Nassim Bernard' })).toBeEnabled()
+  })
+
+  it('announces the persisted decision if another session has already answered', async () => {
+    fetchMock.mockResolvedValueOnce(jsonResponse({ request: { ...pendingRequest, status: 'accepted' } }))
+    render(<PartnershipCenter initialRequests={[pendingRequest]} />)
+    fireEvent.click(screen.getByRole('button', { name: 'Refuser la demande de Nassim Bernard' }))
+    expect(await screen.findByText('Demande acceptée.')).toBeInTheDocument()
+    expect(screen.queryByText('Demande refusée.')).not.toBeInTheDocument()
   })
 })

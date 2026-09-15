@@ -9,6 +9,7 @@ import { cn } from '@/lib/class-names'
 import Button from './button'
 import { FlowButton } from './flow-button'
 import { useScroll } from './use-scroll'
+import NavigationLinkContent from './navigation-link-content'
 
 export type HeaderLink = {
   label: string
@@ -41,7 +42,7 @@ function NavigationLinks({ links, mobile = false, onNavigate }: { links: HeaderL
     {links.map((link) => <li key={link.href}>
       <Link href={link.href} aria-current={link.active ? 'page' : undefined} onNavigate={onNavigate}
         className={cn('flex min-h-11 items-center rounded-xl text-sm font-semibold', mobile ? 'gap-3 px-4 py-3' : 'gap-2 px-3', link.active ? 'bg-foreground text-card' : 'text-muted-foreground hover:bg-secondary hover:text-foreground')}>
-        {link.icon}{link.label}
+        <NavigationLinkContent icon={link.icon} label={link.label} />
         {mobile && <ArrowRight size={16} aria-hidden="true" className="ml-auto shrink-0" />}
       </Link>
     </li>)}

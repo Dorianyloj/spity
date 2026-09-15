@@ -30,6 +30,17 @@ const climber = (overrides: Partial<PublicClimber> = {}): PublicClimber => ({
 })
 
 describe('matching rules', () => {
+  it('applique le niveau à la discipline choisie, pas à une autre pratique', () => {
+    const profiles = [climber({ niveaux: { bloc: '6b', voie: '5c' } })]
+    expect(filterClimbers(profiles, { query: '', discipline: 'voie', grade: '6b' })).toEqual([])
+    expect(filterClimbers(profiles, { query: '', discipline: 'voie', grade: '5c' })).toHaveLength(1)
+    expect(filterClimbers(profiles, { query: '', grade: '6b' })).toHaveLength(1)
+  })
+
+  it('ignore les niveaux résiduels d’une discipline qui n’est plus pratiquée', () => {
+    expect(filterClimbers([climber({ disciplines: ['voie'], niveaux: { bloc: '6b', voie: '5c' } })], { query: '', grade: '6b' })).toEqual([])
+  })
+
   it('construit la même clé quelle que soit la direction de la demande', () => {
     expect(buildPartnershipPairKey('user-b', 'user-a')).toBe('user-a:user-b')
     expect(buildPartnershipPairKey('user-a', 'user-b')).toBe('user-a:user-b')

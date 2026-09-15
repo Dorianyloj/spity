@@ -6,8 +6,8 @@ import { marked } from 'marked'
 import puppeteer from 'puppeteer-core'
 
 const repositoryRoot = resolve('..')
-const docsRoot = resolve(repositoryRoot, 'docs/bc02')
-const outputDirectory = resolve(docsRoot, 'livrable')
+const docsRoot = resolve(repositoryRoot, 'docs/rncp/bloc-02')
+const outputDirectory = resolve(repositoryRoot, 'output/bloc-02')
 const htmlPath = resolve(outputDirectory, 'DOSSIER_BC02_SPITY.html')
 const pdfPath = resolve(outputDirectory, 'DOSSIER_BC02_SPITY.pdf')
 const manifestPath = resolve(outputDirectory, 'manifest.json')
@@ -227,7 +227,7 @@ const documentHtml = `<!doctype html>
     </section>
     <section class="toc">
       <h1>Sommaire du dossier</h1>
-      <p class="document-note">Cette version destinée au jury met en avant mes quatre compétences déterminantes, puis conserve mon retour d'expérience, les 26 critères officiels et neuf annexes visuelles. Les documents techniques complémentaires restent accessibles par les liens du dossier et dans <code>docs/bc02/</code>.</p>
+      <p class="document-note">Cette version destinée au jury met en avant mes quatre compétences déterminantes, puis conserve mon retour d'expérience, les 26 critères officiels et neuf annexes visuelles. Les documents techniques complémentaires restent accessibles par les liens du dossier et dans <code>docs/rncp/bloc-02/</code>.</p>
       <ol>${tableOfContents}</ol>
     </section>
     ${chapters}

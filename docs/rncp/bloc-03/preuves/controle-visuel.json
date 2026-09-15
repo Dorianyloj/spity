@@ -1,89 +1,54 @@
 {
   "date": "2026-09-15",
   "presentation": {
-    "file": "output/presentations/spity-bloc-3-30-minutes-visuel-v14.pptx",
-    "sha256": "be800e6bb700e9929398142d7dec0968789da153430e1cd1b06b85c6f23aceff",
+    "file": "output/bloc-03/spity-bloc-3-30-minutes-visuel-v16.pptx",
+    "sha256": "8bcca22d28671f502c1faa259328b9e123c300a3f6afdb8c4f2cb262ecaad51a",
+    "pdfFile": "output/bloc-03/spity-bloc-3-30-minutes-visuel-v16.pdf",
+    "pdfSHA256": "f5deef5e9609a8ebbfea1d8ec5c09c5b930022062941d5260bb704b08db5a3b0",
     "slidesReviewed": [
-      1,
-      2,
-      3,
       4,
       5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25,
-      26
+      6
     ],
     "changedSlides": [
-      2,
-      3,
       4,
       5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25,
-      26
+      6
     ],
-    "unchangedSlides": "Corps des 26 diapositives identiques à la v13 par comparaison pixel à pixel ; textes des notes et données des graphiques conservés. Seuls les pieds de page des diapositives 2 à 26 sont simplifiés.",
     "nativeCharts": 7,
     "nativeChartWorkbooks": 7,
     "nativeTableSlides": [
-      11,
       15,
       16,
-      17,
-      18,
-      19,
-      23,
       24,
       25,
       26
     ],
     "packageIntegrity": "passed",
-    "layoutGeometry": "passed",
+    "layoutGeometry": "passed: positions de tous les objets dans la surface des 26 slides",
     "font": "Arial",
-    "rendering": "Artifact Tool import and PNG export, 1280 x 720 ; inspection des 25 pieds de page, des diapositives 9 et 20 en entier et comparaison des 26 corps avec la v13.",
+    "rendering": "LibreOffice vers PDF, Poppler vers PNG ; inspection des slides 4 à 6 à 1500 px, puis slide 4 finale à 1300 px. Les 23 autres corps de slides sont identiques à la v15 par comparaison XML.",
     "nativePowerPointExecution": false,
-    "currentReview": "Pieds de page limités au numéro ; corps des 26 diapositives, notes et données des graphiques inchangés. Vérification de la structure et de la géométrie sans anomalie.",
+    "currentReview": "Un an de développement réel déclaré par Dorian ; histogramme des 82 j-h estimés en slide 4 ; scénario fictif de quinze jours explicite sur les slides 4 à 6. Notes 3, 4 et 6 actualisées ; autres notes inchangées.",
     "newSlides": [],
-    "changedContentSlides": []
+    "changedContentSlides": [
+      4,
+      5,
+      6
+    ]
   },
   "dossier": {
-    "file": "output/pdf/dossier-bloc-03-spity.pdf",
+    "file": "output/bloc-03/dossier-bloc-03-spity.pdf",
+    "sha256": "62ada20086fc06aadd2cea55fe950b29694328d1067f3ff5409c762376189ad0",
+    "pages": 30,
+    "rendering": "Régénération après rangement des dossiers. Comparaison du texte des 30 pages avec le PDF précédent : seule la page 8 change (chemins du Bloc 2). Page 8 rendue avec Poppler à 1300 px et inspectée.",
+    "changedPages": [
+      8
+    ]
+  },
+  "scope": "Rangement des dossiers le 15 septembre 2026 : présentation et PDF v16 déplacés avec SHA-256 identiques ; vérification du diaporama conservée à sa portée précédente. Dossier PDF régénéré pour les chemins du Bloc 2, 30 pages conservées. Ancien contrôle du dossier conservé dans previousDossierReview. Aucun nouveau scénario utilisateur exécuté dans le cadre de ce rangement.",
+  "previousDossierReview": {
+    "file": "output/bloc-03/dossier-bloc-03-spity.pdf",
     "sha256": "29be82c9a52c2d8fde98cf76306560278caea79e2de79b3a0522acbb563a5732",
     "pages": 30,
     "rendering": "Poppler PNG, 85 dpi pour les trente pages ; planches de contact complètes et inspection individuelle des pages modifiées 4, 6 et 9.",
@@ -92,6 +57,5 @@
       6,
       9
     ]
-  },
-  "scope": "Révision v14 limitée aux pieds de page : numéro seul. Contenu, sommaire et notes de la v13 conservés. 23 slides principales et trois annexes, trente minutes prévues. Aucun nouveau test applicatif ni répétition orale."
+  }
 }

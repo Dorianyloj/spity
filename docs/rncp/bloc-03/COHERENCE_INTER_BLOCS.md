@@ -17,7 +17,7 @@ Cette lecture décrit les compétences, pas l'ordre chronologique des dossiers :
 
 Le [livrable C1.1.1](../bloc-01/C1.1.1-cartographie-parties-prenantes.pdf), page 2, désigne le **Collectif Altitude Grimpe**, association régionale fictive représentée par **Claire Martin**, présidente fictive. La zone pilote est Lyon-Grenoble. Le Bloc 3 reprend ces éléments à la place du générique « club pilote ».
 
-La cartographie du Bloc 1 distingue les rôles de développeur, architecte et exploitant. Le [dossier BC02](../../bc02/16_DOSSIER_FINAL_BC02.md) décrit les contributions de Dorian à la première personne. Le cas CP/DEV/QA du Bloc 3 représente une organisation fictive pour l'exercice ; il ne prouve pas l'existence de trois collaborateurs. Les comptes de démonstration ne sont pas des membres de cette équipe.
+La cartographie du Bloc 1 distingue les rôles de développeur, architecte et exploitant. Le [dossier BC02](../bloc-02/16_DOSSIER_FINAL_BC02.md) décrit les contributions de Dorian à la première personne. Le cas CP/DEV/QA du Bloc 3 représente une organisation fictive pour l'exercice ; il ne prouve pas l'existence de trois collaborateurs. Les comptes de démonstration ne sont pas des membres de cette équipe.
 
 Le [cas support du Bloc 4](../bloc-04/preuves/B4-C433-01-collaboration-support-2026-08-13.md) est lui aussi déclaré fictif. Il fournit un exemple de transmission fonctionnelle et technique, pas un témoignage de client réel à recycler dans les comptes rendus du Bloc 3.
 
@@ -59,7 +59,7 @@ Les neuf lots de la page 21 sont repris dans A01 avec des identifiants B1-L01 à
 
 | Source | Résultats rapportés | Lecture correcte |
 | --- | --- | --- |
-| [Bloc 2, 23 juillet](../../bc02/16_DOSSIER_FINAL_BC02.md) | 126 tests unitaires dans 23 suites, 11 résultats HTTP/MariaDB et 6 scénarios navigateur. | Preuves historiques du prototype BC02, avec couverture globale documentée. |
+| [Bloc 2, 23 juillet](../bloc-02/16_DOSSIER_FINAL_BC02.md) | 126 tests unitaires dans 23 suites, 11 résultats HTTP/MariaDB et 6 scénarios navigateur. | Preuves historiques du prototype BC02, avec couverture globale documentée. |
 | [Bloc 4, 13 août](../bloc-04/DOSSIER_BLOC_04.md) | 152 tests Jest, 43 tests de maintenance, 11 scénarios MariaDB et 6 recettes Playwright. | Catégories distinctes, conservées comme résultats du dossier de maintenance. |
 | [Bloc 3, 15 septembre](VERIFICATION.md) | 389 tests unitaires dans 72 suites et 6 scénarios navigateur, lint, types et build réussis. | Contrôles locaux datés ; recette sous next dev, sans nouvelle validation distante du standalone. |
 
@@ -74,3 +74,9 @@ Les objectifs d'acquisition, de rétention, de NPS et de note d'application du B
 Le diaporama conserve les trente minutes, ses graphiques modifiables, les grandes captures et les trois annexes. Le commanditaire apparaît dans le contexte, un planning global des neuf lots du diaporama B1 précède le zoom sur les quinze jours du lot, le budget du lot cite la référence globale et la matrice de preuves et cette revue distinguent juillet, août et septembre. Le guide oral, le dossier et les comptes rendus simulés reprennent ces précisions.
 
 La palette verte, les photos d'escalade et les parcours grimpeur/club prolongent l'identité des autres livrables. Les tableaux complets restent dans les annexes. Le support visuel du Bloc 3 conserve sa propre composition pour rester lisible à l'oral.
+
+## Clarification du candidat : un an de développement réel
+
+Le 15 septembre 2026, Dorian confirme avoir développé Spity sur un an. Aucune date exacte ni ventilation mensuelle n’est déduite de cette déclaration. Les 82 j-h du Bloc 1 restent une estimation de charge ; les 16,4 semaines des anciennes projections restent un calcul théorique à pleine capacité, pas la durée réelle.
+
+La v16 affiche explicitement cette durée d’un an en slide 4. Le graphique montre désormais les charges estimées des neuf lots, sans axe calendaire. Les slides 5 et 6 introduisent les quinze jours comme un scénario fictif de préparation d’une démonstration sur le logiciel existant. Les notes et guides conservent cette distinction. Le planning théorique d’A01 et les chiffres du classeur sont inchangés ; ils ne prouvent pas l’historique du projet.

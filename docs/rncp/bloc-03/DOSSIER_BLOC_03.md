@@ -160,7 +160,7 @@ La transmission vers la maintenance s'appuie sur les registres déjà documenté
 
 S1 : référentiel Expert en développement logiciel RNCP39583, p. 11 à 14, copie archivée dans docs/rncp/referentiel. S2 : modalités YNOV M2 2025-2026, p. 4, 6, 8, 10 et 11, fichier fourni par le candidat. S3 : grille d'évaluation BC03, page unique, fichier fourni par le candidat. S4 : règlement spécial RNCP39583, v1.01 du 15 septembre 2025, p. 1 et 3-4, retrouvé dans les Téléchargements du candidat ; modalités, liste des livrables et trois compétences éliminatoires.
 
-Preuves projet : historique Git, commit 689e59d ; docs/bc02/10_CAHIER_RECETTES_C231.md ; docs/bc02/19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES.md ; docs/audits/2026-09-09-synchronisation-linear.md ; captures du 15 septembre 2026 dans preuves/captures ; résultats de vérification produits pendant cette préparation.
+Preuves projet : historique Git, commit 689e59d ; docs/rncp/bloc-02/10_CAHIER_RECETTES_C231.md ; docs/rncp/bloc-02/19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES.md ; docs/audits/2026-09-09-synchronisation-linear.md ; captures du 15 septembre 2026 dans preuves/captures ; résultats de vérification produits pendant cette préparation.
 
 Annexes : A01 planning, A02 responsabilités, A03 indicateurs et risques, A04 arbitrages, A05 management, A06 compétences et formations, A07 suivi client, A08 démonstration, A09 données et rapprochement Linear. Les données numériques du cas sont centralisées dans donnees/pilotage.json et reprises dans le classeur joint. La matrice de preuves donne les correspondances avec la grille officielle.
 

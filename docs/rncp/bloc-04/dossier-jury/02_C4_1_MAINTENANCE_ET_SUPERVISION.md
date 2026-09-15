@@ -29,7 +29,7 @@ Les preuves montrent la qualification d'un lot d'outillage et l'absence d'alerte
 
 **Sources et preuves à présenter :**
 
-- `spity/MAINTENANCE.md` et `spity/dependency-policy.json` ;
+- `spity/docs/operations/MAINTENANCE.md` et `spity/dependency-policy.json` ;
 - `spity/scripts/check-dependency-policy.mjs` ;
 - `.github/workflows/dependency-maintenance.yml` et `dependency-review.yml` ;
 - `../preuves/B4-C411-01-audit-dependances-2026-08-13.json` à `B4-C411-03-controle-dependances-2026-08-13.json`.
@@ -58,7 +58,7 @@ Le SLO porte sur 30 jours et 99,5 % de disponibilité. Seuls les runs planifiés
 
 **Sources et preuves à présenter :**
 
-- `spity/OBSERVABILITY.md` et `spity/monitoring-policy.json` ;
+- `spity/docs/operations/OBSERVABILITY.md` et `spity/monitoring-policy.json` ;
 - `spity/scripts/check-health.mjs` et `spity/scripts/evaluate-monitoring-window.mjs` ;
 - `.github/workflows/production-monitoring.yml` et `availability-slo-report.yml` ;
 - `../preuves/B4-C412-01-historique-supervision-2026-08-13.json` à `B4-C412-04-slo-supervision-2026-08-13.json`.

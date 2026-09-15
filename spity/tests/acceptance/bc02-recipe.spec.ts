@@ -242,7 +242,6 @@ test.describe.serial('Cahier de recettes BC02 - fonctions F01 à F10', () => {
     const declinedCard = cardContainingHeading(sender.page, accounts.thirdClimber.displayName)
     await declinedCard.getByRole('button', { name: 'Envoyer une demande' }).click()
     await expect(sender.page.getByText(`Demande envoyée à ${accounts.thirdClimber.displayName}.`)).toBeVisible()
-    await sender.context.close()
 
     const recipient = await newAuthenticatedPage(browser, secondClimberState)
     await recipient.page.goto('/app/partnerships')
@@ -250,6 +249,10 @@ test.describe.serial('Cahier de recettes BC02 - fonctions F01 à F10', () => {
       name: `Accepter la demande de ${accounts.firstClimber.displayName}`,
     }).click()
     await expect(recipient.page.getByText('Demande acceptée.')).toBeVisible()
+    await sender.page.getByRole('button', { name: 'Actualiser les profils' }).click()
+    await expect(acceptedCard.getByRole('button', { name: 'Partenaire confirmé' })).toBeVisible()
+    await expect(recipient.page.getByRole('link', { name: 'Trouver une sortie' })).toHaveAttribute('href', '/app/events')
+    await sender.context.close()
     await recipient.context.close()
 
     const decliningRecipient = await newAuthenticatedPage(browser, thirdClimberState)
@@ -294,7 +297,7 @@ test.describe.serial('Cahier de recettes BC02 - fonctions F01 à F10', () => {
     await second.page.goto('/app/events')
     await expect(cardContainingHeading(second.page, eventTitle).getByRole('button', { name: 'S’inscrire' })).toBeDisabled()
 
-    await club.page.reload()
+    await club.page.getByRole('button', { name: 'Actualiser les événements' }).click()
     let eventCard = cardContainingHeading(club.page, eventTitle)
     await expect(eventCard.getByText('Participants')).toBeVisible()
     await expect(eventCard.getByText(accounts.firstClimber.displayName)).toBeVisible()
@@ -303,15 +306,15 @@ test.describe.serial('Cahier de recettes BC02 - fonctions F01 à F10', () => {
     await club.page.getByRole('button', { name: 'Enregistrer' }).click()
     await expect(club.page.getByText('Événement enregistré.')).toBeVisible()
 
-    await second.page.reload()
+    await second.page.getByRole('button', { name: 'Actualiser les événements' }).click()
     await cardContainingHeading(second.page, eventTitle).getByRole('button', { name: 'S’inscrire' }).click()
     await expect(second.page.getByText('Inscription confirmée.')).toBeVisible()
 
-    await first.page.reload()
+    await first.page.getByRole('button', { name: 'Actualiser les événements' }).click()
     await cardContainingHeading(first.page, eventTitle).getByRole('button', { name: 'Annuler mon inscription' }).click()
     await expect(first.page.getByText('Inscription annulée.')).toBeVisible()
 
-    await club.page.reload()
+    await club.page.getByRole('button', { name: 'Actualiser les événements' }).click()
     eventCard = cardContainingHeading(club.page, eventTitle)
     await expect(eventCard.getByText(accounts.secondClimber.displayName)).toBeVisible()
     await expect(eventCard.getByText(accounts.firstClimber.displayName)).toHaveCount(0)
@@ -342,6 +345,35 @@ test.describe.serial('Cahier de recettes BC02 - fonctions F01 à F10', () => {
     })
     expect(invalidPayload.status()).toBe(422)
     await expect(invalidPayload.json()).resolves.toMatchObject({ error: expect.any(String) })
+  })
+
+  test('la navbar indique une navigation en attente puis affiche la page sans canvas décoratif', async ({ browser }) => {
+    const context = await browser.newContext({ storageState: firstClimberState, viewport: { width: 1440, height: 1000 } })
+    let resume = () => {}
+    const responseGate = new Promise<void>((resolve) => { resume = resolve })
+    try {
+      const page = await context.newPage()
+      await page.goto('/app/matching')
+      await page.route('**/app/events*', async (route) => {
+        if (route.request().headers().rsc === '1') await responseGate
+        await route.continue()
+      })
+      const navbar = page.getByRole('navigation', { name: 'Navigation principale', exact: true })
+      await navbar.getByRole('link', { name: 'Événements', exact: true }).click()
+      await expect(navbar.getByRole('status').filter({ hasText: 'Chargement de la page' })).toHaveCount(1)
+      await expect(page).toHaveURL(/\/app\/matching$/)
+      resume()
+      await expect(page).toHaveURL(/\/app\/events$/)
+      await expect(page.getByRole('heading', { level: 1 })).toContainText('Événements')
+      await expect(page.getByText('Chargement de la page…')).toHaveCount(0)
+      await expect(page.locator('canvas')).toHaveCount(0)
+      await navbar.getByRole('link', { name: 'Demandes', exact: true }).click()
+      await expect(page).toHaveURL(/\/app\/partnerships$/)
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText('Mes demandes')
+    } finally {
+      resume()
+      await context.close()
+    }
   })
 
   test('REC-F10-001 - structure, navigation clavier et affichage mobile', async ({ browser }) => {

@@ -9,7 +9,7 @@
       "id": "C4.1.1",
       "title": "Gérer les mises à jour des dépendances",
       "operationalFiles": [
-        "spity/MAINTENANCE.md",
+        "spity/docs/operations/MAINTENANCE.md",
         "spity/dependency-policy.json",
         "spity/scripts/check-dependency-policy.mjs",
         ".github/workflows/dependency-maintenance.yml",
@@ -32,7 +32,7 @@
       "id": "C4.1.2",
       "title": "Concevoir un système de supervision et d’alerte",
       "operationalFiles": [
-        "spity/OBSERVABILITY.md",
+        "spity/docs/operations/OBSERVABILITY.md",
         "spity/monitoring-policy.json",
         "spity/scripts/check-health.mjs",
         "spity/scripts/evaluate-monitoring-window.mjs",
@@ -62,7 +62,7 @@
       "id": "C4.2.1",
       "title": "Consigner les anomalies détectées",
       "operationalFiles": [
-        "spity/INCIDENT_MANAGEMENT.md",
+        "spity/docs/operations/INCIDENT_MANAGEMENT.md",
         "spity/incident-policy.json",
         "spity/incidents/SPITY-INC-2026-0001.json",
         "spity/incidents/SPITY-INC-2026-0002.json",
@@ -88,7 +88,7 @@
       "id": "C4.2.2",
       "title": "Créer et déployer un correctif via CI/CD",
       "operationalFiles": [
-        "spity/RELEASE_VERIFICATION.md",
+        "spity/docs/operations/RELEASE_VERIFICATION.md",
         "spity/scripts/verify-deployment.mjs",
         "spity/scripts/run-deployment-verification-exercise.mjs",
         ".github/workflows/ci.yml",
@@ -117,7 +117,7 @@
       "id": "C4.3.1",
       "title": "Proposer des axes d’amélioration",
       "operationalFiles": [
-        "spity/IMPROVEMENT_MANAGEMENT.md",
+        "spity/docs/operations/IMPROVEMENT_MANAGEMENT.md",
         "spity/improvement-policy.json",
         "spity/scripts/check-improvement-backlog.mjs",
         ".github/workflows/improvement-review.yml"
@@ -139,7 +139,7 @@
       "id": "C4.3.2",
       "title": "Établir le journal des versions déployées",
       "operationalFiles": [
-        "spity/RELEASE_JOURNAL.md",
+        "spity/docs/operations/RELEASE_JOURNAL.md",
         "spity/release-journal-policy.json",
         "spity/scripts/check-release-journal.mjs",
         ".github/workflows/release-journal.yml"
@@ -161,7 +161,7 @@
       "id": "C4.3.3",
       "title": "Collaborer avec le support",
       "operationalFiles": [
-        "spity/SUPPORT.md",
+        "spity/docs/operations/SUPPORT.md",
         "spity/support-collaboration-policy.json",
         "spity/support-collaborations/SPITY-SUP-2026-0001.json",
         "spity/scripts/check-support-collaborations.mjs",
