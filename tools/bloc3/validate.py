@@ -95,8 +95,13 @@ def main(package):
             assert 100 <= s['spokenWords']/s['minutes'] <= 145, f"Densité orale incohérente : slide {s['number']}"
     assert len(list((DOCS/'annexes').glob('A*.md')))==9
     matrix = (DOCS/'MATRICE_PREUVES.md').read_text(encoding='utf-8')
-    for competency in ['C.3.1','C3.2.1','C3.2.2','C3.3.1','C3.3.2','C3.4.1','C3.4.2']:
+    framework = read(DOCS/'donnees/cadre-evaluation.json')
+    assert framework['eliminatoryCompetencies']==['C.3.1','C3.2.1','C3.4.2']
+    assert framework['minimumAcquired']==4 and framework['mandatoryDeliverables']==14
+    assert framework['presentationMinutes']==30 and framework['questionsMinutes']==15
+    for competency in framework['competencies']:
         assert competency in matrix
+    assert "Le règlement spécial n'est pas fourni" not in matrix
     for path in DOCS.rglob('*.md'):
         for target in re.findall(r'\[[^\]]*\]\(([^)]+)\)',path.read_text(encoding='utf-8')):
             if '://' in target or target.startswith('#'): continue
@@ -143,13 +148,17 @@ def main(package):
     current_tree=subprocess.check_output(['git','rev-parse','HEAD:spity'],cwd=ROOT,text=True).strip()
     verified_tree=subprocess.check_output(['git','rev-parse',f"{evidence['gitRevision']}:spity"],cwd=ROOT,text=True).strip()
     assert verified_tree==evidence['applicationTree'], 'La preuve doit correspondre à sa révision datée'
-    application_matches=current_tree==verified_tree
+    head_matches=current_tree==verified_tree
+    changed_tracked=subprocess.check_output(['git','diff','--name-only','HEAD','--','spity'],cwd=ROOT,text=True).splitlines()
+    untracked=subprocess.check_output(['git','ls-files','--others','--exclude-standard','--','spity'],cwd=ROOT,text=True).splitlines()
+    application_changes=sorted(set(changed_tracked+untracked))
+    application_matches=head_matches and not application_changes
     if not application_matches:
         assert 'ne certifient pas la version courante' in (DOCS/'VERIFICATION.md').read_text(encoding='utf-8'), 'Documenter la portée historique des tests'
-    assert not subprocess.check_output(['git','diff','HEAD','--','spity'],cwd=ROOT,text=True).strip()
     for capture in read(DOCS/'preuves/captures/manifest.json'):
         assert (DOCS/'preuves/captures'/capture['file']).exists()
     report={'case':'simulation explicite','planningTasks':len(tasks),'baselineEUR':planned,'forecastEUR':forecast,'marginEUR':232,'slides':len(slides),'nativeCharts':len(chart_parts),'chartWorkbooks':len(chart_workbooks),'presentationMinutes':30,'pdfPages':len(reader.pages),'workbookSheets':len(sheets),'workbookFormulas':formulas,'applicationTree':current_tree,'verifiedApplicationTree':verified_tree,'applicationMatchesDatedEvidence':application_matches,'inclusionCase':inclusion['name'],'inclusionSlides':[6,14,16],'scope':'Cohérence documentaire et structure des exports ; aucun nouveau test applicatif ou dépôt externe. Les tests conservent leur révision et leur date.'}
+    report.update({'headApplicationMatchesDatedEvidence':head_matches,'applicationWorkingTreeClean':not application_changes,'applicationWorkingTreeChanges':application_changes,'eliminatoryCompetencies':framework['eliminatoryCompetencies'],'minimumAcquiredCompetencies':framework['minimumAcquired'],'demonstrationReadyOnCurrentVersion':None})
     (DOCS/'preuves/controle-kit.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
     if package:
         included=sorted([p for p in DOCS.rglob('*') if p.is_file() and p.name!='MANIFEST.sha256']+[p for p in (ROOT/'tools/bloc3').glob('*') if p.is_file()]+[PDF,PPTX,XLSX])
@@ -159,7 +168,7 @@ def main(package):
         ZIP.parent.mkdir(parents=True,exist_ok=True)
         with zipfile.ZipFile(ZIP,'w',zipfile.ZIP_DEFLATED) as z:
             for p in included: z.write(p,p.relative_to(ROOT).as_posix())
-            z.writestr('LIRE_EN_PREMIER.txt', 'KIT BLOC 3 SPITY\n\nDossier : output/pdf/dossier-bloc-03-spity.pdf\nSlides : output/presentations/spity-bloc-3-30-minutes-visuel-v11.pptx\nClasseur : outputs/bloc03-01a09eba/pilotage-spity.xlsx\nGuide et checklist : docs/rncp/bloc-03/\n\nLe diaporama comprend 22 slides pour 30 minutes, dont 6 de démonstration, et 3 annexes. Le guide contient le texte oral et les transitions. La durée effective se règle après une répétition chronométrée. Les situations de management sont fictives et identifiées. Les données personnelles et dates du campus restent à confirmer. Aucun dépôt externe effectué. La démonstration nécessite le dépôt Spity complet ; les fichiers techniques seuls ne contiennent pas toute l’application.\n')
+            z.writestr('LIRE_EN_PREMIER.txt', 'KIT BLOC 3 SPITY\n\nDossier : output/pdf/dossier-bloc-03-spity.pdf\nSlides : output/presentations/spity-bloc-3-30-minutes-visuel-v11.pptx\nClasseur : outputs/bloc03-01a09eba/pilotage-spity.xlsx\nGuide et checklist : docs/rncp/bloc-03/\nContrôle détaillé : docs/rncp/bloc-03/CONTROLE_COMPLETUDE.md\n\nLe diaporama comprend 22 slides pour 30 minutes, dont 6 de démonstration, et 3 annexes. Le guide contient le texte oral et les transitions. La durée effective se règle après une répétition chronométrée. Les situations de management sont fictives et identifiées. Les données personnelles et dates du campus restent à confirmer. Aucun dépôt externe effectué. La démonstration nécessite le dépôt Spity complet ; les fichiers techniques seuls ne contiennent pas toute l’application.\n\nLe règlement spécial identifie C.3.1, C3.2.1 et C3.4.2 comme éliminatoires. Les tests de la révision 9d166c0 restent datés : consulter VERIFICATION.md et le contrôle du kit pour la correspondance de la version présentée. La réussite du contrôle documentaire ne vaut pas nouvelle recette du logiciel.\n')
         with zipfile.ZipFile(ZIP) as z: assert z.testzip() is None
         report['zip']=str(ZIP.relative_to(ROOT))
         report['zipSHA256']=digest(ZIP)

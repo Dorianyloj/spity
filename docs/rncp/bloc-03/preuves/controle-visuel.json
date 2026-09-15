@@ -54,13 +54,25 @@
     "layoutGeometry": "passed",
     "font": "Arial",
     "rendering": "Artifact Tool import and PNG export, 1280 x 720; changed slides individually reviewed and entire deck in contact sheets",
-    "nativePowerPointExecution": false
+    "nativePowerPointExecution": false,
+    "currentReview": "25 diapositives relues par extraction et planches de contact ; fichier v11 inchangé pendant le contrôle de complétude."
   },
   "dossier": {
     "file": "output/pdf/dossier-bloc-03-spity.pdf",
-    "sha256": "b6aacf56c801d96296f0ba09174c0590944edb24e4a1e7129d18868e0dcf1011",
+    "sha256": "df7de9da2906d78cea9947bc021db95d104ce178c0ce6deb10faedd1b77cce9d",
     "pages": 30,
-    "rendering": "Poppler PNG, 85 dpi; every page in contact sheets, modified pages individually reviewed"
+    "rendering": "Poppler PNG, 85 dpi pour les 30 pages ; planches de contact et vérification détaillée des pages de cadre/matrice ; dernière page revue à 110 dpi.",
+    "changedPages": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      30
+    ]
   },
-  "scope": "Révision documentaire des rituels de suivi, vérifications visuelles et structurelles ; aucune nouvelle recette applicative ni répétition orale déclarée."
+  "scope": "Contrôle de complétude : sept compétences et quatorze éléments attendus ; PDF corrigé avec le règlement spécial ; aucune nouvelle recette applicative ni répétition orale déclarée."
 }

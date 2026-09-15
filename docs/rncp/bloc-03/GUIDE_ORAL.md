@@ -2,6 +2,10 @@
 
 Support associé : spity-bloc-3-30-minutes-visuel-v11.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
 
+## Compétences à sécuriser avant l'oral
+
+Le règlement spécial v1.01 du 15 septembre 2025, consulté le 15 septembre 2026, identifie trois compétences éliminatoires : C.3.1 (planification), C3.2.1 (suivi) et C3.4.2 (démonstration), pages 3-4. La validation exige au moins quatre compétences acquises sur sept, dont ces trois compétences. La préparation couvre les sept ; seule l'évaluation du jury décide de leur acquisition. Les repères sont les slides 3-6 pour planifier, 4 et 7-10 pour suivre, 19-22 pour démontrer et obtenir une décision. La démonstration doit être exécutée sur la version identifiée ; les captures sont un secours. Le diplôme prérequis, la convocation et le dépôt sont suivis dans CHECKLIST_REMISE.md.
+
 ## Fil conducteur
 
 Expliquer comment organiser et sécuriser la livraison d'un parcours utile : trouver un partenaire puis participer à une sortie organisée par un club. Annoncer dès le début la distinction entre le logiciel et ses preuves réelles, l'analyse historique et la mise en situation fictive de pilotage.

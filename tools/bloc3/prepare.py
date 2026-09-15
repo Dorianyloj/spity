@@ -83,7 +83,7 @@ Linear a été relu directement le 14 septembre : 12 Done, 4 Todo, 1 In Progress
     ]
     write('MATRICE_PREUVES.md','# Correspondance avec la grille BC03\n\nCette matrice constate une couverture documentaire ; elle n’attribue pas la mention Acquis, qui relève du jury.\n\n'+table(['Compétence','Critères couverts','Pièces','Nature'],matrix)+'''
 
-Le règlement spécial n'est pas fourni. La règle de 50 % des compétences et l'absence d'éliminatoire non acquise est rappelée, mais aucune compétence n'est déclarée éliminatoire sur simple supposition. Les preuves d'une situation fictive ne sont pas des attestations de management réel.
+Le règlement spécial v1.01 du 15 septembre 2025, consulté le 15 septembre 2026, identifie trois compétences éliminatoires : C.3.1 (planification), C3.2.1 (suivi) et C3.4.2 (démonstration), pages 3-4. La validation exige au moins quatre compétences acquises sur sept, dont ces trois compétences. La préparation couvre les sept ; seule l'évaluation du jury décide de leur acquisition. Les preuves d'une situation fictive ne sont pas des attestations de management réel.
 ''')
     from competence_annexes import enrich
     enrich(DOCS)

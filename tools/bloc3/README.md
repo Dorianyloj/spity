@@ -49,7 +49,7 @@ python tools/bloc3/build_pdf.py
 python tools/bloc3/validate.py --package
 ```
 
-Le ZIP est un kit documentaire hors connexion. La démonstration exige le dépôt applicatif complet et ses dépendances ; l'archive n'embarque ni base de données, ni node_modules, ni secrets locaux.
+Le ZIP est un kit documentaire hors connexion. La démonstration exige le dépôt applicatif complet et ses dépendances ; l'archive n'embarque ni base de données, ni node_modules, ni secrets locaux. Le contrôle distingue l'arbre applicatif enregistré et les modifications locales (fichiers suivis ou nouveaux non ignorés). S'ils diffèrent de la preuve datée, VERIFICATION.md doit en expliciter la limite et applicationMatchesDatedEvidence vaut false. La réussite du contrôle documentaire ne vaut pas une nouvelle recette de l'application. Le cadre d'évaluation sourcé et les trois compétences éliminatoires sont conservés dans donnees/cadre-evaluation.json.
 
 ## Données et relevé Linear du 14 septembre
 

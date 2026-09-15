@@ -15,9 +15,11 @@ Le Bloc 3 reprend le même projet que les autres livrables. Le Bloc 1 en défini
 | Observé | Fichiers et commits inspectés, commandes effectivement exécutées et résultats datés. |
 | Historique documenté | Résultats présents dans les anciens dossiers ; conservés avec leur date, sans les présenter comme une mesure actuelle. |
 | Simulation pédagogique | Équipe type, planning J1 à J15, estimations de charge, coûts, formations et réunions du cas de pilotage. |
-| À confirmer | Composition réelle de l'équipe, interlocuteurs réels, dates du campus et consignes du règlement spécial. |
+| À confirmer | Composition réelle de l'équipe, interlocuteurs réels, dates et consignes complémentaires du campus. |
 
-Les documents parlent d'un oral individuel de 45 minutes, dont 30 minutes de présentation et 15 minutes d'échange. La démonstration est intégrée à la présentation. Aucun nombre de pages n'est imposé au Bloc 3 dans les trois pièces fournies. Le support et les livrables doivent être déposés sur DigiformaCertif dans le délai du campus. Sources : référentiel p. 11 à 14 ; modalités 2025-2026 p. 6, 8, 10 et 11 ; grille BC03 p. 1.
+Les documents parlent d'un oral individuel de 45 minutes, dont 30 minutes de présentation et 15 minutes d'échange. La démonstration est intégrée à la présentation. Aucun nombre de pages n'est imposé au Bloc 3 dans les quatre documents examinés. Le support et les livrables doivent être déposés sur DigiformaCertif dans le délai du campus. Sources : référentiel p. 11 à 14 ; modalités 2025-2026 p. 6, 8, 10 et 11 ; grille BC03 p. 1 ; règlement spécial v1.01 du 15 septembre 2025, p. 1 et 3-4.
+
+Le règlement spécial v1.01 du 15 septembre 2025, consulté le 15 septembre 2026, identifie trois compétences éliminatoires : C.3.1 (planification), C3.2.1 (suivi) et C3.4.2 (démonstration), pages 3-4. La validation exige au moins quatre compétences acquises sur sept, dont ces trois compétences. La préparation couvre les sept ; seule l'évaluation du jury décide de leur acquisition.
 
 ## 2. Objectifs, acteurs et critères de succès
 
@@ -148,17 +150,15 @@ L'état des vérifications courantes est conservé dans preuves/verification.jso
 
 Le dossier relie chacune des sept compétences à une action, un résultat attendu et une pièce vérifiable. Les preuves réelles couvrent le produit, le code, les tests exécutés et l'arbitrage technique historique. Le cas pédagogique complète la démonstration des méthodes de pilotage, sans transformer les échanges simulés en faits réels.
 
-Les points restant à confirmer par le candidat sont la composition réelle de l'équipe, les interlocuteurs et retours réellement obtenus, la date de soutenance, la date limite de dépôt et les dispositions du règlement spécial. Ils sont regroupés dans la checklist de remise, pour ne pas être oubliés derrière la préparation technique.
+Les points restant à confirmer par le candidat sont la composition réelle de l'équipe, les interlocuteurs et retours réellement obtenus, la date de soutenance, la date limite de dépôt et les consignes complémentaires du campus. Ils sont regroupés dans la checklist de remise, pour ne pas être oubliés derrière la préparation technique.
 
 Le guide d'oral contient les notes de présentation, une répartition totalisant trente minutes et des questions probables. Le candidat doit reformuler les explications avec ses mots et être capable de modifier une hypothèse du classeur, d'expliquer un écart et de retrouver une preuve.
 
 La transmission vers la maintenance s'appuie sur les registres déjà documentés au Bloc 4 : version identifiée, anomalies qualifiées, responsables, réserves et critères de vérification. Le constat de production en retard de 19 commits du 13 août reste historique. Il ne décrit pas l'état actuel du site. Les preuves de juillet, août et septembre conservent leurs dates et leurs périmètres, sans additionner les nombres de tests ni assimiler une réussite locale à une promotion en production.
 
-<!-- pagebreak -->
-
 ## 12. Sources et pièces jointes
 
-S1 : référentiel Expert en développement logiciel RNCP39583, p. 11 à 14, copie archivée dans docs/rncp/referentiel. S2 : modalités YNOV M2 2025-2026, p. 4, 6, 8, 10 et 11, fichier fourni par le candidat. S3 : grille d'évaluation BC03, page unique, fichier fourni par le candidat.
+S1 : référentiel Expert en développement logiciel RNCP39583, p. 11 à 14, copie archivée dans docs/rncp/referentiel. S2 : modalités YNOV M2 2025-2026, p. 4, 6, 8, 10 et 11, fichier fourni par le candidat. S3 : grille d'évaluation BC03, page unique, fichier fourni par le candidat. S4 : règlement spécial RNCP39583, v1.01 du 15 septembre 2025, p. 1 et 3-4, retrouvé dans les Téléchargements du candidat ; modalités, liste des livrables et trois compétences éliminatoires.
 
 Preuves projet : historique Git, commit 689e59d ; docs/bc02/10_CAHIER_RECETTES_C231.md ; docs/bc02/19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES.md ; docs/audits/2026-09-09-synchronisation-linear.md ; captures du 15 septembre 2026 dans preuves/captures ; résultats de vérification produits pendant cette préparation.
 

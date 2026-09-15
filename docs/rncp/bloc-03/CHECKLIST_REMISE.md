@@ -33,8 +33,10 @@
 
 - [ ] Confirmer la date et l'heure individuelles de passage, ainsi que les conditions matérielles de l'oral.
 - [ ] Confirmer la date limite de dépôt sur DigiformaCertif : la période d'oraux du 1er au 29 septembre n'est pas cette échéance.
-- [ ] Consulter le règlement spécial de certification et les dernières consignes du campus, notamment les compétences éliminatoires et les formats attendus.
-- [ ] Vérifier le nommage, la taille maximale et les pièces demandées. Aucun nombre de pages ou de slides pour le Bloc 3 n'est fixé dans les trois PDF fournis.
+- [x] Lire le règlement spécial v1.01 du 15/09/2025 : C.3.1, C3.2.1 et C3.4.2 sont éliminatoires ; au moins quatre compétences sur sept doivent être acquises, dont ces trois.
+- [ ] Vérifier les dernières consignes complémentaires du campus et le règlement général de certification.
+- [ ] Confirmer auprès du campus la réception et la conformité du diplôme/titre prérequis ou de la dérogation (modalités, p. 12 ; règlement spécial, p. 1).
+- [ ] Vérifier le nommage, la taille maximale et les pièces demandées. Aucun nombre de pages ou de slides pour le Bloc 3 n'est fixé dans les quatre documents examinés.
 - [ ] Déposer les fichiers demandés puis conserver la confirmation. Aucun dépôt n'a été effectué pendant cette préparation.
 
 ## Répétition avant passage
@@ -45,7 +47,7 @@
 - [ ] Expliquer pourquoi le budget du lot B3 et les jours J1-J15 sont distincts du budget global et des jalons J1-J5 du Bloc 1.
 - [ ] Expliquer l'arbitrage réel 689e59d, ses limites documentaires et l'arbitrage fictif de périmètre.
 - [ ] Refaire le parcours grimpeur/club, contrôler les dates des événements et ouvrir les deux sessions.
-- [ ] Identifier la version présentée et noter toute modification postérieure aux vérifications du 15 septembre.
+- [ ] Identifier la version présentée et rejouer les vérifications après les modifications postérieures à l'arbre testé 9109ce9. Le contrôle de complétude signale les changements locaux observés.
 - [ ] Garder les fichiers et captures accessibles hors connexion ; tester le matériel de projection.
 - [ ] Préparer les 15 minutes de questions à partir de GUIDE_ORAL.md et retrouver les annexes rapidement.
 

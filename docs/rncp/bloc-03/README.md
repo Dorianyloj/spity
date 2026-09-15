@@ -35,11 +35,11 @@ Le 15 septembre, les contrôles ont réussi : lint, TypeScript, build, 389 tests
 | Situation | Mise en situation professionnelle réelle ou fictive. | S1, p. 11 |
 | Calendrier annoncé | Période du 1er au 29 septembre 2026. La convocation du campus doit préciser le passage individuel ; cette période n'est pas la date limite de dépôt. | S2, p. 4 |
 | Dépôt | Déposer les livrables et le support de présentation sur DigiformaCertif dans le délai imparti. Le document indique une invalidation du bloc en cas de défaut de dépôt. | S2, p. 11 |
-| Validation | Au moins 50 % des compétences acquises, sans compétence éliminatoire non acquise. Avec les sept compétences de la grille, cela correspond à au moins quatre compétences acquises, sous réserve de la condition sur les éliminatoires. | S2, p. 8 ; S3 |
+| Validation | Au moins 50 % des compétences acquises, sans compétence éliminatoire non acquise. Avec les sept compétences de la grille, cela correspond à au moins quatre compétences acquises, sous réserve de la condition sur les éliminatoires. | S2, p. 8 ; S3 ; S4, p. 1 et 3-4 |
 
-Les trois documents ne fixent pas de nombre de pages pour un dossier écrit du Bloc 3, ni de nombre de diapositives. Les plafonds de 30 et 20 pages de S2 concernent respectivement les Blocs 2 et 4. Notre dossier de travail regroupera les explications et les preuves pour construire le support oral.
+Les quatre documents examinés ne fixent pas de nombre de pages pour un dossier écrit du Bloc 3, ni de nombre de diapositives. Les plafonds de 30 et 20 pages de S2 concernent respectivement les Blocs 2 et 4. Le dossier de travail regroupe les explications et les preuves du support oral.
 
-Le règlement spécial de certification, mentionné dans S2 p. 6 et 10, n'est pas parmi les trois pièces analysées. Il reste à vérifier pour le détail du dépôt, les éventuelles contraintes complémentaires et l'identification des compétences éliminatoires. La grille fournie ne les identifie pas explicitement. La préparation vise la couverture des sept compétences.
+Le règlement spécial v1.01 du 15 septembre 2025, consulté le 15 septembre 2026, identifie trois compétences éliminatoires : C.3.1 (planification), C3.2.1 (suivi) et C3.4.2 (démonstration), pages 3-4. La validation exige au moins quatre compétences acquises sur sept, dont ces trois compétences. La préparation couvre les sept ; seule l'évaluation du jury décide de leur acquisition. Les dates et les consignes de dépôt propres au campus restent à confirmer. Le [contrôle de complétude](CONTROLE_COMPLETUDE.md) détaille chaque critère et les réserves avant remise.
 
 ## 2. Checklist des sept compétences
 
@@ -94,8 +94,8 @@ Cette répartition est une recommandation de préparation, pas une exigence offi
 
 | Séquence | Durée |
 | --- | --- |
-| Contexte Spity, besoin et nature des preuves | 2 min 30 |
-| C.3.1 - Méthode, planning et ressources | 4 min |
+| Contexte Spity, besoin et nature des preuves (slides 1-2) | 1 min 30 |
+| C.3.1 - Méthode, planning global et détaillé, ressources (slides 3-6) | 5 min |
 | C3.2.1 - Suivi et indicateurs | 5 min |
 | C3.2.2 - Cas d'arbitrage | 3 min 30 |
 | C3.3.1 - Management et communication | 3 min |
@@ -111,7 +111,7 @@ Cette répartition est une recommandation de préparation, pas une exigence offi
 - Qui a exprimé les besoins, testé le logiciel ou validé des étapes ?
 - Quelles sont les dates réelles du projet, de la soutenance et du dépôt ?
 - Quels planning, suivis de temps/coûts, échanges et retours existent déjà ?
-- Quelles précisions le règlement spécial et les consignes du campus apportent-ils ?
+- Quelles consignes complémentaires du campus précisent le passage et le dépôt ?
 
 Si certaines situations de management ou de relation client sont fictives, les présenter comme telles et les distinguer des faits et preuves réels. Le référentiel admet une situation fictive, mais cela ne permet pas de présenter une équipe inventée, un compte rendu reconstitué ou une validation simulée comme un événement réellement survenu. Les détails d'application seront rapprochés des consignes du campus.
 
@@ -121,4 +121,6 @@ Si certaines situations de management ou de relation client sont fictives, les p
 - **S2** - « 25-26 Modalités_Evaluations_Titre EDL RNCP39583_YNOV_M2_filiere Info (2).pdf », Ludovic NAY, V1.0, rentrée 2025. Pages 4 (planning), 6 (modalités), 8 (validation), 10 (documents de référence) et 11 (dépôt). Fichier fourni dans le dossier Téléchargements du candidat, non recopié dans le dépôt.
 - **S3** - « 24 10 10 Grille évaluation Expert en développement logiciel_BC03.pdf », page unique : sept compétences, livrables et critères, résultat « Acquis / Non Acquis ». Fichier fourni dans le dossier Téléchargements du candidat, non recopié dans le dépôt.
 
-Les pages pertinentes ont été extraites et contrôlées visuellement, notamment l'alignement des modalités par bloc et les lignes de la grille. Les trois PDF d'origine n'ont pas été modifiés.
+- **S4** - « 25 09 15  Réglement spécial de certification - Expert en développement logiciel RNCP39583 (1).pdf », Direction Certification, Titres et Qualité, v1.01 du 15/09/2025. Pages 1 (règle de validation et prérequis), 3-4 (Bloc 3, livrables et compétences éliminatoires). Fichier consulté dans les Téléchargements le 15 septembre 2026, SHA-256 `58167648452bb9bf5ec93c3765b7d00f05a7f56d9e298f5fd76407a26e26f751`.
+
+Les pages pertinentes ont été extraites et contrôlées visuellement, notamment l'alignement des modalités par bloc et les lignes de la grille. Le règlement spécial complète cette lecture avec ses pages 1 et 3-4. Les quatre PDF d'origine n'ont pas été modifiés.

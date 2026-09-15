@@ -1,0 +1,30 @@
+{
+  "consultedOn": "2026-09-15",
+  "sourceFile": "25 09 15  Réglement spécial de certification - Expert en développement logiciel RNCP39583 (1).pdf",
+  "sourceSHA256": "58167648452bb9bf5ec93c3765b7d00f05a7f56d9e298f5fd76407a26e26f751",
+  "sourceVersion": "v1.01 du 15/09/2025",
+  "sourcePages": [
+    1,
+    3,
+    4
+  ],
+  "competencies": [
+    "C.3.1",
+    "C3.2.1",
+    "C3.2.2",
+    "C3.3.1",
+    "C3.3.2",
+    "C3.4.1",
+    "C3.4.2"
+  ],
+  "eliminatoryCompetencies": [
+    "C.3.1",
+    "C3.2.1",
+    "C3.4.2"
+  ],
+  "minimumAcquired": 4,
+  "presentationMinutes": 30,
+  "questionsMinutes": 15,
+  "mandatoryDeliverables": 14,
+  "scope": "Lecture des sources du candidat, sans décision du jury ni confirmation des consignes particulières du campus."
+}
