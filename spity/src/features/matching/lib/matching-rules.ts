@@ -52,7 +52,9 @@ export const filterClimbers = (climbers: PublicClimber[], filters: MatchingFilte
       .toLocaleLowerCase('fr')
       .includes(normalizedQuery)
     const matchesDiscipline = !filters.discipline || climber.disciplines.includes(filters.discipline)
-    const matchesGrade = !filters.grade || Object.values(climber.niveaux).includes(filters.grade)
+    const matchesGrade = !filters.grade || (filters.discipline
+      ? climber.niveaux[filters.discipline] === filters.grade
+      : climber.disciplines.some((discipline) => climber.niveaux[discipline] === filters.grade))
     const matchesAvailability = !filters.availability || climber.availability.includes(filters.availability)
     const matchesEnvironment = !filters.environment || climber.climbingEnvironment === filters.environment
 

@@ -242,7 +242,6 @@ test.describe.serial('Cahier de recettes BC02 - fonctions F01 à F10', () => {
     const declinedCard = cardContainingHeading(sender.page, accounts.thirdClimber.displayName)
     await declinedCard.getByRole('button', { name: 'Envoyer une demande' }).click()
     await expect(sender.page.getByText(`Demande envoyée à ${accounts.thirdClimber.displayName}.`)).toBeVisible()
-    await sender.context.close()
 
     const recipient = await newAuthenticatedPage(browser, secondClimberState)
     await recipient.page.goto('/app/partnerships')
@@ -250,6 +249,10 @@ test.describe.serial('Cahier de recettes BC02 - fonctions F01 à F10', () => {
       name: `Accepter la demande de ${accounts.firstClimber.displayName}`,
     }).click()
     await expect(recipient.page.getByText('Demande acceptée.')).toBeVisible()
+    await sender.page.getByRole('button', { name: 'Actualiser les profils' }).click()
+    await expect(acceptedCard.getByRole('button', { name: 'Partenaire confirmé' })).toBeVisible()
+    await expect(recipient.page.getByRole('link', { name: 'Trouver une sortie' })).toHaveAttribute('href', '/app/events')
+    await sender.context.close()
     await recipient.context.close()
 
     const decliningRecipient = await newAuthenticatedPage(browser, thirdClimberState)
@@ -294,7 +297,7 @@ test.describe.serial('Cahier de recettes BC02 - fonctions F01 à F10', () => {
     await second.page.goto('/app/events')
     await expect(cardContainingHeading(second.page, eventTitle).getByRole('button', { name: 'S’inscrire' })).toBeDisabled()
 
-    await club.page.reload()
+    await club.page.getByRole('button', { name: 'Actualiser les événements' }).click()
     let eventCard = cardContainingHeading(club.page, eventTitle)
     await expect(eventCard.getByText('Participants')).toBeVisible()
     await expect(eventCard.getByText(accounts.firstClimber.displayName)).toBeVisible()
@@ -303,15 +306,15 @@ test.describe.serial('Cahier de recettes BC02 - fonctions F01 à F10', () => {
     await club.page.getByRole('button', { name: 'Enregistrer' }).click()
     await expect(club.page.getByText('Événement enregistré.')).toBeVisible()
 
-    await second.page.reload()
+    await second.page.getByRole('button', { name: 'Actualiser les événements' }).click()
     await cardContainingHeading(second.page, eventTitle).getByRole('button', { name: 'S’inscrire' }).click()
     await expect(second.page.getByText('Inscription confirmée.')).toBeVisible()
 
-    await first.page.reload()
+    await first.page.getByRole('button', { name: 'Actualiser les événements' }).click()
     await cardContainingHeading(first.page, eventTitle).getByRole('button', { name: 'Annuler mon inscription' }).click()
     await expect(first.page.getByText('Inscription annulée.')).toBeVisible()
 
-    await club.page.reload()
+    await club.page.getByRole('button', { name: 'Actualiser les événements' }).click()
     eventCard = cardContainingHeading(club.page, eventTitle)
     await expect(eventCard.getByText(accounts.secondClimber.displayName)).toBeVisible()
     await expect(eventCard.getByText(accounts.firstClimber.displayName)).toHaveCount(0)

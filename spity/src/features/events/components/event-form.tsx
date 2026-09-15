@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { CalendarPlus, Save, X } from 'lucide-react'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import { requestJson } from '@/lib/api-client'
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input, Textarea } from '@/components/ui'
 import {
   eventFormSchema,
@@ -50,13 +50,6 @@ const toFormValues = (event?: SpityEvent): EventFormValues => event ? {
   capacity: event.capacity,
 } : defaultValues
 
-const parseError = async (response: Response) => {
-  const payload: unknown = await response.json().catch(() => null)
-  const result = z.object({ error: z.string() }).safeParse(payload)
-
-  return result.success ? result.data.error : 'L’événement n’a pas pu être enregistré'
-}
-
 export default function EventForm({ event, onCancel, onSaved }: EventFormProps) {
   const form = useForm<EventFormValues>({
     resolver: zodResolver(eventFormSchema),
@@ -78,29 +71,16 @@ export default function EventForm({ event, onCancel, onSaved }: EventFormProps) 
       endsAt: values.endsAt ? new Date(values.endsAt).toISOString() : null,
       capacity: values.capacity,
     }
-    const response = await fetch(event ? `/api/events/${event.id}` : '/api/events', {
-      method: event ? 'PATCH' : 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    })
-
-    if (!response.ok) {
-      form.setError('root', { message: await parseError(response) })
-      return
-    }
-
-    const responsePayload: unknown = await response.json()
-    const parsedResponse = eventResponseSchema.safeParse(responsePayload)
-
-    if (!parsedResponse.success) {
-      form.setError('root', { message: 'La réponse du serveur est invalide' })
-      return
-    }
-
-    onSaved(parsedResponse.data.event)
-
-    if (!event) {
-      form.reset(defaultValues)
+    try {
+      const result = await requestJson(event ? `/api/events/${event.id}` : '/api/events', eventResponseSchema, {
+        method: event ? 'PATCH' : 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      onSaved(result.event)
+      if (!event) form.reset(defaultValues)
+    } catch (error) {
+      form.setError('root', { message: error instanceof Error ? error.message : 'L’événement n’a pas pu être enregistré.' })
     }
   }
 

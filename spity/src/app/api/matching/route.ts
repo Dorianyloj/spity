@@ -1,11 +1,8 @@
 import { getCurrentUser } from '@/features/auth/lib/current-user'
-import { findMatchingClimbers } from '@/features/matching/lib/matching-repository'
+import { findMatchingClimbers, findPartnershipStatuses } from '@/features/matching/lib/matching-repository'
 import { matchingErrorResponse } from '@/features/matching/lib/responses'
-import { publicClimberSchema } from '@/features/matching/schemas'
-import { z } from 'zod'
+import { matchingResponseSchema } from '@/features/matching/schemas'
 import { NextResponse } from 'next/server'
-
-const matchingResponseSchema = z.object({ climbers: z.array(publicClimberSchema) })
 
 export async function GET() {
   const user = await getCurrentUser()
@@ -19,6 +16,9 @@ export async function GET() {
   }
 
   const climbers = await findMatchingClimbers(user.id)
+  const statuses = await findPartnershipStatuses(user.id, climbers.map((climber) => climber.userId))
 
-  return NextResponse.json(matchingResponseSchema.parse({ climbers }))
+  return NextResponse.json(matchingResponseSchema.parse({ climbers, statuses: Object.fromEntries(statuses) }), {
+    headers: { 'Cache-Control': 'private, no-store', Vary: 'Cookie' },
+  })
 }
