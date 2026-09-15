@@ -4,7 +4,7 @@ import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 
-const root=process.cwd(),tmp=path.join(root,'tmp/bloc3/visual-v11');
+const root=process.cwd(),tmp=path.join(root,'tmp/bloc3/visual-v12');
 await fs.mkdir(tmp,{recursive:true});
 const modules=process.env.RUNTIME_NODE_MODULES??path.join(root,'tmp/bloc3/build/node_modules');
 process.env.RUNTIME_NODE_MODULES=modules;
@@ -89,8 +89,8 @@ for(const item of doc.slides){
       const sequence=consolidation.globalPlanning.sequence,capacity=consolidation.globalPlanning.capacityPersonDaysPerWeek;
       let total=0;const starts=sequence.map(x=>{const start=total/capacity;total+=x.personDays;return start;});
       const cats=sequence.map(x=>`${x.title} (${x.personDays} j-h)`),durations=sequence.map(x=>x.personDays/capacity);
-      chart(s,3,cats.reverse(),[{name:'Début',values:starts.reverse(),fill:'none',line:{fill:'none',width:0}},{name:'Durée de capacité',values:durations.reverse(),fill:green}],{position:{left:64,top:173,width:1136,height:409},barOptions:{direction:'bar',grouping:'stacked',gapWidth:70},dataLabels:{showValue:false},xAxis:{visible:true,textStyle:{typeface:font,fontSize:25,fill:ink},majorGridlines:null},yAxis:{visible:true,min:0,max:16,majorUnit:4,numberFormatCode:'0" sem."',textStyle:{typeface:font,fontSize:23,fill:ink},majorGridlines:{fill:'#DBDFD5',width:1}}});
-      takeaway(s,'79 j-h à 5 j-h/semaine : 15,8 semaines de capacité.',598);
+      chart(s,3,cats.reverse(),[{name:'Début',values:starts.reverse(),fill:'none',line:{fill:'none',width:0}},{name:'Durée de capacité',values:durations.reverse(),fill:green}],{position:{left:64,top:173,width:1136,height:409},barOptions:{direction:'bar',grouping:'stacked',gapWidth:70},dataLabels:{showValue:false},xAxis:{visible:true,textStyle:{typeface:font,fontSize:25,fill:ink},majorGridlines:null},yAxis:{visible:true,min:0,max:18,majorUnit:3,numberFormatCode:'0" sem."',textStyle:{typeface:font,fontSize:23,fill:ink},majorGridlines:{fill:'#DBDFD5',width:1}}});
+      takeaway(s,'82 j-h du Bloc 1 : 16,4 semaines à 5 j-h/semaine.',598);
       text(s,'Ordre pédagogique du MVP cible. Le lot B3 est un zoom distinct.',72,641,1136,29,21,false,muted);break;
     }
     case 4:{
@@ -118,7 +118,7 @@ for(const item of doc.slides){
     case 8:
       chart(s,8,['Initial','Prévision','Plafond'],[{name:'Euros',values:[indicators.plannedCost,indicators.forecastCost,indicators.ceiling],valuesFormatCode:'0" €"',fill:green,points:[{idx:0,fill:sage},{idx:1,fill:orange},{idx:2,fill:green}]}]);
       aside(s,'232 €','Marge du lot','195 € au-dessus\nde sa référence.');
-      text(s,'Budget global B1 : 38 126 € HT. Exercice B3 distinct.',72,610,1136,48,27,true,green);break;
+      text(s,'Budget global B1 : 44 250 €. Suivi du lot distinct.',72,610,1136,48,27,true,green);break;
     case 9:
       chart(s,9,['QA','DEV','CP'],[{name:'Charge',values:[24,64,29],valuesFormatCode:'0" h"',fill:green,dataLabelOverrides:[0,1,2].map(idx=>({idx,showValue:true,position:'center',textStyle:{typeface:font,fontSize:24,fill:'#FFFFFF'}}))},{name:'Marge',values:[6,8,1],valuesFormatCode:'0" h"',fill:gray,dataLabelOverrides:[0,1,2].map(idx=>({idx,showValue:idx!==2,position:'center',textStyle:{typeface:font,fontSize:24,fill:ink}}))}],{position:{left:70,top:185,width:805,height:420},barOptions:{direction:'bar',grouping:'stacked',gapWidth:95},hasLegend:true,dataLabels:{showValue:true,position:'center',textStyle:{typeface:font,fontSize:24,fill:ink}}});
       aside(s,'1 h','Marge du CP','Alerte au-delà de 90 %.\nCP atteint 96,7 %.');takeaway(s,'Limiter les demandes. Protéger les créneaux d’arbitrage.',616);break;
@@ -194,7 +194,7 @@ assert.equal(elapsed,30);assert.equal(doc.slides.length,25);
 await fs.writeFile(path.join(root,'docs/rncp/bloc-03/donnees/support-oral.json'),JSON.stringify(doc.slides,null,2)+'\n');
 await fs.writeFile(path.join(tmp,'chart-data.json'),JSON.stringify(chartContracts,null,2)+'\n');
 const candidate=path.join(tmp,'candidate.pptx');await(await PresentationFile.exportPptx(P)).save(candidate);
-const finalPath=path.join(root,'output/presentations/spity-bloc-3-30-minutes-visuel-v11.pptx');
+const finalPath=path.join(root,'output/presentations/spity-bloc-3-30-minutes-visuel-v12.pptx');
 await finalizePresentation({workspaceDir:root,candidatePath:candidate,finalPath,pythonExecutable:python,integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-heading-fit',...tableOwners.flatMap(n=>['--require-native-table-slide',String(n)])],requiredNativeTableOwnerSlides:tableOwners,requiredNativeChartOwnerSlides:chartOwners,materializeLiteralChartWorkbooks:true,fontPolicy:{basis:'design',families:[font]},verifyArtifactToolImport:true,receiptPath:path.join(tmp,'validation.json')});
 const checked=await PresentationFile.importPptx(await FileBlob.load(finalPath));
 for(let i=0;i<checked.slides.items.length;i++){const png=await checked.export({slide:checked.slides.items[i],format:'png',scale:1});await fs.writeFile(path.join(tmp,`slide-${String(i+1).padStart(2,'0')}.png`),new Uint8Array(await png.arrayBuffer()));}

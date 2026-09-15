@@ -1,8 +1,8 @@
 {
   "date": "2026-09-15",
   "presentation": {
-    "file": "output/presentations/spity-bloc-3-30-minutes-visuel-v11.pptx",
-    "sha256": "5ee1b4687582871178c8d43c64635c0216bb31716ae2d6fa85a2430185d97d8b",
+    "file": "output/presentations/spity-bloc-3-30-minutes-visuel-v12.pptx",
+    "sha256": "0c88f8629495fefa1e0f23a84c262d014d71cb1dc372b195cf5b93c7ae356bb5",
     "slidesReviewed": [
       1,
       2,
@@ -31,11 +31,10 @@
       25
     ],
     "changedSlides": [
-      4,
-      13,
-      17
+      3,
+      8
     ],
-    "unchangedSlides": "Rendus identiques à la v10, déjà inspectés individuellement",
+    "unchangedSlides": "23 rendus identiques à la v11, conservés et revus en planches de contact.",
     "nativeCharts": 7,
     "nativeChartWorkbooks": 7,
     "nativeTableSlides": [
@@ -55,24 +54,19 @@
     "font": "Arial",
     "rendering": "Artifact Tool import and PNG export, 1280 x 720; changed slides individually reviewed and entire deck in contact sheets",
     "nativePowerPointExecution": false,
-    "currentReview": "25 diapositives relues par extraction et planches de contact ; fichier v11 inchangé pendant le contrôle de complétude."
+    "currentReview": "25 diapositives relues par extraction et planches de contact ; slides 3 et 8 inspectées individuellement après harmonisation sur le diaporama du Bloc 1."
   },
   "dossier": {
     "file": "output/pdf/dossier-bloc-03-spity.pdf",
-    "sha256": "df7de9da2906d78cea9947bc021db95d104ce178c0ce6deb10faedd1b77cce9d",
+    "sha256": "7193a462af63c8980591f405dac5261538edbff8966b6141457947a0de0da3ff",
     "pages": 30,
-    "rendering": "Poppler PNG, 85 dpi pour les 30 pages ; planches de contact et vérification détaillée des pages de cadre/matrice ; dernière page revue à 110 dpi.",
+    "rendering": "Poppler PNG, 85 dpi pour les 30 pages ; toutes revues en planches de contact, pages modifiées 3, 5, 8 et 11 inspectées individuellement.",
     "changedPages": [
-      2,
       3,
-      4,
       5,
-      6,
-      7,
       8,
-      9,
-      30
+      11
     ]
   },
-  "scope": "Contrôle de complétude : sept compétences et quatorze éléments attendus ; PDF corrigé avec le règlement spécial ; aucune nouvelle recette applicative ni répétition orale déclarée."
+  "scope": "Harmonisation sur le diaporama du Bloc 1 : neuf lots, 82 jours-homme, 450 EUR/jour et 44 250 EUR. Le support reste prévu pour trente minutes. Aucune nouvelle recette applicative ni répétition orale déclarée."
 }

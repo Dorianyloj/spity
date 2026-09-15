@@ -36,3 +36,5 @@ Les valeurs viennent du [cas de pilotage](../donnees/pilotage.json), de ses [ind
 Les rôles, charges, coûts et niveaux de compétences du scénario sont fictifs. Les notes et les pieds de page conservent cette distinction.
 
 Les tableaux natifs des slides 15 et 16 montrent la grille détaillée et les formations. Le complément donnees/consolidation.json documente la projection globale, le cas Paris/Montréal, la session pilote prévue et la variante RH indépendante de l’annexe 25. La version v11 ajoute les réunions inspirées de Scrum sur la slide 4, la rétrospective sur la slide 13 et la review sur la slide 17 ; donnees/rituels.json et A05/A07 décrivent le scénario correspondant.
+
+La version v12 aligne la slide 3 sur les neuf lots et 82 j-h du diaporama Bloc 1 (p. 21), avec une séquence pédagogique de 16,4 semaines à 5 j-h/semaine. La slide 8 reprend son budget global de 44 250 EUR (p. 22). Les données et l'empreinte de la référence sont dans donnees/reference-bloc-01.json ; les coûts du lot B3 gardent leur périmètre et ne s'ajoutent pas au budget global.

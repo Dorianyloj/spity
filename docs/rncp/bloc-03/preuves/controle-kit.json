@@ -30,5 +30,12 @@
     "C3.4.2"
   ],
   "minimumAcquiredCompetencies": 4,
-  "demonstrationReadyOnCurrentVersion": null
+  "demonstrationReadyOnCurrentVersion": null,
+  "referenceBloc1": {
+    "source": "docs/rncp/bloc-01/diapo-bloc-01-spity.pdf",
+    "personDays": 82,
+    "dailyRateEUR": 450,
+    "totalEUR": 44250,
+    "planningLots": 9
+  }
 }

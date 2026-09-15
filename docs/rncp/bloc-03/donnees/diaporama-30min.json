@@ -45,9 +45,9 @@
     },
     {
       "number": 3,
-      "title": "Le planning global de Spity",
+      "title": "Le planning global du Bloc 1",
       "minutes": 1,
-      "nature": "C.3.1, ordonnancement pédagogique dérivé du Bloc 1",
+      "nature": "C.3.1, neuf lots du diaporama Bloc 1",
       "layout": "columns",
       "content": {
         "items": [
@@ -61,9 +61,9 @@
           ]
         ]
       },
-      "script": "Le Bloc 1 prévoit soixante-dix-neuf jours-homme pour le MVP. Ses cinq jalons couvrent le socle, la découverte, l'organisation des sorties, la communauté et la stabilisation. Je représente ici leur ordre à raison de cinq jours-homme par semaine, soit environ seize semaines. C'est un ordonnancement pédagogique, pas la reconstitution des dates réellement travaillées.\n\nChaque jalon correspond à un résultat vérifiable, depuis un profil exploitable jusqu'à une recette documentée. Les fonctions du MVP cible dépassent le prototype évalué au Bloc 2. Le lot de quinze jours que je détaille ensuite permet d'expliquer le suivi sur un périmètre plus réduit. Ses heures ne s'ajoutent pas automatiquement au budget global. Le Bloc 4 prépare la suite, avec les anomalies et le support.",
-      "source": "B1 C1.4.1 p. 7-8 ; A01 ; consolidation.json. Charges source 16+15+17+14+17=79 j-h. Calendrier relatif dérivé, capacité constante de 5 j-h/semaine.",
-      "action": "",
+      "script": "Le diaporama du Bloc 1 prévoit quatre-vingt-deux jours-homme pour le MVP. Je reprends ses neuf lots et leurs charges : cadrage, socle technique, authentification, profils, fil social, répertoire, topos, événements et qualité. Leur total correspond à la référence de lancement.\n\nJe représente ici une séquence pédagogique à cinq jours-homme par semaine. Elle demande seize virgule quatre semaines de capacité. Les barres ne reconstituent pas les dates réellement travaillées. Chaque lot doit produire un résultat vérifiable avant sa clôture.\n\nLe suivi détaillé présenté ensuite porte sur un lot de préparation de démonstration, avec les parcours déjà développés au Bloc 2. Ses jours J1 à J15 désignent des jours relatifs de ce cas. Le budget global reste celui du Bloc 1.",
+      "source": "Diaporama B1, p. 21 : 8+6+10+9+12+10+9+8+10=82 j-h. A01 et reference-bloc-01.json. Séquence pédagogique à 5 j-h/semaine, soit 16,4 semaines.",
+      "action": "Lire les neuf lots du Bloc 1, puis distinguer le planning global du suivi détaillé.",
       "transition": "Je choisis une méthode adaptée au suivi de ce travail.",
       "demo": false
     },
@@ -238,7 +238,7 @@
     },
     {
       "number": 8,
-      "title": "Le budget du lot de démonstration",
+      "title": "Le budget de référence et le suivi du lot",
       "minutes": 1.5,
       "nature": "C3.2.1, montants fictifs en euros",
       "layout": "table",
@@ -277,9 +277,9 @@
         ],
         "takeaway": "Le dépassement reste visible même lorsque la réserve peut l’absorber"
       },
-      "script": "Il faut distinguer deux périmètres. Les fiches détaillées du Bloc 1 estiment le lancement du MVP et sa première année à trente-huit mille cent vingt-six euros hors taxes, sur une base de soixante-dix-neuf jours-homme. Ici, je valorise seulement le lot pédagogique de démonstration, avec des taux horaires fictifs. Ce montant ne remplace pas le budget global et ne permet pas de calculer une économie du projet.\n\nLa référence du lot est de quatre mille deux cent soixante-dix euros, frais compris. À J10, la prévision passe à quatre mille quatre cent soixante-cinq euros. L'écart atteint cent quatre-vingt-quinze euros, soit environ quatre virgule six pour cent. Il doit rester visible même si une réserve existe.\n\nLa réserve initiale de quatre cent vingt-sept euros porte le plafond à quatre mille six cent quatre-vingt-dix-sept euros. Il reste deux cent trente-deux euros de marge. Je compare toute demande nouvelle à cette marge et à la disponibilité des rôles. Le classeur permet de retrouver le détail du calcul. Ces valeurs sont des hypothèses d'exercice, sans facture ni consommation réelle du budget du Bloc 1.",
-      "source": "A03 et classeur Pilotage. B1 : fiches C1.4.1 p. 7 et C1.4.2 p. 2-4, 79 j-h et 38 126 EUR HT. L’ancien diaporama B1 porte une autre estimation, voir COHERENCE_INTER_BLOCS.md.",
-      "action": "Séparer le budget global B1 du budget du lot B3, puis comparer référence, prévision et plafond.",
+      "script": "Je conserve le budget présenté dans le diaporama du Bloc 1 : quarante-quatre mille deux cent cinquante euros. Il comprend quatre-vingt-deux jours-homme à quatre cent cinquante euros, soit trente-six mille neuf cents euros de développement, puis les postes de lancement détaillés en annexe.\n\nLe graphique suit un périmètre plus limité : notre cas de préparation de démonstration, valorisé en heures par rôle. La référence de ce lot est de quatre mille deux cent soixante-dix euros. À J10, sa prévision atteint quatre mille quatre cent soixante-cinq euros. L'écart de cent quatre-vingt-quinze euros représente environ quatre virgule six pour cent.\n\nLa réserve de quatre cent vingt-sept euros porte le plafond du lot à quatre mille six cent quatre-vingt-dix-sept euros. Il reste deux cent trente-deux euros de marge. Toute demande est examinée avec cette marge et la capacité des rôles.\n\nLe classeur détaille ces calculs. Les charges du cas sont simulées : elles ne prouvent pas une consommation du budget global. Je conserve les unités et les périmètres pour éviter d'additionner des montants qui recouvrent des travaux communs.",
+      "source": "Diaporama B1, p. 21-22 : 82 j-h, 450 EUR/j, total 44 250 EUR. A03, A09 et classeur : cas B3 distinct. reference-bloc-01.json et COHERENCE_INTER_BLOCS.md.",
+      "action": "Nommer le budget global B1, puis lire les trois repères du suivi détaillé du lot.",
       "transition": "La marge financière doit être lue avec la disponibilité de chaque rôle.",
       "demo": false
     },
@@ -451,7 +451,7 @@
         "detail": "12 h DEV + 4 h QA = 540 €. Le plafond serait dépassé de 308 €."
       },
       "script": "À J10, le client fictif demande un lot supplémentaire de contributions aux topos. Il s'agit d'une demande pédagogique, distincte de l'état actuel du code. Son estimation est de douze heures de développement et de quatre heures de recette, soit cinq cent quarante euros.\n\nL'ajout porterait la prévision à cinq mille cinq euros, au-dessus du plafond de trois cent huit euros. Il porterait également la charge du développeur à soixante-seize heures pour soixante-douze disponibles. La difficulté concerne donc à la fois le budget et la capacité.\n\nJe compare l'ajout, le retrait d'une partie de la recette et le report. Réduire la recette ferait perdre des contrôles sur le périmètre déjà engagé. Le scénario retient le report du lot supplémentaire. Le client fictif valide cette décision dans le compte rendu J10. Les critères restent dans le backlog pour une estimation ultérieure. Cette réponse explique ce qui peut être livré, à quel moment, et pourquoi la demande ne peut pas simplement être ajoutée sans conséquence.",
-      "source": "A04 et CR02 dans A07. Simulation explicitement distincte du code actuel. B1 : C1.4.1, contributions aux topos dans la vision cible. Le report concerne ce lot pédagogique ; il ne supprime pas la fonctionnalité du projet. Linear SPI-22 est observé en Backlog au 14 septembre. Le chiffrage additionnel 12 h DEV et 4 h QA est une hypothèse du lot, pas une estimation extraite de ce ticket.",
+      "source": "A04 et CR02 dans A07. Simulation explicitement distincte du code actuel. B1 : diaporama p. 20-21, topos Should dans la vision cible. Le report concerne ce lot pédagogique ; il ne supprime pas la fonctionnalité du projet. Linear SPI-22 est observé en Backlog au 14 septembre. Le chiffrage additionnel 12 h DEV et 4 h QA est une hypothèse du lot, pas une estimation extraite de ce ticket.",
       "action": "Montrer le rattachement de la demande au contexte SPI-22, puis comparer les coûts et la capacité DEV.",
       "transition": "Pour appliquer cette décision, je dois aussi la faire comprendre à l’équipe.",
       "demo": false

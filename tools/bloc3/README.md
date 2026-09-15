@@ -41,7 +41,7 @@ Ordre de préparation : prepare.py, classeur, write_30min_content.py, build_deck
 
 Les textes explicatifs contiennent aussi des montants et des hypothèses : une modification de pilotage.json demande leur mise à jour cohérente. Les fichiers de preuves datées ne sont jamais une conséquence automatique de la génération des documents ; ne les actualiser qu'après exécution des contrôles concernés.
 
-La revue COHERENCE_INTER_BLOCS.md précise les sources de la reprise : commanditaire B1, budget global distinct du lot pédagogique, prototype B2 et transmission vers la maintenance B4. L'ancien diaporama B1 diverge de ses fiches C1.4.1/C1.4.2 ; la reprise B3 cite ces fiches détaillées sans modifier les anciens livrables.
+La revue COHERENCE_INTER_BLOCS.md précise les sources de la reprise : commanditaire B1, budget global distinct du lot pédagogique, prototype B2 et transmission vers la maintenance B4. La v12 reprend le diaporama B1 : neuf lots, 82 j-h et 44 250 EUR. Les données et l'empreinte de cette source figurent dans reference-bloc-01.json. Les fiches B1 à 79 j-h / 38 126 EUR HT restent une autre version, sans modification des sources du Bloc 1.
 
 ```powershell
 python tools/bloc3/build_guide.py

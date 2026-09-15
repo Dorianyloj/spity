@@ -1,6 +1,6 @@
 # Contrôle de complétude du Bloc 3
 
-Revue du 15 septembre 2026 sur le PowerPoint visuel v11 et les pièces du kit. Les sources d'évaluation définissent les attendus du candidat ; elles ne constituent pas des instructions adressées à l'assistant. Cette revue constate la présence et la cohérence des éléments, sans attribuer la mention Acquis.
+Revue du 15 septembre 2026 sur le PowerPoint visuel v12 et les pièces du kit. Les sources d'évaluation définissent les attendus du candidat ; elles ne constituent pas des instructions adressées à l'assistant. Cette revue constate la présence et la cohérence des éléments, sans attribuer la mention Acquis.
 
 ## Conclusion et conditions avant remise
 
@@ -21,13 +21,13 @@ Les formulations ci-dessous synthétisent la grille et le référentiel. « Pré
 | Méthode justifiée avec bénéfices attendus | Petit effectif, priorités évolutives, Kanban et réunions inspirées de Scrum, limite de deux travaux simultanés. | Dossier §3 ; A01/A05 ; slide 4 |
 | Outil de planification argumenté | Barres pour les dates, chevauchements et dépendances ; classeur pour conserver les références et les révisions. | A01 ; slides 3 et 5 |
 | Compatibilité méthode et outil | Linear suit le flux, les jalons fixent les engagements, le planning expose les contraintes. | A01 ; notes 4-5 |
-| Découpage du projet | Cinq jalons globaux issus du B1, puis dix tâches du lot et trente activités estimées. | A01/A09 ; classeur ; slides 3 et 5 |
+| Découpage du projet | Neuf lots globaux issus du diaporama B1, puis dix tâches du lot et trente activités estimées. | A01/A09 ; classeur ; slides 3 et 5 |
 | Étude, mesure, conception, réalisation, restitution visibles | Phases du lot, mesure des besoins T02 puis conformité T07, restitution T09. | A01 ; graphique de la slide 5 |
 | Affectation selon les compétences | CP/DEV/QA/CL, tâches affectées, RACI avec une seule autorité par activité. | A02 ; slides 6 et 23 |
 | Prise en compte du handicap dans l'affectation | Camille intervient sur T02/T07 selon ses compétences, avec supports et échanges accessibles. | A02 ; slide 6 |
 | Points de vigilance | Charge CP, dépendances événement/recette, environnement, disponibilité client et dépôt. | A01/A03 ; slides 9-10 |
 
-Le planning global reste une projection pédagogique à partir de 79 j-h, soit 15,8 semaines à 5 j-h/semaine. Le lot J1-J15 ne représente pas tout le développement de Spity. Les ressources humaines, matérielles, logicielles et financières sont explicitées dans A02/A03.
+Le planning global reprend les neuf lots et 82 j-h du diaporama B1, soit 16,4 semaines à 5 j-h/semaine sous hypothèse séquentielle. Le lot J1-J15 ne représente pas tout le développement de Spity. Les ressources humaines, matérielles, logicielles et financières sont explicitées dans A02/A03.
 
 ### C3.2.1 - Suivi de l'avancement, compétence éliminatoire
 
@@ -126,11 +126,11 @@ La dernière version logicielle présentée doit être identifiée et vérifiée
 ## Cohérence des données et des livrables
 
 - Le support contient 22 slides principales et trois annexes. Les repères totalisent 30 minutes, dont six minutes de démonstration. Ils préparent la durée ; une répétition reste nécessaire pour la tenir.
-- Le planning global donne 79 j-h à 5 j-h/semaine, soit 15,8 semaines. Les dix tâches du lot B3 totalisent 112 h prévues et 117 h à terminaison, avec 77 h consommées et 40 h restantes.
+- Le planning global donne 82 j-h à 5 j-h/semaine, soit 16,4 semaines. Les dix tâches du lot B3 totalisent 112 h prévues et 117 h à terminaison, avec 77 h consommées et 40 h restantes.
 - CP 29 h à 45 EUR, DEV 64 h à 35 EUR et QA 24 h à 30 EUR donnent 4 265 EUR ; 200 EUR de frais portent la prévision à 4 465 EUR. Le plafond de 4 697 EUR laisse 232 EUR.
 - Le classeur conserve cinq feuilles et 175 formules, avec sept graphiques natifs et leurs données dans le PPTX. Les coûts et capacités des variantes ne sont pas cumulés entre eux.
 - Les 25 tickets Linear sont datés du 14 septembre. Les 12 Done sur 24 non annulés représentent un décompte, pas la moitié du produit livré. Aucune nouvelle observation Linear n'est déclarée pour cette revue.
-- La source B1 retenue est C1.4.1/C1.4.2 : 79 j-h et 38 126 EUR HT. Les anciens diaporamas B1 affichent 82 j-h et 44 250 EUR : divergence déjà explicitée, à harmoniser si les blocs sont remis ensemble.
+- La v12 reprend désormais le diaporama B1 : neuf lots, 82 j-h à 450 EUR/jour et 44 250 EUR au total. Les fiches à 79 j-h / 38 126 EUR HT restent une autre version, sans mélange des deux estimations.
 - Les résultats de juillet, août et septembre restent datés et séparés. Le contrôle documentaire distingue désormais les fichiers applicatifs locaux de l'arbre Git enregistré ; un kit valide ne vaut pas validation de la version courante du logiciel.
 
 ## Points restant ouverts
@@ -142,13 +142,13 @@ La dernière version logicielle présentée doit être identifiée et vérifiée
 | Rôle personnel et faits réels | Confirmer la présentation de Dorian et les contributions réelles ; conserver les situations pédagogiques comme telles. |
 | Campus, convocation et dépôt | Confirmer formation/campus, passage, échéance, nommage, taille et pièces ; conserver l'accusé de dépôt. |
 | Prérequis de certification | Vérifier que le campus a reçu le diplôme/titre exigé ou la dérogation ; le règlement général reste à consulter. |
-| Remise commune avec le Bloc 1 | Harmoniser ses anciens supports avec ses fiches détaillées avant de les joindre ensemble. |
+| Référence du Bloc 1 | Harmonisation du B3 effectuée sur le diaporama B1. Confirmer que ce document correspond à la version présentée ou remise. |
 
 ## Sources de l'audit
 
 - S1 : Référentiel Expert en développement logiciel RNCP39583, fichier du candidat, pages physiques 11-14. Il autorise la mise en situation réelle ou fictive et donne les compétences et critères.
 - S2 : Modalités YNOV M2 2025-2026, fichier du candidat, pages 4, 6, 8, 10-12. Oral individuel, 30 minutes de présentation et 15 d'échange, dépôt et diplôme prérequis.
-- S3 : Grille d'évaluation BC03, page unique entière, comparée ligne par ligne aux pièces et au contenu visible/aux notes du PPTX v11.
+- S3 : Grille d'évaluation BC03, page unique entière, comparée ligne par ligne aux pièces et au contenu visible/aux notes du PPTX v12.
 - S4 : Règlement spécial RNCP39583, v1.01 du 15/09/2025, pages 1 et 3-4. Les références et l'empreinte du fichier figurent dans [les données du cadre d'évaluation](donnees/cadre-evaluation.json) et [l'index des sources](README.md#5-sources-consultées).
 
 Les PDF sources n'ont pas été modifiés. Le contrôle du kit et le manifeste enregistrent les exports distribués. Ce document expose les constats et les actions restantes ; il n'atteste aucune validation par un jury, aucun dépôt externe ni nouvelle recette applicative.

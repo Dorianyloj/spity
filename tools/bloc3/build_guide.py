@@ -13,7 +13,7 @@ def clock(minutes):
 
 parts = ['''# Guide de répétition — Bloc 3 Spity
 
-Support associé : spity-bloc-3-30-minutes-visuel-v11.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
+Support associé : spity-bloc-3-30-minutes-visuel-v12.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
 
 ## Compétences à sécuriser avant l'oral
 
@@ -49,7 +49,7 @@ parts.append('''## Questions probables du jury
 1. **Qu'avez-vous réellement fait et qu'avez-vous simulé ?** Présenter les contributions personnelles confirmées par le candidat. Les commits et les vérifications sont observables. L'équipe CP/DEV/QA, les jours J1-J15, les coûts et les comptes rendus client appartiennent au cas fictif. Un test réussi ne prouve pas un échange client.
 2. **Pourquoi Kanban et des réunions Scrum ?** Le tableau Kanban suit le flux et limite la réalisation à deux tâches. Le planning J3 fixe l'objectif et la capacité, le daily de dix minutes adapte la prochaine action, les reviews J10/J15 recueillent les retours client et la rétrospective J15 améliore la collaboration. Ce fonctionnement s'inspire de Scrum et reste adapté au lot ; les réunions du cas ne sont pas des preuves d'une application historique complète du cadre.
 3. **Quel est le chemin vers la soutenance ?** Accès/profils, matching, événements, recette/corrections et validation J14 avant la démonstration J15. La recette peut commencer sur les fonctions prêtes ; sa clôture attend les corrections. Montrer A01 et les dépendances.
-4. **Comment obtenez-vous 4 465 EUR ?** Valorisation du travail à terminaison : CP 29 h × 45 EUR, DEV 64 h × 35 EUR, QA 24 h × 30 EUR = 4 265 EUR ; ajouter 200 EUR de frais. Les taux et charges sont des hypothèses du lot. Le budget global B1 est de 38 126 EUR HT dans les fiches détaillées, sur 79 j-h. Il ne faut ni remplacer ce total par les coûts B3, ni les additionner. L’ancien diaporama B1 affiche une autre estimation, documentée dans COHERENCE_INTER_BLOCS.md.
+4. **Comment obtenez-vous 4 465 EUR ?** Valorisation du travail à terminaison : CP 29 h × 45 EUR, DEV 64 h × 35 EUR, QA 24 h × 30 EUR = 4 265 EUR ; ajouter 200 EUR de frais. Les taux et charges sont des hypothèses du lot. Le budget global repris du diaporama B1 est de 44 250 EUR, dont 82 j-h à 450 EUR/jour. Les coûts B3 détaillent un exercice de suivi en heures et ne s'ajoutent pas à ce total. Les neuf lots et les six postes budgétaires du B1 sont rapprochés dans COHERENCE_INTER_BLOCS.md.
 5. **La réserve fait-elle disparaître le dépassement ?** Non : le coût reste supérieur de 195 EUR à la référence de 4 270 EUR. La réserve de 427 EUR porte le plafond à 4 697 EUR et laisse 232 EUR de marge. Un écart doit rester visible même s'il est absorbable.
 6. **Pourquoi 50 % de tâches terminées ne signifie pas 50 % de produit livré ?** Le dénominateur est dix tâches du cas, de tailles différentes. Les 77 h consommées mesurent un effort, pas une valeur acquise. Linear donne aussi 12 Done sur 24 non annulés : ce second 50 % concerne un autre dénominateur et reste non pondéré. Les critères de recette déterminent la validation fonctionnelle.
 7. **Pourquoi reporter la demande nouvelle ?** Elle ajoute 540 EUR et conduit à 5 005 EUR, soit 308 EUR au-dessus du plafond. La charge DEV atteindrait 76 h pour 72 disponibles. Le report préserve les critères du lot et doit être validé par le commanditaire du scénario.
@@ -64,7 +64,7 @@ parts.append('''## Questions probables du jury
 
 ## Compléments de réponse après correction
 
-- Le planning global dérive de 79 j-h à 5 j-h/semaine, soit 15,8 semaines sous hypothèse séquentielle. Les quinze jours du lot B3 ne représentent pas tout le développement.
+- Le planning global reprend les neuf lots et 82 j-h du diaporama Bloc 1 ; à 5 j-h/semaine, il représente 16,4 semaines sous hypothèse séquentielle. Les quinze jours du lot B3 ne représentent pas tout le développement.
 - Les 5 h supplémentaires mesurent la charge. T06 et T07 glissent chacun d'un jour ; leur retard ne s'additionne pas, et le jalon reste J15.
 - Les quatre styles sont participatif, persuasif, directif et délégatif. QA avait déjà la recette : préserver cette affectation n'est pas une réallocation nouvelle.
 - Le plan comprend CP 1 h à J3, DEV 2 h à J9-J12 et Camille 3 h à J10-J14. Les niveaux techniques sont indépendants du handicap.

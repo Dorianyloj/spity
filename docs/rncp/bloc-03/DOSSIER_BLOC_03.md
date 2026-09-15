@@ -35,7 +35,7 @@ Le cas pédagogique reprend le commanditaire du Bloc 1 : le Collectif Altitude G
 | Rendre le parcours utilisable | Les commandes sont nommées et accessibles au clavier ; les erreurs sont compréhensibles. | Contrôle manuel et tests disponibles. |
 | Maîtriser la restitution | Les fonctionnalités montrées correspondent au périmètre accepté et à la version identifiée. | Grille de validation en fin de démonstration. |
 
-La réalisation personnelle exacte et les interactions humaines réelles seront précisées par le candidat. Le dossier ne transforme pas les hypothèses du cas en expérience professionnelle attestée.
+Le diaporama B1 p. 20 classe le matching en Could et les événements en Should. Leur sélection pour cet oral s'appuie sur le prototype B2 déjà développé ; elle ne modifie pas les priorités initiales du cadrage. La réalisation personnelle exacte et les interactions humaines réelles seront précisées par le candidat. Le dossier ne transforme pas les hypothèses du cas en expérience professionnelle attestée.
 
 ## 3. C.3.1 - Méthode et organisation du travail
 
@@ -45,11 +45,11 @@ Ce choix correspond à un petit effectif et à des priorités qui peuvent évolu
 
 Linear a été consulté directement le 14 septembre 2026 : 25 tickets, dont 12 Done, 4 Todo, 1 In Progress, 7 Backlog et 1 Canceled. A09 conserve le relevé et les liens. Le ticket actif SPI-27 concerne les médias et conditionne le parcours de publication SPI-15 puis SPI-18, d'après les descriptions lues. Le classeur de pilotage joint complète ce suivi par les charges, les jalons et les coûts. Git assure la traçabilité des modifications ; il ne remplace pas une mesure du temps passé.
 
-A01 présente d'abord les cinq jalons globaux du Bloc 1 : Socle 16 j-h, Découverte 15, Organisation 17, Communauté 14 et Stabilisation 17. À capacité constante de 5 j-h par semaine, un ordonnancement séquentiel représente 15,8 semaines. Cette projection pédagogique reprend les 79 j-h de C1.4.1, sans inventer un calendrier réalisé. Le diagramme à barres montre la séquence et les dépendances ; Kanban organise le flux quotidien.
+A01 reprend les neuf lots du diaporama Bloc 1, p. 21 : cadrage 8 j-h, setup 6, authentification 10, profils 9, feed 12, répertoire 10, topos 9, événements 8 et qualité/documentation 10. Leur total est de 82 j-h. À capacité constante de 5 j-h par semaine, la séquence pédagogique représente 16,4 semaines, sans dates historiques inventées. Le graphique montre cette projection ; Kanban organise le flux quotidien.
 
 Le planning pédagogique couvre quinze jours ouvrés relatifs, J1 à J15, sans leur attribuer des dates de réalisation historiques. Il distingue étude, mesure des besoins, conception de l'organisation, réalisation, recette et restitution. Les dépendances et les jalons sont détaillés dans A01. T07 peut commencer sur les parcours déjà livrés, mais sa clôture dépend aussi de la recette des événements et des corrections T10. La démonstration J15 reste conditionnée à ces deux validations.
 
-Ce lot de préparation et de stabilisation s'appuie sur le logiciel existant. Il ne représente pas le développement complet de Spity, estimé à 79 jours-homme dans la fiche C1.4.1 du Bloc 1. Les jalons J1-J5 de cette fiche sont distincts des jours relatifs J1-J15 du présent exercice.
+Ce lot de préparation et de stabilisation s'appuie sur le logiciel existant. Il détaille un exercice de suivi au sein du contexte global de 82 jours-homme du diaporama Bloc 1. Les jours relatifs J1-J15 du cas sont distincts des identifiants B1-L01 à B1-L09 ajoutés pour repérer les neuf lots du cadrage.
 
 Les ressources sont trois rôles, une machine de développement, Node.js 22 comme référence projet, MariaDB, un navigateur, Git, Linear et un espace documentaire partagé. Les charges et taux du scénario sont des hypothèses économiques ; ils ne représentent pas des salaires versés ou des dépenses réellement engagées.
 
@@ -82,7 +82,7 @@ Le délai se lit séparément de la charge : T06 passe de J11 à J12 (+1 jour ou
 
 Les heures consommées ne sont pas un pourcentage d'achèvement. Le passage à Terminé repose sur la validation du résultat. Les coûts sont des valorisations de charge en euros, hors taxes conventionnellement dans la simulation ; aucune facture réelle n'est représentée.
 
-La référence globale retenue est la fiche C1.4.2 du Bloc 1 : 79 jours-homme à 420 EUR HT, soit 33 180 EUR, plus 1 480 EUR d'exploitation annuelle et 3 466 EUR de provision, pour un total de 38 126 EUR HT. Les 4 270 EUR du lot B3 ne remplacent pas cette estimation et ne lui sont pas ajoutés. Les périmètres et hypothèses diffèrent ; aucune économie réelle ne peut être déduite de leur comparaison. L'ancien diaporama B1 affiche 82 jours-homme et 44 250 EUR : cette divergence avec les fiches détaillées est identifiée dans la revue inter-blocs et reste à harmoniser avant une remise commune.
+La référence globale est désormais le diaporama Bloc 1, p. 21-22 : 82 j-h à 450 EUR/jour donnent 36 900 EUR. Les autres postes sont l'infrastructure annuelle 1 200 EUR, les médias/cartographie 900 EUR, le domaine/email 250 EUR, la sécurité/conformité 2 000 EUR et les tests/recette 3 000 EUR. Le total repris est 44 250 EUR. Les 4 270 EUR du cas B3 ne lui sont pas ajoutés : les périmètres peuvent recouvrir des travaux communs et aucun consommé global n'est établi. Les anciennes fiches B1 à 79 j-h et 38 126 EUR HT restent des sources distinctes, non retenues pour cette référence financière.
 
 Le classeur recalcule les totaux et la charge par rôle après modification des entrées. Les risques sont suivis séparément avec responsable, déclencheur et réponse. Les 112 h initiales sont décomposées en 30 activités dans la feuille Estimations. Planning et Pilotage calculent leurs totaux à partir de ces entrées. A09 explique les causes des 5 h supplémentaires et les tests de sensibilité : 8 h DEV de plus dépassent le budget de 48 EUR ; 2 h CP de plus respectent le budget mais dépassent sa capacité d'une heure. Le relevé réel des 25 tickets Linear reste dans une feuille distincte.
 
@@ -164,4 +164,4 @@ Preuves projet : historique Git, commit 689e59d ; docs/bc02/10_CAHIER_RECETTES_C
 
 Annexes : A01 planning, A02 responsabilités, A03 indicateurs et risques, A04 arbitrages, A05 management, A06 compétences et formations, A07 suivi client, A08 démonstration, A09 données et rapprochement Linear. Les données numériques du cas sont centralisées dans donnees/pilotage.json et reprises dans le classeur joint. La matrice de preuves donne les correspondances avec la grille officielle.
 
-Continuité du projet : Bloc 1, C1.1.1 p. 2, C1.4.1 p. 7-8 et C1.4.2 p. 2-4 ; Bloc 2, dossier final du 23 juillet et retour d'expérience ; Bloc 4, dossier du 13 août, anomalie B4-C421-02 et cas support B4-C433-01. La revue COHERENCE_INTER_BLOCS.md conserve les références précises et les divergences documentaires.
+Continuité du projet : Bloc 1, C1.1.1 p. 2 pour le commanditaire, diaporama p. 20-22 pour priorités, charges et budget ; Bloc 2, dossier final du 23 juillet et retour d'expérience ; Bloc 4, dossier du 13 août, anomalie B4-C421-02 et cas support B4-C433-01. La revue COHERENCE_INTER_BLOCS.md conserve les références précises et les divergences documentaires.

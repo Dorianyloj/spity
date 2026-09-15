@@ -8,11 +8,13 @@ def align(slides):
     by={s['number']:s for s in slides}
     def update(n,title,script,source,transition='',action='',**extra):
         by[n].update(title=title,script=script.strip(),source=source,transition=transition,action=action,**extra)
-    update(3,'Le planning global de Spity',"""
-Le Bloc 1 prévoit soixante-dix-neuf jours-homme pour le MVP. Ses cinq jalons couvrent le socle, la découverte, l'organisation des sorties, la communauté et la stabilisation. Je représente ici leur ordre à raison de cinq jours-homme par semaine, soit environ seize semaines. C'est un ordonnancement pédagogique, pas la reconstitution des dates réellement travaillées.
+    update(3,'Le planning global du Bloc 1',"""
+Le diaporama du Bloc 1 prévoit quatre-vingt-deux jours-homme pour le MVP. Je reprends ses neuf lots et leurs charges : cadrage, socle technique, authentification, profils, fil social, répertoire, topos, événements et qualité. Leur total correspond à la référence de lancement.
 
-Chaque jalon correspond à un résultat vérifiable, depuis un profil exploitable jusqu'à une recette documentée. Les fonctions du MVP cible dépassent le prototype évalué au Bloc 2. Le lot de quinze jours que je détaille ensuite permet d'expliquer le suivi sur un périmètre plus réduit. Ses heures ne s'ajoutent pas automatiquement au budget global. Le Bloc 4 prépare la suite, avec les anomalies et le support.
-""",'B1 C1.4.1 p. 7-8 ; A01 ; consolidation.json. Charges source 16+15+17+14+17=79 j-h. Calendrier relatif dérivé, capacité constante de 5 j-h/semaine.', 'Je choisis une méthode adaptée au suivi de ce travail.',nature='C.3.1, ordonnancement pédagogique dérivé du Bloc 1')
+Je représente ici une séquence pédagogique à cinq jours-homme par semaine. Elle demande seize virgule quatre semaines de capacité. Les barres ne reconstituent pas les dates réellement travaillées. Chaque lot doit produire un résultat vérifiable avant sa clôture.
+
+Le suivi détaillé présenté ensuite porte sur un lot de préparation de démonstration, avec les parcours déjà développés au Bloc 2. Ses jours J1 à J15 désignent des jours relatifs de ce cas. Le budget global reste celui du Bloc 1.
+""",'Diaporama B1, p. 21 : 8+6+10+9+12+10+9+8+10=82 j-h. A01 et reference-bloc-01.json. Séquence pédagogique à 5 j-h/semaine, soit 16,4 semaines.', 'Je choisis une méthode adaptée au suivi de ce travail.',action='Lire les neuf lots du Bloc 1, puis distinguer le planning global du suivi détaillé.',nature='C.3.1, neuf lots du diaporama Bloc 1')
     update(4,'Kanban pour suivre, des jalons pour décider',"""
 Je retiens Kanban pour le cas : un petit effectif, des priorités évolutives et des retours rapides. La limite de deux tâches de réalisation simultanées réduit la dispersion. Une tâche ne passe à terminé qu'après vérification de ses critères. Des réunions inspirées de Scrum complètent ce flux ; le cycle en V rendrait les retours intermédiaires moins fréquents.
 
@@ -80,4 +82,4 @@ Je demande alors si ce périmètre répond aux critères convenus. Les réserves
 """,'A07 grille de validation ; A08 ; Bloc 4 suivi des réserves et anomalies.', 'Je suis prêt à répondre aux questions et à retrouver les preuves.',action='Demander la décision sur les critères. Terminer à 30:00.',nature='C3.4.2, décision attendue après démonstration')
     update(23,'Annexe : responsabilités du lot','La matrice RACI distingue réalisation, décision, consultation et information. Une seule autorité A est retenue par activité. Camille est le rôle QA fictif. Les aménagements modifient les échanges, sans retirer sa responsabilité de recette.','A02, matrice RACI du scénario.',nature='Annexe, organisation fictive')
     update(25,'Annexe : demande de renfort aux RH','Si une compétence critique reste indisponible à J12, le scénario prévoit une demande au service RH fictif. Quatre heures de spécialiste à 45 euros ajoutent 180 euros, et une demi-heure de CP ajoute 22,50 euros. La prévision de cette variante devient 4 667,50 euros, soit 29,50 euros sous le plafond. La disponibilité J12-J13, le devis et le résultat attendu restent à confirmer. Cette variante indépendante n’est ni activée dans le classeur de base ni présentée comme une embauche réelle.','A06 et consolidation.json, variante RH non activée.',nature='Annexe, demande et devis pédagogiques')
-    assert sum(x['personDays'] for x in case['globalPlanning']['sequence'])==79
+    assert sum(x['personDays'] for x in case['globalPlanning']['sequence'])==82

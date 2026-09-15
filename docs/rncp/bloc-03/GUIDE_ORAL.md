@@ -1,6 +1,6 @@
 # Guide de répétition — Bloc 3 Spity
 
-Support associé : spity-bloc-3-30-minutes-visuel-v11.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
+Support associé : spity-bloc-3-30-minutes-visuel-v12.pptx. Vingt-deux diapositives principales couvrent trente minutes, dont six minutes de démonstration. Les trois dernières sont des annexes de réponse aux questions ; elles ne prolongent pas la présentation. Les graphiques et captures servent de repères visuels. Les explications détaillées restent dans les notes.
 
 ## Compétences à sécuriser avant l'oral
 
@@ -18,7 +18,7 @@ Le texte oral ci-dessous développe chaque diapositive et propose ses transition
 | --- | --- | --- | --- |
 | 1 | Spity | 00:30 | 00:30 |
 | 2 | Le besoin d’Altitude Grimpe | 01:00 | 01:30 |
-| 3 | Le planning global de Spity | 01:00 | 02:30 |
+| 3 | Le planning global du Bloc 1 | 01:00 | 02:30 |
 | 4 | Le suivi : Linear et les rituels Scrum | 01:30 | 04:00 |
 | 5 | Le lot : phases, mesures et dépendances | 01:30 | 05:30 |
 | 6 | Les missions et les aménagements | 01:00 | 06:30 |
@@ -73,21 +73,27 @@ Les quatre blocs abordent ce même projet sous des angles complémentaires.
 
 Source : B1 : C1.1.1, p. 2 ; C1.4.1, p. 4-5. B2 : 16_DOSSIER_FINAL_BC02, F01-F10. Capture locale du 15 septembre 2026, données de test.
 
-### 3. Le planning global de Spity
+### 3. Le planning global du Bloc 1
 
-Repère : 01:30 à 02:30. Nature : C.3.1, ordonnancement pédagogique dérivé du Bloc 1.
+Repère : 01:30 à 02:30. Nature : C.3.1, neuf lots du diaporama Bloc 1.
 
 **Texte oral proposé**
 
-Le Bloc 1 prévoit soixante-dix-neuf jours-homme pour le MVP. Ses cinq jalons couvrent le socle, la découverte, l'organisation des sorties, la communauté et la stabilisation. Je représente ici leur ordre à raison de cinq jours-homme par semaine, soit environ seize semaines. C'est un ordonnancement pédagogique, pas la reconstitution des dates réellement travaillées.
+Le diaporama du Bloc 1 prévoit quatre-vingt-deux jours-homme pour le MVP. Je reprends ses neuf lots et leurs charges : cadrage, socle technique, authentification, profils, fil social, répertoire, topos, événements et qualité. Leur total correspond à la référence de lancement.
 
-Chaque jalon correspond à un résultat vérifiable, depuis un profil exploitable jusqu'à une recette documentée. Les fonctions du MVP cible dépassent le prototype évalué au Bloc 2. Le lot de quinze jours que je détaille ensuite permet d'expliquer le suivi sur un périmètre plus réduit. Ses heures ne s'ajoutent pas automatiquement au budget global. Le Bloc 4 prépare la suite, avec les anomalies et le support.
+Je représente ici une séquence pédagogique à cinq jours-homme par semaine. Elle demande seize virgule quatre semaines de capacité. Les barres ne reconstituent pas les dates réellement travaillées. Chaque lot doit produire un résultat vérifiable avant sa clôture.
+
+Le suivi détaillé présenté ensuite porte sur un lot de préparation de démonstration, avec les parcours déjà développés au Bloc 2. Ses jours J1 à J15 désignent des jours relatifs de ce cas. Le budget global reste celui du Bloc 1.
+
+**À montrer ou manipuler**
+
+Lire les neuf lots du Bloc 1, puis distinguer le planning global du suivi détaillé.
 
 **Transition**
 
 Je choisis une méthode adaptée au suivi de ce travail.
 
-Source : B1 C1.4.1 p. 7-8 ; A01 ; consolidation.json. Charges source 16+15+17+14+17=79 j-h. Calendrier relatif dérivé, capacité constante de 5 j-h/semaine.
+Source : Diaporama B1, p. 21 : 8+6+10+9+12+10+9+8+10=82 j-h. A01 et reference-bloc-01.json. Séquence pédagogique à 5 j-h/semaine, soit 16,4 semaines.
 
 ### 4. Le suivi : Linear et les rituels Scrum
 
@@ -181,11 +187,13 @@ Repère : 08:00 à 09:30. Nature : C3.2.1, montants fictifs en euros.
 
 **Texte oral proposé**
 
-Il faut distinguer deux périmètres. Les fiches détaillées du Bloc 1 estiment le lancement du MVP et sa première année à trente-huit mille cent vingt-six euros hors taxes, sur une base de soixante-dix-neuf jours-homme. Ici, je valorise seulement le lot pédagogique de démonstration, avec des taux horaires fictifs. Ce montant ne remplace pas le budget global et ne permet pas de calculer une économie du projet.
+Je conserve le budget présenté dans le diaporama du Bloc 1 : quarante-quatre mille deux cent cinquante euros. Il comprend quatre-vingt-deux jours-homme à quatre cent cinquante euros, soit trente-six mille neuf cents euros de développement, puis les postes de lancement détaillés en annexe.
 
-La référence du lot est de quatre mille deux cent soixante-dix euros, frais compris. À J10, la prévision passe à quatre mille quatre cent soixante-cinq euros. L'écart atteint cent quatre-vingt-quinze euros, soit environ quatre virgule six pour cent. Il doit rester visible même si une réserve existe.
+Le graphique suit un périmètre plus limité : notre cas de préparation de démonstration, valorisé en heures par rôle. La référence de ce lot est de quatre mille deux cent soixante-dix euros. À J10, sa prévision atteint quatre mille quatre cent soixante-cinq euros. L'écart de cent quatre-vingt-quinze euros représente environ quatre virgule six pour cent.
 
-La réserve initiale de quatre cent vingt-sept euros porte le plafond à quatre mille six cent quatre-vingt-dix-sept euros. Il reste deux cent trente-deux euros de marge. Je compare toute demande nouvelle à cette marge et à la disponibilité des rôles. Le classeur permet de retrouver le détail du calcul. Ces valeurs sont des hypothèses d'exercice, sans facture ni consommation réelle du budget du Bloc 1.
+La réserve de quatre cent vingt-sept euros porte le plafond du lot à quatre mille six cent quatre-vingt-dix-sept euros. Il reste deux cent trente-deux euros de marge. Toute demande est examinée avec cette marge et la capacité des rôles.
+
+Le classeur détaille ces calculs. Les charges du cas sont simulées : elles ne prouvent pas une consommation du budget global. Je conserve les unités et les périmètres pour éviter d'additionner des montants qui recouvrent des travaux communs.
 
 **À montrer ou manipuler**
 
@@ -195,7 +203,7 @@ Comparer les barres du budget initial, de la prévision et du plafond. Expliquer
 
 La marge financière doit être lue avec la disponibilité de chaque rôle.
 
-Source : A03 et classeur Pilotage. B1 : fiches C1.4.1 p. 7 et C1.4.2 p. 2-4, 79 j-h et 38 126 EUR HT. L’ancien diaporama B1 porte une autre estimation, voir COHERENCE_INTER_BLOCS.md.
+Source : Diaporama B1, p. 21-22 : 82 j-h, 450 EUR/j, total 44 250 EUR. A03, A09 et classeur : cas B3 distinct. reference-bloc-01.json et COHERENCE_INTER_BLOCS.md.
 
 ### 9. Le chef de projet approche sa limite
 
@@ -275,7 +283,7 @@ Montrer le rattachement de la demande au contexte SPI-22, puis comparer les coû
 
 Pour appliquer cette décision, je dois aussi la faire comprendre à l’équipe.
 
-Source : A04 et CR02 dans A07. Simulation explicitement distincte du code actuel. B1 : C1.4.1, contributions aux topos dans la vision cible. Le report concerne ce lot pédagogique ; il ne supprime pas la fonctionnalité du projet. Linear SPI-22 est observé en Backlog au 14 septembre. Le chiffrage additionnel 12 h DEV et 4 h QA est une hypothèse du lot, pas une estimation extraite de ce ticket.
+Source : A04 et CR02 dans A07. Simulation explicitement distincte du code actuel. B1 : diaporama p. 20-21, topos Should dans la vision cible. Le report concerne ce lot pédagogique ; il ne supprime pas la fonctionnalité du projet. Linear SPI-22 est observé en Backlog au 14 septembre. Le chiffrage additionnel 12 h DEV et 4 h QA est une hypothèse du lot, pas une estimation extraite de ce ticket.
 
 ### 13. Des styles adaptés à la situation
 
@@ -532,7 +540,7 @@ Source : A06 et consolidation.json, variante RH non activée.
 1. **Qu'avez-vous réellement fait et qu'avez-vous simulé ?** Présenter les contributions personnelles confirmées par le candidat. Les commits et les vérifications sont observables. L'équipe CP/DEV/QA, les jours J1-J15, les coûts et les comptes rendus client appartiennent au cas fictif. Un test réussi ne prouve pas un échange client.
 2. **Pourquoi Kanban et des réunions Scrum ?** Le tableau Kanban suit le flux et limite la réalisation à deux tâches. Le planning J3 fixe l'objectif et la capacité, le daily de dix minutes adapte la prochaine action, les reviews J10/J15 recueillent les retours client et la rétrospective J15 améliore la collaboration. Ce fonctionnement s'inspire de Scrum et reste adapté au lot ; les réunions du cas ne sont pas des preuves d'une application historique complète du cadre.
 3. **Quel est le chemin vers la soutenance ?** Accès/profils, matching, événements, recette/corrections et validation J14 avant la démonstration J15. La recette peut commencer sur les fonctions prêtes ; sa clôture attend les corrections. Montrer A01 et les dépendances.
-4. **Comment obtenez-vous 4 465 EUR ?** Valorisation du travail à terminaison : CP 29 h × 45 EUR, DEV 64 h × 35 EUR, QA 24 h × 30 EUR = 4 265 EUR ; ajouter 200 EUR de frais. Les taux et charges sont des hypothèses du lot. Le budget global B1 est de 38 126 EUR HT dans les fiches détaillées, sur 79 j-h. Il ne faut ni remplacer ce total par les coûts B3, ni les additionner. L’ancien diaporama B1 affiche une autre estimation, documentée dans COHERENCE_INTER_BLOCS.md.
+4. **Comment obtenez-vous 4 465 EUR ?** Valorisation du travail à terminaison : CP 29 h × 45 EUR, DEV 64 h × 35 EUR, QA 24 h × 30 EUR = 4 265 EUR ; ajouter 200 EUR de frais. Les taux et charges sont des hypothèses du lot. Le budget global repris du diaporama B1 est de 44 250 EUR, dont 82 j-h à 450 EUR/jour. Les coûts B3 détaillent un exercice de suivi en heures et ne s'ajoutent pas à ce total. Les neuf lots et les six postes budgétaires du B1 sont rapprochés dans COHERENCE_INTER_BLOCS.md.
 5. **La réserve fait-elle disparaître le dépassement ?** Non : le coût reste supérieur de 195 EUR à la référence de 4 270 EUR. La réserve de 427 EUR porte le plafond à 4 697 EUR et laisse 232 EUR de marge. Un écart doit rester visible même s'il est absorbable.
 6. **Pourquoi 50 % de tâches terminées ne signifie pas 50 % de produit livré ?** Le dénominateur est dix tâches du cas, de tailles différentes. Les 77 h consommées mesurent un effort, pas une valeur acquise. Linear donne aussi 12 Done sur 24 non annulés : ce second 50 % concerne un autre dénominateur et reste non pondéré. Les critères de recette déterminent la validation fonctionnelle.
 7. **Pourquoi reporter la demande nouvelle ?** Elle ajoute 540 EUR et conduit à 5 005 EUR, soit 308 EUR au-dessus du plafond. La charge DEV atteindrait 76 h pour 72 disponibles. Le report préserve les critères du lot et doit être validé par le commanditaire du scénario.
@@ -547,7 +555,7 @@ Source : A06 et consolidation.json, variante RH non activée.
 
 ## Compléments de réponse après correction
 
-- Le planning global dérive de 79 j-h à 5 j-h/semaine, soit 15,8 semaines sous hypothèse séquentielle. Les quinze jours du lot B3 ne représentent pas tout le développement.
+- Le planning global reprend les neuf lots et 82 j-h du diaporama Bloc 1 ; à 5 j-h/semaine, il représente 16,4 semaines sous hypothèse séquentielle. Les quinze jours du lot B3 ne représentent pas tout le développement.
 - Les 5 h supplémentaires mesurent la charge. T06 et T07 glissent chacun d'un jour ; leur retard ne s'additionne pas, et le jalon reste J15.
 - Les quatre styles sont participatif, persuasif, directif et délégatif. QA avait déjà la recette : préserver cette affectation n'est pas une réallocation nouvelle.
 - Le plan comprend CP 1 h à J3, DEV 2 h à J9-J12 et Camille 3 h à J10-J14. Les niveaux techniques sont indépendants du handicap.

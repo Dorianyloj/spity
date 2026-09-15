@@ -1,0 +1,99 @@
+{
+  "source": "docs/rncp/bloc-01/diapo-bloc-01-spity.pdf",
+  "sourceSHA256": "f90a7eb540e19f0880ae0fff3a824bdfd1ec1a2bdaf2e3a4c10a9232d7aa2393",
+  "pages": {
+    "priorities": 20,
+    "workload": 21,
+    "budget": 22
+  },
+  "selection": "Diaporama du Bloc 1 retenu pour harmoniser le Bloc 3 ; le document effectivement remis reste à confirmer par le candidat.",
+  "personDays": 82,
+  "dailyRateEUR": 450,
+  "developmentEUR": 36900,
+  "totalEUR": 44250,
+  "taxConvention": "Non précisée dans le diaporama de référence ; aucun HT ajouté à ce total.",
+  "budgetRows": [
+    {
+      "name": "Développement MVP",
+      "amountEUR": 36900
+    },
+    {
+      "name": "Infrastructure annuelle",
+      "amountEUR": 1200
+    },
+    {
+      "name": "Médias et cartographie",
+      "amountEUR": 900
+    },
+    {
+      "name": "Nom de domaine et email",
+      "amountEUR": 250
+    },
+    {
+      "name": "Sécurité et conformité",
+      "amountEUR": 2000
+    },
+    {
+      "name": "Tests et recette",
+      "amountEUR": 3000
+    }
+  ],
+  "lots": [
+    {
+      "id": "B1-L01",
+      "title": "Cadrage, UX, backlog",
+      "shortTitle": "Cadrage / UX",
+      "personDays": 8
+    },
+    {
+      "id": "B1-L02",
+      "title": "Setup technique",
+      "shortTitle": "Setup technique",
+      "personDays": 6
+    },
+    {
+      "id": "B1-L03",
+      "title": "Auth et sécurité de base",
+      "shortTitle": "Auth / sécurité",
+      "personDays": 10
+    },
+    {
+      "id": "B1-L04",
+      "title": "Profils grimpeur/club",
+      "shortTitle": "Profils",
+      "personDays": 9
+    },
+    {
+      "id": "B1-L05",
+      "title": "Feed social",
+      "shortTitle": "Feed social",
+      "personDays": 12
+    },
+    {
+      "id": "B1-L06",
+      "title": "Répertoire géolocalisé",
+      "shortTitle": "Répertoire",
+      "personDays": 10
+    },
+    {
+      "id": "B1-L07",
+      "title": "Topos collaboratifs",
+      "shortTitle": "Topos",
+      "personDays": 9
+    },
+    {
+      "id": "B1-L08",
+      "title": "Événements clubs",
+      "shortTitle": "Événements",
+      "personDays": 8
+    },
+    {
+      "id": "B1-L09",
+      "title": "Tests, accessibilité, documentation",
+      "shortTitle": "Tests / access. / doc.",
+      "personDays": 10
+    }
+  ],
+  "lotB3Scope": "Le cas B3 conserve son suivi détaillé en heures. Il ne remplace pas le budget global et ne lui est pas ajouté. Aucun rattachement comptable ni consommé global n’est inventé.",
+  "otherVersion": "Les fiches C1.4.1/C1.4.2 du Bloc 1 portent 79 j-h et 38 126 EUR HT. Elles sont conservées et ne constituent plus la référence de charge/budget du Bloc 3."
+}
