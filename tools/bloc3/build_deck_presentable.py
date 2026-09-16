@@ -1,4 +1,4 @@
-"""Build the editable v19 deck from the solo project narrative and dated evidence.
+"""Build the editable v20 deck from the solo project narrative and dated evidence.
 
 Run from any directory: python tools/bloc3/build_deck_presentable.py
 Dependencies: tools/bloc3/requirements-presentation.txt.
@@ -6,7 +6,7 @@ Rendering and visual review are separate; this generator never records a review.
 """
 from pathlib import Path
 import json
-from PIL import Image
+from PIL import Image, ImageFont
 from pptx import Presentation
 from pptx.chart.data import CategoryChartData
 from pptx.dml.color import RGBColor
@@ -18,15 +18,16 @@ from pptx.util import Inches, Pt
 
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / 'docs/rncp/bloc-03'
-OUT = ROOT / 'output/bloc-03/spity-bloc-3-soutenance-v19.pptx'
+OUT = ROOT / 'output/bloc-03/spity-bloc-3-soutenance-v20.pptx'
 SOURCE = json.loads((DOCS / 'donnees/support-oral.json').read_text())
 FACTS = json.loads((DOCS / 'donnees/projet-reel.json').read_text())
 B1 = json.loads((DOCS / 'donnees/reference-bloc-01.json').read_text())
 SIM = json.loads((DOCS / 'donnees/mise-en-situation.json').read_text())
-INK, GREEN, LIME, PAPER = '12332D', '286957', 'D8F28B', 'F6F5EF'
-MUTED, LINE, WHITE, ORANGE = '5C6C65', 'DDE3D9', 'FFFFFF', 'B64E2E'
-PALE, DARKCARD = 'EBEFE6', '1C453B'
-FONT = 'Arial'
+INK, GREEN, LIME, PAPER = '244B43', '28554B', '8CA444', 'F7F8F2'
+MUTED, LINE, WHITE, ORANGE = '56625B', 'D7DFD6', 'FFFFFF', 'AD573D'
+PALE, DARKCARD = 'E9EFE8', '365A51'
+FONT, TITLE_FONT = 'Poppins', 'Archivo Black'
+TITLE_METRICS = ImageFont.truetype(str(DOCS/'assets/fonts/ArchivoBlack-Regular.ttf'), 100)
 P = Presentation()
 P.slide_width, P.slide_height = Inches(16), Inches(9)
 P.core_properties.title = 'Spity — Piloter le projet | Bloc 3'
@@ -45,6 +46,9 @@ def rect(s, x, y, w, h, fill, radius=False, stroke=None):
     if radius:
         shape.adjustments[0] = .04
     shape._element.spPr.append(OxmlElement('a:effectLst'))
+    style = shape._element.find('{http://schemas.openxmlformats.org/presentationml/2006/main}style')
+    if style is not None:
+        shape._element.remove(style)
     shape.fill.solid()
     shape.fill.fore_color.rgb = color(fill)
     if stroke:
@@ -55,7 +59,7 @@ def rect(s, x, y, w, h, fill, radius=False, stroke=None):
     return shape
 
 
-def txt(s, text, x, y, w, h, size=22, bold=False, fill=INK, align=PP_ALIGN.LEFT):
+def txt(s, text, x, y, w, h, size=22, bold=False, fill=INK, align=PP_ALIGN.LEFT, font=FONT):
     box = s.shapes.add_textbox(Inches(x), Inches(y), Inches(w), Inches(h))
     tf = box.text_frame
     tf.clear()
@@ -65,7 +69,7 @@ def txt(s, text, x, y, w, h, size=22, bold=False, fill=INK, align=PP_ALIGN.LEFT)
     for i, line in enumerate(str(text).split('\n')):
         p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
         p.text = line
-        p.font.name, p.font.size, p.font.bold = FONT, Pt(size), bold
+        p.font.name, p.font.size, p.font.bold = font, Pt(size), bold
         p.font.color.rgb = color(fill)
         p.alignment = align
         p.space_after = Pt(4)
@@ -77,6 +81,9 @@ def line(s, x1, y1, x2, y2, fill=LINE, width=1):
     shape.line.color.rgb = color(fill)
     shape.line.width = Pt(width)
     shape._element.spPr.append(OxmlElement('a:effectLst'))
+    style = shape._element.find('{http://schemas.openxmlformats.org/presentationml/2006/main}style')
+    if style is not None:
+        shape._element.remove(style)
 
 
 def pill(s, text, x, y, w, dark=False):
@@ -102,19 +109,26 @@ def picture(s, relative, x, y, w, h, cover=False):
     return pic
 
 
+def draw_heading(s, text, x, y, w, h=.82, size=32, fill=INK):
+    text = text.upper()
+    size = min(size, w * 72 * 100 / max(TITLE_METRICS.getlength(text), 1))
+    return txt(s, text, x, y, w, h, size, False, fill, font=TITLE_FONT)
+
+
 def base(n, title, section, subtitle='', dark=False):
     s = P.slides.add_slide(P.slide_layouts[6])
     s.background.fill.solid()
     s.background.fill.fore_color.rgb = color(INK if dark else PAPER)
-    txt(s, 'SPITY', .65, .35, 1.3, .28, 13, True, LIME if dark else INK)
-    txt(s, section.upper(), 2.1, .38, 11, .25, 10, True, 'B9CABE' if dark else MUTED)
-    if title:
-        txt(s, title, .65, 1.02, 14.7, .78, 32, True, WHITE if dark else INK)
-    if subtitle:
-        txt(s, subtitle, .68, 1.87, 14.5, .65, 17, False, 'C7D6CB' if dark else MUTED)
-    line(s, .65, 8.45, 15.35, 8.45, DARKCARD if dark else LINE)
-    txt(s, 'DORIAN JOLY  /  RNCP39583 · BLOC 3', .65, 8.61, 7, .2, 9, False, 'B9CABE' if dark else MUTED)
-    txt(s, f'{n:02d}', 14.6, 8.54, .75, .32, 16, True, LIME if dark else GREEN, PP_ALIGN.RIGHT)
+    layout = SOURCE[n-1]['layout']
+    if layout not in ['cover', 'demo', 'agenda']:
+        rect(s, .65, .43, .56, .31, GREEN, True)
+        txt(s, f'{n:02d}', .65, .49, .56, .2, 8, True, WHITE, PP_ALIGN.CENTER)
+        txt(s, section.upper(), 1.37, .48, 13.4, .27, 9, False, MUTED)
+        draw_heading(s, title, .65, 1.04, 14.7)
+        txt(s, subtitle, .68, 1.9, 14.5, .63, 16, False, MUTED)
+    if layout not in ['cover', 'demo']:
+        line(s, .65, 8.51, 1.75, 8.51, GREEN, .85)
+        txt(s, str(n), 14.65, 8.47, .7, .26, 10, False, MUTED, PP_ALIGN.RIGHT)
     s.notes_slide.notes_text_frame.text = SOURCE[n-1]['notes']
     return s
 
@@ -177,9 +191,12 @@ def chart(s, categories, series, x, y, w, h, maximum, dark=False, stacked=False,
         ch.legend.position = XL_LEGEND_POSITION.BOTTOM
         ch.legend.include_in_layout = False
         ch.legend.font.name, ch.legend.font.size = FONT, Pt(13)
+    label_skip = OxmlElement('c:tickLblSkip')
+    label_skip.set('val', '1')
+    ch.category_axis._element.insert_element_before(label_skip, 'c:tickMarkSkip', 'c:noMultiLvlLbl', 'c:extLst')
     ch.category_axis.reverse_order = reverse
     ch.category_axis.tick_label_position = XL_TICK_LABEL_POSITION.LOW
-    ch.category_axis.tick_labels.font.size = Pt(16)
+    ch.category_axis.tick_labels.font.size = Pt(12 if stacked else 16)
     ch.value_axis.minimum_scale = minimum
     ch.value_axis.maximum_scale = maximum
     ch.value_axis.tick_labels.font.size = Pt(12)
@@ -234,21 +251,21 @@ for item in SOURCE:
     s = base(n, '' if layout in ['cover', 'demo'] else item['title'], item['section'],
              '' if layout in ['cover', 'demo'] else item['subtitle'], dark)
     if layout in ['cover', 'demo']:
-        photo = 'escalade-falaise-coucher-soleil.jpeg' if layout == 'cover' else 'escalade-falaise-gros-plan.jpeg'
-        picture(s, f'spity/public/images/brand/{photo}', 8.85, 0, 7.15, 8.4, True)
-        pill(s, 'PROJET SOLO · 1 AN' if layout == 'cover' else 'DÉMONSTRATION EN DIRECT', .75, 1.6, 3.6, True)
-        txt(s, 'Une année\npour construire\nSpity.' if layout == 'cover' else 'Passer du suivi\nà l’usage.', .7, 2.5, 8, 3.1, 55, True, WHITE)
-        txt(s, item['subtitle'], .75, 6, 7.35, 1.0, 24, False, 'C7D6CB')
-        txt(s, 'Dorian Joly' if layout == 'cover' else 'Grimpeur → Club', .75, 7.45, 7, .55, 25, True, LIME)
+        picture(s, 'docs/rncp/bloc-03/assets/bloc1-couverture.jpg', 0, 0, 16, 9, True)
+        draw_heading(s, 'SPITY' if layout == 'cover' else 'DÉMONSTRATION', .9, 1.04, 13.9, 1.9, 124 if layout == 'cover' else 56, WHITE)
+        txt(s, 'Coordonner et piloter un projet logiciel' if layout == 'cover' else 'Du suivi du projet à l’usage du site', .94, 3.0, 13.2, .65, 27, True, WHITE)
+        rect(s, .94, 4.04, 4.0, .48, LIME, True)
+        txt(s, 'BLOC 3 · RNCP39583' if layout == 'cover' else 'GRIMPEUR → CLUB', 1.1, 4.14, 3.68, .27, 12, True, WHITE, PP_ALIGN.CENTER)
+        txt(s, 'Dorian Joly', .94, 7.56, 10.8, .42, 18, True, WHITE)
+        txt(s, 'Projet solo sur un an · plateforme sociale pour la communauté escalade' if layout == 'cover' else 'Partenaires, demandes et inscriptions aux événements', .94, 8.08, 13.8, .45, 13, False, WHITE)
     elif layout == 'agenda':
-        txt(s, 'Du besoin\nà l’usage.', .75, 3.03, 4.3, 2.2, 41, True, LIME)
-        txt(s, 'Organiser le travail.\nVérifier le résultat.', .8, 5.65, 4.15, 1.1, 21, False, 'C7D6CB')
-        for i,(num,label,timing) in enumerate(content['items']):
-            y=2.67+i*.65
-            txt(s,num,5.35,y,.7,.5,24,True,LIME)
-            txt(s,label,6.15,y,6.1,.5,21,True,WHITE)
-            txt(s,timing,12.6,y+.09,2.6,.35,14,False,'C7D6CB',PP_ALIGN.RIGHT)
-            line(s,6.15,y+.55,15.15,y+.55,DARKCARD)
+        picture(s, 'docs/rncp/bloc-03/assets/bloc1-sommaire.jpg', .65, .65, 6.55, 7.4, True)
+        draw_heading(s, 'SOMMAIRE', 7.78, .8, 7.55, .78, 38)
+        txt(s, 'Le projet, puis les sept compétences du Bloc 3.', 7.8, 1.74, 7.35, .7, 17, False, MUTED)
+        for i,(num,label,competency) in enumerate(content['items']):
+            y=2.72+i*.67
+            txt(s, '•', 7.8, y, .28, .36, 17, True, GREEN)
+            txt(s, label, 8.18, y, 7.08, .54, 17, False, INK)
     elif layout == 'product':
         for i,(label,heading,detail) in enumerate(content['cards']):
             y=2.8+i*2.05
@@ -291,30 +308,30 @@ for item in SOURCE:
                     line(s, x+.25, y+.5, x+6.9, y+.5)
     elif layout == 'performance':
         data=FACTS['performance']
-        chart(s,data['routes'],[('Avant',[v/1000 for v in data['beforeMs']]),('Après',[v/1000 for v in data['afterMs']])],.65,2.7,10.7,4.6,13,True,fmt='0.00" s"',colors=['86A18C',LIME],legend=True)
-        txt(s,'MÉDIANE OBSERVÉE',11.6,3.05,3.8,.4,13,True,'C7D6CB')
-        txt(s,'10,22 s',11.6,3.76,3.6,.8,40,True,WHITE)
+        chart(s,data['routes'],[('Avant',[v/1000 for v in data['beforeMs']]),('Après',[v/1000 for v in data['afterMs']])],.65,2.7,10.7,4.6,13,False,fmt='0.00" s"',colors=['B9C7BC',GREEN],legend=True)
+        txt(s,'MÉDIANE OBSERVÉE',11.6,3.05,3.8,.4,13,True,MUTED)
+        txt(s,'10,22 s',11.6,3.76,3.6,.8,40,True,INK)
         txt(s,'↓',11.65,4.75,2,.65,30,True,LIME)
-        txt(s,'0,748 s',11.6,5.48,3.6,.8,40,True,LIME)
-        txt(s,'5 parcours locaux',11.6,6.6,3.7,.42,17,False,'C7D6CB')
+        txt(s,'0,748 s',11.6,5.48,3.6,.8,40,True,GREEN)
+        txt(s,'5 parcours locaux',11.6,6.6,3.7,.42,17,False,MUTED)
     elif layout == 'cards':
         for i,(tag,title,detail) in enumerate(content['cards']):
             x=.65+i*5.02
             rect(s,x,2.85,4.65,4.3,DARKCARD if dark else WHITE,True)
             txt(s,tag,x+.26,3.15,4.1,.57,13,True,LIME if dark else GREEN)
-            txt(s,title,x+.26,4.0,4.1,1.06,28,True,fg)
-            txt(s,detail,x+.26,5.4,4.08,1.4,20,False,secondary)
+            txt(s,title,x+.26,4.0,4.1,1.06,24,True,fg)
+            txt(s,detail,x+.26,5.4,4.08,1.4,18,False,secondary)
     elif layout == 'management':
         for i,(title,verb,detail) in enumerate(content['cards']):
             x=.65+(i%2)*7.52; y=2.75+(i//2)*2.04
-            rect(s,x,y,7.18,1.81,DARKCARD,True)
-            txt(s,title.upper(),x+.25,y+.17,6.7,.3,12,True,LIME)
-            txt(s,verb,x+.25,y+.6,2.6,.85,26,True,WHITE)
-            txt(s,detail,x+3.08,y+.59,3.78,1.0,18,False,'C7D6CB')
+            rect(s,x,y,7.18,1.81,WHITE,True,LINE)
+            txt(s,title.upper(),x+.25,y+.17,6.7,.3,12,True,GREEN)
+            txt(s,verb,x+.25,y+.6,2.6,.85,26,True,INK)
+            txt(s,detail,x+3.08,y+.59,3.78,1.0,17,False,MUTED)
     elif layout in ['table','dashboard','skills','training']:
         rows=content['rows']
         widths=[3.0,5.45,6.25] if len(rows[0])==3 else [3.5,11.2]
-        table(s,rows,widths,y=2.65,h=4.66,size=17 if len(rows)>6 else 19)
+        table(s,rows,widths,y=2.65,h=4.66,size=15 if len(rows)>6 else 17)
     elif layout == 'screenshot':
         rect(s,.65,2.5,9.2,5.65,INK,True)
         picture(s,f"docs/rncp/bloc-03/preuves/captures/{content['image']}-2026-09-15.png",.79,2.6,8.92,5.44)
@@ -326,9 +343,8 @@ for item in SOURCE:
     else:
         raise ValueError(layout)
     if content.get('callout'):
-        # Keep the source/limitation readable without overflowing the footer.
-        rect(s,.65,7.65,.055,.48,LIME if dark else GREEN)
-        txt(s,content['callout'],.88,7.65,14.25,.67,17,True,LIME if dark else GREEN)
+        rect(s, .65, 7.65, 14.7, .64, GREEN, True)
+        txt(s, content['callout'], .91, 7.8, 14.18, .44, 14, True, WHITE, PP_ALIGN.CENTER)
 
 assert len(P.slides) == len(SOURCE) == 26
 assert sum(s['minutes'] for s in SOURCE) == 30

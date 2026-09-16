@@ -1,4 +1,4 @@
-# Mon fil conducteur — Spity v19
+# Mon fil conducteur — Spity v20
 
 Document personnel. Le texte ci-dessous reprend ce que je peux dire à l’oral, avec les titres du support. Les repères de manipulation restent dans GUIDE_ORAL.md.
 

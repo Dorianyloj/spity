@@ -1,6 +1,6 @@
 # Générer le kit Bloc 3 courant
 
-La v19 présente le projet solo sur un an puis les sept compétences dans l’ordre des PDF du candidat. Les compléments pédagogiques sont explicitement simulés. Les livrables prêts à consulter sont dans [l’index du kit](../../docs/rncp/bloc-03/README.md).
+La v20 présente le projet solo sur un an puis les sept compétences dans l’ordre des PDF du candidat. Les compléments pédagogiques sont explicitement simulés. Les livrables prêts à consulter sont dans [l’index du kit](../../docs/rncp/bloc-03/README.md).
 
 ## Sources
 
@@ -12,7 +12,7 @@ La v19 présente le projet solo sur un an puis les sept compétences dans l’or
 
 ## Génération
 
-Python, Arial et LibreOffice sont nécessaires. Les scripts n’utilisent plus le runtime documentaire des anciennes versions.
+Python, LibreOffice, Arial (dossier), Poppins et Archivo Black (diaporama) sont nécessaires. Les deux dernières polices et leurs licences sont fournies dans `docs/rncp/bloc-03/assets/fonts/`. Les installer avant de générer ou d’éditer le PowerPoint. Les scripts n’utilisent plus le runtime documentaire des anciennes versions.
 
 ```bash
 python3 -m venv tmp/bloc3/presentation-venv
@@ -21,7 +21,7 @@ tmp/bloc3/presentation-venv/bin/python tools/bloc3/build_guide.py
 tmp/bloc3/presentation-venv/bin/python tools/bloc3/build_deck_presentable.py
 tmp/bloc3/presentation-venv/bin/python tools/bloc3/build_workbook.py
 BLOC3_FONT_DIR=/usr/share/fonts/truetype/msttcorefonts tmp/bloc3/presentation-venv/bin/python tools/bloc3/build_pdf.py
-libreoffice -env:UserInstallation=file:///tmp/spity-bloc3-render --headless --convert-to pdf --outdir output/bloc-03 output/bloc-03/spity-bloc-3-soutenance-v19.pptx
+libreoffice -env:UserInstallation=file:///tmp/spity-bloc3-render --headless --convert-to pdf --outdir output/bloc-03 output/bloc-03/spity-bloc-3-soutenance-v20.pptx
 libreoffice -env:UserInstallation=file:///tmp/spity-bloc3-calc --headless --convert-to xlsx --outdir output/bloc-03 tmp/bloc3/workbook-source/pilotage-spity.xlsx
 ```
 
@@ -29,7 +29,7 @@ Le classeur est d’abord créé sous `tmp`, puis LibreOffice calcule les formul
 
 ## Projection et notes
 
-La v19 réserve les repères horaires et les consignes au guide personnel. Le champ `script` de chaque slide est le texte à dire ; `notes` lui est identique et alimente les notes natives. Les titres, sous-titres et contenus alimentent la projection. Les simulations restent signalées. Le contrôle du PDF refuse les mentions de minutes, les chronométrages et les consignes internes ; il vérifie aussi la première personne et l’égalité exacte des notes.
+La v20 réserve les repères horaires et les consignes au guide personnel. Le champ `script` de chaque slide est le texte à dire ; `notes` lui est identique et alimente les notes natives. Les titres, sous-titres et contenus alimentent la projection. Les simulations restent signalées. Le contrôle du PDF refuse les mentions de minutes, les chronométrages et les consignes internes ; il vérifie aussi la première personne et l’égalité exacte des notes.
 
 ## Revue et paquet
 
@@ -54,3 +54,7 @@ powershell -File tools/bloc3/demo.ps1
 ```
 
 La préparation réinitialise les seules données de démonstration. Les secrets locaux restent dans `tmp`, ignoré par Git. Le ZIP documentaire ne contient pas l’application complète ni une base de données.
+
+## Style de la v20
+
+Le diaporama reprend les codes du PDF Bloc 1 fourni par Dorian : crème, vert foncé et olive, capitales épaisses, photographies d’escalade, tableaux et bandeaux de synthèse. La provenance des images et polices est dans [les sources visuelles](../../docs/rncp/bloc-03/assets/README.md). Les notes et le bilan fonctionnel de la v19 sont conservés.

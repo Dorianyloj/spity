@@ -12,7 +12,7 @@ def clock(value):
 
 parts=['''# Mon guide oral — Spity
 
-**Document personnel de répétition — à garder hors projection.** Support associé : v19.
+**Document personnel de répétition — à garder hors projection.** Support associé : v20.
 
 Les rubriques **Texte à dire** sont identiques aux notes PowerPoint et rédigées à la première personne. Les repères, manipulations et sources ci-dessous servent uniquement à la préparation. Les diapositives projetées et leurs notes natives ne contiennent aucun chronométrage de présentation.
 
@@ -26,7 +26,7 @@ for s in slides:
     if s['minutes']:
         parts.append(f"| {s['number']} | {s['title']} | {clock(s['minutes'])} | {clock(s['endMinute'])} |")
 parts.append('\nRepères privés : 06:00 suivi ; 09:30 arbitrage ; 12:00 management ; 15:00 compétences ; 18:00 client ; 23:00 démonstration ; 29:00 conclusion.\n\n## Mon texte par diapositive\n')
-explanations=['# Mon fil conducteur — Spity v19\n\nDocument personnel. Le texte ci-dessous reprend ce que je peux dire à l’oral, avec les titres du support. Les repères de manipulation restent dans GUIDE_ORAL.md.\n']
+explanations=['# Mon fil conducteur — Spity v20\n\nDocument personnel. Le texte ci-dessous reprend ce que je peux dire à l’oral, avec les titres du support. Les repères de manipulation restent dans GUIDE_ORAL.md.\n']
 for s in slides:
     timing=f"{clock(s['startMinute'])}–{clock(s['endMinute'])}" if s['minutes'] else 'Annexe pour les questions'
     parts.append(f"### {s['number']}. {s['title']}\n\n**Repère privé : {timing}.**\n\n**Texte à dire**\n\n{s['script']}\n\n**Préparation / manipulation — ne pas lire**\n\n{s['action'] or 'Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.'}\n\n**Source de préparation :** {s['source']}\n")
@@ -58,4 +58,4 @@ Je prépare A08, deux sessions locales, des événements futurs et la version ch
 ''')
 (DOCS/'GUIDE_ORAL.md').write_text('\n'.join(parts).rstrip()+'\n')
 (DOCS/'COMPRENDRE_LES_DIAPOS.md').write_text('\n'.join(explanations).rstrip()+'\n')
-print('Guide personnel et texte oral v19 générés : 26 notes à la première personne.')
+print('Guide personnel et texte oral v20 générés : 26 notes à la première personne.')

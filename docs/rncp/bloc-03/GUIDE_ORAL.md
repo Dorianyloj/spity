@@ -1,6 +1,6 @@
 # Mon guide oral — Spity
 
-**Document personnel de répétition — à garder hors projection.** Support associé : v19.
+**Document personnel de répétition — à garder hors projection.** Support associé : v20.
 
 Les rubriques **Texte à dire** sont identiques aux notes PowerPoint et rédigées à la première personne. Les repères, manipulations et sources ci-dessous servent uniquement à la préparation. Les diapositives projetées et leurs notes natives ne contiennent aucun chronométrage de présentation.
 

@@ -1,5 +1,5 @@
 {
-  "version": "v19",
+  "version": "v20",
   "date": "2026-09-16",
   "project": "Solo sur un an déclaré",
   "competencies": [
@@ -24,7 +24,7 @@
   "pdfPages": 26,
   "workbookSheets": 8,
   "workbookFormulas": 31,
-  "localLinksChecked": 36,
+  "localLinksChecked": 37,
   "applicationTree": "587dcb012c325fa7a4225dafa8066edae0affcfa",
   "verifiedHistoricalApplicationTree": "9109ce976825a6536fa1c7219a2b5ef5e8c3b64c",
   "applicationMatchesDatedEvidence": false,

@@ -1,19 +1,21 @@
 # Bloc 3 — Spity, projet solo sur un an
 
-**Version courante : v19, révision du 16 septembre 2026.** Dorian confirme avoir réalisé le projet seul sur un an. La présentation s’appuie sur les étapes enregistrées, les estimations B1, Linear, les corrections et le déploiement. Les compléments de suivi annuel, collaboration ponctuelle, formation et retours client sont **simulés pour l’exercice** et identifiés à chaque utilisation.
+**Version courante : v20, révision du 16 septembre 2026.** Dorian confirme avoir réalisé le projet seul sur un an. La présentation s’appuie sur les étapes enregistrées, les estimations B1, Linear, les corrections et le déploiement. Les compléments de suivi annuel, collaboration ponctuelle, formation et retours client sont **simulés pour l’exercice** et identifiés à chaque utilisation.
 
 ## Ouvrir les livrables
 
 | Besoin | Fichier |
 | --- | --- |
-| Présenter | [PowerPoint v19](../../../output/bloc-03/spity-bloc-3-soutenance-v19.pptx) |
-| Consulter ou projeter | [PDF du diaporama](../../../output/bloc-03/spity-bloc-3-soutenance-v19.pdf) |
+| Présenter | [PowerPoint v20](../../../output/bloc-03/spity-bloc-3-soutenance-v20.pptx) |
+| Consulter ou projeter | [PDF du diaporama](../../../output/bloc-03/spity-bloc-3-soutenance-v20.pdf) |
 | Répéter | [Guide et notes](GUIDE_ORAL.md), [explications simples](COMPRENDRE_LES_DIAPOS.md), [lexique](LEXIQUE_SIMPLE.md) |
 | Lire le dossier | [PDF](../../../output/bloc-03/dossier-bloc-03-spity.pdf), [source](DOSSIER_BLOC_03.md) |
 | Vérifier les données | [Classeur](../../../output/bloc-03/pilotage-spity.xlsx), [sources structurées](donnees/projet-reel.json) |
 | Tout récupérer | [Kit courant ZIP](../../../output/bloc-03/kit-soutenance-spity.zip) |
 | Préparer l’évaluation | [Matrice des preuves](MATRICE_PREUVES.md), [complétude](CONTROLE_COMPLETUDE.md), [checklist](CHECKLIST_REMISE.md) |
 | Préparer le logiciel | [Démonstration](annexes/A08_DEMONSTRATION.md), [portée des vérifications](VERIFICATION.md) |
+
+La présentation reprend la direction graphique du Bloc 1 fourni : fond crème, verts foncé et olive, titres en capitales et photographies d’escalade.
 
 ## Projection et notes personnelles
 

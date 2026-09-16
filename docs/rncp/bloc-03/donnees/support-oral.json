@@ -26,6 +26,11 @@
     "content": {
       "items": [
         [
+          "00",
+          "Présenter Spity",
+          "Projet"
+        ],
+        [
           "01",
           "Planifier le projet",
           "C.3.1"
@@ -65,7 +70,7 @@
     "script": "Je commence par vous présenter Spity et les besoins auxquels il répond. Ensuite, je vous explique ma méthode d’organisation, le suivi du projet et un arbitrage concret sur la navigation.\n\nJe poursuis avec la collaboration, le développement des compétences et le suivi client. Pour terminer, je vous montre le logiciel à travers un parcours de grimpeur et un parcours de club, puis nous revenons sur les critères de validation.",
     "source": "Référentiel p. 11–14 ; compétences obligatoires p. 4.",
     "nature": "Plan aligné sur les deux PDF fournis",
-    "dark": true,
+    "dark": false,
     "action": "",
     "demo": false,
     "number": 2,
@@ -432,7 +437,7 @@
     "source": "Audit navigation du 15/09 ; donnees/projet-reel.json, performance.",
     "action": "Comparer les barres de deux parcours et expliquer le protocole.",
     "nature": "Mesures locales contrôlées, échantillon limité",
-    "dark": true,
+    "dark": false,
     "demo": false,
     "startMinute": 11.0,
     "endMinute": 12.0,
@@ -472,7 +477,7 @@
     "script": "Pour la partie management, je m’appuie sur une situation simulée de recette avec un testeur ponctuel. Dans cet exemple, je souhaite enrichir le décor, alors que le testeur me signale des blocages dans les parcours.\n\nJe commencerais par l’écouter et lui demander des faits précis : c’est la posture participative. Ensuite, j’expliquerais pourquoi je privilégie un parcours utilisable plutôt qu’un enrichissement graphique : c’est la posture persuasive.\n\nJe fixerais aussi une limite claire : je ne valide pas tant qu’un critère critique reste en échec. C’est la posture directive. Enfin, je lui confierais la recette avec un résultat attendu et un point de contrôle, dans une posture délégative.\n\nAvec du recul, décider trop vite de mon côté pourrait me faire perdre une alerte utile. Je retiens donc une séquence simple : écouter, comparer les impacts, décider et écrire la prochaine action.",
     "source": "A05 ; séance pédagogique ; référentiel p. 12–13.",
     "nature": "Mise en situation pédagogique explicitement simulée",
-    "dark": true,
+    "dark": false,
     "action": "",
     "demo": false,
     "number": 12,
@@ -898,7 +903,7 @@
     "source": "Synthèse des pièces citées ; matrice des compétences.",
     "action": "Donner le bilan réel des manipulations, puis ouvrir les questions.",
     "nature": "Éléments du projet documentés",
-    "dark": true,
+    "dark": false,
     "demo": false,
     "startMinute": 29.0,
     "endMinute": 30.0,

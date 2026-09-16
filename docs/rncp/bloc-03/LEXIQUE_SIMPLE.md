@@ -1,4 +1,4 @@
-# Lexique du diaporama v19
+# Lexique du diaporama v20
 
 | Terme | Sens dans Spity |
 | --- | --- |

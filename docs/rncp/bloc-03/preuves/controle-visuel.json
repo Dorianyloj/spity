@@ -1,10 +1,10 @@
 {
   "reviewedOn": "2026-09-16",
   "presentation": {
-    "file": "output/bloc-03/spity-bloc-3-soutenance-v19.pptx",
-    "sha256": "a6bcc6035798bb2885222cd341fc9cb7314c81ac788e7d00f93240b5705c6434",
-    "pdfFile": "output/bloc-03/spity-bloc-3-soutenance-v19.pdf",
-    "pdfSHA256": "378b1b6fb6e1f8dc080c4a5e2e98adce830d3730c8f3a3557d9d48528da3c76e",
+    "file": "output/bloc-03/spity-bloc-3-soutenance-v20.pptx",
+    "sha256": "563619ee7d39170b22e12ca90e6a0dac98a46fc642b173cf27d1240932e22dfe",
+    "pdfFile": "output/bloc-03/spity-bloc-3-soutenance-v20.pdf",
+    "pdfSHA256": "a7315f097b3cfc72b7e7a229bbcdbe0ecabaa68241613d706d06c02d590e44e8",
     "slidesReviewed": [
       1,
       2,
@@ -34,16 +34,41 @@
       26
     ],
     "nativeCharts": 2,
-    "method": "Export LibreOffice. Inspection individuelle de la diapositive 7 à 1600 px. Comparaison des 26 pages PDF : seule la page 7 change ; XML des 25 autres slides identique à la version v18 déjà inspectée. Revue précédente conservée pour ces pages. Notes natives et textes contrôlés séparément.",
-    "result": "Deux colonnes lisibles, sans débordement : fonctionnalités disponibles et suites à compléter. Authentification affichée comme livrée ; aucun total Linear périmé dans la projection.",
+    "method": "Comparaison visuelle avec les 23 pages du PDF Bloc 1 fourni. Export LibreOffice et inspection des 26 slides sur quatre planches ; après ajustements, inspection individuelle des slides 1, 2, 5 et 11 à 1400 px. Les neuf libellés du planning sont affichés. Vérification séparée de la conservation exacte des textes oraux et des notes.",
+    "result": "Palette crème, vert foncé et olive, titres en capitales, Poppins, photographies du Bloc 1 et bandeaux de synthèse harmonisés. Aucun débordement visible. Sommaire : présentation du projet puis sept compétences. Les simulations restent identifiées.",
     "currentRevisionSlidesReviewed": [
-      7
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
     ],
-    "previousReviewSHA256": "9357432faaef56b90305b8995edcbb7b085b12395ceb61aad8734da008bba14f"
+    "previousReviewSHA256": "a6bcc6035798bb2885222cd341fc9cb7314c81ac788e7d00f93240b5705c6434"
   },
   "dossier": {
     "file": "output/bloc-03/dossier-bloc-03-spity.pdf",
-    "sha256": "d9c4f2fe1c85d76325053e0d74ffa938093c9356d8319ae01373435c26be59e4",
+    "sha256": "817899661cea3b6632ec71981ba214e946b9dff113f561399eb060aa63d6b5c6",
     "pages": 26,
     "pagesReviewed": [
       1,
@@ -74,18 +99,12 @@
       26
     ],
     "currentRevisionPagesReviewed": [
-      3,
-      4,
-      5,
-      8,
       23,
-      24,
-      25,
       26
     ],
-    "method": "Comparaison textuelle avec le dossier précédent. Rendu et inspection en deux planches des huit pages modifiées ou ajoutées ; revue précédente conservée pour les pages identiques.",
-    "previousReviewSHA256": "19119ad82913a587642cc868c8c4fa3d33798dbdb876833c621708474c9b435a",
-    "result": "26 pages ; bilan fonctionnel et historique Linear explicitement séparés. Tableau historique réparti sur deux pages avec en-tête répété ; aucun débordement visible."
+    "method": "Comparaison textuelle des 26 pages : seules 23 et 26 changent. Rendu et inspection individuelle de ces pages à 1000 px ; revue précédente conservée pour les pages identiques.",
+    "previousReviewSHA256": "d9c4f2fe1c85d76325053e0d74ffa938093c9356d8319ae01373435c26be59e4",
+    "result": "26 pages ; références v20 et explication de la direction graphique mises à jour. Aucun débordement visible."
   },
-  "scope": "Revue de la révision v19 : diapositive 7, notes correspondantes et pages modifiées du dossier. Revue v18 conservée pour les pages identiques. Aucun contrôle Microsoft PowerPoint ni nouvelle recette applicative."
+  "scope": "Revue visuelle du support v20 inspiré du Bloc 1 fourni et des deux pages modifiées du dossier. Notes orales conservées. Aucun contrôle Microsoft PowerPoint ni nouvelle recette applicative."
 }
