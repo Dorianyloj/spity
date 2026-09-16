@@ -13,7 +13,7 @@ Bienvenue dans le dépôt de Spity. Cette page permet d'accéder rapidement aux 
 
 Le [cadrage produit](CADRAGE_PROJET.md) présente le besoin, les utilisateurs, les fonctionnalités et les objectifs. Le [README applicatif](spity/README.md) décrit l'installation et l'architecture du code.
 
-Pour le **Bloc 3 — Coordonner et piloter**, commencer par le [kit de soutenance](docs/rncp/bloc-03/README.md), puis le [dossier PDF](output/bloc-03/dossier-bloc-03-spity.pdf) et la [matrice des sept compétences](docs/rncp/bloc-03/MATRICE_PREUVES.md). Le kit distingue les preuves techniques observées du cas de management fictif. La démonstration et la checklist sont accessibles depuis ce même index.
+Pour le **Bloc 3 — Coordonner et piloter**, commencer par le [kit de soutenance](docs/rncp/bloc-03/README.md), puis le [dossier PDF](output/bloc-03/dossier-bloc-03-spity.pdf) et la [matrice des sept compétences](docs/rncp/bloc-03/MATRICE_PREUVES.md). Le support présente le projet solo sur un an puis les sept compétences ; les preuves réelles et les mises en situation pédagogiques sont distinguées. La démonstration et la checklist sont accessibles depuis ce même index.
 
 ## 2. Trois parcours de consultation
 

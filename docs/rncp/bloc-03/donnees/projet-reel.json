@@ -1,0 +1,154 @@
+{
+  "asOf": "2026-09-16",
+  "duration": {
+    "label": "1 an",
+    "nature": "Durée déclarée par Dorian Joly dans la conversation",
+    "exactStart": null,
+    "exactEnd": null
+  },
+  "team": {
+    "confirmedComposition": "Projet solo : Dorian Joly",
+    "source": "Confirmation explicite du candidat, conversation du 16/09/2026",
+    "note": "Les retours pédagogiques simulés ne représentent pas une équipe réelle."
+  },
+  "actualHours": null,
+  "actualCostEUR": null,
+  "clientValidation": null,
+  "milestones": [
+    {
+      "revision": "c2783de7f21a896179d9a6cf83cf427e71acd89d",
+      "date": "2026-01-24",
+      "title": "Fondations Next.js et Drizzle"
+    },
+    {
+      "revision": "f92a86d00e48a9906719483bb21c002397b71df4",
+      "date": "2026-05-04",
+      "title": "Authentification"
+    },
+    {
+      "revision": "84d85c9c47cf4e9e760c574fc2d7c5dc697e94c9",
+      "date": "2026-05-04",
+      "title": "Profils et onboarding"
+    },
+    {
+      "revision": "97b425b92a9475eeee153dd42efc463433a9e7f8",
+      "date": "2026-05-05",
+      "title": "Répertoire des lieux"
+    },
+    {
+      "revision": "aa5079c26e0904245a3470c8149ec9f7404430f1",
+      "date": "2026-07-20",
+      "title": "Matching et événements"
+    },
+    {
+      "revision": "689e59dccf15dc611dbddccea9cf81ccc187c40c",
+      "date": "2026-07-20",
+      "title": "Recette sur build compilé"
+    },
+    {
+      "revision": "6809b3ed0a1ec93e499bffc06d8ef9913468abe7",
+      "date": "2026-07-28",
+      "title": "Commentaires du feed"
+    },
+    {
+      "revision": "f892c31184be8ac889cb912305d15ca3b6394f15",
+      "date": "2026-08-13",
+      "title": "Maintenance des dépendances"
+    },
+    {
+      "revision": "95c01f79d176c1694447d68f43573138b732a78a",
+      "date": "2026-08-13",
+      "title": "Supervision"
+    },
+    {
+      "revision": "bafa5992bb6f9fd49a0873a051285a5afd4660b9",
+      "date": "2026-09-09",
+      "title": "Médias sécurisés"
+    },
+    {
+      "revision": "62937d584b74420e1071a5814c78c311cfc07511",
+      "date": "2026-09-09",
+      "title": "Administration"
+    },
+    {
+      "revision": "3ae03231833e714422023de5decd6aae99e5be6c",
+      "date": "2026-09-11",
+      "title": "Voies et alertes en falaise"
+    },
+    {
+      "revision": "efda3e88d665fc6cce469e84eae7ac8315e2b0c6",
+      "date": "2026-09-11",
+      "title": "Liens et PDF de topos"
+    },
+    {
+      "revision": "363f681217b6ba00f16d8c6c7396bf9653c4a8f7",
+      "date": "2026-09-15",
+      "title": "Fiabilisation des parcours de démonstration"
+    },
+    {
+      "revision": "83e4c29d24a584d7f607f7840b6066e63e80a53c",
+      "date": "2026-09-15",
+      "title": "Correction de la navigation"
+    },
+    {
+      "revision": "872db197b3e6bf3d053b698829c41674ae42a836",
+      "date": "2026-09-15",
+      "title": "Fusion de la PR 35"
+    }
+  ],
+  "performance": {
+    "source": "docs/audits/2026-09-15-navigation-performances.md",
+    "observedOn": "2026-09-15",
+    "scope": "Build de production local ; Chromium, CPU ×4, latence 100 ms, débit 1 000 000 octets/s, un passage par parcours. Aucune mesure de performance en production.",
+    "routes": [
+      "Partenaires",
+      "Événements",
+      "Demandes",
+      "Profil",
+      "Feed"
+    ],
+    "beforeMs": [
+      11041,
+      9917,
+      10220,
+      10363,
+      8660
+    ],
+    "afterMs": [
+      1123,
+      763,
+      550,
+      748,
+      494
+    ]
+  },
+  "simulatedFeedback": [
+    {
+      "id": "SIM-01",
+      "persona": "Grimpeur (persona fictif)",
+      "feedback": "Je veux filtrer les partenaires selon la discipline que je pratique et comprendre l’état de ma demande.",
+      "response": "Montrer les filtres et les états ; vérifier la cohérence du niveau avec la discipline.",
+      "criterion": "Résultats cohérents et statut de demande lisible.",
+      "implementationEvidence": "363f681",
+      "nature": "Retour inventé pour l’exercice ; fonctionnalité réelle, aucun entretien réalisé."
+    },
+    {
+      "id": "SIM-02",
+      "persona": "Responsable de club (persona fictif)",
+      "feedback": "Je dois retrouver les inscrits et savoir s’il reste des places pour ma sortie.",
+      "response": "Présenter la capacité et la liste des participants avec une session club.",
+      "criterion": "Liste autorisée, inscription confirmée et capacité respectée.",
+      "implementationEvidence": "363f681",
+      "nature": "Retour inventé pour l’exercice ; fonctionnalité réelle, aucune réception client."
+    },
+    {
+      "id": "SIM-03",
+      "persona": "Grimpeur (persona fictif)",
+      "feedback": "Après un clic dans le menu, je veux savoir que ma navigation est en cours.",
+      "response": "Montrer l’indicateur d’attente et la correction du fond décoratif.",
+      "criterion": "Attente visible puis disparition à l’arrivée sur la page.",
+      "implementationEvidence": "83e4c29",
+      "nature": "Retour inventé pour l’exercice ; correction réelle issue du signalement de Dorian."
+    }
+  ]
+}

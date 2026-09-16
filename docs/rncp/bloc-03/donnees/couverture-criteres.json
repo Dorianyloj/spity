@@ -1,0 +1,643 @@
+[
+  {
+    "id": "C.3.1-1",
+    "competency": "C.3.1",
+    "criterion": "Méthodologie justifiée et bénéfices",
+    "slides": [
+      4
+    ],
+    "annexes": [
+      "A01"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      11,
+      12
+    ]
+  },
+  {
+    "id": "C.3.1-2",
+    "competency": "C.3.1",
+    "criterion": "Outil de planification argumenté et compatible avec la méthode",
+    "slides": [
+      4,
+      5
+    ],
+    "annexes": [
+      "A01"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      11,
+      12
+    ]
+  },
+  {
+    "id": "C.3.1-3",
+    "competency": "C.3.1",
+    "criterion": "Phases, tâches et lots détaillés",
+    "slides": [
+      5
+    ],
+    "annexes": [
+      "A01"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      11,
+      12
+    ]
+  },
+  {
+    "id": "C.3.1-4",
+    "competency": "C.3.1",
+    "criterion": "Étude, mesure, conception, réalisation, restitution visibles",
+    "slides": [
+      5
+    ],
+    "annexes": [
+      "A01"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      11,
+      12
+    ]
+  },
+  {
+    "id": "C.3.1-5",
+    "competency": "C.3.1",
+    "criterion": "Affectation selon les compétences et responsabilités",
+    "slides": [
+      6
+    ],
+    "annexes": [
+      "A02"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      11,
+      12
+    ]
+  },
+  {
+    "id": "C.3.1-6",
+    "competency": "C.3.1",
+    "criterion": "Prise en compte du handicap dans les missions",
+    "slides": [
+      6
+    ],
+    "annexes": [
+      "A02"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      11,
+      12
+    ]
+  },
+  {
+    "id": "C.3.1-7",
+    "competency": "C.3.1",
+    "criterion": "Points de vigilance et ressources nécessaires",
+    "slides": [
+      5,
+      6
+    ],
+    "annexes": [
+      "A01",
+      "A02"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      11,
+      12
+    ]
+  },
+  {
+    "id": "C3.2.1-1",
+    "competency": "C3.2.1",
+    "criterion": "Outil de suivi adapté au projet et à la méthode",
+    "slides": [
+      7,
+      8
+    ],
+    "annexes": [
+      "A03",
+      "A09"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12
+    ]
+  },
+  {
+    "id": "C3.2.1-2",
+    "competency": "C3.2.1",
+    "criterion": "Indicateurs mesurables et quantifiables",
+    "slides": [
+      7,
+      8
+    ],
+    "annexes": [
+      "A03"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12
+    ]
+  },
+  {
+    "id": "C3.2.1-3",
+    "competency": "C3.2.1",
+    "criterion": "Tableau de bord : avancement",
+    "slides": [
+      7
+    ],
+    "annexes": [
+      "A09"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12
+    ]
+  },
+  {
+    "id": "C3.2.1-4",
+    "competency": "C3.2.1",
+    "criterion": "Tableau de bord : coûts",
+    "slides": [
+      8
+    ],
+    "annexes": [
+      "A03"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12
+    ]
+  },
+  {
+    "id": "C3.2.1-5",
+    "competency": "C3.2.1",
+    "criterion": "Tableau de bord : délais",
+    "slides": [
+      8
+    ],
+    "annexes": [
+      "A03"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12
+    ]
+  },
+  {
+    "id": "C3.2.1-6",
+    "competency": "C3.2.1",
+    "criterion": "Tableau de bord : risques",
+    "slides": [
+      9
+    ],
+    "annexes": [
+      "A03"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12
+    ]
+  },
+  {
+    "id": "C3.2.1-7",
+    "competency": "C3.2.1",
+    "criterion": "Tableau de bord : ressources humaines et capacité",
+    "slides": [
+      8,
+      13
+    ],
+    "annexes": [
+      "A02",
+      "A03"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12
+    ]
+  },
+  {
+    "id": "C3.2.2-1",
+    "competency": "C3.2.2",
+    "criterion": "Problème et conséquences exposés",
+    "slides": [
+      10
+    ],
+    "annexes": [
+      "A04"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12
+    ]
+  },
+  {
+    "id": "C3.2.2-2",
+    "competency": "C3.2.2",
+    "criterion": "Options détaillées et outil d’aide à la décision",
+    "slides": [
+      10
+    ],
+    "annexes": [
+      "A04"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12
+    ]
+  },
+  {
+    "id": "C3.2.2-3",
+    "competency": "C3.2.2",
+    "criterion": "Décision argumentée et effet vérifié",
+    "slides": [
+      10,
+      11
+    ],
+    "annexes": [
+      "A04"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12
+    ]
+  },
+  {
+    "id": "C3.3.1-1",
+    "competency": "C3.3.1",
+    "criterion": "Spécificités de handicap prises en compte",
+    "slides": [
+      13
+    ],
+    "annexes": [
+      "A05"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12,
+      13
+    ]
+  },
+  {
+    "id": "C3.3.1-2",
+    "competency": "C3.3.1",
+    "criterion": "Charge répartie et équilibrée",
+    "slides": [
+      13
+    ],
+    "annexes": [
+      "A02",
+      "A05"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12,
+      13
+    ]
+  },
+  {
+    "id": "C3.3.1-3",
+    "competency": "C3.3.1",
+    "criterion": "Styles identifiés et décrits",
+    "slides": [
+      12
+    ],
+    "annexes": [
+      "A05"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12,
+      13
+    ]
+  },
+  {
+    "id": "C3.3.1-4",
+    "competency": "C3.3.1",
+    "criterion": "Principes de management et animation adaptés",
+    "slides": [
+      12,
+      13
+    ],
+    "annexes": [
+      "A05"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12,
+      13
+    ]
+  },
+  {
+    "id": "C3.3.1-5",
+    "competency": "C3.3.1",
+    "criterion": "Analyse critique d’une situation ou posture",
+    "slides": [
+      12
+    ],
+    "annexes": [
+      "A05"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12,
+      13
+    ]
+  },
+  {
+    "id": "C3.3.1-6",
+    "competency": "C3.3.1",
+    "criterion": "Recommandations réalistes et réalisables",
+    "slides": [
+      12,
+      13
+    ],
+    "annexes": [
+      "A05"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12,
+      13
+    ]
+  },
+  {
+    "id": "C3.3.1-7",
+    "competency": "C3.3.1",
+    "criterion": "Partage de ressources dans les outils collaboratifs",
+    "slides": [
+      13
+    ],
+    "annexes": [
+      "A05"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12,
+      13
+    ]
+  },
+  {
+    "id": "C3.3.1-8",
+    "competency": "C3.3.1",
+    "criterion": "Choix des outils justifié par l’objectif",
+    "slides": [
+      13
+    ],
+    "annexes": [
+      "A05"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12,
+      13
+    ]
+  },
+  {
+    "id": "C3.3.1-9",
+    "competency": "C3.3.1",
+    "criterion": "Contexte multiculturel et international",
+    "slides": [
+      13
+    ],
+    "annexes": [
+      "A05"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      12,
+      13
+    ]
+  },
+  {
+    "id": "C3.3.2-1",
+    "competency": "C3.3.2",
+    "criterion": "Compétences nécessaires identifiées",
+    "slides": [
+      14
+    ],
+    "annexes": [
+      "A06"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      13
+    ]
+  },
+  {
+    "id": "C3.3.2-2",
+    "competency": "C3.3.2",
+    "criterion": "Grille actuel/cible commentée",
+    "slides": [
+      14
+    ],
+    "annexes": [
+      "A06"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      13
+    ]
+  },
+  {
+    "id": "C3.3.2-3",
+    "competency": "C3.3.2",
+    "criterion": "Plan de développement détaillé et adapté",
+    "slides": [
+      15
+    ],
+    "annexes": [
+      "A06"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      13
+    ]
+  },
+  {
+    "id": "C3.3.2-4",
+    "competency": "C3.3.2",
+    "criterion": "Formations adaptées au besoin et au profil",
+    "slides": [
+      15
+    ],
+    "annexes": [
+      "A06"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      13
+    ]
+  },
+  {
+    "id": "C3.3.2-5",
+    "competency": "C3.3.2",
+    "criterion": "Modalités accessibles en cas de handicap",
+    "slides": [
+      15
+    ],
+    "annexes": [
+      "A06"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      13
+    ]
+  },
+  {
+    "id": "C3.3.2-6",
+    "competency": "C3.3.2",
+    "criterion": "Transmission conditionnelle du besoin de recrutement aux RH",
+    "slides": [
+      15,
+      26
+    ],
+    "annexes": [
+      "A06"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      13
+    ]
+  },
+  {
+    "id": "C3.4.1-1",
+    "competency": "C3.4.1",
+    "criterion": "Comptes rendus clairs et ordonnés",
+    "slides": [
+      16
+    ],
+    "annexes": [
+      "A07"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      13,
+      14
+    ]
+  },
+  {
+    "id": "C3.4.1-2",
+    "competency": "C3.4.1",
+    "criterion": "Comptes rendus facilitant les décisions du client",
+    "slides": [
+      16
+    ],
+    "annexes": [
+      "A07"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      13,
+      14
+    ]
+  },
+  {
+    "id": "C3.4.1-3",
+    "competency": "C3.4.1",
+    "criterion": "Points de validation organisés pour suivre la qualité",
+    "slides": [
+      17
+    ],
+    "annexes": [
+      "A07"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      13,
+      14
+    ]
+  },
+  {
+    "id": "C3.4.1-4",
+    "competency": "C3.4.1",
+    "criterion": "Indicateurs de satisfaction définis et cohérents",
+    "slides": [
+      18
+    ],
+    "annexes": [
+      "A07"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      13,
+      14
+    ]
+  },
+  {
+    "id": "C3.4.2-1",
+    "competency": "C3.4.2",
+    "criterion": "Dernière version et logiciel utilisable",
+    "slides": [
+      19,
+      20,
+      21,
+      22
+    ],
+    "annexes": [
+      "A08"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      14
+    ]
+  },
+  {
+    "id": "C3.4.2-2",
+    "competency": "C3.4.2",
+    "criterion": "Démonstration des fonctionnalités attendues",
+    "slides": [
+      19,
+      21,
+      22
+    ],
+    "annexes": [
+      "A08"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      14
+    ]
+  },
+  {
+    "id": "C3.4.2-3",
+    "competency": "C3.4.2",
+    "criterion": "Vocabulaire adapté à une audience client",
+    "slides": [
+      20,
+      21,
+      22
+    ],
+    "annexes": [
+      "A08"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      14
+    ]
+  },
+  {
+    "id": "C3.4.2-4",
+    "competency": "C3.4.2",
+    "criterion": "Démonstration permettant une validation",
+    "slides": [
+      19,
+      23
+    ],
+    "annexes": [
+      "A08"
+    ],
+    "scope": "Réel, estimation ou simulation selon les sources explicitement affichées ; aucune acquisition présumée.",
+    "referencePages": [
+      14
+    ]
+  }
+]

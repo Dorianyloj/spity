@@ -1,30 +1,245 @@
-b4ef85b 2026-09-15 docs(bloc3): clarifier le role du PO et la delegation
-b648d31 2026-09-15 docs(bloc3): ajouter un lexique simple des termes du support
-d0d5d6a 2026-09-15 docs(bloc3): expliquer les diapositives pour un developpeur
-af50cc5 2026-09-15 docs(bloc3): harmoniser sur le diaporama du bloc 1
-6b90276 2026-09-15 docs(bloc3): verifier tous les criteres et les regles de certification
-4836e9a 2026-09-15 Polish partnership request cards
-551249e 2026-09-15 docs(bloc3): integrer les reunions inspirees de Scrum
-98e7b6f 2026-09-15 docs(bloc3): corriger la couverture des competences et le support visuel
-9d166c0 2026-09-15 docs(bloc3): auditer toutes les competences et les criteres de la grille
-2f644db 2026-09-15 docs(bloc3): rendre les amenagements du cas fictif visibles dans le diaporama
-817f4c7 2026-09-15 docs(bloc3): clarifier les exigences de prise en compte du handicap
-67dedd8 2026-09-14 Fix partner card inner spacing
-3742f56 2026-09-14 Fix matching filter accessibility label collision
-ea957b6 2026-09-14 Polish partner matching directory
-a9da83c 2026-09-14 docs(bloc3): ancrer le pilotage dans Linear et détailler les estimations
-90e269b 2026-09-14 docs: align bloc 3 with existing certification dossiers
-8c026f6 2026-09-14 docs: redesign bloc 3 slideshow with charts and visual layouts
-0ae14e1 2026-09-14 docs: develop bloc 3 slideshow and speaker script for 30 minutes
-894bcd2 2026-09-14 docs: prepare complete RNCP bloc 3 presentation kit
+a20d200 2026-01-22 Initial commit
+c2783de 2026-01-24 feat: initialize project with Next.js, Tailwind CSS, and Drizzle ORM
+913227a 2026-05-04 feat(ui): add landing page and design system
+0951b0b 2026-05-04 Merge pull request #1 from Dorianyloj/feat-landing-design-system
+71dbb5a 2026-05-04 chore(project): clean up foundation setup
+248d2cb 2026-05-04 Merge pull request #2 from Dorianyloj/chore/project-foundations
+f92a86d 2026-05-04 feat(auth): add email password session foundation
+6223091 2026-05-04 Merge pull request #3 from Dorianyloj/feat/auth-foundation
+84d85c9 2026-05-04 feat(profile): add onboarding and profile APIs
+4763fd2 2026-05-04 Merge pull request #4 from Dorianyloj/feat/profile-onboarding
+c4cffd8 2026-05-04 feat(auth): add user-facing login and register pages
+559e8e4 2026-05-04 Merge pull request #5 from Dorianyloj/feat/auth-pages
+e022006 2026-05-04 feat(app): add connected dashboard shell
+3ab606e 2026-05-04 refactor(app): switch dashboard to feed layout
+368bbf1 2026-05-04 refactor(profile): improve final profile page
+1f40deb 2026-05-04 refactor(app): embed profile page in app shell
+1299b66 2026-05-04 Merge pull request #6 from Dorianyloj/feat/app-shell
+5765e53 2026-05-04 feat(profile): add detailed equipment inventory
+41f63b0 2026-05-04 refactor(profile): split profile into tabs
+d912152 2026-05-04 style(profile): unify profile layout direction
+24c0858 2026-05-04 feat(profile): enrich public climbing profile
+ea73a82 2026-05-04 style(profile): simplify profile overview
+759db91 2026-05-04 style(profile): start profile with tabs
+97f2b43 2026-05-04 style(app): apply spity visual direction
+3e45d1e 2026-05-05 feat(landing): redesign homepage hero
+6d625ab 2026-05-05 feat(ui): align screens with landing identity
+30d25ce 2026-05-05 chore(docker): avoid phpmyadmin port conflict
+9e43468 2026-05-05 chore(db): add demo seed data
+97b425b 2026-05-05 feat(places): add connected directory page
+e5fe986 2026-05-05 feat(places): enrich location experience
+41a780a 2026-05-05 feat(places): add detailed place pages
+6770a88 2026-05-05 Merge pull request #8 from Dorianyloj/feat/profile-equipment-inventory
+4d9cdba 2026-05-05 chore(demo): add climbing image bank
+a80bad4 2026-05-05 style(app): restore dark climbing interface
+f9614d0 2026-05-05 style(places): improve filters toolbar
+bf34bd6 2026-05-05 style(brand): add transparent logos
+8e9c610 2026-05-05 feat(ui): add reusable layout components
+b351b4f 2026-05-05 style(theme): apply alpine daylight palette
+651ac7b 2026-05-05 refactor(ui): improve shared components
+755790d 2026-05-07 docs(rncp): add stakeholder mapping for C1.1.1
+8354906 2026-05-07 docs(rncp): update C1.1.1 client context
+f5cab2d 2026-05-07 docs(rncp): add client request analysis for C1.1.2
+c525ad9 2026-05-07 docs(rncp): add SWOT analysis for C1.2.1
+b44aa0a 2026-05-07 docs(rncp): add technical feasibility audit for C1.2.2
+c256cd3 2026-05-07 docs(rncp): add risk register for C1.2.3
+2b81382 2026-05-07 docs(rncp): add watch methodology for C1.3.1
+bbae53c 2026-05-07 docs(rncp): add architecture comparison for C1.3.2
+9f974b8 2026-05-07 docs(rncp): add functional scope estimate for C1.4.1
+9edec45 2026-05-07 docs(rncp): add budget estimate for C1.4.2
+6fd7fa8 2026-05-07 docs(rncp): add software architecture for C1.5
+6fcc735 2026-05-07 docs(rncp): add client recommendations for C1.6
+e1879dd 2026-05-07 docs(rncp): add mermaid architecture diagram
+d8a8be9 2026-05-07 docs(rncp): embed architecture png in C1.5
+209812c 2026-05-07 docs(rncp): use provided architecture png
+e145493 2026-05-28 docs(rncp): add bloc 01 presentation deck
+73248cc 2026-05-28 docs(rncp): add reveal presentation deck
+eaecde8 2026-07-20 docs(bc02): define prototype scope and evaluation plan
+fa23964 2026-07-20 docs(rncp): planifier le dossier du bloc 2
+624050e 2026-07-20 docs(bc02): document environments and deployment protocol
+b2fa87a 2026-07-20 chore(git): merge main into develop
+eb837f4 2026-07-20 feat(quality): add BC02 integration and test pipeline
+b77477e 2026-07-20 docs(bc02): document integration and test evidence
+25d0de5 2026-07-20 fix(ci): upload Lighthouse reports
+835b0c6 2026-07-20 docs(bc02): record successful CI evidence [skip ci]
+aa5079c 2026-07-20 feat(bc02): implement matching and event workflows
+8f306d0 2026-07-20 docs(bc02): document prototype architecture
+1db84b8 2026-07-20 fix(matching): preserve existing partnership history
+4039be9 2026-07-20 docs(bc02): record prototype CI evidence [skip ci]
+5f120ee 2026-07-20 test(bc02): add MariaDB integration workflow
+1e1cb16 2026-07-20 docs(bc02): document MariaDB integration evidence
+6a5b969 2026-07-20 docs(bc02): record integration CI evidence [skip ci]
+d6d6b53 2026-07-20 feat(security): harden OWASP controls
+8f20d07 2026-07-20 feat(accessibility): enforce RGAA audit
+3779eee 2026-07-20 docs(bc02): document OWASP and RGAA evidence
+295f539 2026-07-20 docs(bc02): record security audit CI evidence [skip ci]
+8be8a29 2026-07-20 chore(ci): upgrade actions to Node 24 runtime
+eca50aa 2026-07-20 docs(bc02): record Node 24 CI validation [skip ci]
+5c6240f 2026-07-20 feat(release): add immutable version metadata
+9004054 2026-07-20 feat(ci): automate staged release promotion
+0bdd4e7 2026-07-20 docs(bc02): document version and deployment strategy
+2dc8788 2026-07-20 docs(bc02): record v0.1.0 release evidence [skip ci]
+2941a44 2026-07-20 test(bc02): automate acceptance recipe
+f384a21 2026-07-20 docs(bc02): add acceptance and bug correction records
+f672dba 2026-07-20 docs(bc02): record acceptance CI evidence [skip ci]
+c24d505 2026-07-20 docs(bc02): add exploitation manuals
+689e59d 2026-07-20 test(ci): run acceptance on standalone build
+d683d08 2026-07-20 docs(bc02): record standalone acceptance evidence [skip ci]
+0ea776d 2026-07-20 docs(bc02): assemble final certification dossier
+c1cb0f1 2026-07-21 docs(bc02): shorten final certification dossier
+e54bf20 2026-07-21 docs(bc02): audit official evaluation coverage
+9bb4efa 2026-07-21 test(coverage): enforce global unit coverage
+b9e34c2 2026-07-21 docs(bc02): prove global unit coverage
+dd49932 2026-07-21 docs(bc02): record successful coverage pipeline
+d2245db 2026-07-21 docs(bc02): shorten dossier with visual annexes
+6bddda4 2026-07-21 docs(bc02): personnaliser le dossier de certification
+d646f7a 2026-07-21 docs(bc02): renforcer les compétences déterminantes
+e58ec36 2026-07-21 chore(ci): relancer les contrôles Lighthouse
+306b837 2026-07-23 feat(deploy): prepare jury demo environment
+49c4ea0 2026-07-23 fix(security): update vulnerable runtime dependencies
+3d14fac 2026-07-23 docs(bc02): add jury application access
+34f717c 2026-07-23 docs(bc02): cover all evaluation criteria
+160c233 2026-07-28 chore: harden deployment and quality tooling
+0d23f4f 2026-07-28 chore: sync local development branch
+65ea37d 2026-07-28 feat(feed): simplify community timeline
+25b7579 2026-07-28 feat(feed): persist post likes
+6651616 2026-07-28 fix(feed): use local image paths
+a33d86b 2026-07-28 fix(auth): accept internal avatar paths
+f15571d 2026-07-28 style(app): darken authenticated background
+e19fb03 2026-07-28 style(app): lighten dark workspace background
+6809b3e 2026-07-28 feat(feed): add post comments
+04e4953 2026-07-28 feat(feed): reveal comment composer on demand
+aa94c82 2026-07-28 feat(profile): add public profile pages
+d66b158 2026-07-28 fix(db): share mysql pool across dev reloads
+25cc574 2026-08-03 merge: integrate develop into main
+88c5cbb 2026-08-12 chore(project): prepare bloc 4 maintenance baseline
+e5b4433 2026-08-12 fix(ci): restore acceptance and accessibility gates
+da7ebfb 2026-08-12 ci: pin authenticated accessibility browser
+e3784b7 2026-08-12 fix(a11y): make empty states contrast-safe
+f892c31 2026-08-13 feat(maintenance): industrialize bloc 4 dependency updates
+95c01f7 2026-08-13 feat(monitoring): industrialize C4.1.2 supervision
+2a75990 2026-08-13 feat(incidents): industrialize C4.2.1 registry
+392e36c 2026-08-13 feat(release): verify C4.2.2 promotions
+d140f74 2026-08-13 feat(improvements): industrialize C4.3.1 review
+db93398 2026-08-13 fix(improvements): validate evidence paths cross-platform
+a813edd 2026-08-13 feat(releases): industrialize C4.3.2 journal
+af7273b 2026-08-13 feat(support): industrialize C4.3.3 collaboration
+094b24f 2026-08-13 ci: retry transient audit and registry publication
+e21d900 2026-08-13 docs(bloc4): complete final competency audit
+965b1d8 2026-08-13 docs(bloc4): add structured jury handoff dossier
+005121e 2026-08-13 docs: prepare repository entrypoint for jury
+6797471 2026-08-13 docs(bloc4): expand competency explanations
+429ee04 2026-08-13 docs(bloc4): add reproducible visual evidence
+dba17e1 2026-08-13 docs(bloc4): embed visual evidence in pdf
+4cbafc7 2026-08-13 docs(bloc4): add git and ci visual evidence
+b210551 2026-08-14 fix(bloc4): stabilize competency PDF headings
+8b1280e 2026-09-07 chore: document block 3 review
+5d802ce 2026-09-07 chore: record bloc 3 project audit
+14ac459 2026-09-07 chore: record Linear project audit
+66616a5 2026-09-08 chore: clarify Linear project scope
+593af8c 2026-09-09 docs(project): record Linear backlog reconciliation
+bafa599 2026-09-09 feat(media): add private image uploads and security patches
+481c530 2026-09-09 feat(deploy): automatically update production VPS after main CI
+74ec9de 2026-09-09 fix(ci): isolate deployment checks from archived document hashes
+f8f4c4f 2026-09-09 docs(admin): add isolated local administration prototype
+71e59d8 2026-09-09 docs(admin): enrich dashboard preview with coherent analytics
+62937d5 2026-09-09 feat(admin): add secured live dashboard and reversible moderation
+2548671 2026-09-09 test(admin): verify transaction guards and serialize moderated interactions
+eda727e 2026-09-09 fix(ci): propagate integration failures and audit production admin with current axe
+7bd147e 2026-09-09 fix(admin): keep navigation readable and capture hydration diagnostics
+e854e69 2026-09-09 fix(admin): render a stable SVG title during hydration
+a6e4193 2026-09-09 docs(profile): add interactive profile preview with member privacy and accessible editors
+d8308a8 2026-09-09 feat(profile): integrate complete member profiles and private workspace
+2517509 2026-09-09 fix(profile): improve heading contrast and extend visual checks
+e283678 2026-09-09 test(profile): target browser controls by accessible name
+5ebf63c 2026-09-09 test(profile): verify persisted partnership status column
+7fa3d76 2026-09-09 release: deploy validated complete member profiles
+0cfc668 2026-09-09 fix(profile): simplify practice disciplines and grade labels
+2164dfc 2026-09-09 feat(navigation): add floating Spity header and accessible mobile menu
+5137ba2 2026-09-09 test(navigation): cover the new mobile menu keyboard flow
+786897e 2026-09-09 fix(navigation): preserve compact logout icon size
+52593e1 2026-09-09 fix(home): overlay floating navbar on hero image
+26ecdd0 2026-09-09 style(navigation): apply forest theme to landing navbar
+830918f 2026-09-09 fix(home): prevent light canvas during overscroll
+27d647a 2026-09-09 feat(navigation): compact full-width header on scroll
+08687bc 2026-09-09 fix(auth): remove duplicate Spity labels beside logos
+be639ae 2026-09-09 style(typography): apply Outfit across the interface
+0604e2f 2026-09-09 feat(auth): enrich registration form and widen layout
+c302dcf 2026-09-09 feat(auth): align login layout with registration
+d80db5e 2026-09-09 fix(auth): clarify password length wording
+7063cfb 2026-09-09 style(auth): move login link below registration form
+1f8d87e 2026-09-09 style(auth): move registration link below login form
+e2758ca 2026-09-09 feat(ui): add animated flow buttons to primary actions
+fdfaa9b 2026-09-09 feat(ui): extend flow buttons to primary app actions
+a459247 2026-09-09 style(auth): remove redundant login helper text
+d259c05 2026-09-10 style(app): align navbar with landing page
+697c91d 2026-09-10 style(profile): refine practice level display
+f616df1 2026-09-10 feat: add place creation requests
+34036c3 2026-09-10 refactor: simplify place creation flow
+97e9495 2026-09-10 feat: review place requests and map parking
+dcb0dcc 2026-09-10 feat: add place map search
+3c212ec 2026-09-10 feat: add photos to place requests
+a20e233 2026-09-10 feat: let climbers improve place listings
+e2b1725 2026-09-10 fix: restore CI for place contributions
+a7e4608 2026-09-10 feat: compact place moderation queue
+a98ce9d 2026-09-10 ci: cache production image builds
+6f9300c 2026-09-10 ci: accelerate verified delivery pipeline
+5fde78f 2026-09-10 feat: streamline places exploration
+6efaa05 2026-09-10 fix: restore places contrast
+0582867 2026-09-11 style: center place filters
+55fe812 2026-09-11 style: expand place filters
+3ae0323 2026-09-11 feat: let climbers add crag routes and alerts
+a3709f5 2026-09-11 test: cover crag contribution flows
+efda3e8 2026-09-11 feat: add crag topo links and PDFs
+24da55c 2026-09-11 feat: add place detail section menu
+468a0ee 2026-09-11 feat: show one crag detail section at a time
+b88facf 2026-09-11 feat: filter and compact crag route listings
+667a53e 2026-09-11 refactor: hide route filter result count
+f22ee9f 2026-09-11 feat: color crag grades by difficulty
+672b4d2 2026-09-11 feat: expand and cluster places map
+92b93b0 2026-09-11 feat: toggle expanded places map
+18fbaf6 2026-09-11 fix: clean up map cluster labels
+39c44e9 2026-09-11 style: improve places map marker contrast
+28f7983 2026-09-11 feat: split places maps by climbing venue
+e162e90 2026-09-11 feat: add topology app background
+f588162 2026-09-11 style: compact route filter reset
+dc09d0f 2026-09-11 feat: add Spity browser icon
+cff0cad 2026-09-11 chore: refresh demo place data
+24d5ef6 2026-09-11 fix: preserve demo admin account
+529bb05 2026-09-11 style: streamline places filters
+b6e35ee 2026-09-11 style: balance filter toolbar spacing
+8a37dc1 2026-09-11 style: make place cards more visual
+0589242 2026-09-11 feat: animate place filter dropdowns
+c892d68 2026-09-11 feat: summarize crag grade ranges
+947dcfd 2026-09-11 feat: sync route types with crags
+4924d66 2026-09-11 fix: align place search filters
+dc9e81e 2026-09-11 fix: align place filter controls
 dd2bee5 2026-09-14 docs: prepare RNCP bloc 3 requirements and evidence checklist
-
-Arbitrage :
-commit 689e59dccf15dc611dbddccea9cf81ccc187c40c
-Date: 2026-07-20
-Subject: test(ci): run acceptance on standalone build
-
- .github/workflows/ci.yml                   |  7 +++++++
- spity/playwright.config.ts                 | 13 +++++++++++--
- spity/tests/acceptance/bc02-recipe.spec.ts |  3 ++-
- 3 files changed, 20 insertions(+), 3 deletions(-)
+894bcd2 2026-09-14 docs: prepare complete RNCP bloc 3 presentation kit
+0ae14e1 2026-09-14 docs: develop bloc 3 slideshow and speaker script for 30 minutes
+8c026f6 2026-09-14 docs: redesign bloc 3 slideshow with charts and visual layouts
+90e269b 2026-09-14 docs: align bloc 3 with existing certification dossiers
+a9da83c 2026-09-14 docs(bloc3): ancrer le pilotage dans Linear et détailler les estimations
+ea957b6 2026-09-14 Polish partner matching directory
+3742f56 2026-09-14 Fix matching filter accessibility label collision
+67dedd8 2026-09-14 Fix partner card inner spacing
+817f4c7 2026-09-15 docs(bloc3): clarifier les exigences de prise en compte du handicap
+2f644db 2026-09-15 docs(bloc3): rendre les amenagements du cas fictif visibles dans le diaporama
+9d166c0 2026-09-15 docs(bloc3): auditer toutes les competences et les criteres de la grille
+98e7b6f 2026-09-15 docs(bloc3): corriger la couverture des competences et le support visuel
+551249e 2026-09-15 docs(bloc3): integrer les reunions inspirees de Scrum
+4836e9a 2026-09-15 Polish partnership request cards
+6b90276 2026-09-15 docs(bloc3): verifier tous les criteres et les regles de certification
+af50cc5 2026-09-15 docs(bloc3): harmoniser sur le diaporama du bloc 1
+d0d5d6a 2026-09-15 docs(bloc3): expliquer les diapositives pour un developpeur
+b648d31 2026-09-15 docs(bloc3): ajouter un lexique simple des termes du support
+b4ef85b 2026-09-15 docs(bloc3): clarifier le role du PO et la delegation
+578603e 2026-09-15 docs(bloc3): ajouter le sommaire et finaliser le support de repetition
+820888c 2026-09-15 docs(bloc3): garder uniquement les numeros en pied de page
+c12e522 2026-09-15 fix(deploy): reclaim Spity images before transfer
+cd5bc81 2026-09-15 docs(bloc3): refondre la presentation de soutenance
+9b3926f 2026-09-15 docs(bloc3): distinguer un an de developpement du scenario fictif
+363f681 2026-09-15 fix(demo): fiabiliser les parcours partenaires et evenements
+f98daef 2026-09-15 chore(repo): regrouper les documents et archiver les anciens livrables
+83e4c29 2026-09-15 perf(navigation): supprimer le calcul du fond anime entre les pages
+872db19 2026-09-15 Merge pull request #35 from Dorianyloj/fix/navigation-performance

@@ -1,210 +1,141 @@
-"""Validate the submitted Bloc 3 case and native packages; optionally bundle them."""
+"""Validate current Bloc 3 sources/exports and optionally assemble the offline kit.
+
+Checks documentary consistency only: no application recipe or jury evaluation.
+"""
 import argparse
+from collections import Counter
 import hashlib
 import json
-import posixpath
+from pathlib import Path
 import re
 import subprocess
 import zipfile
-from pathlib import Path
-from xml.etree import ElementTree as ET
+from urllib.parse import unquote
+from openpyxl import load_workbook
+from pptx import Presentation
 from pypdf import PdfReader
-
-ROOT = Path(__file__).resolve().parents[2]
-DOCS = ROOT / 'docs/rncp/bloc-03'
-PDF = ROOT / 'output/bloc-03/dossier-bloc-03-spity.pdf'
-PPTX = ROOT / 'output/bloc-03/spity-bloc-3-30-minutes-visuel-v16.pptx'
-DECK_PDF = ROOT / 'output/bloc-03/spity-bloc-3-30-minutes-visuel-v16.pdf'
-XLSX = ROOT / 'output/bloc-03/pilotage-spity.xlsx'
-ZIP = ROOT / 'output/bloc-03/kit-soutenance-spity.zip'
-S = {'s':'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
-
-def read(path):
-    return json.loads(path.read_text(encoding='utf-8'))
-
-def digest(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
+ROOT=Path(__file__).resolve().parents[2];DOCS=ROOT/'docs/rncp/bloc-03';OUT=ROOT/'output/bloc-03'
+PPTX=OUT/'spity-bloc-3-30-minutes-visuel-v17.pptx';DECK=OUT/'spity-bloc-3-30-minutes-visuel-v17.pdf'
+PDF=OUT/'dossier-bloc-03-spity.pdf';XLSX=OUT/'pilotage-spity.xlsx';ZIP=OUT/'kit-soutenance-spity.zip'
+def read(p):return json.loads(p.read_text())
+def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def git(*args):return subprocess.check_output(['git',*args],cwd=ROOT,text=True).strip()
 def main(package):
-    data = read(DOCS/'donnees/pilotage.json')
-    tasks = data['tasks']
-    roles = {r['id']:r for r in data['roles']}
-    ids = {t['id'] for t in tasks}
-    assert len(ids) == len(tasks) == 10
-    for t in tasks:
-        assert t['role'] in roles
-        assert set(t['dependencies']) <= ids - {t['id']}
-        assert 1 <= t['start'] <= t['finish'] <= 15
-        assert all(t[k] >= 0 for k in ['plannedHours','spentHours','remainingHours'])
-    def visit(task_id, stack):
-        assert task_id not in stack, 'Dépendance cyclique'
-        for dep in next(t for t in tasks if t['id']==task_id)['dependencies']:
-            visit(dep, stack | {task_id})
-    for task_id in ids: visit(task_id, set())
-    planned = sum(t['plannedHours']*roles[t['role']]['hourlyRate'] for t in tasks)+sum(e['planned'] for e in data['expenses'])
-    forecast = sum((t['spentHours']+t['remainingHours'])*roles[t['role']]['hourlyRate'] for t in tasks)+sum(e['forecast'] for e in data['expenses'])
-    assert planned == 4270 and forecast == 4465
-    assert sum(t['plannedHours'] for t in tasks)==112
-    assert sum(t['spentHours']+t['remainingHours'] for t in tasks)==117
-    details=data['estimateDetails']
-    assert len(details)==30 and len({x['id'] for x in details})==30
-    for t in tasks:
-        for field in ['plannedHours','spentHours','remainingHours']:
-            assert sum(x[field] for x in details if x['task']==t['id'])==t[field]
-    inclusion=read(DOCS/'donnees/inclusion.json')
-    assert inclusion['fictional'] and inclusion['role']=='QA'
-    assert roles['QA']['capacityHours']==inclusion['capacityHours']
-    qa_tasks=[t for t in tasks if t['role']=='QA']
-    assert {t['id'] for t in qa_tasks}==set(inclusion['tasks'])
-    assert sum(t['spentHours']+t['remainingHours'] for t in qa_tasks)==inclusion['forecastHours']
-    for allocation in inclusion['preparationIncluded']:
-        activity=next(x for x in details if x['id']==allocation['activity'])
-        task=next(t for t in tasks if t['id']==allocation['task'])
-        assert activity['task']==task['id'] and task['role']==allocation['role']
-        assert 0 < allocation['hours'] <= activity['plannedHours']
-    training=inclusion['trainingIncluded']
-    assert 0 < training['hours'] <= next(t for t in qa_tasks if t['id']==training['task'])['plannedHours']
-    snapshot=read(DOCS/'donnees/linear-2026-09-14.json')
-    from collections import Counter
-    assert len(snapshot['issues'])==25
-    assert dict(Counter(x['status'] for x in snapshot['issues']))==snapshot['counts']=={'Done':12,'Todo':4,'In Progress':1,'Backlog':7,'Canceled':1}
-    assert len({x['id'] for x in snapshot['issues']})==25
-    assert sum(x['priority']=='High' and x['status'] not in ['Done','Canceled'] for x in snapshot['issues'])==7
-    indicators = read(DOCS/'donnees/indicateurs.json')
-    assert indicators['plannedCost']==planned and indicators['forecastCost']==forecast
-    assert abs(indicators['margin']-232)<1e-8
-    consolidation=read(DOCS/'donnees/consolidation.json')
-    rituals=read(DOCS/'donnees/rituels.json')
-    assert [x['id'] for x in rituals['events']]==['planning','daily','review','retro']
-    assert next(x for x in rituals['events'] if x['id']=='daily')['targetMinutes']==10
-    global_plan=consolidation['globalPlanning']
-    assert sum(x['personDays'] for x in global_plan['sequence'])==82
-    assert sum(x['personDays'] for x in global_plan['sequence'])/global_plan['capacityPersonDaysPerWeek']==16.4
-    b1=read(DOCS/'donnees/reference-bloc-01.json')
-    assert b1['sourceSHA256']==digest(ROOT/b1['source'])
-    assert sum(x['personDays'] for x in b1['lots'])==b1['personDays']==82
-    assert b1['personDays']*b1['dailyRateEUR']==b1['developmentEUR']==36900
-    assert sum(x['amountEUR'] for x in b1['budgetRows'])==b1['totalEUR']==44250
-    assert [x['personDays'] for x in b1['lots']]==[x['personDays'] for x in global_plan['sequence']]
-    recruitment=consolidation['conditionalRecruitment']
-    assert recruitment['activated'] is False and consolidation['clientSession']['actualParticipants'] is None
-    additional=recruitment['specialistHours']*recruitment['specialistHourlyRate']+recruitment['additionalCPHours']*recruitment['cpHourlyRate']
-    assert additional==202.5 and forecast+additional==4667.5
-    cp_hours=sum(t['spentHours']+t['remainingHours'] for t in tasks if t['role']=='CP')
-    assert cp_hours+recruitment['additionalCPHours']<=roles['CP']['capacityHours']
-    slides = read(DOCS/'donnees/support-oral.json')
-    assert len(slides)==26 and sum(s['minutes'] for s in slides)==30
-    assert [s['number'] for s in slides]==list(range(1,27))
-    assert sorted(s['contentNumber'] for s in slides)==list(range(26))
-    assert slides[1]['title']=='Sommaire' and slides[1]['minutes']==0.5
-    for start,end,expected in [(3,4,'01:00 à 03:00'),(5,7,'03:00 à 07:00'),(8,13,'07:00 à 15:00'),(14,19,'15:00 à 23:00'),(20,23,'23:00 à 30:00')]:
-        clock=lambda m:f'{int(m):02d}:{round((m%1)*60):02d}'
-        actual=f"{clock(slides[start-1]['startMinute'])} à {clock(slides[end-1]['endMinute'])}"
-        assert actual==expected and any(row[2]==actual for row in slides[1]['content']['items']), 'Sommaire incohérent avec les notes'
-    assert len([s for s in slides if s['minutes']>0])==23
+    slides=read(DOCS/'donnees/support-oral.json');facts=read(DOCS/'donnees/projet-reel.json');sim=read(DOCS/'donnees/mise-en-situation.json')
+    b1=read(DOCS/'donnees/reference-bloc-01.json');linear=read(DOCS/'donnees/linear-2026-09-14.json')
+    coverage=read(DOCS/'donnees/couverture-criteres.json');sources=read(DOCS/'donnees/sources-evaluation.json')
+    assert len(slides)==26 and [s['number'] for s in slides]==list(range(1,27))
+    assert sum(s['minutes'] for s in slides)==30
     assert sum(s['minutes'] for s in slides if s['demo'])==6
     assert all(s['minutes']==0 for s in slides[23:])
-    for s in slides[:23]:
-        assert s['endMinute']-s['startMinute']==s['minutes']
-        if not s['demo']:
-            assert 100 <= s['spokenWords']/s['minutes'] <= 145, f"Densité orale incohérente : slide {s['number']}"
-    assert len(list((DOCS/'annexes').glob('A*.md')))==9
-    matrix = (DOCS/'MATRICE_PREUVES.md').read_text(encoding='utf-8')
-    framework = read(DOCS/'donnees/cadre-evaluation.json')
-    assert framework['eliminatoryCompetencies']==['C.3.1','C3.2.1','C3.4.2']
-    assert framework['minimumAcquired']==4 and framework['mandatoryDeliverables']==14
-    assert framework['presentationMinutes']==30 and framework['questionsMinutes']==15
-    for competency in framework['competencies']:
-        assert competency in matrix
-    assert "Le règlement spécial n'est pas fourni" not in matrix
-    for path in DOCS.rglob('*.md'):
-        for target in re.findall(r'\[[^\]]*\]\(([^)]+)\)',path.read_text(encoding='utf-8')):
-            if '://' in target or target.startswith('#'): continue
-            resolved = (path.parent/target.split('#')[0]).resolve()
-            if resolved==ZIP: continue
-            assert resolved.exists(), f'Lien manquant : {path.name} -> {target}'
-    with zipfile.ZipFile(XLSX) as z:
-        assert z.testzip() is None
-        sheets = [n for n in z.namelist() if re.fullmatch(r'xl/worksheets/sheet\d+\.xml',n)]
-        assert len(sheets)==5
-        formulas=0
-        for name in sheets:
-            tree = ET.fromstring(z.read(name))
-            assert not tree.findall('.//s:c[@t="e"]',S), 'Erreur Excel exportée'
-            formulas += len(tree.findall('.//s:f',S))
-        assert formulas >= 40
-        cells={c.attrib['r']:c.findtext('s:v',namespaces=S) for c in ET.fromstring(z.read('xl/worksheets/sheet1.xml')).findall('.//s:c',S)}
-        for cell,value in {'C8':112,'C11':117,'C14':4270,'C16':4465,'C19':232}.items():
-            assert float(cells[cell])==value, f'Cache Excel incorrect : {cell}'
+    assert facts['team']['confirmedComposition']=='Projet solo : Dorian Joly'
+    assert facts['duration']['label']=='1 an' and facts['actualHours'] is None and facts['actualCostEUR'] is None
+    for src in sources:assert digest(ROOT/src['file'])==src['sha256']
+    assert digest(ROOT/b1['source'])==b1['sourceSHA256']
+    for m in facts['milestones']:
+        assert git('show','-s','--format=%as',m['revision'])==m['date']
+        assert subprocess.run(['git','merge-base','--is-ancestor',m['revision'],'872db19'],cwd=ROOT).returncode==0
+    counts=Counter(i['status'] for i in linear['issues'])
+    assert counts=={'Done':12,'Todo':4,'In Progress':1,'Backlog':7,'Canceled':1}
+    assert sum(l['personDays'] for l in b1['lots'])==82
+    assert sum(r['amountEUR'] for r in b1['budgetRows'])==44250
+    t=sim['tracking']
+    assert t['consumedPersonDays']+t['remainingPersonDays']==t['forecastPersonDays']==86
+    assert t['forecastPersonDays']*t['dailyRateEUR']+t['fixedEstimatedEUR']==t['forecastEUR']==46050
+    assert t['forecastEUR']-t['baselineEUR']==t['varianceEUR']==1800
+    assert len(sim['planning'])==9 and sum(r['personDays'] for r in sim['planning'])==82
+    for r in sim['planning']:assert 1<=r['startMonth']<=r['endMonth']<=12
+    assert all(r['assignedHours']==4 and r['availableHours']==5 for r in sim['review']['roles'])
+    assert len(coverage)==40
+    competencies=['C.3.1','C3.2.1','C3.2.2','C3.3.1','C3.3.2','C3.4.1','C3.4.2']
+    assert list(dict.fromkeys(c['competency'] for c in coverage))==competencies
+    assert len({c['id'] for c in coverage})==40
+    for c in coverage:
+        assert all(1<=n<=26 for n in c['slides'])
+        assert all(list((DOCS/'annexes').glob(a+'_*.md')) for a in c['annexes'])
+        assert c['criterion'] in (DOCS/'CONTROLE_COMPLETUDE.md').read_text()
+        assert any(c['competency'] in slides[n-1]['section'] for n in c['slides'])
+    sections=list(dict.fromkeys(s['section'].split(' /')[0] for s in slides[3:23]))
+    assert sections==competencies
+    presentation=Presentation(PPTX);assert len(presentation.slides)==26
+    charts=[]
+    for info,slide in zip(slides,presentation.slides):
+        assert info['notes']==slide.notes_slide.notes_text_frame.text
+        assert info['script'] in (DOCS/'GUIDE_ORAL.md').read_text()
+        text='\n'.join(shape.text for shape in slide.shapes if shape.has_text_frame)
+        assert not re.search(r'15 jours|quinze jours|J1[0-5]\b|Camille|4270|4 270',text,re.I)
+        for shape in slide.shapes:
+            assert shape.left>=0 and shape.top>=0
+            assert shape.left+shape.width<=presentation.slide_width+10
+            assert shape.top+shape.height<=presentation.slide_height+10
+            if shape.has_chart:charts.append((info['number'],shape.chart))
+    assert [n for n,c in charts]==[5,7,11]
+    assert list(charts[0][1].series[0].values)==[r['startMonth']-1 for r in sim['planning']]
+    assert list(charts[0][1].series[1].values)==[r['endMonth']-r['startMonth']+1 for r in sim['planning']]
+    assert list(charts[1][1].series[0].values)==[12,1,4,7]
+    perf=facts['performance']
+    assert list(charts[2][1].series[0].values)==[v/1000 for v in perf['beforeMs']]
+    assert list(charts[2][1].series[1].values)==[v/1000 for v in perf['afterMs']]
     with zipfile.ZipFile(PPTX) as z:
         assert z.testzip() is None
-        assert len([n for n in z.namelist() if re.fullmatch(r'ppt/slides/slide\d+\.xml',n)])==len(slides)
-        notes=[n for n in z.namelist() if re.fullmatch(r'ppt/notesSlides/notesSlide\d+\.xml',n)]
-        assert len(notes)==len(slides)
-        for note in notes:
-            assert len(''.join(ET.fromstring(z.read(note)).itertext()).strip())>80
-        a={'a':'http://schemas.openxmlformats.org/drawingml/2006/main'}
-        for slide in slides:
-            note=ET.fromstring(z.read(f"ppt/notesSlides/notesSlide{slide['number']}.xml"))
-            native_text='\n'.join(''.join(t.text or '' for t in p.findall('.//a:t',a)) for p in note.findall('.//a:p',a))
-            assert slide['notes'] in native_text, f"Notes différentes : slide {slide['number']}"
-        chart_parts=[n for n in z.namelist() if re.search(r'/charts/chart\d+\.xml$',n)]
-        chart_workbooks=[n for n in z.namelist() if '/embeddings/' in n and n.endswith('.xlsx')]
-        assert len(chart_parts)==7, 'Les sept graphiques doivent rester natifs'
-        assert len(chart_workbooks)==7, 'Chaque graphique doit conserver ses données intégrées'
-        for number in [7,15,17]:
-            visible=' '.join(ET.fromstring(z.read(f'ppt/slides/slide{number}.xml')).itertext())
-            assert inclusion['name'] in visible, f'Cas absent de la diapositive {number}'
-        assert re.search(r'ficti[fv]', ' '.join(ET.fromstring(z.read('ppt/slides/slide15.xml')).itertext()))
-        for number,terms in {2:['Sommaire','Organiser','Suivre','client','Démontrer'],4:['82','1 an','15 jours','fictif'],9:['44 250'],5:['Kanban','Scrum','Planning','Daily','Review','Rétrospective'],6:['1 an','15 jours','fictif','Mesure'],7:['assurance qualité','Ordinateur','Linear','Git'],8:['J11','J12','J13','J14'],14:['Participatif','Persuasif','Directif','Délégatif','Rétro'],16:['Actuel','Cible','Concurrence'],17:['CP','DEV','Camille'],18:['CR02','J12','J14','Review'],19:['80','4/5'],23:['accepté','refusé'],26:['202,50','29,50']}.items():
-            visible=' '.join(ET.fromstring(z.read(f'ppt/slides/slide{number}.xml')).itertext())
-            relationships=ET.fromstring(z.read(f'ppt/slides/_rels/slide{number}.xml.rels'))
-            for relationship in relationships:
-                if relationship.attrib['Type'].endswith('/chart'):
-                    target=posixpath.normpath(posixpath.join('ppt/slides',relationship.attrib['Target']))
-                    visible+=' '+' '.join(ET.fromstring(z.read(target)).itertext())
-            assert all(term.casefold() in visible.casefold() for term in terms), f'Élément attendu absent de la slide {number}'
-    reader=PdfReader(PDF)
-    assert all(len(page.extract_text().strip())>90 for page in reader.pages)
-    deck_reader=PdfReader(DECK_PDF)
-    assert len(deck_reader.pages)==26
-    assert all(len(page.extract_text().strip())>90 for page in deck_reader.pages)
+        assert len([n for n in z.namelist() if '/embeddings/' in n and n.endswith('.xlsx')])==3
+    deck=PdfReader(DECK);dossier=PdfReader(PDF)
+    assert len(deck.pages)==26 and len(dossier.pages)>10
+    assert all(len(p.extract_text().strip())>70 for p in deck.pages)
+    assert all(len(p.extract_text().strip())>70 for p in dossier.pages)
+    for n in [6,8,9,12,13,14,15,16,17,18,26]:
+        content=(deck.pages[n-1].extract_text()+' '+slides[n-1]['notes']).casefold()
+        assert any(term in content for term in ['simul','pédagog','hypoth','proposé']),n
+    wb=load_workbook(XLSX,data_only=False);cached=load_workbook(XLSX,data_only=True)
+    assert wb.sheetnames==['Lecture','Chronologie','Linear','Indicateurs','Cadrage','Navigation','Retours SIMULES','Suivi SIMULE']
+    expected={'Indicateurs':{'B2':25,'B3':1,'B4':24,'B5':12,'B6':.5,'B7':10220,'B8':748},'Cadrage':{'B11':82,'D11':36900,'D17':44250},'Suivi SIMULE':{'B6':86,'B9':44250,'B10':46050,'B11':1800,'B15':1,'B18':1.2}}
+    for name,values in expected.items():
+        for cell,value in values.items():assert cached[name][cell].value==value,(name,cell,cached[name][cell].value,value)
+    for row in [18,19]:assert cached['Cadrage'][f'D{row}'].value is None
+    formula_count=0
+    for s in wb:
+        for row in s:
+            for c in row:
+                assert c.data_type!='e'
+                if c.data_type=='f':
+                    formula_count+=1
+                    assert cached[s.title][c.coordinate].value is not None
+                    assert cached[s.title][c.coordinate].data_type!='e'
     visual=read(DOCS/'preuves/controle-visuel.json')
-    assert visual['presentation']['file']==PPTX.relative_to(ROOT).as_posix() and visual['presentation']['sha256']==digest(PPTX)
-    assert visual['presentation']['pdfSHA256']==digest(DECK_PDF)
-    assert visual['dossier']['pages']==len(reader.pages) and visual['dossier']['sha256']==digest(PDF)
-    evidence=read(DOCS/'preuves/verification.json')
-    current_tree=subprocess.check_output(['git','rev-parse','HEAD:spity'],cwd=ROOT,text=True).strip()
-    verified_tree=subprocess.check_output(['git','rev-parse',f"{evidence['gitRevision']}:spity"],cwd=ROOT,text=True).strip()
-    assert verified_tree==evidence['applicationTree'], 'La preuve doit correspondre à sa révision datée'
-    head_matches=current_tree==verified_tree
-    changed_tracked=subprocess.check_output(['git','diff','--name-only','HEAD','--','spity'],cwd=ROOT,text=True).splitlines()
-    untracked=subprocess.check_output(['git','ls-files','--others','--exclude-standard','--','spity'],cwd=ROOT,text=True).splitlines()
-    application_changes=sorted(set(changed_tracked+untracked))
-    application_matches=head_matches and not application_changes
-    if not application_matches:
-        assert 'ne certifient pas la version courante' in (DOCS/'VERIFICATION.md').read_text(encoding='utf-8'), 'Documenter la portée historique des tests'
-    for capture in read(DOCS/'preuves/captures/manifest.json'):
-        assert (DOCS/'preuves/captures'/capture['file']).exists()
-    report={'case':'simulation explicite','planningTasks':len(tasks),'baselineEUR':planned,'forecastEUR':forecast,'marginEUR':232,'slides':len(slides),'nativeCharts':len(chart_parts),'chartWorkbooks':len(chart_workbooks),'presentationMinutes':30,'pdfPages':len(reader.pages),'workbookSheets':len(sheets),'workbookFormulas':formulas,'applicationTree':current_tree,'verifiedApplicationTree':verified_tree,'applicationMatchesDatedEvidence':application_matches,'inclusionCase':inclusion['name'],'inclusionSlides':[7,15,17],'scope':'Cohérence documentaire et structure des exports ; aucun nouveau test applicatif ou dépôt externe. Les tests conservent leur révision et leur date.'}
-    report.update({'headApplicationMatchesDatedEvidence':head_matches,'applicationWorkingTreeClean':not application_changes,'applicationWorkingTreeChanges':application_changes,'eliminatoryCompetencies':framework['eliminatoryCompetencies'],'minimumAcquiredCompetencies':framework['minimumAcquired'],'demonstrationReadyOnCurrentVersion':None})
-    report['referenceBloc1']={'source':b1['source'],'personDays':b1['personDays'],'dailyRateEUR':b1['dailyRateEUR'],'totalEUR':b1['totalEUR'],'planningLots':len(b1['lots'])}
-    (DOCS/'preuves/controle-kit.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
+    for key,file in [('presentation',PPTX),('dossier',PDF)]:assert visual[key]['sha256']==digest(file)
+    assert visual['presentation']['pdfSHA256']==digest(DECK)
+    assert visual['presentation']['slidesReviewed']==list(range(1,27))
+    assert visual['dossier']['pagesReviewed']==list(range(1,len(dossier.pages)+1))
+    # Check actual destinations of all Markdown links in current documents and tool guide.
+    links=0
+    for p in [*DOCS.rglob('*.md'),ROOT/'tools/bloc3/README.md',ROOT/'output/README.md']:
+        for target in re.findall(r'\[[^\]]*\]\(([^)]+)\)',p.read_text()):
+            target=unquote(target.split('#')[0].strip('<>'))
+            if not target or re.match(r'^[a-z]+:',target):continue
+            dest=(p.parent/target).resolve()
+            assert dest.exists() or (package and dest==ZIP),(p,target)
+            links+=1
+    current_tree=git('rev-parse','HEAD:spity');evidence=read(DOCS/'preuves/verification.json')
+    assert git('rev-parse',f"{evidence['gitRevision']}:spity")==evidence['applicationTree']
+    changes=git('diff','--name-only','HEAD','--','spity')
+    report={'version':'v17','date':'2026-09-16','project':'Solo sur un an déclaré','competencies':competencies,'mandatoryCompetencies':['C.3.1','C3.2.1','C3.4.2'],'criteriaMapped':len(coverage),'slides':26,'presentationMinutes':30,'demonstrationMinutes':6,'nativeCharts':3,'pdfPages':len(dossier.pages),'workbookSheets':len(wb.sheetnames),'workbookFormulas':formula_count,'localLinksChecked':links,'applicationTree':current_tree,'verifiedHistoricalApplicationTree':evidence['applicationTree'],'applicationMatchesDatedEvidence':current_tree==evidence['applicationTree'] and not changes,'applicationWorkingTreeClean':not changes,'scope':'Cohérence documentaire, couverture des critères, formules, sources et exports. Réel et simulation distingués. Aucune nouvelle recette complète ni acquisition de compétence déclarée.'}
+    (DOCS/'preuves/controle-kit.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     if package:
-        included=sorted([p for p in DOCS.rglob('*') if p.is_file() and p.name!='MANIFEST.sha256']+[p for p in (ROOT/'tools/bloc3').glob('*') if p.is_file()]+[PDF,PPTX,DECK_PDF,XLSX,ROOT/b1['source']])
-        manifest=''.join(f'{digest(p)}  {p.relative_to(ROOT).as_posix()}\n' for p in included)
-        (DOCS/'preuves/MANIFEST.sha256').write_text(manifest,encoding='utf-8',newline='\n')
-        included.append(DOCS/'preuves/MANIFEST.sha256')
-        ZIP.parent.mkdir(parents=True,exist_ok=True)
+        included=[p for p in DOCS.rglob('*') if p.is_file() and p.name!='MANIFEST.sha256']
+        included += [p for p in (ROOT/'tools/bloc3').glob('*') if p.is_file()]
+        included += [PDF,PPTX,DECK,XLSX,ROOT/b1['source'],ROOT/'docs/audits/2026-09-15-navigation-performances.md']
+        included += [ROOT/src['file'] for src in sources]
+        included += [ROOT/'spity/public/images/brand'/name for name in ['escalade-falaise-coucher-soleil.jpeg','escalade-falaise-gros-plan.jpeg']]
+        included=sorted(set(included))
+        manifest=DOCS/'preuves/MANIFEST.sha256';manifest.write_text(''.join(f'{digest(p)}  {p.relative_to(ROOT).as_posix()}\n' for p in included))
+        included.append(manifest)
         with zipfile.ZipFile(ZIP,'w',zipfile.ZIP_DEFLATED) as z:
-            for p in included: z.write(p,p.relative_to(ROOT).as_posix())
-            z.writestr('LIRE_EN_PREMIER.txt', 'KIT BLOC 3 SPITY\n\nDossier : output/bloc-03/dossier-bloc-03-spity.pdf\nSlides : output/bloc-03/spity-bloc-3-30-minutes-visuel-v16.pptx\nClasseur : output/bloc-03/pilotage-spity.xlsx\nGuide et checklist : docs/rncp/bloc-03/\nContrôle détaillé : docs/rncp/bloc-03/CONTROLE_COMPLETUDE.md\n\nLe diaporama comprend 23 slides pour 30 minutes, dont 6 de démonstration, et 3 annexes. Le guide contient le texte oral et les transitions. La durée effective se règle après une répétition chronométrée. Les situations de management sont fictives et identifiées. Les données personnelles et dates du campus restent à confirmer. Aucun dépôt externe effectué. La démonstration nécessite le dépôt Spity complet ; les fichiers techniques seuls ne contiennent pas toute l’application.\n\nLe règlement spécial identifie C.3.1, C3.2.1 et C3.4.2 comme éliminatoires. Les tests de la révision 9d166c0 restent datés : consulter VERIFICATION.md et le contrôle du kit pour la correspondance de la version présentée. La réussite du contrôle documentaire ne vaut pas nouvelle recette du logiciel.\n')
-        with zipfile.ZipFile(ZIP) as z: assert z.testzip() is None
-        report['zip']=str(ZIP.relative_to(ROOT))
+            for p in included:z.write(p,p.relative_to(ROOT).as_posix())
+            z.writestr('LIRE_EN_PREMIER.txt','SPITY — BLOC 3 — v17\n\nOuvrir output/bloc-03/spity-bloc-3-30-minutes-visuel-v17.pdf ou .pptx.\nSommaire, projet solo sur un an, puis sept compétences dans l’ordre.\nLes mises en situation pédagogiques sont signalées ; elles ne sont pas des expériences vécues.\nGuide : docs/rncp/bloc-03/GUIDE_ORAL.md\nCouverture : docs/rncp/bloc-03/CONTROLE_COMPLETUDE.md\nLa démonstration nécessite le dépôt applicatif complet et ses dépendances.\nCe kit ne contient pas de base, secrets ou node_modules. Aucun dépôt officiel ni accord client déclaré.\n')
+        with zipfile.ZipFile(ZIP) as z:
+            assert z.testzip() is None
+            for p in included:assert hashlib.sha256(z.read(p.relative_to(ROOT).as_posix())).hexdigest()==digest(p)
         report['zipSHA256']=digest(ZIP)
     print(json.dumps(report,ensure_ascii=False,indent=2))
-
 if __name__=='__main__':
-    parser=argparse.ArgumentParser()
-    parser.add_argument('--package',action='store_true')
-    main(parser.parse_args().package)
+    parser=argparse.ArgumentParser();parser.add_argument('--package',action='store_true');main(parser.parse_args().package)

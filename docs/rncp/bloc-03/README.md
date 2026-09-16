@@ -1,126 +1,36 @@
-# Bloc 3 - Kit de soutenance Spity
+# Bloc 3 — Spity, projet solo sur un an
 
-État documentaire au 15 septembre 2026 (preuves techniques du 15 septembre, Linear du 14 septembre) : dossier, support oral, classeur, annexes et démonstration préparés. Le kit est disponible pour la répétition. Les confirmations personnelles et administratives de la checklist restent nécessaires avant remise ; aucune validation de compétence par le jury n'est présumée.
+**Version courante : v17, révision du 16 septembre 2026.** Dorian confirme avoir réalisé le projet seul sur un an. La présentation s’appuie sur les étapes enregistrées, les estimations B1, Linear, les corrections et le déploiement. Les compléments de suivi annuel, collaboration ponctuelle, formation et retours client sont **simulés pour l’exercice** et identifiés à chaque utilisation.
 
-**Intitulé : Coordonner et piloter un projet de développement d'applications logicielles.**
-
-## Commencer ici
+## Ouvrir les livrables
 
 | Besoin | Fichier |
 | --- | --- |
-| Comprendre les slides avec des exemples de développeur | [Explication simple des 26 diapositives](COMPRENDRE_LES_DIAPOS.md) |
-| Comprendre les sigles et le vocabulaire | [Lexique simple : QA, CP, recette, RACI, budget et réunions](LEXIQUE_SIMPLE.md) |
-| Tout récupérer pour la répétition | [Kit ZIP](../../../output/bloc-03/kit-soutenance-spity.zip) |
-| Lire le dossier et les neuf annexes | [PDF](../../../output/bloc-03/dossier-bloc-03-spity.pdf) ; [source modifiable](DOSSIER_BLOC_03.md) |
-| Présenter en trente minutes | [PowerPoint visuel avec texte oral et timing](../../../output/bloc-03/spity-bloc-3-30-minutes-visuel-v16.pptx) ; [guide d'oral](GUIDE_ORAL.md) |
-| Manipuler les coûts, charges et risques | [Classeur Excel](../../../output/bloc-03/pilotage-spity.xlsx) ; [données du cas](donnees/pilotage.json) |
-| Retrouver les preuves par compétence | [Matrice](MATRICE_PREUVES.md) ; [vérifications datées](VERIFICATION.md) |
-| Justifier les données et retrouver Linear | [A09 : relevé et estimations](annexes/A09_DONNEES_LINEAR.md) ; [25 tickets observés](donnees/linear-2026-09-14.json) |
-| Relier les quatre blocs | [Revue de cohérence](COHERENCE_INTER_BLOCS.md) : commanditaire, budget global, lot B3 et preuves datées. |
-| Lancer ou répéter la démonstration | [Procédure A08](annexes/A08_DEMONSTRATION.md) ; [outils](../../../tools/bloc3/README.md) |
-| Finaliser les informations et le dépôt | [Checklist de remise](CHECKLIST_REMISE.md) |
+| Présenter | [PowerPoint v17](../../../output/bloc-03/spity-bloc-3-30-minutes-visuel-v17.pptx) |
+| Consulter ou projeter | [PDF du diaporama](../../../output/bloc-03/spity-bloc-3-30-minutes-visuel-v17.pdf) |
+| Répéter | [Guide et notes](GUIDE_ORAL.md), [explications simples](COMPRENDRE_LES_DIAPOS.md), [lexique](LEXIQUE_SIMPLE.md) |
+| Lire le dossier | [PDF](../../../output/bloc-03/dossier-bloc-03-spity.pdf), [source](DOSSIER_BLOC_03.md) |
+| Vérifier les données | [Classeur](../../../output/bloc-03/pilotage-spity.xlsx), [sources structurées](donnees/projet-reel.json) |
+| Tout récupérer | [Kit courant ZIP](../../../output/bloc-03/kit-soutenance-spity.zip) |
+| Préparer l’évaluation | [Matrice des preuves](MATRICE_PREUVES.md), [complétude](CONTROLE_COMPLETUDE.md), [checklist](CHECKLIST_REMISE.md) |
+| Préparer le logiciel | [Démonstration](annexes/A08_DEMONSTRATION.md), [portée des vérifications](VERIFICATION.md) |
 
-Le kit distingue les faits techniques observés d'une mise en situation fictive de management. Les charges, coûts, rôles et comptes rendus du scénario sont des hypothèses explicites. L'équipe réelle, les échanges client et les dates du campus restent à préciser avec Dorian.
+## Ce qui est réel, estimé ou simulé
 
-Le commanditaire fictif reprend celui du Bloc 1 : Collectif Altitude Grimpe, représenté par Claire Martin. Le budget global repris est celui du diaporama Bloc 1 : 44 250 EUR, sur une base de 82 jours-homme à 450 EUR/jour. Les neuf lots conservent leurs charges estimées. Dorian a confirmé un an de développement réel ; les 82 j-h ne constituent pas un relevé de temps passé. Le cas B3 détaille le suivi d'un lot en heures sans ajouter son coût au budget global. Les fiches B1 à 79 j-h et 38 126 EUR HT sont conservées comme une autre version, non retenue pour cette harmonisation ; voir la revue de cohérence.
+- **Confirmé par Dorian :** projet solo, durée d’un an. Les mois de début et de fin restent à préciser.
+- **Traces du dépôt :** chronologie des commits, fonctionnalités, corrections, contrôles consignés et version servie lors de la sonde du 15 septembre.
+- **Relevé daté :** Linear du 14 septembre, sans actualisation automatique ni statut modifié.
+- **Estimation :** 82 j-h et 44 250 € du diaporama B1. Aucun temps consommé ni coût réel n’est inventé.
+- **Simulation pédagogique :** planning M1–M12, consommés de suivi, recette ponctuelle, grille, formation et retours de personas. Ces exemples couvrent les critères sans inventer une expérience réellement vécue. Aucun entretien ou accord client réel n’est déclaré.
 
-Le diaporama visuel v16 comporte 23 slides principales, dont un sommaire en slide 2, et 3 annexes. Les diapositives 7, 15 et 17 présentent Camille, QA malentendante fictive : missions, aménagements concrets et formation. A02, A05, A06 et donnees/inclusion.json conservent les mêmes hypothèses et les critères de vérification attendus. La slide 5 montre les quatre réunions inspirées de Scrum ; les slides 14 et 18 les relient à la rétrospective et au compte rendu de review. A05/A07 et donnees/rituels.json détaillent le protocole. Sept graphiques modifiables présentent les charges estimées du B1 et le planning fictif détaillé, le flux Linear, les coûts et la charge. Des tableaux montrent les six compétences, les formations par rôle, CR02, les mesures de satisfaction et les critères de validation. Les annexes 24 à 26 présentent le RACI, la sensibilité et le besoin RH conditionnel. Une matrice montre les risques, des captures agrandies accompagnent la démonstration et les situations de management sont présentées dans quatre encadrés. Les [sources des visuels](visuels/README.md) sont documentées. La v16 conserve la mise en page de la v15 et clarifie les slides 4 à 6 : un an réel, 82 j-h estimés au B1, quinze jours fictifs pour préparer la démonstration. Les notes correspondantes sont actualisées ; la numérotation et les trente minutes restent identiques. Le [PDF du diaporama](../../../output/bloc-03/spity-bloc-3-30-minutes-visuel-v16.pdf) permet une consultation sans PowerPoint. Les notes développent le texte à dire, les transitions et les manipulations. Les repères totalisent 24 minutes d'explications et 6 minutes de démonstration. Prévoir une répétition chronométrée pour ajuster le débit ; le PowerPoint avance manuellement. Les fichiers soutenance-bloc-03-spity.pptx et spity-bloc-3-30-minutes.pptx conservent les versions précédentes comme archives.
+Le support couvre les sept compétences et les critères des deux PDF fournis, dans leur ordre. Le projet solo est distingué de chaque mise en situation. Cette couverture documentaire ne vaut pas acquisition des compétences.
 
-Le 15 septembre, les contrôles ont réussi : lint, TypeScript, build, 389 tests unitaires dans 72 suites et six scénarios navigateur avec une MariaDB dédiée. La démonstration se lance sur http://127.0.0.1:3313 avec `powershell -File tools/bloc3/demo.ps1` depuis la racine. Premier lancement sur une nouvelle machine : utiliser `-Prepare` selon A08. Les résultats détaillés et leur portée figurent dans VERIFICATION.md.
+## Sources d’évaluation
 
-## 1. Modalités établies par les documents fournis
+Le [référentiel fourni](../referentiel/2024-referentiel-expert-developpement-logiciel-ynov.pdf), pages 11–14, décrit le Bloc 3. Les informations relevées dans le règlement spécial v1.01 du 15/09/2025 sont conservées avec son empreinte dans [cadre-evaluation.json](donnees/cadre-evaluation.json). Les consignes administratives du campus restent à confirmer. Les sources d’évaluation ne prescrivent pas le scénario de quinze jours des anciennes versions.
 
-| Point | Attendu officiel | Source |
-| --- | --- | --- |
-| Épreuve | Oral individuel de 45 minutes : 30 minutes de présentation et 15 minutes d'échange avec le jury. | S2, p. 6 |
-| Contenu | Présentation de la gestion du projet et démonstration du logiciel développé pendant la formation. Prévoir la démonstration dans les 30 minutes de présentation. | S1, p. 11 ; S2, p. 6 |
-| Situation | Mise en situation professionnelle réelle ou fictive. | S1, p. 11 |
-| Calendrier annoncé | Période du 1er au 29 septembre 2026. La convocation du campus doit préciser le passage individuel ; cette période n'est pas la date limite de dépôt. | S2, p. 4 |
-| Dépôt | Déposer les livrables et le support de présentation sur DigiformaCertif dans le délai imparti. Le document indique une invalidation du bloc en cas de défaut de dépôt. | S2, p. 11 |
-| Validation | Au moins 50 % des compétences acquises, sans compétence éliminatoire non acquise. Avec les sept compétences de la grille, cela correspond à au moins quatre compétences acquises, sous réserve de la condition sur les éliminatoires. | S2, p. 8 ; S3 ; S4, p. 1 et 3-4 |
+Le PDF [Compétences obligatoires](../referentiel/rncp-edl-competences-obligatoires.pdf), page 4, confirme les trois compétences obligatoires.
 
-Les quatre documents examinés ne fixent pas de nombre de pages pour un dossier écrit du Bloc 3, ni de nombre de diapositives. Les plafonds de 30 et 20 pages de S2 concernent respectivement les Blocs 2 et 4. Le dossier de travail regroupe les explications et les preuves du support oral.
+## Historique et génération
 
-Le règlement spécial v1.01 du 15 septembre 2025, consulté le 15 septembre 2026, identifie trois compétences éliminatoires : C.3.1 (planification), C3.2.1 (suivi) et C3.4.2 (démonstration), pages 3-4. La validation exige au moins quatre compétences acquises sur sept, dont ces trois compétences. La préparation couvre les sept ; seule l'évaluation du jury décide de leur acquisition. Les dates et les consignes de dépôt propres au campus restent à confirmer. Le [contrôle de complétude](CONTROLE_COMPLETUDE.md) détaille chaque critère et les réserves avant remise.
-
-## 2. Checklist des sept compétences
-
-Les éléments ci-dessous synthétisent S1 p. 11 à 14 et S3. Les formats proposés dans la dernière colonne sont des choix de préparation, pas des modèles imposés par YNOV. RACI signifie Responsible, Accountable, Consulted, Informed ; RASCI ajoute Support.
-
-| Compétence | Ce que le jury doit pouvoir constater | Documents ou démonstrations à préparer |
-| --- | --- | --- |
-| **C.3.1 - Planifier** | Méthode et outil de planification justifiés et compatibles ; phases, tâches, ressources, responsabilités et points de vigilance identifiés. | Méthodologie, planning détaillé avec dépendances et jalons, ressources humaines/financières/matérielles, matrice des responsabilités. |
-| **C3.2.1 - Suivre l'avancement** | Outil adapté et suivi régulier avec des indicateurs mesurables sur l'avancement, les coûts, les délais, les risques et les ressources humaines. | Tableau de bord daté, extraits du suivi de projet, comparaison prévisionnel/réalisé et interprétation des écarts. |
-| **C3.2.2 - Arbitrer** | Problème et conséquences expliqués, options comparées, décision argumentée permettant de résoudre le problème. | Fiche d'arbitrage : constat, options, aide à la décision, choix, impacts et résultat. |
-| **C3.3.1 - Piloter l'équipe** | Missions réparties selon les compétences et une charge équilibrée ; style managérial expliqué, communication adaptée, analyse critique et recommandations réalistes. | Répartition des missions et de la charge, outils de communication et de partage, étude d'une situation managériale. |
-| **C3.3.2 - Développer les compétences** | Besoins du projet identifiés, compétences actuelles et à acquérir évaluées, plan de développement détaillé et formations adaptées. | Grille de compétences commentée et plan de formation ; besoin de recrutement à expliciter si applicable. |
-| **C3.4.1 - Assurer le suivi client** | Comptes rendus clairs qui facilitent les décisions, points de validation organisés et indicateurs de satisfaction cohérents. | Comptes rendus d'avancement, calendrier et traces des validations, indicateurs de satisfaction définis et résultats disponibles. |
-| **C3.4.2 - Démontrer le logiciel** | Dernière version utilisable, fonctionnalités attendues présentées avec un vocabulaire adapté au client et démonstration permettant la validation. | Logiciel opérationnel, scénario de démonstration relié aux besoins et critères d'acceptation. |
-
-### Critères à contrôler pendant la relecture et la répétition
-
-- [ ] **C.3.1** : justifier la méthode réellement utilisée ; choisir un outil cohérent (Gantt, rétroplanning, etc.) ; rendre visibles les phases d'étude, de mesure, de conception, de réalisation et de restitution ; affecter les tâches selon les compétences et tenir compte des situations de handicap ; identifier les points de vigilance.
-- [ ] **C3.2.1** : documenter la fréquence du suivi et les décisions qu'il déclenche ; donner la date, la source et la méthode de calcul de chaque indicateur ; couvrir coûts, délais, avancement, risques et charge/capacité de l'équipe. Un décompte de tickets ne couvre pas tous ces critères.
-- [ ] **C3.2.2** : partir d'un écart ou d'une dérive ; décrire les options et leurs conséquences ; fournir un outil d'aide à la décision, par exemple un logigramme ou une matrice de comparaison ; expliquer le résultat de l'arbitrage.
-- [ ] **C3.3.1** : expliquer le ou les styles managériaux employés et les techniques d'animation ; analyser une situation ou une posture avec recul ; traiter les adaptations au handicap et les spécificités multiculturelles/internationales applicables au contexte ; justifier les outils collaboratifs et le partage des ressources.
-- [ ] **C3.3.2** : comparer niveau actuel et niveau attendu ; préciser les objectifs, bénéficiaires et modalités des formations ; prévoir les adaptations au handicap ; expliciter les besoins de recrutement et leur transmission RH si le cas le nécessite. Pour rendre le plan exploitable, proposer échéances et critères de réussite.
-- [ ] **C3.4.1** : relier chaque compte rendu aux évolutions livrées, aux difficultés et aux décisions attendues du client ; expliciter les points de validation réalisés et le suivi qualité ; distinguer les indicateurs de satisfaction des indicateurs techniques et signaler les mesures encore non réalisées.
-- [ ] **C3.4.2** : relier chaque étape de démonstration à une fonctionnalité attendue et à son critère d'acceptation ; expliquer la valeur pour l'utilisateur ; identifier la version présentée et vérifier les parcours avant l'oral.
-
-## 3. Éléments Spity déjà repérés
-
-L'inventaire ci-dessous a servi de point de départ. Le kit et les vérifications listés plus haut le complètent. Le tableau Linear a été relu en direct le 14 septembre. Le relevé actuel, les 30 activités estimées et les règles de calcul figurent dans [A09](annexes/A09_DONNEES_LINEAR.md).
-
-| Base existante | Utilité possible pour le Bloc 3 | Limite ou complément nécessaire |
-| --- | --- | --- |
-| [Cadrage produit](../../../CADRAGE_PROJET.md) et [livrables Bloc 1](../bloc-01/) | Besoins, périmètre, parties prenantes, risques et budget prévisionnel. | Confirmer le périmètre réellement retenu, les acteurs impliqués et les écarts au prévisionnel. La cartographie des acteurs ne remplace pas une affectation des tâches de l'équipe. |
-| [État daté du backlog Linear](../../audits/2026-09-09-synchronisation-linear.md) | Base pour expliquer le suivi, les priorités et les dépendances. | Document du 9 septembre : 12 Done, 5 Todo, 7 Backlog, 1 Canceled. Il n'invente ni dates cibles ni estimations et ne constitue pas à lui seul un suivi des coûts et délais. Relecture directe du 14 septembre : 12 Done, 4 Todo, 1 In Progress, 7 Backlog, 1 Canceled ; voir A09. |
-| Historique Git et [retour d'expérience Bloc 2](../bloc-02/19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES.md) | Traces des réalisations et pistes pour un cas d'arbitrage. | Un changement technique devient une preuve d'arbitrage lorsque l'écart, les options, le choix et les conséquences sont explicités. |
-| [Cahier de recettes Bloc 2](../bloc-02/10_CAHIER_RECETTES_C231.md) et [preuves Bloc 4](../bloc-04/preuves/README.md) | Base pour les critères d'acceptation, la préparation de la démonstration et les indicateurs de qualité. | Rejouer les parcours utiles sur la version présentée. Les preuves de tests et de maintenance ne constituent pas automatiquement une validation ou une satisfaction client. |
-
-Le document de synchronisation du 9 septembre indique que les 24 tickets non annulés sont attribués à Dorian Joly. Cela ne suffit pas à conclure qu'aucune autre personne n'a participé au projet. L'équipe, les interlocuteurs et leurs rôles restent à préciser avec le candidat.
-
-Les parties à documenter en priorité sont le planning confronté au réalisé, le suivi des coûts et de la charge, le management, le développement des compétences et les échanges de validation avec le client.
-
-## 4. Organisation proposée pour notre travail
-
-1. **Poser le contexte** : rôle du candidat, personnes réellement impliquées, commanditaire ou interlocuteurs, période du projet, contraintes et date de soutenance.
-2. **Rassembler les preuves disponibles** : planning, backlog daté, estimations ou temps suivis, dépenses, décisions, échanges et retours utilisateurs. Identifier ce qui manque.
-3. **Rédiger les sept parties** : pour chacune, expliquer le contexte, l'action personnelle, les choix, les résultats, les limites et les preuves associées.
-4. **Construire le support et la démonstration** : garder les pièces détaillées dans un dossier d'annexes et associer chaque compétence à ses diapositives et preuves.
-5. **Répéter et contrôler le dépôt** : tenir les 30 minutes, préparer les réponses du jury et respecter les exigences confirmées du campus.
-
-### Répartition proposée des 30 minutes
-
-Cette répartition est une recommandation de préparation, pas une exigence officielle.
-
-| Séquence | Durée |
-| --- | --- |
-| Introduction et sommaire (slides 1-2) | 1 min |
-| Le projet Spity (slides 3-4) | 2 min |
-| Organiser le travail (slides 5-7) | 4 min |
-| Suivre et décider (slides 8-13) | 8 min |
-| L'équipe et le client (slides 14-19) | 8 min |
-| Démonstration (slides 20-22) | 6 min |
-| Validation du parcours (slide 23) | 1 min |
-| **Total présentation, démonstration incluse** | **30 min** |
-
-### Informations à préciser ensemble
-
-- Qui a travaillé sur Spity, avec quel rôle et quelle disponibilité ?
-- Qui a exprimé les besoins, testé le logiciel ou validé des étapes ?
-- Quelles sont les dates réelles du projet, de la soutenance et du dépôt ?
-- Quels planning, suivis de temps/coûts, échanges et retours existent déjà ?
-- Quelles consignes complémentaires du campus précisent le passage et le dépôt ?
-
-Si certaines situations de management ou de relation client sont fictives, les présenter comme telles et les distinguer des faits et preuves réels. Le référentiel admet une situation fictive, mais cela ne permet pas de présenter une équipe inventée, un compte rendu reconstitué ou une validation simulée comme un événement réellement survenu. Les détails d'application seront rapprochés des consignes du campus.
-
-## 5. Sources consultées
-
-- **S1** - « Référentiel Expert en développement logiciel RNCP39583 (1) (2).pdf », pages 11 à 14, intitulé Bloc 3 et colonnes Activités, Compétences, Modalités et Critères d'évaluation. La [copie déjà archivée dans le dépôt](../referentiel/2024-referentiel-expert-developpement-logiciel-ynov.pdf) est identique au fichier fourni : SHA-256 `4892018d969edff4ea79dfd90b23ec0c37ab5bd618af0cd9b831ba878cfe4466`.
-- **S2** - « 25-26 Modalités_Evaluations_Titre EDL RNCP39583_YNOV_M2_filiere Info (2).pdf », Ludovic NAY, V1.0, rentrée 2025. Pages 4 (planning), 6 (modalités), 8 (validation), 10 (documents de référence) et 11 (dépôt). Fichier fourni dans le dossier Téléchargements du candidat, non recopié dans le dépôt.
-- **S3** - « 24 10 10 Grille évaluation Expert en développement logiciel_BC03.pdf », page unique : sept compétences, livrables et critères, résultat « Acquis / Non Acquis ». Fichier fourni dans le dossier Téléchargements du candidat, non recopié dans le dépôt.
-
-- **S4** - « 25 09 15  Réglement spécial de certification - Expert en développement logiciel RNCP39583 (1).pdf », Direction Certification, Titres et Qualité, v1.01 du 15/09/2025. Pages 1 (règle de validation et prérequis), 3-4 (Bloc 3, livrables et compétences éliminatoires). Fichier consulté dans les Téléchargements le 15 septembre 2026, SHA-256 `58167648452bb9bf5ec93c3765b7d00f05a7f56d9e298f5fd76407a26e26f751`.
-
-Les pages pertinentes ont été extraites et contrôlées visuellement, notamment l'alignement des modalités par bloc et les lignes de la grille. Le règlement spécial complète cette lecture avec ses pages 1 et 3-4. Les quatre PDF d'origine n'ont pas été modifiés.
+L’ancien cas et ses générateurs sont conservés dans [le kit v16 archivé](../../../output/bloc-03/archives/kit-scenario-15-jours-v16.zip). Ils ne servent plus à générer les livrables courants. La procédure actuelle est dans [tools/bloc3/README.md](../../../tools/bloc3/README.md).

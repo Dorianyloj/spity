@@ -1,62 +1,96 @@
-# A07 - Suivi client et validation
+# A07 — Retours utilisateurs simulés
 
-Tous les comptes rendus de cette annexe sont des SIMULATIONS PÉDAGOGIQUES. Aucun échange ni accord réel n'est attesté. Les jours J3, J10 et J15 sont relatifs au cas, sans date historique inventée.
+**Simulation pédagogique demandée par le candidat.** Les personas et leurs retours ci-dessous sont inventés. Aucun entretien, compte rendu signé, satisfaction mesurée ou accord client réel n’est déclaré. Les fonctionnalités et corrections citées sont réelles. Les échanges sont construits après coup ; ils ne sont pas l’origine historique des changements.
 
-Continuité du Bloc 1 : CL représente Claire Martin, présidente fictive du Collectif Altitude Grimpe. Ces comptes rendus portent sur un lot pédagogique de démonstration et ne révisent pas le budget global du MVP.
+## SIM-01 — Grimpeur (persona fictif)
 
-## CR01 - Planning et périmètre à J3
+**Retour simulé :** « Je veux filtrer les partenaires selon la discipline que je pratique et comprendre l’état de ma demande. »
 
-Participants fictifs : CP, DEV, QA et CL pour la confirmation du périmètre. Le planning a pour objectif de convenir du résultat du lot, sélectionner les tâches compatibles avec la capacité et fixer les critères de validation. Le client fictif attend la recherche de partenaires, les événements et la visibilité des inscriptions côté club. La recette vérifie aussi les droits et la capacité.
+**Réponse proposée dans la review :** Montrer les filtres et les états ; vérifier la cohérence du niveau avec la discipline.
 
-Décision du scénario : retenir ce parcours pour J15 ; traiter les autres demandes dans un lot séparé. CP publie le planning et la répartition à J4. QA formalise les critères ; DEV estime les tâches avant engagement. Point suivant : revue des écarts à J10. La validation porte sur le périmètre proposé, pas encore sur le logiciel.
+**Critère à vérifier :** Résultats cohérents et statut de demande lisible.
 
-## CR02 - Review, avancement et arbitrage à J10
+**Trace de réalisation distincte :** commit 363f681. Aucun accord de recette réellement reçu.
 
-Participants fictifs : CP, CL, DEV, QA. Dans cette review intermédiaire, le scénario présente le matching disponible et les événements encore à stabiliser. Le client confronte ces parcours à son besoin, puis l'équipe examine l'effet d'une demande nouvelle. Le tableau de bord indique cinq tâches terminées sur dix, 77 h consommées et 40 h restantes. La prévision de 4 465 EUR dépasse de 195 EUR le budget initial hors réserve mais reste sous le plafond de 4 697 EUR.
+## SIM-02 — Responsable de club (persona fictif)
 
-Le développement des événements est prévu à J12 au lieu de J11. La recette s'étend jusqu'à J14. La demande supplémentaire de contributions aux topos ajouterait 540 EUR et dépasserait la capacité DEV.
+**Retour simulé :** « Je dois retrouver les inscrits et savoir s’il reste des places pour ma sortie. »
 
-Décision fictive : reporter cette demande et maintenir les critères de recette. DEV termine T06 puis traite T10 ; QA clôt T07 après la vérification des corrections ; CP suit quotidiennement les écarts et prépare la restitution. La réserve restante est de 232 EUR. Tout nouvel écart qui dépasse cette marge déclenche une nouvelle décision client.
+**Réponse proposée dans la review :** Présenter la capacité et la liste des participants avec une session club.
 
-| Prochaine action du compte rendu | Responsable | Échéance du cas | Condition de clôture |
-| --- | --- | --- | --- |
-| Terminer les événements T06 | DEV | J12, au lieu de J11 | Critères événement et capacité vérifiés. |
-| Clore la recette T07 après T10 | Camille, QA | J14, au lieu de J13 | Cas rejoués, corrections contrôlées, réserves décrites. |
-| Préparer la décision finale | CP | J15 | Version et grille de validation accessibles au client. |
+**Critère à vérifier :** Liste autorisée, inscription confirmée et capacité respectée.
 
-Ressources communes : [planning A01](A01_PLANNING.md), [arbitrage A04](A04_ARBITRAGES.md) et grille de critères ci-dessous. Dans l'exercice, le CP dépose la synthèse écrite au même emplacement partagé et vérifie que chaque rôle retrouve sa prochaine action. Les liens sont disponibles dans ce kit ; aucune diffusion réelle à des interlocuteurs n'est attestée.
+**Trace de réalisation distincte :** commit 363f681. Aucun accord de recette réellement reçu.
 
-<!-- pagebreak -->
+## SIM-03 — Grimpeur (persona fictif)
 
-## CR03 - Review et répétition de validation à J15
+**Retour simulé :** « Après un clic dans le menu, je veux savoir que ma navigation est en cours. »
 
-Participants fictifs : CP, CL et QA. Ce compte rendu décrit un exercice de clôture ; il ne remplace pas les résultats de la vérification technique réelle jointe au dossier.
+**Réponse proposée dans la review :** Montrer l’indicateur d’attente et la correction du fond décoratif.
 
-Dans le scénario pédagogique, les critères métier de la grille ci-dessous sont présentés au client. La décision fictive est une acceptation du périmètre démontré avec réserve sur toute fonction non parcourue. La réserve doit devenir une action avant une ouverture publique. Le statut d'une recette réelle reste celui de VERIFICATION.md.
+**Critère à vérifier :** Attente visible puis disparition à l’arrivée sur la page.
 
-| Critère à présenter au client | Preuve attendue | Décision dans l'exercice fictif |
+**Trace de réalisation distincte :** commit 83e4c29. Aucun accord de recette réellement reçu.
+
+## Synthèse d’évolution proposée — exemple pédagogique
+
+Périmètre de la review : partenaires et événements. Présenter les besoins ci-dessus, montrer les fonctionnalités, noter les critères observés et les éventuelles réserves. Dorian porte le projet et les corrections ; les personas ne sont ni des collaborateurs ni des clients réels. Une date de prochaine validation n’est fixée qu’au moment d’une séance réelle.
+
+## Indicateurs à relever lors d’une séance réelle
+
+| Indicateur proposé | Calcul / recueil | Résultat disponible |
 | --- | --- | --- |
-| Matching conforme aux filtres | Liste filtrée et état vide compréhensible | Accepté dans le scénario. |
-| Demande de partenariat traçable | État envoyé, reçu ou accepté visible | Accepté dans le scénario. |
-| Inscription à un événement | Confirmation et place disponible cohérentes | Accepté dans le scénario. |
-| Administration club | Liste des participants et commandes autorisées | Accepté dans le scénario. |
-| Fonctions hors parcours | Recette dédiée ultérieure | Non évaluées dans ce scénario. |
+| Réussite du parcours | Parcours réussis sans aide / parcours tentés ; conserver l’effectif | Non mesuré |
+| Utilité perçue | Question de 1 à 5, moyenne avec nombre de répondants | Non mesurée |
+| Critères acceptés | Critères acceptés / critères effectivement évalués | Non mesurés |
+| Blocages | Liste datée des difficultés empêchant une tâche | Aucun relevé utilisateur réel joint |
 
-## Mesure de satisfaction prête à utiliser
+Un faible résultat déclencherait une qualification du problème, une priorité de correction et une nouvelle vérification. Aucun seuil n’est présenté comme un engagement conclu avec un client réel.
 
-| Indicateur | Méthode | Objectif proposé | Mesure réelle disponible |
-| --- | --- | --- | --- |
-| Critères acceptés | Nombre accepté / nombre évalué | 100 % des critères critiques | Non mesurée. |
-| Parcours sans aide | Parcours terminés sans aide / parcours tentés | Au moins 80 % dans une session pilote | Non mesurée. |
-| Utilité perçue | Question de 1 à 5, moyenne et nombre de répondants | Moyenne au moins 4/5 | Non mesurée. |
-| Blocages critiques | Comptage des obstacles empêchant la tâche | Aucun avant livraison du périmètre | Non mesurée auprès d'un client réel. |
+## Réception proposée
 
-Session pilote prévue à J15 : deux grimpeurs et un représentant de club, tous fictifs dans ce protocole ; aucun participant réellement recruté. CP recueille la décision sur les critères et la note d'utilité, QA observe chaque tentative de parcours avec une grille identique. Le compte rendu conserve les numérateurs, dénominateurs, obstacles et effectifs réels si la session a lieu. Une absence de réponse reste une donnée manquante.
+Pour chaque critère démontré, recueillir une décision : accepté, accepté avec réserve ou refusé. Une réserve doit préciser le problème, la suite attendue et la prochaine vérification. Cette procédure est proposée ; elle ne constitue pas un procès-verbal de réception.
 
-Si un critère critique est refusé ou un blocage critique observé, le périmètre concerné reste sous réserve avec une correction et une nouvelle vérification. Si les parcours sans aide passent sous 80 % ou l'utilité sous 4/5, CP qualifie les obstacles avec QA, affecte une action au prochain lot et organise un nouvel essai. Ces seuils guident une décision ; un échantillon de trois personnes ne justifie aucune conclusion statistique générale.
+Le signalement de lenteur de Dorian est un retour réel du porteur du projet, traité dans A04. Il reste distinct des trois retours simulés.
 
-Après cette review du produit, la rétrospective RT01 d'A05 traite les pratiques de l'équipe.
+## Comptes rendus structurés du scénario annuel
 
-Questionnaire de session : quelle tâche cherchiez-vous à accomplir ? L'avez-vous terminée sans aide ? Quel obstacle avez-vous rencontré ? Quelle note d'utilité donnez-vous de 1 à 5 ? Quelle amélioration est prioritaire ? Noter la date, le nombre de participants et les résultats avec leur consentement, sans publier de données personnelles inutiles.
+Ces exemples sont simulés. Le représentant de club est un persona, les retours ne proviennent pas d’entretiens et aucune signature historique n’est créée.
 
-Une validation réelle peut utiliser la même grille avec le statut accepté, accepté avec réserve ou refusé, le rôle de l'interlocuteur et sa confirmation. Aucun message n'a été envoyé pendant la préparation de ce kit.
+### CR-SIM-01 — M3 — Périmètre et critères
+
+**Constat :** Personas : besoin de partenaires compatibles et de suivi des inscrits.
+
+**Décision du cas :** Retenir partenaires, événements et participants pour la démonstration.
+
+**Actions :** Porteur : formaliser les critères avant la réalisation.
+
+**Validation :** Critères confirmés dans le scénario ; aucun accord réel.
+
+### CR-SIM-02 — M10 — Écart et arbitrage
+
+**Constat :** Suivi simulé : +1 800 € et +1 mois. Demande : animation plus riche.
+
+**Décision du cas :** Dans le scénario, conserver un fond statique et prioriser les critères de recette.
+
+**Actions :** Porteur : actualiser la prévision ; testeur fictif : préparer la recette M11.
+
+**Validation :** Réexaminer critères et budget à la review M11 ; pas de signature réelle.
+
+### CR-SIM-03 — M12 — Démonstration et réception
+
+**Constat :** Résultats à relever pendant la démonstration.
+
+**Décision du cas :** Accepté, accepté avec réserve ou refusé selon les critères observés.
+
+**Actions :** Porteur : qualifier les réserves et fixer la prochaine vérification.
+
+**Validation :** Décision finale non préremplie.
+
+## Points de validation planifiés dans le modèle
+
+M3 : confirmer périmètre et critères. M10 : arbitrer les écarts et réviser les prévisions. M11 : présenter la recette et traiter les réserves. M12 : démontrer la dernière version et recueillir une décision. Le bilan final n’est pas prérempli. Chaque réserve précise une action, un responsable et une échéance à convenir.
+
+## Cibles pédagogiques de satisfaction
+
+Réussite sans aide au moins 80 % ; utilité perçue au moins 4/5 ; 100 % des critères critiques acceptés ; aucun blocage critique avant acceptation. Recueillir la date et le nombre de participants pour chaque résultat. Ces seuils sont proposés pour le cas, pas signés avec un client. **Résultats : non mesurés.** Sous la cible, qualifier la difficulté, décider une correction et refaire le parcours.

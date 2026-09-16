@@ -23,19 +23,21 @@ Ouvrir deux profils de navigateur distincts pour conserver une session grimpeur 
 
 | Temps | Action | Explication orientée client | Critère visible |
 | --- | --- | --- | --- |
-| 0:00-0:45 | Session grimpeur et profil | « Je prépare une sortie correspondant à mon niveau et à mes disponibilités. » | Profil et rôle identifiés. |
-| 0:45-2:00 | Matching et filtres | « Je réduis la liste aux partenaires compatibles ; je peux vérifier l'état d'une demande. » | Résultats cohérents et état compréhensible. |
-| 2:00-3:15 | Événements et inscription | « Je consulte la sortie et les places disponibles, puis je m'inscris. » | Inscription confirmée ou état déjà inscrit expliqué. |
-| 3:15-4:45 | Session club et participants | « Le club voit qui participe et garde la maîtrise de l'événement. » | Commandes club et participants autorisés. |
-| 4:45-5:30 | Capacité, erreurs et accessibilité | « Les règles évitent les dépassements ; les commandes restent utilisables au clavier. » | Contrôle observable ou preuve de test précisément identifiée. |
-| 5:30-6:00 | Retour aux critères | « Voici les critères couverts, les réserves et la décision attendue. » | Grille de validation et limites. |
+| 0:00–0:30 | Présenter les sessions et la version | « Voici les comptes de démonstration et les critères. » | Version et environnement identifiés. |
+| 0:30–1:00 | Profil grimpeur | « Je prépare une sortie selon ma pratique. » | Profil et discipline identifiés. |
+| 1:00–2:00 | Recherche et filtres | « Je retrouve des partenaires adaptés. » | Résultats cohérents. |
+| 2:00–3:00 | Demande de partenaire | « Je sais où en est ma demande. » | État lisible ; demande existante expliquée. |
+| 3:00–4:00 | Événement et inscription | « Je consulte les places et m’inscris. » | Confirmation ou état déjà inscrit. |
+| 4:00–5:15 | Session club | « Le club retrouve les participants. » | Liste et commandes autorisées. |
+| 5:15–5:45 | Parcours au clavier | « Les commandes restent accessibles. » | Focus et activation observables. |
+| 5:45–6:00 | Retour aux critères | « Voici les résultats et réserves à retenir. » | Critères montrés et limites précisés. |
 
 Avant chaque répétition, vérifier les dates futures des événements. Un compte déjà inscrit sert à montrer l'état existant ; pour rejouer une inscription, choisir un autre événement ou préparer à nouveau les données dédiées. Ne pas improviser une modification sur une production pendant la soutenance.
 
 ## Préparation du jour J
 
-Vérifier /api/health, les deux connexions, les pages /app/matching et /app/events, puis un parcours complet. Noter la version et le SHA. Préparer le diaporama, le classeur et les preuves hors connexion. Désactiver les notifications personnelles et fermer les onglets sans rapport avec le projet.
+Vérifier /api/health, les deux connexions, les pages /app/matching et /app/events, puis un parcours complet. Noter la version et le SHA. Préparer le diaporama v17, le classeur et les preuves hors connexion. Désactiver les notifications personnelles et fermer les onglets sans rapport avec le projet.
 
 En cas d'incident : annoncer précisément le problème, conserver le message utile, présenter la capture datée de secours et expliquer la dernière vérification disponible. Revenir à la grille et indiquer quel critère ne peut pas être revalidé en direct. Un environnement arrêté ne doit pas être présenté comme une recette réussie.
 
-Les résultats effectivement obtenus pendant cette préparation figurent dans VERIFICATION.md : les six scénarios navigateur ont réussi avec la base dédiée. Arrêter le serveur avec Ctrl+C avant de rejouer -Verify ; le serveur de recette utilise le même port. Pour arrêter ensuite la seule base dédiée, exécuter : docker compose --env-file tmp/bloc3/demo.env -f tools/bloc3/compose.demo.yml -p spity-bloc3-demo stop.
+VERIFICATION.md distingue la recette historique à six scénarios de la recette locale compilée à sept scénarios consignée dans l’audit de navigation du 15 septembre. Rejouer le parcours sur la version choisie avant l’oral. Arrêter le serveur avec Ctrl+C avant de rejouer -Verify ; le serveur de recette utilise le même port. Pour arrêter ensuite la seule base dédiée, exécuter : docker compose --env-file tmp/bloc3/demo.env -f tools/bloc3/compose.demo.yml -p spity-bloc3-demo stop.

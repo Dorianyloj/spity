@@ -1,0 +1,268 @@
+{
+  "nature": "Mise en situation pédagogique, distincte du développement réel solo sur un an. Aucune valeur consommée, réunion, formation ou collaboration ci-dessous n’est un fait historique.",
+  "months": "M1 à M12 : repères relatifs d’un modèle annuel ; aucune date calendaire inventée.",
+  "planning": [
+    {
+      "lot": "Cadrage / UX",
+      "startMonth": 1,
+      "endMonth": 2,
+      "personDays": 8,
+      "owner": "Dorian"
+    },
+    {
+      "lot": "Setup technique",
+      "startMonth": 2,
+      "endMonth": 3,
+      "personDays": 6,
+      "owner": "Dorian"
+    },
+    {
+      "lot": "Auth / sécurité",
+      "startMonth": 3,
+      "endMonth": 4,
+      "personDays": 10,
+      "owner": "Dorian"
+    },
+    {
+      "lot": "Profils",
+      "startMonth": 4,
+      "endMonth": 5,
+      "personDays": 9,
+      "owner": "Dorian"
+    },
+    {
+      "lot": "Feed social",
+      "startMonth": 5,
+      "endMonth": 7,
+      "personDays": 12,
+      "owner": "Dorian"
+    },
+    {
+      "lot": "Répertoire",
+      "startMonth": 6,
+      "endMonth": 8,
+      "personDays": 10,
+      "owner": "Dorian"
+    },
+    {
+      "lot": "Topos",
+      "startMonth": 8,
+      "endMonth": 10,
+      "personDays": 9,
+      "owner": "Dorian"
+    },
+    {
+      "lot": "Événements",
+      "startMonth": 8,
+      "endMonth": 10,
+      "personDays": 8,
+      "owner": "Dorian"
+    },
+    {
+      "lot": "Tests / access. / doc.",
+      "startMonth": 10,
+      "endMonth": 12,
+      "personDays": 10,
+      "owner": "Dorian"
+    }
+  ],
+  "tracking": {
+    "checkpoint": "M10",
+    "baselinePersonDays": 82,
+    "consumedPersonDays": 58,
+    "remainingPersonDays": 28,
+    "forecastPersonDays": 86,
+    "dailyRateEUR": 450,
+    "fixedEstimatedEUR": 7350,
+    "baselineEUR": 44250,
+    "forecastEUR": 46050,
+    "varianceEUR": 1800,
+    "baselineDelivery": "fin M11",
+    "forecastDelivery": "fin M12",
+    "delayMonths": 1,
+    "capacityPersonDaysPerMonth": 10,
+    "plannedPersonDaysNextMonth": 12
+  },
+  "review": {
+    "nature": "Séance ponctuelle fictive ; aucun membre ajouté à l’équipe réelle.",
+    "roles": [
+      {
+        "role": "Dorian, porteur",
+        "assignedHours": 4,
+        "availableHours": 5,
+        "tasks": "Préparer le build et les comptes 1 h ; corriger 2 h ; vérifier et restituer 1 h."
+      },
+      {
+        "role": "Testeur externe fictif",
+        "assignedHours": 4,
+        "availableHours": 5,
+        "tasks": "Préparer les critères 1 h ; exécuter les parcours 2 h ; restituer les anomalies 1 h.",
+        "accessibility": "Persona malentendant : consignes écrites, sous-titres vérifiés et temps d’échange asynchrone."
+      }
+    ]
+  },
+  "skills": [
+    {
+      "role": "Porteur (simulation)",
+      "skill": "Planning et suivi",
+      "current": 1,
+      "target": 2,
+      "evidence": "Justification pédagogique : sait lire le suivi, doit expliquer seul les écarts."
+    },
+    {
+      "role": "Porteur (simulation)",
+      "skill": "Développement et API",
+      "current": 2,
+      "target": 2,
+      "evidence": "Hypothèse de maîtrise pour la séance ; aucune note personnelle réelle."
+    },
+    {
+      "role": "Testeur fictif",
+      "skill": "Recette reproductible",
+      "current": 1,
+      "target": 2,
+      "evidence": "Sait suivre une consigne, doit rédiger un résultat reproductible."
+    },
+    {
+      "role": "Testeur fictif",
+      "skill": "Parcours clavier",
+      "current": 1,
+      "target": 2,
+      "evidence": "Repère les commandes, doit vérifier focus, libellés et messages."
+    }
+  ],
+  "training": [
+    {
+      "who": "Porteur",
+      "topic": "Suivi des écarts",
+      "durationHours": 1,
+      "when": "Avant revue M10",
+      "method": "Atelier individuel : recalculer coût et délai depuis les entrées.",
+      "success": "Expliquer sans aide les 1 800 € et le mois de décalage."
+    },
+    {
+      "who": "Testeur fictif",
+      "topic": "Recette et clavier",
+      "durationHours": 2,
+      "when": "Avant recette M11",
+      "method": "Consignes écrites, tutoriel sous-titré, pratique guidée puis autonome ; pauses à adapter.",
+      "success": "Rejouer un parcours sans aide et rédiger un défaut reproductible."
+    }
+  ],
+  "clientReviews": [
+    {
+      "id": "CR-SIM-01",
+      "when": "M3",
+      "topic": "Périmètre et critères",
+      "finding": "Personas : besoin de partenaires compatibles et de suivi des inscrits.",
+      "decision": "Retenir partenaires, événements et participants pour la démonstration.",
+      "actions": "Porteur : formaliser les critères avant la réalisation.",
+      "validation": "Critères confirmés dans le scénario ; aucun accord réel."
+    },
+    {
+      "id": "CR-SIM-02",
+      "when": "M10",
+      "topic": "Écart et arbitrage",
+      "finding": "Suivi simulé : +1 800 € et +1 mois. Demande : animation plus riche.",
+      "decision": "Dans le scénario, conserver un fond statique et prioriser les critères de recette.",
+      "actions": "Porteur : actualiser la prévision ; testeur fictif : préparer la recette M11.",
+      "validation": "Réexaminer critères et budget à la review M11 ; pas de signature réelle."
+    },
+    {
+      "id": "CR-SIM-03",
+      "when": "M12",
+      "topic": "Démonstration et réception",
+      "finding": "Résultats à relever pendant la démonstration.",
+      "decision": "Accepté, accepté avec réserve ou refusé selon les critères observés.",
+      "actions": "Porteur : qualifier les réserves et fixer la prochaine vérification.",
+      "validation": "Décision finale non préremplie."
+    }
+  ],
+  "workbookRows": [
+    [
+      "PÉRIMÈTRE",
+      "SIMULATION",
+      "Exemple de suivi annuel ; aucun consommé réel"
+    ],
+    [
+      "Charge initiale",
+      82,
+      "j-h ; référence B1"
+    ],
+    [
+      "Consommé simulé",
+      58,
+      "j-h ; hypothèse pédagogique"
+    ],
+    [
+      "Reste à faire simulé",
+      28,
+      "j-h ; hypothèse pédagogique"
+    ],
+    [
+      "Prévision",
+      "=B4+B5",
+      "j-h"
+    ],
+    [
+      "Taux valorisé",
+      450,
+      "€/j-h ; estimation B1"
+    ],
+    [
+      "Autres postes",
+      7350,
+      "€ ; estimation B1"
+    ],
+    [
+      "Budget initial",
+      "=B3*B7+B8",
+      "€"
+    ],
+    [
+      "Prévision coût",
+      "=B6*B7+B8",
+      "€"
+    ],
+    [
+      "Écart",
+      "=B10-B9",
+      "€"
+    ],
+    [
+      "Écart relatif",
+      "=B11/B9",
+      "Proportion"
+    ],
+    [
+      "Livraison initiale",
+      11,
+      "Mois relatif simulé"
+    ],
+    [
+      "Livraison révisée",
+      12,
+      "Mois relatif simulé"
+    ],
+    [
+      "Décalage",
+      "=B14-B13",
+      "Mois"
+    ],
+    [
+      "Capacité mensuelle hypothétique",
+      10,
+      "j-h"
+    ],
+    [
+      "Charge prochaine période",
+      12,
+      "j-h"
+    ],
+    [
+      "Taux de charge",
+      "=B17/B16",
+      "Proportion ; alerte > 1"
+    ]
+  ]
+}

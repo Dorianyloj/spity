@@ -94,6 +94,6 @@
       "personDays": 10
     }
   ],
-  "lotB3Scope": "Le cas B3 conserve son suivi détaillé en heures. Il ne remplace pas le budget global et ne lui est pas ajouté. Aucun rattachement comptable ni consommé global n’est inventé.",
+  "lotB3Scope": "La version réelle du Bloc 3 cite ces montants comme estimations initiales uniquement. Aucun coût réellement consommé ni écart budgétaire ne peut être calculé sans relevé de temps et justificatifs.",
   "otherVersion": "Les fiches C1.4.1/C1.4.2 du Bloc 1 portent 79 j-h et 38 126 EUR HT. Elles sont conservées et ne constituent plus la référence de charge/budget du Bloc 3."
 }

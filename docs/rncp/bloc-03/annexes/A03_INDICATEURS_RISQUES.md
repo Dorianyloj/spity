@@ -1,54 +1,45 @@
-# A03 - Indicateurs, coûts et risques
+# A03 — Indicateurs et risques
 
-Nature : données simulées à J10. Les taux servent à valoriser le travail dans le cas ; aucune dépense réelle n’est attestée.
+## Indicateurs disponibles
 
-| Rôle | Prévu h | À terminaison h | Capacité h | Occupation | EUR/h |
-| --- | --- | --- | --- | --- | --- |
-| CP | 28 | 29 | 30 | 96.7% | 45 |
-| DEV | 62 | 64 | 72 | 88.9% | 35 |
-| QA | 22 | 24 | 30 | 80.0% | 30 |
+| Indicateur | Valeur et calcul | Portée |
+| --- | --- | --- |
+| Tickets terminés | 12 / 24 = 50 % | Relevé du 14/09, hors annulé, tailles non pondérées |
+| Charge initiale | Somme des neuf lots = 82 j-h | Estimation du diaporama B1 |
+| Budget initial | 82 × 450 € + autres postes = 44 250 € | Prévision B1 ; aucune dépense réelle |
+| Navigation locale | Médiane de cinq parcours : 10 220 → 748 ms | CPU ×4, latence 100 ms, un passage/parcours |
+| Qualité après correction | 404 tests Jest ; sept scénarios navigateur | Résultats consignés dans l’audit du 15/09 |
+| Version distante | 872db19, version 0.1.0 ; santé OK | Sonde du 15/09 à 21:39 UTC |
 
-Les trois rôles représentent 112 h prévues, 77 h consommées et 40 h restantes. La prévision de 117 h est supérieure de 5 h au plan. La somme des capacités vaut 132 h, mais cette capacité ne se substitue pas librement entre métiers : DEV ne peut pas absorber du travail QA sans vérifier ses compétences et la séparation réalisation/validation.
+Le classeur calcule le décompte Linear, les totaux B1 et les médianes depuis leurs valeurs sources. Les consommés de temps et de coûts restent vides, car non fournis. Aucun écart budget/réalisé ou capacité/charge ne peut être déduit d’une valeur manquante.
 
-Coût initial : 28 x 45 + 62 x 35 + 22 x 30 = 4 090 EUR de travail, plus 180 EUR de frais, soit 4 270 EUR. Prévision : 29 x 45 + 64 x 35 + 24 x 30 = 4 265 EUR, plus 200 EUR de frais, soit 4 465 EUR. Le dépassement de 195 EUR vaut 4,6 % de la référence. La réserve de 427 EUR porte le plafond à 4 697 EUR, avec 232 EUR de marge prévisionnelle.
+## Risques : analyse rétrospective
 
-Le consommé économique du cas vaut 2 945 EUR, dont 2 825 EUR de travail et 120 EUR de frais. Il ne s'agit pas d'un relevé bancaire. Les variations sont calculées à périmètre et taux constants.
+| Risque | Déclencheur observable | Réponse documentée |
+| --- | --- | --- |
+| Navigation bloquante | Clic suivi d’un long calcul dans le navigateur | Fond statique et indicateur d’attente |
+| Régression de parcours | Scénario de recette en échec | Correction et nouvelle exécution de la recette |
+| Mauvaise version servie | SHA distant différent de la version attendue | Vérification du déploiement et de la sonde |
+| Démo indisponible | Connexion ou parcours impossible le jour J | Annoncer l’incident, montrer une capture datée, noter les critères non revérifiés |
+| Indicateur trompeur | Statut Linear incohérent avec le périmètre testé | Rapprocher ticket, code et critère avant de conclure |
 
-## Registre des risques
+Cette analyse ne prétend pas reconstituer un registre initial approuvé. Aucun score de risque, délai consommé ou responsable externe n’est inventé.
 
-Échelle proposée : probabilité et impact de 1 (faible) à 3 (fort). Priorité = produit des deux. Un score de 6 ou 9 déclenche une revue avant engagement du jalon. Ce score aide à ordonner l'analyse, sans remplacer la décision.
+## Tableau annuel simulé à M10
 
-| ID | Risque | P | I | Score | Responsable |
-| --- | --- | --- | --- | --- | --- |
-| R01 | Environnement de démonstration indisponible | 3 | 3 | 9 | CP |
-| R02 | Surcharge du chef de projet | 2 | 3 | 6 | CP |
-| R03 | Ajout tardif de contributions aux topos | 2 | 3 | 6 | CP |
-| R04 | Défaut de capacité des événements | 2 | 3 | 6 | DEV |
-| R05 | Consignes de dépôt non confirmées | 2 | 3 | 6 | CP |
+Ces entrées sont inventées pour l’exercice et séparées du relevé Linear réel. Elles illustrent les calculs exigés ; elles ne sont ni des dépenses ni des heures réellement consommées par Dorian.
 
-**R01** - Déclencheur : Sonde de santé indisponible ou base inaccessible. Réponse : Tester l'installation à J12, répéter à J14 et conserver des captures datées de secours.
+| Indicateur | Formule / référence | Résultat du cas |
+| --- | --- | --- |
+| Charge à terminaison | 58 j-h consommés simulés + 28 j-h restants | 86 j-h |
+| Écart de charge | 86 − 82 | +4 j-h |
+| Autres postes B1 estimés | 44 250 − 82 × 450 | 7 350 € |
+| Coût prévisionnel | 86 × 450 + 7 350 | 46 050 € |
+| Écart au budget initial | 46 050 − 44 250 | +1 800 €, soit environ +4,07 % |
+| Délai | Fin M12 au lieu de fin M11 | +1 mois |
+| Ressource solo | 12 j-h prévus / 10 j-h disponibles | 120 % ; 2 j-h à déplacer |
+| Séance de recette | Porteur 4/5 h ; testeur fictif 4/5 h | 80 % chacun, hors formation |
 
-**R02** - Déclencheur : Prévision de charge supérieure à 90 % de la capacité. Réponse : Limiter le travail simultané et faire préparer la grille de recette par QA.
+Une revue hebdomadaire proposée actualise le reste à faire, le coût prévu, le jalon et les risques. Elle se conclut par une action et un responsable. L’arbitrage présenté dans CR-SIM-02 maintient les critères critiques et limite les enrichissements décoratifs. Les données du cas ne permettent pas d’attribuer historiquement quatre jours de dérive à la correction réelle de navigation.
 
-**R03** - Déclencheur : Nouvelle demande sans capacité ni recette disponible. Réponse : Reporter ce lot après la démonstration et consigner la décision client simulée.
-
-**R04** - Déclencheur : Deux inscriptions acceptées sur la dernière place. Réponse : Vérifier l'inscription concurrente et les refus d'accès.
-
-**R05** - Déclencheur : Date limite ou livrable demandé non identifié. Réponse : Consulter la convocation et le règlement spécial avant le dépôt.
-
-## Règles de suivi
-
-Chaque rôle actualise son consommé et son reste à faire. Le daily de dix minutes permet d'adapter le plan du jour et de traiter les blocages. Les reviews J10/J15 examinent les parcours avec le client, puis CR02/CR03 conservent les décisions. CP vérifie aussi deux fois par semaine l'écart, les dates et la capacité. A05 distingue ces rendez-vous de la rétrospective d'équipe. Une variation de budget dépassant la réserve, une charge supérieure à la capacité ou un critère critique non vérifié déclenche un arbitrage documenté. Les indicateurs de qualité s'appuient sur les résultats réellement exécutés dans VERIFICATION.md.
-
-Linear a été relu directement le 14 septembre : 12 Done, 4 Todo, 1 In Progress, 7 Backlog et 1 Canceled. Le taux de tickets Done est de 12 / 24 = 50 % hors annulé. Il ne mesure pas la part de produit livrée. A09 conserve le relevé, les dépendances lues, les 30 activités estimées et les tests de sensibilité. La feuille Linear reste distincte du scénario.
-
-## Écarts de dates et décision de suivi
-
-| Tâche | Fin initiale | Fin revue à J10 | Retard prévisionnel | Conséquence |
-| --- | --- | --- | --- | --- |
-| T06 - Événements | J11 | J12 | 1 jour | Préserver les critères de capacité et préparer les corrections. |
-| T07 - Recette | J13 | J14 | 1 jour | Clôturer après T06 et T10, avant la démonstration J15. |
-
-Le retard se calcule par fin revue moins fin initiale. Ces deux écarts ne s'additionnent pas pour annoncer deux jours de retard de la démonstration : celle-ci reste prévue à J15. Les +5 h de charge ne sont pas cinq jours de retard. Exemple de mise à jour : renseigner le reste à faire T06 et sa nouvelle fin, relire charge/coût, vérifier la dépendance de T07 puis consigner l'effet dans CR02.
-
-CP atteint 96,7 % de sa capacité, au-dessus de l'alerte de 90 %. Le scénario limite les demandes nouvelles et protège ses créneaux d'arbitrage. La recette est déjà confiée à QA ; ce n'est pas une nouvelle réaffectation faisant gagner des heures à CP. Tout ajout mobilisant plus que sa marge d'une heure nécessite un arbitrage. La capacité restante des autres rôles ne prouve pas qu'ils disposent de la compétence requise pour reprendre une tâche.
+Seuils proposés : charge supérieure à 100 % → déplacer ou retirer une tâche ; un critère critique en échec → pas d’acceptation ; disponibilité ou connexion en échec → diagnostiquer et annoncer le recours aux captures. Les échéances se mettent à jour avec la décision ; elles ne se déduisent pas automatiquement des jours-personne.

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "criterion": "C4.2.2",
+  "checkedAt": "2026-09-15T21:39:53.182Z",
+  "environment": "production",
+  "expected": {
+    "revision": "872db197b3e6bf3d053b698829c41674ae42a836",
+    "version": "0.1.0"
+  },
+  "observed": {
+    "revision": "872db197b3e6bf3d053b698829c41674ae42a836",
+    "version": "0.1.0"
+  },
+  "result": "passed",
+  "health": {
+    "schemaVersion": 2,
+    "checkedAt": "2026-09-15T21:39:53.182Z",
+    "status": "healthy",
+    "availability": true,
+    "target": "https://spity.fr/api/health",
+    "attempts": [
+      {
+        "attempt": 1,
+        "httpStatus": 200,
+        "latencyMs": 269,
+        "outcome": "success",
+        "code": "healthy"
+      }
+    ],
+    "classification": {
+      "code": "healthy",
+      "category": "healthy",
+      "severity": null,
+      "impactsAvailability": false,
+      "runbook": "none"
+    },
+    "indicators": {
+      "applicationStatus": "ok",
+      "httpStatus": 200,
+      "latencyMs": 269,
+      "maxLatencyMs": 3000,
+      "revision": "872db197b3e6bf3d053b698829c41674ae42a836",
+      "version": "0.1.0"
+    },
+    "thresholds": {
+      "maxLatencyMs": 3000,
+      "retries": 0,
+      "timeoutMs": 15000
+    }
+  }
+}

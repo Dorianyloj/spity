@@ -1,1077 +1,1014 @@
 [
   {
     "number": 1,
-    "title": "Spity",
+    "title": "Une année pour construire Spity.",
+    "section": "Spity · Bloc 3",
     "minutes": 0.5,
-    "nature": "RNCP39583, Bloc 3",
     "layout": "cover",
+    "subtitle": "Du besoin des grimpeurs à un site déployé.",
     "content": {},
-    "script": "Bonjour, je suis Dorian Joly. Je vais présenter le pilotage de Spity, une application destinée à la communauté de l'escalade. Mon fil conducteur est la préparation d'une sortie, depuis la recherche d'un partenaire jusqu'à l'inscription à un événement. Je présenterai l'organisation du projet, les décisions de pilotage, puis une démonstration du logiciel.",
-    "source": "Référentiel RNCP39583, p. 11 à 14. Photo de marque du dépôt, illustration sans lien avec une équipe réelle.",
+    "script": "Spity est un projet d’escalade que j’ai développé seul sur un an. Je présente sa gestion et le logiciel. Les traces de développement, la correction de navigation et le déploiement sont réels. Pour traiter les compétences de pilotage, de collaboration et de suivi client qui ne sont pas toutes documentées dans le projet solo, j’ajoute des mises en situation explicitement signalées. Elles se déroulent dans le cadre d’une année, sans être présentées comme des événements réellement vécus.",
+    "source": "Durée déclarée par le candidat ; CADRAGE_PROJET.md ; historique Git.",
     "action": "",
-    "transition": "Je commence par le besoin auquel répond le produit.",
+    "nature": "Durée déclarée et preuves du dépôt",
+    "dark": true,
     "demo": false,
-    "contentNumber": 1,
     "startMinute": 0,
     "endMinute": 0.5,
-    "spokenWords": 61,
-    "notes": "REPÈRE : 00:00 à 00:30. Durée prévue : 00:30.\n\nTEXTE ORAL\nBonjour, je suis Dorian Joly. Je vais présenter le pilotage de Spity, une application destinée à la communauté de l'escalade. Mon fil conducteur est la préparation d'une sortie, depuis la recherche d'un partenaire jusqu'à l'inscription à un événement. Je présenterai l'organisation du projet, les décisions de pilotage, puis une démonstration du logiciel.\n\nTRANSITION\nJe commence par le besoin auquel répond le produit.\n\nSOURCE ET NATURE\nRNCP39583, Bloc 3. Référentiel RNCP39583, p. 11 à 14. Photo de marque du dépôt, illustration sans lien avec une équipe réelle."
+    "notes": "REPÈRE : 00:00–00:30\nNATURE : Durée déclarée et preuves du dépôt\n\nTEXTE ORAL\nSpity est un projet d’escalade que j’ai développé seul sur un an. Je présente sa gestion et le logiciel. Les traces de développement, la correction de navigation et le déploiement sont réels. Pour traiter les compétences de pilotage, de collaboration et de suivi client qui ne sont pas toutes documentées dans le projet solo, j’ajoute des mises en situation explicitement signalées. Elles se déroulent dans le cadre d’une année, sans être présentées comme des événements réellement vécus.\n\nÀ MONTRER\n\n\nSOURCE\nDurée déclarée par le candidat ; CADRAGE_PROJET.md ; historique Git."
   },
   {
-    "number": 2,
     "title": "Sommaire",
+    "section": "Les sept compétences du Bloc 3",
     "minutes": 0.5,
-    "nature": "Le déroulé de la présentation",
     "layout": "agenda",
+    "subtitle": "Présentation du projet, puis les compétences dans l’ordre du référentiel.",
     "content": {
       "items": [
         [
           "01",
-          "Le projet Spity",
-          "01:00 à 03:00"
+          "Planifier le projet",
+          "C.3.1"
         ],
         [
           "02",
-          "Organiser le travail",
-          "03:00 à 07:00"
+          "Suivre l’avancement",
+          "C3.2.1"
         ],
         [
           "03",
-          "Suivre et décider",
-          "07:00 à 15:00"
+          "Arbitrer",
+          "C3.2.2"
         ],
         [
           "04",
-          "L'équipe et le client",
-          "15:00 à 23:00"
+          "Manager et communiquer",
+          "C3.3.1"
         ],
         [
           "05",
+          "Développer les compétences",
+          "C3.3.2"
+        ],
+        [
+          "06",
+          "Suivre avec le client",
+          "C3.4.1"
+        ],
+        [
+          "07",
           "Démontrer et valider",
-          "23:00 à 30:00"
+          "C3.4.2"
         ]
       ]
     },
-    "script": "Je commence par le besoin et le projet Spity. Je présente ensuite l'organisation du travail, puis le suivi et les décisions prises dans le scénario. J'explique comment accompagner l'équipe et échanger avec le client. À vingt-trois minutes, je passe à l'application pour montrer le parcours, puis faire le bilan des critères vérifiés.",
-    "source": "Ordre du support et repères de répétition. Trente minutes, dont six minutes de démonstration.",
-    "action": "Annoncer les cinq parties sans détailler encore les chiffres.",
-    "transition": "Je commence par le besoin utilisateur.",
+    "script": "Je présente d’abord le besoin et le projet solo. Je déroule ensuite les sept compétences dans l’ordre : planification, suivi, arbitrage, management, compétences, suivi client et démonstration. Les six minutes de manipulation sont incluses dans les trente minutes. Les trois compétences signalées comme obligatoires dans le PDF fourni sont la planification, le suivi de l’avancement et la démonstration. Toutes les autres restent traitées.",
+    "source": "Référentiel p. 11–14 ; compétences obligatoires p. 4.",
+    "nature": "Plan aligné sur les deux PDF fournis",
+    "dark": true,
+    "action": "",
     "demo": false,
-    "contentNumber": 0,
+    "number": 2,
     "startMinute": 0.5,
-    "endMinute": 1,
-    "spokenWords": 58,
-    "notes": "REPÈRE : 00:30 à 01:00. Durée prévue : 00:30.\n\nTEXTE ORAL\nJe commence par le besoin et le projet Spity. Je présente ensuite l'organisation du travail, puis le suivi et les décisions prises dans le scénario. J'explique comment accompagner l'équipe et échanger avec le client. À vingt-trois minutes, je passe à l'application pour montrer le parcours, puis faire le bilan des critères vérifiés.\n\nGESTE OU MANIPULATION\nAnnoncer les cinq parties sans détailler encore les chiffres.\n\nTRANSITION\nJe commence par le besoin utilisateur.\n\nSOURCE ET NATURE\nLe déroulé de la présentation. Ordre du support et repères de répétition. Trente minutes, dont six minutes de démonstration."
+    "endMinute": 1.0,
+    "notes": "REPÈRE : 00:30–01:00\nNATURE : Plan aligné sur les deux PDF fournis\n\nTEXTE ORAL\nJe présente d’abord le besoin et le projet solo. Je déroule ensuite les sept compétences dans l’ordre : planification, suivi, arbitrage, management, compétences, suivi client et démonstration. Les six minutes de manipulation sont incluses dans les trente minutes. Les trois compétences signalées comme obligatoires dans le PDF fourni sont la planification, le suivi de l’avancement et la démonstration. Toutes les autres restent traitées.\n\nÀ MONTRER\n\n\nSOURCE\nRéférentiel p. 11–14 ; compétences obligatoires p. 4."
   },
   {
     "number": 3,
-    "title": "Le besoin d’Altitude Grimpe",
+    "title": "Relier les grimpeurs. Simplifier les sorties.",
+    "section": "Présentation / Spity, projet solo sur un an",
     "minutes": 1,
-    "nature": "B1, commanditaire fictif et produit réel",
-    "layout": "photo",
+    "layout": "product",
+    "subtitle": "Deux besoins concrets pour guider les fonctionnalités.",
     "content": {
-      "image": "docs/rncp/bloc-03/preuves/captures/lieux-2026-09-15.png",
-      "items": [
+      "cards": [
         [
-          "Grimpeur",
-          "Trouver un partenaire et rejoindre une sortie."
+          "GRIMPEUR",
+          "Trouver un partenaire",
+          "Discipline, niveau et profil pour préparer une sortie."
         ],
         [
-          "Club",
-          "Organiser un événement et suivre les participants."
+          "CLUB",
+          "Organiser un événement",
+          "Places disponibles, inscriptions et liste des participants."
         ]
-      ]
+      ],
+      "image": "lieux",
+      "callout": "Parcours présenté : partenaire → événement → inscription."
     },
-    "script": "Je reprends le commanditaire du Bloc 1 : le Collectif Altitude Grimpe, association fictive représentée par Claire Martin. Le cadre reste une zone pilote autour de Lyon et Grenoble. Son besoin est de centraliser des usages aujourd'hui dispersés : trouver un partenaire, consulter les lieux et organiser des sorties.\n\nPour cette soutenance, je retiens le parcours déjà développé dans le Bloc 2. Le grimpeur recherche une personne compatible et rejoint un événement. Le club organise cette sortie et retrouve les participants autorisés. Ce choix relie le besoin initial à un résultat démontrable. La capture montre le répertoire de lieux du produit local. Elle illustre le contexte géographique, sans prétendre que toutes les fonctions de la vision initiale sont validées.",
-    "source": "B1 : C1.1.1, p. 2 ; C1.4.1, p. 4-5. B2 : 16_DOSSIER_FINAL_BC02, F01-F10. Capture locale du 15 septembre 2026, données de test.",
+    "script": "Spity répond à deux besoins complémentaires. Un grimpeur cherche une personne avec laquelle pratiquer et une sortie adaptée. Un club souhaite organiser une activité et retrouver les participants. Le produit regroupe donc des profils, des partenaires, des événements et un répertoire de lieux. Ces besoins servent de fil conducteur à la démonstration. La capture montre une interface de la base de démonstration, avec des données de test. Le Collectif Altitude Grimpe présent dans le cadrage initial est un commanditaire fictif ; il ne constitue pas la preuve d’un client réel. Aucun accord de ce collectif n’est revendiqué ici.",
+    "source": "CADRAGE_PROJET.md ; capture lieux du 15/09/2026 ; Bloc 1.",
+    "action": "Montrer le besoin utilisateur puis le répertoire, sans détailler chaque fonction.",
+    "nature": "Éléments du projet documentés",
+    "dark": false,
+    "demo": false,
+    "startMinute": 1.0,
+    "endMinute": 2.0,
+    "notes": "REPÈRE : 01:00–02:00\nNATURE : Éléments du projet documentés\n\nTEXTE ORAL\nSpity répond à deux besoins complémentaires. Un grimpeur cherche une personne avec laquelle pratiquer et une sortie adaptée. Un club souhaite organiser une activité et retrouver les participants. Le produit regroupe donc des profils, des partenaires, des événements et un répertoire de lieux. Ces besoins servent de fil conducteur à la démonstration. La capture montre une interface de la base de démonstration, avec des données de test. Le Collectif Altitude Grimpe présent dans le cadrage initial est un commanditaire fictif ; il ne constitue pas la preuve d’un client réel. Aucun accord de ce collectif n’est revendiqué ici.\n\nÀ MONTRER\nMontrer le besoin utilisateur puis le répertoire, sans détailler chaque fonction.\n\nSOURCE\nCADRAGE_PROJET.md ; capture lieux du 15/09/2026 ; Bloc 1."
+  },
+  {
+    "title": "Une méthode adaptée au travail solo",
+    "section": "C.3.1 / Planifier",
+    "minutes": 1,
+    "layout": "cards",
+    "subtitle": "Flux de tâches inspiré de Kanban ; rétroplanning annuel pour les jalons.",
+    "content": {
+      "cards": [
+        [
+          "FLUX",
+          "Linear",
+          "Rendre visibles les priorités et les états ; limiter la dispersion."
+        ],
+        [
+          "CALENDRIER",
+          "Rétroplanning",
+          "Visualiser les phases, dépendances et points de validation."
+        ],
+        [
+          "QUALITÉ",
+          "Git + CI",
+          "Versionner les changements et conserver les résultats des contrôles."
+        ]
+      ],
+      "callout": "Linear est observé dans le projet ; le calendrier annuel présenté est une reconstruction pédagogique."
+    },
+    "script": "Je retiens un flux inspiré de Kanban, adapté à un projet solo où les priorités évoluent. Linear apporte la visibilité sur les tâches. Le rétroplanning complète le tableau en montrant les dates cibles et les dépendances, que le simple statut d’un ticket ne suffit pas à expliquer. Les deux outils sont compatibles : un lot planifié contient des tâches suivies dans Linear. Git et la CI relient les modifications à leurs contrôles. Le dépôt prouve l’existence de ces outils ; il ne prouve pas que toutes les pratiques proposées ont été appliquées historiquement. Dans la mise en situation, une revue hebdomadaire actualise le reste à faire et les risques.",
+    "source": "Linear 14/09 ; dépôt ; A01.",
+    "nature": "Outils réels ; cadre méthodologique argumenté et calendrier pédagogique",
+    "dark": false,
     "action": "",
-    "transition": "Je distingue maintenant la durée réelle du projet et le scénario de pilotage.",
     "demo": false,
-    "contentNumber": 2,
-    "startMinute": 1,
-    "endMinute": 2,
-    "spokenWords": 132,
-    "notes": "REPÈRE : 01:00 à 02:00. Durée prévue : 01:00.\n\nTEXTE ORAL\nJe reprends le commanditaire du Bloc 1 : le Collectif Altitude Grimpe, association fictive représentée par Claire Martin. Le cadre reste une zone pilote autour de Lyon et Grenoble. Son besoin est de centraliser des usages aujourd'hui dispersés : trouver un partenaire, consulter les lieux et organiser des sorties.\n\nPour cette soutenance, je retiens le parcours déjà développé dans le Bloc 2. Le grimpeur recherche une personne compatible et rejoint un événement. Le club organise cette sortie et retrouve les participants autorisés. Ce choix relie le besoin initial à un résultat démontrable. La capture montre le répertoire de lieux du produit local. Elle illustre le contexte géographique, sans prétendre que toutes les fonctions de la vision initiale sont validées.\n\nGESTE OU MANIPULATION\n\n\nTRANSITION\nJe distingue maintenant la durée réelle du projet et le scénario de pilotage.\n\nSOURCE ET NATURE\nB1, commanditaire fictif et produit réel. B1 : C1.1.1, p. 2 ; C1.4.1, p. 4-5. B2 : 16_DOSSIER_FINAL_BC02, F01-F10. Capture locale du 15 septembre 2026, données de test."
-  },
-  {
     "number": 4,
-    "title": "Un an de développement ; un cas fictif de quinze jours",
-    "minutes": 1,
-    "nature": "Durée réelle déclarée par le candidat ; estimation B1 et scénario fictif B3 distincts",
-    "layout": "columns",
-    "content": {
-      "items": [
-        [
-          "Éléments observés",
-          "Code, historique Git et tests datés.\nApplication et comptes de démonstration."
-        ],
-        [
-          "Cas pédagogique",
-          "Équipe CP, DEV et QA.\nPlanning, coûts et réunions simulés."
-        ]
-      ]
-    },
-    "script": "J'ai développé Spity sur un an. C'est la durée réelle du projet, depuis son démarrage jusqu'à la version présentée. Le découpage affiché reprend les neuf lots du Bloc 1.\n\nLes quatre-vingt-deux jours-homme correspondent à une estimation de charge du MVP. Ils ne mesurent pas mon temps réellement passé. Une quantité de travail estimée et une durée calendaire sont deux informations différentes. Je ne transforme donc pas cette estimation en calendrier réel.\n\nPour illustrer le Bloc 3, je présente ensuite un scénario fictif de préparation de démonstration sur quinze jours ouvrés, à partir du logiciel existant. J1 à J15 sont les jours de cet exercice. Les charges, les réunions et le budget associés restent des hypothèses pédagogiques.",
-    "source": "Durée d'un an confirmée par Dorian le 15 septembre 2026. Dates exactes et temps passé non fournis. Diaporama B1 p. 21 : neuf lots, 82 j-h estimés. Cas B3 : quinze jours ouvrés fictifs.",
-    "action": "Montrer un an de développement réel, puis distinguer la charge estimée et les quinze jours fictifs.",
-    "transition": "Je choisis une méthode adaptée au suivi de ce travail.",
-    "demo": false,
-    "contentNumber": 3,
-    "startMinute": 2,
-    "endMinute": 3,
-    "spokenWords": 126,
-    "notes": "REPÈRE : 02:00 à 03:00. Durée prévue : 01:00.\n\nTEXTE ORAL\nJ'ai développé Spity sur un an. C'est la durée réelle du projet, depuis son démarrage jusqu'à la version présentée. Le découpage affiché reprend les neuf lots du Bloc 1.\n\nLes quatre-vingt-deux jours-homme correspondent à une estimation de charge du MVP. Ils ne mesurent pas mon temps réellement passé. Une quantité de travail estimée et une durée calendaire sont deux informations différentes. Je ne transforme donc pas cette estimation en calendrier réel.\n\nPour illustrer le Bloc 3, je présente ensuite un scénario fictif de préparation de démonstration sur quinze jours ouvrés, à partir du logiciel existant. J1 à J15 sont les jours de cet exercice. Les charges, les réunions et le budget associés restent des hypothèses pédagogiques.\n\nGESTE OU MANIPULATION\nMontrer un an de développement réel, puis distinguer la charge estimée et les quinze jours fictifs.\n\nTRANSITION\nJe choisis une méthode adaptée au suivi de ce travail.\n\nSOURCE ET NATURE\nDurée réelle déclarée par le candidat ; estimation B1 et scénario fictif B3 distincts. Durée d'un an confirmée par Dorian le 15 septembre 2026. Dates exactes et temps passé non fournis. Diaporama B1 p. 21 : neuf lots, 82 j-h estimés. Cas B3 : quinze jours ouvrés fictifs."
+    "startMinute": 2.0,
+    "endMinute": 3.0,
+    "notes": "REPÈRE : 02:00–03:00\nNATURE : Outils réels ; cadre méthodologique argumenté et calendrier pédagogique\n\nTEXTE ORAL\nJe retiens un flux inspiré de Kanban, adapté à un projet solo où les priorités évoluent. Linear apporte la visibilité sur les tâches. Le rétroplanning complète le tableau en montrant les dates cibles et les dépendances, que le simple statut d’un ticket ne suffit pas à expliquer. Les deux outils sont compatibles : un lot planifié contient des tâches suivies dans Linear. Git et la CI relient les modifications à leurs contrôles. Le dépôt prouve l’existence de ces outils ; il ne prouve pas que toutes les pratiques proposées ont été appliquées historiquement. Dans la mise en situation, une revue hebdomadaire actualise le reste à faire et les risques.\n\nÀ MONTRER\n\n\nSOURCE\nLinear 14/09 ; dépôt ; A01."
   },
   {
+    "title": "Planifier les travaux sur une année",
+    "section": "C.3.1 / Planning détaillé",
+    "minutes": 1.5,
+    "layout": "annual",
+    "subtitle": "M1–M12 : modèle pédagogique sur un an, sans dates calendaires inventées.",
+    "content": {
+      "callout": "Étude M1 · mesure M2 puis M10–11 · conception M2–3 · réalisation M3–10 · restitution M12."
+    },
+    "script": "Le graphique répartit les neuf lots du cadrage sur douze mois relatifs. Les charges de référence viennent du Bloc 1 : elles totalisent 82 jours-personne estimés. Leur position dans le calendrier est une reconstruction pédagogique, pas le planning historique retrouvé. L’étude et la mesure du besoin précèdent la conception. La réalisation des parcours s’appuie sur l’authentification et les profils. Les événements doivent exister avant la recette des inscriptions. Les contrôles se poursuivent pendant la réalisation, puis la restitution intervient au dernier mois. Les points de vigilance portent sur les dépendances, le temps disponible en solo et la préparation d’une recette sur une version stable. Les vraies dates de commits restent dans l’annexe, séparées de ce modèle.",
+    "source": "B1 : neuf lots, 82 j-h ; mise-en-situation.json ; A01.",
+    "nature": "Mise en situation pédagogique explicitement simulée",
+    "dark": false,
+    "action": "",
+    "demo": false,
     "number": 5,
-    "title": "Le suivi : Linear et les rituels Scrum",
-    "minutes": 1.5,
-    "nature": "Linear observé et réunions du scénario fictif",
-    "layout": "table",
-    "content": {
-      "rows": [
-        [
-          "État",
-          "Condition"
-        ],
-        [
-          "À faire",
-          "Besoin et critères explicites"
-        ],
-        [
-          "En cours",
-          "Responsable et capacité disponibles"
-        ],
-        [
-          "À vérifier",
-          "Fonction prête pour la recette"
-        ],
-        [
-          "Terminé",
-          "Critères vérifiés et réserves traitées"
-        ]
-      ],
-      "widths": [
-        300,
-        852
-      ],
-      "takeaway": "Deux tâches de réalisation simultanées au maximum"
-    },
-    "script": "Pour suivre le projet, le scénario combine un tableau Kanban dans Linear et des réunions inspirées de Scrum. Le tableau limite la réalisation à deux tâches simultanées. Les critères de recette conditionnent le passage à terminé. Les réunions donnent un rythme commun aux échanges.\n\nÀ J3, le planning précise l'objectif du lot, les tâches retenues et la capacité disponible. Chaque jour, le daily dure dix minutes : où en sommes-nous, quel obstacle faut-il lever et quelle action adapter ? Le diagnostic technique se poursuit ensuite avec les personnes concernées. À J10 et J15, la review confronte les parcours aux attentes du client. Après la dernière revue, la rétrospective choisit une amélioration de notre fonctionnement.\n\nCette organisation est adaptée au lot de quinze jours. Elle ne revendique pas l'application complète du cadre Scrum. Linear conserve ses données réellement observées : douze tickets terminés sur vingt-quatre non annulés, sans pondération. Les dépendances médias, API et formulaire restent visibles. A05 détaille les réunions et A07 conserve les comptes rendus du cas. Une réunion doit conduire à une action retrouvable.",
-    "source": "A01/A05/A07 ; rituels.json. Linear observé le 14 septembre 2026. Guide Scrum 2020, p. 9-10 : https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-French.pdf",
-    "action": "Associer chaque rituel à son objectif et à sa trace. Distinguer le flux Linear observé des réunions du scénario.",
-    "transition": "Le planning montre les phases et les rendez-vous du lot.",
-    "demo": false,
-    "contentNumber": 4,
-    "startMinute": 3,
+    "startMinute": 3.0,
     "endMinute": 4.5,
-    "spokenWords": 186,
-    "notes": "REPÈRE : 03:00 à 04:30. Durée prévue : 01:30.\n\nTEXTE ORAL\nPour suivre le projet, le scénario combine un tableau Kanban dans Linear et des réunions inspirées de Scrum. Le tableau limite la réalisation à deux tâches simultanées. Les critères de recette conditionnent le passage à terminé. Les réunions donnent un rythme commun aux échanges.\n\nÀ J3, le planning précise l'objectif du lot, les tâches retenues et la capacité disponible. Chaque jour, le daily dure dix minutes : où en sommes-nous, quel obstacle faut-il lever et quelle action adapter ? Le diagnostic technique se poursuit ensuite avec les personnes concernées. À J10 et J15, la review confronte les parcours aux attentes du client. Après la dernière revue, la rétrospective choisit une amélioration de notre fonctionnement.\n\nCette organisation est adaptée au lot de quinze jours. Elle ne revendique pas l'application complète du cadre Scrum. Linear conserve ses données réellement observées : douze tickets terminés sur vingt-quatre non annulés, sans pondération. Les dépendances médias, API et formulaire restent visibles. A05 détaille les réunions et A07 conserve les comptes rendus du cas. Une réunion doit conduire à une action retrouvable.\n\nGESTE OU MANIPULATION\nAssocier chaque rituel à son objectif et à sa trace. Distinguer le flux Linear observé des réunions du scénario.\n\nTRANSITION\nLe planning montre les phases et les rendez-vous du lot.\n\nSOURCE ET NATURE\nLinear observé et réunions du scénario fictif. A01/A05/A07 ; rituels.json. Linear observé le 14 septembre 2026. Guide Scrum 2020, p. 9-10 : https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-French.pdf"
+    "notes": "REPÈRE : 03:00–04:30\nNATURE : Mise en situation pédagogique explicitement simulée\n\nTEXTE ORAL\nLe graphique répartit les neuf lots du cadrage sur douze mois relatifs. Les charges de référence viennent du Bloc 1 : elles totalisent 82 jours-personne estimés. Leur position dans le calendrier est une reconstruction pédagogique, pas le planning historique retrouvé. L’étude et la mesure du besoin précèdent la conception. La réalisation des parcours s’appuie sur l’authentification et les profils. Les événements doivent exister avant la recette des inscriptions. Les contrôles se poursuivent pendant la réalisation, puis la restitution intervient au dernier mois. Les points de vigilance portent sur les dépendances, le temps disponible en solo et la préparation d’une recette sur une version stable. Les vraies dates de commits restent dans l’annexe, séparées de ce modèle.\n\nÀ MONTRER\n\n\nSOURCE\nB1 : neuf lots, 82 j-h ; mise-en-situation.json ; A01."
   },
   {
-    "number": 6,
-    "title": "Scénario fictif : quinze jours de préparation",
+    "title": "Affecter les missions et prévoir les moyens",
+    "section": "C.3.1 / Responsabilités",
     "minutes": 1.5,
-    "nature": "C.3.1, planning fictif du lot à J10",
     "layout": "table",
+    "subtitle": "Projet réel : Dorian seul. Extension simulée : une séance avec un testeur ponctuel.",
     "content": {
       "rows": [
         [
-          "Jalon",
-          "Résultat attendu",
-          "Validation"
+          "Mission",
+          "Réalise / décide",
+          "Moyens et adaptation"
         ],
         [
-          "J3",
-          "Périmètre et critères",
-          "Client fictif"
+          "Cadrage, développement, livraison",
+          "Dorian : R / A",
+          "Poste, Git, Next.js, MariaDB, Docker, VPS"
         ],
         [
-          "J8",
-          "Parcours partenaire",
-          "CP et QA"
+          "Recette ponctuelle — simulée",
+          "Testeur fictif : R ; Dorian : A",
+          "Critères écrits, comptes dédiés et retours reproductibles"
         ],
         [
-          "J10",
-          "Écarts et arbitrages",
-          "CP et client"
+          "Décision de validation — simulée",
+          "Représentant club fictif : A",
+          "Dorian prépare la démonstration et les réserves"
         ],
         [
-          "J14",
-          "Recette et corrections",
-          "CP et QA"
-        ],
-        [
-          "J15",
-          "Démonstration et réserves",
-          "Client fictif"
+          "Accessibilité — simulée",
+          "Persona testeur malentendant",
+          "Sous-titres vérifiés, écrit, prise de parole organisée"
         ]
       ],
-      "widths": [
-        160,
-        660,
-        332
-      ]
+      "callout": "R = réalise ; A = décide. Budget initial B1 : 44 250 € estimés ; pas de dépense réelle déclarée."
     },
-    "script": "Ce planning est un exercice fictif de préparation de démonstration sur quinze jours ouvrés. Le développement réel de Spity a duré un an. L'étude cadre le besoin. La mesure transforme ce besoin en critères observables, par exemple une seule inscription acceptée sur la dernière place. La conception fixe les responsabilités et les moyens. La réalisation fournit les parcours, la recette mesure leur conformité et la restitution prépare la décision du client.\n\nLe diagramme à barres rend les chevauchements lisibles. Il complète le tableau Kanban et les réunions sans imposer que toutes les activités attendent la fin de la précédente. QA peut préparer et tester les fonctions déjà disponibles. La clôture de la recette dépend toutefois de la stabilisation des événements et des corrections. La démonstration reste prévue à J15, après la recette J14.\n\nJe conserve les dates initiales dans le classeur pour mesurer les dérives. À J10, les événements sont prévus à J12 au lieu de J11 et la recette à J14 au lieu de J13. Chaque glissement vaut un jour. Ce décalage de date est distinct de l'augmentation de charge. A01 conserve les dix tâches et les trente activités estimées sont détaillées dans A09.",
-    "source": "A01, A03, A09 et Planning. Étude T01, mesure T02, conception T03, réalisation T04-T06, recette T07/T10, restitution T09. A05 : planning J3, reviews J10/J15 et rétrospective J15. Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01.",
-    "action": "Lire la phase Mesure, les chevauchements puis les dates initiales et revues.",
-    "transition": "La répartition des missions permet de tenir ces engagements.",
+    "script": "Dans la réalité, j’ai réalisé Spity seul. Le tableau sépare donc les responsabilités du projet individuel et une extension pédagogique de recette. Pour cette séance fictive, un testeur réalise les contrôles et Dorian reste responsable du livrable. Un représentant de club fictif décide de l’acceptation dans la mise en situation. Les missions sont affectées selon les compétences nécessaires, pas selon une situation de handicap. Le persona testeur est malentendant : les consignes écrites, les sous-titres vérifiés et les échanges asynchrones rendent sa mission accessible. Les ressources matérielles et logicielles sont celles du projet. Le budget de référence reste l’estimation B1, distincte des dépenses réelles non fournies.",
+    "source": "A02 ; données B1 ; séance pédagogique dans mise-en-situation.json.",
+    "nature": "Mise en situation pédagogique explicitement simulée",
+    "dark": false,
+    "action": "",
     "demo": false,
-    "contentNumber": 5,
+    "number": 6,
     "startMinute": 4.5,
-    "endMinute": 6,
-    "spokenWords": 204,
-    "notes": "REPÈRE : 04:30 à 06:00. Durée prévue : 01:30.\n\nTEXTE ORAL\nCe planning est un exercice fictif de préparation de démonstration sur quinze jours ouvrés. Le développement réel de Spity a duré un an. L'étude cadre le besoin. La mesure transforme ce besoin en critères observables, par exemple une seule inscription acceptée sur la dernière place. La conception fixe les responsabilités et les moyens. La réalisation fournit les parcours, la recette mesure leur conformité et la restitution prépare la décision du client.\n\nLe diagramme à barres rend les chevauchements lisibles. Il complète le tableau Kanban et les réunions sans imposer que toutes les activités attendent la fin de la précédente. QA peut préparer et tester les fonctions déjà disponibles. La clôture de la recette dépend toutefois de la stabilisation des événements et des corrections. La démonstration reste prévue à J15, après la recette J14.\n\nJe conserve les dates initiales dans le classeur pour mesurer les dérives. À J10, les événements sont prévus à J12 au lieu de J11 et la recette à J14 au lieu de J13. Chaque glissement vaut un jour. Ce décalage de date est distinct de l'augmentation de charge. A01 conserve les dix tâches et les trente activités estimées sont détaillées dans A09.\n\nGESTE OU MANIPULATION\nLire la phase Mesure, les chevauchements puis les dates initiales et revues.\n\nTRANSITION\nLa répartition des missions permet de tenir ces engagements.\n\nSOURCE ET NATURE\nC.3.1, planning fictif du lot à J10. A01, A03, A09 et Planning. Étude T01, mesure T02, conception T03, réalisation T04-T06, recette T07/T10, restitution T09. A05 : planning J3, reviews J10/J15 et rétrospective J15. Graphique des intervalles de phases à J10, entre les jours relatifs indiqués. Les jalons complets restent dans A01."
+    "endMinute": 6.0,
+    "notes": "REPÈRE : 04:30–06:00\nNATURE : Mise en situation pédagogique explicitement simulée\n\nTEXTE ORAL\nDans la réalité, j’ai réalisé Spity seul. Le tableau sépare donc les responsabilités du projet individuel et une extension pédagogique de recette. Pour cette séance fictive, un testeur réalise les contrôles et Dorian reste responsable du livrable. Un représentant de club fictif décide de l’acceptation dans la mise en situation. Les missions sont affectées selon les compétences nécessaires, pas selon une situation de handicap. Le persona testeur est malentendant : les consignes écrites, les sous-titres vérifiés et les échanges asynchrones rendent sa mission accessible. Les ressources matérielles et logicielles sont celles du projet. Le budget de référence reste l’estimation B1, distincte des dépenses réelles non fournies.\n\nÀ MONTRER\n\n\nSOURCE\nA02 ; données B1 ; séance pédagogique dans mise-en-situation.json."
   },
   {
     "number": 7,
-    "title": "Les missions et les aménagements",
+    "title": "Linear : un état daté du travail",
+    "section": "C3.2.1 / Mesurer l’avancement",
     "minutes": 1,
-    "nature": "C.3.1, équipe et situation fictives",
-    "layout": "table",
+    "layout": "linear",
+    "subtitle": "Observation du 14 septembre 2026 ; un ticket annulé exclu du dénominateur.",
     "content": {
-      "rows": [
-        [
-          "Rôle",
-          "Responsabilité",
-          "Capacité"
-        ],
-        [
-          "Chef de projet",
-          "Organiser et arbitrer",
-          "30 h"
-        ],
-        [
-          "Développeur",
-          "Réaliser et corriger",
-          "72 h"
-        ],
-        [
-          "Testeur UX",
-          "Recetter les parcours",
-          "30 h"
-        ],
-        [
-          "Client",
-          "Valider le périmètre",
-          "3 points"
-        ]
-      ],
-      "widths": [
-        350,
-        560,
-        242
-      ],
-      "takeaway": "Une seule autorité de décision par activité dans la matrice RACI"
+      "callout": "12 tickets terminés sur 24 : un décompte de statuts, pas 50 % du produit."
     },
-    "script": "Dans le scénario, le chef de projet organise, le développeur réalise et Camille prépare les tests. QA signifie assurance qualité ; son rôle consiste ici à vérifier les parcours et leurs critères. Camille est une testeuse malentendante fictive. Elle intervient sur T02 et T07, selon ses compétences, avec vingt-quatre heures prévues pour trente disponibles.\n\nLes consignes sont écrites, les réunions sous-titrées et les décisions accessibles après chaque échange. Une heure de préparation est déjà comprise dans le pilotage. Le tableau des responsabilités précise qui réalise et qui décide.\n\nNous utilisons un ordinateur, un navigateur et une base locale pour développer et tester. Linear suit les tâches, Git conserve les versions et les documents partagés gardent les décisions. Le budget présenté ensuite valorise les moyens du cas.",
-    "source": "A02 ; donnees/inclusion.json. Camille est un personnage fictif. C.3.1 : référentiel RNCP39583, p. 11-12. Capacités et charges du cas conservées. A02 : moyens matériels, logiciels et collaboration. Rôles CP/DEV/QA/CL du scénario.",
-    "action": "Présenter les trois rôles et identifier les missions T02/T07 de Camille. Distinguer sa capacité de sa charge prévue.",
-    "transition": "Je vérifie ensuite les écarts de charge avant d'engager le reste du lot.",
-    "demo": false,
-    "contentNumber": 6,
-    "startMinute": 6,
-    "endMinute": 7,
-    "spokenWords": 139,
-    "notes": "REPÈRE : 06:00 à 07:00. Durée prévue : 01:00.\n\nTEXTE ORAL\nDans le scénario, le chef de projet organise, le développeur réalise et Camille prépare les tests. QA signifie assurance qualité ; son rôle consiste ici à vérifier les parcours et leurs critères. Camille est une testeuse malentendante fictive. Elle intervient sur T02 et T07, selon ses compétences, avec vingt-quatre heures prévues pour trente disponibles.\n\nLes consignes sont écrites, les réunions sous-titrées et les décisions accessibles après chaque échange. Une heure de préparation est déjà comprise dans le pilotage. Le tableau des responsabilités précise qui réalise et qui décide.\n\nNous utilisons un ordinateur, un navigateur et une base locale pour développer et tester. Linear suit les tâches, Git conserve les versions et les documents partagés gardent les décisions. Le budget présenté ensuite valorise les moyens du cas.\n\nGESTE OU MANIPULATION\nPrésenter les trois rôles et identifier les missions T02/T07 de Camille. Distinguer sa capacité de sa charge prévue.\n\nTRANSITION\nJe vérifie ensuite les écarts de charge avant d'engager le reste du lot.\n\nSOURCE ET NATURE\nC.3.1, équipe et situation fictives. A02 ; donnees/inclusion.json. Camille est un personnage fictif. C.3.1 : référentiel RNCP39583, p. 11-12. Capacités et charges du cas conservées. A02 : moyens matériels, logiciels et collaboration. Rôles CP/DEV/QA/CL du scénario."
-  },
-  {
-    "number": 8,
-    "title": "Les causes des 5 heures supplémentaires",
-    "minutes": 1.5,
-    "nature": "C3.2.1, simulation pédagogique",
-    "layout": "numbers",
-    "content": {
-      "values": [
-        [
-          "112 h",
-          "Charge initiale"
-        ],
-        [
-          "77 h",
-          "Charge consommée"
-        ],
-        [
-          "40 h",
-          "Reste à faire"
-        ]
-      ],
-      "takeaway": "Prévision à terminaison : 117 h, soit 5 h de plus que prévu",
-      "detail": "5 tâches terminées sur 10. Les tâches ont des tailles différentes."
-    },
-    "script": "Les chiffres du lot reposent maintenant sur trente activités détaillées, regroupées dans dix tâches. Chaque ligne décrit un travail identifiable, son estimation initiale, son consommé simulé à J10 et son reste à faire. Les trente estimations initiales totalisent cent douze heures. Le consommé atteint soixante-dix-sept heures et le reste à faire quarante heures. La prévision totale devient donc cent dix-sept heures.\n\nLe graphique explique les cinq heures supplémentaires. La clarification des dépendances ajoute une heure de pilotage. Les contrôles d'accès ajoutent deux heures, la stabilisation des événements deux heures et la recette deux heures. En sens inverse, la réestimation des corrections retire deux heures. Cette économie reste une hypothèse à surveiller, elle ne justifie pas de réduire les critères de validation.\n\nJe conserve la référence initiale et les causes d'écart pour rendre la décision traçable. Les heures sont des données du scénario, pas des temps saisis dans Linear. Les soixante-dix-sept heures consommées ne donnent pas non plus un pourcentage de fonctionnalités terminées. Pour décider, je rapproche ce consommé des livrables vérifiés et des contrôles encore nécessaires. Les dates évoluent aussi : événements J11 à J12, recette J13 à J14. Dans les deux cas, le retard prévu vaut un jour.",
-    "source": "A09, section 4 et 5 ; donnees/pilotage.json, 30 estimateDetails ; classeur Estimations et Planning. Simulation pédagogique, sans relevés horaires réels.",
-    "action": "Lire chaque cause de variation puis montrer le total net de cinq heures.",
-    "transition": "Ces heures ont un effet différent sur le budget selon le rôle concerné.",
-    "demo": false,
-    "contentNumber": 7,
-    "startMinute": 7,
-    "endMinute": 8.5,
-    "spokenWords": 212,
-    "notes": "REPÈRE : 07:00 à 08:30. Durée prévue : 01:30.\n\nTEXTE ORAL\nLes chiffres du lot reposent maintenant sur trente activités détaillées, regroupées dans dix tâches. Chaque ligne décrit un travail identifiable, son estimation initiale, son consommé simulé à J10 et son reste à faire. Les trente estimations initiales totalisent cent douze heures. Le consommé atteint soixante-dix-sept heures et le reste à faire quarante heures. La prévision totale devient donc cent dix-sept heures.\n\nLe graphique explique les cinq heures supplémentaires. La clarification des dépendances ajoute une heure de pilotage. Les contrôles d'accès ajoutent deux heures, la stabilisation des événements deux heures et la recette deux heures. En sens inverse, la réestimation des corrections retire deux heures. Cette économie reste une hypothèse à surveiller, elle ne justifie pas de réduire les critères de validation.\n\nJe conserve la référence initiale et les causes d'écart pour rendre la décision traçable. Les heures sont des données du scénario, pas des temps saisis dans Linear. Les soixante-dix-sept heures consommées ne donnent pas non plus un pourcentage de fonctionnalités terminées. Pour décider, je rapproche ce consommé des livrables vérifiés et des contrôles encore nécessaires. Les dates évoluent aussi : événements J11 à J12, recette J13 à J14. Dans les deux cas, le retard prévu vaut un jour.\n\nGESTE OU MANIPULATION\nLire chaque cause de variation puis montrer le total net de cinq heures.\n\nTRANSITION\nCes heures ont un effet différent sur le budget selon le rôle concerné.\n\nSOURCE ET NATURE\nC3.2.1, simulation pédagogique. A09, section 4 et 5 ; donnees/pilotage.json, 30 estimateDetails ; classeur Estimations et Planning. Simulation pédagogique, sans relevés horaires réels."
-  },
-  {
-    "number": 9,
-    "title": "Le budget du lot de démonstration",
-    "minutes": 1.5,
-    "nature": "C3.2.1, montants fictifs en euros",
-    "layout": "table",
-    "content": {
-      "rows": [
-        [
-          "Repère",
-          "Montant",
-          "Lecture"
-        ],
-        [
-          "Budget initial hors réserve",
-          "4 270 €",
-          "Référence du lot"
-        ],
-        [
-          "Prévision à terminaison",
-          "4 465 €",
-          "Écart de +195 €"
-        ],
-        [
-          "Plafond avec réserve",
-          "4 697 €",
-          "Réserve initiale de 427 €"
-        ],
-        [
-          "Marge sous le plafond",
-          "232 €",
-          "Capacité financière restante"
-        ]
-      ],
-      "widths": [
-        480,
-        240,
-        432
-      ],
-      "takeaway": "Le dépassement reste visible même lorsque la réserve peut l’absorber"
-    },
-    "script": "Je conserve le budget présenté dans le diaporama du Bloc 1 : quarante-quatre mille deux cent cinquante euros. Il comprend quatre-vingt-deux jours-homme à quatre cent cinquante euros, soit trente-six mille neuf cents euros de développement, puis les postes de lancement détaillés en annexe.\n\nLe graphique suit un périmètre plus limité : notre cas de préparation de démonstration, valorisé en heures par rôle. La référence de ce lot est de quatre mille deux cent soixante-dix euros. À J10, sa prévision atteint quatre mille quatre cent soixante-cinq euros. L'écart de cent quatre-vingt-quinze euros représente environ quatre virgule six pour cent.\n\nLa réserve de quatre cent vingt-sept euros porte le plafond du lot à quatre mille six cent quatre-vingt-dix-sept euros. Il reste deux cent trente-deux euros de marge. Toute demande est examinée avec cette marge et la capacité des rôles.\n\nLe classeur détaille ces calculs. Les charges du cas sont simulées : elles ne prouvent pas une consommation du budget global. Je conserve les unités et les périmètres pour éviter d'additionner des montants qui recouvrent des travaux communs.",
-    "source": "Diaporama B1, p. 21-22 : 82 j-h, 450 EUR/j, total 44 250 EUR. A03, A09 et classeur : cas B3 distinct. reference-bloc-01.json et COHERENCE_INTER_BLOCS.md.",
-    "action": "Comparer les barres du budget initial, de la prévision et du plafond. Expliquer les 232 euros de marge.",
-    "transition": "La marge financière doit être lue avec la disponibilité de chaque rôle.",
-    "demo": false,
-    "contentNumber": 8,
-    "startMinute": 8.5,
-    "endMinute": 10,
-    "spokenWords": 187,
-    "notes": "REPÈRE : 08:30 à 10:00. Durée prévue : 01:30.\n\nTEXTE ORAL\nJe conserve le budget présenté dans le diaporama du Bloc 1 : quarante-quatre mille deux cent cinquante euros. Il comprend quatre-vingt-deux jours-homme à quatre cent cinquante euros, soit trente-six mille neuf cents euros de développement, puis les postes de lancement détaillés en annexe.\n\nLe graphique suit un périmètre plus limité : notre cas de préparation de démonstration, valorisé en heures par rôle. La référence de ce lot est de quatre mille deux cent soixante-dix euros. À J10, sa prévision atteint quatre mille quatre cent soixante-cinq euros. L'écart de cent quatre-vingt-quinze euros représente environ quatre virgule six pour cent.\n\nLa réserve de quatre cent vingt-sept euros porte le plafond du lot à quatre mille six cent quatre-vingt-dix-sept euros. Il reste deux cent trente-deux euros de marge. Toute demande est examinée avec cette marge et la capacité des rôles.\n\nLe classeur détaille ces calculs. Les charges du cas sont simulées : elles ne prouvent pas une consommation du budget global. Je conserve les unités et les périmètres pour éviter d'additionner des montants qui recouvrent des travaux communs.\n\nGESTE OU MANIPULATION\nComparer les barres du budget initial, de la prévision et du plafond. Expliquer les 232 euros de marge.\n\nTRANSITION\nLa marge financière doit être lue avec la disponibilité de chaque rôle.\n\nSOURCE ET NATURE\nC3.2.1, montants fictifs en euros. Diaporama B1, p. 21-22 : 82 j-h, 450 EUR/j, total 44 250 EUR. A03, A09 et classeur : cas B3 distinct. reference-bloc-01.json et COHERENCE_INTER_BLOCS.md."
-  },
-  {
-    "number": 10,
-    "title": "Le chef de projet approche sa limite",
-    "minutes": 1,
-    "nature": "C3.2.1, simulation pédagogique",
-    "layout": "table",
-    "content": {
-      "rows": [
-        [
-          "Rôle",
-          "Prévision",
-          "Capacité",
-          "Marge"
-        ],
-        [
-          "Chef de projet",
-          "29 h",
-          "30 h",
-          "1 h"
-        ],
-        [
-          "Développeur",
-          "64 h",
-          "72 h",
-          "8 h"
-        ],
-        [
-          "Testeur UX",
-          "24 h",
-          "30 h",
-          "6 h"
-        ]
-      ],
-      "widths": [
-        480,
-        224,
-        224,
-        224
-      ],
-      "takeaway": "La capacité disponible dépend des compétences et des responsabilités"
-    },
-    "script": "La charge totale reste inférieure à la capacité globale, mais cette somme peut masquer une tension sur un rôle. Le chef de projet est à vingt-neuf heures pour trente disponibles. Il ne conserve qu'une heure de marge. Le développeur dispose de huit heures et QA de six heures.\n\nCes heures ne sont pas librement interchangeables. Transférer une tâche suppose de vérifier la compétence de la personne et l'effet sur la qualité. Le développeur doit pouvoir corriger son travail, tandis que QA conserve un regard sur sa validation. Je protège donc le temps d'arbitrage du chef de projet et je limite les demandes supplémentaires. Le suivi par rôle rend cette décision plus précise qu'un simple total d'heures disponibles. CP dépasse l'alerte de 90 %. QA était déjà chargé de la recette.",
-    "source": "A03. Classeur Pilotage, charges à terminaison.",
+    "script": "Le relevé du 14 septembre contient 25 tickets, dont un annulé. Sur les 24 autres, 12 sont terminés, un est en cours, quatre sont à faire et sept restent dans le backlog. Le ratio de tickets terminés vaut donc 50 %. Sa lecture demande deux précautions. D’abord, les tickets n’ont pas tous la même taille. Ensuite, certains statuts peuvent être en retard sur le logiciel : le relevé contient par exemple un sujet d’authentification à faire alors que des parcours de connexion existent dans le dépôt. Le tableau permet de repérer un écart à vérifier ; il ne permet pas de conclure que toute la fonction est terminée. Je conserve la date du relevé et je ne présente pas ces nombres comme un état en direct du 16 septembre.",
+    "source": "donnees/linear-2026-09-14.json ; A09.",
     "action": "",
-    "transition": "Je relie ensuite ces points de vigilance à un registre des risques.",
+    "nature": "Observation historique non pondérée",
+    "dark": false,
     "demo": false,
-    "contentNumber": 9,
-    "startMinute": 10,
-    "endMinute": 11,
-    "spokenWords": 142,
-    "notes": "REPÈRE : 10:00 à 11:00. Durée prévue : 01:00.\n\nTEXTE ORAL\nLa charge totale reste inférieure à la capacité globale, mais cette somme peut masquer une tension sur un rôle. Le chef de projet est à vingt-neuf heures pour trente disponibles. Il ne conserve qu'une heure de marge. Le développeur dispose de huit heures et QA de six heures.\n\nCes heures ne sont pas librement interchangeables. Transférer une tâche suppose de vérifier la compétence de la personne et l'effet sur la qualité. Le développeur doit pouvoir corriger son travail, tandis que QA conserve un regard sur sa validation. Je protège donc le temps d'arbitrage du chef de projet et je limite les demandes supplémentaires. Le suivi par rôle rend cette décision plus précise qu'un simple total d'heures disponibles. CP dépasse l'alerte de 90 %. QA était déjà chargé de la recette.\n\nTRANSITION\nJe relie ensuite ces points de vigilance à un registre des risques.\n\nSOURCE ET NATURE\nC3.2.1, simulation pédagogique. A03. Classeur Pilotage, charges à terminaison."
+    "startMinute": 6.0,
+    "endMinute": 7.0,
+    "notes": "REPÈRE : 06:00–07:00\nNATURE : Observation historique non pondérée\n\nTEXTE ORAL\nLe relevé du 14 septembre contient 25 tickets, dont un annulé. Sur les 24 autres, 12 sont terminés, un est en cours, quatre sont à faire et sept restent dans le backlog. Le ratio de tickets terminés vaut donc 50 %. Sa lecture demande deux précautions. D’abord, les tickets n’ont pas tous la même taille. Ensuite, certains statuts peuvent être en retard sur le logiciel : le relevé contient par exemple un sujet d’authentification à faire alors que des parcours de connexion existent dans le dépôt. Le tableau permet de repérer un écart à vérifier ; il ne permet pas de conclure que toute la fonction est terminée. Je conserve la date du relevé et je ne présente pas ces nombres comme un état en direct du 16 septembre.\n\nÀ MONTRER\n\n\nSOURCE\ndonnees/linear-2026-09-14.json ; A09."
   },
   {
-    "number": 11,
-    "title": "Des risques qui déclenchent une action",
-    "minutes": 1,
-    "nature": "C3.2.1, extrait du registre fictif",
-    "layout": "table",
-    "content": {
-      "rows": [
-        [
-          "Risque",
-          "Déclencheur",
-          "Réponse"
-        ],
-        [
-          "Démonstration indisponible",
-          "Sonde de santé en échec",
-          "Vérifier l’environnement et préparer le secours"
-        ],
-        [
-          "Surcharge du chef de projet",
-          "Charge au-delà de 90 %",
-          "Limiter les demandes et répartir la préparation"
-        ],
-        [
-          "Demande nouvelle",
-          "Capacité ou budget dépassé",
-          "Arbitrer avant engagement"
-        ]
-      ],
-      "widths": [
-        330,
-        350,
-        472
-      ]
-    },
-    "script": "Le registre complet contient cinq risques. Je présente ici ceux qui influencent directement la restitution. Le premier concerne la disponibilité de la démonstration. La réponse consiste à vérifier l'environnement avant l'oral et à conserver des captures datées.\n\nLe deuxième concerne la surcharge du chef de projet. Le seuil de quatre-vingt-dix pour cent déclenche une revue de la charge. Le troisième concerne une demande nouvelle qui dépasse la capacité ou le budget. Elle impose un arbitrage avant engagement.\n\nChaque risque possède un responsable, un déclencheur et une réponse. Le score de probabilité et d'impact aide à prioriser, mais la décision doit aussi examiner la conséquence concrète pour le projet. Une couleur seule ne dit pas ce que l'équipe doit faire.",
-    "source": "A03, registre des cinq risques.",
-    "action": "",
-    "transition": "Je vais illustrer cette logique de décision avec un changement réel du projet.",
-    "demo": false,
-    "contentNumber": 10,
-    "startMinute": 11,
-    "endMinute": 12,
-    "spokenWords": 132,
-    "notes": "REPÈRE : 11:00 à 12:00. Durée prévue : 01:00.\n\nTEXTE ORAL\nLe registre complet contient cinq risques. Je présente ici ceux qui influencent directement la restitution. Le premier concerne la disponibilité de la démonstration. La réponse consiste à vérifier l'environnement avant l'oral et à conserver des captures datées.\n\nLe deuxième concerne la surcharge du chef de projet. Le seuil de quatre-vingt-dix pour cent déclenche une revue de la charge. Le troisième concerne une demande nouvelle qui dépasse la capacité ou le budget. Elle impose un arbitrage avant engagement.\n\nChaque risque possède un responsable, un déclencheur et une réponse. Le score de probabilité et d'impact aide à prioriser, mais la décision doit aussi examiner la conséquence concrète pour le projet. Une couleur seule ne dit pas ce que l'équipe doit faire.\n\nTRANSITION\nJe vais illustrer cette logique de décision avec un changement réel du projet.\n\nSOURCE ET NATURE\nC3.2.1, extrait du registre fictif. A03, registre des cinq risques."
-  },
-  {
-    "number": 12,
-    "title": "Le choix du build standalone",
+    "title": "Un tableau de bord pour décider",
+    "section": "C3.2.1 / Coûts, délais et ressources",
     "minutes": 1.5,
-    "nature": "C3.2.2, fait Git et analyse rétrospective",
-    "layout": "table",
-    "content": {
-      "rows": [
-        [
-          "Option",
-          "Intérêt",
-          "Limite"
-        ],
-        [
-          "Ajouter des retries",
-          "Absorber certains délais",
-          "Risque de masquer la cause"
-        ],
-        [
-          "Préchauffer le serveur dev",
-          "Limiter les compilations",
-          "Dépend des routes préparées"
-        ],
-        [
-          "Tester le standalone",
-          "Se rapprocher du livrable",
-          "Construction préalable"
-        ]
-      ],
-      "widths": [
-        340,
-        430,
-        382
-      ],
-      "takeaway": "Commit 689e59d du 20 juillet 2026 : recette CI sur le build standalone"
-    },
-    "script": "Cet exemple part d'un problème technique documenté dans le Bloc 2. Les compilations du serveur de développement perturbaient la recette navigateur. Il fallait rendre les tests plus proches du logiciel livré.\n\nJe compare trois options. Augmenter les délais ou ajouter des tentatives est rapide, mais peut masquer la cause. Préchauffer les routes réduit les compilations pendant les tests, à condition d'avoir préparé toutes les routes utiles. Tester le serveur standalone issu du build demande une construction préalable, mais rapproche la recette du livrable.\n\nLe commit visible dans Git retient cette troisième option et ajuste aussi localhost pour les sessions. Le dossier historique rapporte une exécution réussie après consolidation. La comparaison des options est mon analyse rétrospective ; elle n'est pas un compte rendu rédigé le jour de la décision. Les résultats gardent leur version et leur date.\n\nCe cas montre comment je justifie un choix : je pars du problème, j'examine les conséquences des options et je relie la solution au résultat attendu.",
-    "source": "A04. git show 689e59d. Cahier de recettes Bloc 2, consolidation standalone. B2 : 19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES, section 8. L’arbitrage B3 reprend le même événement et en explicite le raisonnement de pilotage.",
-    "action": "Comparer oralement les trois options. Mettre en avant le standalone et le commit qui atteste le choix.",
-    "transition": "Un arbitrage peut aussi porter sur le périmètre plutôt que sur un choix technique.",
-    "demo": false,
-    "contentNumber": 11,
-    "startMinute": 12,
-    "endMinute": 13.5,
-    "spokenWords": 177,
-    "notes": "REPÈRE : 12:00 à 13:30. Durée prévue : 01:30.\n\nTEXTE ORAL\nCet exemple part d'un problème technique documenté dans le Bloc 2. Les compilations du serveur de développement perturbaient la recette navigateur. Il fallait rendre les tests plus proches du logiciel livré.\n\nJe compare trois options. Augmenter les délais ou ajouter des tentatives est rapide, mais peut masquer la cause. Préchauffer les routes réduit les compilations pendant les tests, à condition d'avoir préparé toutes les routes utiles. Tester le serveur standalone issu du build demande une construction préalable, mais rapproche la recette du livrable.\n\nLe commit visible dans Git retient cette troisième option et ajuste aussi localhost pour les sessions. Le dossier historique rapporte une exécution réussie après consolidation. La comparaison des options est mon analyse rétrospective ; elle n'est pas un compte rendu rédigé le jour de la décision. Les résultats gardent leur version et leur date.\n\nCe cas montre comment je justifie un choix : je pars du problème, j'examine les conséquences des options et je relie la solution au résultat attendu.\n\nGESTE OU MANIPULATION\nComparer oralement les trois options. Mettre en avant le standalone et le commit qui atteste le choix.\n\nTRANSITION\nUn arbitrage peut aussi porter sur le périmètre plutôt que sur un choix technique.\n\nSOURCE ET NATURE\nC3.2.2, fait Git et analyse rétrospective. A04. git show 689e59d. Cahier de recettes Bloc 2, consolidation standalone. B2 : 19_RETOUR_EXPERIENCE_ET_CHOIX_TECHNIQUES, section 8. L’arbitrage B3 reprend le même événement et en explicite le raisonnement de pilotage."
-  },
-  {
-    "number": 13,
-    "title": "Une demande qui dépasse le lot",
-    "minutes": 1.5,
-    "nature": "C3.2.2, demande fictive à J10",
-    "layout": "table",
-    "content": {
-      "rows": [
-        [
-          "Effet de la demande",
-          "Avant",
-          "Après ajout"
-        ],
-        [
-          "Coût à terminaison",
-          "4 465 €",
-          "5 005 €"
-        ],
-        [
-          "Charge du développeur",
-          "64 h",
-          "76 h"
-        ],
-        [
-          "Capacité du développeur",
-          "72 h",
-          "72 h"
-        ]
-      ],
-      "widths": [
-        530,
-        311,
-        311
-      ],
-      "takeaway": "Décision du cas : reporter le lot et conserver les critères de recette",
-      "detail": "12 h DEV + 4 h QA = 540 €. Le plafond serait dépassé de 308 €."
-    },
-    "script": "À J10, le client fictif demande un lot supplémentaire de contributions aux topos. Il s'agit d'une demande pédagogique, distincte de l'état actuel du code. Son estimation est de douze heures de développement et de quatre heures de recette, soit cinq cent quarante euros.\n\nL'ajout porterait la prévision à cinq mille cinq euros, au-dessus du plafond de trois cent huit euros. Il porterait également la charge du développeur à soixante-seize heures pour soixante-douze disponibles. La difficulté concerne donc à la fois le budget et la capacité.\n\nJe compare l'ajout, le retrait d'une partie de la recette et le report. Réduire la recette ferait perdre des contrôles sur le périmètre déjà engagé. Le scénario retient le report du lot supplémentaire. Le client fictif valide cette décision dans le compte rendu J10. Les critères restent dans le backlog pour une estimation ultérieure. Cette réponse explique ce qui peut être livré, à quel moment, et pourquoi la demande ne peut pas simplement être ajoutée sans conséquence.",
-    "source": "A04 et CR02 dans A07. Simulation explicitement distincte du code actuel. B1 : diaporama p. 20-21, topos Should dans la vision cible. Le report concerne ce lot pédagogique ; il ne supprime pas la fonctionnalité du projet. Linear SPI-22 est observé en Backlog au 14 septembre. Le chiffrage additionnel 12 h DEV et 4 h QA est une hypothèse du lot, pas une estimation extraite de ce ticket.",
-    "action": "Montrer le rattachement de la demande au contexte SPI-22, puis comparer les coûts et la capacité DEV.",
-    "transition": "Pour appliquer cette décision, je dois aussi la faire comprendre à l’équipe.",
-    "demo": false,
-    "contentNumber": 12,
-    "startMinute": 13.5,
-    "endMinute": 15,
-    "spokenWords": 174,
-    "notes": "REPÈRE : 13:30 à 15:00. Durée prévue : 01:30.\n\nTEXTE ORAL\nÀ J10, le client fictif demande un lot supplémentaire de contributions aux topos. Il s'agit d'une demande pédagogique, distincte de l'état actuel du code. Son estimation est de douze heures de développement et de quatre heures de recette, soit cinq cent quarante euros.\n\nL'ajout porterait la prévision à cinq mille cinq euros, au-dessus du plafond de trois cent huit euros. Il porterait également la charge du développeur à soixante-seize heures pour soixante-douze disponibles. La difficulté concerne donc à la fois le budget et la capacité.\n\nJe compare l'ajout, le retrait d'une partie de la recette et le report. Réduire la recette ferait perdre des contrôles sur le périmètre déjà engagé. Le scénario retient le report du lot supplémentaire. Le client fictif valide cette décision dans le compte rendu J10. Les critères restent dans le backlog pour une estimation ultérieure. Cette réponse explique ce qui peut être livré, à quel moment, et pourquoi la demande ne peut pas simplement être ajoutée sans conséquence.\n\nGESTE OU MANIPULATION\nMontrer le rattachement de la demande au contexte SPI-22, puis comparer les coûts et la capacité DEV.\n\nTRANSITION\nPour appliquer cette décision, je dois aussi la faire comprendre à l’équipe.\n\nSOURCE ET NATURE\nC3.2.2, demande fictive à J10. A04 et CR02 dans A07. Simulation explicitement distincte du code actuel. B1 : diaporama p. 20-21, topos Should dans la vision cible. Le report concerne ce lot pédagogique ; il ne supprime pas la fonctionnalité du projet. Linear SPI-22 est observé en Backlog au 14 septembre. Le chiffrage additionnel 12 h DEV et 4 h QA est une hypothèse du lot, pas une estimation extraite de ce ticket."
-  },
-  {
-    "number": 14,
-    "title": "Des styles adaptés à la situation",
-    "minutes": 1.5,
-    "nature": "C3.3.1, situation managériale fictive",
-    "layout": "columns",
-    "content": {
-      "items": [
-        [
-          "Situation",
-          "DEV souhaite ajouter une fonction.\nQA attend un parcours stable pour la recette."
-        ],
-        [
-          "Conduite retenue",
-          "Faire expliciter les impacts.\nDécider sur la charge et les critères.\nConsigner la décision et suivre son effet."
-        ]
-      ]
-    },
-    "script": "Le développeur souhaite ajouter une fonction alors que Camille attend une version stable. Leurs besoins sont différents : faire évoluer le produit et vérifier le périmètre engagé. Je demande les faits, les impacts et l'aide nécessaire avant de choisir une réponse.\n\nLa posture participative sert à comparer leurs propositions. La posture persuasive permet d'expliquer au client les conséquences du report. Je reste directif sur les critères critiques de livraison : on ne valide pas une capacité non vérifiée. La délégation porte sur un résultat et un contrôle. DEV choisit l'implémentation ; Camille choisit les cas de recette dans les critères convenus.\n\nUne réponse seulement directive ferait taire le désaccord sans traiter sa cause. Une discussion sans échéance consommerait la faible marge du chef de projet. Je retiens quinze minutes, avec les options préparées par écrit, une autorité de décision identifiée et une prochaine action datée. La rétrospective J15 complète cette analyse : nous séparons le daily des diagnostics techniques. CP vérifie cette amélioration aux trois premiers points du prochain lot. Cette décision appartient au scénario fictif.",
-    "source": "A05, situation de désaccord, styles et analyse critique. Illustration fictive conservée. A05, RT01 : amélioration du daily lors de la rétrospective J15. Illustration fictive générée avec ImageGen, visuels/equipe-illustration.png. Aucune personne réelle représentée.",
-    "action": "Associer chaque style à une action, puis expliquer la limite d’une réponse seulement directive.",
-    "transition": "Ces échanges doivent être accessibles à toute l’équipe.",
-    "demo": false,
-    "contentNumber": 13,
-    "startMinute": 15,
-    "endMinute": 16.5,
-    "spokenWords": 184,
-    "notes": "REPÈRE : 15:00 à 16:30. Durée prévue : 01:30.\n\nTEXTE ORAL\nLe développeur souhaite ajouter une fonction alors que Camille attend une version stable. Leurs besoins sont différents : faire évoluer le produit et vérifier le périmètre engagé. Je demande les faits, les impacts et l'aide nécessaire avant de choisir une réponse.\n\nLa posture participative sert à comparer leurs propositions. La posture persuasive permet d'expliquer au client les conséquences du report. Je reste directif sur les critères critiques de livraison : on ne valide pas une capacité non vérifiée. La délégation porte sur un résultat et un contrôle. DEV choisit l'implémentation ; Camille choisit les cas de recette dans les critères convenus.\n\nUne réponse seulement directive ferait taire le désaccord sans traiter sa cause. Une discussion sans échéance consommerait la faible marge du chef de projet. Je retiens quinze minutes, avec les options préparées par écrit, une autorité de décision identifiée et une prochaine action datée. La rétrospective J15 complète cette analyse : nous séparons le daily des diagnostics techniques. CP vérifie cette amélioration aux trois premiers points du prochain lot. Cette décision appartient au scénario fictif.\n\nGESTE OU MANIPULATION\nAssocier chaque style à une action, puis expliquer la limite d’une réponse seulement directive.\n\nTRANSITION\nCes échanges doivent être accessibles à toute l’équipe.\n\nSOURCE ET NATURE\nC3.3.1, situation managériale fictive. A05, situation de désaccord, styles et analyse critique. Illustration fictive conservée. A05, RT01 : amélioration du daily lors de la rétrospective J15. Illustration fictive générée avec ImageGen, visuels/equipe-illustration.png. Aucune personne réelle représentée."
-  },
-  {
-    "number": 15,
-    "title": "Camille et une équipe à distance",
-    "minutes": 1.5,
-    "nature": "C3.3.1, handicap et contexte international simulés",
-    "layout": "table",
-    "content": {
-      "rows": [
-        [
-          "Situation",
-          "Aménagement retenu"
-        ],
-        [
-          "Réunions",
-          "Sous-titres testés, une personne parle à la fois."
-        ],
-        [
-          "Décisions",
-          "Synthèse écrite avec responsable et échéance."
-        ],
-        [
-          "Formation",
-          "Consignes écrites, démonstration sous-titrée."
-        ]
-      ],
-      "widths": [
-        270,
-        882
-      ]
-    },
-    "script": "Camille est notre testeuse QA malentendante fictive. Nous convenons de supports écrits, de sous-titres testés et d'une seule personne qui parle à la fois. La synthèse conserve l'action, le responsable et l'échéance. La formation utilise des consignes écrites et une démonstration sous-titrée.\n\nDans le même scénario, le développeur travaille depuis Montréal, tandis que CP et Camille sont à Paris. L'invitation indique les deux fuseaux et propose un créneau commun. Comme la maîtrise du français peut varier, j'utilise un résumé simple et un glossaire français-anglais. DEV peut transmettre son avis par écrit avant la décision. Je ne déduis pas un accord du silence ou d'une différence de style d'expression.\n\nLe contrôle porte sur l'accès à l'information : reformuler une consigne à J3, retrouver une décision à J10, réaliser un cas sans aide à J14. Les résultats restent à constater. Si les sous-titres ou une formulation ne suffisent pas, je reprends par écrit et ajuste les modalités avec la personne. Le compte rendu partagé devient la référence commune.",
-    "source": "A02/A05/A06 ; inclusion.json et consolidation.json. Camille et le contexte Paris/Montréal sont fictifs ; aucune nationalité ou situation réelle inférée.",
-    "action": "Présenter les adaptations de Camille puis le cas Paris/Montréal et le contrôle commun.",
-    "transition": "Je compare ensuite les compétences disponibles aux besoins du projet.",
-    "demo": false,
-    "contentNumber": 14,
-    "startMinute": 16.5,
-    "endMinute": 18,
-    "spokenWords": 176,
-    "notes": "REPÈRE : 16:30 à 18:00. Durée prévue : 01:30.\n\nTEXTE ORAL\nCamille est notre testeuse QA malentendante fictive. Nous convenons de supports écrits, de sous-titres testés et d'une seule personne qui parle à la fois. La synthèse conserve l'action, le responsable et l'échéance. La formation utilise des consignes écrites et une démonstration sous-titrée.\n\nDans le même scénario, le développeur travaille depuis Montréal, tandis que CP et Camille sont à Paris. L'invitation indique les deux fuseaux et propose un créneau commun. Comme la maîtrise du français peut varier, j'utilise un résumé simple et un glossaire français-anglais. DEV peut transmettre son avis par écrit avant la décision. Je ne déduis pas un accord du silence ou d'une différence de style d'expression.\n\nLe contrôle porte sur l'accès à l'information : reformuler une consigne à J3, retrouver une décision à J10, réaliser un cas sans aide à J14. Les résultats restent à constater. Si les sous-titres ou une formulation ne suffisent pas, je reprends par écrit et ajuste les modalités avec la personne. Le compte rendu partagé devient la référence commune.\n\nGESTE OU MANIPULATION\nPrésenter les adaptations de Camille puis le cas Paris/Montréal et le contrôle commun.\n\nTRANSITION\nJe compare ensuite les compétences disponibles aux besoins du projet.\n\nSOURCE ET NATURE\nC3.3.1, handicap et contexte international simulés. A02/A05/A06 ; inclusion.json et consolidation.json. Camille et le contexte Paris/Montréal sont fictifs ; aucune nationalité ou situation réelle inférée."
-  },
-  {
-    "number": 16,
-    "title": "La grille des compétences du lot",
-    "minutes": 1,
-    "nature": "C3.3.2, niveaux hypothétiques du cas",
-    "layout": "table",
-    "content": {
-      "rows": [
-        [
-          "Rôle",
-          "Besoin du projet",
-          "Niveau du cas",
-          "Cible"
-        ],
-        [
-          "CP",
-          "Suivi des écarts",
-          "1",
-          "2"
-        ],
-        [
-          "DEV",
-          "Transactions concurrentes",
-          "1",
-          "2"
-        ],
-        [
-          "QA",
-          "Recette navigateur et clavier",
-          "1",
-          "2"
-        ]
-      ],
-      "widths": [
-        140,
-        700,
-        172,
-        140
-      ],
-      "takeaway": "Échelle : 0 non abordé, 1 accompagné, 2 autonome, 3 capable d’accompagner"
-    },
-    "script": "Cette grille compare une compétence précise à un niveau attendu. Zéro signifie non abordé, un réalisé avec accompagnement, deux autonome sur un cas courant et trois capable de traiter les cas complexes. Les niveaux sont ceux de l'exercice fictif, pas des évaluations réelles des personnes.\n\nLe chef de projet progresse sur le suivi des écarts. DEV doit sécuriser les inscriptions concurrentes. Camille doit rendre la recette navigateur et le contrôle clavier reproductibles. L'animation et le développement typé sont maintenus au niveau deux dans le cas.\n\nJe commente l'écart avec un exemple observable : expliquer pourquoi une seule demande obtient la dernière place. Une note globale par personne masquerait ce besoin. L'objectif reste la compétence utile au projet, indépendamment de la situation de handicap.",
-    "source": "A06 : six compétences et échelle 0-3. Besoins et niveaux simulés.",
-    "action": "Commenter une ligne complète : rôle, compétence, niveau actuel et cible.",
-    "transition": "Chaque écart conduit à une action de formation ciblée.",
-    "demo": false,
-    "contentNumber": 15,
-    "startMinute": 18,
-    "endMinute": 19,
-    "spokenWords": 132,
-    "notes": "REPÈRE : 18:00 à 19:00. Durée prévue : 01:00.\n\nTEXTE ORAL\nCette grille compare une compétence précise à un niveau attendu. Zéro signifie non abordé, un réalisé avec accompagnement, deux autonome sur un cas courant et trois capable de traiter les cas complexes. Les niveaux sont ceux de l'exercice fictif, pas des évaluations réelles des personnes.\n\nLe chef de projet progresse sur le suivi des écarts. DEV doit sécuriser les inscriptions concurrentes. Camille doit rendre la recette navigateur et le contrôle clavier reproductibles. L'animation et le développement typé sont maintenus au niveau deux dans le cas.\n\nJe commente l'écart avec un exemple observable : expliquer pourquoi une seule demande obtient la dernière place. Une note globale par personne masquerait ce besoin. L'objectif reste la compétence utile au projet, indépendamment de la situation de handicap.\n\nGESTE OU MANIPULATION\nCommenter une ligne complète : rôle, compétence, niveau actuel et cible.\n\nTRANSITION\nChaque écart conduit à une action de formation ciblée.\n\nSOURCE ET NATURE\nC3.3.2, niveaux hypothétiques du cas. A06 : six compétences et échelle 0-3. Besoins et niveaux simulés."
-  },
-  {
-    "number": 17,
-    "title": "Un plan de formation pour chaque rôle",
-    "minutes": 1.5,
-    "nature": "C3.3.2, formations et besoin RH simulés",
-    "layout": "table",
-    "content": {
-      "rows": [
-        [
-          "Public",
-          "Charge",
-          "Exercice de validation"
-        ],
-        [
-          "Chef de projet",
-          "1 h",
-          "Modifier le reste à faire et expliquer l’écart"
-        ],
-        [
-          "Développeur",
-          "2 h",
-          "Expliquer la protection de la dernière place"
-        ],
-        [
-          "QA",
-          "3 h",
-          "Rejouer un scénario et contrôler le clavier"
-        ]
-      ],
-      "widths": [
-        330,
-        150,
-        672
-      ],
-      "takeaway": "6 h incluses dans les tâches. 60 € de ressources complémentaires fictives."
-    },
-    "script": "Les six heures de formation sont déjà comprises dans les tâches. À J3, le chef de projet consacre une heure au tableau de bord et doit expliquer un écart recalculé. DEV dispose de deux heures pendant T06, entre J9 et J12, pour pratiquer les inscriptions concurrentes. Camille dispose de trois heures dans T07, entre J10 et J14 : deux pour la recette navigateur et une pour le clavier.\n\nLes ateliers commencent par une pratique accompagnée, puis un cas autonome. Camille reçoit des consignes écrites et une démonstration sous-titrée. Si le support est inaccessible, on le corrige ; si la difficulté reste technique, on ajuste l'accompagnement. Soixante euros de ressources sont prévus dans le budget fictif.\n\nÀ J12, si une compétence critique reste indisponible, CP prépare une demande de renfort aux RH. La fiche précise mission, délai, exercice de sélection et coût maximal. L'annexe présente une variante chiffrée qui doit être arbitrée avant engagement. Elle n'est pas activée dans le budget de base et aucune demande réelle n'est envoyée.",
-    "source": "A06 et consolidation.json. Formation CP 1 h/T03, DEV 2 h/T06, QA 3 h/T07. Variante RH séparée, annexe 25.",
-    "action": "Lire les trois actions et leurs critères de réussite, puis indiquer le déclencheur RH.",
-    "transition": "Le client reçoit ensuite un compte rendu qui permet de décider.",
-    "demo": false,
-    "contentNumber": 16,
-    "startMinute": 19,
-    "endMinute": 20.5,
-    "spokenWords": 179,
-    "notes": "REPÈRE : 19:00 à 20:30. Durée prévue : 01:30.\n\nTEXTE ORAL\nLes six heures de formation sont déjà comprises dans les tâches. À J3, le chef de projet consacre une heure au tableau de bord et doit expliquer un écart recalculé. DEV dispose de deux heures pendant T06, entre J9 et J12, pour pratiquer les inscriptions concurrentes. Camille dispose de trois heures dans T07, entre J10 et J14 : deux pour la recette navigateur et une pour le clavier.\n\nLes ateliers commencent par une pratique accompagnée, puis un cas autonome. Camille reçoit des consignes écrites et une démonstration sous-titrée. Si le support est inaccessible, on le corrige ; si la difficulté reste technique, on ajuste l'accompagnement. Soixante euros de ressources sont prévus dans le budget fictif.\n\nÀ J12, si une compétence critique reste indisponible, CP prépare une demande de renfort aux RH. La fiche précise mission, délai, exercice de sélection et coût maximal. L'annexe présente une variante chiffrée qui doit être arbitrée avant engagement. Elle n'est pas activée dans le budget de base et aucune demande réelle n'est envoyée.\n\nGESTE OU MANIPULATION\nLire les trois actions et leurs critères de réussite, puis indiquer le déclencheur RH.\n\nTRANSITION\nLe client reçoit ensuite un compte rendu qui permet de décider.\n\nSOURCE ET NATURE\nC3.3.2, formations et besoin RH simulés. A06 et consolidation.json. Formation CP 1 h/T03, DEV 2 h/T06, QA 3 h/T07. Variante RH séparée, annexe 25."
-  },
-  {
-    "number": 18,
-    "title": "Review J10 : une décision dans CR02",
-    "minutes": 1.5,
-    "nature": "C3.4.1, comptes rendus simulés",
-    "layout": "table",
-    "content": {
-      "rows": [
-        [
-          "Point",
-          "Décision attendue",
-          "Trace"
-        ],
-        [
-          "J3",
-          "Périmètre et critères",
-          "CR01"
-        ],
-        [
-          "J10",
-          "Écarts et report de la demande",
-          "CR02"
-        ],
-        [
-          "J15",
-          "Acceptation et réserves",
-          "CR03"
-        ]
-      ],
-      "widths": [
-        170,
-        820,
-        162
-      ],
-      "takeaway": "Chaque action possède un responsable, une échéance et un prochain point"
-    },
-    "script": "La review est un échange sur le produit avec Claire Martin, pour le Collectif Altitude Grimpe. Dans le scénario, nous regardons les parcours disponibles et leurs critères, puis nous adaptons les priorités. Le planning J3 fixe le périmètre. Les reviews J10 et J15 organisent les retours intermédiaires puis la validation du parcours démontré.\n\nÀ J10, le matching est disponible dans le cas, mais les événements restent à stabiliser. Leur fin glisse de J11 à J12. La prévision atteint quatre mille quatre cent soixante-cinq euros, avec deux cent trente-deux euros sous le plafond. La nouvelle demande de contributions aux topos dépasserait le budget et la capacité DEV. Le client fictif retient son report, en conservant les critères de recette.\n\nCR02 garde la trace de cette décision. DEV termine T06 à J12, Camille clôt la recette après corrections à J14 et CP prépare la validation J15. Le document partagé relie l'écart, le choix et la prochaine action. La rétrospective examine ensuite notre façon de travailler, tandis que la review porte sur le produit. Les comptes rendus décrivent un exercice pédagogique, sans accord client réel attesté.",
-    "source": "A05, protocole des reviews ; A07, CR02 ; rituels.json. Compte rendu et accord client fictifs.",
-    "action": "Montrer le résultat présenté, la décision issue du retour client et les actions datées.",
-    "transition": "Les retours du client sont aussi suivis par un protocole de satisfaction.",
-    "demo": false,
-    "contentNumber": 17,
-    "startMinute": 20.5,
-    "endMinute": 22,
-    "spokenWords": 195,
-    "notes": "REPÈRE : 20:30 à 22:00. Durée prévue : 01:30.\n\nTEXTE ORAL\nLa review est un échange sur le produit avec Claire Martin, pour le Collectif Altitude Grimpe. Dans le scénario, nous regardons les parcours disponibles et leurs critères, puis nous adaptons les priorités. Le planning J3 fixe le périmètre. Les reviews J10 et J15 organisent les retours intermédiaires puis la validation du parcours démontré.\n\nÀ J10, le matching est disponible dans le cas, mais les événements restent à stabiliser. Leur fin glisse de J11 à J12. La prévision atteint quatre mille quatre cent soixante-cinq euros, avec deux cent trente-deux euros sous le plafond. La nouvelle demande de contributions aux topos dépasserait le budget et la capacité DEV. Le client fictif retient son report, en conservant les critères de recette.\n\nCR02 garde la trace de cette décision. DEV termine T06 à J12, Camille clôt la recette après corrections à J14 et CP prépare la validation J15. Le document partagé relie l'écart, le choix et la prochaine action. La rétrospective examine ensuite notre façon de travailler, tandis que la review porte sur le produit. Les comptes rendus décrivent un exercice pédagogique, sans accord client réel attesté.\n\nGESTE OU MANIPULATION\nMontrer le résultat présenté, la décision issue du retour client et les actions datées.\n\nTRANSITION\nLes retours du client sont aussi suivis par un protocole de satisfaction.\n\nSOURCE ET NATURE\nC3.4.1, comptes rendus simulés. A05, protocole des reviews ; A07, CR02 ; rituels.json. Compte rendu et accord client fictifs."
-  },
-  {
-    "number": 19,
-    "title": "Mesurer la satisfaction et agir",
-    "minutes": 1,
-    "nature": "C3.4.1, aucun résultat client réel disponible",
-    "layout": "table",
+    "layout": "dashboard",
+    "subtitle": "SIMULATION À M10 · exemple de suivi annuel, distinct des observations réelles.",
     "content": {
       "rows": [
         [
           "Indicateur",
-          "Mesure prévue"
+          "Référence → prévision",
+          "Lecture et action"
         ],
         [
-          "Critères acceptés",
-          "Acceptés / évalués"
+          "Charge",
+          "82 → 86 j-h",
+          "58 consommés simulés + 28 restants"
         ],
         [
-          "Parcours sans aide",
-          "Terminés sans aide / tentés"
+          "Coût",
+          "44 250 → 46 050 €",
+          "+1 800 € ; réexaminer le reste à faire"
+        ],
+        [
+          "Délai",
+          "Fin M11 → fin M12",
+          "+1 mois ; annoncer le nouveau jalon"
+        ],
+        [
+          "Capacité solo",
+          "12 j-h prévus / 10 disponibles",
+          "120 % ; reporter 2 j-h hors période"
+        ]
+      ],
+      "callout": "Revue hebdomadaire proposée : mettre à jour les entrées, expliquer les écarts, décider et tracer."
+    },
+    "script": "Le relevé Linear est réel et daté. Ce tableau est, lui, un exemple chiffré simulé pour montrer comment suivre les autres dimensions du projet. À M10, 58 jours-personne sont supposés consommés et 28 restent à faire. La prévision devient 86 jours, contre 82 initialement. À 450 euros par jour et en conservant les autres postes B1 à 7 350 euros, le total atteint 46 050 euros, soit un écart de 1 800 euros. Le jalon passe de la fin du mois 11 à la fin du mois 12. La prochaine période contient 12 jours de travail pour une capacité hypothétique de 10 : il faut déplacer deux jours de charge ou réduire le périmètre. Ces valeurs servent à expliquer les formules et les décisions ; elles ne sont pas mon temps ou mes dépenses réels.",
+    "source": "mise-en-situation.json ; classeur, Suivi SIMULE ; A03.",
+    "nature": "Mise en situation pédagogique explicitement simulée",
+    "dark": false,
+    "action": "",
+    "demo": false,
+    "number": 8,
+    "startMinute": 7.0,
+    "endMinute": 8.5,
+    "notes": "REPÈRE : 07:00–08:30\nNATURE : Mise en situation pédagogique explicitement simulée\n\nTEXTE ORAL\nLe relevé Linear est réel et daté. Ce tableau est, lui, un exemple chiffré simulé pour montrer comment suivre les autres dimensions du projet. À M10, 58 jours-personne sont supposés consommés et 28 restent à faire. La prévision devient 86 jours, contre 82 initialement. À 450 euros par jour et en conservant les autres postes B1 à 7 350 euros, le total atteint 46 050 euros, soit un écart de 1 800 euros. Le jalon passe de la fin du mois 11 à la fin du mois 12. La prochaine période contient 12 jours de travail pour une capacité hypothétique de 10 : il faut déplacer deux jours de charge ou réduire le périmètre. Ces valeurs servent à expliquer les formules et les décisions ; elles ne sont pas mon temps ou mes dépenses réels.\n\nÀ MONTRER\n\n\nSOURCE\nmise-en-situation.json ; classeur, Suivi SIMULE ; A03."
+  },
+  {
+    "title": "Anticiper les points de vigilance",
+    "section": "C3.2.1 / Suivre les risques",
+    "minutes": 1,
+    "layout": "table",
+    "subtitle": "Registre pédagogique, appuyé sur des problèmes possibles du projet.",
+    "content": {
+      "rows": [
+        [
+          "Risque",
+          "Signal / seuil proposé",
+          "Réponse et responsable"
+        ],
+        [
+          "Surcharge solo",
+          "Charge / capacité > 100 %",
+          "Dorian : déplacer une tâche et revoir le jalon"
+        ],
+        [
+          "Parcours non fiable",
+          "Un critère critique en échec",
+          "Dorian : corriger avant validation"
+        ],
+        [
+          "Démo indisponible",
+          "Connexion ou santé en échec",
+          "Dorian : diagnostiquer ; secours daté"
+        ],
+        [
+          "Recette inaccessible",
+          "Consigne non comprise / sous-titres KO",
+          "Dorian : support écrit et essai avant séance"
+        ]
+      ],
+      "callout": "Contrôler à chaque revue : avancement, coûts, délais, risques et disponibilité des ressources."
+    },
+    "script": "Un tableau de bord doit déclencher des actions. Je propose donc des signaux observables : dépasser la capacité, échouer sur un critère critique, ne pas pouvoir ouvrir le logiciel ou ne pas comprendre une consigne de recette. Chaque ligne associe une réponse et un responsable. Dans le projet solo, Dorian porte ces décisions. La ligne sur la recette accessible appartient à la séance fictive avec testeur. La revue hebdomadaire proposée rapproche les tickets, les écarts et les risques, puis conserve une action datée. Le tableau est un dispositif de pilotage pédagogique ; aucune cotation historique ou réunion réellement tenue n’est revendiquée.",
+    "source": "A03 ; scénario annuel ; audit navigation pour le problème réel.",
+    "nature": "Mise en situation pédagogique explicitement simulée",
+    "dark": false,
+    "action": "",
+    "demo": false,
+    "number": 9,
+    "startMinute": 8.5,
+    "endMinute": 9.5,
+    "notes": "REPÈRE : 08:30–09:30\nNATURE : Mise en situation pédagogique explicitement simulée\n\nTEXTE ORAL\nUn tableau de bord doit déclencher des actions. Je propose donc des signaux observables : dépasser la capacité, échouer sur un critère critique, ne pas pouvoir ouvrir le logiciel ou ne pas comprendre une consigne de recette. Chaque ligne associe une réponse et un responsable. Dans le projet solo, Dorian porte ces décisions. La ligne sur la recette accessible appartient à la séance fictive avec testeur. La revue hebdomadaire proposée rapproche les tickets, les écarts et les risques, puis conserve une action datée. Le tableau est un dispositif de pilotage pédagogique ; aucune cotation historique ou réunion réellement tenue n’est revendiquée.\n\nÀ MONTRER\n\n\nSOURCE\nA03 ; scénario annuel ; audit navigation pour le problème réel."
+  },
+  {
+    "title": "Arbitrer face à une navigation trop lente",
+    "section": "C3.2.2 / Problème, options, décision",
+    "minutes": 1.5,
+    "layout": "table",
+    "subtitle": "Cas réel du 15 septembre : un calcul décoratif bloque le navigateur.",
+    "content": {
+      "rows": [
+        [
+          "Option analysée",
+          "Intérêt",
+          "Limite / décision"
+        ],
+        [
+          "Garder l’animation",
+          "Conserver tout le mouvement",
+          "Calcul bloquant observé toujours présent"
+        ],
+        [
+          "Optimiser ou différer",
+          "Préserver potentiellement l’animation",
+          "Gain non mesuré dans les pièces"
+        ],
+        [
+          "Fond SVG statique",
+          "Conserver le motif sans calcul animé",
+          "Choix implémenté ; perte du mouvement"
+        ]
+      ],
+      "callout": "Décision : SVG statique + indicateur d’attente. Commit 83e4c29 ; PR 35 ; version livrée 872db19."
+    },
+    "script": "Le cas réel est la lenteur signalée lors des clics de navigation. La conséquence est visible : l’utilisateur attend sans percevoir clairement le résultat de son action. Le diagnostic local montre que l’initialisation du fond animé monopolise le navigateur. Le tableau compare les options comme outil d’aide à la décision. Garder le fond conserve le problème. Optimiser ou différer l’animation peut être étudié, mais aucun gain n’a été mesuré dans les preuves disponibles. Le choix retenu remplace le fond par un SVG statique et ajoute un indicateur d’attente. Il conserve le motif graphique et sacrifie le mouvement. Le changement est réel ; la comparaison formalisée ici est rétrospective. Les mesures suivantes permettent d’en discuter l’effet.",
+    "source": "Audit navigation du 15/09 ; commit 83e4c29.",
+    "nature": "Arbitrage réel ; comparaison rétrospective",
+    "dark": false,
+    "action": "",
+    "demo": false,
+    "number": 10,
+    "startMinute": 9.5,
+    "endMinute": 11.0,
+    "notes": "REPÈRE : 09:30–11:00\nNATURE : Arbitrage réel ; comparaison rétrospective\n\nTEXTE ORAL\nLe cas réel est la lenteur signalée lors des clics de navigation. La conséquence est visible : l’utilisateur attend sans percevoir clairement le résultat de son action. Le diagnostic local montre que l’initialisation du fond animé monopolise le navigateur. Le tableau compare les options comme outil d’aide à la décision. Garder le fond conserve le problème. Optimiser ou différer l’animation peut être étudié, mais aucun gain n’a été mesuré dans les preuves disponibles. Le choix retenu remplace le fond par un SVG statique et ajoute un indicateur d’attente. Il conserve le motif graphique et sacrifie le mouvement. Le changement est réel ; la comparaison formalisée ici est rétrospective. Les mesures suivantes permettent d’en discuter l’effet.\n\nÀ MONTRER\n\n\nSOURCE\nAudit navigation du 15/09 ; commit 83e4c29."
+  },
+  {
+    "number": 11,
+    "title": "Mesurer l’effet de la correction",
+    "section": "C3.2.2 / Vérifier le résultat",
+    "minutes": 1,
+    "layout": "performance",
+    "subtitle": "Mesures locales contrôlées du 15 septembre ; un passage par parcours.",
+    "content": {
+      "callout": "CPU ×4 · latence 100 ms · mêmes parcours. Ces temps ne sont pas des mesures de production."
+    },
+    "script": "Le graphique compare les mêmes cinq parcours avant et après la correction. Les mesures sont réalisées avec Chromium, un processeur ralenti quatre fois et une latence réseau simulée de 100 millisecondes. Avant correction, le temps médian observé est de 10 220 millisecondes. Après correction, il est de 748 millisecondes. La comparaison montre un effet très net dans ces conditions. Elle reste un échantillon d’un passage par parcours : ce n’est ni une moyenne sur tous les utilisateurs, ni un engagement de performance, ni une mesure en production. Le protocole et les valeurs sont conservés dans l’audit. Je préfère présenter les temps et leurs limites plutôt que transformer un test local en promesse générale.",
+    "source": "Audit navigation du 15/09 ; donnees/projet-reel.json, performance.",
+    "action": "Comparer les barres de deux parcours et expliquer le protocole.",
+    "nature": "Mesures locales contrôlées, échantillon limité",
+    "dark": true,
+    "demo": false,
+    "startMinute": 11.0,
+    "endMinute": 12.0,
+    "notes": "REPÈRE : 11:00–12:00\nNATURE : Mesures locales contrôlées, échantillon limité\n\nTEXTE ORAL\nLe graphique compare les mêmes cinq parcours avant et après la correction. Les mesures sont réalisées avec Chromium, un processeur ralenti quatre fois et une latence réseau simulée de 100 millisecondes. Avant correction, le temps médian observé est de 10 220 millisecondes. Après correction, il est de 748 millisecondes. La comparaison montre un effet très net dans ces conditions. Elle reste un échantillon d’un passage par parcours : ce n’est ni une moyenne sur tous les utilisateurs, ni un engagement de performance, ni une mesure en production. Le protocole et les valeurs sont conservés dans l’audit. Je préfère présenter les temps et leurs limites plutôt que transformer un test local en promesse générale.\n\nÀ MONTRER\nComparer les barres de deux parcours et expliquer le protocole.\n\nSOURCE\nAudit navigation du 15/09 ; donnees/projet-reel.json, performance."
+  },
+  {
+    "title": "Adapter la posture à une situation précise",
+    "section": "C3.3.1 / Management",
+    "minutes": 1.5,
+    "layout": "management",
+    "subtitle": "SIMULATION · une recette ponctuelle avec testeur, dans un projet développé seul.",
+    "content": {
+      "cards": [
+        [
+          "Participatif",
+          "Écouter les faits",
+          "Le testeur veut corriger les blocages ; le porteur veut enrichir le décor."
+        ],
+        [
+          "Persuasif",
+          "Expliquer le choix",
+          "Prioriser le parcours utilisable avec les critères et les mesures."
+        ],
+        [
+          "Directif",
+          "Fixer la limite",
+          "Aucune validation si un critère critique reste en échec."
+        ],
+        [
+          "Délégatif",
+          "Confier la recette",
+          "Résultat attendu, autonomie et point de contrôle convenus."
+        ]
+      ],
+      "callout": "Analyse critique : décider seul trop vite peut faire perdre une alerte utile ; écouter puis trancher."
+    },
+    "script": "Cette situation est simulée : j’imagine une séance de recette ponctuelle, sans transformer Spity en projet développé en équipe. Le testeur demande de traiter les blocages, tandis que le porteur souhaite enrichir le décor. Une posture participative sert d’abord à écouter les faits et les impacts. Une posture persuasive permet d’expliquer le compromis. La posture directive fixe une limite : un critère critique en échec empêche l’acceptation. Enfin, la posture délégative confie un scénario de test avec un résultat attendu et un point de contrôle. La critique porte sur une décision trop rapide du porteur : elle peut faire perdre une information utile. La recommandation est de faire reformuler le problème, comparer les options, décider puis écrire l’action. Aucun conflit réel n’est attribué à une personne.",
+    "source": "A05 ; séance pédagogique ; référentiel p. 12–13.",
+    "nature": "Mise en situation pédagogique explicitement simulée",
+    "dark": true,
+    "action": "",
+    "demo": false,
+    "number": 12,
+    "startMinute": 12.0,
+    "endMinute": 13.5,
+    "notes": "REPÈRE : 12:00–13:30\nNATURE : Mise en situation pédagogique explicitement simulée\n\nTEXTE ORAL\nCette situation est simulée : j’imagine une séance de recette ponctuelle, sans transformer Spity en projet développé en équipe. Le testeur demande de traiter les blocages, tandis que le porteur souhaite enrichir le décor. Une posture participative sert d’abord à écouter les faits et les impacts. Une posture persuasive permet d’expliquer le compromis. La posture directive fixe une limite : un critère critique en échec empêche l’acceptation. Enfin, la posture délégative confie un scénario de test avec un résultat attendu et un point de contrôle. La critique porte sur une décision trop rapide du porteur : elle peut faire perdre une information utile. La recommandation est de faire reformuler le problème, comparer les options, décider puis écrire l’action. Aucun conflit réel n’est attribué à une personne.\n\nÀ MONTRER\n\n\nSOURCE\nA05 ; séance pédagogique ; référentiel p. 12–13."
+  },
+  {
+    "title": "Organiser une collaboration accessible",
+    "section": "C3.3.1 / Charge et communication",
+    "minutes": 1.5,
+    "layout": "table",
+    "subtitle": "SIMULATION · testeur malentendant, à distance ; contexte multiculturel prévu.",
+    "content": {
+      "rows": [
+        [
+          "Point",
+          "Organisation proposée",
+          "Contrôle"
+        ],
+        [
+          "Charge de la séance",
+          "Porteur 4 h / 5 h ; testeur 4 h / 5 h",
+          "80 % chacun ; 1 h de marge"
+        ],
+        [
+          "Accessibilité",
+          "Consignes écrites, sous-titres, une voix à la fois",
+          "Le testeur reformule puis retrouve la décision"
+        ],
+        [
+          "Distance et langues",
+          "Créneau commun avec fuseaux, glossaire FR/EN",
+          "Compréhension vérifiée sans supposer la langue"
+        ],
+        [
+          "Outils partagés",
+          "Linear : action ; Git : version ; dossier : preuves",
+          "Un lien commun vers critères et compte rendu"
+        ]
+      ],
+      "callout": "Rituel proposé : préparation écrite → point de 20 min → action responsable → retour asynchrone."
+    },
+    "script": "Dans la simulation, la séance comporte quatre heures de travail pour le porteur et quatre pour le testeur, chacun disposant de cinq heures. La répartition respecte les compétences et conserve une marge. Ce n’est pas une capacité réelle mesurée. Pour le persona malentendant, les consignes sont écrites, les sous-titres sont vérifiés et les prises de parole organisées. Le contrôle consiste à faire reformuler la consigne et retrouver la décision. Dans un contexte à distance et multiculturel, les invitations indiquent les heures locales et le vocabulaire partagé évite les ambiguïtés. Linear suit les actions, Git identifie la version et le dossier centralise les preuves. Un point court, préparé par écrit, se termine par un responsable et un retour attendu.",
+    "source": "A02/A05 ; mise-en-situation.json, review.",
+    "nature": "Mise en situation pédagogique explicitement simulée",
+    "dark": false,
+    "action": "",
+    "demo": false,
+    "number": 13,
+    "startMinute": 13.5,
+    "endMinute": 15.0,
+    "notes": "REPÈRE : 13:30–15:00\nNATURE : Mise en situation pédagogique explicitement simulée\n\nTEXTE ORAL\nDans la simulation, la séance comporte quatre heures de travail pour le porteur et quatre pour le testeur, chacun disposant de cinq heures. La répartition respecte les compétences et conserve une marge. Ce n’est pas une capacité réelle mesurée. Pour le persona malentendant, les consignes sont écrites, les sous-titres sont vérifiés et les prises de parole organisées. Le contrôle consiste à faire reformuler la consigne et retrouver la décision. Dans un contexte à distance et multiculturel, les invitations indiquent les heures locales et le vocabulaire partagé évite les ambiguïtés. Linear suit les actions, Git identifie la version et le dossier centralise les preuves. Un point court, préparé par écrit, se termine par un responsable et un retour attendu.\n\nÀ MONTRER\n\n\nSOURCE\nA02/A05 ; mise-en-situation.json, review."
+  },
+  {
+    "title": "Évaluer les compétences utiles au projet",
+    "section": "C3.3.2 / Grille commentée",
+    "minutes": 1.5,
+    "layout": "skills",
+    "subtitle": "SIMULATION · niveaux pédagogiques, aucune évaluation personnelle réelle.",
+    "content": {
+      "rows": [
+        [
+          "Rôle du cas",
+          "Compétence",
+          "Actuel → cible"
+        ],
+        [
+          "Porteur",
+          "Planning et suivi des écarts",
+          "1 → 2"
+        ],
+        [
+          "Porteur",
+          "Développement et API",
+          "2 → 2"
+        ],
+        [
+          "Testeur fictif",
+          "Recette reproductible",
+          "1 → 2"
+        ],
+        [
+          "Testeur fictif",
+          "Parcours clavier",
+          "1 → 2"
+        ]
+      ],
+      "callout": "0 : non abordé · 1 : accompagné · 2 : autonome · 3 : cas complexes."
+    },
+    "script": "Les compétences nécessaires sont le suivi, le développement, la recette et la vérification au clavier. Cette grille est pédagogique : elle ne constitue pas une note réellement attribuée à Dorian ou à un testeur. L’échelle va de zéro, non abordé, à trois, autonome sur des cas complexes. Dans le cas, le porteur lit le suivi avec aide mais doit expliquer seul les écarts : il passe donc d’un niveau un à une cible deux. Le développement est supposé autonome et ne demande pas de formation prioritaire. Le testeur sait suivre une consigne mais doit produire une recette reproductible et vérifier le clavier sans aide. Ces écarts justifient les actions de formation. Le niveau technique reste indépendant de la situation de handicap.",
+    "source": "A06 ; mise-en-situation.json, skills.",
+    "nature": "Mise en situation pédagogique explicitement simulée",
+    "dark": false,
+    "action": "",
+    "demo": false,
+    "number": 14,
+    "startMinute": 15.0,
+    "endMinute": 16.5,
+    "notes": "REPÈRE : 15:00–16:30\nNATURE : Mise en situation pédagogique explicitement simulée\n\nTEXTE ORAL\nLes compétences nécessaires sont le suivi, le développement, la recette et la vérification au clavier. Cette grille est pédagogique : elle ne constitue pas une note réellement attribuée à Dorian ou à un testeur. L’échelle va de zéro, non abordé, à trois, autonome sur des cas complexes. Dans le cas, le porteur lit le suivi avec aide mais doit expliquer seul les écarts : il passe donc d’un niveau un à une cible deux. Le développement est supposé autonome et ne demande pas de formation prioritaire. Le testeur sait suivre une consigne mais doit produire une recette reproductible et vérifier le clavier sans aide. Ces écarts justifient les actions de formation. Le niveau technique reste indépendant de la situation de handicap.\n\nÀ MONTRER\n\n\nSOURCE\nA06 ; mise-en-situation.json, skills."
+  },
+  {
+    "title": "Prévoir une progression vérifiable",
+    "section": "C3.3.2 / Formation et besoin de renfort",
+    "minutes": 1.5,
+    "layout": "training",
+    "subtitle": "PLAN SIMULÉ · formations proposées, pas de sessions déclarées suivies.",
+    "content": {
+      "rows": [
+        [
+          "Public / moment",
+          "Action et modalité",
+          "Résultat attendu"
+        ],
+        [
+          "Porteur · avant M10",
+          "1 h : atelier de recalcul du suivi",
+          "Expliquer seul le coût et le décalage"
+        ],
+        [
+          "Testeur · avant M11",
+          "2 h : recette et clavier, exercice guidé",
+          "Rejouer un cas et décrire un défaut"
+        ],
+        [
+          "Adaptation au handicap",
+          "Écrit, sous-titres, pauses et durée adaptées",
+          "Vérifier la compréhension avant autonomie"
+        ],
+        [
+          "Besoin persistant",
+          "Renfort QA conditionnel de 4 h",
+          "Fiche de besoin préparée en annexe 26"
+        ]
+      ],
+      "callout": "Évaluer après pratique ; si l’écart persiste, adapter la formation puis arbitrer un renfort."
+    },
+    "script": "Le plan répond aux écarts de la grille. Le porteur dispose d’un atelier d’une heure avant la revue M10 pour recalculer et expliquer le tableau de bord. Le testeur dispose de deux heures avant la recette M11 pour pratiquer la recette et les contrôles clavier. Les durées sont des hypothèses de formation, distinctes des huit heures de la séance de recette. Les supports sont écrits et sous-titrés, les pauses et le temps supplémentaire sont adaptés au besoin. L’efficacité se juge sur une tâche réalisée sans aide, pas sur la seule présence. Si une compétence critique reste indisponible, la fiche de renfort prépare une mission, un profil et des critères pour un service RH dans la mise en situation. Aucun recrutement n’est réellement engagé.",
+    "source": "A06 ; mise-en-situation.json, training ; annexe 26.",
+    "nature": "Mise en situation pédagogique explicitement simulée",
+    "dark": false,
+    "action": "",
+    "demo": false,
+    "number": 15,
+    "startMinute": 16.5,
+    "endMinute": 18.0,
+    "notes": "REPÈRE : 16:30–18:00\nNATURE : Mise en situation pédagogique explicitement simulée\n\nTEXTE ORAL\nLe plan répond aux écarts de la grille. Le porteur dispose d’un atelier d’une heure avant la revue M10 pour recalculer et expliquer le tableau de bord. Le testeur dispose de deux heures avant la recette M11 pour pratiquer la recette et les contrôles clavier. Les durées sont des hypothèses de formation, distinctes des huit heures de la séance de recette. Les supports sont écrits et sous-titrés, les pauses et le temps supplémentaire sont adaptés au besoin. L’efficacité se juge sur une tâche réalisée sans aide, pas sur la seule présence. Si une compétence critique reste indisponible, la fiche de renfort prépare une mission, un profil et des critères pour un service RH dans la mise en situation. Aucun recrutement n’est réellement engagé.\n\nÀ MONTRER\n\n\nSOURCE\nA06 ; mise-en-situation.json, training ; annexe 26."
+  },
+  {
+    "title": "Un compte rendu qui aide à décider",
+    "section": "C3.4.1 / Suivi client",
+    "minutes": 1.5,
+    "layout": "cards",
+    "subtitle": "CR-SIM-02 · M10 · exemple pédagogique, interlocuteur club fictif.",
+    "content": {
+      "cards": [
+        [
+          "CONSTAT",
+          "Un écart annoncé",
+          "Prévision simulée : +1 800 € et +1 mois. Retour : garder un parcours fluide."
+        ],
+        [
+          "DÉCISION",
+          "Prioriser l’usage",
+          "Conserver le fond statique ; maintenir les critères de recette."
+        ],
+        [
+          "ACTIONS",
+          "Préparer la validation",
+          "Porteur : réviser le suivi. Testeur : préparer M11. Club : revoir les critères."
+        ]
+      ],
+      "callout": "Compte rendu structuré : contexte → faits → décision → responsable → prochaine validation."
+    },
+    "script": "Le compte rendu montré est fictif et identifié CR-SIM-02. Il relie les chiffres de la simulation au besoin d’un persona club. Le constat annonce la prévision, son écart et sa conséquence sur le jalon. La décision pédagogique consiste à conserver le fond statique et à protéger les critères de recette. Les actions distinguent le porteur, le testeur ponctuel et le représentant de club fictif. Le document donne aussi un prochain point de validation. Cette structure aide un client à comprendre et à choisir. La correction du fond est réellement présente dans le logiciel, mais ce compte rendu n’est pas son origine historique et n’a pas été signé par un client réel.",
+    "source": "A07 ; mise-en-situation.json, clientReviews ; retours simulés du candidat.",
+    "nature": "Mise en situation pédagogique explicitement simulée",
+    "dark": false,
+    "action": "",
+    "demo": false,
+    "number": 16,
+    "startMinute": 18.0,
+    "endMinute": 19.5,
+    "notes": "REPÈRE : 18:00–19:30\nNATURE : Mise en situation pédagogique explicitement simulée\n\nTEXTE ORAL\nLe compte rendu montré est fictif et identifié CR-SIM-02. Il relie les chiffres de la simulation au besoin d’un persona club. Le constat annonce la prévision, son écart et sa conséquence sur le jalon. La décision pédagogique consiste à conserver le fond statique et à protéger les critères de recette. Les actions distinguent le porteur, le testeur ponctuel et le représentant de club fictif. Le document donne aussi un prochain point de validation. Cette structure aide un client à comprendre et à choisir. La correction du fond est réellement présente dans le logiciel, mais ce compte rendu n’est pas son origine historique et n’a pas été signé par un client réel.\n\nÀ MONTRER\n\n\nSOURCE\nA07 ; mise-en-situation.json, clientReviews ; retours simulés du candidat."
+  },
+  {
+    "title": "Prévoir les points de validation",
+    "section": "C3.4.1 / Jalons et conformité",
+    "minutes": 1,
+    "layout": "table",
+    "subtitle": "Calendrier pédagogique cohérent avec le planning annuel.",
+    "content": {
+      "rows": [
+        [
+          "Point",
+          "Objet à montrer",
+          "Décision attendue"
+        ],
+        [
+          "M3 · cadrage",
+          "Besoin et critères du parcours",
+          "Confirmer le périmètre"
+        ],
+        [
+          "M10 · évolution",
+          "Écarts, options et version disponible",
+          "Arbitrer et réviser la prévision"
+        ],
+        [
+          "M11 · recette",
+          "Résultats des critères et réserves",
+          "Corriger ou autoriser la démo"
+        ],
+        [
+          "M12 · restitution",
+          "Dernière version et parcours complet",
+          "Accepter, réserver ou refuser"
+        ]
+      ],
+      "callout": "Chaque réserve : problème précis, action, responsable et échéance à convenir."
+    },
+    "script": "Les points de validation du modèle annuel suivent les risques du projet. Le cadrage vérifie le besoin avant d’engager la réalisation. La revue M10 expose les écarts et permet de décider. La recette M11 rapproche chaque critère de son résultat et prépare les corrections. La restitution M12 porte sur la dernière version prête. Une réserve entraîne une action avec un responsable et une échéance à convenir. Ces rendez-vous sont planifiés dans la simulation ; ils ne sont pas des réunions historiques déclarées. Le calendrier évite de découvrir à la dernière minute que le logiciel ne répond pas au parcours attendu.",
+    "source": "A01/A07 ; planning annuel simulé.",
+    "nature": "Mise en situation pédagogique explicitement simulée",
+    "dark": false,
+    "action": "",
+    "demo": false,
+    "number": 17,
+    "startMinute": 19.5,
+    "endMinute": 20.5,
+    "notes": "REPÈRE : 19:30–20:30\nNATURE : Mise en situation pédagogique explicitement simulée\n\nTEXTE ORAL\nLes points de validation du modèle annuel suivent les risques du projet. Le cadrage vérifie le besoin avant d’engager la réalisation. La revue M10 expose les écarts et permet de décider. La recette M11 rapproche chaque critère de son résultat et prépare les corrections. La restitution M12 porte sur la dernière version prête. Une réserve entraîne une action avec un responsable et une échéance à convenir. Ces rendez-vous sont planifiés dans la simulation ; ils ne sont pas des réunions historiques déclarées. Le calendrier évite de découvrir à la dernière minute que le logiciel ne répond pas au parcours attendu.\n\nÀ MONTRER\n\n\nSOURCE\nA01/A07 ; planning annuel simulé."
+  },
+  {
+    "title": "Mesurer le retour pour agir",
+    "section": "C3.4.1 / Satisfaction",
+    "minutes": 1,
+    "layout": "table",
+    "subtitle": "Protocole proposé ; aucun résultat réel mesuré.",
+    "content": {
+      "rows": [
+        [
+          "Indicateur",
+          "Calcul / recueil",
+          "Cible pédagogique"
+        ],
+        [
+          "Réussite sans aide",
+          "Parcours réussis / tentés ; noter l’effectif",
+          "≥ 80 %"
         ],
         [
           "Utilité perçue",
-          "Note de 1 à 5 et nombre de répondants"
+          "Note de 1 à 5 ; moyenne et répondants",
+          "≥ 4 / 5"
         ],
         [
-          "Blocages critiques",
-          "Nombre et description des obstacles"
+          "Conformité critique",
+          "Critères critiques acceptés / évalués",
+          "100 %"
+        ],
+        [
+          "Blocages",
+          "Nombre de tâches empêchées ouvertes",
+          "0 avant acceptation"
         ]
       ],
-      "widths": [
-        400,
-        752
-      ],
-      "takeaway": "Satisfaction réelle : non mesurée à ce stade"
+      "callout": "Sous la cible : qualifier → prioriser → corriger → vérifier à nouveau. Résultats : non mesurés."
     },
-    "script": "À J15, je prévois une session pilote fictive avec deux grimpeurs et un représentant de club. Aucun participant n'a réellement été recruté pour cette mesure. Les résultats restent non mesurés.\n\nJe relève la part de critères critiques acceptés, avec une cible de cent pour cent. Je compte les parcours réussis sans aide, avec une cible de quatre-vingts pour cent. L'utilité attendue est au moins quatre sur cinq et aucun blocage critique ne doit rester ouvert.\n\nChaque résultat indique sa date, son effectif et sa méthode. Un faible effectif ne représente pas tous les utilisateurs. Sous le seuil, je qualifie l'obstacle, affecte une correction et vérifie le parcours à nouveau. Les tests techniques ne remplacent pas cette appréciation du besoin par les utilisateurs.",
-    "source": "A07 : définitions, seuils et questionnaire ; consolidation.json : effectif prévu uniquement, résultats null.",
-    "action": "Lire un indicateur avec son calcul et son seuil, puis expliquer l’action déclenchée.",
-    "transition": "Je montre maintenant le parcours qui sera évalué.",
+    "script": "Les indicateurs sont définis avant la séance : réussite sans aide, utilité perçue, conformité des critères critiques et blocages ouverts. Le protocole note aussi l’effectif, car une moyenne isolée masque le nombre de retours. Les cibles affichées sont pédagogiques, pas des engagements signés. Les résultats restent non mesurés. Si la réussite sans aide est faible, il faut identifier l’étape difficile. Une faible utilité demande de revenir au besoin. Un blocage critique empêche l’acceptation et déclenche une correction suivie d’une nouvelle vérification. Ces indicateurs complètent les tests techniques, qui ne mesurent pas la satisfaction.",
+    "source": "A07 ; indicateurs proposés pour les personas simulés.",
+    "nature": "Mise en situation pédagogique explicitement simulée",
+    "dark": false,
+    "action": "",
     "demo": false,
-    "contentNumber": 18,
-    "startMinute": 22,
-    "endMinute": 23,
-    "spokenWords": 130,
-    "notes": "REPÈRE : 22:00 à 23:00. Durée prévue : 01:00.\n\nTEXTE ORAL\nÀ J15, je prévois une session pilote fictive avec deux grimpeurs et un représentant de club. Aucun participant n'a réellement été recruté pour cette mesure. Les résultats restent non mesurés.\n\nJe relève la part de critères critiques acceptés, avec une cible de cent pour cent. Je compte les parcours réussis sans aide, avec une cible de quatre-vingts pour cent. L'utilité attendue est au moins quatre sur cinq et aucun blocage critique ne doit rester ouvert.\n\nChaque résultat indique sa date, son effectif et sa méthode. Un faible effectif ne représente pas tous les utilisateurs. Sous le seuil, je qualifie l'obstacle, affecte une correction et vérifie le parcours à nouveau. Les tests techniques ne remplacent pas cette appréciation du besoin par les utilisateurs.\n\nGESTE OU MANIPULATION\nLire un indicateur avec son calcul et son seuil, puis expliquer l’action déclenchée.\n\nTRANSITION\nJe montre maintenant le parcours qui sera évalué.\n\nSOURCE ET NATURE\nC3.4.1, aucun résultat client réel disponible. A07 : définitions, seuils et questionnaire ; consolidation.json : effectif prévu uniquement, résultats null."
+    "number": 18,
+    "startMinute": 20.5,
+    "endMinute": 21.5,
+    "notes": "REPÈRE : 20:30–21:30\nNATURE : Mise en situation pédagogique explicitement simulée\n\nTEXTE ORAL\nLes indicateurs sont définis avant la séance : réussite sans aide, utilité perçue, conformité des critères critiques et blocages ouverts. Le protocole note aussi l’effectif, car une moyenne isolée masque le nombre de retours. Les cibles affichées sont pédagogiques, pas des engagements signés. Les résultats restent non mesurés. Si la réussite sans aide est faible, il faut identifier l’étape difficile. Une faible utilité demande de revenir au besoin. Un blocage critique empêche l’acceptation et déclenche une correction suivie d’une nouvelle vérification. Ces indicateurs complètent les tests techniques, qui ne mesurent pas la satisfaction.\n\nÀ MONTRER\n\n\nSOURCE\nA07 ; indicateurs proposés pour les personas simulés."
+  },
+  {
+    "number": 19,
+    "title": "Préparer une démonstration vérifiable",
+    "section": "C3.4.2 / Préparer la démonstration",
+    "minutes": 1.5,
+    "layout": "table",
+    "subtitle": "La réussite s’observe sur des actions précises.",
+    "content": {
+      "rows": [
+        [
+          "Parcours",
+          "Résultat attendu",
+          "Preuve à montrer"
+        ],
+        [
+          "Partenaire",
+          "Filtres adaptés et état de demande clair",
+          "Session grimpeur"
+        ],
+        [
+          "Inscription",
+          "Confirmation et capacité cohérentes",
+          "Événement de démonstration"
+        ],
+        [
+          "Organisation club",
+          "Participants et commandes autorisées",
+          "Session club distincte"
+        ],
+        [
+          "Utilisation",
+          "Navigation et commandes au clavier",
+          "Manipulation en direct"
+        ]
+      ],
+      "callout": "Une capture datée sert de secours ; une manipulation réussie valide le critère montré."
+    },
+    "script": "La démonstration est préparée autour de critères visibles. Pour les partenaires, je vérifie les filtres et l’état d’une demande. Pour un événement, je montre l’inscription et les places disponibles. Avec la session club, je retrouve les participants et les commandes autorisées. Je termine par un passage au clavier. La préparation se fait sur une base isolée contenant des comptes de test. Avant l’oral, il faut vérifier les dates des événements, les connexions et la version utilisée. Les captures du 15 septembre servent de secours si un incident empêche une manipulation. Dans ce cas, j’annonce le problème et le critère qui n’a pas été revérifié en direct. Je ne transforme pas une capture en validation actuelle.",
+    "source": "A08 ; captures du 15/09 ; recette du projet.",
+    "action": "Préparer deux sessions et annoncer les critères avant de changer d’écran.",
+    "nature": "Protocole proposé pour la démonstration",
+    "dark": false,
+    "demo": false,
+    "startMinute": 21.5,
+    "endMinute": 23.0,
+    "notes": "REPÈRE : 21:30–23:00\nNATURE : Protocole proposé pour la démonstration\n\nTEXTE ORAL\nLa démonstration est préparée autour de critères visibles. Pour les partenaires, je vérifie les filtres et l’état d’une demande. Pour un événement, je montre l’inscription et les places disponibles. Avec la session club, je retrouve les participants et les commandes autorisées. Je termine par un passage au clavier. La préparation se fait sur une base isolée contenant des comptes de test. Avant l’oral, il faut vérifier les dates des événements, les connexions et la version utilisée. Les captures du 15 septembre servent de secours si un incident empêche une manipulation. Dans ce cas, j’annonce le problème et le critère qui n’a pas été revérifié en direct. Je ne transforme pas une capture en validation actuelle.\n\nÀ MONTRER\nPréparer deux sessions et annoncer les critères avant de changer d’écran.\n\nSOURCE\nA08 ; captures du 15/09 ; recette du projet."
   },
   {
     "number": 20,
-    "title": "Place à la démonstration",
+    "title": "Passer du suivi à l’usage.",
+    "section": "C3.4.2 / Démontrer et valider",
     "minutes": 0.5,
-    "nature": "C3.4.2, séquence de six minutes",
-    "layout": "demo_intro",
-    "content": {
-      "items": [
-        [
-          "Session grimpeur",
-          "Profil, partenaire et inscription"
-        ],
-        [
-          "Session club",
-          "Événement, participants et droits"
-        ]
-      ],
-      "takeaway": "Critères : état compréhensible, capacité respectée et participant visible"
-    },
-    "script": "Je passe à la démonstration locale, sur le même parcours grimpeur et club que dans le Bloc 2. Les comptes contiennent des données fictives. Je montre d'abord la recherche d'un partenaire, puis les inscriptions et les participants côté club. Comme le rappelle le Bloc 4, une validation locale ne prouve pas une mise à jour de la production.",
-    "source": "A08 et preuves/verification.json. B2 : F03-F08. B4 : B4-C421-02 et dossier-jury/01_CADRAGE_PROJET, distinction local, staging et production. État de production historique non réactualisé. Photo de marque existante escalade-falaise-gros-plan.jpeg, illustration de la pratique.",
-    "action": "Ouvrir les deux sessions déjà connectées. Lancer le chronomètre de démonstration.",
-    "transition": "Je commence avec le compte grimpeur.",
+    "layout": "demo",
+    "subtitle": "Deux sessions pour un parcours complet.",
+    "content": {},
+    "script": "Je passe à la démonstration. Les comptes utilisés sont des comptes de test dans une base dédiée. Je commence avec une session grimpeur, puis je passe à la session club pour retrouver les participants. L’objectif est de montrer les critères annoncés, pas de parcourir toutes les pages du site.",
+    "source": "A08 ; environnement local isolé.",
+    "action": "Basculer dans le navigateur préparé ; annoncer la version.",
+    "nature": "Manipulation à réaliser devant le jury",
+    "dark": true,
     "demo": true,
-    "contentNumber": 19,
-    "startMinute": 23,
+    "startMinute": 23.0,
     "endMinute": 23.5,
-    "spokenWords": 64,
-    "notes": "REPÈRE : 23:00 à 23:30. Durée prévue : 00:30.\n\nTEXTE ORAL\nJe passe à la démonstration locale, sur le même parcours grimpeur et club que dans le Bloc 2. Les comptes contiennent des données fictives. Je montre d'abord la recherche d'un partenaire, puis les inscriptions et les participants côté club. Comme le rappelle le Bloc 4, une validation locale ne prouve pas une mise à jour de la production.\n\nGESTE OU MANIPULATION\nOuvrir les deux sessions déjà connectées. Lancer le chronomètre de démonstration.\n\nTRANSITION\nJe commence avec le compte grimpeur.\n\nSOURCE ET NATURE\nC3.4.2, séquence de six minutes. A08 et preuves/verification.json. B2 : F03-F08. B4 : B4-C421-02 et dossier-jury/01_CADRAGE_PROJET, distinction local, staging et production. État de production historique non réactualisé. Photo de marque existante escalade-falaise-gros-plan.jpeg, illustration de la pratique."
+    "notes": "REPÈRE : 23:00–23:30\nNATURE : Manipulation à réaliser devant le jury\n\nTEXTE ORAL\nJe passe à la démonstration. Les comptes utilisés sont des comptes de test dans une base dédiée. Je commence avec une session grimpeur, puis je passe à la session club pour retrouver les participants. L’objectif est de montrer les critères annoncés, pas de parcourir toutes les pages du site.\n\nÀ MONTRER\nBasculer dans le navigateur préparé ; annoncer la version.\n\nSOURCE\nA08 ; environnement local isolé."
   },
   {
     "number": 21,
     "title": "Trouver un partenaire",
-    "minutes": 3,
-    "nature": "C3.4.2, application locale et données de test",
-    "layout": "photo",
+    "section": "C3.4.2 / Démontrer et valider",
+    "minutes": 2.5,
+    "layout": "screenshot",
+    "subtitle": "Parcours grimpeur · base de démonstration.",
     "content": {
-      "image": "docs/rncp/bloc-03/preuves/captures/matching-2026-09-15.png",
-      "items": [
-        [
-          "Profil et recherche",
-          "Vérifier le niveau et les disponibilités."
-        ],
-        [
-          "Demande et sortie",
-          "Lire l’état, consulter l’événement et s’inscrire."
-        ]
+      "image": "matching",
+      "steps": [
+        "Profil",
+        "Filtres",
+        "Demande"
       ]
     },
-    "script": "Je suis connecté en tant que grimpeur. Le profil donne les informations utiles pour ma pratique. Dans la recherche de partenaires, les filtres permettent de réduire les résultats. Je montre un filtre et j'explique ce qui change dans la liste. L'état de la demande permet ensuite de savoir si un échange est déjà engagé.\n\nJe rejoins maintenant la page des événements. Je lis la date, le lieu et la capacité avant de m'inscrire. Je vérifie que l'interface confirme l'inscription et que l'état affiché reste cohérent. Si le compte était déjà inscrit, je l'annonce et j'utilise l'événement préparé pour la répétition.\n\nJe décris le résultat du point de vue de l'utilisateur : il sait quelle sortie il rejoint et peut retrouver son inscription. Je vais vérifier ce même résultat depuis le rôle club.",
-    "source": "Capture réelle du 15 septembre 2026. A08, recette navigateur datée.",
-    "action": "0:00–0:40 : profil. 0:40–1:35 : filtre et demande. 1:35–2:40 : événement et inscription. 2:40–3:00 : confirmation. Laisser le navigateur affiché pendant les manipulations. La capture sert de secours.",
-    "transition": "Je bascule sur la session du club organisateur.",
+    "script": "Afficher le profil de la session grimpeur et expliquer la discipline et le niveau utilisés. Ouvrir la recherche de partenaires, modifier un filtre et vérifier que les résultats restent cohérents. Consulter un profil compatible, puis montrer l’état d’une demande. Si une demande existe déjà, expliquer cet état au lieu d’annoncer un nouvel envoi. Lorsque le partenariat est accepté, montrer le passage vers les événements. Décrire chaque résultat visible avec les mots d’un utilisateur.",
+    "source": "Capture matching du 15/09 ; code et recette matching.",
+    "action": "0:30–1:00 profil ; 1:00–2:00 filtres ; 2:00–3:00 demande. Adapter aux données disponibles.",
+    "nature": "Manipulation en direct ; capture datée de secours",
+    "dark": false,
     "demo": true,
-    "contentNumber": 20,
     "startMinute": 23.5,
-    "endMinute": 26.5,
-    "spokenWords": 140,
-    "notes": "REPÈRE : 23:30 à 26:30. Durée prévue : 03:00.\n\nTEXTE ORAL\nJe suis connecté en tant que grimpeur. Le profil donne les informations utiles pour ma pratique. Dans la recherche de partenaires, les filtres permettent de réduire les résultats. Je montre un filtre et j'explique ce qui change dans la liste. L'état de la demande permet ensuite de savoir si un échange est déjà engagé.\n\nJe rejoins maintenant la page des événements. Je lis la date, le lieu et la capacité avant de m'inscrire. Je vérifie que l'interface confirme l'inscription et que l'état affiché reste cohérent. Si le compte était déjà inscrit, je l'annonce et j'utilise l'événement préparé pour la répétition.\n\nJe décris le résultat du point de vue de l'utilisateur : il sait quelle sortie il rejoint et peut retrouver son inscription. Je vais vérifier ce même résultat depuis le rôle club.\n\nGESTE OU MANIPULATION\n0:00–0:40 : profil. 0:40–1:35 : filtre et demande. 1:35–2:40 : événement et inscription. 2:40–3:00 : confirmation. Laisser le navigateur affiché pendant les manipulations. La capture sert de secours.\n\nTRANSITION\nJe bascule sur la session du club organisateur.\n\nSOURCE ET NATURE\nC3.4.2, application locale et données de test. Capture réelle du 15 septembre 2026. A08, recette navigateur datée."
+    "endMinute": 26.0,
+    "notes": "REPÈRE : 23:30–26:00\nNATURE : Manipulation en direct ; capture datée de secours\n\nTEXTE ORAL\nAfficher le profil de la session grimpeur et expliquer la discipline et le niveau utilisés. Ouvrir la recherche de partenaires, modifier un filtre et vérifier que les résultats restent cohérents. Consulter un profil compatible, puis montrer l’état d’une demande. Si une demande existe déjà, expliquer cet état au lieu d’annoncer un nouvel envoi. Lorsque le partenariat est accepté, montrer le passage vers les événements. Décrire chaque résultat visible avec les mots d’un utilisateur.\n\nÀ MONTRER\n0:30–1:00 profil ; 1:00–2:00 filtres ; 2:00–3:00 demande. Adapter aux données disponibles.\n\nSOURCE\nCapture matching du 15/09 ; code et recette matching."
   },
   {
     "number": 22,
-    "title": "Retrouver les participants",
-    "minutes": 2.5,
-    "nature": "C3.4.2, application locale et données de test",
-    "layout": "photo",
+    "title": "S’inscrire et retrouver les participants",
+    "section": "C3.4.2 / Démontrer et valider",
+    "minutes": 3,
+    "layout": "screenshot",
+    "subtitle": "Parcours grimpeur puis club · six minutes au total.",
     "content": {
-      "image": "docs/rncp/bloc-03/preuves/captures/evenements-2026-09-15.png",
-      "items": [
-        [
-          "Organisation",
-          "Retrouver l’événement et les participants."
-        ],
-        [
-          "Contrôles",
-          "Vérifier les droits et expliciter les réserves."
-        ]
+      "image": "evenements",
+      "steps": [
+        "Événement",
+        "Inscription",
+        "Participants"
       ]
     },
-    "script": "Je suis maintenant connecté avec le rôle club. Je retrouve l'événement et je consulte les participants. L'inscription effectuée côté grimpeur doit apparaître de façon cohérente. Les commandes de gestion correspondent au rôle de l'organisateur.\n\nJe montre aussi un passage au clavier sur les commandes utiles. Les règles de capacité et les refus d'accès disposent de scénarios de recette identifiés. Si je ne reproduis pas un contrôle en direct, je précise la preuve de test utilisée et sa date.\n\nJe termine en reprenant les critères annoncés : un partenaire recherché, un état de demande compréhensible, une inscription cohérente et un participant visible pour le club. Je distingue les critères vérifiés de ceux qui restent hors du parcours. La validation attendue porte sur ce périmètre explicite, avec ses réserves éventuelles.",
-    "source": "Capture réelle du 15 septembre 2026. A08 et preuves/verification.json.",
-    "action": "0:00–1:15 : événement, commandes et participants. 1:15–2:00 : clavier et portée des preuves de capacité. 2:00–2:30 : critères et réserves. En cas d’incident, annoncer le contrôle non revalidé et utiliser la capture datée.",
-    "transition": "Je reviens au bilan du pilotage.",
+    "script": "Ouvrir un événement futur et montrer les places restantes. Procéder à l’inscription ou expliquer l’état déjà inscrit. Passer dans le navigateur de la session club et retrouver la liste des participants. Montrer que les commandes dépendent du rôle et vérifier un passage au clavier. Revenir aux critères annoncés : préciser ceux qui ont été montrés, ceux qui nécessitent une réserve et ceux qui reposent uniquement sur une preuve de test. Revenir au diaporama avant la fin des six minutes.",
+    "source": "Capture événements du 15/09 ; A08 ; recette événements.",
+    "action": "3:00–4:00 inscription ; 4:00–5:15 club ; 5:15–5:45 clavier ; 5:45–6:00 retour aux critères.",
+    "nature": "Manipulation en direct ; capture datée de secours",
+    "dark": false,
     "demo": true,
-    "contentNumber": 21,
-    "startMinute": 26.5,
-    "endMinute": 29,
-    "spokenWords": 134,
-    "notes": "REPÈRE : 26:30 à 29:00. Durée prévue : 02:30.\n\nTEXTE ORAL\nJe suis maintenant connecté avec le rôle club. Je retrouve l'événement et je consulte les participants. L'inscription effectuée côté grimpeur doit apparaître de façon cohérente. Les commandes de gestion correspondent au rôle de l'organisateur.\n\nJe montre aussi un passage au clavier sur les commandes utiles. Les règles de capacité et les refus d'accès disposent de scénarios de recette identifiés. Si je ne reproduis pas un contrôle en direct, je précise la preuve de test utilisée et sa date.\n\nJe termine en reprenant les critères annoncés : un partenaire recherché, un état de demande compréhensible, une inscription cohérente et un participant visible pour le club. Je distingue les critères vérifiés de ceux qui restent hors du parcours. La validation attendue porte sur ce périmètre explicite, avec ses réserves éventuelles.\n\nGESTE OU MANIPULATION\n0:00–1:15 : événement, commandes et participants. 1:15–2:00 : clavier et portée des preuves de capacité. 2:00–2:30 : critères et réserves. En cas d’incident, annoncer le contrôle non revalidé et utiliser la capture datée.\n\nTRANSITION\nJe reviens au bilan du pilotage.\n\nSOURCE ET NATURE\nC3.4.2, application locale et données de test. Capture réelle du 15 septembre 2026. A08 et preuves/verification.json."
+    "startMinute": 26.0,
+    "endMinute": 29.0,
+    "notes": "REPÈRE : 26:00–29:00\nNATURE : Manipulation en direct ; capture datée de secours\n\nTEXTE ORAL\nOuvrir un événement futur et montrer les places restantes. Procéder à l’inscription ou expliquer l’état déjà inscrit. Passer dans le navigateur de la session club et retrouver la liste des participants. Montrer que les commandes dépendent du rôle et vérifier un passage au clavier. Revenir aux critères annoncés : préciser ceux qui ont été montrés, ceux qui nécessitent une réserve et ceux qui reposent uniquement sur une preuve de test. Revenir au diaporama avant la fin des six minutes.\n\nÀ MONTRER\n3:00–4:00 inscription ; 4:00–5:15 club ; 5:15–5:45 clavier ; 5:45–6:00 retour aux critères.\n\nSOURCE\nCapture événements du 15/09 ; A08 ; recette événements."
   },
   {
     "number": 23,
-    "title": "Les critères de validation du parcours",
+    "title": "Conclure par une décision de validation",
+    "section": "C3.4.2 / Démontrer et valider",
     "minutes": 1,
-    "nature": "C3.4.2, décision attendue après démonstration",
-    "layout": "columns",
+    "layout": "cards",
+    "subtitle": "Conclure sur ce que les preuves permettent d’affirmer.",
     "content": {
-      "items": [
+      "cards": [
         [
-          "Résultats présentés",
-          "Parcours logiciel démontré.\nDécisions reliées aux coûts et à la capacité.\nPreuves classées par compétence."
+          "DÉMONSTRATION",
+          "Critères observés",
+          "Partenaire, inscription, participants et utilisation au clavier."
         ],
         [
-          "Limites explicites",
-          "Management et budget du cas fictif.\nSatisfaction réelle non mesurée.\nContributions réelles à préciser."
+          "DÉCISION",
+          "Accepté / avec réserve / refusé",
+          "Décider à partir du résultat montré, sans accord prérempli."
+        ],
+        [
+          "SUITE",
+          "Traiter les réserves",
+          "Un problème, une action, un responsable et une échéance."
         ]
-      ]
+      ],
+      "callout": "Projet solo réel sur un an ; mises en situation pédagogiques annoncées ; preuves datées."
     },
-    "script": "Je termine par les critères annoncés : trouver un partenaire adapté, comprendre l'état de la demande, confirmer une inscription et retrouver le participant côté club. Je rappelle les contrôles montrés au clavier ainsi que la portée des preuves de capacité.\n\nPour chacun, la décision attendue est accepté, accepté avec réserve ou refusé. Le constat doit correspondre à ce qui a réellement été observé pendant la démonstration. Si une fonction n'a pas été parcourue ou un contrôle a échoué, je l'indique et je conserve la réserve avec son responsable et sa prochaine vérification.\n\nJe demande alors si ce périmètre répond aux critères convenus. Les réserves alimentent le suivi de maintenance du Bloc 4 avec la version identifiée. Aucun accord réel n'est prérempli au nom du client.",
-    "source": "A07 grille de validation ; A08 ; Bloc 4 suivi des réserves et anomalies.",
-    "action": "Demander la décision sur les critères. Terminer à 30:00.",
-    "transition": "Je suis prêt à répondre aux questions et à retrouver les preuves.",
+    "script": "Je termine par le résultat des manipulations : quels critères ont réussi et quelles réserves restent ouvertes ? La décision doit être formulée à partir de ce qui a été montré : accepté, accepté avec réserve ou refusé. Chaque réserve décrit une action, un responsable et une prochaine vérification. Cette validation est recherchée à la fin de la démonstration ; elle n’est pas inventée à l’avance. Le support a présenté les sept compétences, en séparant le projet solo réel sur un an, les estimations initiales et les mises en situation pédagogiques. Les traces du logiciel et les limites des simulations restent disponibles dans les annexes.",
+    "source": "Synthèse des pièces citées ; matrice des compétences.",
+    "action": "Donner le bilan réel des manipulations, puis ouvrir les questions.",
+    "nature": "Éléments du projet documentés",
+    "dark": true,
     "demo": false,
-    "contentNumber": 22,
-    "startMinute": 29,
-    "endMinute": 30,
-    "spokenWords": 137,
-    "notes": "REPÈRE : 29:00 à 30:00. Durée prévue : 01:00.\n\nTEXTE ORAL\nJe termine par les critères annoncés : trouver un partenaire adapté, comprendre l'état de la demande, confirmer une inscription et retrouver le participant côté club. Je rappelle les contrôles montrés au clavier ainsi que la portée des preuves de capacité.\n\nPour chacun, la décision attendue est accepté, accepté avec réserve ou refusé. Le constat doit correspondre à ce qui a réellement été observé pendant la démonstration. Si une fonction n'a pas été parcourue ou un contrôle a échoué, je l'indique et je conserve la réserve avec son responsable et sa prochaine vérification.\n\nJe demande alors si ce périmètre répond aux critères convenus. Les réserves alimentent le suivi de maintenance du Bloc 4 avec la version identifiée. Aucun accord réel n'est prérempli au nom du client.\n\nGESTE OU MANIPULATION\nDemander la décision sur les critères. Terminer à 30:00.\n\nTRANSITION\nJe suis prêt à répondre aux questions et à retrouver les preuves.\n\nSOURCE ET NATURE\nC3.4.2, décision attendue après démonstration. A07 grille de validation ; A08 ; Bloc 4 suivi des réserves et anomalies."
+    "startMinute": 29.0,
+    "endMinute": 30.0,
+    "notes": "REPÈRE : 29:00–30:00\nNATURE : Éléments du projet documentés\n\nTEXTE ORAL\nJe termine par le résultat des manipulations : quels critères ont réussi et quelles réserves restent ouvertes ? La décision doit être formulée à partir de ce qui a été montré : accepté, accepté avec réserve ou refusé. Chaque réserve décrit une action, un responsable et une prochaine vérification. Cette validation est recherchée à la fin de la démonstration ; elle n’est pas inventée à l’avance. Le support a présenté les sept compétences, en séparant le projet solo réel sur un an, les estimations initiales et les mises en situation pédagogiques. Les traces du logiciel et les limites des simulations restent disponibles dans les annexes.\n\nÀ MONTRER\nDonner le bilan réel des manipulations, puis ouvrir les questions.\n\nSOURCE\nSynthèse des pièces citées ; matrice des compétences."
   },
   {
     "number": 24,
-    "title": "Annexe : responsabilités du lot",
+    "title": "Les sept compétences et leurs preuves",
+    "section": "Annexe / Correspondance avec le référentiel",
     "minutes": 0,
-    "nature": "Annexe, organisation fictive",
     "layout": "table",
+    "subtitle": "Deux PDF fournis, une correspondance explicite et aucune acquisition présumée.",
     "content": {
       "rows": [
         [
-          "Compétences",
-          "Pièces de référence"
+          "Compétence",
+          "Slides",
+          "Éléments présentés"
         ],
         [
-          "C.3.1 et C3.2.1",
-          "A01 à A03 et classeur"
+          "C.3.1 · obligatoire",
+          "4–6",
+          "Méthode, planning annuel, affectation et moyens"
+        ],
+        [
+          "C3.2.1 · obligatoire",
+          "7–9",
+          "Avancement, coûts, délais, risques et ressources"
         ],
         [
           "C3.2.2",
-          "A04 et commit 689e59d"
+          "10–11",
+          "Problème, options, décision et mesures"
         ],
         [
-          "C3.3.1 et C3.3.2",
-          "A05 et A06"
+          "C3.3.1",
+          "12–13",
+          "Styles, analyse critique, charge et inclusion"
         ],
         [
-          "C3.4.1 et C3.4.2",
-          "A07, A08 et vérifications"
+          "C3.3.2",
+          "14–15 + 26",
+          "Grille, formation et fiche de renfort"
+        ],
+        [
+          "C3.4.1",
+          "16–18",
+          "Comptes rendus, validations et satisfaction"
+        ],
+        [
+          "C3.4.2 · obligatoire",
+          "19–23",
+          "Dernière version, démo et décision"
         ]
       ],
-      "widths": [
-        460,
-        692
-      ]
+      "callout": "Les mises en situation fictives sont autorisées par le référentiel ; elles restent signalées."
     },
-    "script": "La matrice RACI distingue réalisation, décision, consultation et information. Une seule autorité A est retenue par activité. Camille est le rôle QA fictif. Les aménagements modifient les échanges, sans retirer sa responsabilité de recette.",
-    "source": "A02, matrice RACI du scénario.",
+    "script": "Chaque compétence dispose d’un contenu visible, de notes et d’une annexe détaillée. Les compétences obligatoires sont repérées dans le PDF fourni. La matrice distingue les faits, les estimations et les simulations. Cette correspondance prouve la présence des éléments dans le support ; elle ne préjuge pas de leur évaluation par le jury.",
+    "source": "cadre-evaluation.json ; MATRICE_PREUVES.md.",
     "action": "",
-    "transition": "",
+    "nature": "Analyse de couverture, sans attribution de compétence",
+    "dark": false,
     "demo": false,
-    "contentNumber": 23,
-    "startMinute": 30,
-    "endMinute": 30,
-    "spokenWords": 34,
-    "notes": "REPÈRE : 30:00 à 30:00. Durée prévue : 00:00.\n\nTEXTE ORAL\nLa matrice RACI distingue réalisation, décision, consultation et information. Une seule autorité A est retenue par activité. Camille est le rôle QA fictif. Les aménagements modifient les échanges, sans retirer sa responsabilité de recette.\n\nSOURCE ET NATURE\nAnnexe, organisation fictive. A02, matrice RACI du scénario."
+    "startMinute": 30.0,
+    "endMinute": 30.0,
+    "notes": "REPÈRE : Annexe hors timing\nNATURE : Analyse de couverture, sans attribution de compétence\n\nTEXTE ORAL\nChaque compétence dispose d’un contenu visible, de notes et d’une annexe détaillée. Les compétences obligatoires sont repérées dans le PDF fourni. La matrice distingue les faits, les estimations et les simulations. Cette correspondance prouve la présence des éléments dans le support ; elle ne préjuge pas de leur évaluation par le jury.\n\nÀ MONTRER\n\n\nSOURCE\ncadre-evaluation.json ; MATRICE_PREUVES.md."
   },
   {
     "number": 25,
-    "title": "La sensibilité du budget et de la capacité",
+    "title": "Les étapes enregistrées dans Git",
+    "section": "Annexe / Chronologie réelle du dépôt",
     "minutes": 0,
-    "nature": "Annexe, scénarios pédagogiques",
-    "layout": "table",
-    "content": {
-      "rows": [
-        [
-          "Hypothèse",
-          "Prévision",
-          "Marge",
-          "Capacité"
-        ],
-        [
-          "J10",
-          "4 465 €",
-          "232 €",
-          "Respectée"
-        ],
-        [
-          "QA +6 h",
-          "4 645 €",
-          "52 €",
-          "Respectée"
-        ],
-        [
-          "DEV +8 h",
-          "4 745 €",
-          "−48 €",
-          "Respectée"
-        ],
-        [
-          "CP +2 h",
-          "4 555 €",
-          "142 €",
-          "CP : 31 / 30 h"
-        ],
-        [
-          "Topos +16 h",
-          "5 005 €",
-          "−308 €",
-          "DEV : 76 / 72 h"
-        ]
-      ],
-      "widths": [
-        310,
-        240,
-        225,
-        377
-      ]
-    },
-    "script": "Chaque ligne ajoute une hypothèse isolée à la prévision J10. Six heures QA consomment cent quatre-vingts euros et laissent cinquante-deux euros de marge. Huit heures DEV dépassent le budget de quarante-huit euros, malgré une capacité encore respectée. Deux heures CP conservent cent quarante-deux euros de marge mais portent sa charge à trente et une heures pour trente heures disponibles. La demande topo dépasse les deux contraintes. Les lignes ne se cumulent pas. Les formules de la feuille Pilotage permettent de modifier les heures supplémentaires et de vérifier les effets.",
-    "source": "A09 section 6 ; classeur Pilotage, sensibilité ; donnees/pilotage.json. Taux et capacités fictifs du lot.",
-    "action": "Choisir un scénario dans le tableau et expliquer séparément la contrainte budgétaire et la capacité.",
-    "transition": "",
-    "demo": false,
-    "contentNumber": 24,
-    "startMinute": 30,
-    "endMinute": 30,
-    "spokenWords": 89,
-    "notes": "REPÈRE : 30:00 à 30:00. Durée prévue : 00:00.\n\nTEXTE ORAL\nChaque ligne ajoute une hypothèse isolée à la prévision J10. Six heures QA consomment cent quatre-vingts euros et laissent cinquante-deux euros de marge. Huit heures DEV dépassent le budget de quarante-huit euros, malgré une capacité encore respectée. Deux heures CP conservent cent quarante-deux euros de marge mais portent sa charge à trente et une heures pour trente heures disponibles. La demande topo dépasse les deux contraintes. Les lignes ne se cumulent pas. Les formules de la feuille Pilotage permettent de modifier les heures supplémentaires et de vérifier les effets.\n\nGESTE OU MANIPULATION\nChoisir un scénario dans le tableau et expliquer séparément la contrainte budgétaire et la capacité.\n\nSOURCE ET NATURE\nAnnexe, scénarios pédagogiques. A09 section 6 ; classeur Pilotage, sensibilité ; donnees/pilotage.json. Taux et capacités fictifs du lot."
-  },
-  {
-    "number": 26,
-    "title": "Annexe : demande de renfort aux RH",
-    "minutes": 0,
-    "nature": "Annexe, demande et devis pédagogiques",
-    "layout": "columns",
+    "layout": "timeline",
+    "subtitle": "Repères réels de commits ; distincts du calendrier pédagogique M1–M12.",
     "content": {
       "items": [
         [
-          "Cadre officiel",
-          "Référentiel RNCP39583, pages 11 à 14.\nModalités 2025–2026, pages 6, 8 et 11.\nGrille BC03, page unique."
+          "JAN. 2026",
+          "Fondations",
+          "Next.js, Tailwind, Drizzle"
         ],
         [
-          "Vérifications du 14 septembre",
-          "389 tests unitaires et 6 scénarios navigateur.\nRecette locale sur next dev et MariaDB dédiée.\nAucune validation par un client réel."
+          "MAI",
+          "Premiers parcours",
+          "Connexion, profils, lieux"
+        ],
+        [
+          "JUILLET",
+          "Prototype testé",
+          "Matching, événements, CI"
+        ],
+        [
+          "AOÛT",
+          "Maintenance",
+          "Supervision, incidents, qualité"
+        ],
+        [
+          "SEPT.",
+          "Livraison enrichie",
+          "Médias, administration, topos"
         ]
-      ]
+      ],
+      "callout": "Les commits datent des versions ; ils ne mesurent pas les heures travaillées."
     },
-    "script": "Si une compétence critique reste indisponible à J12, le scénario prévoit une demande au service RH fictif. Quatre heures de spécialiste à 45 euros ajoutent 180 euros, et une demi-heure de CP ajoute 22,50 euros. La prévision de cette variante devient 4 667,50 euros, soit 29,50 euros sous le plafond. La disponibilité J12-J13, le devis et le résultat attendu restent à confirmer. Cette variante indépendante n’est ni activée dans le classeur de base ni présentée comme une embauche réelle.",
-    "source": "A06 et consolidation.json, variante RH non activée.",
-    "action": "",
-    "transition": "",
+    "script": "Le projet s’inscrit sur un an, comme indiqué dans mon cadrage personnel. Le dépôt apporte des repères complémentaires : les fondations techniques sont enregistrées en janvier, puis les interfaces, les profils et les lieux en mai. En juillet apparaissent le matching, les événements et la recette automatisée. En août, le projet intègre davantage de maintenance et de supervision. En septembre, il évolue avec les médias, l’administration et les contributions aux falaises. Cette chronologie est reconstruite à partir des commits. Elle montre ce qui est traçable, mais ne remplace pas un planning initial approuvé. Le premier commit ne date pas nécessairement le début de la réflexion sur le projet. Les mois exacts de début et de fin de l’année restent à confirmer. Je ne transforme pas une période sans commit en absence de travail.",
+    "source": "donnees/projet-reel.json ; preuves/historique-git.txt.",
+    "action": "Suivre la frise ; ouvrir un commit uniquement si le jury demande la preuve.",
+    "nature": "Durée déclarée ; chronologie rétrospective issue de Git",
+    "dark": false,
     "demo": false,
-    "contentNumber": 25,
-    "startMinute": 30,
-    "endMinute": 30,
-    "spokenWords": 79,
-    "notes": "REPÈRE : 30:00 à 30:00. Durée prévue : 00:00.\n\nTEXTE ORAL\nSi une compétence critique reste indisponible à J12, le scénario prévoit une demande au service RH fictif. Quatre heures de spécialiste à 45 euros ajoutent 180 euros, et une demi-heure de CP ajoute 22,50 euros. La prévision de cette variante devient 4 667,50 euros, soit 29,50 euros sous le plafond. La disponibilité J12-J13, le devis et le résultat attendu restent à confirmer. Cette variante indépendante n’est ni activée dans le classeur de base ni présentée comme une embauche réelle.\n\nSOURCE ET NATURE\nAnnexe, demande et devis pédagogiques. A06 et consolidation.json, variante RH non activée."
+    "startMinute": 30.0,
+    "endMinute": 30.0,
+    "notes": "REPÈRE : Annexe hors timing\nNATURE : Durée déclarée ; chronologie rétrospective issue de Git\n\nTEXTE ORAL\nLe projet s’inscrit sur un an, comme indiqué dans mon cadrage personnel. Le dépôt apporte des repères complémentaires : les fondations techniques sont enregistrées en janvier, puis les interfaces, les profils et les lieux en mai. En juillet apparaissent le matching, les événements et la recette automatisée. En août, le projet intègre davantage de maintenance et de supervision. En septembre, il évolue avec les médias, l’administration et les contributions aux falaises. Cette chronologie est reconstruite à partir des commits. Elle montre ce qui est traçable, mais ne remplace pas un planning initial approuvé. Le premier commit ne date pas nécessairement le début de la réflexion sur le projet. Les mois exacts de début et de fin de l’année restent à confirmer. Je ne transforme pas une période sans commit en absence de travail.\n\nÀ MONTRER\nSuivre la frise ; ouvrir un commit uniquement si le jury demande la preuve.\n\nSOURCE\ndonnees/projet-reel.json ; preuves/historique-git.txt."
+  },
+  {
+    "title": "Préparer un besoin de renfort",
+    "section": "Annexe / C3.3.2 · Transmission RH",
+    "minutes": 0,
+    "layout": "table",
+    "subtitle": "FICHE SIMULÉE ET CONDITIONNELLE · aucun recrutement réel dans le projet solo.",
+    "content": {
+      "rows": [
+        [
+          "Rubrique",
+          "Besoin à transmettre au service RH du cas"
+        ],
+        [
+          "Déclencheur",
+          "Recette critique non maîtrisée après la formation et son évaluation"
+        ],
+        [
+          "Mission",
+          "4 h de renfort QA avant la restitution ; parcours et anomalies reproductibles"
+        ],
+        [
+          "Compétences",
+          "Recette navigateur, accessibilité clavier, communication écrite"
+        ],
+        [
+          "Sélection / intégration",
+          "Exercice accessible sur base test ; binôme de prise en main avec le porteur"
+        ],
+        [
+          "Coût indicatif",
+          "4 h × 45 € = 180 € ; hors budget de base, engagement à arbitrer"
+        ],
+        [
+          "Accueil et contrôle",
+          "Accès limités, critères écrits, point de retour et validation du livrable"
+        ]
+      ],
+      "callout": "Préciser disponibilité, modalités et budget avant accord ; ne pas déclarer la fiche envoyée."
+    },
+    "script": "Cette fiche montre comment transmettre un besoin au service RH dans la mise en situation. Le déclencheur est un écart critique qui persiste après formation. La mission est limitée à quatre heures de recette, avec compétences, disponibilité à confirmer et livrable précis. La sélection se fait par un exercice accessible et l’accueil donne les critères et les seuls accès nécessaires. Le coût indicatif de 180 euros serait supplémentaire et doit être arbitré avant tout engagement. Le projet réel est solo : aucun service RH n’a été sollicité ni renfort engagé.",
+    "source": "A06 ; fiche de mise en situation pédagogique.",
+    "nature": "Mise en situation pédagogique explicitement simulée",
+    "dark": false,
+    "action": "",
+    "demo": false,
+    "number": 26,
+    "startMinute": 30.0,
+    "endMinute": 30.0,
+    "notes": "REPÈRE : Annexe hors timing\nNATURE : Mise en situation pédagogique explicitement simulée\n\nTEXTE ORAL\nCette fiche montre comment transmettre un besoin au service RH dans la mise en situation. Le déclencheur est un écart critique qui persiste après formation. La mission est limitée à quatre heures de recette, avec compétences, disponibilité à confirmer et livrable précis. La sélection se fait par un exercice accessible et l’accueil donne les critères et les seuls accès nécessaires. Le coût indicatif de 180 euros serait supplémentaire et doit être arbitré avant tout engagement. Le projet réel est solo : aucun service RH n’a été sollicité ni renfort engagé.\n\nÀ MONTRER\n\n\nSOURCE\nA06 ; fiche de mise en situation pédagogique."
   }
 ]

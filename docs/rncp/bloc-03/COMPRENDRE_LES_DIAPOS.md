@@ -1,237 +1,211 @@
-# Comprendre les diapositives du Bloc 3 quand on est développeur
+# Comprendre le diaporama v17
 
-Ce guide explique le [diaporama v16](../../../output/bloc-03/spity-bloc-3-30-minutes-visuel-v16.pptx) avec des situations de développement. Lis-le pour comprendre le raisonnement, puis utilise le [guide oral](GUIDE_ORAL.md) pour travailler la durée. Les phrases courtes ci-dessous sont des points de départ : elles ne remplissent pas à elles seules les trente minutes.
+Projet **solo**, développé sur **un an**. Les compléments pédagogiques de planning, suivi, collaboration, formation et retours sont explicitement simulés. Les coûts B1 restent prévisionnels.
 
-Pour les sigles et le vocabulaire, consulte le [lexique simple du Bloc 3](LEXIQUE_SIMPLE.md), qui développe notamment QA, CP, RACI et les termes des plannings et budgets.
+## 1. Une année pour construire Spity.
 
-## L'histoire que tu racontes
+Du besoin des grimpeurs à un site déployé.
 
-Tu développes Spity pour des grimpeurs et des clubs. Pour préparer une version à montrer, tu dois choisir les fonctionnalités, répartir le travail, suivre les problèmes et expliquer tes décisions. Le Bloc 3 présente cette organisation autour du code.
+Spity est un projet d’escalade que j’ai développé seul sur un an. Je présente sa gestion et le logiciel. Les traces de développement, la correction de navigation et le déploiement sont réels. Pour traiter les compétences de pilotage, de collaboration et de suivi client qui ne sont pas toutes documentées dans le projet solo, j’ajoute des mises en situation explicitement signalées. Elles se déroulent dans le cadre d’une année, sans être présentées comme des événements réellement vécus.
 
-Une situation suffit pour comprendre le fil conducteur : **le client demande une fonction de plus alors que les inscriptions aux événements demandent encore des corrections.** Tu estimes le travail, regardes le temps disponible et proposes de reporter l'ajout pour terminer et tester ce qui est déjà prévu. Tu expliques ce choix à l'équipe et au client, puis tu montres le résultat.
+Nature : Durée déclarée et preuves du dépôt.
 
-L'application, le code et les preuves datées existent. L'équipe CP/DEV/QA, Camille, les heures, les réunions et les demandes client de ce cas sont fictifs. À l'oral, annonce cette mise en situation. Pour ces passages, « dans le scénario, je prévois… » décrit correctement ce que tu présentes.
+## 2. Sommaire
 
-## Durée réelle, estimation et scénario fictif
+Présentation du projet, puis les compétences dans l’ordre du référentiel.
 
-| Ce que tu regardes | Ce que cela signifie |
-| --- | --- |
-| Développement réel | **Un an**, durée confirmée par Dorian. Les dates exactes et le temps passé ne sont pas fournis. |
-| Projet global du Bloc 1 | La vision de lancement de Spity : neuf lots, 82 jours-homme et 44 250 € de budget estimé. |
-| Cas détaillé du Bloc 3 | Un exercice de préparation de démonstration sur quinze jours ouvrés, à partir des fonctions déjà développées. On suit ses heures, ses personnes et ses décisions. |
+Je présente d’abord le besoin et le projet solo. Je déroule ensuite les sept compétences dans l’ordre : planification, suivi, arbitrage, management, compétences, suivi client et démonstration. Les six minutes de manipulation sont incluses dans les trente minutes. Les trois compétences signalées comme obligatoires dans le PDF fourni sont la planification, le suivi de l’avancement et la démonstration. Toutes les autres restent traitées.
 
-**Un lot** est un ensemble de travaux. Le support emploie ce mot pour les neuf grandes parties du B1 et pour le cas détaillé B3. Ces deux échelles expliquent la présence de deux plannings et de deux budgets.
+Nature : Plan aligné sur les deux PDF fournis.
 
-**Un jour-homme** représente une journée de travail d'une personne. Les 82 jours-homme sont une quantité de travail. La v16 les montre comme des charges estimées par lot, sans les convertir en durée de développement. Le projet réel a duré un an. J10 signifie simplement le dixième jour ouvré du cas B3.
+## 3. Relier les grimpeurs. Simplifier les sorties.
 
-Les 4 465 € du cas B3 ne s'ajoutent pas aux 44 250 € du B1. Le dossier n'établit pas de comptabilité permettant de cumuler ces montants. Le budget global est une référence, le petit cas permet d'expliquer un suivi détaillé.
+Deux besoins concrets pour guider les fonctionnalités.
 
-## Les diapositives, une par une
+Spity répond à deux besoins complémentaires. Un grimpeur cherche une personne avec laquelle pratiquer et une sortie adaptée. Un club souhaite organiser une activité et retrouver les participants. Le produit regroupe donc des profils, des partenaires, des événements et un répertoire de lieux. Ces besoins servent de fil conducteur à la démonstration. La capture montre une interface de la base de démonstration, avec des données de test. Le Collectif Altitude Grimpe présent dans le cadrage initial est un commanditaire fictif ; il ne constitue pas la preuve d’un client réel. Aucun accord de ce collectif n’est revendiqué ici.
 
-### 1. Spity
+Nature : Éléments du projet documentés.
 
-Tu annonces le sujet : Spity, son organisation et sa démonstration. Le jury doit comprendre ce que tu vas lui montrer.
+## 4. Une méthode adaptée au travail solo
 
-**Avec tes mots :** « Je vais expliquer comment j'organise le travail autour de Spity, puis vous montrer un parcours grimpeur et club. »
+Flux de tâches inspiré de Kanban ; rétroplanning annuel pour les jalons.
 
-### 2. Sommaire
+Je retiens un flux inspiré de Kanban, adapté à un projet solo où les priorités évoluent. Linear apporte la visibilité sur les tâches. Le rétroplanning complète le tableau en montrant les dates cibles et les dépendances, que le simple statut d’un ticket ne suffit pas à expliquer. Les deux outils sont compatibles : un lot planifié contient des tâches suivies dans Linear. Git et la CI relient les modifications à leurs contrôles. Le dépôt prouve l’existence de ces outils ; il ne prouve pas que toutes les pratiques proposées ont été appliquées historiquement. Dans la mise en situation, une revue hebdomadaire actualise le reste à faire et les risques.
 
-Tu annonces les cinq parties : le projet, l'organisation, le suivi et les décisions, l'équipe et le client, puis la démonstration. Les horaires sont des repères pour ta répétition. Cette slide prend trente secondes.
+Nature : Outils réels ; cadre méthodologique argumenté et calendrier pédagogique.
 
-**Avec tes mots :** « Je vais présenter le projet, expliquer comment j'organise et suis le travail, puis montrer le résultat dans l'application. »
+## 5. Planifier les travaux sur une année
 
-### 3. Le besoin d'Altitude Grimpe
+M1–M12 : modèle pédagogique sur un an, sans dates calendaires inventées.
 
-Tu présentes le problème utilisateur qui justifie le développement. Un grimpeur veut trouver un partenaire et rejoindre une sortie. Un club veut organiser un événement et voir ses participants. Altitude Grimpe et Claire Martin appartiennent au cadre fictif du B1.
+Le graphique répartit les neuf lots du cadrage sur douze mois relatifs. Les charges de référence viennent du Bloc 1 : elles totalisent 82 jours-personne estimés. Leur position dans le calendrier est une reconstruction pédagogique, pas le planning historique retrouvé. L’étude et la mesure du besoin précèdent la conception. La réalisation des parcours s’appuie sur l’authentification et les profils. Les événements doivent exister avant la recette des inscriptions. Les contrôles se poursuivent pendant la réalisation, puis la restitution intervient au dernier mois. Les points de vigilance portent sur les dépendances, le temps disponible en solo et la préparation d’une recette sur une version stable. Les vraies dates de commits restent dans l’annexe, séparées de ce modèle.
 
-**Avec tes mots :** « Ces besoins me servent à choisir les parcours à montrer et à vérifier si ce qu'on livre est utile. »
+Nature : Mise en situation pédagogique explicitement simulée.
 
-### 4. Spity : un an de développement
+## 6. Affecter les missions et prévoir les moyens
 
-La durée réelle du projet est **un an**. Les neuf barres représentent uniquement les charges estimées au Bloc 1 : leur somme est de 82 jours-homme. Ce n’est pas un relevé de ton temps de travail. Il n’y a pas de dates historiques inventées pour les lots.
+Projet réel : Dorian seul. Extension simulée : une séance avec un testeur ponctuel.
 
-**Avec tes mots :** « J’ai développé Spity sur un an. Pour montrer ma démarche de pilotage, je vais ensuite utiliser un scénario fictif de préparation de démonstration sur quinze jours. »
+Dans la réalité, j’ai réalisé Spity seul. Le tableau sépare donc les responsabilités du projet individuel et une extension pédagogique de recette. Pour cette séance fictive, un testeur réalise les contrôles et Dorian reste responsable du livrable. Un représentant de club fictif décide de l’acceptation dans la mise en situation. Les missions sont affectées selon les compétences nécessaires, pas selon une situation de handicap. Le persona testeur est malentendant : les consignes écrites, les sous-titres vérifiés et les échanges asynchrones rendent sa mission accessible. Les ressources matérielles et logicielles sont celles du projet. Le budget de référence reste l’estimation B1, distincte des dépenses réelles non fournies.
 
-### 5. Le suivi : Linear et les rituels Scrum
+Nature : Mise en situation pédagogique explicitement simulée.
 
-Linear sert à retrouver les tickets et leur état. Kanban désigne ici ce suivi par colonnes. Dans le cas, on limite à deux les tâches en réalisation pour éviter de tout commencer sans terminer.
+## 7. Linear : un état daté du travail
 
-Les réunions ont chacune un usage : le **planning** choisit le travail à faire, le **daily** repère rapidement les blocages, la **review** montre le produit au client, la **rétrospective** améliore la façon de travailler. Exemple de daily : « Je suis bloqué sur le contrôle des places disponibles ; j'ai besoin d'un échange technique après le point. »
+Observation du 14 septembre 2026 ; un ticket annulé exclu du dénominateur.
 
-**Avec tes mots :** « Linear garde la trace du travail. Les réunions permettent de décider quoi faire et de lever les blocages. »
+Le relevé du 14 septembre contient 25 tickets, dont un annulé. Sur les 24 autres, 12 sont terminés, un est en cours, quatre sont à faire et sept restent dans le backlog. Le ratio de tickets terminés vaut donc 50 %. Sa lecture demande deux précautions. D’abord, les tickets n’ont pas tous la même taille. Ensuite, certains statuts peuvent être en retard sur le logiciel : le relevé contient par exemple un sujet d’authentification à faire alors que des parcours de connexion existent dans le dépôt. Le tableau permet de repérer un écart à vérifier ; il ne permet pas de conclure que toute la fonction est terminée. Je conserve la date du relevé et je ne présente pas ces nombres comme un état en direct du 16 septembre.
 
-Le support décrit des réunions inspirées de Scrum, adaptées à un flux Kanban. Les 12 tickets terminés sur 24 non annulés viennent du relevé Linear daté. Des tickets de tailles différentes ne donnent pas automatiquement 50 % du travail réalisé.
+Nature : Observation historique non pondérée.
 
-### 6. Le lot : phases, mesures et dépendances
+## 8. Un tableau de bord pour décider
 
-Tu passes à un **exercice fictif de quinze jours ouvrés**, appliqué au logiciel déjà développé pendant un an. On précise le besoin, on définit comment vérifier le résultat, on prépare la solution, on réalise, on teste, puis on présente. « Mesure » signifie ici rendre l'attente vérifiable : par exemple, une seule inscription acceptée quand il reste une place.
+SIMULATION À M10 · exemple de suivi annuel, distinct des observations réelles.
 
-Une **dépendance** signifie qu'un travail attend un autre travail. La validation finale des événements attend les corrections nécessaires. Les tests peuvent commencer avant, sur ce qui fonctionne déjà.
+Le relevé Linear est réel et daté. Ce tableau est, lui, un exemple chiffré simulé pour montrer comment suivre les autres dimensions du projet. À M10, 58 jours-personne sont supposés consommés et 28 restent à faire. La prévision devient 86 jours, contre 82 initialement. À 450 euros par jour et en conservant les autres postes B1 à 7 350 euros, le total atteint 46 050 euros, soit un écart de 1 800 euros. Le jalon passe de la fin du mois 11 à la fin du mois 12. La prochaine période contient 12 jours de travail pour une capacité hypothétique de 10 : il faut déplacer deux jours de charge ou réduire le périmètre. Ces valeurs servent à expliquer les formules et les décisions ; elles ne sont pas mon temps ou mes dépenses réels.
 
-**Avec tes mots :** « Je prévois du temps pour les tests et les corrections avant la démonstration. Je surveille les tâches qui risquent de décaler cette préparation. »
+Nature : Mise en situation pédagogique explicitement simulée.
 
-### 7. Les missions et les aménagements
+## 9. Anticiper les points de vigilance
 
-CP signifie chef de projet : il organise et prend les décisions nécessaires. DEV développe et corrige. QA prépare et exécute les vérifications. Dans le cas, leurs disponibilités sont respectivement de 30, 72 et 30 heures.
+Registre pédagogique, appuyé sur des problèmes possibles du projet.
 
-Camille est la QA malentendante fictive. Ses missions restent les tests. On adapte les échanges avec des consignes écrites et des réunions sous-titrées, en tenant compte de ses besoins.
+Un tableau de bord doit déclencher des actions. Je propose donc des signaux observables : dépasser la capacité, échouer sur un critère critique, ne pas pouvoir ouvrir le logiciel ou ne pas comprendre une consigne de recette. Chaque ligne associe une réponse et un responsable. Dans le projet solo, Dorian porte ces décisions. La ligne sur la recette accessible appartient à la séance fictive avec testeur. La revue hebdomadaire proposée rapproche les tickets, les écarts et les risques, puis conserve une action datée. Le tableau est un dispositif de pilotage pédagogique ; aucune cotation historique ou réunion réellement tenue n’est revendiquée.
 
-**Avec tes mots :** « Chaque personne sait ce qu'elle doit faire. Je vérifie aussi qu'elle dispose du temps et des informations nécessaires. »
+Nature : Mise en situation pédagogique explicitement simulée.
 
-### 8. Les causes des cinq heures supplémentaires
+## 10. Arbitrer face à une navigation trop lente
 
-Au départ, les travaux du cas étaient estimés à **112 h**. Au point J10, on suppose **77 h déjà faites** et **40 h encore nécessaires**. La nouvelle estimation est donc **117 h**, soit **5 h de plus**.
+Cas réel du 15 septembre : un calcul décoratif bloque le navigateur.
 
-Le graphique explique l'écart : clarification +1 h, accès +2 h, événements +2 h, tests +2 h et corrections réestimées −2 h. Les événements et la fin des tests glissent aussi d'un jour dans le planning. Un décalage de date et des heures de travail supplémentaires sont deux mesures différentes.
+Le cas réel est la lenteur signalée lors des clics de navigation. La conséquence est visible : l’utilisateur attend sans percevoir clairement le résultat de son action. Le diagnostic local montre que l’initialisation du fond animé monopolise le navigateur. Le tableau compare les options comme outil d’aide à la décision. Garder le fond conserve le problème. Optimiser ou différer l’animation peut être étudié, mais aucun gain n’a été mesuré dans les preuves disponibles. Le choix retenu remplace le fond par un SVG statique et ajoute un indicateur d’attente. Il conserve le motif graphique et sacrifie le mouvement. Le changement est réel ; la comparaison formalisée ici est rétrospective. Les mesures suivantes permettent d’en discuter l’effet.
 
-**Avec tes mots :** « Certaines tâches prennent plus de temps que prévu. Je garde l'estimation initiale et j'explique pourquoi la nouvelle estimation augmente. »
+Nature : Arbitrage réel ; comparaison rétrospective.
 
-### 9. Le budget du lot de démonstration
+## 11. Mesurer l’effet de la correction
 
-On valorise les heures du scénario avec un tarif par rôle. Voici les quatre nombres à comprendre :
+Mesures locales contrôlées du 15 septembre ; un passage par parcours.
 
-| Montant | Sens |
-| --- | --- |
-| 4 270 € | Coût prévu au départ pour le cas. |
-| 427 € | Réserve prévue pour les imprévus. |
-| 4 697 € | Limite totale du cas : 4 270 + 427. |
-| 4 465 € | Nouvelle estimation du coût final au point J10. |
+Le graphique compare les mêmes cinq parcours avant et après la correction. Les mesures sont réalisées avec Chromium, un processeur ralenti quatre fois et une latence réseau simulée de 100 millisecondes. Avant correction, le temps médian observé est de 10 220 millisecondes. Après correction, il est de 748 millisecondes. La comparaison montre un effet très net dans ces conditions. Elle reste un échantillon d’un passage par parcours : ce n’est ni une moyenne sur tous les utilisateurs, ni un engagement de performance, ni une mesure en production. Le protocole et les valeurs sont conservés dans l’audit. Je préfère présenter les temps et leurs limites plutôt que transformer un test local en promesse générale.
 
-La nouvelle estimation dépasse le coût initial de **195 €**, mais reste **232 € sous la limite**. La réserve sert justement à absorber certains imprévus. Ces montants sont simulés, sans dépense réelle attestée.
+Nature : Mesures locales contrôlées, échantillon limité.
 
-**Avec tes mots :** « Le cas coûte plus cher que prévu, mais on garde 232 € de marge sur notre limite. Je regarde cette marge avant d'accepter un ajout. »
+## 12. Adapter la posture à une situation précise
 
-### 10. Le chef de projet approche sa limite
+SIMULATION · une recette ponctuelle avec testeur, dans un projet développé seul.
 
-On compare le travail prévu pour chaque rôle avec son temps disponible. CP est à **29 h sur 30**, DEV à **64 h sur 72**, QA à **24 h sur 30**. Le point fragile est CP, qui n'a plus qu'une heure disponible.
+Cette situation est simulée : j’imagine une séance de recette ponctuelle, sans transformer Spity en projet développé en équipe. Le testeur demande de traiter les blocages, tandis que le porteur souhaite enrichir le décor. Une posture participative sert d’abord à écouter les faits et les impacts. Une posture persuasive permet d’expliquer le compromis. La posture directive fixe une limite : un critère critique en échec empêche l’acceptation. Enfin, la posture délégative confie un scénario de test avec un résultat attendu et un point de contrôle. La critique porte sur une décision trop rapide du porteur : elle peut faire perdre une information utile. La recommandation est de faire reformuler le problème, comparer les options, décider puis écrire l’action. Aucun conflit réel n’est attribué à une personne.
 
-**Avec tes mots :** « Même si l'équipe a encore du temps au total, la personne qui doit organiser et décider peut devenir le point de blocage. »
+Nature : Mise en situation pédagogique explicitement simulée.
 
-### 11. Des risques qui déclenchent une action
+## 13. Organiser une collaboration accessible
 
-Un risque est un problème possible qu'on prépare à l'avance. Sur la matrice, un axe représente sa probabilité, l'autre ses conséquences. Un score élevé aide à repérer ce qu'il faut surveiller.
+SIMULATION · testeur malentendant, à distance ; contexte multiculturel prévu.
 
-Exemple : la démonstration pourrait ne pas démarrer. On prévoit une vérification de l'environnement et des captures datées pour expliquer le parcours en cas de difficulté. Pour chaque risque, quelqu'un doit savoir quand agir et quoi faire.
+Dans la simulation, la séance comporte quatre heures de travail pour le porteur et quatre pour le testeur, chacun disposant de cinq heures. La répartition respecte les compétences et conserve une marge. Ce n’est pas une capacité réelle mesurée. Pour le persona malentendant, les consignes sont écrites, les sous-titres sont vérifiés et les prises de parole organisées. Le contrôle consiste à faire reformuler la consigne et retrouver la décision. Dans un contexte à distance et multiculturel, les invitations indiquent les heures locales et le vocabulaire partagé évite les ambiguïtés. Linear suit les actions, Git identifie la version et le dossier centralise les preuves. Un point court, préparé par écrit, se termine par un responsable et un retour attendu.
 
-**Avec tes mots :** « J'identifie ce qui peut bloquer la livraison et je prépare une réponse avant que le problème arrive. »
+Nature : Mise en situation pédagogique explicitement simulée.
 
-### 12. Le choix du build standalone
+## 14. Évaluer les compétences utiles au projet
 
-C'est un exemple technique : les compilations du serveur de développement perturbaient la recette navigateur rapportée dans le dossier historique. On compare augmenter les délais, préparer les routes à l'avance ou tester un serveur issu du build. Le choix visible dans Git est le standalone.
+SIMULATION · niveaux pédagogiques, aucune évaluation personnelle réelle.
 
-Le raisonnement de pilotage consiste à expliquer le problème, les solutions possibles et la raison du choix. Le commit est réel, la comparaison est une analyse faite après coup. Les résultats historiques gardent leur date et leur version.
+Les compétences nécessaires sont le suivi, le développement, la recette et la vérification au clavier. Cette grille est pédagogique : elle ne constitue pas une note réellement attribuée à Dorian ou à un testeur. L’échelle va de zéro, non abordé, à trois, autonome sur des cas complexes. Dans le cas, le porteur lit le suivi avec aide mais doit expliquer seul les écarts : il passe donc d’un niveau un à une cible deux. Le développement est supposé autonome et ne demande pas de formation prioritaire. Le testeur sait suivre une consigne mais doit produire une recette reproductible et vérifier le clavier sans aide. Ces écarts justifient les actions de formation. Le niveau technique reste indépendant de la situation de handicap.
 
-**Avec tes mots :** « Tester le build permet de vérifier un logiciel plus proche de ce qu'on livre. J'explique pourquoi ce choix répond au problème rencontré. »
+Nature : Mise en situation pédagogique explicitement simulée.
 
-### 13. Une demande qui dépasse le lot
+## 15. Prévoir une progression vérifiable
 
-Le client fictif demande une fonction supplémentaire sur les topos. On l'estime à 12 h DEV et 4 h QA, soit 540 €. La nouvelle estimation serait **5 005 €**, donc **308 € au-dessus de la limite**. DEV aurait aussi **76 h de travail pour 72 h disponibles**.
+PLAN SIMULÉ · formations proposées, pas de sessions déclarées suivies.
 
-Le scénario reporte l'ajout. On garde la demande pour plus tard et on conserve les tests du travail déjà prévu.
+Le plan répond aux écarts de la grille. Le porteur dispose d’un atelier d’une heure avant la revue M10 pour recalculer et expliquer le tableau de bord. Le testeur dispose de deux heures avant la recette M11 pour pratiquer la recette et les contrôles clavier. Les durées sont des hypothèses de formation, distinctes des huit heures de la séance de recette. Les supports sont écrits et sous-titrés, les pauses et le temps supplémentaire sont adaptés au besoin. L’efficacité se juge sur une tâche réalisée sans aide, pas sur la seule présence. Si une compétence critique reste indisponible, la fiche de renfort prépare une mission, un profil et des critères pour un service RH dans la mise en situation. Aucun recrutement n’est réellement engagé.
 
-**Avec tes mots :** « L'ajout dépasse notre temps et notre budget. Je propose de le reporter pour finir correctement ce qu'on a déjà engagé. »
+Nature : Mise en situation pédagogique explicitement simulée.
 
-### 14. Des styles adaptés à la situation
+## 16. Un compte rendu qui aide à décider
 
-Les quatre mots désignent des façons d'intervenir. **Participatif** : tu demandes les propositions de DEV et QA. **Persuasif** : tu expliques au client pourquoi tu proposes un report. **Directif** : tu fixes une règle claire sur les contrôles obligatoires avant livraison. **Délégatif** : tu confies le choix de l'implémentation au développeur, avec un résultat attendu.
+CR-SIM-02 · M10 · exemple pédagogique, interlocuteur club fictif.
 
-**Avec tes mots :** « Je fais participer l'équipe aux choix, j'explique les décisions et je laisse de l'autonomie là où la personne maîtrise son travail. »
+Le compte rendu montré est fictif et identifié CR-SIM-02. Il relie les chiffres de la simulation au besoin d’un persona club. Le constat annonce la prévision, son écart et sa conséquence sur le jalon. La décision pédagogique consiste à conserver le fond statique et à protéger les critères de recette. Les actions distinguent le porteur, le testeur ponctuel et le représentant de club fictif. Le document donne aussi un prochain point de validation. Cette structure aide un client à comprendre et à choisir. La correction du fond est réellement présente dans le logiciel, mais ce compte rendu n’est pas son origine historique et n’a pas été signé par un client réel.
 
-### 15. Camille et une équipe à distance
+Nature : Mise en situation pédagogique explicitement simulée.
 
-Tu expliques comment chacun reçoit et comprend les informations. Dans ce cas fictif : sous-titres, une personne qui parle à la fois, décisions écrites, créneau compatible avec Paris et Montréal, formulation simple et possibilité de répondre par écrit.
+## 17. Prévoir les points de validation
 
-**Avec tes mots :** « Après une réunion, chacun doit pouvoir retrouver ce qu'il doit faire, même s'il a mal entendu ou n'était pas disponible au même moment. »
+Calendrier pédagogique cohérent avec le planning annuel.
 
-### 16. La grille des compétences du lot
+Les points de validation du modèle annuel suivent les risques du projet. Le cadrage vérifie le besoin avant d’engager la réalisation. La revue M10 expose les écarts et permet de décider. La recette M11 rapproche chaque critère de son résultat et prépare les corrections. La restitution M12 porte sur la dernière version prête. Une réserve entraîne une action avec un responsable et une échéance à convenir. Ces rendez-vous sont planifiés dans la simulation ; ils ne sont pas des réunions historiques déclarées. Le calendrier évite de découvrir à la dernière minute que le logiciel ne répond pas au parcours attendu.
 
-Tu compares une compétence utile au projet avec le niveau nécessaire. Niveau 1 signifie que la personne réalise avec de l'aide, niveau 2 qu'elle sait faire seule sur un cas courant. Les notes décrivent le scénario, sans évaluer des collègues réels.
+Nature : Mise en situation pédagogique explicitement simulée.
 
-Exemple DEV : comprendre comment empêcher deux inscriptions concurrentes de prendre la dernière place. Exemple QA : rejouer le test de façon reproductible.
+## 18. Mesurer le retour pour agir
 
-**Avec tes mots :** « Je repère ce que chacun doit apprendre pour réussir les tâches prévues. »
+Protocole proposé ; aucun résultat réel mesuré.
 
-### 17. Un plan de formation pour chaque rôle
+Les indicateurs sont définis avant la séance : réussite sans aide, utilité perçue, conformité des critères critiques et blocages ouverts. Le protocole note aussi l’effectif, car une moyenne isolée masque le nombre de retours. Les cibles affichées sont pédagogiques, pas des engagements signés. Les résultats restent non mesurés. Si la réussite sans aide est faible, il faut identifier l’étape difficile. Une faible utilité demande de revenir au besoin. Un blocage critique empêche l’acceptation et déclenche une correction suivie d’une nouvelle vérification. Ces indicateurs complètent les tests techniques, qui ne mesurent pas la satisfaction.
 
-La grille précédente débouche sur du temps d'apprentissage : une heure pour le suivi des écarts côté CP, deux heures pour la concurrence côté DEV et trois heures pour les tests navigateur et clavier côté QA. Ces six heures sont déjà comprises dans les tâches du cas.
+Nature : Mise en situation pédagogique explicitement simulée.
 
-On vérifie ensuite que la personne réussit un exercice seule. Si une compétence critique reste manquante, le scénario prévoit d'étudier un renfort.
+## 19. Préparer une démonstration vérifiable
 
-**Avec tes mots :** « Je réserve du temps pour apprendre, puis je vérifie que la personne sait utiliser ce qu'elle a appris sur le projet. »
+La réussite s’observe sur des actions précises.
 
-### 18. Review J10 : une décision dans CR02
+La démonstration est préparée autour de critères visibles. Pour les partenaires, je vérifie les filtres et l’état d’une demande. Pour un événement, je montre l’inscription et les places disponibles. Avec la session club, je retrouve les participants et les commandes autorisées. Je termine par un passage au clavier. La préparation se fait sur une base isolée contenant des comptes de test. Avant l’oral, il faut vérifier les dates des événements, les connexions et la version utilisée. Les captures du 15 septembre servent de secours si un incident empêche une manipulation. Dans ce cas, j’annonce le problème et le critère qui n’a pas été revérifié en direct. Je ne transforme pas une capture en validation actuelle.
 
-CR02 est simplement le deuxième compte rendu du cas. Le point client explique le décalage des événements, le coût prévu et le report des topos. Il précise ensuite qui fait quoi : DEV termine à J12, QA clôt les tests après correction à J14, CP prépare la présentation J15.
+Nature : Protocole proposé pour la démonstration.
 
-**Avec tes mots :** « Après le point client, je garde une trace de la décision et des prochaines actions pour éviter les malentendus. »
+## 20. Passer du suivi à l’usage.
 
-### 19. Mesurer la satisfaction et agir
+Deux sessions pour un parcours complet.
 
-Tu prépares une vérification avec des utilisateurs : arrivent-ils à terminer le parcours sans aide, trouvent-ils le résultat utile et rencontrent-ils des blocages ? Les valeurs 80 % et 4/5 sont des objectifs. Aucun résultat réel n'a été mesuré dans cette session fictive.
+Je passe à la démonstration. Les comptes utilisés sont des comptes de test dans une base dédiée. Je commence avec une session grimpeur, puis je passe à la session club pour retrouver les participants. L’objectif est de montrer les critères annoncés, pas de parcourir toutes les pages du site.
 
-**Avec tes mots :** « Je veux vérifier que les utilisateurs arrivent à utiliser la fonction. Si ça bloque, je relève le problème, je prévois une correction et je refais le test. »
+Nature : Manipulation à réaliser devant le jury.
 
-### 20. Place à la démonstration
+## 21. Trouver un partenaire
 
-Tu annonces le passage à l'application locale avec des comptes de test : d'abord le grimpeur, puis le club. Cette transition fait partie des six minutes de démonstration prévues avec les slides 21 et 22.
+Parcours grimpeur · base de démonstration.
 
-**Avec tes mots :** « Je vais maintenant montrer le parcours que nous avons préparé. »
+Afficher le profil de la session grimpeur et expliquer la discipline et le niveau utilisés. Ouvrir la recherche de partenaires, modifier un filtre et vérifier que les résultats restent cohérents. Consulter un profil compatible, puis montrer l’état d’une demande. Si une demande existe déjà, expliquer cet état au lieu d’annoncer un nouvel envoi. Lorsque le partenariat est accepté, montrer le passage vers les événements. Décrire chaque résultat visible avec les mots d’un utilisateur.
 
-### 21. Trouver un partenaire
+Nature : Manipulation en direct ; capture datée de secours.
 
-Tu joues le rôle du grimpeur : profil, filtre de recherche, état de la demande, puis accès à une sortie et inscription. Tu décris ce que l'utilisateur fait et ce que l'écran confirme.
+## 22. S’inscrire et retrouver les participants
 
-**Avec tes mots :** « Je cherche un partenaire adapté à ma pratique, puis je rejoins une sortie. Je vérifie que mon inscription est bien confirmée. »
+Parcours grimpeur puis club · six minutes au total.
 
-### 22. Retrouver les participants
+Ouvrir un événement futur et montrer les places restantes. Procéder à l’inscription ou expliquer l’état déjà inscrit. Passer dans le navigateur de la session club et retrouver la liste des participants. Montrer que les commandes dépendent du rôle et vérifier un passage au clavier. Revenir aux critères annoncés : préciser ceux qui ont été montrés, ceux qui nécessitent une réserve et ceux qui reposent uniquement sur une preuve de test. Revenir au diaporama avant la fin des six minutes.
 
-Tu passes côté club et retrouves l'inscription effectuée. Cela relie les deux rôles au même résultat. Tu montres les commandes utiles et un passage au clavier. Tout contrôle cité doit correspondre à ce que tu montres ou à une preuve de test identifiée.
+Nature : Manipulation en direct ; capture datée de secours.
 
-**Avec tes mots :** « Le club retrouve maintenant le participant inscrit et peut suivre l'organisation de son événement. »
+## 23. Conclure par une décision de validation
 
-### 23. Les critères de validation du parcours
+Conclure sur ce que les preuves permettent d’affirmer.
 
-Tu reprends ce que tu avais promis de montrer et le résultat observé. « Accepté avec réserve » signifie qu'on conserve un point à traiter explicitement. Cette décision doit s'appuyer sur la démonstration. On ne préremplit pas un accord client fictif comme s'il avait été obtenu.
+Je termine par le résultat des manipulations : quels critères ont réussi et quelles réserves restent ouvertes ? La décision doit être formulée à partir de ce qui a été montré : accepté, accepté avec réserve ou refusé. Chaque réserve décrit une action, un responsable et une prochaine vérification. Cette validation est recherchée à la fin de la démonstration ; elle n’est pas inventée à l’avance. Le support a présenté les sept compétences, en séparant le projet solo réel sur un an, les estimations initiales et les mises en situation pédagogiques. Les traces du logiciel et les limites des simulations restent disponibles dans les annexes.
 
-**Avec tes mots :** « Voici ce qui a été vérifié et les éventuels points restant à corriger. Pour chaque réserve, je précise la suite. »
+Nature : Éléments du projet documentés.
 
-### 24. Annexe : responsabilités du lot
+## 24. Les sept compétences et leurs preuves
 
-RACI est un tableau de responsabilités : **R réalise**, **A a la décision finale**, **C donne son avis**, **I reçoit l'information**. Exemple : DEV réalise la correction, QA aide à vérifier le résultat, CP organise sa prise en compte.
+Deux PDF fournis, une correspondance explicite et aucune acquisition présumée.
 
-**Avec tes mots :** « Ce tableau évite qu'une tâche reste sans responsable ou qu'on ne sache pas qui peut valider. »
+Chaque compétence dispose d’un contenu visible, de notes et d’une annexe détaillée. Les compétences obligatoires sont repérées dans le PDF fourni. La matrice distingue les faits, les estimations et les simulations. Cette correspondance prouve la présence des éléments dans le support ; elle ne préjuge pas de leur évaluation par le jury.
 
-### 25. Annexe : sensibilité du budget et de la capacité
+Nature : Analyse de couverture, sans attribution de compétence.
 
-« Sensibilité » signifie ici regarder ce qui se passe quand une hypothèse change. Exemple : deux heures de CP supplémentaires restent dans le budget, mais dépassent son temps disponible. Une situation peut être acceptable financièrement tout en étant impossible à planifier.
+## 25. Les étapes enregistrées dans Git
 
-**Avec tes mots :** « Je teste les conséquences d'un imprévu sur le budget et sur le temps de chaque rôle. »
+Repères réels de commits ; distincts du calendrier pédagogique M1–M12.
 
-Chaque ligne est une variante indépendante, sans cumul automatique avec les autres.
+Le projet s’inscrit sur un an, comme indiqué dans mon cadrage personnel. Le dépôt apporte des repères complémentaires : les fondations techniques sont enregistrées en janvier, puis les interfaces, les profils et les lieux en mai. En juillet apparaissent le matching, les événements et la recette automatisée. En août, le projet intègre davantage de maintenance et de supervision. En septembre, il évolue avec les médias, l’administration et les contributions aux falaises. Cette chronologie est reconstruite à partir des commits. Elle montre ce qui est traçable, mais ne remplace pas un planning initial approuvé. Le premier commit ne date pas nécessairement le début de la réflexion sur le projet. Les mois exacts de début et de fin de l’année restent à confirmer. Je ne transforme pas une période sans commit en absence de travail.
 
-### 26. Annexe : demande de renfort aux RH
+Nature : Durée déclarée ; chronologie rétrospective issue de Git.
 
-Si la formation ne suffit pas, le scénario décrit une aide QA de quatre heures. Avec le temps d'accueil de CP, la variante ajoute 202,50 € et laisse 29,50 € sous le plafond. Il faut encore vérifier la disponibilité et décider de l'engagement. Cette aide n'est pas activée dans le cas de base.
+## 26. Préparer un besoin de renfort
 
-**Avec tes mots :** « Si on a besoin d'aide, je précise la mission, le délai et le coût avant de demander un renfort. »
+FICHE SIMULÉE ET CONDITIONNELLE · aucun recrutement réel dans le projet solo.
 
-Les slides 24 à 26 servent aux questions du jury. Elles ne s'ajoutent pas aux trente minutes prévues pour les slides 1 à 23.
+Cette fiche montre comment transmettre un besoin au service RH dans la mise en situation. Le déclencheur est un écart critique qui persiste après formation. La mission est limitée à quatre heures de recette, avec compétences, disponibilité à confirmer et livrable précis. La sélection se fait par un exercice accessible et l’accueil donne les critères et les seuls accès nécessaires. Le coût indicatif de 180 euros serait supplémentaire et doit être arbitré avant tout engagement. Le projet réel est solo : aucun service RH n’a été sollicité ni renfort engagé.
 
-## Les mots à traduire dans ta tête
-
-| Terme du support | Traduction simple |
-| --- | --- |
-| Piloter | Organiser le travail, regarder ce qui se passe et adapter les décisions. |
-| Périmètre | Ce qu'on a prévu de livrer dans cette version. |
-| Charge | Le travail nécessaire, exprimé en heures ou en jours-homme. |
-| Capacité | Le temps disponible pour réaliser ce travail. |
-| Prévision à terminaison | Ce qu'on estime nécessaire au total pour finir. |
-| Reste à faire | Le travail encore nécessaire. |
-| Arbitrage | Un choix expliqué entre plusieurs options. |
-| Recette | Vérifier le résultat avec des critères définis. |
-| Jalon | Un point du planning où un résultat doit être vérifié ou une décision prise. |
-| Réserve budgétaire | Une somme prévue pour les imprévus. |
-| Réserve après démonstration | Un point explicitement conservé pour correction ou vérification. |
-| Commanditaire | La personne ou l'organisation qui demande le projet. |
-
-Pour préparer une slide, entraîne-toi à expliquer le problème concret, ce que tu proposes et l'effet attendu. Si un mot te bloque, reprends la situation de développement correspondante et formule-la avec tes mots.
+Nature : Mise en situation pédagogique explicitement simulée.

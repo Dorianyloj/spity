@@ -60,7 +60,10 @@ def markdown(path):
             if rows[0]==['ID','Statut observé','Priorité','Intitulé']: widths=[0.6,0.9,0.7,3.8]
             if rows[0]==['Tâche','Détail initial en heures','Total','Référence de contexte']: widths=[0.7,3.45,0.5,1.6]
             if rows[0]==['Cause du scénario','Écart h','Effet coût','Réponse']: widths=[2.1,0.55,0.8,2.2]
-            if columns==5: widths=[0.65,1.65,0.75,0.7,2]
+            if columns==5: widths=[1.2,1.4,0.8,1.8,2.0]
+            if rows[0]==['Lot','Début','Fin','Charge estimée','Responsable du cas']: widths=[2.2,0.6,0.6,1.1,1.5]
+            if rows[0]==['Rôle du cas','Compétence','Actuel','Cible','Commentaire']: widths=[1.3,1.6,0.55,0.55,3]
+            if rows[0]==['Public','Moment / durée','Objectif','Modalité','Évaluation']: widths=[0.85,1.0,1.1,2.0,2.2]
             if columns==6: widths=[0.45,2.4,0.5,0.5,0.6,0.9]
             if columns==7: widths=[0.5,2.4,0.6,0.85,0.8,0.8,1.1]
             if rows[0]==['Activité','CP','DEV','QA','CL']: widths=[3,0.7,0.7,0.7,0.7]
@@ -70,7 +73,7 @@ def markdown(path):
             content=[[Paragraph(inline(c),styles['head' if n==0 else 'cell']) for c in row] for n,row in enumerate(rows)]
             t=Table(content,colWidths=[174*mm*w/total for w in widths],repeatRows=1,hAlign='LEFT')
             t.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),GREEN),('VALIGN',(0,0),(-1,-1),'TOP'),('LEFTPADDING',(0,0),(-1,-1),6),('RIGHTPADDING',(0,0),(-1,-1),6),('TOPPADDING',(0,0),(-1,-1),4.5),('BOTTOMPADDING',(0,0),(-1,-1),4.5),('ROWBACKGROUNDS',(0,1),(-1,-1),[colors.white,LIGHT]),('LINEBELOW',(0,0),(-1,0),0.5,GREEN)]))
-            story += [t,Spacer(1,9)]
+            story += [KeepTogether([t]) if len(rows) <= 9 else t,Spacer(1,9)]
             continue
         if line.startswith('# '): key='h1'; line=line[2:]
         elif line.startswith('## '): key='h2'; line=line[3:]
@@ -89,7 +92,7 @@ def footer(canvas,doc):
 
 def main():
     OUTPUT.parent.mkdir(parents=True,exist_ok=True)
-    story=[Spacer(1,32*mm),Paragraph('SPITY',ParagraphStyle('cover',fontName='Arial-Bold',fontSize=45,leading=50,textColor=GREEN)),Spacer(1,10*mm),Paragraph('Coordonner et piloter<br/>un projet logiciel',styles['h1']),Paragraph('Dossier de soutenance - Bloc 3',styles['h2']),Paragraph('Dorian Joly<br/>Expert en développement logiciel - RNCP39583<br/>Révision documentaire du 15 septembre 2026',styles['body']),Spacer(1,12*mm),Paragraph('Réalisations vérifiables du projet et mise en situation pédagogique explicitement identifiée. Le dossier accompagne un oral de 30 minutes, démonstration incluse, suivi de 15 minutes de questions.',styles['body']),PageBreak()]
+    story=[Spacer(1,32*mm),Paragraph('SPITY',ParagraphStyle('cover',fontName='Arial-Bold',fontSize=45,leading=50,textColor=GREEN)),Spacer(1,10*mm),Paragraph('Coordonner et piloter<br/>un projet logiciel',styles['h1']),Paragraph('Dossier de soutenance - Bloc 3',styles['h2']),Paragraph('Dorian Joly<br/>Expert en développement logiciel - RNCP39583<br/>Révision documentaire du 16 septembre 2026',styles['body']),Spacer(1,12*mm),Paragraph('Projet solo sur un an, réalisations vérifiables et mises en situation pédagogiques identifiées pour les sept compétences. Le dossier accompagne un oral de 30 minutes, démonstration incluse, suivi de 15 minutes de questions.',styles['body']),PageBreak()]
     files=[DOCS/'DOSSIER_BLOC_03.md',DOCS/'MATRICE_PREUVES.md',*sorted((DOCS/'annexes').glob('A*.md')),DOCS/'VERIFICATION.md']
     for n,f in enumerate(files):
         if not f.exists():raise FileNotFoundError(f)

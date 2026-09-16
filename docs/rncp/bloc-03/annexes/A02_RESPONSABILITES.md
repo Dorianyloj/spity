@@ -1,43 +1,41 @@
-# A02 - Responsabilités et ressources
+# A02 — Responsabilités et ressources du projet solo
 
-Nature : simulation pédagogique. CP = chef de projet ; DEV = développeur fictif ; QA = Camille, testeuse QA fictive ; CL = client fictif. R réalise, A décide et répond du résultat, C est consulté, I est informé. Une seule autorité A par ligne.
+Dorian Joly confirme avoir réalisé le projet seul. Les responsabilités ci-dessous décrivent le périmètre du projet, sans multiplier artificiellement les personnes.
 
-CL reprend Claire Martin, présidente fictive du Collectif Altitude Grimpe, commanditaire défini dans C1.1.1 du Bloc 1. CP/DEV/QA sont des rôles du scénario et ne prouvent pas l'existence de trois collaborateurs réels.
-
-| Activité | CP | DEV | QA | CL |
-| --- | --- | --- | --- | --- |
-| Fixer périmètre et critères | R | C | C | A |
-| Planifier et affecter | A/R | C | C | I |
-| Réaliser les fonctions | A | R | C | I |
-| Recetter les parcours | A | C | R | C |
-| Traiter les corrections | A | R | C | I |
-| Arbitrer délai, coût, périmètre | R | C | C | A |
-| Accepter la démonstration | R | C | C | A |
-
-| Ressource du cas | Disponibilité et usage |
-| --- | --- |
-| CP | 30 h sur quinze jours ouvrés ; organisation, décisions, suivi et présentation. |
-| DEV | 72 h sur le même horizon ; réalisation et corrections. |
-| QA : Camille | 30 h disponibles, 24 h prévues à terminaison ; critères T02, recette et accessibilité T07. |
-| CL | Trois points de validation ; disponibilité à convenir dans une réalisation réelle. |
-| Matériel | Machine et navigateur disponibles ; aucune acquisition matérielle imputée au cas. |
-| Logiciels | Git, Linear, environnement Node.js/MariaDB, documents partagés et visioconférence. |
-
-Le rôle réel de chaque personne doit être distingué de cette organisation type. L'attribution des tickets à Dorian dans l'archive Linear n'établit pas, à elle seule, la composition d'une équipe réelle.
-
-<!-- pagebreak -->
-
-## Cas concret : Camille, testeuse QA malentendante
-
-Camille est un personnage entièrement fictif ajouté au scénario pédagogique le 15 septembre 2026. Son besoin retenu est d'accéder aux informations orales et de participer aux décisions. L'affectation de T02 et T07 repose sur les compétences du rôle QA ; sa situation ne détermine pas son niveau technique. Le cas est centralisé dans [les données d'inclusion](../donnees/inclusion.json).
-
-| Besoin du scénario | Modalité convenue avec Camille | Responsable |
+| Responsabilité | Travail à expliquer | Trace |
 | --- | --- | --- |
-| Comprendre les consignes et préparer son intervention | Ordre du jour et consignes écrites avant les points. | CP |
-| Suivre une réunion | Sous-titres testés, une seule personne parle à la fois, reprise écrite si nécessaire. | CP et participants |
-| Retrouver une décision | Synthèse avec action, responsable et échéance dans l'espace partagé. | CP |
-| Se former et réaliser la recette | Consignes écrites et démonstration sous-titrée ; mise en pratique autonome. | CP pour le support, Camille pour l'exercice |
+| Pilotage | Cadrage, priorités et décisions | Bloc 1, Linear, audits |
+| Réalisation | Interfaces, données et parcours | Code, commits, pull requests |
+| Vérification | Recette, qualité et préparation de la démo | Tests et procédures |
+| Livraison | Intégration et contrôle de version | CI/CD et sonde de santé |
 
-La préparation mobilise 0,5 h CP dans T03.3 « Affecter les responsabilités » et 0,5 h CP dans T08.2 « Préparer la revue et arbitrer », incluses dans les charges existantes. Les 3 h QA de formation restent dans T07. L'outil de visioconférence existant est supposé fournir un sous-titrage adapté dans ce scénario ; aucun achat supplémentaire n'est compté. Si ces hypothèses ne suffisent pas, la charge et le budget sont réestimés avant engagement.
+## Ressources observables
 
-Les contrôles prévus à J3, J10 et J14 sont détaillés dans A05. Ce sont des résultats attendus, sans observation réelle annoncée. Le cas n'attribue aucune situation de santé à une personne réelle. Les horaires restent explicites et les ressources accessibles de façon asynchrone.
+Poste local, navigateur, dépôt Git, Next.js, MariaDB et Docker ; environnement de démonstration isolé ; production sur VPS ; CI GitHub Actions. Linear conserve un suivi de tâches. Aucune capacité hebdomadaire, taux d’occupation ou disponibilité d’un autre collaborateur n’est fournie.
+
+La recette n’est pas indépendante du développement dans ce projet solo. Les contrôles automatisés rendent certaines vérifications répétables, mais ne remplacent pas une revue humaine indépendante. Décrire les aides réellement reçues si le candidat souhaite les préciser.
+
+Aucune situation de handicap n’est attribuée à une personne réelle. Le persona de l’extension pédagogique est explicitement fictif. L’accessibilité des interfaces se démontre par les contrôles du produit ; elle ne prouve pas un aménagement d’équipe.
+
+## Extension pédagogique : séance de recette ponctuelle
+
+Le projet reste développé seul. Le cas ajoute uniquement une collaboration fictive de recette afin de présenter l’affectation et la coordination demandées.
+
+| Activité | Dorian | Testeur fictif | Club fictif |
+| --- | --- | --- | --- |
+| Définir le périmètre du cas | R | C | A |
+| Développer et livrer | A/R | I | I |
+| Préparer et exécuter la recette | A | R | C |
+| Corriger et recontrôler | A/R | C | I |
+| Décider la réception | R | C | A |
+
+R : réalise ; A : décide ; C : consulté ; I : informé. Une autorité par activité. Le testeur reçoit une mission de recette parce que son profil est adapté à l’exécution des scénarios, avec formation sur les écarts identifiés dans A06.
+
+| Personne du cas | Charge de la séance | Capacité hypothétique | Détail |
+| --- | --- | --- | --- |
+| Porteur | 4 h | 5 h | Préparer build/comptes 1 h ; corriger 2 h ; vérifier/restituer 1 h |
+| Testeur fictif | 4 h | 5 h | Préparer les critères 1 h ; tester 2 h ; restituer 1 h |
+
+Taux de charge : 80 % chacun ; une heure de marge. Les trois heures de formation d’A06 sont une autre activité, planifiée avant la séance et exclue de ces huit heures. Aucune double comptabilisation dans un consommé réel, car aucune de ces charges n’est historique.
+
+Persona testeur malentendant : consignes écrites, sous-titres vérifiés, prise de parole organisée et possibilité de retour asynchrone. Vérifier qu’il comprend la consigne et retrouve la décision. Ces besoins d’aménagement ne déterminent pas son niveau technique.

@@ -1,0 +1,21 @@
+[
+  {
+    "file": "docs/rncp/referentiel/rncp-edl-competences-obligatoires.pdf",
+    "sha256": "750a8b2d41594c7163cfe2844494bb8165df93ba3495b7c06970aa86ccaf7fbf",
+    "pages": [
+      4
+    ],
+    "providedOn": "2026-09-16"
+  },
+  {
+    "file": "docs/rncp/referentiel/2024-referentiel-expert-developpement-logiciel-ynov.pdf",
+    "sha256": "4892018d969edff4ea79dfd90b23ec0c37ab5bd618af0cd9b831ba878cfe4466",
+    "pages": [
+      11,
+      12,
+      13,
+      14
+    ],
+    "providedOn": "2026-09-16"
+  }
+]

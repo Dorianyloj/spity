@@ -1,5 +1,7 @@
-# Anciennes présentations
+# Archives du Bloc 3
 
-Ces versions sont conservées pour l'historique du travail. La version courante à utiliser est [le PowerPoint v16](../spity-bloc-3-30-minutes-visuel-v16.pptx), accompagné de [son PDF](../spity-bloc-3-30-minutes-visuel-v16.pdf).
+La version courante est la v17, dans le dossier parent.
 
-Les anciens générateurs écrivent également dans ce dossier. Toute nouvelle version remplacée doit être rangée ici pour garder le dossier parent lisible.
+Le fichier `kit-scenario-15-jours-v16.zip` conserve intégralement les anciennes sources, outils, notes, dossier et classeur du cas fictif. Les présentations v16 et précédentes sont historiques et ne doivent pas servir à la soutenance actuelle. Les anciens générateurs se trouvent dans ce ZIP ; ils ne font plus partie de la chaîne de génération courante.
+
+La v17 présente le projet réel sur un an déclaré par le candidat, avec des observations datées et les informations encore non documentées.

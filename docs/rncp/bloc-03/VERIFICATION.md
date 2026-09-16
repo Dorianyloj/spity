@@ -1,26 +1,23 @@
-# Vérification du kit et de l'application
+# Vérifications et portée des preuves
 
-Contrôles du 15 septembre 2026 sur 9d166c0, arbre applicatif 9109ce976825a6536fa1c7219a2b5ef5e8c3b64c, incluant les évolutions du matching à cette révision. Les résultats du 14 septembre restent dans preuves/verification-2026-09-14.json. Les trois captures du 15 septembre sont identifiées dans preuves/captures/manifest.json. Linear conserve son relevé distinct du 14 septembre.
+## Recette historique conservée
 
-| Contrôle réellement exécuté | Résultat | Portée |
-| --- | --- | --- |
-| Lint | Réussi | Analyse ESLint du projet. |
-| TypeScript | Réussi | Contrôle statique sans émission. |
-| Tests unitaires | 389 tests réussis dans 72 suites | Aucun test ignoré ou instantané annoncé ; ce résultat n'est pas une couverture en pourcentage. |
-| Build Next.js | Réussi, version installée 16.3.4 | Construction de l'application et vérification TypeScript. |
-| MariaDB de démonstration | Base dédiée préparée, réutilisée | Base dédiée spity_bloc3_demo sur 127.0.0.1:33313 ; la base habituelle n'est pas réinitialisée. |
-| Recette navigateur | Six scénarios réussis, aucun échec, skip ou flaky | Inscription, profils, matching, partenariats, événements, droits et navigation mobile/clavier. |
+preuves/verification.json décrit la révision 9d166c0 et l’arbre applicatif 9109ce976825a6536fa1c7219a2b5ef5e8c3b64c : lint, types, build, 389 tests Jest et six scénarios navigateur. Les résultats du 14 septembre sont conservés séparément. Ces contrôles **ne certifient pas la version courante** si son arbre diffère. La révision récente ajoute des changements applicatifs.
 
-Les contrôles ont utilisé Node.js 24.14.0 ; Node.js 22 reste la référence du projet. Le runtime documentaire est distinct. Le build a réussi avec l'accès aux polices Google ; l'échec réseau du 14 septembre reste archivé.
+## Correction de navigation du 15 septembre
 
-La recette locale utilise next dev sur le port 3313, selon la configuration hors CI. Ce résultat ne vaut pas nouvelle recette distante du standalone. L'avertissement décoratif VANTA « No THREE defined on window » n'a pas empêché les six parcours de réussir. Aucun déploiement de production, audit externe ou accord client réel n'est déclaré.
+Le rapport docs/audits/2026-09-15-navigation-performances.md consigne lint, types, build, 404 tests Jest et sept scénarios Playwright réussis sur une compilation de production locale avec MariaDB isolée. Les chiffres avant/après proviennent d’un passage par parcours avec CPU ×4, latence 100 ms et débit 1 000 000 octets/s. Ce rapport est une preuve historique consignée, pas une nouvelle exécution lors de la révision documentaire.
 
-## Portée sur la version présentée
+## Livraison distante datée
 
-Ces résultats ne certifient pas la version courante si elle diffère de l'arbre testé. Au contrôle documentaire du 15 septembre, partnership-center.tsx et partnership-center.test.tsx différaient localement de HEAD. Ces changements n'ont pas reçu de nouvelle recette dans cette revue. Le contrôle du kit distingue HEAD, les modifications locales et la preuve datée. Stabiliser la version à présenter, rejouer les contrôles et le parcours complet, puis actualiser la preuve.
+La PR 35 est fusionnée le 15 septembre à 872db19. Le déploiement GitHub Actions 35026306103 termine avec succès. preuves/production-2026-09-15.json conserve la sonde réalisée à 21:39 UTC : santé OK, version 0.1.0 et SHA attendu. Ce fichier est conservé depuis le contrôle réellement exécuté ; sa copie dans le kit ne constitue pas une nouvelle sonde.
 
-## Vérification des livrables
+## Captures
 
-Le classeur comporte cinq feuilles, trente activités et 175 formules sans erreur exportée. Les contrôles de recalcul portent sur le reste à faire, le taux horaire, une capacité nulle et une entrée manquante ; les entrées sont restaurées avant export. Le taux de 50 % désigne cinq tâches sur dix du cas, sans pondération.
+Les trois captures du 15 septembre représentent la base locale de démonstration. Leur manifeste est inchangé. Elles ne prouvent ni une utilisation par de vrais clients ni le résultat de la prochaine démonstration.
 
-Les rendus PDF et PPTX sont inspectés, sans ouverture déclarée dans Microsoft PowerPoint. La matrice précise les trois compétences éliminatoires du règlement spécial. La checklist conserve rôle personnel, dates, consignes du campus et répétition. Aucun dépôt DigiformaCertif n'est effectué.
+## Livrables v17
+
+La validation documentaire contrôle données sources, formules et valeurs du classeur, chiffres des graphiques, couverture de tous les critères, notes, liens locaux, intégrité PDF/PPTX/ZIP et empreintes. Les rendus sont inspectés avec LibreOffice, sans contrôle revendiqué dans Microsoft PowerPoint. Le résultat détaillé figure dans preuves/controle-kit.json et la portée visuelle dans preuves/controle-visuel.json.
+
+Cette révision ne rejoue pas la recette complète du logiciel. Le lint et le typage requis avant push sont distingués des résultats historiques. La démonstration sur la version choisie et la répétition orale restent à faire avant le passage.
