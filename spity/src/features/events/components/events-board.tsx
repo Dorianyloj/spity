@@ -2,7 +2,7 @@
 
 import { CalendarDays, CalendarPlus, Check, MapPin, Pencil, RefreshCw, TicketCheck, UsersRound, X } from 'lucide-react'
 import { useMemo, useState } from 'react'
-import { AppHero, Badge, Button, Card, CardContent, EmptyState } from '@/components/ui'
+import { AppHero, Badge, Button, Card, EmptyState } from '@/components/ui'
 import { useLiveResource } from '@/hooks/use-live-resource'
 import { ApiRequestError, requestJson } from '@/lib/api-client'
 import { demoClimbingAssets } from '@/lib/brand-assets'
@@ -125,45 +125,63 @@ export default function EventsBoard({ initialEvents, role }: EventsBoardProps) {
           description={role === 'club' ? 'Publiez le premier événement du club.' : 'Revenez prochainement pour découvrir de nouvelles sorties.'}
         />
       ) : (
-        <section className="grid gap-4 xl:grid-cols-2" aria-label="Liste des événements">
+        <section className="grid items-stretch gap-5 xl:grid-cols-2" aria-label="Liste des événements">
           {orderedEvents.map((event) => (
-            <Card key={event.id} hover={false} className={event.status === 'cancelled' ? 'opacity-75' : ''}>
-              <CardContent className="p-5">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
+            <Card key={event.id} hover={false} className={`overflow-hidden ${event.status === 'cancelled' ? 'opacity-75' : ''}`}>
+              <div className="flex h-full flex-col p-5 sm:p-6">
+                <div className="flex flex-wrap items-start justify-between gap-5">
+                  <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
                       <Badge variant="primary">{typeLabels[event.type]}</Badge>
                       {event.status === 'scheduled' && event.remainingCapacity === 0 && <Badge variant="warning">Complet</Badge>}
                       {event.status === 'cancelled' && <Badge variant="destructive">Annulé</Badge>}
                       {event.isRegistered && <Badge variant="success">Inscrit</Badge>}
                     </div>
-                    <h2 className="mt-3 text-xl font-black text-foreground">{event.title}</h2>
-                    <p className="mt-1 text-sm font-semibold text-muted-foreground">{event.clubName}</p>
+                    <h2 className="mt-4 text-balance text-xl font-black leading-tight text-foreground sm:text-2xl">{event.title}</h2>
+                    <p className="mt-1.5 text-sm font-semibold text-muted-foreground">{event.clubName}</p>
                   </div>
-                  <div className="text-right">
-                    <p className="text-2xl font-black text-foreground">{event.remainingCapacity}</p>
-                    <p className="text-xs text-muted-foreground">place(s) disponible(s)</p>
+                  <div className="min-w-28 rounded-lg bg-secondary/65 px-3 py-2.5 text-right">
+                    <p className="text-2xl font-black leading-none tabular-nums text-foreground">{event.remainingCapacity}</p>
+                    <p className="mt-1 text-xs font-semibold text-muted-foreground">
+                      {event.remainingCapacity === 1 ? 'place disponible' : 'places disponibles'}
+                    </p>
                   </div>
                 </div>
 
-                <div className="mt-4 grid gap-2 text-sm text-muted-foreground">
-                  <p className="flex items-start gap-2"><CalendarDays className="mt-0.5 shrink-0" size={16} aria-hidden="true" />{formatEventDate(event.startsAt)}</p>
-                  <p className="flex items-start gap-2"><MapPin className="mt-0.5 shrink-0" size={16} aria-hidden="true" />{event.location ?? 'Lieu à confirmer'}</p>
-                  <p className="flex items-start gap-2"><UsersRound className="mt-0.5 shrink-0" size={16} aria-hidden="true" />{event.registeredCount} / {event.capacity} participant(s)</p>
+                <div className="mt-5 grid gap-3 rounded-lg bg-secondary/55 p-4 text-sm sm:grid-cols-2">
+                  <p className="flex items-start gap-2.5 text-muted-foreground">
+                    <CalendarDays className="mt-0.5 shrink-0 text-accent-foreground" size={16} aria-hidden="true" />
+                    <span>{formatEventDate(event.startsAt)}</span>
+                  </p>
+                  <p className="flex items-start gap-2.5 text-muted-foreground">
+                    <MapPin className="mt-0.5 shrink-0 text-accent-foreground" size={16} aria-hidden="true" />
+                    <span>{event.location ?? 'Lieu à confirmer'}</span>
+                  </p>
+                  <p className="flex items-start gap-2.5 text-muted-foreground sm:col-span-2">
+                    <UsersRound className="mt-0.5 shrink-0 text-accent-foreground" size={16} aria-hidden="true" />
+                    <span><strong className="font-semibold text-foreground tabular-nums">{event.registeredCount} / {event.capacity}</strong> participant(s)</span>
+                  </p>
                 </div>
-                {event.description && <p className="mt-4 border-t border-border pt-4 text-sm text-muted-foreground">{event.description}</p>}
+                {event.description && <p className="mt-5 text-pretty text-sm leading-relaxed text-muted-foreground">{event.description}</p>}
 
                 {event.isOwner && (
-                  <div className="mt-4 rounded-lg border border-border bg-white/[0.04] p-3">
-                    <p className="text-sm font-bold text-foreground">Participants</p>
-                    {event.participants.length === 0 && <p className="mt-2 text-sm text-muted-foreground">Aucun participant pour le moment.</p>}
-                    <ul className="mt-2 grid gap-1 text-sm text-muted-foreground sm:grid-cols-2">
-                      {event.participants.map((participant) => <li key={participant.userId}>{participant.displayName}</li>)}
+                  <div className="mt-5 rounded-lg border border-border bg-white/[0.04] p-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="text-sm font-bold text-foreground">Participants</p>
+                      <span className="text-xs font-semibold tabular-nums text-muted-foreground">{event.participants.length} inscrit{event.participants.length > 1 ? 's' : ''}</span>
+                    </div>
+                    {event.participants.length === 0 && <p className="mt-3 text-sm text-muted-foreground">Aucun participant pour le moment.</p>}
+                    <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+                      {event.participants.map((participant) => (
+                        <li key={participant.userId} className="rounded-md bg-secondary/60 px-3 py-2 text-sm font-medium text-foreground">
+                          {participant.displayName}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 )}
 
-                <div className="mt-5 flex flex-wrap gap-2 border-t border-border pt-4">
+                <div className="mt-auto flex flex-wrap gap-2 border-t border-border pt-5">
                   {role === 'grimpeur' && event.status === 'scheduled' && (
                     <Button
                       disabled={pendingId !== null || (!event.isRegistered && event.remainingCapacity === 0)}
@@ -198,7 +216,7 @@ export default function EventsBoard({ initialEvents, role }: EventsBoardProps) {
                     <span className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground"><Check size={16} aria-hidden="true" />Annulation enregistrée</span>
                   )}
                 </div>
-              </CardContent>
+              </div>
             </Card>
           ))}
         </section>
