@@ -1,4 +1,10 @@
-# A09 — Relevé Linear du 14 septembre 2026
+# A09 — Avancement des fonctionnalités et historique Linear
+
+## Bilan du 16 septembre 2026
+
+La diapositive 7 présente le code livré et les suites identifiées dans l’[audit du 16 septembre](../../../audits/2026-09-16-reconciliation-linear.md). L’inscription et la connexion sont réalisées. Le renouvellement et la rotation des sessions restent à compléter. Les profils avec avatar, la publication avec image, la carte salles/falaises et les contributions aux topos sont aussi implémentés. Cette revue ne modifie pas les statuts dans Linear et ne crée pas un nouveau pourcentage de tickets terminés.
+
+## Archive : relevé Linear du 14 septembre 2026
 
 Transcription conservée dans donnees/linear-2026-09-14.json. Observation de 25 tickets : 12 Done, 4 Todo, 1 In Progress, 7 Backlog et 1 Canceled. Aucun nouveau relevé ni changement de statut n’est déclaré.
 
@@ -30,6 +36,6 @@ Transcription conservée dans donnees/linear-2026-09-14.json. Observation de 25 
 | SPI-28 | Done | Low | SPITY-024: Tests unitaires critiques (auth, posts) |
 | SPI-29 | Done | Low | SPITY-025: Sécurité OWASP + accessibilité RGAA |
 
-**Calcul :** 12 / (25 − 1) = 50 % de tickets terminés, hors annulé. Les tickets ont des tailles différentes et les statuts ne valent pas recette. Exemple : SPI-6 est à faire alors que la connexion existe ; cela demande de vérifier le périmètre restant avant de changer son état.
+**Calcul :** 12 / (25 − 1) = 50 % de tickets terminés, hors annulé. Les tickets ont des tailles différentes et les statuts ne valent pas recette. Le bilan du 16 septembre ci-dessus précise le périmètre livré de SPI-6 et les suites encore à développer.
 
 Le classeur reprend ce relevé et ses URL. La priorité élevée de sept tickets non terminés est un signal de suivi, pas une preuve que sept fonctions sont absentes. Aucun historique de vélocité ou temps passé n’est disponible.

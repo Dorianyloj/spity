@@ -68,7 +68,7 @@ Révision du 16 septembre 2026. Référentiel, pages 11–14 ; compétences obli
 
 ## Contrôle transversal
 
-Sommaire → présentation du projet → sept compétences dans l’ordre. Vingt-trois slides principales totalisent 30 minutes cibles, dont six de démonstration ; trois annexes répondent aux questions. Les trois graphiques modifiables représentent le planning pédagogique, le relevé Linear et les mesures locales. Le budget annuel simulé se calcule séparément du réel et du budget B1.
+Sommaire → présentation du projet → sept compétences dans l’ordre. Vingt-trois slides principales totalisent 30 minutes cibles, dont six de démonstration ; trois annexes répondent aux questions. Les deux graphiques modifiables représentent le planning pédagogique et les mesures locales. La diapositive d’avancement distingue les fonctionnalités disponibles et les suites à compléter, à partir de la revue du code du 16 septembre. Le budget annuel simulé se calcule séparément du réel et du budget B1.
 
 ## Limites avant passage
 

@@ -212,23 +212,75 @@
   },
   {
     "number": 7,
-    "title": "Linear : un état daté du travail",
+    "title": "L’avancement réel des fonctionnalités",
     "section": "C3.2.1 / Mesurer l’avancement",
     "minutes": 1,
-    "layout": "linear",
-    "subtitle": "Observation du 14 septembre 2026 ; un ticket annulé exclu du dénominateur.",
+    "layout": "delivery",
+    "subtitle": "Fonctionnalités disponibles et suites identifiées · bilan du 16 septembre 2026.",
     "content": {
-      "callout": "12 tickets terminés sur 24 · indicateur non pondéré, à rapprocher de la recette."
+      "available": [
+        [
+          "Authentification",
+          "Inscription et connexion grimpeur / club"
+        ],
+        [
+          "Profils",
+          "Disciplines, niveaux, matériel et avatar"
+        ],
+        [
+          "Publications",
+          "Texte, image, likes et commentaires simples"
+        ],
+        [
+          "Carte interactive",
+          "Salles et falaises géolocalisées"
+        ],
+        [
+          "Topos collaboratifs",
+          "Ajout de voies, signalements, liens et PDF"
+        ],
+        [
+          "Événements",
+          "Création, inscriptions et capacité"
+        ]
+      ],
+      "remaining": [
+        [
+          "Sessions",
+          "Renouvellement et rotation des jetons"
+        ],
+        [
+          "Publications",
+          "Modification, suppression et tags contextuels"
+        ],
+        [
+          "Clubs",
+          "Carte, coachs et validation d’affiliation"
+        ],
+        [
+          "Topos",
+          "Votes de consensus et modération des voies"
+        ],
+        [
+          "Fil social",
+          "Personnalisation et événements épinglés"
+        ],
+        [
+          "Tableau de bord club",
+          "Statistiques historiques et agrégées"
+        ]
+      ],
+      "callout": "Je suis le périmètre livré et le reste à faire pour prioriser les prochaines évolutions."
     },
-    "script": "Voici mon relevé Linear du 14 septembre. Il contient 25 tickets, dont un annulé. Sur les 24 autres, 12 sont terminés, un est en cours, quatre sont à faire et sept sont dans le backlog.\n\nJ’obtiens donc 50 % de tickets terminés. Je fais attention à ce que ce chiffre signifie : les tickets n’ont pas tous la même taille et leur statut peut être en retard sur le logiciel.\n\nPar exemple, un sujet d’authentification apparaît encore à faire, alors que la connexion existe déjà. Avant de changer son statut, je dois vérifier le périmètre restant. J’utilise donc ce tableau comme un point de départ pour le suivi, en le rapprochant du code et de la recette.",
-    "source": "donnees/linear-2026-09-14.json ; A09.",
+    "script": "Pour faire le point sur mon avancement, j’ai rapproché les tâches de mon backlog des fonctionnalités présentes dans le site. L’inscription et la connexion sont déjà réalisées, pour les grimpeurs comme pour les clubs. Les améliorations restantes sur les sessions concernent leur renouvellement et la rotation des jetons.\n\nJ’ai aussi réalisé les profils avec avatar, la publication avec image, les likes et les commentaires simples. La carte affiche les salles et les falaises. Pour les topos, je peux ajouter une voie, faire un signalement et partager un lien ou un PDF. Les événements permettent de gérer les inscriptions et la capacité.\n\nJe garde à droite les suites à développer : modifier ou supprimer une publication, compléter les fonctions des clubs, ajouter les votes sur les topos et enrichir le fil social. Ce bilan me permet de prioriser ce qui manque encore, sans compter une fonction déjà disponible comme un travail à recommencer.",
+    "source": "A09 ; audit du 16/09/2026 ; dépôt applicatif a805162.",
     "action": "",
-    "nature": "Observation historique non pondérée",
+    "nature": "État des fonctionnalités vérifié dans le code le 16 septembre 2026",
     "dark": false,
     "demo": false,
     "startMinute": 6.0,
     "endMinute": 7.0,
-    "notes": "Voici mon relevé Linear du 14 septembre. Il contient 25 tickets, dont un annulé. Sur les 24 autres, 12 sont terminés, un est en cours, quatre sont à faire et sept sont dans le backlog.\n\nJ’obtiens donc 50 % de tickets terminés. Je fais attention à ce que ce chiffre signifie : les tickets n’ont pas tous la même taille et leur statut peut être en retard sur le logiciel.\n\nPar exemple, un sujet d’authentification apparaît encore à faire, alors que la connexion existe déjà. Avant de changer son statut, je dois vérifier le périmètre restant. J’utilise donc ce tableau comme un point de départ pour le suivi, en le rapprochant du code et de la recette."
+    "notes": "Pour faire le point sur mon avancement, j’ai rapproché les tâches de mon backlog des fonctionnalités présentes dans le site. L’inscription et la connexion sont déjà réalisées, pour les grimpeurs comme pour les clubs. Les améliorations restantes sur les sessions concernent leur renouvellement et la rotation des jetons.\n\nJ’ai aussi réalisé les profils avec avatar, la publication avec image, les likes et les commentaires simples. La carte affiche les salles et les falaises. Pour les topos, je peux ajouter une voie, faire un signalement et partager un lien ou un PDF. Les événements permettent de gérer les inscriptions et la capacité.\n\nJe garde à droite les suites à développer : modifier ou supprimer une publication, compléter les fonctions des clubs, ajouter les votes sur les topos et enrichir le fil social. Ce bilan me permet de prioriser ce qui manque encore, sans compter une fonction déjà disponible comme un travail à recommencer."
   },
   {
     "title": "Un tableau de bord pour décider",

@@ -1,13 +1,13 @@
 # Bloc 3 — Spity, projet solo sur un an
 
-**Version courante : v18, révision du 16 septembre 2026.** Dorian confirme avoir réalisé le projet seul sur un an. La présentation s’appuie sur les étapes enregistrées, les estimations B1, Linear, les corrections et le déploiement. Les compléments de suivi annuel, collaboration ponctuelle, formation et retours client sont **simulés pour l’exercice** et identifiés à chaque utilisation.
+**Version courante : v19, révision du 16 septembre 2026.** Dorian confirme avoir réalisé le projet seul sur un an. La présentation s’appuie sur les étapes enregistrées, les estimations B1, Linear, les corrections et le déploiement. Les compléments de suivi annuel, collaboration ponctuelle, formation et retours client sont **simulés pour l’exercice** et identifiés à chaque utilisation.
 
 ## Ouvrir les livrables
 
 | Besoin | Fichier |
 | --- | --- |
-| Présenter | [PowerPoint v18](../../../output/bloc-03/spity-bloc-3-soutenance-v18.pptx) |
-| Consulter ou projeter | [PDF du diaporama](../../../output/bloc-03/spity-bloc-3-soutenance-v18.pdf) |
+| Présenter | [PowerPoint v19](../../../output/bloc-03/spity-bloc-3-soutenance-v19.pptx) |
+| Consulter ou projeter | [PDF du diaporama](../../../output/bloc-03/spity-bloc-3-soutenance-v19.pdf) |
 | Répéter | [Guide et notes](GUIDE_ORAL.md), [explications simples](COMPRENDRE_LES_DIAPOS.md), [lexique](LEXIQUE_SIMPLE.md) |
 | Lire le dossier | [PDF](../../../output/bloc-03/dossier-bloc-03-spity.pdf), [source](DOSSIER_BLOC_03.md) |
 | Vérifier les données | [Classeur](../../../output/bloc-03/pilotage-spity.xlsx), [sources structurées](donnees/projet-reel.json) |
@@ -23,7 +23,7 @@ Le PowerPoint et son PDF constituent le support à projeter : aucun chronométra
 
 - **Confirmé par Dorian :** projet solo, durée d’un an. Les mois de début et de fin restent à préciser.
 - **Traces du dépôt :** chronologie des commits, fonctionnalités, corrections, contrôles consignés et version servie lors de la sonde du 15 septembre.
-- **Relevé daté :** Linear du 14 septembre, sans actualisation automatique ni statut modifié.
+- **Avancement présenté :** bilan fonctionnel du 16 septembre, vérifié dans le code. Le relevé Linear du 14 septembre est conservé comme historique dans l’annexe et le classeur.
 - **Estimation :** 82 j-h et 44 250 € du diaporama B1. Aucun temps consommé ni coût réel n’est inventé.
 - **Simulation pédagogique :** planning M1–M12, consommés de suivi, recette ponctuelle, grille, formation et retours de personas. Ces exemples couvrent les critères sans inventer une expérience réellement vécue. Aucun entretien ou accord client réel n’est déclaré.
 

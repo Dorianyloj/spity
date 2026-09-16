@@ -1,6 +1,6 @@
 # Mon guide oral — Spity
 
-**Document personnel de répétition — à garder hors projection.** Support associé : v18.
+**Document personnel de répétition — à garder hors projection.** Support associé : v19.
 
 Les rubriques **Texte à dire** sont identiques aux notes PowerPoint et rédigées à la première personne. Les repères, manipulations et sources ci-dessous servent uniquement à la préparation. Les diapositives projetées et leurs notes natives ne contiennent aucun chronométrage de présentation.
 
@@ -16,7 +16,7 @@ Je vise trente minutes, dont six de démonstration. Les 23 diapositives principa
 | 4 | Une méthode adaptée au travail solo | 01:00 | 03:00 |
 | 5 | Planifier les travaux sur une année | 01:30 | 04:30 |
 | 6 | Affecter les missions et prévoir les moyens | 01:30 | 06:00 |
-| 7 | Linear : un état daté du travail | 01:00 | 07:00 |
+| 7 | L’avancement réel des fonctionnalités | 01:00 | 07:00 |
 | 8 | Un tableau de bord pour décider | 01:30 | 08:30 |
 | 9 | Anticiper les points de vigilance | 01:00 | 09:30 |
 | 10 | Arbitrer face à une navigation trop lente | 01:30 | 11:00 |
@@ -146,23 +146,23 @@ Je prends appui sur les éléments affichés et je marque une pause avant de pou
 
 **Source de préparation :** A02 ; données B1 ; séance pédagogique dans mise-en-situation.json.
 
-### 7. Linear : un état daté du travail
+### 7. L’avancement réel des fonctionnalités
 
 **Repère privé : 06:00–07:00.**
 
 **Texte à dire**
 
-Voici mon relevé Linear du 14 septembre. Il contient 25 tickets, dont un annulé. Sur les 24 autres, 12 sont terminés, un est en cours, quatre sont à faire et sept sont dans le backlog.
+Pour faire le point sur mon avancement, j’ai rapproché les tâches de mon backlog des fonctionnalités présentes dans le site. L’inscription et la connexion sont déjà réalisées, pour les grimpeurs comme pour les clubs. Les améliorations restantes sur les sessions concernent leur renouvellement et la rotation des jetons.
 
-J’obtiens donc 50 % de tickets terminés. Je fais attention à ce que ce chiffre signifie : les tickets n’ont pas tous la même taille et leur statut peut être en retard sur le logiciel.
+J’ai aussi réalisé les profils avec avatar, la publication avec image, les likes et les commentaires simples. La carte affiche les salles et les falaises. Pour les topos, je peux ajouter une voie, faire un signalement et partager un lien ou un PDF. Les événements permettent de gérer les inscriptions et la capacité.
 
-Par exemple, un sujet d’authentification apparaît encore à faire, alors que la connexion existe déjà. Avant de changer son statut, je dois vérifier le périmètre restant. J’utilise donc ce tableau comme un point de départ pour le suivi, en le rapprochant du code et de la recette.
+Je garde à droite les suites à développer : modifier ou supprimer une publication, compléter les fonctions des clubs, ajouter les votes sur les topos et enrichir le fil social. Ce bilan me permet de prioriser ce qui manque encore, sans compter une fonction déjà disponible comme un travail à recommencer.
 
 **Préparation / manipulation — ne pas lire**
 
 Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
 
-**Source de préparation :** donnees/linear-2026-09-14.json ; A09.
+**Source de préparation :** A09 ; audit du 16/09/2026 ; dépôt applicatif a805162.
 
 ### 8. Un tableau de bord pour décider
 
@@ -537,7 +537,7 @@ Je prends appui sur les éléments affichés et je marque une pause avant de pou
 - **Pourquoi un an et 82 j-h ?** « J’ai développé Spity sur un an. Les 82 jours-personne correspondent à l’estimation de charge de mon cadrage. Je distingue cette charge de la durée calendaire. »
 - **Avec quelle équipe ?** « J’ai réalisé le projet seul. La séance avec un testeur et le représentant de club appartient à ma mise en situation. »
 - **Quel client a validé ?** « Mes exemples de retours et de comptes rendus sont simulés. Je n’ai pas de réception réelle signée à présenter. »
-- **Pourquoi 12/24 ?** « Je reprends le relevé du 14 septembre, hors ticket annulé. Je ne pondère pas la taille des tickets ; ce décompte ne mesure donc pas la part du produit validée. »
+- **Comment je mesure l’avancement ?** « Je rapproche mon backlog du code et des contrôles. Je distingue la connexion déjà livrée des améliorations de sessions encore à réaliser. Le relevé Linear du 14 septembre reste une archive ; ma slide présente le bilan des fonctionnalités du 16 septembre. »
 - **Pourquoi supprimer l’animation ?** « Le calcul décoratif bloquait la navigation. Le fond statique conserve le motif et supprime cette initialisation ; les mesures locales montrent l’effet de la correction. »
 - **Ces temps sont-ils ceux de la production ?** « Je les ai présentés comme une comparaison locale contrôlée. La sonde distante vérifie la santé et la version servie à un instant précis ; elle ne mesure pas ces parcours. »
 - **Qu’ai-je simulé ?** « J’ai distingué le développement réel des hypothèses de planning, de consommé, de collaboration, de formation et de suivi client. Je peux expliquer les calculs et les décisions de chacun de ces exemples. »

@@ -1,4 +1,4 @@
-# Mon fil conducteur — Spity v18
+# Mon fil conducteur — Spity v19
 
 Document personnel. Le texte ci-dessous reprend ce que je peux dire à l’oral, avec les titres du support. Les repères de manipulation restent dans GUIDE_ORAL.md.
 
@@ -50,13 +50,13 @@ J’ai choisi un persona de testeur malentendant. Je lui donnerais des consignes
 
 Pour les moyens, je m’appuie sur mon environnement de développement, la base de données, Docker et le serveur. Les 44 250 euros restent l’estimation initiale du cadrage.
 
-## 7. Linear : un état daté du travail
+## 7. L’avancement réel des fonctionnalités
 
-Voici mon relevé Linear du 14 septembre. Il contient 25 tickets, dont un annulé. Sur les 24 autres, 12 sont terminés, un est en cours, quatre sont à faire et sept sont dans le backlog.
+Pour faire le point sur mon avancement, j’ai rapproché les tâches de mon backlog des fonctionnalités présentes dans le site. L’inscription et la connexion sont déjà réalisées, pour les grimpeurs comme pour les clubs. Les améliorations restantes sur les sessions concernent leur renouvellement et la rotation des jetons.
 
-J’obtiens donc 50 % de tickets terminés. Je fais attention à ce que ce chiffre signifie : les tickets n’ont pas tous la même taille et leur statut peut être en retard sur le logiciel.
+J’ai aussi réalisé les profils avec avatar, la publication avec image, les likes et les commentaires simples. La carte affiche les salles et les falaises. Pour les topos, je peux ajouter une voie, faire un signalement et partager un lien ou un PDF. Les événements permettent de gérer les inscriptions et la capacité.
 
-Par exemple, un sujet d’authentification apparaît encore à faire, alors que la connexion existe déjà. Avant de changer son statut, je dois vérifier le périmètre restant. J’utilise donc ce tableau comme un point de départ pour le suivi, en le rapprochant du code et de la recette.
+Je garde à droite les suites à développer : modifier ou supprimer une publication, compléter les fonctions des clubs, ajouter les votes sur les topos et enrichir le fil social. Ce bilan me permet de prioriser ce qui manque encore, sans compter une fonction déjà disponible comme un travail à recommencer.
 
 ## 8. Un tableau de bord pour décider
 

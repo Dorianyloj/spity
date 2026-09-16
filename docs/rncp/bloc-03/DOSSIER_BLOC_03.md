@@ -35,13 +35,17 @@ Source : A02 ; données B1 ; séance pédagogique dans mise-en-situation.json.
 
 ## C3.2.1
 
-### Linear : un état daté du travail
+### L’avancement réel des fonctionnalités
 
-Nature : **Observation historique non pondérée**.
+Nature : **État des fonctionnalités vérifié dans le code le 16 septembre 2026**.
 
-Le relevé du 14 septembre contient 25 tickets, dont un annulé. Sur les 24 autres, 12 sont terminés, un est en cours, quatre sont à faire et sept restent dans le backlog. Le ratio de tickets terminés vaut donc 50 %. Sa lecture demande deux précautions. D’abord, les tickets n’ont pas tous la même taille. Ensuite, certains statuts peuvent être en retard sur le logiciel : le relevé contient par exemple un sujet d’authentification à faire alors que des parcours de connexion existent dans le dépôt. Le tableau permet de repérer un écart à vérifier ; il ne permet pas de conclure que toute la fonction est terminée. Je conserve la date du relevé et je ne présente pas ces nombres comme un état en direct du 16 septembre.
+Pour faire le point sur mon avancement, j’ai rapproché les tâches de mon backlog des fonctionnalités présentes dans le site. L’inscription et la connexion sont déjà réalisées, pour les grimpeurs comme pour les clubs. Les améliorations restantes sur les sessions concernent leur renouvellement et la rotation des jetons.
 
-Source : donnees/linear-2026-09-14.json ; A09.
+J’ai aussi réalisé les profils avec avatar, la publication avec image, les likes et les commentaires simples. La carte affiche les salles et les falaises. Pour les topos, je peux ajouter une voie, faire un signalement et partager un lien ou un PDF. Les événements permettent de gérer les inscriptions et la capacité.
+
+Je garde à droite les suites à développer : modifier ou supprimer une publication, compléter les fonctions des clubs, ajouter les votes sur les topos et enrichir le fil social. Ce bilan me permet de prioriser ce qui manque encore, sans compter une fonction déjà disponible comme un travail à recommencer.
+
+Source : A09 ; audit du 16/09/2026 ; dépôt applicatif a805162.
 
 ### Un tableau de bord pour décider
 

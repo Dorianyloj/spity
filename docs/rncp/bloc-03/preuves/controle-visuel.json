@@ -1,10 +1,10 @@
 {
   "reviewedOn": "2026-09-16",
   "presentation": {
-    "file": "output/bloc-03/spity-bloc-3-soutenance-v18.pptx",
-    "sha256": "9357432faaef56b90305b8995edcbb7b085b12395ceb61aad8734da008bba14f",
-    "pdfFile": "output/bloc-03/spity-bloc-3-soutenance-v18.pdf",
-    "pdfSHA256": "11320a549c2f8b89ca0f7a9f44bfbdf1a8a9305a00b0ccec40daa4798941fb3d",
+    "file": "output/bloc-03/spity-bloc-3-soutenance-v19.pptx",
+    "sha256": "a6bcc6035798bb2885222cd341fc9cb7314c81ac788e7d00f93240b5705c6434",
+    "pdfFile": "output/bloc-03/spity-bloc-3-soutenance-v19.pdf",
+    "pdfSHA256": "378b1b6fb6e1f8dc080c4a5e2e98adce830d3730c8f3a3557d9d48528da3c76e",
     "slidesReviewed": [
       1,
       2,
@@ -33,14 +33,18 @@
       25,
       26
     ],
-    "nativeCharts": 3,
-    "method": "Export LibreOffice ; rendu et inspection des 26 slides en trois planches. Lecture de tous les textes oraux à la première personne. Contrôle textuel séparé des minutes et consignes projetées. Après clarification de l’en-tête « Livrable examiné », la slide 17 a été rendue et inspectée individuellement.",
-    "result": "Sommaire et transition de démonstration sans durée ; aucune consigne de répétition visible ; titres et tableaux lisibles. Les exemples simulés restent identifiés."
+    "nativeCharts": 2,
+    "method": "Export LibreOffice. Inspection individuelle de la diapositive 7 à 1600 px. Comparaison des 26 pages PDF : seule la page 7 change ; XML des 25 autres slides identique à la version v18 déjà inspectée. Revue précédente conservée pour ces pages. Notes natives et textes contrôlés séparément.",
+    "result": "Deux colonnes lisibles, sans débordement : fonctionnalités disponibles et suites à compléter. Authentification affichée comme livrée ; aucun total Linear périmé dans la projection.",
+    "currentRevisionSlidesReviewed": [
+      7
+    ],
+    "previousReviewSHA256": "9357432faaef56b90305b8995edcbb7b085b12395ceb61aad8734da008bba14f"
   },
   "dossier": {
     "file": "output/bloc-03/dossier-bloc-03-spity.pdf",
-    "sha256": "19119ad82913a587642cc868c8c4fa3d33798dbdb876833c621708474c9b435a",
-    "pages": 25,
+    "sha256": "d9c4f2fe1c85d76325053e0d74ffa938093c9356d8319ae01373435c26be59e4",
+    "pages": 26,
     "pagesReviewed": [
       1,
       2,
@@ -66,15 +70,22 @@
       22,
       23,
       24,
-      25
+      25,
+      26
     ],
     "currentRevisionPagesReviewed": [
+      3,
+      4,
+      5,
+      8,
       23,
-      25
+      24,
+      25,
+      26
     ],
-    "method": "Comparaison textuelle des 25 pages avec la version précédemment inspectée : seules 23 et 25 changent. Ces deux pages ont été rendues et inspectées individuellement ; revue des autres pages conservée.",
-    "previousReviewSHA256": "482a3efc7edc55a4fb5e3bf9834d37c6e27182eaade21bae1bda4f65d708544a",
-    "result": "25 pages conservées ; références v18 et explication des notes actualisées, aucun débordement visible."
+    "method": "Comparaison textuelle avec le dossier précédent. Rendu et inspection en deux planches des huit pages modifiées ou ajoutées ; revue précédente conservée pour les pages identiques.",
+    "previousReviewSHA256": "19119ad82913a587642cc868c8c4fa3d33798dbdb876833c621708474c9b435a",
+    "result": "26 pages ; bilan fonctionnel et historique Linear explicitement séparés. Tableau historique réparti sur deux pages avec en-tête répété ; aucun débordement visible."
   },
-  "scope": "Revue du support de projection v18 et des notes natives ; repères privés dans le guide. Aucun contrôle Microsoft PowerPoint, aucune répétition chronométrée ni nouvelle recette applicative."
+  "scope": "Revue de la révision v19 : diapositive 7, notes correspondantes et pages modifiées du dossier. Revue v18 conservée pour les pages identiques. Aucun contrôle Microsoft PowerPoint ni nouvelle recette applicative."
 }

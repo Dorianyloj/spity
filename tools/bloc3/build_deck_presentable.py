@@ -1,4 +1,4 @@
-"""Build the editable v18 deck from the solo project narrative and dated evidence.
+"""Build the editable v19 deck from the solo project narrative and dated evidence.
 
 Run from any directory: python tools/bloc3/build_deck_presentable.py
 Dependencies: tools/bloc3/requirements-presentation.txt.
@@ -18,11 +18,10 @@ from pptx.util import Inches, Pt
 
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / 'docs/rncp/bloc-03'
-OUT = ROOT / 'output/bloc-03/spity-bloc-3-soutenance-v18.pptx'
+OUT = ROOT / 'output/bloc-03/spity-bloc-3-soutenance-v19.pptx'
 SOURCE = json.loads((DOCS / 'donnees/support-oral.json').read_text())
 FACTS = json.loads((DOCS / 'donnees/projet-reel.json').read_text())
 B1 = json.loads((DOCS / 'donnees/reference-bloc-01.json').read_text())
-LINEAR = json.loads((DOCS / 'donnees/linear-2026-09-14.json').read_text())
 SIM = json.loads((DOCS / 'donnees/mise-en-situation.json').read_text())
 INK, GREEN, LIME, PAPER = '12332D', '286957', 'D8F28B', 'F6F5EF'
 MUTED, LINE, WHITE, ORANGE = '5C6C65', 'DDE3D9', 'FFFFFF', 'B64E2E'
@@ -279,12 +278,17 @@ for item in SOURCE:
         chart(s,[r['shortTitle'] for r in seq],[('Charge estimée',[r['personDays'] for r in seq])],.65,2.65,10.65,4.62,14,fmt='0" j-h"')
         rect(s,11.6,2.9,3.75,4.3,PALE,True)
         stat(s,str(B1['personDays']),'jours-personne',11.9,3.3,3.1,False,'Estimation initiale\nAucun relevé réel\nde temps fourni')
-    elif layout == 'linear':
-        statuses=['Done','In Progress','Todo','Backlog']
-        counts=[sum(i['status']==status for i in LINEAR['issues']) for status in statuses]
-        assert sum(counts)==24, counts
-        chart(s,['Terminé','En cours','À faire','Backlog'],[('Tickets',counts)],.65,2.9,10.65,4.0,14)
-        stat(s,'12 / 24','tickets terminés',11.65,3.1,3.7,False,'14 septembre 2026\n1 annulé exclu\nTailles non pondérées')
+    elif layout == 'delivery':
+        for col, (key, heading) in enumerate([('available', 'DÉJÀ DISPONIBLE'), ('remaining', 'À COMPLÉTER')]):
+            x = .65 + col * 7.52
+            rect(s, x, 2.7, 7.18, 4.65, WHITE if col == 0 else PALE, True)
+            pill(s, heading, x+.25, 2.95, 3.1)
+            for row, (title, detail) in enumerate(content[key]):
+                y = 3.53 + row * .59
+                txt(s, title, x+.25, y, 2.35, .32, 16, True, GREEN if col == 0 else INK)
+                txt(s, detail, x+2.72, y, 4.15, .48, 15, False, MUTED)
+                if row < 5:
+                    line(s, x+.25, y+.5, x+6.9, y+.5)
     elif layout == 'performance':
         data=FACTS['performance']
         chart(s,data['routes'],[('Avant',[v/1000 for v in data['beforeMs']]),('Après',[v/1000 for v in data['afterMs']])],.65,2.7,10.7,4.6,13,True,fmt='0.00" s"',colors=['86A18C',LIME],legend=True)

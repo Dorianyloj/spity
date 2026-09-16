@@ -15,7 +15,7 @@ from openpyxl import load_workbook
 from pptx import Presentation
 from pypdf import PdfReader
 ROOT=Path(__file__).resolve().parents[2];DOCS=ROOT/'docs/rncp/bloc-03';OUT=ROOT/'output/bloc-03'
-PPTX=OUT/'spity-bloc-3-soutenance-v18.pptx';DECK=OUT/'spity-bloc-3-soutenance-v18.pdf'
+PPTX=OUT/'spity-bloc-3-soutenance-v19.pptx';DECK=OUT/'spity-bloc-3-soutenance-v19.pdf'
 PDF=OUT/'dossier-bloc-03-spity.pdf';XLSX=OUT/'pilotage-spity.xlsx';ZIP=OUT/'kit-soutenance-spity.zip'
 def read(p):return json.loads(p.read_text())
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -71,16 +71,22 @@ def main(package):
             assert shape.left+shape.width<=presentation.slide_width+10
             assert shape.top+shape.height<=presentation.slide_height+10
             if shape.has_chart:charts.append((info['number'],shape.chart))
-    assert [n for n,c in charts]==[5,7,11]
+    assert [n for n,c in charts]==[5,11]
     assert list(charts[0][1].series[0].values)==[r['startMonth']-1 for r in sim['planning']]
     assert list(charts[0][1].series[1].values)==[r['endMonth']-r['startMonth']+1 for r in sim['planning']]
-    assert list(charts[1][1].series[0].values)==[12,1,4,7]
+    delivery=slides[6]
+    assert delivery['layout']=='delivery'
+    assert len(delivery['content']['available'])==len(delivery['content']['remaining'])==6
+    delivery_text='\n'.join(shape.text for shape in presentation.slides[6].shapes if shape.has_text_frame)
+    for title,detail in delivery['content']['available']+delivery['content']['remaining']:
+        assert title in delivery_text and detail in delivery_text
+    assert not re.search(r'12\s*/\s*24|50\s*%|connexion.*à faire',delivery_text,re.I)
     perf=facts['performance']
-    assert list(charts[2][1].series[0].values)==[v/1000 for v in perf['beforeMs']]
-    assert list(charts[2][1].series[1].values)==[v/1000 for v in perf['afterMs']]
+    assert list(charts[1][1].series[0].values)==[v/1000 for v in perf['beforeMs']]
+    assert list(charts[1][1].series[1].values)==[v/1000 for v in perf['afterMs']]
     with zipfile.ZipFile(PPTX) as z:
         assert z.testzip() is None
-        assert len([n for n in z.namelist() if '/embeddings/' in n and n.endswith('.xlsx')])==3
+        assert len([n for n in z.namelist() if '/embeddings/' in n and n.endswith('.xlsx')])==2
     deck=PdfReader(DECK);dossier=PdfReader(PDF)
     assert len(deck.pages)==26 and len(dossier.pages)>10
     assert all(len(p.extract_text().strip())>70 for p in deck.pages)
@@ -124,12 +130,12 @@ def main(package):
     current_tree=git('rev-parse','HEAD:spity');evidence=read(DOCS/'preuves/verification.json')
     assert git('rev-parse',f"{evidence['gitRevision']}:spity")==evidence['applicationTree']
     changes=git('diff','--name-only','HEAD','--','spity')
-    report={'version':'v18','date':'2026-09-16','project':'Solo sur un an déclaré','competencies':competencies,'mandatoryCompetencies':['C.3.1','C3.2.1','C3.4.2'],'criteriaMapped':len(coverage),'slides':26,'presentationMinutes':30,'demonstrationMinutes':6,'nativeCharts':3,'pdfPages':len(dossier.pages),'workbookSheets':len(wb.sheetnames),'workbookFormulas':formula_count,'localLinksChecked':links,'applicationTree':current_tree,'verifiedHistoricalApplicationTree':evidence['applicationTree'],'applicationMatchesDatedEvidence':current_tree==evidence['applicationTree'] and not changes,'applicationWorkingTreeClean':not changes,'scope':'Cohérence documentaire, couverture des critères, formules, sources et exports. Réel et simulation distingués. Aucune nouvelle recette complète ni acquisition de compétence déclarée.'}
+    report={'version':'v19','date':'2026-09-16','project':'Solo sur un an déclaré','competencies':competencies,'mandatoryCompetencies':['C.3.1','C3.2.1','C3.4.2'],'criteriaMapped':len(coverage),'slides':26,'presentationMinutes':30,'demonstrationMinutes':6,'nativeCharts':2,'pdfPages':len(dossier.pages),'workbookSheets':len(wb.sheetnames),'workbookFormulas':formula_count,'localLinksChecked':links,'applicationTree':current_tree,'verifiedHistoricalApplicationTree':evidence['applicationTree'],'applicationMatchesDatedEvidence':current_tree==evidence['applicationTree'] and not changes,'applicationWorkingTreeClean':not changes,'scope':'Cohérence documentaire, couverture des critères, formules, sources et exports. Réel et simulation distingués. Aucune nouvelle recette complète ni acquisition de compétence déclarée.'}
     (DOCS/'preuves/controle-kit.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     if package:
         included=[p for p in DOCS.rglob('*') if p.is_file() and p.name!='MANIFEST.sha256']
         included += [p for p in (ROOT/'tools/bloc3').glob('*') if p.is_file()]
-        included += [PDF,PPTX,DECK,XLSX,ROOT/b1['source'],ROOT/'docs/audits/2026-09-15-navigation-performances.md']
+        included += [PDF,PPTX,DECK,XLSX,ROOT/b1['source'],ROOT/'docs/audits/2026-09-15-navigation-performances.md',ROOT/'docs/audits/2026-09-16-reconciliation-linear.md']
         included += [ROOT/src['file'] for src in sources]
         included += [ROOT/'spity/public/images/brand'/name for name in ['escalade-falaise-coucher-soleil.jpeg','escalade-falaise-gros-plan.jpeg']]
         included=sorted(set(included))
@@ -137,7 +143,7 @@ def main(package):
         included.append(manifest)
         with zipfile.ZipFile(ZIP,'w',zipfile.ZIP_DEFLATED) as z:
             for p in included:z.write(p,p.relative_to(ROOT).as_posix())
-            z.writestr('LIRE_EN_PREMIER.txt','SPITY — BLOC 3 — v18\n\nOuvrir output/bloc-03/spity-bloc-3-soutenance-v18.pdf ou .pptx.\nSommaire, projet solo sur un an, puis sept compétences dans l’ordre.\nLes mises en situation pédagogiques sont signalées ; elles ne sont pas des expériences vécues.\nGuide : docs/rncp/bloc-03/GUIDE_ORAL.md\nCouverture : docs/rncp/bloc-03/CONTROLE_COMPLETUDE.md\nLa démonstration nécessite le dépôt applicatif complet et ses dépendances.\nCe kit ne contient pas de base, secrets ou node_modules. Aucun dépôt officiel ni accord client déclaré.\n')
+            z.writestr('LIRE_EN_PREMIER.txt','SPITY — BLOC 3 — v19\n\nOuvrir output/bloc-03/spity-bloc-3-soutenance-v19.pdf ou .pptx.\nSommaire, projet solo sur un an, puis sept compétences dans l’ordre.\nLes mises en situation pédagogiques sont signalées ; elles ne sont pas des expériences vécues.\nGuide : docs/rncp/bloc-03/GUIDE_ORAL.md\nCouverture : docs/rncp/bloc-03/CONTROLE_COMPLETUDE.md\nLa démonstration nécessite le dépôt applicatif complet et ses dépendances.\nCe kit ne contient pas de base, secrets ou node_modules. Aucun dépôt officiel ni accord client déclaré.\n')
         with zipfile.ZipFile(ZIP) as z:
             assert z.testzip() is None
             for p in included:assert hashlib.sha256(z.read(p.relative_to(ROOT).as_posix())).hexdigest()==digest(p)
