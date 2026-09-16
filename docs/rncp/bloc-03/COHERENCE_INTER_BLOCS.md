@@ -1,4 +1,4 @@
-# Cohérence entre les blocs — v17
+# Cohérence entre les blocs — v18
 
 | Source | Reprise dans le Bloc 3 | Limite |
 | --- | --- | --- |
@@ -10,4 +10,4 @@
 
 Le diaporama B1 retenu présente 82 j-h et 44 250 €. Les anciennes fiches B1 indiquent 79 j-h / 38 126 € HT ; elles sont conservées. Le Bloc 3 identifie la version choisie sans mélanger les montants ni ajouter une convention fiscale absente du diaporama.
 
-Les topos et contributions aux falaises sont présents dans les commits de septembre. L’ancien report fictif ne décrit plus leur état. Les retours simulés du support v17 servent à expliquer les besoins auxquels répondent des fonctions existantes ; ils ne réécrivent pas l’origine historique des changements.
+Les topos et contributions aux falaises sont présents dans les commits de septembre. L’ancien report fictif ne décrit plus leur état. Les retours simulés du support v18 servent à expliquer les besoins auxquels répondent des fonctions existantes ; ils ne réécrivent pas l’origine historique des changements.

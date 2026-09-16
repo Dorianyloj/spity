@@ -1,14 +1,12 @@
-# Guide oral — Spity, projet solo sur un an
+# Mon guide oral — Spity
 
-Support : **v17**, 23 slides principales et trois annexes. La cible de 30 minutes inclut six minutes de démonstration. Les notes sont un canevas : les pauses, explications des graphiques et manipulations doivent être réglées par une répétition chronométrée. Ce fichier ne garantit pas la durée d’une lecture mot à mot.
+**Document personnel de répétition — à garder hors projection.** Support associé : v18.
 
-## Fil conducteur
+Les rubriques **Texte à dire** sont identiques aux notes PowerPoint et rédigées à la première personne. Les repères, manipulations et sources ci-dessous servent uniquement à la préparation. Les diapositives projetées et leurs notes natives ne contiennent aucun chronométrage de présentation.
 
-Présenter le projet développé seul par Dorian Joly, sa chronologie vérifiable, le suivi, une correction réelle et la livraison. Le planning annuel, les chiffres de suivi, la collaboration ponctuelle, la formation et les retours sont **simulés pour l’exercice** et séparés des traces réelles. Ils illustrent les critères du référentiel ; ils ne sont pas des événements vécus ni la cause historique des corrections.
+## Mes repères de répétition
 
-La durée d’un an et le travail en solo sont confirmés par le candidat. Les dates exactes de l’année restent à préciser. Le budget B1 est une estimation. Les dates Git, le relevé Linear et les mesures techniques conservent chacun leur portée.
-
-## Repères
+Je vise trente minutes, dont six de démonstration. Les 23 diapositives principales portent le fil de l’oral ; les trois dernières sont des annexes pour les questions. J’ajuste mon débit et mes pauses en répétant avec le logiciel : lire le texte seul ne garantit pas la durée du passage.
 
 | Slide | Sujet | Durée cible | Fin |
 | --- | --- | --- | --- |
@@ -30,287 +28,531 @@ La durée d’un an et le travail en solo sont confirmés par le candidat. Les d
 | 16 | Un compte rendu qui aide à décider | 01:30 | 19:30 |
 | 17 | Prévoir les points de validation | 01:00 | 20:30 |
 | 18 | Mesurer le retour pour agir | 01:00 | 21:30 |
-| 19 | Préparer une démonstration vérifiable | 01:30 | 23:00 |
+| 19 | Les critères de validation | 01:30 | 23:00 |
 | 20 | Passer du suivi à l’usage. | 00:30 | 23:30 |
 | 21 | Trouver un partenaire | 02:30 | 26:00 |
 | 22 | S’inscrire et retrouver les participants | 03:00 | 29:00 |
 | 23 | Conclure par une décision de validation | 01:00 | 30:00 |
 
-À 06:00 : suivi ; à 09:30 : arbitrage ; à 12:00 : management ; à 15:00 : compétences ; à 18:00 : client ; à 23:00 : démonstration ; à 29:00 : validation.
+Repères privés : 06:00 suivi ; 09:30 arbitrage ; 12:00 management ; 15:00 compétences ; 18:00 client ; 23:00 démonstration ; 29:00 conclusion.
 
-## Notes par diapositive
+## Mon texte par diapositive
 
 ### 1. Une année pour construire Spity.
 
-**Repère : 00:00–00:30** — Durée déclarée et preuves du dépôt.
+**Repère privé : 00:00–00:30.**
 
-Spity est un projet d’escalade que j’ai développé seul sur un an. Je présente sa gestion et le logiciel. Les traces de développement, la correction de navigation et le déploiement sont réels. Pour traiter les compétences de pilotage, de collaboration et de suivi client qui ne sont pas toutes documentées dans le projet solo, j’ajoute des mises en situation explicitement signalées. Elles se déroulent dans le cadre d’une année, sans être présentées comme des événements réellement vécus.
+**Texte à dire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+Bonjour, je vais vous présenter Spity, le projet que j’ai développé seul sur un an autour de l’escalade. Mon objectif est de faciliter la recherche de partenaires et l’organisation de sorties.
 
-**Source :** Durée déclarée par le candidat ; CADRAGE_PROJET.md ; historique Git.
+Je vais vous montrer comment j’organise le travail, comment je suis l’avancement et comment je prends mes décisions. Je m’appuie sur le logiciel et sur les traces de son développement. Pour les situations de collaboration et de suivi client, j’utilise aussi des exemples simulés, que je distingue du projet réel.
+
+**Préparation / manipulation — ne pas lire**
+
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
+
+**Source de préparation :** Durée déclarée par le candidat ; CADRAGE_PROJET.md ; historique Git.
 
 ### 2. Sommaire
 
-**Repère : 00:30–01:00** — Plan aligné sur les deux PDF fournis.
+**Repère privé : 00:30–01:00.**
 
-Je présente d’abord le besoin et le projet solo. Je déroule ensuite les sept compétences dans l’ordre : planification, suivi, arbitrage, management, compétences, suivi client et démonstration. Les six minutes de manipulation sont incluses dans les trente minutes. Les trois compétences signalées comme obligatoires dans le PDF fourni sont la planification, le suivi de l’avancement et la démonstration. Toutes les autres restent traitées.
+**Texte à dire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+Je commence par vous présenter Spity et les besoins auxquels il répond. Ensuite, je vous explique ma méthode d’organisation, le suivi du projet et un arbitrage concret sur la navigation.
 
-**Source :** Référentiel p. 11–14 ; compétences obligatoires p. 4.
+Je poursuis avec la collaboration, le développement des compétences et le suivi client. Pour terminer, je vous montre le logiciel à travers un parcours de grimpeur et un parcours de club, puis nous revenons sur les critères de validation.
+
+**Préparation / manipulation — ne pas lire**
+
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
+
+**Source de préparation :** Référentiel p. 11–14 ; compétences obligatoires p. 4.
 
 ### 3. Relier les grimpeurs. Simplifier les sorties.
 
-**Repère : 01:00–02:00** — Éléments du projet documentés.
+**Repère privé : 01:00–02:00.**
 
-Spity répond à deux besoins complémentaires. Un grimpeur cherche une personne avec laquelle pratiquer et une sortie adaptée. Un club souhaite organiser une activité et retrouver les participants. Le produit regroupe donc des profils, des partenaires, des événements et un répertoire de lieux. Ces besoins servent de fil conducteur à la démonstration. La capture montre une interface de la base de démonstration, avec des données de test. Le Collectif Altitude Grimpe présent dans le cadrage initial est un commanditaire fictif ; il ne constitue pas la preuve d’un client réel. Aucun accord de ce collectif n’est revendiqué ici.
+**Texte à dire**
 
-**À montrer :** Montrer le besoin utilisateur puis le répertoire, sans détailler chaque fonction.
+Avec Spity, je pars de deux besoins assez simples. Du côté du grimpeur, je veux permettre de trouver un partenaire qui pratique la même discipline, avec un niveau adapté. Du côté du club, je veux faciliter l’organisation d’une sortie et le suivi des participants.
 
-**Source :** CADRAGE_PROJET.md ; capture lieux du 15/09/2026 ; Bloc 1.
+J’ai donc construit le produit autour des profils, de la recherche de partenaires, des événements et des lieux d’escalade. Ici, vous voyez le répertoire des lieux sur ma base de démonstration.
+
+Le parcours que je vais vous présenter suit cette logique : je trouve un partenaire, je consulte une sortie, puis je m’inscris. Cela me permet de relier chaque fonctionnalité à un besoin concret.
+
+**Préparation / manipulation — ne pas lire**
+
+Montrer le besoin utilisateur puis le répertoire, sans détailler chaque fonction.
+
+**Source de préparation :** CADRAGE_PROJET.md ; capture lieux du 15/09/2026 ; Bloc 1.
 
 ### 4. Une méthode adaptée au travail solo
 
-**Repère : 02:00–03:00** — Outils réels ; cadre méthodologique argumenté et calendrier pédagogique.
+**Repère privé : 02:00–03:00.**
 
-Je retiens un flux inspiré de Kanban, adapté à un projet solo où les priorités évoluent. Linear apporte la visibilité sur les tâches. Le rétroplanning complète le tableau en montrant les dates cibles et les dépendances, que le simple statut d’un ticket ne suffit pas à expliquer. Les deux outils sont compatibles : un lot planifié contient des tâches suivies dans Linear. Git et la CI relient les modifications à leurs contrôles. Le dépôt prouve l’existence de ces outils ; il ne prouve pas que toutes les pratiques proposées ont été appliquées historiquement. Dans la mise en situation, une revue hebdomadaire actualise le reste à faire et les risques.
+**Texte à dire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+Comme je travaille seul, j’ai besoin d’une organisation qui reste simple à utiliser. Je m’appuie sur Linear pour retrouver mes tâches, leurs priorités et leur état. Le fonctionnement que je retiens est inspiré de Kanban : je rends le travail visible et je garde une vue sur ce qui reste à faire.
 
-**Source :** Linear 14/09 ; dépôt ; A01.
+Le tableau de tâches ne suffit pas pour visualiser toute l’année. Je le complète donc ici par un rétroplanning reconstruit pour la mise en situation. Il me permet de montrer les dépendances et les points de validation.
+
+Enfin, Git conserve les versions et la CI exécute les contrôles automatiques. Dans le fonctionnement proposé, je prévois une revue hebdomadaire pour actualiser le reste à faire et les risques.
+
+**Préparation / manipulation — ne pas lire**
+
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
+
+**Source de préparation :** Linear 14/09 ; dépôt ; A01.
 
 ### 5. Planifier les travaux sur une année
 
-**Repère : 03:00–04:30** — Mise en situation pédagogique explicitement simulée.
+**Repère privé : 03:00–04:30.**
 
-Le graphique répartit les neuf lots du cadrage sur douze mois relatifs. Les charges de référence viennent du Bloc 1 : elles totalisent 82 jours-personne estimés. Leur position dans le calendrier est une reconstruction pédagogique, pas le planning historique retrouvé. L’étude et la mesure du besoin précèdent la conception. La réalisation des parcours s’appuie sur l’authentification et les profils. Les événements doivent exister avant la recette des inscriptions. Les contrôles se poursuivent pendant la réalisation, puis la restitution intervient au dernier mois. Les points de vigilance portent sur les dépendances, le temps disponible en solo et la préparation d’une recette sur une version stable. Les vraies dates de commits restent dans l’annexe, séparées de ce modèle.
+**Texte à dire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+J’ai repris les neuf lots de mon cadrage et leurs charges estimées, qui représentent au total 82 jours-personne. Un jour-personne correspond à une journée de travail pour une personne : c’est une charge, alors que l’année correspond à la durée du projet.
 
-**Source :** B1 : neuf lots, 82 j-h ; mise-en-situation.json ; A01.
+Pour ce planning, j’ai réparti les lots sur douze mois relatifs. C’est une reconstruction pédagogique : les dates réellement enregistrées dans Git sont présentées séparément.
+
+Je commence par l’étude et la mesure du besoin, puis la conception. L’authentification et les profils servent de base aux autres parcours. Un événement doit être disponible avant que je puisse vérifier une inscription. Je garde aussi des contrôles pendant la réalisation, puis une phase de recette avant la restitution.
+
+Mes points de vigilance sont surtout les dépendances entre les fonctions, ma disponibilité et la stabilité de la version à présenter.
+
+**Préparation / manipulation — ne pas lire**
+
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
+
+**Source de préparation :** B1 : neuf lots, 82 j-h ; mise-en-situation.json ; A01.
 
 ### 6. Affecter les missions et prévoir les moyens
 
-**Repère : 04:30–06:00** — Mise en situation pédagogique explicitement simulée.
+**Repère privé : 04:30–06:00.**
 
-Dans la réalité, j’ai réalisé Spity seul. Le tableau sépare donc les responsabilités du projet individuel et une extension pédagogique de recette. Pour cette séance fictive, un testeur réalise les contrôles et Dorian reste responsable du livrable. Un représentant de club fictif décide de l’acceptation dans la mise en situation. Les missions sont affectées selon les compétences nécessaires, pas selon une situation de handicap. Le persona testeur est malentendant : les consignes écrites, les sous-titres vérifiés et les échanges asynchrones rendent sa mission accessible. Les ressources matérielles et logicielles sont celles du projet. Le budget de référence reste l’estimation B1, distincte des dépenses réelles non fournies.
+**Texte à dire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+J’ai développé Spity seul : dans le projet réel, je prends en charge le cadrage, la réalisation et la livraison. Pour expliquer comment je répartirais les missions lors d’une recette avec un intervenant, j’ai préparé cette mise en situation.
 
-**Source :** A02 ; données B1 ; séance pédagogique dans mise-en-situation.json.
+Je confierais l’exécution des scénarios à un testeur ponctuel, tout en restant responsable du livrable. Le représentant du club déciderait de l’acceptation dans cet exemple. La lettre R indique qui réalise, et la lettre A qui décide.
+
+J’ai choisi un persona de testeur malentendant. Je lui donnerais des consignes écrites, des sous-titres vérifiés et la possibilité de faire un retour par écrit. J’adapte les échanges à ses besoins, tout en affectant la mission selon ses compétences.
+
+Pour les moyens, je m’appuie sur mon environnement de développement, la base de données, Docker et le serveur. Les 44 250 euros restent l’estimation initiale du cadrage.
+
+**Préparation / manipulation — ne pas lire**
+
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
+
+**Source de préparation :** A02 ; données B1 ; séance pédagogique dans mise-en-situation.json.
 
 ### 7. Linear : un état daté du travail
 
-**Repère : 06:00–07:00** — Observation historique non pondérée.
+**Repère privé : 06:00–07:00.**
 
-Le relevé du 14 septembre contient 25 tickets, dont un annulé. Sur les 24 autres, 12 sont terminés, un est en cours, quatre sont à faire et sept restent dans le backlog. Le ratio de tickets terminés vaut donc 50 %. Sa lecture demande deux précautions. D’abord, les tickets n’ont pas tous la même taille. Ensuite, certains statuts peuvent être en retard sur le logiciel : le relevé contient par exemple un sujet d’authentification à faire alors que des parcours de connexion existent dans le dépôt. Le tableau permet de repérer un écart à vérifier ; il ne permet pas de conclure que toute la fonction est terminée. Je conserve la date du relevé et je ne présente pas ces nombres comme un état en direct du 16 septembre.
+**Texte à dire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+Voici mon relevé Linear du 14 septembre. Il contient 25 tickets, dont un annulé. Sur les 24 autres, 12 sont terminés, un est en cours, quatre sont à faire et sept sont dans le backlog.
 
-**Source :** donnees/linear-2026-09-14.json ; A09.
+J’obtiens donc 50 % de tickets terminés. Je fais attention à ce que ce chiffre signifie : les tickets n’ont pas tous la même taille et leur statut peut être en retard sur le logiciel.
+
+Par exemple, un sujet d’authentification apparaît encore à faire, alors que la connexion existe déjà. Avant de changer son statut, je dois vérifier le périmètre restant. J’utilise donc ce tableau comme un point de départ pour le suivi, en le rapprochant du code et de la recette.
+
+**Préparation / manipulation — ne pas lire**
+
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
+
+**Source de préparation :** donnees/linear-2026-09-14.json ; A09.
 
 ### 8. Un tableau de bord pour décider
 
-**Repère : 07:00–08:30** — Mise en situation pédagogique explicitement simulée.
+**Repère privé : 07:00–08:30.**
 
-Le relevé Linear est réel et daté. Ce tableau est, lui, un exemple chiffré simulé pour montrer comment suivre les autres dimensions du projet. À M10, 58 jours-personne sont supposés consommés et 28 restent à faire. La prévision devient 86 jours, contre 82 initialement. À 450 euros par jour et en conservant les autres postes B1 à 7 350 euros, le total atteint 46 050 euros, soit un écart de 1 800 euros. Le jalon passe de la fin du mois 11 à la fin du mois 12. La prochaine période contient 12 jours de travail pour une capacité hypothétique de 10 : il faut déplacer deux jours de charge ou réduire le périmètre. Ces valeurs servent à expliquer les formules et les décisions ; elles ne sont pas mon temps ou mes dépenses réels.
+**Texte à dire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+Pour montrer le suivi des coûts et des délais, je prends maintenant un exemple chiffré simulé au dixième mois du projet.
 
-**Source :** mise-en-situation.json ; classeur, Suivi SIMULE ; A03.
+Dans cet exemple, j’ai 58 jours-personne consommés et 28 jours estimés pour terminer. Ma prévision atteint donc 86 jours, contre 82 au départ. Avec la valorisation de 450 euros par jour et les autres postes du cadrage, j’arrive à 46 050 euros : l’écart est de 1 800 euros.
+
+Je regarde aussi le délai : la livraison prévue à la fin du mois 11 passe à la fin du mois 12. Enfin, je compare la charge à ma capacité. Si je prévois 12 jours de travail alors que je n’en ai que 10 de disponibles, je dois déplacer deux jours de charge ou revoir le périmètre.
+
+Ces chiffres sont les hypothèses du cas. Ils me servent à expliquer comment je détecte un écart et comment je prends une décision.
+
+**Préparation / manipulation — ne pas lire**
+
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
+
+**Source de préparation :** mise-en-situation.json ; classeur, Suivi SIMULE ; A03.
 
 ### 9. Anticiper les points de vigilance
 
-**Repère : 08:30–09:30** — Mise en situation pédagogique explicitement simulée.
+**Repère privé : 08:30–09:30.**
 
-Un tableau de bord doit déclencher des actions. Je propose donc des signaux observables : dépasser la capacité, échouer sur un critère critique, ne pas pouvoir ouvrir le logiciel ou ne pas comprendre une consigne de recette. Chaque ligne associe une réponse et un responsable. Dans le projet solo, Dorian porte ces décisions. La ligne sur la recette accessible appartient à la séance fictive avec testeur. La revue hebdomadaire proposée rapproche les tickets, les écarts et les risques, puis conserve une action datée. Le tableau est un dispositif de pilotage pédagogique ; aucune cotation historique ou réunion réellement tenue n’est revendiquée.
+**Texte à dire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+Je veux que mon suivi débouche sur une action. Pour chaque risque, je définis donc un signal et une réponse.
 
-**Source :** A03 ; scénario annuel ; audit navigation pour le problème réel.
+Dans cette mise en situation, si ma charge dépasse ma capacité, je déplace une tâche et je revois le jalon. Si un critère critique échoue, je corrige avant de valider. Si le logiciel devient indisponible pendant une présentation, je décris l’incident et je m’appuie sur les captures datées pour expliquer le parcours.
+
+Pour la séance avec le testeur fictif, je prévois aussi un essai des consignes et des sous-titres. Je vérifie ainsi que les conditions de recette sont adaptées.
+
+À chaque revue proposée, je rapproche ces risques de l’avancement, des coûts et des délais. Je termine avec une action et un responsable identifiés.
+
+**Préparation / manipulation — ne pas lire**
+
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
+
+**Source de préparation :** A03 ; scénario annuel ; audit navigation pour le problème réel.
 
 ### 10. Arbitrer face à une navigation trop lente
 
-**Repère : 09:30–11:00** — Arbitrage réel ; comparaison rétrospective.
+**Repère privé : 09:30–11:00.**
 
-Le cas réel est la lenteur signalée lors des clics de navigation. La conséquence est visible : l’utilisateur attend sans percevoir clairement le résultat de son action. Le diagnostic local montre que l’initialisation du fond animé monopolise le navigateur. Le tableau compare les options comme outil d’aide à la décision. Garder le fond conserve le problème. Optimiser ou différer l’animation peut être étudié, mais aucun gain n’a été mesuré dans les preuves disponibles. Le choix retenu remplace le fond par un SVG statique et ajoute un indicateur d’attente. Il conserve le motif graphique et sacrifie le mouvement. Le changement est réel ; la comparaison formalisée ici est rétrospective. Les mesures suivantes permettent d’en discuter l’effet.
+**Texte à dire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+Je prends maintenant un problème réel que j’ai rencontré sur Spity : lorsque je cliquais dans la barre de navigation, le passage à la page suivante semblait très lent.
 
-**Source :** Audit navigation du 15/09 ; commit 83e4c29.
+Le diagnostic local a montré que l’initialisation du fond animé occupait le navigateur. J’ai repris les options possibles dans ce tableau pour expliquer l’arbitrage. Garder l’animation conservait le problème observé. L’optimiser ou la différer pouvait être étudié, mais je n’ai pas de mesure permettant d’affirmer le gain de cette option.
+
+Le choix retenu a été de remplacer le fond par un SVG statique et d’ajouter un indicateur d’attente. Je conserve ainsi le motif graphique, en acceptant de perdre le mouvement décoratif.
+
+Le changement a été intégré et livré. Pour vérifier son effet, je m’appuie sur la comparaison avant et après que je vous montre ensuite.
+
+**Préparation / manipulation — ne pas lire**
+
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
+
+**Source de préparation :** Audit navigation du 15/09 ; commit 83e4c29.
 
 ### 11. Mesurer l’effet de la correction
 
-**Repère : 11:00–12:00** — Mesures locales contrôlées, échantillon limité.
+**Repère privé : 11:00–12:00.**
 
-Le graphique compare les mêmes cinq parcours avant et après la correction. Les mesures sont réalisées avec Chromium, un processeur ralenti quatre fois et une latence réseau simulée de 100 millisecondes. Avant correction, le temps médian observé est de 10 220 millisecondes. Après correction, il est de 748 millisecondes. La comparaison montre un effet très net dans ces conditions. Elle reste un échantillon d’un passage par parcours : ce n’est ni une moyenne sur tous les utilisateurs, ni un engagement de performance, ni une mesure en production. Le protocole et les valeurs sont conservés dans l’audit. Je préfère présenter les temps et leurs limites plutôt que transformer un test local en promesse générale.
+**Texte à dire**
 
-**À montrer :** Comparer les barres de deux parcours et expliquer le protocole.
+Ici, je compare les mêmes cinq parcours avant et après la correction. Les mesures ont été réalisées localement sur une compilation de production, avec un processeur ralenti quatre fois et une latence réseau simulée de 100 millisecondes.
 
-**Source :** Audit navigation du 15/09 ; donnees/projet-reel.json, performance.
+La médiane passe de 10,22 secondes à 0,748 seconde. L’amélioration est nette dans ce protocole : le navigateur n’a plus à effectuer le calcul décoratif au changement de page.
+
+Je garde cependant la portée de la mesure : il y a un passage par parcours, dans un environnement local contrôlé. Je ne présente donc pas ces chiffres comme les temps de tous les utilisateurs en production. Ils me permettent de vérifier l’effet de la correction dans des conditions comparables.
+
+**Préparation / manipulation — ne pas lire**
+
+Comparer les barres de deux parcours et expliquer le protocole.
+
+**Source de préparation :** Audit navigation du 15/09 ; donnees/projet-reel.json, performance.
 
 ### 12. Adapter la posture à une situation précise
 
-**Repère : 12:00–13:30** — Mise en situation pédagogique explicitement simulée.
+**Repère privé : 12:00–13:30.**
 
-Cette situation est simulée : j’imagine une séance de recette ponctuelle, sans transformer Spity en projet développé en équipe. Le testeur demande de traiter les blocages, tandis que le porteur souhaite enrichir le décor. Une posture participative sert d’abord à écouter les faits et les impacts. Une posture persuasive permet d’expliquer le compromis. La posture directive fixe une limite : un critère critique en échec empêche l’acceptation. Enfin, la posture délégative confie un scénario de test avec un résultat attendu et un point de contrôle. La critique porte sur une décision trop rapide du porteur : elle peut faire perdre une information utile. La recommandation est de faire reformuler le problème, comparer les options, décider puis écrire l’action. Aucun conflit réel n’est attribué à une personne.
+**Texte à dire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+Pour la partie management, je m’appuie sur une situation simulée de recette avec un testeur ponctuel. Dans cet exemple, je souhaite enrichir le décor, alors que le testeur me signale des blocages dans les parcours.
 
-**Source :** A05 ; séance pédagogique ; référentiel p. 12–13.
+Je commencerais par l’écouter et lui demander des faits précis : c’est la posture participative. Ensuite, j’expliquerais pourquoi je privilégie un parcours utilisable plutôt qu’un enrichissement graphique : c’est la posture persuasive.
+
+Je fixerais aussi une limite claire : je ne valide pas tant qu’un critère critique reste en échec. C’est la posture directive. Enfin, je lui confierais la recette avec un résultat attendu et un point de contrôle, dans une posture délégative.
+
+Avec du recul, décider trop vite de mon côté pourrait me faire perdre une alerte utile. Je retiens donc une séquence simple : écouter, comparer les impacts, décider et écrire la prochaine action.
+
+**Préparation / manipulation — ne pas lire**
+
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
+
+**Source de préparation :** A05 ; séance pédagogique ; référentiel p. 12–13.
 
 ### 13. Organiser une collaboration accessible
 
-**Repère : 13:30–15:00** — Mise en situation pédagogique explicitement simulée.
+**Repère privé : 13:30–15:00.**
 
-Dans la simulation, la séance comporte quatre heures de travail pour le porteur et quatre pour le testeur, chacun disposant de cinq heures. La répartition respecte les compétences et conserve une marge. Ce n’est pas une capacité réelle mesurée. Pour le persona malentendant, les consignes sont écrites, les sous-titres sont vérifiés et les prises de parole organisées. Le contrôle consiste à faire reformuler la consigne et retrouver la décision. Dans un contexte à distance et multiculturel, les invitations indiquent les heures locales et le vocabulaire partagé évite les ambiguïtés. Linear suit les actions, Git identifie la version et le dossier centralise les preuves. Un point court, préparé par écrit, se termine par un responsable et un retour attendu.
+**Texte à dire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+Dans la même simulation, je répartis la séance selon les missions de chacun. Je prévois quatre heures pour mon travail et quatre heures pour celui du testeur, avec cinq heures disponibles de chaque côté. Cela laisse une heure de marge à chacun.
 
-**Source :** A02/A05 ; mise-en-situation.json, review.
+Pour le persona malentendant, je prépare les consignes par écrit, je vérifie les sous-titres et j’organise une prise de parole à la fois. Je lui demande de reformuler la consigne pour vérifier que nous nous sommes compris.
+
+Si nous travaillons à distance, je précise les fuseaux dans l’invitation et je prévois aussi un retour asynchrone. Un glossaire partagé en français et en anglais aide à éviter les ambiguïtés.
+
+Enfin, chaque outil a un objectif : Linear pour les actions, Git pour la version et le dossier partagé pour les critères et les preuves. Je termine l’échange avec une action, un responsable et un retour attendu.
+
+**Préparation / manipulation — ne pas lire**
+
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
+
+**Source de préparation :** A02/A05 ; mise-en-situation.json, review.
 
 ### 14. Évaluer les compétences utiles au projet
 
-**Repère : 15:00–16:30** — Mise en situation pédagogique explicitement simulée.
+**Repère privé : 15:00–16:30.**
 
-Les compétences nécessaires sont le suivi, le développement, la recette et la vérification au clavier. Cette grille est pédagogique : elle ne constitue pas une note réellement attribuée à Dorian ou à un testeur. L’échelle va de zéro, non abordé, à trois, autonome sur des cas complexes. Dans le cas, le porteur lit le suivi avec aide mais doit expliquer seul les écarts : il passe donc d’un niveau un à une cible deux. Le développement est supposé autonome et ne demande pas de formation prioritaire. Le testeur sait suivre une consigne mais doit produire une recette reproductible et vérifier le clavier sans aide. Ces écarts justifient les actions de formation. Le niveau technique reste indépendant de la situation de handicap.
+**Texte à dire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+Pour choisir une formation, je commence par regarder l’écart entre le niveau actuel et le niveau nécessaire. Cette grille appartient à la mise en situation : les niveaux sont des hypothèses d’exercice.
 
-**Source :** A06 ; mise-en-situation.json, skills.
+J’utilise une échelle de zéro à trois. Au niveau un, la personne réalise la tâche avec de l’aide. Au niveau deux, elle est autonome. Au niveau trois, elle sait aussi traiter les cas complexes.
+
+Dans l’exemple, je me place au niveau un sur le suivi, avec une cible au niveau deux : je dois pouvoir expliquer seul les écarts. Le développement est supposé autonome, donc je ne le retiens pas comme priorité de formation.
+
+Pour le testeur fictif, je vise une recette reproductible et une vérification au clavier réalisées sans aide. Ce sont ces besoins techniques qui orientent le plan, indépendamment du handicap.
+
+**Préparation / manipulation — ne pas lire**
+
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
+
+**Source de préparation :** A06 ; mise-en-situation.json, skills.
 
 ### 15. Prévoir une progression vérifiable
 
-**Repère : 16:30–18:00** — Mise en situation pédagogique explicitement simulée.
+**Repère privé : 16:30–18:00.**
 
-Le plan répond aux écarts de la grille. Le porteur dispose d’un atelier d’une heure avant la revue M10 pour recalculer et expliquer le tableau de bord. Le testeur dispose de deux heures avant la recette M11 pour pratiquer la recette et les contrôles clavier. Les durées sont des hypothèses de formation, distinctes des huit heures de la séance de recette. Les supports sont écrits et sous-titrés, les pauses et le temps supplémentaire sont adaptés au besoin. L’efficacité se juge sur une tâche réalisée sans aide, pas sur la seule présence. Si une compétence critique reste indisponible, la fiche de renfort prépare une mission, un profil et des critères pour un service RH dans la mise en situation. Aucun recrutement n’est réellement engagé.
+**Texte à dire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+À partir de cette grille, je propose deux actions dans la mise en situation. Pour le suivi, je prévois un atelier d’une heure avant la revue du mois 10, afin de recalculer les écarts et de les expliquer sans aide.
 
-**Source :** A06 ; mise-en-situation.json, training ; annexe 26.
+Pour le testeur fictif, je propose deux heures de pratique sur la recette et le clavier avant le mois 11. Je prépare des consignes écrites et un support sous-titré. J’adapte les pauses et le temps nécessaire à ses besoins.
+
+Ces formations sont prévues avant la séance de recette : je ne compte pas leurs heures dans la charge de cette séance. Pour vérifier leur efficacité, je regarde si la tâche peut être réalisée de façon autonome.
+
+Si un écart critique persiste, je prévois d’abord un accompagnement adapté, puis j’étudie un renfort ponctuel. J’ai détaillé ce besoin conditionnel dans la fiche en annexe.
+
+**Préparation / manipulation — ne pas lire**
+
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
+
+**Source de préparation :** A06 ; mise-en-situation.json, training ; annexe 26.
 
 ### 16. Un compte rendu qui aide à décider
 
-**Repère : 18:00–19:30** — Mise en situation pédagogique explicitement simulée.
+**Repère privé : 18:00–19:30.**
 
-Le compte rendu montré est fictif et identifié CR-SIM-02. Il relie les chiffres de la simulation au besoin d’un persona club. Le constat annonce la prévision, son écart et sa conséquence sur le jalon. La décision pédagogique consiste à conserver le fond statique et à protéger les critères de recette. Les actions distinguent le porteur, le testeur ponctuel et le représentant de club fictif. Le document donne aussi un prochain point de validation. Cette structure aide un client à comprendre et à choisir. La correction du fond est réellement présente dans le logiciel, mais ce compte rendu n’est pas son origine historique et n’a pas été signé par un client réel.
+**Texte à dire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+Pour le suivi client, j’ai préparé un compte rendu simulé avec un représentant de club. Je l’organise en trois parties : le constat, la décision et les actions.
 
-**Source :** A07 ; mise-en-situation.json, clientReviews ; retours simulés du candidat.
+Au mois 10, j’annonce l’écart du cas : 1 800 euros supplémentaires et un mois de décalage. Je le relie au besoin exprimé dans l’exemple : garder un parcours fluide et utilisable.
+
+La décision proposée est de conserver le fond statique et de maintenir les critères de recette. De mon côté, je révise le suivi. Le testeur prépare la recette et le représentant du club revoit les critères au prochain point.
+
+Cette structure donne à mon interlocuteur les informations utiles pour décider. Le compte rendu est simulé ; il illustre le suivi et ne constitue pas l’origine historique de la correction du site.
+
+**Préparation / manipulation — ne pas lire**
+
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
+
+**Source de préparation :** A07 ; mise-en-situation.json, clientReviews ; retours simulés du candidat.
 
 ### 17. Prévoir les points de validation
 
-**Repère : 19:30–20:30** — Mise en situation pédagogique explicitement simulée.
+**Repère privé : 19:30–20:30.**
 
-Les points de validation du modèle annuel suivent les risques du projet. Le cadrage vérifie le besoin avant d’engager la réalisation. La revue M10 expose les écarts et permet de décider. La recette M11 rapproche chaque critère de son résultat et prépare les corrections. La restitution M12 porte sur la dernière version prête. Une réserve entraîne une action avec un responsable et une échéance à convenir. Ces rendez-vous sont planifiés dans la simulation ; ils ne sont pas des réunions historiques déclarées. Le calendrier évite de découvrir à la dernière minute que le logiciel ne répond pas au parcours attendu.
+**Texte à dire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+Je prévois plusieurs points de validation dans mon calendrier simulé pour vérifier le résultat au fur et à mesure.
 
-**Source :** A01/A07 ; planning annuel simulé.
+Au mois 3, je fais confirmer le besoin et les critères. Au mois 10, je présente les écarts et les options pour décider de la suite. Au mois 11, je rapproche les résultats de recette des critères attendus. Au mois 12, je présente la dernière version disponible.
+
+Si une réserve apparaît, je la transforme en action avec un responsable et une échéance à convenir. L’objectif est de garder un lien entre le besoin de départ, ce qui est développé et ce qui peut être accepté.
+
+**Préparation / manipulation — ne pas lire**
+
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
+
+**Source de préparation :** A01/A07 ; planning annuel simulé.
 
 ### 18. Mesurer le retour pour agir
 
-**Repère : 20:30–21:30** — Mise en situation pédagogique explicitement simulée.
+**Repère privé : 20:30–21:30.**
 
-Les indicateurs sont définis avant la séance : réussite sans aide, utilité perçue, conformité des critères critiques et blocages ouverts. Le protocole note aussi l’effectif, car une moyenne isolée masque le nombre de retours. Les cibles affichées sont pédagogiques, pas des engagements signés. Les résultats restent non mesurés. Si la réussite sans aide est faible, il faut identifier l’étape difficile. Une faible utilité demande de revenir au besoin. Un blocage critique empêche l’acceptation et déclenche une correction suivie d’une nouvelle vérification. Ces indicateurs complètent les tests techniques, qui ne mesurent pas la satisfaction.
+**Texte à dire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+Pour recueillir un retour utile, je propose quatre indicateurs. Je regarde si le parcours est réalisé sans aide, si le service est jugé utile, si les critères critiques sont acceptés et si des blocages restent ouverts.
 
-**Source :** A07 ; indicateurs proposés pour les personas simulés.
+Les seuils affichés sont les objectifs proposés pour la mise en situation. Je n’ai pas de résultats réels de satisfaction à présenter. Lors d’une séance, je noterais aussi le nombre de participants pour donner un sens aux pourcentages et à la moyenne.
 
-### 19. Préparer une démonstration vérifiable
+Si la réussite sans aide est faible, je cherche l’étape qui pose problème. Si l’utilité est mal évaluée, je reviens au besoin. Et si un blocage critique reste ouvert, je corrige avant de demander l’acceptation.
 
-**Repère : 21:30–23:00** — Protocole proposé pour la démonstration.
+Je complète ainsi les tests techniques par un regard sur l’utilisation du produit.
 
-La démonstration est préparée autour de critères visibles. Pour les partenaires, je vérifie les filtres et l’état d’une demande. Pour un événement, je montre l’inscription et les places disponibles. Avec la session club, je retrouve les participants et les commandes autorisées. Je termine par un passage au clavier. La préparation se fait sur une base isolée contenant des comptes de test. Avant l’oral, il faut vérifier les dates des événements, les connexions et la version utilisée. Les captures du 15 septembre servent de secours si un incident empêche une manipulation. Dans ce cas, j’annonce le problème et le critère qui n’a pas été revérifié en direct. Je ne transforme pas une capture en validation actuelle.
+**Préparation / manipulation — ne pas lire**
 
-**À montrer :** Préparer deux sessions et annoncer les critères avant de changer d’écran.
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
 
-**Source :** A08 ; captures du 15/09 ; recette du projet.
+**Source de préparation :** A07 ; indicateurs proposés pour les personas simulés.
+
+### 19. Les critères de validation
+
+**Repère privé : 21:30–23:00.**
+
+**Texte à dire**
+
+Avant de vous montrer le logiciel, je précise ce que nous allons vérifier. Pour les partenaires, je regarde la cohérence des filtres et la lisibilité de l’état d’une demande.
+
+Pour les événements, je vérifie l’inscription et les places disponibles. Avec la session club, je retrouve les participants et les commandes liées à ce rôle. Je montre aussi l’utilisation des commandes au clavier.
+
+J’utilise une base de démonstration avec des comptes de test. Le résultat attendu reste concret : un grimpeur comprend ce qu’il peut faire, et un club retrouve les informations nécessaires pour organiser sa sortie.
+
+Ces critères me servent ensuite à faire le bilan de la démonstration et à identifier les éventuelles réserves.
+
+**Préparation / manipulation — ne pas lire**
+
+Préparer deux sessions et annoncer les critères avant de changer d’écran.
+
+**Source de préparation :** A08 ; captures du 15/09 ; recette du projet.
 
 ### 20. Passer du suivi à l’usage.
 
-**Repère : 23:00–23:30** — Manipulation à réaliser devant le jury.
+**Repère privé : 23:00–23:30.**
 
-Je passe à la démonstration. Les comptes utilisés sont des comptes de test dans une base dédiée. Je commence avec une session grimpeur, puis je passe à la session club pour retrouver les participants. L’objectif est de montrer les critères annoncés, pas de parcourir toutes les pages du site.
+**Texte à dire**
 
-**À montrer :** Basculer dans le navigateur préparé ; annoncer la version.
+Je passe maintenant au logiciel. Je commence avec une session grimpeur pour vous montrer la recherche de partenaires. Ensuite, je passe sur un événement, puis sur la session club pour retrouver les participants.
 
-**Source :** A08 ; environnement local isolé.
+Je garde les mêmes critères tout au long du parcours : des filtres cohérents, un état compréhensible et des actions adaptées au rôle de l’utilisateur.
+
+**Préparation / manipulation — ne pas lire**
+
+Basculer dans le navigateur préparé ; annoncer la version.
+
+**Source de préparation :** A08 ; environnement local isolé.
 
 ### 21. Trouver un partenaire
 
-**Repère : 23:30–26:00** — Manipulation en direct ; capture datée de secours.
+**Repère privé : 23:30–26:00.**
 
-Afficher le profil de la session grimpeur et expliquer la discipline et le niveau utilisés. Ouvrir la recherche de partenaires, modifier un filtre et vérifier que les résultats restent cohérents. Consulter un profil compatible, puis montrer l’état d’une demande. Si une demande existe déjà, expliquer cet état au lieu d’annoncer un nouvel envoi. Lorsque le partenariat est accepté, montrer le passage vers les événements. Décrire chaque résultat visible avec les mots d’un utilisateur.
+**Texte à dire**
 
-**À montrer :** 0:30–1:00 profil ; 1:00–2:00 filtres ; 2:00–3:00 demande. Adapter aux données disponibles.
+Je commence par le profil du grimpeur. Ici, je retrouve sa pratique et son niveau : ce sont les informations qui donnent du contexte à la recherche.
 
-**Source :** Capture matching du 15/09 ; code et recette matching.
+Je vais maintenant dans les partenaires. Je sélectionne une discipline et je regarde comment la liste s’adapte. Je peux consulter un profil pour vérifier s’il correspond à la sortie que je veux préparer.
+
+Je passe ensuite à la demande de partenariat. Ce que je veux rendre clair pour l’utilisateur, c’est l’état de sa demande : il doit savoir où il en est avant de poursuivre. Si une demande existe déjà, je présente l’état affiché ; je n’ai pas besoin d’en créer une deuxième pour montrer ce fonctionnement.
+
+Le parcours peut ensuite se poursuivre vers les événements pour préparer une sortie.
+
+**Préparation / manipulation — ne pas lire**
+
+0:30–1:00 profil ; 1:00–2:00 filtres ; 2:00–3:00 demande. Adapter aux données disponibles.
+
+**Source de préparation :** Capture matching du 15/09 ; code et recette matching.
 
 ### 22. S’inscrire et retrouver les participants
 
-**Repère : 26:00–29:00** — Manipulation en direct ; capture datée de secours.
+**Repère privé : 26:00–29:00.**
 
-Ouvrir un événement futur et montrer les places restantes. Procéder à l’inscription ou expliquer l’état déjà inscrit. Passer dans le navigateur de la session club et retrouver la liste des participants. Montrer que les commandes dépendent du rôle et vérifier un passage au clavier. Revenir aux critères annoncés : préciser ceux qui ont été montrés, ceux qui nécessitent une réserve et ceux qui reposent uniquement sur une preuve de test. Revenir au diaporama avant la fin des six minutes.
+**Texte à dire**
 
-**À montrer :** 3:00–4:00 inscription ; 4:00–5:15 club ; 5:15–5:45 clavier ; 5:45–6:00 retour aux critères.
+Je passe maintenant aux événements. Sur la fiche, je retrouve les informations de la sortie et les places disponibles. Je peux vérifier l’action proposée pour l’inscription et l’état affiché pour ce compte.
 
-**Source :** Capture événements du 15/09 ; A08 ; recette événements.
+Si le compte est déjà inscrit, je peux le voir directement. Sinon, je peux effectuer l’inscription et vérifier la confirmation.
+
+Je passe ensuite à la session club. L’objectif est de retrouver les participants et les commandes de gestion adaptées à ce rôle. Le grimpeur et le club n’ont pas les mêmes actions à réaliser.
+
+Je termine avec les commandes au clavier pour montrer le déplacement du focus et leur activation. Je peux maintenant revenir à mes critères et distinguer les résultats observés des points qui resteraient à vérifier.
+
+**Préparation / manipulation — ne pas lire**
+
+3:00–4:00 inscription ; 4:00–5:15 club ; 5:15–5:45 clavier ; 5:45–6:00 retour aux critères.
+
+**Source de préparation :** Capture événements du 15/09 ; A08 ; recette événements.
 
 ### 23. Conclure par une décision de validation
 
-**Repère : 29:00–30:00** — Éléments du projet documentés.
+**Repère privé : 29:00–30:00.**
 
-Je termine par le résultat des manipulations : quels critères ont réussi et quelles réserves restent ouvertes ? La décision doit être formulée à partir de ce qui a été montré : accepté, accepté avec réserve ou refusé. Chaque réserve décrit une action, un responsable et une prochaine vérification. Cette validation est recherchée à la fin de la démonstration ; elle n’est pas inventée à l’avance. Le support a présenté les sept compétences, en séparant le projet solo réel sur un an, les estimations initiales et les mises en situation pédagogiques. Les traces du logiciel et les limites des simulations restent disponibles dans les annexes.
+**Texte à dire**
 
-**À montrer :** Donner le bilan réel des manipulations, puis ouvrir les questions.
+Pour terminer, je reviens aux critères que nous avons suivis : les partenaires, l’inscription, les participants et l’utilisation au clavier.
 
-**Source :** Synthèse des pièces citées ; matrice des compétences.
+À partir du résultat observé, je peux demander une décision : accepté, accepté avec réserve ou refusé. Si un point reste à corriger, je le décris précisément et je lui associe une action, un responsable et une prochaine vérification.
 
-### 24. Les sept compétences et leurs preuves
+Ce que je retiens de Spity, c’est l’importance de relier l’organisation du travail à un résultat utilisable. Les tickets me donnent une vue sur le travail, les contrôles me permettent de vérifier les changements et la démonstration me ramène au besoin de l’utilisateur.
 
-**Repère : Annexe hors timing** — Analyse de couverture, sans attribution de compétence.
+Merci pour votre attention. Je suis prêt à répondre à vos questions.
 
-Chaque compétence dispose d’un contenu visible, de notes et d’une annexe détaillée. Les compétences obligatoires sont repérées dans le PDF fourni. La matrice distingue les faits, les estimations et les simulations. Cette correspondance prouve la présence des éléments dans le support ; elle ne préjuge pas de leur évaluation par le jury.
+**Préparation / manipulation — ne pas lire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+Donner le bilan réel des manipulations, puis ouvrir les questions.
 
-**Source :** cadre-evaluation.json ; MATRICE_PREUVES.md.
+**Source de préparation :** Synthèse des pièces citées ; matrice des compétences.
+
+### 24. Synthèse du pilotage
+
+**Repère privé : Annexe pour les questions.**
+
+**Texte à dire**
+
+Cette synthèse reprend les éléments sur lesquels je m’appuie pour piloter Spity : une organisation du travail, des indicateurs, des choix argumentés et des critères de validation.
+
+Le projet a été développé en solo. J’ai utilisé les traces réelles pour présenter l’avancement et l’arbitrage de navigation. Les mises en situation m’ont permis d’expliquer comment je préparerais une collaboration, une formation et un suivi client.
+
+Si vous souhaitez revenir sur un point, je peux reprendre le tableau, le calcul ou la décision correspondante.
+
+**Préparation / manipulation — ne pas lire**
+
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
+
+**Source de préparation :** cadre-evaluation.json ; MATRICE_PREUVES.md.
 
 ### 25. Les étapes enregistrées dans Git
 
-**Repère : Annexe hors timing** — Durée déclarée ; chronologie rétrospective issue de Git.
+**Repère privé : Annexe pour les questions.**
 
-Le projet s’inscrit sur un an, comme indiqué dans mon cadrage personnel. Le dépôt apporte des repères complémentaires : les fondations techniques sont enregistrées en janvier, puis les interfaces, les profils et les lieux en mai. En juillet apparaissent le matching, les événements et la recette automatisée. En août, le projet intègre davantage de maintenance et de supervision. En septembre, il évolue avec les médias, l’administration et les contributions aux falaises. Cette chronologie est reconstruite à partir des commits. Elle montre ce qui est traçable, mais ne remplace pas un planning initial approuvé. Le premier commit ne date pas nécessairement le début de la réflexion sur le projet. Les mois exacts de début et de fin de l’année restent à confirmer. Je ne transforme pas une période sans commit en absence de travail.
+**Texte à dire**
 
-**À montrer :** Suivre la frise ; ouvrir un commit uniquement si le jury demande la preuve.
+Voici les étapes que je peux retrouver dans l’historique du dépôt. Les fondations techniques sont enregistrées en janvier. En mai apparaissent les premiers parcours, avec la connexion, les profils et les lieux.
 
-**Source :** donnees/projet-reel.json ; preuves/historique-git.txt.
+En juillet, je retrouve le matching, les événements et la recette automatisée. En août, les changements portent davantage sur la maintenance et la supervision. En septembre, le produit s’enrichit avec les médias, l’administration et les contributions aux falaises.
+
+Cette frise situe les versions enregistrées. Elle est distincte du planning annuel reconstruit : une date de commit me dit quand un changement a été enregistré, mais pas combien d’heures il a demandé.
+
+**Préparation / manipulation — ne pas lire**
+
+Suivre la frise ; ouvrir un commit uniquement si le jury demande la preuve.
+
+**Source de préparation :** donnees/projet-reel.json ; preuves/historique-git.txt.
 
 ### 26. Préparer un besoin de renfort
 
-**Repère : Annexe hors timing** — Mise en situation pédagogique explicitement simulée.
+**Repère privé : Annexe pour les questions.**
 
-Cette fiche montre comment transmettre un besoin au service RH dans la mise en situation. Le déclencheur est un écart critique qui persiste après formation. La mission est limitée à quatre heures de recette, avec compétences, disponibilité à confirmer et livrable précis. La sélection se fait par un exercice accessible et l’accueil donne les critères et les seuls accès nécessaires. Le coût indicatif de 180 euros serait supplémentaire et doit être arbitré avant tout engagement. Le projet réel est solo : aucun service RH n’a été sollicité ni renfort engagé.
+**Texte à dire**
 
-**À montrer :** Expliquer les éléments affichés et leur source.
+Si une compétence de recette restait indisponible après la formation, je préparerais ce besoin de renfort dans le cadre de la mise en situation.
 
-**Source :** A06 ; fiche de mise en situation pédagogique.
+Je commencerais par préciser le déclencheur et la mission : quatre heures de recette sur les parcours et le clavier, avec un résultat reproductible. Je demanderais un profil capable de décrire une anomalie et de communiquer clairement par écrit.
 
-## Réponses à préparer
+Pour la sélection, je proposerais un exercice accessible sur une base de test. À l’accueil, je fournirais les critères, les accès nécessaires et un point de restitution.
 
-- **Pourquoi un an et 82 j-h ?** Un an est une durée déclarée ; 82 j-h est la charge estimée du cadrage. Aucun relevé de temps ne permet de comparer le consommé.
-- **Avec quelle équipe ?** Projet solo confirmé. Présenter les responsabilités assumées et les aides effectivement reçues ; ne pas inventer de collaborateurs.
-- **Quel client a validé ?** Aucune réception réelle jointe. Les trois retours sont pédagogiques et simulés.
-- **Pourquoi 12/24 ?** Relevé Linear du 14 septembre, hors ticket annulé, non pondéré ; ce n’est pas la moitié du produit validé.
-- **Pourquoi la correction de navigation ?** Calcul décoratif bloquant reproduit localement, puis SVG statique et indicateur d’attente ; voir l’audit daté.
-- **Les temps sont-ils ceux de la production ?** Non. Protocole local contrôlé, un passage par parcours. La sonde distante prouve seulement la santé et la révision servie à cet instant.
-- **Le Bloc 3 est-il entièrement démontré ?** Les sept compétences et leurs critères disposent de contenus. Certains sont traités par une mise en situation annoncée. Cela ne vaut ni expérience vécue ni acquisition décidée par le jury.
-- **Que faire si la démo échoue ?** Dire quel critère n’a pas pu être revérifié, utiliser une capture datée puis décrire la suite nécessaire.
+À 45 euros de l’heure, le coût indicatif serait de 180 euros, à arbitrer en plus du budget de base. C’est une fiche conditionnelle : je n’ai pas engagé de recrutement dans mon projet solo.
 
-## Répétition
+**Préparation / manipulation — ne pas lire**
 
-Préparer A08, les deux sessions locales et les événements futurs. Expliquer oralement un chiffre de chaque graphique, son unité et sa limite. Rejouer les six minutes de démonstration. Vérifier les règles de dépôt du campus et les pièces nécessaires dans CHECKLIST_REMISE.md. Aucun dépôt externe ni validation du jury n’est déclaré par ce guide.
+Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.
+
+**Source de préparation :** A06 ; fiche de mise en situation pédagogique.
+
+## Mes réponses possibles aux questions
+
+- **Pourquoi un an et 82 j-h ?** « J’ai développé Spity sur un an. Les 82 jours-personne correspondent à l’estimation de charge de mon cadrage. Je distingue cette charge de la durée calendaire. »
+- **Avec quelle équipe ?** « J’ai réalisé le projet seul. La séance avec un testeur et le représentant de club appartient à ma mise en situation. »
+- **Quel client a validé ?** « Mes exemples de retours et de comptes rendus sont simulés. Je n’ai pas de réception réelle signée à présenter. »
+- **Pourquoi 12/24 ?** « Je reprends le relevé du 14 septembre, hors ticket annulé. Je ne pondère pas la taille des tickets ; ce décompte ne mesure donc pas la part du produit validée. »
+- **Pourquoi supprimer l’animation ?** « Le calcul décoratif bloquait la navigation. Le fond statique conserve le motif et supprime cette initialisation ; les mesures locales montrent l’effet de la correction. »
+- **Ces temps sont-ils ceux de la production ?** « Je les ai présentés comme une comparaison locale contrôlée. La sonde distante vérifie la santé et la version servie à un instant précis ; elle ne mesure pas ces parcours. »
+- **Qu’ai-je simulé ?** « J’ai distingué le développement réel des hypothèses de planning, de consommé, de collaboration, de formation et de suivi client. Je peux expliquer les calculs et les décisions de chacun de ces exemples. »
+
+## Mes variantes pendant la démonstration
+
+Ces variantes restent dans ce guide personnel. Je choisis uniquement celle qui correspond à ce que j’observe, sans annoncer une réussite à l’avance.
+
+- **Inscription réussie :** « La confirmation est affichée. Je peux maintenant vérifier la présence de ce compte dans les participants. »
+- **Compte déjà inscrit :** « Ce compte est déjà inscrit : l’état affiché le confirme. Je vous montre maintenant comment le club le retrouve. »
+- **Demande déjà existante :** « Une demande existe déjà. Son état reste visible, ce qui permet à l’utilisateur de savoir où il en est. »
+- **Incident :** « Ce parcours ne répond pas comme prévu. Je vous montre l’interface datée pour expliquer le fonctionnement attendu, et je garde ce critère comme non revérifié en direct. »
+- **Bilan sans réserve observée :** « Les critères que nous venons de parcourir ont été vérifiés. Je peux proposer la validation de ce périmètre. »
+- **Bilan avec réserve :** « Je garde une réserve sur ce point. Je prévois une correction puis une nouvelle vérification avant de le considérer comme validé. »
+
+## Ma préparation
+
+Je prépare A08, deux sessions locales, des événements futurs et la version choisie. Je répète les manipulations au clavier et je vérifie les règles de dépôt du campus. Pour projeter, j’utilise le diaporama ou son PDF ; je garde ce guide et les contrôles documentaires sur mon écran de présentation.

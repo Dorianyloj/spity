@@ -36,7 +36,7 @@ Avant chaque répétition, vérifier les dates futures des événements. Un comp
 
 ## Préparation du jour J
 
-Vérifier /api/health, les deux connexions, les pages /app/matching et /app/events, puis un parcours complet. Noter la version et le SHA. Préparer le diaporama v17, le classeur et les preuves hors connexion. Désactiver les notifications personnelles et fermer les onglets sans rapport avec le projet.
+Vérifier /api/health, les deux connexions, les pages /app/matching et /app/events, puis un parcours complet. Noter la version et le SHA. Préparer le diaporama v18, le classeur et les preuves hors connexion. Désactiver les notifications personnelles et fermer les onglets sans rapport avec le projet.
 
 En cas d'incident : annoncer précisément le problème, conserver le message utile, présenter la capture datée de secours et expliquer la dernière vérification disponible. Revenir à la grille et indiquer quel critère ne peut pas être revalidé en direct. Un environnement arrêté ne doit pas être présenté comme une recette réussie.
 

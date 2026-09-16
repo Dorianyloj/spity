@@ -15,7 +15,7 @@ from openpyxl import load_workbook
 from pptx import Presentation
 from pypdf import PdfReader
 ROOT=Path(__file__).resolve().parents[2];DOCS=ROOT/'docs/rncp/bloc-03';OUT=ROOT/'output/bloc-03'
-PPTX=OUT/'spity-bloc-3-30-minutes-visuel-v17.pptx';DECK=OUT/'spity-bloc-3-30-minutes-visuel-v17.pdf'
+PPTX=OUT/'spity-bloc-3-soutenance-v18.pptx';DECK=OUT/'spity-bloc-3-soutenance-v18.pdf'
 PDF=OUT/'dossier-bloc-03-spity.pdf';XLSX=OUT/'pilotage-spity.xlsx';ZIP=OUT/'kit-soutenance-spity.zip'
 def read(p):return json.loads(p.read_text())
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -60,6 +60,8 @@ def main(package):
     presentation=Presentation(PPTX);assert len(presentation.slides)==26
     charts=[]
     for info,slide in zip(slides,presentation.slides):
+        assert info['notes']==info['script'], 'Les notes natives doivent contenir seulement le texte à dire'
+        assert re.search(r'\bje\b|\bj[’\x27]|\bmon\b|\bmes\b',info['script'],re.I)
         assert info['notes']==slide.notes_slide.notes_text_frame.text
         assert info['script'] in (DOCS/'GUIDE_ORAL.md').read_text()
         text='\n'.join(shape.text for shape in slide.shapes if shape.has_text_frame)
@@ -82,10 +84,14 @@ def main(package):
     deck=PdfReader(DECK);dossier=PdfReader(PDF)
     assert len(deck.pages)==26 and len(dossier.pages)>10
     assert all(len(p.extract_text().strip())>70 for p in deck.pages)
+    for n,page in enumerate(deck.pages,1):
+        projected=page.extract_text()
+        assert not re.search(r'\bminutes?\b|\bmin\b|\b\d{1,2}:\d{2}\b',projected,re.I), f'Chronométrage projeté : {n}'
+        assert not re.search(r'repère privé|à montrer|ne pas lire|PDF fournis|acquisition présumée|ne pas déclarer',projected,re.I), f'Consigne interne projetée : {n}'
     assert all(len(p.extract_text().strip())>70 for p in dossier.pages)
     for n in [6,8,9,12,13,14,15,16,17,18,26]:
-        content=(deck.pages[n-1].extract_text()+' '+slides[n-1]['notes']).casefold()
-        assert any(term in content for term in ['simul','pédagog','hypoth','proposé']),n
+        content=deck.pages[n-1].extract_text().casefold()
+        assert any(term in content for term in ['simul','mise en situation','pédagog','hypoth','proposé']),n
     wb=load_workbook(XLSX,data_only=False);cached=load_workbook(XLSX,data_only=True)
     assert wb.sheetnames==['Lecture','Chronologie','Linear','Indicateurs','Cadrage','Navigation','Retours SIMULES','Suivi SIMULE']
     expected={'Indicateurs':{'B2':25,'B3':1,'B4':24,'B5':12,'B6':.5,'B7':10220,'B8':748},'Cadrage':{'B11':82,'D11':36900,'D17':44250},'Suivi SIMULE':{'B6':86,'B9':44250,'B10':46050,'B11':1800,'B15':1,'B18':1.2}}
@@ -118,7 +124,7 @@ def main(package):
     current_tree=git('rev-parse','HEAD:spity');evidence=read(DOCS/'preuves/verification.json')
     assert git('rev-parse',f"{evidence['gitRevision']}:spity")==evidence['applicationTree']
     changes=git('diff','--name-only','HEAD','--','spity')
-    report={'version':'v17','date':'2026-09-16','project':'Solo sur un an déclaré','competencies':competencies,'mandatoryCompetencies':['C.3.1','C3.2.1','C3.4.2'],'criteriaMapped':len(coverage),'slides':26,'presentationMinutes':30,'demonstrationMinutes':6,'nativeCharts':3,'pdfPages':len(dossier.pages),'workbookSheets':len(wb.sheetnames),'workbookFormulas':formula_count,'localLinksChecked':links,'applicationTree':current_tree,'verifiedHistoricalApplicationTree':evidence['applicationTree'],'applicationMatchesDatedEvidence':current_tree==evidence['applicationTree'] and not changes,'applicationWorkingTreeClean':not changes,'scope':'Cohérence documentaire, couverture des critères, formules, sources et exports. Réel et simulation distingués. Aucune nouvelle recette complète ni acquisition de compétence déclarée.'}
+    report={'version':'v18','date':'2026-09-16','project':'Solo sur un an déclaré','competencies':competencies,'mandatoryCompetencies':['C.3.1','C3.2.1','C3.4.2'],'criteriaMapped':len(coverage),'slides':26,'presentationMinutes':30,'demonstrationMinutes':6,'nativeCharts':3,'pdfPages':len(dossier.pages),'workbookSheets':len(wb.sheetnames),'workbookFormulas':formula_count,'localLinksChecked':links,'applicationTree':current_tree,'verifiedHistoricalApplicationTree':evidence['applicationTree'],'applicationMatchesDatedEvidence':current_tree==evidence['applicationTree'] and not changes,'applicationWorkingTreeClean':not changes,'scope':'Cohérence documentaire, couverture des critères, formules, sources et exports. Réel et simulation distingués. Aucune nouvelle recette complète ni acquisition de compétence déclarée.'}
     (DOCS/'preuves/controle-kit.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     if package:
         included=[p for p in DOCS.rglob('*') if p.is_file() and p.name!='MANIFEST.sha256']
@@ -131,7 +137,7 @@ def main(package):
         included.append(manifest)
         with zipfile.ZipFile(ZIP,'w',zipfile.ZIP_DEFLATED) as z:
             for p in included:z.write(p,p.relative_to(ROOT).as_posix())
-            z.writestr('LIRE_EN_PREMIER.txt','SPITY — BLOC 3 — v17\n\nOuvrir output/bloc-03/spity-bloc-3-30-minutes-visuel-v17.pdf ou .pptx.\nSommaire, projet solo sur un an, puis sept compétences dans l’ordre.\nLes mises en situation pédagogiques sont signalées ; elles ne sont pas des expériences vécues.\nGuide : docs/rncp/bloc-03/GUIDE_ORAL.md\nCouverture : docs/rncp/bloc-03/CONTROLE_COMPLETUDE.md\nLa démonstration nécessite le dépôt applicatif complet et ses dépendances.\nCe kit ne contient pas de base, secrets ou node_modules. Aucun dépôt officiel ni accord client déclaré.\n')
+            z.writestr('LIRE_EN_PREMIER.txt','SPITY — BLOC 3 — v18\n\nOuvrir output/bloc-03/spity-bloc-3-soutenance-v18.pdf ou .pptx.\nSommaire, projet solo sur un an, puis sept compétences dans l’ordre.\nLes mises en situation pédagogiques sont signalées ; elles ne sont pas des expériences vécues.\nGuide : docs/rncp/bloc-03/GUIDE_ORAL.md\nCouverture : docs/rncp/bloc-03/CONTROLE_COMPLETUDE.md\nLa démonstration nécessite le dépôt applicatif complet et ses dépendances.\nCe kit ne contient pas de base, secrets ou node_modules. Aucun dépôt officiel ni accord client déclaré.\n')
         with zipfile.ZipFile(ZIP) as z:
             assert z.testzip() is None
             for p in included:assert hashlib.sha256(z.read(p.relative_to(ROOT).as_posix())).hexdigest()==digest(p)

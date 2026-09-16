@@ -1,4 +1,4 @@
-# Checklist de remise — v17
+# Checklist de remise — v18
 
 ## Confirmé
 

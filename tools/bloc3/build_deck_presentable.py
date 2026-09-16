@@ -1,4 +1,4 @@
-"""Build the editable v17 deck from the solo project narrative and dated evidence.
+"""Build the editable v18 deck from the solo project narrative and dated evidence.
 
 Run from any directory: python tools/bloc3/build_deck_presentable.py
 Dependencies: tools/bloc3/requirements-presentation.txt.
@@ -18,7 +18,7 @@ from pptx.util import Inches, Pt
 
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / 'docs/rncp/bloc-03'
-OUT = ROOT / 'output/bloc-03/spity-bloc-3-30-minutes-visuel-v17.pptx'
+OUT = ROOT / 'output/bloc-03/spity-bloc-3-soutenance-v18.pptx'
 SOURCE = json.loads((DOCS / 'donnees/support-oral.json').read_text())
 FACTS = json.loads((DOCS / 'donnees/projet-reel.json').read_text())
 B1 = json.loads((DOCS / 'donnees/reference-bloc-01.json').read_text())
@@ -31,7 +31,7 @@ FONT = 'Arial'
 P = Presentation()
 P.slide_width, P.slide_height = Inches(16), Inches(9)
 P.core_properties.title = 'Spity — Piloter le projet | Bloc 3'
-P.core_properties.subject = 'Soutenance RNCP39583 — 30 minutes, démonstration incluse'
+P.core_properties.subject = 'Soutenance RNCP39583 — Coordonner et piloter Spity'
 P.core_properties.author = 'Dorian Joly'
 P.core_properties.language = 'fr-FR'
 
@@ -240,9 +240,10 @@ for item in SOURCE:
         pill(s, 'PROJET SOLO · 1 AN' if layout == 'cover' else 'DÉMONSTRATION EN DIRECT', .75, 1.6, 3.6, True)
         txt(s, 'Une année\npour construire\nSpity.' if layout == 'cover' else 'Passer du suivi\nà l’usage.', .7, 2.5, 8, 3.1, 55, True, WHITE)
         txt(s, item['subtitle'], .75, 6, 7.35, 1.0, 24, False, 'C7D6CB')
-        txt(s, 'Dorian Joly' if layout == 'cover' else '6 minutes', .75, 7.45, 7, .55, 25, True, LIME)
+        txt(s, 'Dorian Joly' if layout == 'cover' else 'Grimpeur → Club', .75, 7.45, 7, .55, 25, True, LIME)
     elif layout == 'agenda':
-        stat(s, '30', 'minutes pour présenter', .75, 3, 4, True, '24 min d’explications\n6 min de démonstration')
+        txt(s, 'Du besoin\nà l’usage.', .75, 3.03, 4.3, 2.2, 41, True, LIME)
+        txt(s, 'Organiser le travail.\nVérifier le résultat.', .8, 5.65, 4.15, 1.1, 21, False, 'C7D6CB')
         for i,(num,label,timing) in enumerate(content['items']):
             y=2.67+i*.65
             txt(s,num,5.35,y,.7,.5,24,True,LIME)
@@ -258,7 +259,7 @@ for item in SOURCE:
         rect(s,6.85,2.72,8.5,4.82,INK,True)
         picture(s,'docs/rncp/bloc-03/preuves/captures/lieux-2026-09-15.png',7.03,2.88,8.14,4.46)
     elif layout == 'timeline':
-        stat(s,'1 an','projet solo',.8,2.9,3.0,False,'Période déclarée\npar Dorian Joly')
+        stat(s,'1 an','projet solo',.8,2.9,3.0,False,'De la conception\nà la livraison')
         for i,(date,title,detail) in enumerate(content['items']):
             y=2.65+i*.91
             pill(s,date,4.4,y,1.6)
@@ -317,7 +318,7 @@ for item in SOURCE:
             y=3.15+i*1.34
             pill(s,f'0{i+1}',10.7,y,1.0)
             txt(s,label,10.7,y+.48,4.4,.55,28,True)
-        txt(s,'Capture de secours · 15/09/2026',10.7,7.83,4.5,.3,11,False,MUTED)
+        txt(s,'Interface du 15/09/2026 · données de démo',10.7,7.83,4.5,.3,10,False,MUTED)
     else:
         raise ValueError(layout)
     if content.get('callout'):

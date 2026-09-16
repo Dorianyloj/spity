@@ -1,6 +1,6 @@
 # Générer le kit Bloc 3 courant
 
-La v17 présente le projet solo sur un an puis les sept compétences dans l’ordre des PDF du candidat. Les compléments pédagogiques sont explicitement simulés. Les livrables prêts à consulter sont dans [l’index du kit](../../docs/rncp/bloc-03/README.md).
+La v18 présente le projet solo sur un an puis les sept compétences dans l’ordre des PDF du candidat. Les compléments pédagogiques sont explicitement simulés. Les livrables prêts à consulter sont dans [l’index du kit](../../docs/rncp/bloc-03/README.md).
 
 ## Sources
 
@@ -21,11 +21,15 @@ tmp/bloc3/presentation-venv/bin/python tools/bloc3/build_guide.py
 tmp/bloc3/presentation-venv/bin/python tools/bloc3/build_deck_presentable.py
 tmp/bloc3/presentation-venv/bin/python tools/bloc3/build_workbook.py
 BLOC3_FONT_DIR=/usr/share/fonts/truetype/msttcorefonts tmp/bloc3/presentation-venv/bin/python tools/bloc3/build_pdf.py
-libreoffice -env:UserInstallation=file:///tmp/spity-bloc3-render --headless --convert-to pdf --outdir output/bloc-03 output/bloc-03/spity-bloc-3-30-minutes-visuel-v17.pptx
+libreoffice -env:UserInstallation=file:///tmp/spity-bloc3-render --headless --convert-to pdf --outdir output/bloc-03 output/bloc-03/spity-bloc-3-soutenance-v18.pptx
 libreoffice -env:UserInstallation=file:///tmp/spity-bloc3-calc --headless --convert-to xlsx --outdir output/bloc-03 tmp/bloc3/workbook-source/pilotage-spity.xlsx
 ```
 
 Le classeur est d’abord créé sous `tmp`, puis LibreOffice calcule les formules et exporte les valeurs en cache dans le livrable. La validation contrôle aussi ces caches. Sous Windows, utiliser les exécutables `Scripts` du venv et les polices Arial locales ; adapter le profil LibreOffice.
+
+## Projection et notes
+
+La v18 réserve les repères horaires et les consignes au guide personnel. Le champ `script` de chaque slide est le texte à dire ; `notes` lui est identique et alimente les notes natives. Les titres, sous-titres et contenus alimentent la projection. Les simulations restent signalées. Le contrôle du PDF refuse les mentions de minutes, les chronométrages et les consignes internes ; il vérifie aussi la première personne et l’égalité exacte des notes.
 
 ## Revue et paquet
 

@@ -16,8 +16,10 @@ La PR 35 est fusionnée le 15 septembre à 872db19. Le déploiement GitHub Actio
 
 Les trois captures du 15 septembre représentent la base locale de démonstration. Leur manifeste est inchangé. Elles ne prouvent ni une utilisation par de vrais clients ni le résultat de la prochaine démonstration.
 
-## Livrables v17
+## Livrables v18
 
 La validation documentaire contrôle données sources, formules et valeurs du classeur, chiffres des graphiques, couverture de tous les critères, notes, liens locaux, intégrité PDF/PPTX/ZIP et empreintes. Les rendus sont inspectés avec LibreOffice, sans contrôle revendiqué dans Microsoft PowerPoint. Le résultat détaillé figure dans preuves/controle-kit.json et la portée visuelle dans preuves/controle-visuel.json.
 
 Cette révision ne rejoue pas la recette complète du logiciel. Le lint et le typage requis avant push sont distingués des résultats historiques. La démonstration sur la version choisie et la répétition orale restent à faire avant le passage.
+
+La v18 retire des pages projetées les durées de présentation et les consignes de répétition. Les 26 notes natives sont identiques au texte oral à la première personne. Le guide personnel conserve les repères horaires et les variantes de manipulation. Le contrôle documentaire vérifie cette séparation sur le PDF exporté.

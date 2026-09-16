@@ -1,10 +1,10 @@
 {
   "reviewedOn": "2026-09-16",
   "presentation": {
-    "file": "output/bloc-03/spity-bloc-3-30-minutes-visuel-v17.pptx",
-    "sha256": "4e5867b48ae762e33f26d854e09e923e4060473681d141e8b747291c5e718330",
-    "pdfFile": "output/bloc-03/spity-bloc-3-30-minutes-visuel-v17.pdf",
-    "pdfSHA256": "58c98f5eba144510a88fd2440b7507783892a868986482ae474ba51ed88bbbc0",
+    "file": "output/bloc-03/spity-bloc-3-soutenance-v18.pptx",
+    "sha256": "9357432faaef56b90305b8995edcbb7b085b12395ceb61aad8734da008bba14f",
+    "pdfFile": "output/bloc-03/spity-bloc-3-soutenance-v18.pdf",
+    "pdfSHA256": "11320a549c2f8b89ca0f7a9f44bfbdf1a8a9305a00b0ccec40daa4798941fb3d",
     "slidesReviewed": [
       1,
       2,
@@ -34,12 +34,12 @@
       26
     ],
     "nativeCharts": 3,
-    "method": "Export LibreOffice, inspection des 26 diapositives en trois planches ; graphique Linear inspecté individuellement. Géométrie et notes vérifiées séparément par validate.py.",
-    "result": "Titres, sommaire, tableaux, graphiques, légendes et captures lisibles ; aucun débordement visible. Simulations identifiées et sept compétences dans l’ordre."
+    "method": "Export LibreOffice ; rendu et inspection des 26 slides en trois planches. Lecture de tous les textes oraux à la première personne. Contrôle textuel séparé des minutes et consignes projetées. Après clarification de l’en-tête « Livrable examiné », la slide 17 a été rendue et inspectée individuellement.",
+    "result": "Sommaire et transition de démonstration sans durée ; aucune consigne de répétition visible ; titres et tableaux lisibles. Les exemples simulés restent identifiés."
   },
   "dossier": {
     "file": "output/bloc-03/dossier-bloc-03-spity.pdf",
-    "sha256": "482a3efc7edc55a4fb5e3bf9834d37c6e27182eaade21bae1bda4f65d708544a",
+    "sha256": "19119ad82913a587642cc868c8c4fa3d33798dbdb876833c621708474c9b435a",
     "pages": 25,
     "pagesReviewed": [
       1,
@@ -68,8 +68,13 @@
       24,
       25
     ],
-    "method": "Rendu des pages par pdftoppm et inspection des trois planches finales ; largeur des tableaux et regroupement des lignes corrigés avant ce rendu.",
-    "result": "25 pages, tableaux lisibles, aucun chevauchement ou texte coupé visible."
+    "currentRevisionPagesReviewed": [
+      23,
+      25
+    ],
+    "method": "Comparaison textuelle des 25 pages avec la version précédemment inspectée : seules 23 et 25 changent. Ces deux pages ont été rendues et inspectées individuellement ; revue des autres pages conservée.",
+    "previousReviewSHA256": "482a3efc7edc55a4fb5e3bf9834d37c6e27182eaade21bae1bda4f65d708544a",
+    "result": "25 pages conservées ; références v18 et explication des notes actualisées, aucun débordement visible."
   },
-  "scope": "Revue des livrables v17 ; aucun contrôle déclaré dans Microsoft PowerPoint, aucune répétition chronométrée ni nouvelle recette applicative."
+  "scope": "Revue du support de projection v18 et des notes natives ; repères privés dans le guide. Aucun contrôle Microsoft PowerPoint, aucune répétition chronométrée ni nouvelle recette applicative."
 }
