@@ -30,6 +30,7 @@ sheet('Lecture',['Information','Portée'],[
 ['Linear','Relevé du 14/09/2026, non actualisé. Décompte non pondéré.'],
 ['Cadrage','Charges et montants estimés du diaporama B1 ; aucun consommé réel.'],
 ['Navigation','Mesures locales du 15/09, un passage par parcours ; aucune mesure de production.'],
+['Équipe du scénario','Cinq membres fictifs et Claire côté client ; RACI et charges détaillées dans les feuilles SIMULEES.'],
 ['Retours','Personas et retours simulés pour l’exercice ; pas d’entretiens réalisés.'],
 ['Formules','Recalculées par LibreOffice ; les sources sont conservées dans le kit.'],
 ],[24,110])
@@ -58,5 +59,19 @@ scenario=DOCS/'donnees/mise-en-situation.json'
 if scenario.exists():
     sim=json.loads(scenario.read_text())
     if 'workbookRows' in sim:sheet('Suivi SIMULE',['Indicateur','Valeur','Nature'],sim['workbookRows'],[45,24,100])
+# Team allocations remain entirely separate from the observed Linear snapshot.
+team=sim['team']; names=[member['name'] for member in team]
+rows=[]
+for i,lot in enumerate(sim['planning'],2):
+    rows.append([lot['lot'],lot['owner'],lot['startMonth'],lot['endMonth'],*[lot['allocations'].get(name,0) for name in names],f'=SUM(E{i}:I{i})'])
+rows.append(['TOTAL',None,None,None,*[f'=SUM({col}2:{col}10)' for col in 'EFGHIJ']])
+sheet('Planning SIMULE',['Lot','Pilote','Début M','Fin M',*names,'Total j-h'],rows,[34,15,12,12,14,14,14,14,14,16])
+rows=[]
+for i,(member,planning_col) in enumerate(zip(team,'EFGHI'),2):
+    rows.append([member['name'],member['role'],f"=SUM('Planning SIMULE'!{planning_col}2:{planning_col}10)",member['consumedPersonDays'],member['remainingPersonDays'],f'=D{i}+E{i}',f'=F{i}-C{i}',member['nextMonthAssigned'],member['nextMonthAvailable'],f'=H{i}/I{i}'])
+rows.append(['TOTAL',None,*[f'=SUM({col}2:{col}6)' for col in 'CDEFGHI'],'=H7/I7'])
+sheet('Equipe SIMULEE',['Membre','Rôle','Base j-h','Consommé j-h','Reste j-h','Prévision j-h','Écart j-h','Charge période','Capacité période','Taux de charge'],rows,[16,32,15,18,15,18,16,20,20,20])
+for row in range(2,8):w['Equipe SIMULEE'][f'J{row}'].number_format='0.0%'
+sheet('RACI SIMULE',sim['raci']['columns'],sim['raci']['rows'],[36,14,14,14,14,14,14])
 output=ROOT/'tmp/bloc3/workbook-source/pilotage-spity.xlsx';output.parent.mkdir(parents=True,exist_ok=True)
 w.save(output);print(output)

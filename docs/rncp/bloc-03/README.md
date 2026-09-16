@@ -1,13 +1,13 @@
-# Bloc 3 — Spity, projet solo sur un an
+# Bloc 3 — Piloter Spity avec une équipe fictive
 
-**Version courante : v20, révision du 16 septembre 2026.** Dorian confirme avoir réalisé le projet seul sur un an. La présentation s’appuie sur les étapes enregistrées, les estimations B1, Linear, les corrections et le déploiement. Les compléments de suivi annuel, collaboration ponctuelle, formation et retours client sont **simulés pour l’exercice** et identifiés à chaque utilisation.
+**Version courante : v21, révision du 16 septembre 2026.** Dorian confirme avoir réalisé le projet seul sur un an. La présentation s’appuie sur les étapes enregistrées, les estimations B1, Linear, les corrections et le déploiement. Le scénario d’équipe sur l’année, ses affectations, formations et retours client sont **simulés pour l’exercice** et identifiés à chaque utilisation.
 
 ## Ouvrir les livrables
 
 | Besoin | Fichier |
 | --- | --- |
-| Présenter | [PowerPoint v20](../../../output/bloc-03/spity-bloc-3-soutenance-v20.pptx) |
-| Consulter ou projeter | [PDF du diaporama](../../../output/bloc-03/spity-bloc-3-soutenance-v20.pdf) |
+| Présenter | [PowerPoint v21](../../../output/bloc-03/spity-bloc-3-soutenance-v21.pptx) |
+| Consulter ou projeter | [PDF du diaporama](../../../output/bloc-03/spity-bloc-3-soutenance-v21.pdf) |
 | Répéter | [Guide et notes](GUIDE_ORAL.md), [explications simples](COMPRENDRE_LES_DIAPOS.md), [lexique](LEXIQUE_SIMPLE.md) |
 | Lire le dossier | [PDF](../../../output/bloc-03/dossier-bloc-03-spity.pdf), [source](DOSSIER_BLOC_03.md) |
 | Vérifier les données | [Classeur](../../../output/bloc-03/pilotage-spity.xlsx), [sources structurées](donnees/projet-reel.json) |
@@ -27,7 +27,7 @@ Le PowerPoint et son PDF constituent le support à projeter : aucun chronométra
 - **Traces du dépôt :** chronologie des commits, fonctionnalités, corrections, contrôles consignés et version servie lors de la sonde du 15 septembre.
 - **Avancement présenté :** bilan fonctionnel du 16 septembre, vérifié dans le code. Le relevé Linear du 14 septembre est conservé comme historique dans l’annexe et le classeur.
 - **Estimation :** 82 j-h et 44 250 € du diaporama B1. Aucun temps consommé ni coût réel n’est inventé.
-- **Simulation pédagogique :** planning M1–M12, consommés de suivi, recette ponctuelle, grille, formation et retours de personas. Ces exemples couvrent les critères sans inventer une expérience réellement vécue. Aucun entretien ou accord client réel n’est déclaré.
+- **Simulation pédagogique :** équipe Dorian / Léa / Hugo / Inès / Sami, Claire côté client, planning M1–M12, RACI, charges par personne, formations et retours. Ces exemples couvrent les critères sans inventer une expérience réellement vécue. Aucun entretien ou accord client réel n’est déclaré.
 
 Le support couvre les sept compétences et les critères des deux PDF fournis, dans leur ordre. Le projet solo est distingué de chaque mise en situation. Cette couverture documentaire ne vaut pas acquisition des compétences.
 

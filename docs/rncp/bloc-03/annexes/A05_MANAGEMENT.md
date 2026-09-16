@@ -1,38 +1,23 @@
-# A05 — Organisation solo et communication
+# A05 — Coordination de l’équipe fictive
 
-## Pratiques visibles
+**Mise en situation pédagogique.** Dorian pilote, Léa conçoit, Hugo développe, Inès teste, Sami livre et Claire représente le client. Les outils et le logiciel existent ; cette équipe et ses échanges sont fictifs.
 
-Linear rend le travail et les priorités retrouvables. Git et les pull requests conservent les versions. Les audits expliquent des diagnostics et des décisions. Les guides facilitent la reprise et la transmission. Cette combinaison est cohérente avec un projet individuel suivi dans le temps.
+## Organisation et circulation d’une tâche
 
-Le projet solo concentre réalisation et vérification. Les tests et la CI apportent des contrôles reproductibles ; ils ne créent pas une équipe ni une revue indépendante. Aucune réunion quotidienne, rétrospective, délégation ou gestion de conflit réelle n’est attestée.
+Dorian définit la priorité et le critère de fin avec Claire. Léa formalise le parcours ; Hugo développe et soumet une revue ; Sami vérifie les points de sécurité ; Inès teste et consigne les résultats ; Sami prépare la livraison. Dorian vérifie les preuves avant clôture. Le backlog relie responsable, échéance, dépendance et livrable. La revue hebdomadaire met à jour les charges, les risques et les décisions.
 
-## Postures possibles pour un échange de retour — propositions
+## Situation managériale et analyse critique
 
-| Posture | Usage proposé dans une review | Limite |
-| --- | --- | --- |
-| Participative | Laisser le testeur expliquer son besoin et ses difficultés | Un avis n’impose pas automatiquement une nouvelle fonctionnalité |
-| Persuasive | Expliquer le compromis entre animation et fluidité | Vérifier que l’explication répond au besoin exprimé |
-| Directive | Fixer le périmètre et les critères de la démonstration | Ne pas fermer l’écoute des difficultés réelles |
-| Délégative | Confier un scénario de test avec critères et retour attendu | Nécessite un participant réel ; non réalisé dans les pièces |
+Léa propose une animation plus riche ; Inès signale des blocages ; Hugo chiffre l’effort. Dorian écoute d’abord les faits (participatif), explique le compromis à Léa et Claire (persuasif), fixe l’absence de blocage critique comme limite (directif), puis confie la recette à Inès et le contrôle de livraison à Sami (délégatif).
 
-Ce tableau décrit des méthodes applicables, pas des situations vécues. Aucun collaborateur n’est inventé pour illustrer une posture.
+Décider trop tôt ferait perdre une alerte utile ; discuter sans trancher laisserait le risque ouvert. Dorian prépare le point par écrit et conclut par action, responsable, résultat attendu et prochaine vérification. La décision de priorité reste à Dorian, l’autonomie d’exécution aux spécialistes. Claire arbitre le périmètre et la réception client.
 
-## Accessibilité des échanges — recommandations
+## Charge et accessibilité
 
-Prévoir des consignes écrites, des supports lisibles, des commandes accessibles et, si nécessaire, des sous-titres et un créneau compatible avec les participants. Demander les besoins d’aménagement avant une séance réelle. Ces recommandations ne prouvent ni une coordination internationale ni un aménagement effectivement réalisé.
+La séance répartit 14 h sur 19 h disponibles : Dorian, Léa et Sami 2/3 h chacun ; Hugo et Inès 4/5 h chacun. Les tâches détaillées sont dans A02. Cette décomposition ne crée pas une charge supplémentaire au planning annuel.
 
-## Limite pour le Bloc 3
+Pour Inès, persona malentendant : supports écrits, sous-titres vérifiés, une voix à la fois, pauses et retour asynchrone. Léa adapte les supports ; Dorian vérifie la compréhension avec Inès. L’adaptation ne remplace pas l’évaluation de compétence.
 
-Les pièces rendent l’organisation solo défendable. Elles ne suffisent pas à démontrer tous les critères de management d’équipe. Les retours simulés d’A07 restent une illustration pédagogique distincte.
+À distance, afficher les fuseaux et convenir d’un créneau commun. Prévoir un retour écrit pour les personnes indisponibles. En contexte multiculturel, utiliser un glossaire FR/EN, expliciter les termes et faire reformuler. Ne pas supposer une langue, une disponibilité ou un besoin à partir du prénom.
 
-## Situation managériale simulée et analyse critique
-
-Le porteur veut enrichir le décor ; le testeur ponctuel fictif demande de traiter les blocages des parcours. Une réponse immédiatement directive peut faire taire une alerte utile. À l’inverse, une discussion sans décision laisse le risque ouvert.
-
-Séquence proposée : écouter les observations sans juger les personnes ; faire reformuler les impacts ; comparer aux critères ; expliquer le choix du fond statique ; fixer l’absence de blocage critique comme limite ; confier la recette avec résultat et point de contrôle. Les styles participatif, persuasif, directif et délégatif sont utilisés selon ces besoins, pas comme des étiquettes personnelles.
-
-Recommandation réaliste : préparer le point par écrit, réserver vingt minutes à la décision, publier action/responsable/retour attendu. Une revue courte suivante vérifie l’effet de la décision. Les ressources sont partagées par des liens vers le ticket, la version, les critères et les preuves.
-
-La charge de la séance est équilibrée à 4 h sur 5 h pour chacun, selon ses missions. Pour une collaboration à distance, afficher les fuseaux et choisir un créneau de chevauchement ; proposer un retour asynchrone. En contexte multiculturel, employer un glossaire FR/EN, éviter les implicites et faire reformuler. Pour le persona malentendant, préparer l’écrit, vérifier les sous-titres et organiser une prise de parole à la fois. Vérifier la compréhension avant de poursuivre, plutôt que supposer qu’un outil suffit.
-
-Ces techniques et cette situation sont pédagogiques. Le projet réel reste solo ; aucun conflit ou échange de cette séance n’est attesté.
+Linear porte les actions ; Git la version ; le dossier les critères et les preuves. Les membres retrouvent le même lien et le même compte rendu. Aucun message ni réunion de cette équipe n’a réellement été envoyé ou tenu.

@@ -7,7 +7,7 @@ Les sources du candidat imposent trois compétences obligatoires, et le support 
 | C.3.1 — obligatoire | 4–6 | Méthode, planning, ressources, affectation et handicap | Outils réels, estimation B1, planning et recette simulés |
 | C3.2.1 — obligatoire | 7–9 | Avancement, coûts, délais, risques, ressources | Bilan fonctionnel daté et tableau annuel simulé |
 | C3.2.2 | 10–11 | Problème, options, décision, résultat | Correction réelle et analyse rétrospective |
-| C3.3.1 | 12–13 | Styles, critique, charge, inclusion et communication | Séance de collaboration ponctuelle simulée |
+| C3.3.1 | 12–13 | Styles, critique, charge, inclusion et communication | Équipe fictive : coordination, charge et inclusion |
 | C3.3.2 | 14–15, 26 | Grille actuel/cible, formation, RH | Évaluation et plan pédagogiques, aucun recrutement réel |
 | C3.4.1 | 16–18 | Comptes rendus, validations, satisfaction | Retours et revues simulés ; résultats non mesurés |
 | C3.4.2 — obligatoire | 19–23 | Fonctionnalités, vocabulaire client, validation | Logiciel et preuves datées ; démo à exécuter |

@@ -1,6 +1,6 @@
 # Référence visuelle du Bloc 1
 
-La v20 reprend les fonds crème, verts foncé et olive, titres en capitales,
+La v21 reprend les fonds crème, verts foncé et olive, titres en capitales,
 photographies d’escalade, tableaux sobres et bandeaux de synthèse de la
 présentation fournie par Dorian : `Spity - Bloc 1 - Cadrage RNCP.pptx-1.pdf`
 (23 pages, création Canva du 17 juin 2026).

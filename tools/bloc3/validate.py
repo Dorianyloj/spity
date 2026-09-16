@@ -15,7 +15,7 @@ from openpyxl import load_workbook
 from pptx import Presentation
 from pypdf import PdfReader
 ROOT=Path(__file__).resolve().parents[2];DOCS=ROOT/'docs/rncp/bloc-03';OUT=ROOT/'output/bloc-03'
-PPTX=OUT/'spity-bloc-3-soutenance-v20.pptx';DECK=OUT/'spity-bloc-3-soutenance-v20.pdf'
+PPTX=OUT/'spity-bloc-3-soutenance-v21.pptx';DECK=OUT/'spity-bloc-3-soutenance-v21.pdf'
 PDF=OUT/'dossier-bloc-03-spity.pdf';XLSX=OUT/'pilotage-spity.xlsx';ZIP=OUT/'kit-soutenance-spity.zip'
 def read(p):return json.loads(p.read_text())
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -45,7 +45,27 @@ def main(package):
     assert t['forecastEUR']-t['baselineEUR']==t['varianceEUR']==1800
     assert len(sim['planning'])==9 and sum(r['personDays'] for r in sim['planning'])==82
     for r in sim['planning']:assert 1<=r['startMonth']<=r['endMonth']<=12
-    assert all(r['assignedHours']==4 and r['availableHours']==5 for r in sim['review']['roles'])
+    team=sim['team'];names=[m['name'] for m in team]
+    assert len(team)==5 and len(set(names))==5 and sim['client']['name']=='Claire'
+    assert sum(m['baselinePersonDays'] for m in team)==82
+    assert sum(m['consumedPersonDays'] for m in team)==t['consumedPersonDays']
+    assert sum(m['remainingPersonDays'] for m in team)==t['remainingPersonDays']
+    assert sum(m['nextMonthAssigned'] for m in team)==t['plannedPersonDaysNextMonth']
+    assert sum(m['nextMonthAvailable'] for m in team)==t['capacityPersonDaysPerMonth']
+    for lot in sim['planning']:
+        assert lot['owner'] in names and set(lot['allocations'])<=set(names)
+        assert sum(lot['allocations'].values())==lot['personDays']
+    for member in team:
+        assert sum(lot['allocations'].get(member['name'],0) for lot in sim['planning'])==member['baselinePersonDays']
+    for row in sim['raci']['rows']:
+        assert row[1:].count('A')==1 and 'R' in row[1:]
+    review=sim['review']['roles']
+    assert {r['role'] for r in review}==set(names)
+    assert sum(r['assignedHours'] for r in review)==14
+    assert sum(r['availableHours'] for r in review)==19
+    assert all(r['assignedHours']<=r['availableHours'] for r in review)
+    assert {r['role'] for r in sim['skills']}==set(names)
+    assert sum(r['durationHours'] for r in sim['training'])==5
     assert len(coverage)==40
     competencies=['C.3.1','C3.2.1','C3.2.2','C3.3.1','C3.3.2','C3.4.1','C3.4.2']
     assert list(dict.fromkeys(c['competency'] for c in coverage))==competencies
@@ -99,8 +119,10 @@ def main(package):
         content=deck.pages[n-1].extract_text().casefold()
         assert any(term in content for term in ['simul','mise en situation','pédagog','hypoth','proposé']),n
     wb=load_workbook(XLSX,data_only=False);cached=load_workbook(XLSX,data_only=True)
-    assert wb.sheetnames==['Lecture','Chronologie','Linear','Indicateurs','Cadrage','Navigation','Retours SIMULES','Suivi SIMULE']
+    assert wb.sheetnames==['Lecture','Chronologie','Linear','Indicateurs','Cadrage','Navigation','Retours SIMULES','Suivi SIMULE','Planning SIMULE','Equipe SIMULEE','RACI SIMULE']
     expected={'Indicateurs':{'B2':25,'B3':1,'B4':24,'B5':12,'B6':.5,'B7':10220,'B8':748},'Cadrage':{'B11':82,'D11':36900,'D17':44250},'Suivi SIMULE':{'B6':86,'B9':44250,'B10':46050,'B11':1800,'B15':1,'B18':1.2}}
+    expected['Planning SIMULE']={'E11':12,'F11':12,'G11':39,'H11':11,'I11':8,'J11':82}
+    expected['Equipe SIMULEE']={'C7':82,'D7':58,'E7':28,'F7':86,'G7':4,'H7':12,'I7':10,'J7':1.2}
     for name,values in expected.items():
         for cell,value in values.items():assert cached[name][cell].value==value,(name,cell,cached[name][cell].value,value)
     for row in [18,19]:assert cached['Cadrage'][f'D{row}'].value is None
@@ -130,7 +152,7 @@ def main(package):
     current_tree=git('rev-parse','HEAD:spity');evidence=read(DOCS/'preuves/verification.json')
     assert git('rev-parse',f"{evidence['gitRevision']}:spity")==evidence['applicationTree']
     changes=git('diff','--name-only','HEAD','--','spity')
-    report={'version':'v20','date':'2026-09-16','project':'Solo sur un an déclaré','competencies':competencies,'mandatoryCompetencies':['C.3.1','C3.2.1','C3.4.2'],'criteriaMapped':len(coverage),'slides':26,'presentationMinutes':30,'demonstrationMinutes':6,'nativeCharts':2,'pdfPages':len(dossier.pages),'workbookSheets':len(wb.sheetnames),'workbookFormulas':formula_count,'localLinksChecked':links,'applicationTree':current_tree,'verifiedHistoricalApplicationTree':evidence['applicationTree'],'applicationMatchesDatedEvidence':current_tree==evidence['applicationTree'] and not changes,'applicationWorkingTreeClean':not changes,'scope':'Cohérence documentaire, couverture des critères, formules, sources et exports. Réel et simulation distingués. Aucune nouvelle recette complète ni acquisition de compétence déclarée.'}
+    report={'version':'v21','date':'2026-09-16','project':'Logiciel réel solo ; scénario de pilotage en équipe fictive sur un an','competencies':competencies,'mandatoryCompetencies':['C.3.1','C3.2.1','C3.4.2'],'criteriaMapped':len(coverage),'slides':26,'presentationMinutes':30,'demonstrationMinutes':6,'nativeCharts':2,'pdfPages':len(dossier.pages),'workbookSheets':len(wb.sheetnames),'workbookFormulas':formula_count,'localLinksChecked':links,'applicationTree':current_tree,'verifiedHistoricalApplicationTree':evidence['applicationTree'],'applicationMatchesDatedEvidence':current_tree==evidence['applicationTree'] and not changes,'applicationWorkingTreeClean':not changes,'scope':'Cohérence documentaire, couverture des critères, formules, sources et exports. Réel et simulation distingués. Aucune nouvelle recette complète ni acquisition de compétence déclarée.'}
     (DOCS/'preuves/controle-kit.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     if package:
         included=[p for p in DOCS.rglob('*') if p.is_file() and p.name!='MANIFEST.sha256']
@@ -143,7 +165,7 @@ def main(package):
         included.append(manifest)
         with zipfile.ZipFile(ZIP,'w',zipfile.ZIP_DEFLATED) as z:
             for p in included:z.write(p,p.relative_to(ROOT).as_posix())
-            z.writestr('LIRE_EN_PREMIER.txt','SPITY — BLOC 3 — v20\n\nOuvrir output/bloc-03/spity-bloc-3-soutenance-v20.pdf ou .pptx.\nSommaire, projet solo sur un an, puis sept compétences dans l’ordre.\nLes mises en situation pédagogiques sont signalées ; elles ne sont pas des expériences vécues.\nGuide : docs/rncp/bloc-03/GUIDE_ORAL.md\nCouverture : docs/rncp/bloc-03/CONTROLE_COMPLETUDE.md\nLa démonstration nécessite le dépôt applicatif complet et ses dépendances.\nCe kit ne contient pas de base, secrets ou node_modules. Aucun dépôt officiel ni accord client déclaré.\n')
+            z.writestr('LIRE_EN_PREMIER.txt','SPITY — BLOC 3 — v21\n\nOuvrir output/bloc-03/spity-bloc-3-soutenance-v21.pdf ou .pptx.\nSommaire, Spity et pilotage d’une équipe fictive sur un an, puis sept compétences dans l’ordre.\nLes mises en situation pédagogiques sont signalées ; elles ne sont pas des expériences vécues.\nGuide : docs/rncp/bloc-03/GUIDE_ORAL.md\nCouverture : docs/rncp/bloc-03/CONTROLE_COMPLETUDE.md\nLa démonstration nécessite le dépôt applicatif complet et ses dépendances.\nCe kit ne contient pas de base, secrets ou node_modules. Aucun dépôt officiel ni accord client déclaré.\n')
         with zipfile.ZipFile(ZIP) as z:
             assert z.testzip() is None
             for p in included:assert hashlib.sha256(z.read(p.relative_to(ROOT).as_posix())).hexdigest()==digest(p)

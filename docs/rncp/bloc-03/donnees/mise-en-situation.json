@@ -1,5 +1,5 @@
 {
-  "nature": "Mise en situation pédagogique, distincte du développement réel solo sur un an. Aucune valeur consommée, réunion, formation ou collaboration ci-dessous n’est un fait historique.",
+  "nature": "Projet d’équipe fictif sur douze mois, construit sur le logiciel développé seul par Dorian. Les personnes, affectations, consommés, formations et validations du scénario ne sont pas des faits historiques.",
   "months": "M1 à M12 : repères relatifs d’un modèle annuel ; aucune date calendaire inventée.",
   "planning": [
     {
@@ -7,63 +7,104 @@
       "startMonth": 1,
       "endMonth": 2,
       "personDays": 8,
-      "owner": "Dorian"
+      "owner": "Léa",
+      "allocations": {
+        "Dorian": 4,
+        "Léa": 4
+      }
     },
     {
       "lot": "Setup technique",
       "startMonth": 2,
       "endMonth": 3,
       "personDays": 6,
-      "owner": "Dorian"
+      "owner": "Sami",
+      "allocations": {
+        "Hugo": 2,
+        "Sami": 4
+      }
     },
     {
       "lot": "Auth / sécurité",
       "startMonth": 3,
       "endMonth": 4,
       "personDays": 10,
-      "owner": "Dorian"
+      "owner": "Hugo",
+      "allocations": {
+        "Hugo": 8,
+        "Sami": 2
+      }
     },
     {
       "lot": "Profils",
       "startMonth": 4,
       "endMonth": 5,
       "personDays": 9,
-      "owner": "Dorian"
+      "owner": "Hugo",
+      "allocations": {
+        "Hugo": 6,
+        "Léa": 3
+      }
     },
     {
       "lot": "Feed social",
       "startMonth": 5,
       "endMonth": 7,
       "personDays": 12,
-      "owner": "Dorian"
+      "owner": "Hugo",
+      "allocations": {
+        "Hugo": 8,
+        "Léa": 2,
+        "Dorian": 2
+      }
     },
     {
       "lot": "Répertoire",
       "startMonth": 6,
       "endMonth": 8,
       "personDays": 10,
-      "owner": "Dorian"
+      "owner": "Hugo",
+      "allocations": {
+        "Hugo": 6,
+        "Léa": 3,
+        "Inès": 1
+      }
     },
     {
       "lot": "Topos",
       "startMonth": 8,
       "endMonth": 10,
       "personDays": 9,
-      "owner": "Dorian"
+      "owner": "Hugo",
+      "allocations": {
+        "Hugo": 5,
+        "Inès": 3,
+        "Dorian": 1
+      }
     },
     {
       "lot": "Événements",
       "startMonth": 8,
       "endMonth": 10,
       "personDays": 8,
-      "owner": "Dorian"
+      "owner": "Hugo",
+      "allocations": {
+        "Hugo": 4,
+        "Inès": 2,
+        "Dorian": 2
+      }
     },
     {
       "lot": "Tests / access. / doc.",
       "startMonth": 10,
       "endMonth": 12,
       "personDays": 10,
-      "owner": "Dorian"
+      "owner": "Inès",
+      "allocations": {
+        "Inès": 5,
+        "Sami": 2,
+        "Dorian": 3
+      }
     }
   ],
   "tracking": {
@@ -81,72 +122,115 @@
     "forecastDelivery": "fin M12",
     "delayMonths": 1,
     "capacityPersonDaysPerMonth": 10,
-    "plannedPersonDaysNextMonth": 12
+    "plannedPersonDaysNextMonth": 12,
+    "capacityScope": "Somme des disponibilités réservées à Spity par les cinq membres à temps partiel ; Hugo 4/3 j-h et Inès 3/2 j-h portent la surcharge. Dorian reporte 1 j-h de développement et 1 j-h de recette non critiques hors période.",
+    "rateScope": "450 €/j-h : taux moyen conventionnel du scénario pour conserver la base B1, pas cinq tarifs individuels négociés."
   },
   "review": {
-    "nature": "Séance ponctuelle fictive ; aucun membre ajouté à l’équipe réelle.",
+    "nature": "Séance de préparation, correction et recette de l’équipe fictive ; 14 h affectées sur 19 h disponibles, hors formation.",
     "roles": [
       {
-        "role": "Dorian, porteur",
-        "assignedHours": 4,
-        "availableHours": 5,
-        "tasks": "Préparer le build et les comptes 1 h ; corriger 2 h ; vérifier et restituer 1 h."
+        "role": "Dorian",
+        "assignedHours": 2,
+        "availableHours": 3,
+        "tasks": "Prioriser les réserves 1 h ; préparer la décision client 1 h."
       },
       {
-        "role": "Testeur externe fictif",
+        "role": "Léa",
+        "assignedHours": 2,
+        "availableHours": 3,
+        "tasks": "Vérifier les parcours et les libellés 1 h ; adapter les supports 1 h."
+      },
+      {
+        "role": "Hugo",
         "assignedHours": 4,
         "availableHours": 5,
-        "tasks": "Préparer les critères 1 h ; exécuter les parcours 2 h ; restituer les anomalies 1 h.",
-        "accessibility": "Persona malentendant : consignes écrites, sous-titres vérifiés et temps d’échange asynchrone."
+        "tasks": "Préparer la version 1 h ; corriger les défauts 2 h ; tests unitaires 1 h."
+      },
+      {
+        "role": "Inès",
+        "assignedHours": 4,
+        "availableHours": 5,
+        "tasks": "Préparer les critères 1 h ; exécuter et recontrôler 2 h ; rédiger le rapport 1 h.",
+        "accessibility": "Persona malentendant ; consignes écrites, sous-titres vérifiés, échanges asynchrones et pauses adaptées."
+      },
+      {
+        "role": "Sami",
+        "assignedHours": 2,
+        "availableHours": 3,
+        "tasks": "Préparer les comptes et l’environnement 1 h ; vérifier version et santé 1 h."
       }
     ]
   },
   "skills": [
     {
-      "role": "Porteur (simulation)",
-      "skill": "Planning et suivi",
+      "role": "Dorian",
+      "skill": "Planning et suivi des écarts",
       "current": 1,
       "target": 2,
-      "evidence": "Justification pédagogique : sait lire le suivi, doit expliquer seul les écarts."
+      "evidence": "Lit le suivi ; doit justifier seul une prévision."
     },
     {
-      "role": "Porteur (simulation)",
-      "skill": "Développement et API",
+      "role": "Léa",
+      "skill": "Accessibilité des maquettes",
+      "current": 1,
+      "target": 2,
+      "evidence": "Structure un parcours ; doit vérifier contraste et libellés."
+    },
+    {
+      "role": "Hugo",
+      "skill": "API et sécurité applicative",
       "current": 2,
       "target": 2,
-      "evidence": "Hypothèse de maîtrise pour la séance ; aucune note personnelle réelle."
+      "evidence": "Autonome dans le scénario ; contrôle par revue de code."
     },
     {
-      "role": "Testeur fictif",
-      "skill": "Recette reproductible",
+      "role": "Inès",
+      "skill": "Recette reproductible et clavier",
       "current": 1,
       "target": 2,
-      "evidence": "Sait suivre une consigne, doit rédiger un résultat reproductible."
+      "evidence": "Suit un scénario ; doit rédiger un défaut puis recontrôler."
     },
     {
-      "role": "Testeur fictif",
-      "skill": "Parcours clavier",
+      "role": "Sami",
+      "skill": "Déploiement et retour arrière",
       "current": 1,
       "target": 2,
-      "evidence": "Repère les commandes, doit vérifier focus, libellés et messages."
+      "evidence": "Exécute un pipeline ; doit vérifier une restauration."
     }
   ],
   "training": [
     {
-      "who": "Porteur",
+      "who": "Dorian",
       "topic": "Suivi des écarts",
       "durationHours": 1,
-      "when": "Avant revue M10",
-      "method": "Atelier individuel : recalculer coût et délai depuis les entrées.",
-      "success": "Expliquer sans aide les 1 800 € et le mois de décalage."
+      "when": "Avant M10",
+      "method": "Atelier sur le classeur et correction commentée",
+      "success": "Justifier sans aide les 1 800 € et le mois de décalage."
     },
     {
-      "who": "Testeur fictif",
+      "who": "Léa",
+      "topic": "Contrastes et libellés",
+      "durationHours": 1,
+      "when": "Avant M10",
+      "method": "Audit guidé d’une maquette puis correction",
+      "success": "Livrer une maquette lisible avec les libellés attendus."
+    },
+    {
+      "who": "Inès",
       "topic": "Recette et clavier",
       "durationHours": 2,
-      "when": "Avant recette M11",
-      "method": "Consignes écrites, tutoriel sous-titré, pratique guidée puis autonome ; pauses à adapter.",
-      "success": "Rejouer un parcours sans aide et rédiger un défaut reproductible."
+      "when": "Avant M11",
+      "method": "Consignes écrites, tutoriel sous-titré et exercice guidé",
+      "success": "Rejouer un cas au clavier et décrire un défaut reproductible."
+    },
+    {
+      "who": "Sami",
+      "topic": "Retour arrière",
+      "durationHours": 1,
+      "when": "Avant M11",
+      "method": "Exercice isolé avec Hugo puis contrôle autonome",
+      "success": "Restaurer une version et vérifier son état."
     }
   ],
   "clientReviews": [
@@ -156,8 +240,9 @@
       "topic": "Périmètre et critères",
       "finding": "Personas : besoin de partenaires compatibles et de suivi des inscrits.",
       "decision": "Retenir partenaires, événements et participants pour la démonstration.",
-      "actions": "Porteur : formaliser les critères avant la réalisation.",
-      "validation": "Critères confirmés dans le scénario ; aucun accord réel."
+      "actions": "Léa : formaliser les parcours ; Dorian : prioriser ; Claire : valider le périmètre M3.",
+      "validation": "Critères confirmés dans le scénario ; aucun accord réel.",
+      "client": "Claire"
     },
     {
       "id": "CR-SIM-02",
@@ -165,8 +250,9 @@
       "topic": "Écart et arbitrage",
       "finding": "Suivi simulé : +1 800 € et +1 mois. Demande : animation plus riche.",
       "decision": "Dans le scénario, conserver un fond statique et prioriser les critères de recette.",
-      "actions": "Porteur : actualiser la prévision ; testeur fictif : préparer la recette M11.",
-      "validation": "Réexaminer critères et budget à la review M11 ; pas de signature réelle."
+      "actions": "Dorian : réviser le suivi ; Hugo : préparer la version ; Inès : préparer M11 ; Sami : vérifier le déploiement ; Claire : arbitrer le périmètre.",
+      "validation": "Réexaminer critères et budget à la review M11 ; pas de signature réelle.",
+      "client": "Claire"
     },
     {
       "id": "CR-SIM-03",
@@ -174,8 +260,9 @@
       "topic": "Démonstration et réception",
       "finding": "Résultats à relever pendant la démonstration.",
       "decision": "Accepté, accepté avec réserve ou refusé selon les critères observés.",
-      "actions": "Porteur : qualifier les réserves et fixer la prochaine vérification.",
-      "validation": "Décision finale non préremplie."
+      "actions": "Inès : consigner les résultats ; Hugo et Léa : traiter les réserves ; Sami : livrer ; Dorian : restituer ; Claire : décider.",
+      "validation": "Décision finale non préremplie.",
+      "client": "Claire"
     }
   ],
   "workbookRows": [
@@ -186,17 +273,17 @@
     ],
     [
       "Charge initiale",
-      82,
+      "=SUM('Equipe SIMULEE'!C2:C6)",
       "j-h ; référence B1"
     ],
     [
       "Consommé simulé",
-      58,
+      "=SUM('Equipe SIMULEE'!D2:D6)",
       "j-h ; hypothèse pédagogique"
     ],
     [
       "Reste à faire simulé",
-      28,
+      "=SUM('Equipe SIMULEE'!E2:E6)",
       "j-h ; hypothèse pédagogique"
     ],
     [
@@ -250,13 +337,13 @@
       "Mois"
     ],
     [
-      "Capacité mensuelle hypothétique",
-      10,
-      "j-h"
+      "Capacité de l’équipe réservée à Spity",
+      "=SUM('Equipe SIMULEE'!I2:I6)",
+      "j-h ; somme des cinq disponibilités à temps partiel"
     ],
     [
       "Charge prochaine période",
-      12,
+      "=SUM('Equipe SIMULEE'!H2:H6)",
       "j-h"
     ],
     [
@@ -264,5 +351,145 @@
       "=B17/B16",
       "Proportion ; alerte > 1"
     ]
-  ]
+  ],
+  "team": [
+    {
+      "name": "Dorian",
+      "role": "Chef de projet / produit",
+      "mission": "Prioriser, affecter, suivre les coûts et délais, arbitrer et restituer",
+      "deliverable": "Backlog, planning et comptes rendus",
+      "baselinePersonDays": 12,
+      "consumedPersonDays": 9,
+      "remainingPersonDays": 4,
+      "nextMonthAssigned": 2,
+      "nextMonthAvailable": 2
+    },
+    {
+      "name": "Léa",
+      "role": "Designer UX/UI",
+      "mission": "Concevoir les parcours, maquettes et adaptations accessibles",
+      "deliverable": "Maquettes et critères UX",
+      "baselinePersonDays": 12,
+      "consumedPersonDays": 10,
+      "remainingPersonDays": 2,
+      "nextMonthAssigned": 1,
+      "nextMonthAvailable": 1
+    },
+    {
+      "name": "Hugo",
+      "role": "Développeur full-stack",
+      "mission": "Développer les interfaces et API, corriger les anomalies",
+      "deliverable": "Code, tests unitaires et pull requests",
+      "baselinePersonDays": 39,
+      "consumedPersonDays": 28,
+      "remainingPersonDays": 12,
+      "nextMonthAssigned": 4,
+      "nextMonthAvailable": 3
+    },
+    {
+      "name": "Inès",
+      "role": "Testeuse QA / accessibilité",
+      "mission": "Préparer et exécuter les scénarios, qualifier et recontrôler les défauts",
+      "deliverable": "Rapport de recette et réserves",
+      "baselinePersonDays": 11,
+      "consumedPersonDays": 6,
+      "remainingPersonDays": 7,
+      "nextMonthAssigned": 3,
+      "nextMonthAvailable": 2,
+      "accessibility": "Persona malentendant ; consignes écrites, sous-titres vérifiés, échanges asynchrones et pauses adaptées."
+    },
+    {
+      "name": "Sami",
+      "role": "DevOps / sécurité",
+      "mission": "Préparer les environnements, contrôler la sécurité et livrer",
+      "deliverable": "Pipeline, sauvegarde, version et contrôle de santé",
+      "baselinePersonDays": 8,
+      "consumedPersonDays": 5,
+      "remainingPersonDays": 3,
+      "nextMonthAssigned": 2,
+      "nextMonthAvailable": 2
+    }
+  ],
+  "client": {
+    "name": "Claire",
+    "role": "Représentante du club / cliente fictive",
+    "mission": "Exprimer le besoin, arbitrer le périmètre et prononcer la réception",
+    "budgetScope": "Disponibilité côté client hors charge des cinq membres du projet ; aucune facturation réelle."
+  },
+  "raci": {
+    "columns": [
+      "Activité",
+      "Dorian",
+      "Léa",
+      "Hugo",
+      "Inès",
+      "Sami",
+      "Claire"
+    ],
+    "rows": [
+      [
+        "Périmètre et besoin",
+        "R",
+        "R",
+        "C",
+        "C",
+        "C",
+        "A"
+      ],
+      [
+        "Parcours et maquettes",
+        "A",
+        "R",
+        "C",
+        "C",
+        "I",
+        "C"
+      ],
+      [
+        "Interfaces et API",
+        "A",
+        "C",
+        "R",
+        "C",
+        "C",
+        "I"
+      ],
+      [
+        "Sécurité et environnements",
+        "A",
+        "I",
+        "C",
+        "C",
+        "R",
+        "I"
+      ],
+      [
+        "Recette et recontrôle",
+        "A",
+        "C",
+        "C",
+        "R",
+        "C",
+        "C"
+      ],
+      [
+        "Livraison",
+        "A",
+        "I",
+        "C",
+        "C",
+        "R",
+        "I"
+      ],
+      [
+        "Réception client",
+        "R",
+        "C",
+        "C",
+        "C",
+        "C",
+        "A"
+      ]
+    ]
+  }
 }

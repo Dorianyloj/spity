@@ -1,41 +1,77 @@
-# A02 — Responsabilités et ressources du projet solo
+# A02 — Équipe fictive, responsabilités et ressources
 
-Dorian Joly confirme avoir réalisé le projet seul. Les responsabilités ci-dessous décrivent le périmètre du projet, sans multiplier artificiellement les personnes.
+**Mise en situation demandée par le candidat.** Le développement historique reste solo. Le scénario comporte cinq membres du projet et Claire, cliente fictive. Les rôles couvrent toute l’année, pas seulement une séance de test.
 
-| Responsabilité | Travail à expliquer | Trace |
-| --- | --- | --- |
-| Pilotage | Cadrage, priorités et décisions | Bloc 1, Linear, audits |
-| Réalisation | Interfaces, données et parcours | Code, commits, pull requests |
-| Vérification | Recette, qualité et préparation de la démo | Tests et procédures |
-| Livraison | Intégration et contrôle de version | CI/CD et sonde de santé |
+## Équipe et livrables
 
-## Ressources observables
-
-Poste local, navigateur, dépôt Git, Next.js, MariaDB et Docker ; environnement de démonstration isolé ; production sur VPS ; CI GitHub Actions. Linear conserve un suivi de tâches. Aucune capacité hebdomadaire, taux d’occupation ou disponibilité d’un autre collaborateur n’est fournie.
-
-La recette n’est pas indépendante du développement dans ce projet solo. Les contrôles automatisés rendent certaines vérifications répétables, mais ne remplacent pas une revue humaine indépendante. Décrire les aides réellement reçues si le candidat souhaite les préciser.
-
-Aucune situation de handicap n’est attribuée à une personne réelle. Le persona de l’extension pédagogique est explicitement fictif. L’accessibilité des interfaces se démontre par les contrôles du produit ; elle ne prouve pas un aménagement d’équipe.
-
-## Extension pédagogique : séance de recette ponctuelle
-
-Le projet reste développé seul. Le cas ajoute uniquement une collaboration fictive de recette afin de présenter l’affectation et la coordination demandées.
-
-| Activité | Dorian | Testeur fictif | Club fictif |
+| Personne | Rôle | Mission | Livrable |
 | --- | --- | --- | --- |
-| Définir le périmètre du cas | R | C | A |
-| Développer et livrer | A/R | I | I |
-| Préparer et exécuter la recette | A | R | C |
-| Corriger et recontrôler | A/R | C | I |
-| Décider la réception | R | C | A |
+| Dorian | Chef de projet / produit | Prioriser, affecter, suivre les coûts et délais, arbitrer et restituer | Backlog, planning et comptes rendus |
+| Léa | Designer UX/UI | Concevoir les parcours, maquettes et adaptations accessibles | Maquettes et critères UX |
+| Hugo | Développeur full-stack | Développer les interfaces et API, corriger les anomalies | Code, tests unitaires et pull requests |
+| Inès | Testeuse QA / accessibilité | Préparer et exécuter les scénarios, qualifier et recontrôler les défauts | Rapport de recette et réserves |
+| Sami | DevOps / sécurité | Préparer les environnements, contrôler la sécurité et livrer | Pipeline, sauvegarde, version et contrôle de santé |
 
-R : réalise ; A : décide ; C : consulté ; I : informé. Une autorité par activité. Le testeur reçoit une mission de recette parce que son profil est adapté à l’exécution des scénarios, avec formation sur les écarts identifiés dans A06.
+Claire représente le club : elle exprime le besoin, valide le périmètre et décide de la réception. Sa disponibilité côté client est hors charge de réalisation des cinq membres ; aucun contrat ni salaire réel n’est déclaré.
 
-| Personne du cas | Charge de la séance | Capacité hypothétique | Détail |
+## Matrice RACI
+
+| Activité | Dorian | Léa | Hugo | Inès | Sami | Claire |
+| --- | --- | --- | --- | --- | --- | --- |
+| Périmètre et besoin | R | R | C | C | C | A |
+| Parcours et maquettes | A | R | C | C | I | C |
+| Interfaces et API | A | C | R | C | C | I |
+| Sécurité et environnements | A | I | C | C | R | I |
+| Recette et recontrôle | A | C | C | R | C | C |
+| Livraison | A | I | C | C | R | I |
+| Réception client | R | C | C | C | C | A |
+
+R réalise ; A décide ; C est consulté ; I est informé. Chaque ligne a un seul A et au moins un R. Le pilote du lot coordonne les contributions ; il n’en réalise pas forcément toute la charge. Dorian porte la coordination interne, Claire les décisions de périmètre et de réception.
+
+## Moyens affectés
+
+Léa dispose d’un outil de maquette et des critères UX. Hugo utilise Git, Next.js, MariaDB, les tests et une base dédiée. Inès dispose de comptes de test, scénarios, navigateur et rapports de défauts. Sami utilise Docker, CI/CD, sauvegardes et environnement isolé. Dorian partage backlog, planning et classeur ; Claire consulte les démonstrations et comptes rendus. Ces affectations sont fictives ; la présence des outils dans le dépôt est réelle.
+
+## Charge annuelle et point M10
+
+| Personne | Base j-h | Consommé simulé | Reste simulé | Prévision j-h |
+| --- | --- | --- | --- | --- |
+| Dorian | 12 | 9 | 4 | 13 |
+| Léa | 12 | 10 | 2 | 12 |
+| Hugo | 39 | 28 | 12 | 40 |
+| Inès | 11 | 6 | 7 | 13 |
+| Sami | 8 | 5 | 3 | 8 |
+| TOTAL | 82 | 58 | 28 | 86 |
+
+Les 82 j-h sont partagés, jamais multipliés par cinq. Le taux de 450 €/j-h est un taux moyen conventionnel repris du cadrage pour le scénario, pas cinq tarifs individuels. Les personnes interviennent à temps partiel ; une année ne représente pas cinq équivalents temps plein.
+
+## Prochaine période : disponibilités réservées à Spity
+
+| Personne | Charge j-h | Capacité j-h | Taux |
 | --- | --- | --- | --- |
-| Porteur | 4 h | 5 h | Préparer build/comptes 1 h ; corriger 2 h ; vérifier/restituer 1 h |
-| Testeur fictif | 4 h | 5 h | Préparer les critères 1 h ; tester 2 h ; restituer 1 h |
+| Dorian | 2 | 2 | 100% |
+| Léa | 1 | 1 | 100% |
+| Hugo | 4 | 3 | 133% |
+| Inès | 3 | 2 | 150% |
+| Sami | 2 | 2 | 100% |
+| TOTAL | 12 | 10 | 120 % |
 
-Taux de charge : 80 % chacun ; une heure de marge. Les trois heures de formation d’A06 sont une autre activité, planifiée avant la séance et exclue de ces huit heures. Aucune double comptabilisation dans un consommé réel, car aucune de ces charges n’est historique.
+Dorian reporte un jour de développement d’Hugo et un jour de recette non critique d’Inès hors période. Il vérifie les dépendances et présente le jalon révisé à Claire. Cette disponibilité limitée appartient au scénario ; elle n’est pas déduite d’un temps de travail réel.
 
-Persona testeur malentendant : consignes écrites, sous-titres vérifiés, prise de parole organisée et possibilité de retour asynchrone. Vérifier qu’il comprend la consigne et retrouve la décision. Ces besoins d’aménagement ne déterminent pas son niveau technique.
+<!-- pagebreak -->
+
+## Séance de recette : affectation détaillée
+
+| Personne | Charge h | Capacité h | Tâches |
+| --- | --- | --- | --- |
+| Dorian | 2 | 3 | Prioriser les réserves 1 h ; préparer la décision client 1 h. |
+| Léa | 2 | 3 | Vérifier les parcours et les libellés 1 h ; adapter les supports 1 h. |
+| Hugo | 4 | 5 | Préparer la version 1 h ; corriger les défauts 2 h ; tests unitaires 1 h. |
+| Inès | 4 | 5 | Préparer les critères 1 h ; exécuter et recontrôler 2 h ; rédiger le rapport 1 h. |
+| Sami | 2 | 3 | Préparer les comptes et l’environnement 1 h ; vérifier version et santé 1 h. |
+
+Total : 14 h affectées pour 19 h disponibles. Ces tâches détaillent les lots du planning : aucune addition automatique aux 82 j-h. Les formations d’A06 sont distinctes de cette séance et elles aussi incluses dans les lots.
+
+## Adaptation des échanges
+
+Inès est un persona malentendant. Léa prépare des supports écrits lisibles et des sous-titres vérifiés ; Dorian organise une voix à la fois, les pauses et les retours asynchrones. Inès reformule la consigne et retrouve la décision. Son handicap ne détermine pas son niveau technique : la mission est affectée selon ses compétences, puis les moyens sont adaptés.

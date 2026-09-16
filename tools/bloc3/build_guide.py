@@ -12,7 +12,7 @@ def clock(value):
 
 parts=['''# Mon guide oral — Spity
 
-**Document personnel de répétition — à garder hors projection.** Support associé : v20.
+**Document personnel de répétition — à garder hors projection.** Support associé : v21.
 
 Les rubriques **Texte à dire** sont identiques aux notes PowerPoint et rédigées à la première personne. Les repères, manipulations et sources ci-dessous servent uniquement à la préparation. Les diapositives projetées et leurs notes natives ne contiennent aucun chronométrage de présentation.
 
@@ -26,7 +26,7 @@ for s in slides:
     if s['minutes']:
         parts.append(f"| {s['number']} | {s['title']} | {clock(s['minutes'])} | {clock(s['endMinute'])} |")
 parts.append('\nRepères privés : 06:00 suivi ; 09:30 arbitrage ; 12:00 management ; 15:00 compétences ; 18:00 client ; 23:00 démonstration ; 29:00 conclusion.\n\n## Mon texte par diapositive\n')
-explanations=['# Mon fil conducteur — Spity v20\n\nDocument personnel. Le texte ci-dessous reprend ce que je peux dire à l’oral, avec les titres du support. Les repères de manipulation restent dans GUIDE_ORAL.md.\n']
+explanations=['# Mon fil conducteur — Spity v21\n\nDocument personnel. Le texte ci-dessous reprend ce que je peux dire à l’oral, avec les titres du support. Les repères de manipulation restent dans GUIDE_ORAL.md.\n']
 for s in slides:
     timing=f"{clock(s['startMinute'])}–{clock(s['endMinute'])}" if s['minutes'] else 'Annexe pour les questions'
     parts.append(f"### {s['number']}. {s['title']}\n\n**Repère privé : {timing}.**\n\n**Texte à dire**\n\n{s['script']}\n\n**Préparation / manipulation — ne pas lire**\n\n{s['action'] or 'Je prends appui sur les éléments affichés et je marque une pause avant de poursuivre.'}\n\n**Source de préparation :** {s['source']}\n")
@@ -34,12 +34,12 @@ for s in slides:
 parts.append('''## Mes réponses possibles aux questions
 
 - **Pourquoi un an et 82 j-h ?** « J’ai développé Spity sur un an. Les 82 jours-personne correspondent à l’estimation de charge de mon cadrage. Je distingue cette charge de la durée calendaire. »
-- **Avec quelle équipe ?** « J’ai réalisé le projet seul. La séance avec un testeur et le représentant de club appartient à ma mise en situation. »
+- **Avec quelle équipe ?** « J’ai réalisé le projet seul. Pour le scénario, je pilote Léa en UX/UI, Hugo au développement, Inès en QA et Sami en DevOps. Claire représente le client. Cette équipe couvre toute l’année et reste fictive. »
 - **Quel client a validé ?** « Mes exemples de retours et de comptes rendus sont simulés. Je n’ai pas de réception réelle signée à présenter. »
 - **Comment je mesure l’avancement ?** « Je rapproche mon backlog du code et des contrôles. Je distingue la connexion déjà livrée des améliorations de sessions encore à réaliser. Le relevé Linear du 14 septembre reste une archive ; ma slide présente le bilan des fonctionnalités du 16 septembre. »
 - **Pourquoi supprimer l’animation ?** « Le calcul décoratif bloquait la navigation. Le fond statique conserve le motif et supprime cette initialisation ; les mesures locales montrent l’effet de la correction. »
 - **Ces temps sont-ils ceux de la production ?** « Je les ai présentés comme une comparaison locale contrôlée. La sonde distante vérifie la santé et la version servie à un instant précis ; elle ne mesure pas ces parcours. »
-- **Qu’ai-je simulé ?** « J’ai distingué le développement réel des hypothèses de planning, de consommé, de collaboration, de formation et de suivi client. Je peux expliquer les calculs et les décisions de chacun de ces exemples. »
+- **Qu’ai-je simulé ?** « J’ai distingué le développement réel des hypothèses de planning, de consommé, de affectation d’équipe, de formation et de suivi client. Je peux expliquer les calculs et les décisions de chacun de ces exemples. »
 
 ## Mes variantes pendant la démonstration
 
@@ -58,4 +58,4 @@ Je prépare A08, deux sessions locales, des événements futurs et la version ch
 ''')
 (DOCS/'GUIDE_ORAL.md').write_text('\n'.join(parts).rstrip()+'\n')
 (DOCS/'COMPRENDRE_LES_DIAPOS.md').write_text('\n'.join(explanations).rstrip()+'\n')
-print('Guide personnel et texte oral v20 générés : 26 notes à la première personne.')
+print('Guide personnel et texte oral v21 générés : 26 notes à la première personne.')

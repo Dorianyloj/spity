@@ -53,17 +53,17 @@ Pour chaque critère démontré, recueillir une décision : accepté, accepté a
 
 Le signalement de lenteur de Dorian est un retour réel du porteur du projet, traité dans A04. Il reste distinct des trois retours simulés.
 
-## Comptes rendus structurés du scénario annuel
+## Comptes rendus de l’équipe fictive et du client
 
-Ces exemples sont simulés. Le représentant de club est un persona, les retours ne proviennent pas d’entretiens et aucune signature historique n’est créée.
+Claire est la représentante fictive du club. Dorian prépare et restitue les décisions ; chaque action est confiée à un membre. Ces échanges ne sont pas l’origine historique des corrections du logiciel.
 
 ### CR-SIM-01 — M3 — Périmètre et critères
 
 **Constat :** Personas : besoin de partenaires compatibles et de suivi des inscrits.
 
-**Décision du cas :** Retenir partenaires, événements et participants pour la démonstration.
+**Décision :** Retenir partenaires, événements et participants pour la démonstration.
 
-**Actions :** Porteur : formaliser les critères avant la réalisation.
+**Actions et responsables :** Léa : formaliser les parcours ; Dorian : prioriser ; Claire : valider le périmètre M3.
 
 **Validation :** Critères confirmés dans le scénario ; aucun accord réel.
 
@@ -71,9 +71,9 @@ Ces exemples sont simulés. Le représentant de club est un persona, les retours
 
 **Constat :** Suivi simulé : +1 800 € et +1 mois. Demande : animation plus riche.
 
-**Décision du cas :** Dans le scénario, conserver un fond statique et prioriser les critères de recette.
+**Décision :** Dans le scénario, conserver un fond statique et prioriser les critères de recette.
 
-**Actions :** Porteur : actualiser la prévision ; testeur fictif : préparer la recette M11.
+**Actions et responsables :** Dorian : réviser le suivi ; Hugo : préparer la version ; Inès : préparer M11 ; Sami : vérifier le déploiement ; Claire : arbitrer le périmètre.
 
 **Validation :** Réexaminer critères et budget à la review M11 ; pas de signature réelle.
 
@@ -81,16 +81,14 @@ Ces exemples sont simulés. Le représentant de club est un persona, les retours
 
 **Constat :** Résultats à relever pendant la démonstration.
 
-**Décision du cas :** Accepté, accepté avec réserve ou refusé selon les critères observés.
+**Décision :** Accepté, accepté avec réserve ou refusé selon les critères observés.
 
-**Actions :** Porteur : qualifier les réserves et fixer la prochaine vérification.
+**Actions et responsables :** Inès : consigner les résultats ; Hugo et Léa : traiter les réserves ; Sami : livrer ; Dorian : restituer ; Claire : décider.
 
 **Validation :** Décision finale non préremplie.
 
-## Points de validation planifiés dans le modèle
+## Validation et satisfaction
 
-M3 : confirmer périmètre et critères. M10 : arbitrer les écarts et réviser les prévisions. M11 : présenter la recette et traiter les réserves. M12 : démontrer la dernière version et recueillir une décision. Le bilan final n’est pas prérempli. Chaque réserve précise une action, un responsable et une échéance à convenir.
+M3 : Claire confirme les parcours préparés par Léa et le périmètre présenté par Dorian. M10 : Claire arbitre les options chiffrées par Hugo et consolidées par Dorian. M11 : Inès rapporte les résultats, Hugo corrige et Dorian autorise la démonstration. M12 : Sami prépare la version, Dorian restitue, Claire accepte, réserve ou refuse. Chaque réserve est affectée à Léa ou Hugo, puis recontrôlée par Inès avant livraison par Sami.
 
-## Cibles pédagogiques de satisfaction
-
-Réussite sans aide au moins 80 % ; utilité perçue au moins 4/5 ; 100 % des critères critiques acceptés ; aucun blocage critique avant acceptation. Recueillir la date et le nombre de participants pour chaque résultat. Ces seuils sont proposés pour le cas, pas signés avec un client. **Résultats : non mesurés.** Sous la cible, qualifier la difficulté, décider une correction et refaire le parcours.
+Inès relève la réussite et les blocages ; Léa recueille l’utilité perçue ; Claire examine les critères ; Dorian consolide le bilan avec l’effectif et la date. Cibles pédagogiques : réussite sans aide ≥ 80 %, utilité ≥ 4/5, 100 % des critères critiques acceptés, zéro blocage critique. **Résultats non mesurés.** Si une cible n’est pas atteinte, qualifier, affecter une correction et refaire le parcours avant réception.

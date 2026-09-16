@@ -45,22 +45,22 @@ Connexion → profil → recherche et demande de partenaire ; événement exista
 
 Le classeur, feuille Chronologie, reprend les dates et références. Joindre le planning initial et ses modifications si ces documents existent.
 
-## Modèle annuel pédagogique révisé
+## Modèle annuel d’équipe — mise en situation
 
-M1–M12 sont des mois relatifs, sans dates calendaires inventées. Le placement des lots est simulé ; les charges proviennent de B1. Le modèle montre la prévision révisée à M10, avec restitution M12 au lieu de M11.
+M1–M12 sont des mois relatifs, sans dates calendaires inventées. Les cinq personnes interviennent à temps partiel. Le modèle montre la prévision révisée à M10, avec restitution M12 au lieu de M11. Les pilotes coordonnent les contributions indiquées, sous le pilotage global de Dorian.
 
-| Lot | Début | Fin | Charge estimée | Responsable du cas |
+| Lot | Début | Fin | Charge estimée | Pilote et contributions |
 | --- | --- | --- | --- | --- |
-| Cadrage / UX | M1 | M2 | 8 j-h | Dorian |
-| Setup technique | M2 | M3 | 6 j-h | Dorian |
-| Auth / sécurité | M3 | M4 | 10 j-h | Dorian |
-| Profils | M4 | M5 | 9 j-h | Dorian |
-| Feed social | M5 | M7 | 12 j-h | Dorian |
-| Répertoire | M6 | M8 | 10 j-h | Dorian |
-| Topos | M8 | M10 | 9 j-h | Dorian |
-| Événements | M8 | M10 | 8 j-h | Dorian |
-| Tests / access. / doc. | M10 | M12 | 10 j-h | Dorian |
+| Cadrage / UX | M1 | M2 | 8 j-h | Léa pilote ; Dorian 4 j-h, Léa 4 j-h |
+| Setup technique | M2 | M3 | 6 j-h | Sami pilote ; Hugo 2 j-h, Sami 4 j-h |
+| Auth / sécurité | M3 | M4 | 10 j-h | Hugo pilote ; Hugo 8 j-h, Sami 2 j-h |
+| Profils | M4 | M5 | 9 j-h | Hugo pilote ; Hugo 6 j-h, Léa 3 j-h |
+| Feed social | M5 | M7 | 12 j-h | Hugo pilote ; Hugo 8 j-h, Léa 2 j-h, Dorian 2 j-h |
+| Répertoire | M6 | M8 | 10 j-h | Hugo pilote ; Hugo 6 j-h, Léa 3 j-h, Inès 1 j-h |
+| Topos | M8 | M10 | 9 j-h | Hugo pilote ; Hugo 5 j-h, Inès 3 j-h, Dorian 1 j-h |
+| Événements | M8 | M10 | 8 j-h | Hugo pilote ; Hugo 4 j-h, Inès 2 j-h, Dorian 2 j-h |
+| Tests / access. / doc. | M10 | M12 | 10 j-h | Inès pilote ; Inès 5 j-h, Sami 2 j-h, Dorian 3 j-h |
 
-Phases : étude M1 ; mesure du besoin M2 ; conception M2–M3 ; réalisation M3–M10 ; mesure de conformité et recette M10–M11 ; restitution M12. Les contrôles se déroulent aussi pendant la réalisation. Authentification avant profils ; événement avant inscription ; version stable avant démonstration.
+Phases : étude M1 ; mesure du besoin M2 ; conception M2–M3 ; réalisation M3–M10 ; mesure de conformité et recette M10–M11 ; restitution M12. Les contrôles accompagnent la réalisation. Léa prépare les parcours avant le développement d’Hugo ; Sami stabilise l’environnement ; Inès teste une version identifiée ; Dorian organise la décision de Claire.
 
-Méthode retenue pour le cas : flux inspiré de Kanban, actualisé lors d’une revue hebdomadaire. Linear montre les tâches, leur priorité et leur état. Le rétroplanning matérialise les jalons et dépendances ; leur combinaison relie court terme et année complète. Point de vigilance : capacité solo, préparation des données, critères critiques et accessibilité de la recette ponctuelle.
+Dépendances : authentification avant profils ; événement avant inscription ; correction avant recontrôle. Chaque tâche précise son responsable, sa date cible, son livrable et son critère de fin. La revue hebdomadaire confronte le reste à faire aux disponibilités ; elle ne présente pas cinq personnes disponibles à temps plein.

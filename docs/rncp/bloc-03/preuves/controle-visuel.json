@@ -1,10 +1,10 @@
 {
   "reviewedOn": "2026-09-16",
   "presentation": {
-    "file": "output/bloc-03/spity-bloc-3-soutenance-v20.pptx",
-    "sha256": "563619ee7d39170b22e12ca90e6a0dac98a46fc642b173cf27d1240932e22dfe",
-    "pdfFile": "output/bloc-03/spity-bloc-3-soutenance-v20.pdf",
-    "pdfSHA256": "a7315f097b3cfc72b7e7a229bbcdbe0ecabaa68241613d706d06c02d590e44e8",
+    "file": "output/bloc-03/spity-bloc-3-soutenance-v21.pptx",
+    "sha256": "fbe84aa9da65453a46a2cdf38c224e3306437412967a1495ff63d52b1294a951",
+    "pdfFile": "output/bloc-03/spity-bloc-3-soutenance-v21.pdf",
+    "pdfSHA256": "45d05d5d311332f478ac841b0c2ea975c5727823c1114c687135f7398bc458fe",
     "slidesReviewed": [
       1,
       2,
@@ -34,8 +34,8 @@
       26
     ],
     "nativeCharts": 2,
-    "method": "Comparaison visuelle avec les 23 pages du PDF Bloc 1 fourni. Export LibreOffice et inspection des 26 slides sur quatre planches ; après ajustements, inspection individuelle des slides 1, 2, 5 et 11 à 1400 px. Les neuf libellés du planning sont affichés. Vérification séparée de la conservation exacte des textes oraux et des notes.",
-    "result": "Palette crème, vert foncé et olive, titres en capitales, Poppins, photographies du Bloc 1 et bandeaux de synthèse harmonisés. Aucun débordement visible. Sommaire : présentation du projet puis sept compétences. Les simulations restent identifiées.",
+    "method": "Export LibreOffice et inspection des 26 diapositives sur quatre planches à partir de rendus de 900 px. Relecture des affectations, des notes natives et de la séparation entre données réelles et scénario. Les neuf lots du graphique affichent leur pilote.",
+    "result": "Équipe fictive cohérente sur toute l’année : cinq membres et une cliente. Tableaux lisibles, rôles attribués dans les tâches, les risques, les validations et les formations. Style Bloc 1 conservé, sans chronométrage projeté.",
     "currentRevisionSlidesReviewed": [
       1,
       2,
@@ -64,12 +64,12 @@
       25,
       26
     ],
-    "previousReviewSHA256": "a6bcc6035798bb2885222cd341fc9cb7314c81ac788e7d00f93240b5705c6434"
+    "previousReviewSHA256": "563619ee7d39170b22e12ca90e6a0dac98a46fc642b173cf27d1240932e22dfe"
   },
   "dossier": {
     "file": "output/bloc-03/dossier-bloc-03-spity.pdf",
-    "sha256": "817899661cea3b6632ec71981ba214e946b9dff113f561399eb060aa63d6b5c6",
-    "pages": 26,
+    "sha256": "222c24493b8f516619c365c19699758f34af8919598e857eaf66adb4ca0d485b",
+    "pages": 27,
     "pagesReviewed": [
       1,
       2,
@@ -96,15 +96,41 @@
       23,
       24,
       25,
-      26
+      26,
+      27
     ],
     "currentRevisionPagesReviewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
       23,
-      26
+      24,
+      25,
+      26,
+      27
     ],
-    "method": "Comparaison textuelle des 26 pages : seules 23 et 26 changent. Rendu et inspection individuelle de ces pages à 1000 px ; revue précédente conservée pour les pages identiques.",
-    "previousReviewSHA256": "d9c4f2fe1c85d76325053e0d74ffa938093c9356d8319ae01373435c26be59e4",
-    "result": "26 pages ; références v20 et explication de la direction graphique mises à jour. Aucun débordement visible."
+    "method": "Rendu des pages à 1000 px et inspection de sept planches, puis relecture individuelle des pages de charge, recette, formation et vérification après ajustement des largeurs. La fiche RH a été condensée et rendue à 1100 px pour supprimer une page de deux lignes ; les pages suivantes conservent leur contenu déjà inspecté.",
+    "previousReviewSHA256": "817899661cea3b6632ec71981ba214e946b9dff113f561399eb060aa63d6b5c6",
+    "result": "27 pages. RACI avec un décideur par tâche, affectations annuelles et capacités individuelles lisibles. Notes et scénario alignés ; aucun débordement visible."
   },
-  "scope": "Revue visuelle du support v20 inspiré du Bloc 1 fourni et des deux pages modifiées du dossier. Notes orales conservées. Aucun contrôle Microsoft PowerPoint ni nouvelle recette applicative."
+  "scope": "Revue de la présentation v21, du dossier et des affectations du scénario. Notes à la première personne. Aucune collaboration réelle, réunion, formation ou nouvelle recette applicative déclarée."
 }

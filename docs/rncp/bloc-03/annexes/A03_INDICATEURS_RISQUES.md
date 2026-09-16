@@ -37,9 +37,18 @@ Ces entrées sont inventées pour l’exercice et séparées du relevé Linear r
 | Coût prévisionnel | 86 × 450 + 7 350 | 46 050 € |
 | Écart au budget initial | 46 050 − 44 250 | +1 800 €, soit environ +4,07 % |
 | Délai | Fin M12 au lieu de fin M11 | +1 mois |
-| Ressource solo | 12 j-h prévus / 10 j-h disponibles | 120 % ; 2 j-h à déplacer |
-| Séance de recette | Porteur 4/5 h ; testeur fictif 4/5 h | 80 % chacun, hors formation |
+| Capacité de l’équipe fictive | 12 j-h prévus / 10 j-h réservés à Spity | 120 % ; Dorian reporte 1 j-h d’Hugo et 1 j-h d’Inès |
+| Séance de recette | 14 h affectées / 19 h disponibles, cinq membres | Détail des tâches et marges dans A02 |
 
 Une revue hebdomadaire proposée actualise le reste à faire, le coût prévu, le jalon et les risques. Elle se conclut par une action et un responsable. L’arbitrage présenté dans CR-SIM-02 maintient les critères critiques et limite les enrichissements décoratifs. Les données du cas ne permettent pas d’attribuer historiquement quatre jours de dérive à la correction réelle de navigation.
 
 Seuils proposés : charge supérieure à 100 % → déplacer ou retirer une tâche ; un critère critique en échec → pas d’acceptation ; disponibilité ou connexion en échec → diagnostiquer et annoncer le recours aux captures. Les échéances se mettent à jour avec la décision ; elles ne se déduisent pas automatiquement des jours-personne.
+
+## Responsables des réponses dans le scénario
+
+| Signal | Réalisation | Contrôle / décision |
+| --- | --- | --- |
+| Surcharge | Dorian replanifie avec Hugo et Inès | Claire arbitre le périmètre |
+| Anomalie critique | Hugo corrige ; Léa adapte le parcours si nécessaire | Inès recontrôle ; Dorian clôt |
+| Version indisponible | Sami diagnostique et prépare le secours | Dorian décide de la démonstration |
+| Consigne inaccessible | Léa adapte les supports | Inès reformule ; Dorian vérifie les conditions |

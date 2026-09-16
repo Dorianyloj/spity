@@ -5,17 +5,17 @@
     "section": "Spity · Bloc 3",
     "minutes": 0.5,
     "layout": "cover",
-    "subtitle": "Du besoin des grimpeurs à un site déployé.",
+    "subtitle": "Pilotage d’une équipe fictive sur un an · mise en situation.",
     "content": {},
-    "script": "Bonjour, je vais vous présenter Spity, le projet que j’ai développé seul sur un an autour de l’escalade. Mon objectif est de faciliter la recherche de partenaires et l’organisation de sorties.\n\nJe vais vous montrer comment j’organise le travail, comment je suis l’avancement et comment je prends mes décisions. Je m’appuie sur le logiciel et sur les traces de son développement. Pour les situations de collaboration et de suivi client, j’utilise aussi des exemples simulés, que je distingue du projet réel.",
+    "script": "Bonjour, je vais vous présenter Spity, une plateforme autour de l’escalade. Pour cette mise en situation, je pilote une équipe de cinq personnes sur un an, avec une représentante du client. Le logiciel qui sert de support a été développé par moi seul ; l’équipe et son organisation sont fictives.\n\nJe vais expliquer comment je répartis les tâches, comment je suis les charges et les délais, et comment je coordonne les validations. Je m’appuie sur les fonctionnalités et les traces réelles du logiciel, puis je déroule le scénario d’équipe annoncé.",
     "source": "Durée déclarée par le candidat ; CADRAGE_PROJET.md ; historique Git.",
     "action": "",
-    "nature": "Durée déclarée et preuves du dépôt",
+    "nature": "Logiciel réel ; organisation en équipe fictive",
     "dark": true,
     "demo": false,
     "startMinute": 0,
     "endMinute": 0.5,
-    "notes": "Bonjour, je vais vous présenter Spity, le projet que j’ai développé seul sur un an autour de l’escalade. Mon objectif est de faciliter la recherche de partenaires et l’organisation de sorties.\n\nJe vais vous montrer comment j’organise le travail, comment je suis l’avancement et comment je prends mes décisions. Je m’appuie sur le logiciel et sur les traces de son développement. Pour les situations de collaboration et de suivi client, j’utilise aussi des exemples simulés, que je distingue du projet réel."
+    "notes": "Bonjour, je vais vous présenter Spity, une plateforme autour de l’escalade. Pour cette mise en situation, je pilote une équipe de cinq personnes sur un an, avec une représentante du client. Le logiciel qui sert de support a été développé par moi seul ; l’équipe et son organisation sont fictives.\n\nJe vais expliquer comment je répartis les tâches, comment je suis les charges et les délais, et comment je coordonne les validations. Je m’appuie sur les fonctionnalités et les traces réelles du logiciel, puis je déroule le scénario d’équipe annoncé."
   },
   {
     "title": "Sommaire",
@@ -81,7 +81,7 @@
   {
     "number": 3,
     "title": "Relier les grimpeurs. Simplifier les sorties.",
-    "section": "Présentation / Spity, projet solo sur un an",
+    "section": "Présentation / Le projet Spity",
     "minutes": 1,
     "layout": "product",
     "subtitle": "Deux besoins concrets pour guider les fonctionnalités.",
@@ -112,53 +112,53 @@
     "notes": "Avec Spity, je pars de deux besoins assez simples. Du côté du grimpeur, je veux permettre de trouver un partenaire qui pratique la même discipline, avec un niveau adapté. Du côté du club, je veux faciliter l’organisation d’une sortie et le suivi des participants.\n\nJ’ai donc construit le produit autour des profils, de la recherche de partenaires, des événements et des lieux d’escalade. Ici, vous voyez le répertoire des lieux sur ma base de démonstration.\n\nLe parcours que je vais vous présenter suit cette logique : je trouve un partenaire, je consulte une sortie, puis je m’inscris. Cela me permet de relier chaque fonctionnalité à un besoin concret."
   },
   {
-    "title": "Une méthode adaptée au travail solo",
+    "title": "Organiser le travail de l’équipe",
     "section": "C.3.1 / Planifier",
     "minutes": 1,
     "layout": "cards",
-    "subtitle": "Un flux de tâches, des jalons et des contrôles.",
+    "subtitle": "Mise en situation · un responsable et un critère de fin pour chaque tâche.",
     "content": {
       "cards": [
         [
-          "FLUX",
-          "Linear",
-          "Rendre visibles les priorités et les états ; limiter la dispersion."
+          "PILOTAGE",
+          "Dorian",
+          "Priorités, responsable, échéance et critère de fin dans le backlog."
         ],
         [
-          "CALENDRIER",
-          "Rétroplanning",
-          "Visualiser les phases, dépendances et points de validation."
+          "RÉALISATION",
+          "Léa + Hugo",
+          "Parcours et maquettes, puis interfaces, API et corrections."
         ],
         [
-          "QUALITÉ",
-          "Git + CI",
-          "Versionner les changements et conserver les résultats des contrôles."
+          "QUALITÉ / LIVRAISON",
+          "Inès + Sami",
+          "Recette et réserves, puis version contrôlée et déploiement."
         ]
       ],
-      "callout": "Relier les priorités du backlog aux jalons et aux résultats des contrôles."
+      "callout": "Flux du cas : à faire → en cours → revue → recette → terminé ; Dorian coordonne."
     },
-    "script": "Comme je travaille seul, j’ai besoin d’une organisation qui reste simple à utiliser. Je m’appuie sur Linear pour retrouver mes tâches, leurs priorités et leur état. Le fonctionnement que je retiens est inspiré de Kanban : je rends le travail visible et je garde une vue sur ce qui reste à faire.\n\nLe tableau de tâches ne suffit pas pour visualiser toute l’année. Je le complète donc ici par un rétroplanning reconstruit pour la mise en situation. Il me permet de montrer les dépendances et les points de validation.\n\nEnfin, Git conserve les versions et la CI exécute les contrôles automatiques. Dans le fonctionnement proposé, je prévois une revue hebdomadaire pour actualiser le reste à faire et les risques.",
-    "source": "Linear 14/09 ; dépôt ; A01.",
-    "nature": "Outils réels ; cadre méthodologique argumenté et calendrier pédagogique",
+    "script": "Dans ce scénario, je suis chef de projet et responsable des priorités produit. Je retiens un fonctionnement inspiré de Kanban : chaque tâche a une personne responsable, une échéance, une dépendance et un critère de fin.\n\nLéa prépare les parcours et les maquettes. Hugo développe et propose une revue du code. Inès vérifie les critères de recette ; Sami contrôle l’environnement et la livraison. Je clos la tâche quand les preuves attendues sont présentes. Claire valide les décisions de périmètre et la réception côté client.\n\nJe complète le backlog par un planning annuel. Lors de la revue hebdomadaire, chacun actualise son reste à faire et signale les blocages. Je compare ensuite la charge aux disponibilités avant d’arbitrer.",
+    "source": "Équipe, planning et affectations : donnees/mise-en-situation.json ; annexes A01–A07.",
+    "nature": "Organisation de l’équipe fictive appuyée sur les outils réels",
     "dark": false,
     "action": "",
     "demo": false,
     "number": 4,
     "startMinute": 2.0,
     "endMinute": 3.0,
-    "notes": "Comme je travaille seul, j’ai besoin d’une organisation qui reste simple à utiliser. Je m’appuie sur Linear pour retrouver mes tâches, leurs priorités et leur état. Le fonctionnement que je retiens est inspiré de Kanban : je rends le travail visible et je garde une vue sur ce qui reste à faire.\n\nLe tableau de tâches ne suffit pas pour visualiser toute l’année. Je le complète donc ici par un rétroplanning reconstruit pour la mise en situation. Il me permet de montrer les dépendances et les points de validation.\n\nEnfin, Git conserve les versions et la CI exécute les contrôles automatiques. Dans le fonctionnement proposé, je prévois une revue hebdomadaire pour actualiser le reste à faire et les risques."
+    "notes": "Dans ce scénario, je suis chef de projet et responsable des priorités produit. Je retiens un fonctionnement inspiré de Kanban : chaque tâche a une personne responsable, une échéance, une dépendance et un critère de fin.\n\nLéa prépare les parcours et les maquettes. Hugo développe et propose une revue du code. Inès vérifie les critères de recette ; Sami contrôle l’environnement et la livraison. Je clos la tâche quand les preuves attendues sont présentes. Claire valide les décisions de périmètre et la réception côté client.\n\nJe complète le backlog par un planning annuel. Lors de la revue hebdomadaire, chacun actualise son reste à faire et signale les blocages. Je compare ensuite la charge aux disponibilités avant d’arbitrer."
   },
   {
     "title": "Planifier les travaux sur une année",
     "section": "C.3.1 / Planning détaillé",
     "minutes": 1.5,
     "layout": "annual",
-    "subtitle": "Planning annuel reconstruit · neuf lots issus du cadrage.",
+    "subtitle": "Mise en situation · neuf lots, un pilote par lot, contributions détaillées dans le planning.",
     "content": {
-      "callout": "Étude M1 · mesure M2 puis M10–11 · conception M2–3 · réalisation M3–10 · restitution M12."
+      "callout": "Léa : cadrage / UX · Sami : setup · Hugo : développement · Inès : recette · Dorian : coordination."
     },
-    "script": "J’ai repris les neuf lots de mon cadrage et leurs charges estimées, qui représentent au total 82 jours-personne. Un jour-personne correspond à une journée de travail pour une personne : c’est une charge, alors que l’année correspond à la durée du projet.\n\nPour ce planning, j’ai réparti les lots sur douze mois relatifs. C’est une reconstruction pédagogique : les dates réellement enregistrées dans Git sont présentées séparément.\n\nJe commence par l’étude et la mesure du besoin, puis la conception. L’authentification et les profils servent de base aux autres parcours. Un événement doit être disponible avant que je puisse vérifier une inscription. Je garde aussi des contrôles pendant la réalisation, puis une phase de recette avant la restitution.\n\nMes points de vigilance sont surtout les dépendances entre les fonctions, ma disponibilité et la stabilité de la version à présenter.",
-    "source": "B1 : neuf lots, 82 j-h ; mise-en-situation.json ; A01.",
+    "script": "Je répartis les neuf lots du cadrage sur douze mois relatifs. Les 82 jours-personne sont la charge totale de l’équipe, pas 82 jours par personne. Les membres interviennent à temps partiel selon les phases.\n\nLéa pilote le cadrage UX avec moi, Sami prépare le socle et Hugo prend en charge les lots de développement. Inès pilote la recette, avec Sami pour la livraison et moi pour la documentation et la restitution. Le planning détaillé répartit aussi les contributions de chaque personne à l’intérieur des lots.\n\nJe garde les dépendances : les accès avant les profils, les événements avant les inscriptions et une version stable avant la recette. Les dates Git restent une preuve du développement réel ; les mois de ce planning représentent le scénario d’équipe.",
+    "source": "Équipe, planning et affectations : donnees/mise-en-situation.json ; annexes A01–A07.",
     "nature": "Mise en situation pédagogique explicitement simulée",
     "dark": false,
     "action": "",
@@ -166,46 +166,56 @@
     "number": 5,
     "startMinute": 3.0,
     "endMinute": 4.5,
-    "notes": "J’ai repris les neuf lots de mon cadrage et leurs charges estimées, qui représentent au total 82 jours-personne. Un jour-personne correspond à une journée de travail pour une personne : c’est une charge, alors que l’année correspond à la durée du projet.\n\nPour ce planning, j’ai réparti les lots sur douze mois relatifs. C’est une reconstruction pédagogique : les dates réellement enregistrées dans Git sont présentées séparément.\n\nJe commence par l’étude et la mesure du besoin, puis la conception. L’authentification et les profils servent de base aux autres parcours. Un événement doit être disponible avant que je puisse vérifier une inscription. Je garde aussi des contrôles pendant la réalisation, puis une phase de recette avant la restitution.\n\nMes points de vigilance sont surtout les dépendances entre les fonctions, ma disponibilité et la stabilité de la version à présenter."
+    "notes": "Je répartis les neuf lots du cadrage sur douze mois relatifs. Les 82 jours-personne sont la charge totale de l’équipe, pas 82 jours par personne. Les membres interviennent à temps partiel selon les phases.\n\nLéa pilote le cadrage UX avec moi, Sami prépare le socle et Hugo prend en charge les lots de développement. Inès pilote la recette, avec Sami pour la livraison et moi pour la documentation et la restitution. Le planning détaillé répartit aussi les contributions de chaque personne à l’intérieur des lots.\n\nJe garde les dépendances : les accès avant les profils, les événements avant les inscriptions et une version stable avant la recette. Les dates Git restent une preuve du développement réel ; les mois de ce planning représentent le scénario d’équipe."
   },
   {
-    "title": "Affecter les missions et prévoir les moyens",
+    "title": "Une équipe, des responsabilités précises",
     "section": "C.3.1 / Responsabilités",
     "minutes": 1.5,
     "layout": "table",
-    "subtitle": "Projet solo · mise en situation d’une recette avec un testeur ponctuel.",
+    "subtitle": "Mise en situation · cinq membres du projet et une représentante du client.",
     "content": {
       "rows": [
         [
-          "Mission",
-          "Réalise / décide",
-          "Moyens et adaptation"
+          "Personne / rôle",
+          "Mission confiée",
+          "Livrable et validation"
         ],
         [
-          "Cadrage, développement, livraison",
-          "Dorian : R / A",
-          "Poste, Git, Next.js, MariaDB, Docker, VPS"
+          "Dorian · chef de projet",
+          "Priorités, budget, charge et arbitrages",
+          "Planning et comptes rendus → Claire"
         ],
         [
-          "Recette ponctuelle — simulée",
-          "Testeur fictif : R ; Dorian : A",
-          "Critères écrits, comptes dédiés et retours reproductibles"
+          "Léa · UX/UI",
+          "Parcours, maquettes et accessibilité",
+          "Maquettes → Dorian ; avis d’Inès"
         ],
         [
-          "Décision de validation — simulée",
-          "Représentant club fictif : A",
-          "Dorian prépare la démonstration et les réserves"
+          "Hugo · développement",
+          "Interfaces, API et corrections",
+          "Code et tests → revue de Sami, recette d’Inès"
         ],
         [
-          "Accessibilité — simulée",
-          "Persona testeur malentendant",
-          "Sous-titres vérifiés, écrit, prise de parole organisée"
+          "Inès · QA / accessibilité",
+          "Scénarios, anomalies et recontrôle",
+          "Rapport de recette → Dorian"
+        ],
+        [
+          "Sami · DevOps / sécurité",
+          "Environnements, CI/CD et livraison",
+          "Version et santé → Dorian"
+        ],
+        [
+          "Claire · cliente",
+          "Besoin, périmètre et réception",
+          "Décision d’acceptation côté club"
         ]
       ],
-      "callout": "R = réalise ; A = décide. Budget initial : 44 250 € estimés dans le cadrage."
+      "callout": "Équipe fictive : missions attribuées selon les compétences ; moyens et RACI détaillés en annexe."
     },
-    "script": "J’ai développé Spity seul : dans le projet réel, je prends en charge le cadrage, la réalisation et la livraison. Pour expliquer comment je répartirais les missions lors d’une recette avec un intervenant, j’ai préparé cette mise en situation.\n\nJe confierais l’exécution des scénarios à un testeur ponctuel, tout en restant responsable du livrable. Le représentant du club déciderait de l’acceptation dans cet exemple. La lettre R indique qui réalise, et la lettre A qui décide.\n\nJ’ai choisi un persona de testeur malentendant. Je lui donnerais des consignes écrites, des sous-titres vérifiés et la possibilité de faire un retour par écrit. J’adapte les échanges à ses besoins, tout en affectant la mission selon ses compétences.\n\nPour les moyens, je m’appuie sur mon environnement de développement, la base de données, Docker et le serveur. Les 44 250 euros restent l’estimation initiale du cadrage.",
-    "source": "A02 ; données B1 ; séance pédagogique dans mise-en-situation.json.",
+    "script": "Je répartis le travail entre cinq membres. Je prends le pilotage et les priorités produit. Léa s’occupe des parcours et des maquettes. Hugo développe les interfaces et les API. Inès prépare la recette, qualifie les défauts et vérifie les corrections. Sami prend en charge l’infrastructure, la sécurité et le déploiement.\n\nClaire représente le club client : elle exprime le besoin, valide le périmètre et prononce la réception. Je reste responsable de la coordination interne. Dans ma matrice RACI, je distingue celui qui réalise de celui qui décide, avec un seul décideur par activité.\n\nJe prévois les moyens adaptés : outil de maquette pour Léa, dépôt et base de test pour Hugo, comptes et scénarios dédiés pour Inès, pipeline et environnement isolé pour Sami. Inès est un persona malentendant ; je prépare des consignes écrites et des sous-titres, indépendamment de son niveau technique.",
+    "source": "Équipe, planning et affectations : donnees/mise-en-situation.json ; annexes A01–A07.",
     "nature": "Mise en situation pédagogique explicitement simulée",
     "dark": false,
     "action": "",
@@ -213,7 +223,7 @@
     "number": 6,
     "startMinute": 4.5,
     "endMinute": 6.0,
-    "notes": "J’ai développé Spity seul : dans le projet réel, je prends en charge le cadrage, la réalisation et la livraison. Pour expliquer comment je répartirais les missions lors d’une recette avec un intervenant, j’ai préparé cette mise en situation.\n\nJe confierais l’exécution des scénarios à un testeur ponctuel, tout en restant responsable du livrable. Le représentant du club déciderait de l’acceptation dans cet exemple. La lettre R indique qui réalise, et la lettre A qui décide.\n\nJ’ai choisi un persona de testeur malentendant. Je lui donnerais des consignes écrites, des sous-titres vérifiés et la possibilité de faire un retour par écrit. J’adapte les échanges à ses besoins, tout en affectant la mission selon ses compétences.\n\nPour les moyens, je m’appuie sur mon environnement de développement, la base de données, Docker et le serveur. Les 44 250 euros restent l’estimation initiale du cadrage."
+    "notes": "Je répartis le travail entre cinq membres. Je prends le pilotage et les priorités produit. Léa s’occupe des parcours et des maquettes. Hugo développe les interfaces et les API. Inès prépare la recette, qualifie les défauts et vérifie les corrections. Sami prend en charge l’infrastructure, la sécurité et le déploiement.\n\nClaire représente le club client : elle exprime le besoin, valide le périmètre et prononce la réception. Je reste responsable de la coordination interne. Dans ma matrice RACI, je distingue celui qui réalise de celui qui décide, avec un seul décideur par activité.\n\nJe prévois les moyens adaptés : outil de maquette pour Léa, dépôt et base de test pour Hugo, comptes et scénarios dédiés pour Inès, pipeline et environnement isolé pour Sami. Inès est un persona malentendant ; je prépare des consignes écrites et des sous-titres, indépendamment de son niveau technique."
   },
   {
     "number": 7,
@@ -275,9 +285,9 @@
           "Statistiques historiques et agrégées"
         ]
       ],
-      "callout": "Je suis le périmètre livré et le reste à faire pour prioriser les prochaines évolutions."
+      "callout": "Dans le scénario : Hugo réalise les suites, Inès vérifie, Sami livre et Dorian priorise."
     },
-    "script": "Pour faire le point sur mon avancement, j’ai rapproché les tâches de mon backlog des fonctionnalités présentes dans le site. L’inscription et la connexion sont déjà réalisées, pour les grimpeurs comme pour les clubs. Les améliorations restantes sur les sessions concernent leur renouvellement et la rotation des jetons.\n\nJ’ai aussi réalisé les profils avec avatar, la publication avec image, les likes et les commentaires simples. La carte affiche les salles et les falaises. Pour les topos, je peux ajouter une voie, faire un signalement et partager un lien ou un PDF. Les événements permettent de gérer les inscriptions et la capacité.\n\nJe garde à droite les suites à développer : modifier ou supprimer une publication, compléter les fonctions des clubs, ajouter les votes sur les topos et enrichir le fil social. Ce bilan me permet de prioriser ce qui manque encore, sans compter une fonction déjà disponible comme un travail à recommencer.",
+    "script": "Pour faire le point sur mon avancement, j’ai rapproché les tâches de mon backlog des fonctionnalités présentes dans le site. L’inscription et la connexion sont déjà réalisées, pour les grimpeurs comme pour les clubs. Les améliorations restantes sur les sessions concernent leur renouvellement et la rotation des jetons.\n\nJ’ai aussi réalisé les profils avec avatar, la publication avec image, les likes et les commentaires simples. La carte affiche les salles et les falaises. Pour les topos, je peux ajouter une voie, faire un signalement et partager un lien ou un PDF. Les événements permettent de gérer les inscriptions et la capacité.\n\nJe garde à droite les suites à développer : modifier ou supprimer une publication, compléter les fonctions des clubs, ajouter les votes sur les topos et enrichir le fil social. Ce bilan me permet de prioriser ce qui manque encore, sans compter une fonction déjà disponible comme un travail à recommencer.\n\nPour organiser les prochaines évolutions du scénario, je les confie à Hugo, avec Léa pour les parcours, Inès pour les tests et Sami pour la livraison. Ces attributions ne changent pas l’auteur réel du logiciel.",
     "source": "A09 ; audit du 16/09/2026 ; dépôt applicatif a805162.",
     "action": "",
     "nature": "État des fonctionnalités vérifié dans le code le 16 septembre 2026",
@@ -285,7 +295,7 @@
     "demo": false,
     "startMinute": 6.0,
     "endMinute": 7.0,
-    "notes": "Pour faire le point sur mon avancement, j’ai rapproché les tâches de mon backlog des fonctionnalités présentes dans le site. L’inscription et la connexion sont déjà réalisées, pour les grimpeurs comme pour les clubs. Les améliorations restantes sur les sessions concernent leur renouvellement et la rotation des jetons.\n\nJ’ai aussi réalisé les profils avec avatar, la publication avec image, les likes et les commentaires simples. La carte affiche les salles et les falaises. Pour les topos, je peux ajouter une voie, faire un signalement et partager un lien ou un PDF. Les événements permettent de gérer les inscriptions et la capacité.\n\nJe garde à droite les suites à développer : modifier ou supprimer une publication, compléter les fonctions des clubs, ajouter les votes sur les topos et enrichir le fil social. Ce bilan me permet de prioriser ce qui manque encore, sans compter une fonction déjà disponible comme un travail à recommencer."
+    "notes": "Pour faire le point sur mon avancement, j’ai rapproché les tâches de mon backlog des fonctionnalités présentes dans le site. L’inscription et la connexion sont déjà réalisées, pour les grimpeurs comme pour les clubs. Les améliorations restantes sur les sessions concernent leur renouvellement et la rotation des jetons.\n\nJ’ai aussi réalisé les profils avec avatar, la publication avec image, les likes et les commentaires simples. La carte affiche les salles et les falaises. Pour les topos, je peux ajouter une voie, faire un signalement et partager un lien ou un PDF. Les événements permettent de gérer les inscriptions et la capacité.\n\nJe garde à droite les suites à développer : modifier ou supprimer une publication, compléter les fonctions des clubs, ajouter les votes sur les topos et enrichir le fil social. Ce bilan me permet de prioriser ce qui manque encore, sans compter une fonction déjà disponible comme un travail à recommencer.\n\nPour organiser les prochaines évolutions du scénario, je les confie à Hugo, avec Léa pour les parcours, Inès pour les tests et Sami pour la livraison. Ces attributions ne changent pas l’auteur réel du logiciel."
   },
   {
     "title": "Un tableau de bord pour décider",
@@ -316,15 +326,15 @@
           "+1 mois ; annoncer le nouveau jalon"
         ],
         [
-          "Capacité solo",
+          "Capacité de l’équipe",
           "12 j-h prévus / 10 disponibles",
-          "120 % ; reporter 2 j-h hors période"
+          "Hugo : 4/3 ; Inès : 3/2 → reporter 2 j-h"
         ]
       ],
       "callout": "Revue hebdomadaire proposée : mettre à jour les entrées, expliquer les écarts, décider et tracer."
     },
-    "script": "Pour montrer le suivi des coûts et des délais, je prends maintenant un exemple chiffré simulé au dixième mois du projet.\n\nDans cet exemple, j’ai 58 jours-personne consommés et 28 jours estimés pour terminer. Ma prévision atteint donc 86 jours, contre 82 au départ. Avec la valorisation de 450 euros par jour et les autres postes du cadrage, j’arrive à 46 050 euros : l’écart est de 1 800 euros.\n\nJe regarde aussi le délai : la livraison prévue à la fin du mois 11 passe à la fin du mois 12. Enfin, je compare la charge à ma capacité. Si je prévois 12 jours de travail alors que je n’en ai que 10 de disponibles, je dois déplacer deux jours de charge ou revoir le périmètre.\n\nCes chiffres sont les hypothèses du cas. Ils me servent à expliquer comment je détecte un écart et comment je prends une décision.",
-    "source": "mise-en-situation.json ; classeur, Suivi SIMULE ; A03.",
+    "script": "Au point du mois 10 de mon scénario, je consolide les chiffres de chaque membre. Le détail donne 58 jours-personne consommés et 28 restants, soit 86 à terminaison au lieu de 82. Avec un taux moyen conventionnel de 450 euros par jour et les autres postes, la prévision atteint 46 050 euros, soit 1 800 euros de plus.\n\nJe regarde aussi les disponibilités réservées à Spity sur la prochaine période : dix jours pour l’équipe, face à douze jours de tâches. La surcharge concerne Hugo, avec quatre jours prévus pour trois disponibles, et Inès, avec trois pour deux. Je reporte un jour de développement et un jour de recette non critiques hors période, après vérification des dépendances.\n\nLe jalon révisé passe de fin M11 à fin M12. Je présente à Claire l’effet sur le délai et je conserve les critères critiques. Tous ces consommés et disponibilités sont les hypothèses chiffrées du scénario.",
+    "source": "Équipe, planning et affectations : donnees/mise-en-situation.json ; annexes A01–A07.",
     "nature": "Mise en situation pédagogique explicitement simulée",
     "dark": false,
     "action": "",
@@ -332,7 +342,7 @@
     "number": 8,
     "startMinute": 7.0,
     "endMinute": 8.5,
-    "notes": "Pour montrer le suivi des coûts et des délais, je prends maintenant un exemple chiffré simulé au dixième mois du projet.\n\nDans cet exemple, j’ai 58 jours-personne consommés et 28 jours estimés pour terminer. Ma prévision atteint donc 86 jours, contre 82 au départ. Avec la valorisation de 450 euros par jour et les autres postes du cadrage, j’arrive à 46 050 euros : l’écart est de 1 800 euros.\n\nJe regarde aussi le délai : la livraison prévue à la fin du mois 11 passe à la fin du mois 12. Enfin, je compare la charge à ma capacité. Si je prévois 12 jours de travail alors que je n’en ai que 10 de disponibles, je dois déplacer deux jours de charge ou revoir le périmètre.\n\nCes chiffres sont les hypothèses du cas. Ils me servent à expliquer comment je détecte un écart et comment je prends une décision."
+    "notes": "Au point du mois 10 de mon scénario, je consolide les chiffres de chaque membre. Le détail donne 58 jours-personne consommés et 28 restants, soit 86 à terminaison au lieu de 82. Avec un taux moyen conventionnel de 450 euros par jour et les autres postes, la prévision atteint 46 050 euros, soit 1 800 euros de plus.\n\nJe regarde aussi les disponibilités réservées à Spity sur la prochaine période : dix jours pour l’équipe, face à douze jours de tâches. La surcharge concerne Hugo, avec quatre jours prévus pour trois disponibles, et Inès, avec trois pour deux. Je reporte un jour de développement et un jour de recette non critiques hors période, après vérification des dépendances.\n\nLe jalon révisé passe de fin M11 à fin M12. Je présente à Claire l’effet sur le délai et je conserve les critères critiques. Tous ces consommés et disponibilités sont les hypothèses chiffrées du scénario."
   },
   {
     "title": "Anticiper les points de vigilance",
@@ -345,33 +355,33 @@
         [
           "Risque",
           "Signal / seuil proposé",
-          "Réponse et responsable"
+          "Action et responsable"
         ],
         [
-          "Surcharge solo",
-          "Charge / capacité > 100 %",
-          "Dorian : déplacer une tâche et revoir le jalon"
+          "Surcharge de l’équipe",
+          "Hugo et Inès au-delà de 100 %",
+          "Dorian : replanifier avec eux, informer Claire"
         ],
         [
           "Parcours non fiable",
-          "Un critère critique en échec",
-          "Dorian : corriger avant validation"
+          "Critère critique en échec",
+          "Hugo corrige ; Inès recontrôle"
         ],
         [
-          "Démo indisponible",
+          "Version indisponible",
           "Connexion ou santé en échec",
-          "Dorian : diagnostiquer ; secours daté"
+          "Sami : diagnostiquer, préparer le secours"
         ],
         [
           "Recette inaccessible",
-          "Consigne non comprise / sous-titres KO",
-          "Dorian : support écrit et essai avant séance"
+          "Consigne ou sous-titres insuffisants",
+          "Léa adapte ; Inès vérifie la compréhension"
         ]
       ],
       "callout": "Contrôler à chaque revue : avancement, coûts, délais, risques et disponibilité des ressources."
     },
-    "script": "Je veux que mon suivi débouche sur une action. Pour chaque risque, je définis donc un signal et une réponse.\n\nDans cette mise en situation, si ma charge dépasse ma capacité, je déplace une tâche et je revois le jalon. Si un critère critique échoue, je corrige avant de valider. Si le logiciel devient indisponible pendant une présentation, je décris l’incident et je m’appuie sur les captures datées pour expliquer le parcours.\n\nPour la séance avec le testeur fictif, je prévois aussi un essai des consignes et des sous-titres. Je vérifie ainsi que les conditions de recette sont adaptées.\n\nÀ chaque revue proposée, je rapproche ces risques de l’avancement, des coûts et des délais. Je termine avec une action et un responsable identifiés.",
-    "source": "A03 ; scénario annuel ; audit navigation pour le problème réel.",
+    "script": "Je donne à chaque risque un signal et une personne responsable. Si Hugo ou Inès dépasse sa capacité, je reprends les priorités avec eux et j’annonce l’effet sur le jalon à Claire.\n\nSi un critère critique échoue, Hugo corrige et Inès recontrôle. Si l’environnement devient indisponible, Sami diagnostique et prépare le secours. Pour l’accessibilité des échanges, Léa adapte les supports et je vérifie avec Inès qu’elle peut retrouver et reformuler les consignes.\n\nJe termine chaque revue avec une action datée et un responsable. Je ne ferme pas un risque uniquement parce qu’une action a été promise : je demande le résultat du contrôle.",
+    "source": "Équipe, planning et affectations : donnees/mise-en-situation.json ; annexes A01–A07.",
     "nature": "Mise en situation pédagogique explicitement simulée",
     "dark": false,
     "action": "",
@@ -379,7 +389,7 @@
     "number": 9,
     "startMinute": 8.5,
     "endMinute": 9.5,
-    "notes": "Je veux que mon suivi débouche sur une action. Pour chaque risque, je définis donc un signal et une réponse.\n\nDans cette mise en situation, si ma charge dépasse ma capacité, je déplace une tâche et je revois le jalon. Si un critère critique échoue, je corrige avant de valider. Si le logiciel devient indisponible pendant une présentation, je décris l’incident et je m’appuie sur les captures datées pour expliquer le parcours.\n\nPour la séance avec le testeur fictif, je prévois aussi un essai des consignes et des sous-titres. Je vérifie ainsi que les conditions de recette sont adaptées.\n\nÀ chaque revue proposée, je rapproche ces risques de l’avancement, des coûts et des délais. Je termine avec une action et un responsable identifiés."
+    "notes": "Je donne à chaque risque un signal et une personne responsable. Si Hugo ou Inès dépasse sa capacité, je reprends les priorités avec eux et j’annonce l’effet sur le jalon à Claire.\n\nSi un critère critique échoue, Hugo corrige et Inès recontrôle. Si l’environnement devient indisponible, Sami diagnostique et prépare le secours. Pour l’accessibilité des échanges, Léa adapte les supports et je vérifie avec Inès qu’elle peut retrouver et reformuler les consignes.\n\nJe termine chaque revue avec une action datée et un responsable. Je ne ferme pas un risque uniquement parce qu’une action a été promise : je demande le résultat du contrôle."
   },
   {
     "title": "Arbitrer face à une navigation trop lente",
@@ -410,7 +420,7 @@
           "Choix implémenté ; perte du mouvement"
         ]
       ],
-      "callout": "Choix retenu : conserver le motif graphique avec un SVG statique et rendre l’attente visible."
+      "callout": "Correction réelle : fond statique. Dans le cas : Dorian arbitre, Hugo corrige, Inès recontrôle."
     },
     "script": "Je prends maintenant un problème réel que j’ai rencontré sur Spity : lorsque je cliquais dans la barre de navigation, le passage à la page suivante semblait très lent.\n\nLe diagnostic local a montré que l’initialisation du fond animé occupait le navigateur. J’ai repris les options possibles dans ce tableau pour expliquer l’arbitrage. Garder l’animation conservait le problème observé. L’optimiser ou la différer pouvait être étudié, mais je n’ai pas de mesure permettant d’affirmer le gain de cette option.\n\nLe choix retenu a été de remplacer le fond par un SVG statique et d’ajouter un indicateur d’attente. Je conserve ainsi le motif graphique, en acceptant de perdre le mouvement décoratif.\n\nLe changement a été intégré et livré. Pour vérifier son effet, je m’appuie sur la comparaison avant et après que je vous montre ensuite.",
     "source": "Audit navigation du 15/09 ; commit 83e4c29.",
@@ -433,7 +443,7 @@
     "content": {
       "callout": "CPU ×4 · latence 100 ms · mêmes parcours. Ces temps ne sont pas des mesures de production."
     },
-    "script": "Ici, je compare les mêmes cinq parcours avant et après la correction. Les mesures ont été réalisées localement sur une compilation de production, avec un processeur ralenti quatre fois et une latence réseau simulée de 100 millisecondes.\n\nLa médiane passe de 10,22 secondes à 0,748 seconde. L’amélioration est nette dans ce protocole : le navigateur n’a plus à effectuer le calcul décoratif au changement de page.\n\nJe garde cependant la portée de la mesure : il y a un passage par parcours, dans un environnement local contrôlé. Je ne présente donc pas ces chiffres comme les temps de tous les utilisateurs en production. Ils me permettent de vérifier l’effet de la correction dans des conditions comparables.",
+    "script": "Ici, je compare les mêmes cinq parcours avant et après la correction. Les mesures ont été réalisées localement sur une compilation de production, avec un processeur ralenti quatre fois et une latence réseau simulée de 100 millisecondes.\n\nLa médiane passe de 10,22 secondes à 0,748 seconde. L’amélioration est nette dans ce protocole : le navigateur n’a plus à effectuer le calcul décoratif au changement de page.\n\nJe garde cependant la portée de la mesure : il y a un passage par parcours, dans un environnement local contrôlé. Je ne présente donc pas ces chiffres comme les temps de tous les utilisateurs en production. Ils me permettent de vérifier l’effet de la correction dans des conditions comparables.\n\nDans mon scénario, je confie à Inès la comparaison des mêmes parcours, à Hugo l’analyse technique et à Sami la vérification de la version livrée. Les mesures affichées restent celles du contrôle local réel.",
     "source": "Audit navigation du 15/09 ; donnees/projet-reel.json, performance.",
     "action": "Comparer les barres de deux parcours et expliquer le protocole.",
     "nature": "Mesures locales contrôlées, échantillon limité",
@@ -441,41 +451,41 @@
     "demo": false,
     "startMinute": 11.0,
     "endMinute": 12.0,
-    "notes": "Ici, je compare les mêmes cinq parcours avant et après la correction. Les mesures ont été réalisées localement sur une compilation de production, avec un processeur ralenti quatre fois et une latence réseau simulée de 100 millisecondes.\n\nLa médiane passe de 10,22 secondes à 0,748 seconde. L’amélioration est nette dans ce protocole : le navigateur n’a plus à effectuer le calcul décoratif au changement de page.\n\nJe garde cependant la portée de la mesure : il y a un passage par parcours, dans un environnement local contrôlé. Je ne présente donc pas ces chiffres comme les temps de tous les utilisateurs en production. Ils me permettent de vérifier l’effet de la correction dans des conditions comparables."
+    "notes": "Ici, je compare les mêmes cinq parcours avant et après la correction. Les mesures ont été réalisées localement sur une compilation de production, avec un processeur ralenti quatre fois et une latence réseau simulée de 100 millisecondes.\n\nLa médiane passe de 10,22 secondes à 0,748 seconde. L’amélioration est nette dans ce protocole : le navigateur n’a plus à effectuer le calcul décoratif au changement de page.\n\nJe garde cependant la portée de la mesure : il y a un passage par parcours, dans un environnement local contrôlé. Je ne présente donc pas ces chiffres comme les temps de tous les utilisateurs en production. Ils me permettent de vérifier l’effet de la correction dans des conditions comparables.\n\nDans mon scénario, je confie à Inès la comparaison des mêmes parcours, à Hugo l’analyse technique et à Sami la vérification de la version livrée. Les mesures affichées restent celles du contrôle local réel."
   },
   {
     "title": "Adapter la posture à une situation précise",
     "section": "C3.3.1 / Management",
     "minutes": 1.5,
     "layout": "management",
-    "subtitle": "Mise en situation · arbitrer les priorités avec un testeur ponctuel.",
+    "subtitle": "Mise en situation · arbitrer entre UX, développement, recette et attentes du client.",
     "content": {
       "cards": [
         [
           "Participatif",
           "Écouter les faits",
-          "Le testeur veut corriger les blocages ; le porteur veut enrichir le décor."
+          "Léa propose une animation ; Inès signale des blocages ; Hugo chiffre l’effort."
         ],
         [
           "Persuasif",
           "Expliquer le choix",
-          "Prioriser le parcours utilisable avec les critères et les mesures."
+          "Dorian explique le compromis à Léa et à Claire."
         ],
         [
           "Directif",
           "Fixer la limite",
-          "Aucune validation si un critère critique reste en échec."
+          "Hugo corrige les critères critiques avant la réception."
         ],
         [
           "Délégatif",
           "Confier la recette",
-          "Résultat attendu, autonomie et point de contrôle convenus."
+          "Inès conduit les tests ; Sami vérifie la livraison."
         ]
       ],
       "callout": "Analyse critique : décider seul trop vite peut faire perdre une alerte utile ; écouter puis trancher."
     },
-    "script": "Pour la partie management, je m’appuie sur une situation simulée de recette avec un testeur ponctuel. Dans cet exemple, je souhaite enrichir le décor, alors que le testeur me signale des blocages dans les parcours.\n\nJe commencerais par l’écouter et lui demander des faits précis : c’est la posture participative. Ensuite, j’expliquerais pourquoi je privilégie un parcours utilisable plutôt qu’un enrichissement graphique : c’est la posture persuasive.\n\nJe fixerais aussi une limite claire : je ne valide pas tant qu’un critère critique reste en échec. C’est la posture directive. Enfin, je lui confierais la recette avec un résultat attendu et un point de contrôle, dans une posture délégative.\n\nAvec du recul, décider trop vite de mon côté pourrait me faire perdre une alerte utile. Je retiens donc une séquence simple : écouter, comparer les impacts, décider et écrire la prochaine action.",
-    "source": "A05 ; séance pédagogique ; référentiel p. 12–13.",
+    "script": "Dans cette situation simulée, Léa propose une animation plus riche. Inès signale des blocages et Hugo estime l’effort nécessaire. Je commence par écouter leurs observations et par faire préciser les impacts : c’est ma posture participative.\n\nJ’explique ensuite à Léa et à Claire pourquoi je privilégie les parcours utilisables. Je m’appuie sur les critères et les mesures : c’est la posture persuasive. Je fixe une limite claire à Hugo et à l’équipe : aucun blocage critique ne peut être accepté comme terminé.\n\nEnfin, je délègue à Inès l’exécution de la recette et à Sami le contrôle de livraison, avec un résultat attendu et un point de retour. Je garde la décision de priorité, sans refaire leur travail à leur place. Avec du recul, trancher avant d’avoir écouté l’équipe ferait perdre des informations utiles.",
+    "source": "Équipe, planning et affectations : donnees/mise-en-situation.json ; annexes A01–A07.",
     "nature": "Mise en situation pédagogique explicitement simulée",
     "dark": false,
     "action": "",
@@ -483,7 +493,7 @@
     "number": 12,
     "startMinute": 12.0,
     "endMinute": 13.5,
-    "notes": "Pour la partie management, je m’appuie sur une situation simulée de recette avec un testeur ponctuel. Dans cet exemple, je souhaite enrichir le décor, alors que le testeur me signale des blocages dans les parcours.\n\nJe commencerais par l’écouter et lui demander des faits précis : c’est la posture participative. Ensuite, j’expliquerais pourquoi je privilégie un parcours utilisable plutôt qu’un enrichissement graphique : c’est la posture persuasive.\n\nJe fixerais aussi une limite claire : je ne valide pas tant qu’un critère critique reste en échec. C’est la posture directive. Enfin, je lui confierais la recette avec un résultat attendu et un point de contrôle, dans une posture délégative.\n\nAvec du recul, décider trop vite de mon côté pourrait me faire perdre une alerte utile. Je retiens donc une séquence simple : écouter, comparer les impacts, décider et écrire la prochaine action."
+    "notes": "Dans cette situation simulée, Léa propose une animation plus riche. Inès signale des blocages et Hugo estime l’effort nécessaire. Je commence par écouter leurs observations et par faire préciser les impacts : c’est ma posture participative.\n\nJ’explique ensuite à Léa et à Claire pourquoi je privilégie les parcours utilisables. Je m’appuie sur les critères et les mesures : c’est la posture persuasive. Je fixe une limite claire à Hugo et à l’équipe : aucun blocage critique ne peut être accepté comme terminé.\n\nEnfin, je délègue à Inès l’exécution de la recette et à Sami le contrôle de livraison, avec un résultat attendu et un point de retour. Je garde la décision de priorité, sans refaire leur travail à leur place. Avec du recul, trancher avant d’avoir écouté l’équipe ferait perdre des informations utiles."
   },
   {
     "title": "Organiser une collaboration accessible",
@@ -494,35 +504,40 @@
     "content": {
       "rows": [
         [
-          "Point",
-          "Organisation proposée",
-          "Contrôle"
+          "Membre",
+          "Tâches de la séance simulée",
+          "Charge / disponibilité"
         ],
         [
-          "Charge de la séance",
-          "Porteur 4 h / 5 h ; testeur 4 h / 5 h",
-          "80 % chacun ; 1 h de marge"
+          "Dorian",
+          "Prioriser les réserves 1 h ; préparer la décision client 1 h.",
+          "2 h / 3 h"
         ],
         [
-          "Accessibilité",
-          "Consignes écrites, sous-titres, une voix à la fois",
-          "Le testeur reformule puis retrouve la décision"
+          "Léa",
+          "Vérifier les parcours et les libellés 1 h ; adapter les supports 1 h.",
+          "2 h / 3 h"
         ],
         [
-          "Distance et langues",
-          "Créneau commun avec fuseaux, glossaire FR/EN",
-          "Compréhension vérifiée sans supposer la langue"
+          "Hugo",
+          "Préparer la version 1 h ; corriger les défauts 2 h ; tests unitaires 1 h.",
+          "4 h / 5 h"
         ],
         [
-          "Outils partagés",
-          "Linear : action ; Git : version ; dossier : preuves",
-          "Un lien commun vers critères et compte rendu"
+          "Inès",
+          "Préparer les critères 1 h ; exécuter et recontrôler 2 h ; rédiger le rapport 1 h.",
+          "4 h / 5 h"
+        ],
+        [
+          "Sami",
+          "Préparer les comptes et l’environnement 1 h ; vérifier version et santé 1 h.",
+          "2 h / 3 h"
         ]
       ],
-      "callout": "Préparation écrite → point de coordination → action et responsable → retour asynchrone."
+      "callout": "Inès : écrit et sous-titres · tous : compte rendu, fuseaux, glossaire et retour asynchrone."
     },
-    "script": "Dans la même simulation, je répartis la séance selon les missions de chacun. Je prévois quatre heures pour mon travail et quatre heures pour celui du testeur, avec cinq heures disponibles de chaque côté. Cela laisse une heure de marge à chacun.\n\nPour le persona malentendant, je prépare les consignes par écrit, je vérifie les sous-titres et j’organise une prise de parole à la fois. Je lui demande de reformuler la consigne pour vérifier que nous nous sommes compris.\n\nSi nous travaillons à distance, je précise les fuseaux dans l’invitation et je prévois aussi un retour asynchrone. Un glossaire partagé en français et en anglais aide à éviter les ambiguïtés.\n\nEnfin, chaque outil a un objectif : Linear pour les actions, Git pour la version et le dossier partagé pour les critères et les preuves. Je termine l’échange avec une action, un responsable et un retour attendu.",
-    "source": "A02/A05 ; mise-en-situation.json, review.",
+    "script": "Pour la séance de recette du scénario, je répartis quatorze heures de travail entre les cinq membres, pour dix-neuf heures disponibles au total. Hugo et Inès ont quatre heures affectées sur cinq ; Léa, Sami et moi avons chacun deux heures sur trois.\n\nJe coordonne les priorités et la décision client. Léa vérifie les parcours et adapte les supports. Hugo prépare et corrige la version. Inès exécute les scénarios et rédige les réserves. Sami prépare les comptes et contrôle la version. Ces heures détaillent une activité des lots du planning : elles ne s’ajoutent pas une deuxième fois aux 82 jours.\n\nPour Inès, je fournis les consignes par écrit, des sous-titres vérifiés et une prise de parole à la fois. Je lui demande de reformuler la consigne. À distance, je précise les fuseaux, je prévois un retour asynchrone et un glossaire français-anglais. Chaque échange se termine par une action, un responsable et un retour attendu.",
+    "source": "Équipe, planning et affectations : donnees/mise-en-situation.json ; annexes A01–A07.",
     "nature": "Mise en situation pédagogique explicitement simulée",
     "dark": false,
     "action": "",
@@ -530,7 +545,7 @@
     "number": 13,
     "startMinute": 13.5,
     "endMinute": 15.0,
-    "notes": "Dans la même simulation, je répartis la séance selon les missions de chacun. Je prévois quatre heures pour mon travail et quatre heures pour celui du testeur, avec cinq heures disponibles de chaque côté. Cela laisse une heure de marge à chacun.\n\nPour le persona malentendant, je prépare les consignes par écrit, je vérifie les sous-titres et j’organise une prise de parole à la fois. Je lui demande de reformuler la consigne pour vérifier que nous nous sommes compris.\n\nSi nous travaillons à distance, je précise les fuseaux dans l’invitation et je prévois aussi un retour asynchrone. Un glossaire partagé en français et en anglais aide à éviter les ambiguïtés.\n\nEnfin, chaque outil a un objectif : Linear pour les actions, Git pour la version et le dossier partagé pour les critères et les preuves. Je termine l’échange avec une action, un responsable et un retour attendu."
+    "notes": "Pour la séance de recette du scénario, je répartis quatorze heures de travail entre les cinq membres, pour dix-neuf heures disponibles au total. Hugo et Inès ont quatre heures affectées sur cinq ; Léa, Sami et moi avons chacun deux heures sur trois.\n\nJe coordonne les priorités et la décision client. Léa vérifie les parcours et adapte les supports. Hugo prépare et corrige la version. Inès exécute les scénarios et rédige les réserves. Sami prépare les comptes et contrôle la version. Ces heures détaillent une activité des lots du planning : elles ne s’ajoutent pas une deuxième fois aux 82 jours.\n\nPour Inès, je fournis les consignes par écrit, des sous-titres vérifiés et une prise de parole à la fois. Je lui demande de reformuler la consigne. À distance, je précise les fuseaux, je prévois un retour asynchrone et un glossaire français-anglais. Chaque échange se termine par une action, un responsable et un retour attendu."
   },
   {
     "title": "Évaluer les compétences utiles au projet",
@@ -541,35 +556,40 @@
     "content": {
       "rows": [
         [
-          "Rôle du cas",
-          "Compétence",
+          "Membre du cas",
+          "Compétence à vérifier",
           "Actuel → cible"
         ],
         [
-          "Porteur",
+          "Dorian",
           "Planning et suivi des écarts",
           "1 → 2"
         ],
         [
-          "Porteur",
-          "Développement et API",
-          "2 → 2"
-        ],
-        [
-          "Testeur fictif",
-          "Recette reproductible",
+          "Léa",
+          "Accessibilité des maquettes",
           "1 → 2"
         ],
         [
-          "Testeur fictif",
-          "Parcours clavier",
+          "Hugo",
+          "API et sécurité applicative",
+          "2 → 2"
+        ],
+        [
+          "Inès",
+          "Recette reproductible et clavier",
+          "1 → 2"
+        ],
+        [
+          "Sami",
+          "Déploiement et retour arrière",
           "1 → 2"
         ]
       ],
       "callout": "0 : non abordé · 1 : accompagné · 2 : autonome · 3 : cas complexes."
     },
-    "script": "Pour choisir une formation, je commence par regarder l’écart entre le niveau actuel et le niveau nécessaire. Cette grille appartient à la mise en situation : les niveaux sont des hypothèses d’exercice.\n\nJ’utilise une échelle de zéro à trois. Au niveau un, la personne réalise la tâche avec de l’aide. Au niveau deux, elle est autonome. Au niveau trois, elle sait aussi traiter les cas complexes.\n\nDans l’exemple, je me place au niveau un sur le suivi, avec une cible au niveau deux : je dois pouvoir expliquer seul les écarts. Le développement est supposé autonome, donc je ne le retiens pas comme priorité de formation.\n\nPour le testeur fictif, je vise une recette reproductible et une vérification au clavier réalisées sans aide. Ce sont ces besoins techniques qui orientent le plan, indépendamment du handicap.",
-    "source": "A06 ; mise-en-situation.json, skills.",
+    "script": "J’évalue les besoins de chaque rôle avant de choisir une formation. Cette grille est une hypothèse pédagogique. Un niveau un signifie que la personne travaille avec de l’aide ; deux signifie qu’elle est autonome ; trois couvre les cas complexes.\n\nJe dois progresser sur le suivi des écarts. Léa doit vérifier l’accessibilité des maquettes. Inès doit produire une recette reproductible et vérifier le clavier. Sami doit maîtriser le retour arrière. Hugo est supposé autonome sur les API et la sécurité applicative ; je vérifie cette hypothèse par la revue de code, sans lui imposer une formation inutile.\n\nJe relie chaque écart à la mission confiée et à un résultat observable. Les besoins d’aménagement d’Inès sont traités séparément de son niveau technique.",
+    "source": "Équipe, planning et affectations : donnees/mise-en-situation.json ; annexes A01–A07.",
     "nature": "Mise en situation pédagogique explicitement simulée",
     "dark": false,
     "action": "",
@@ -577,7 +597,7 @@
     "number": 14,
     "startMinute": 15.0,
     "endMinute": 16.5,
-    "notes": "Pour choisir une formation, je commence par regarder l’écart entre le niveau actuel et le niveau nécessaire. Cette grille appartient à la mise en situation : les niveaux sont des hypothèses d’exercice.\n\nJ’utilise une échelle de zéro à trois. Au niveau un, la personne réalise la tâche avec de l’aide. Au niveau deux, elle est autonome. Au niveau trois, elle sait aussi traiter les cas complexes.\n\nDans l’exemple, je me place au niveau un sur le suivi, avec une cible au niveau deux : je dois pouvoir expliquer seul les écarts. Le développement est supposé autonome, donc je ne le retiens pas comme priorité de formation.\n\nPour le testeur fictif, je vise une recette reproductible et une vérification au clavier réalisées sans aide. Ce sont ces besoins techniques qui orientent le plan, indépendamment du handicap."
+    "notes": "J’évalue les besoins de chaque rôle avant de choisir une formation. Cette grille est une hypothèse pédagogique. Un niveau un signifie que la personne travaille avec de l’aide ; deux signifie qu’elle est autonome ; trois couvre les cas complexes.\n\nJe dois progresser sur le suivi des écarts. Léa doit vérifier l’accessibilité des maquettes. Inès doit produire une recette reproductible et vérifier le clavier. Sami doit maîtriser le retour arrière. Hugo est supposé autonome sur les API et la sécurité applicative ; je vérifie cette hypothèse par la revue de code, sans lui imposer une formation inutile.\n\nJe relie chaque écart à la mission confiée et à un résultat observable. Les besoins d’aménagement d’Inès sont traités séparément de son niveau technique."
   },
   {
     "title": "Prévoir une progression vérifiable",
@@ -588,35 +608,35 @@
     "content": {
       "rows": [
         [
-          "Public / moment",
-          "Action et modalité",
-          "Résultat attendu"
+          "Membre / moment",
+          "Action de formation",
+          "Preuve d’autonomie"
         ],
         [
-          "Porteur · avant M10",
-          "1 h : atelier de recalcul du suivi",
-          "Expliquer seul le coût et le décalage"
+          "Dorian · avant M10",
+          "1 h : recalcul du suivi",
+          "Justifier le coût et le décalage"
         ],
         [
-          "Testeur · avant M11",
-          "2 h : recette et clavier, exercice guidé",
+          "Léa · avant M10",
+          "1 h : audit d’une maquette",
+          "Corriger contrastes et libellés"
+        ],
+        [
+          "Inès · avant M11",
+          "2 h : recette et clavier",
           "Rejouer un cas et décrire un défaut"
         ],
         [
-          "Adaptation au handicap",
-          "Écrit, sous-titres, pauses et durée adaptées",
-          "Vérifier la compréhension avant autonomie"
-        ],
-        [
-          "Besoin persistant",
-          "Renfort QA conditionnel de 4 h",
-          "Fiche de besoin préparée en annexe 26"
+          "Sami · avant M11",
+          "1 h : retour arrière avec Hugo",
+          "Restaurer puis vérifier une version"
         ]
       ],
-      "callout": "Évaluer après pratique ; si l’écart persiste, adapter la formation puis arbitrer un renfort."
+      "callout": "Supports accessibles et évaluation après pratique ; renfort QA uniquement si un besoin critique persiste."
     },
-    "script": "À partir de cette grille, je propose deux actions dans la mise en situation. Pour le suivi, je prévois un atelier d’une heure avant la revue du mois 10, afin de recalculer les écarts et de les expliquer sans aide.\n\nPour le testeur fictif, je propose deux heures de pratique sur la recette et le clavier avant le mois 11. Je prépare des consignes écrites et un support sous-titré. J’adapte les pauses et le temps nécessaire à ses besoins.\n\nCes formations sont prévues avant la séance de recette : je ne compte pas leurs heures dans la charge de cette séance. Pour vérifier leur efficacité, je regarde si la tâche peut être réalisée de façon autonome.\n\nSi un écart critique persiste, je prévois d’abord un accompagnement adapté, puis j’étudie un renfort ponctuel. J’ai détaillé ce besoin conditionnel dans la fiche en annexe.",
-    "source": "A06 ; mise-en-situation.json, training ; annexe 26.",
+    "script": "Je prévois quatre actions ciblées : une heure de recalcul du suivi pour moi, une heure d’audit de maquette pour Léa, deux heures de recette et de clavier pour Inès, puis une heure de retour arrière pour Sami avec Hugo.\n\nLes cinq heures correspondent au temps des apprenants. Je prévois séparément deux heures d’accompagnement par Hugo pour Inès et Sami, et une heure par moi pour Léa. Ces huit heures de formation et d’accompagnement sont comprises dans les lots et distinctes de la séance de recette.\n\nJe fournis des supports écrits, des sous-titres et des pauses adaptées. Je vérifie l’efficacité par une tâche réalisée sans aide. Si une compétence critique reste indisponible, j’ajuste l’accompagnement puis j’étudie un renfort QA ponctuel, décrit en annexe, sans annoncer un recrutement déjà décidé.",
+    "source": "Équipe, planning et affectations : donnees/mise-en-situation.json ; annexes A01–A07.",
     "nature": "Mise en situation pédagogique explicitement simulée",
     "dark": false,
     "action": "",
@@ -624,7 +644,7 @@
     "number": 15,
     "startMinute": 16.5,
     "endMinute": 18.0,
-    "notes": "À partir de cette grille, je propose deux actions dans la mise en situation. Pour le suivi, je prévois un atelier d’une heure avant la revue du mois 10, afin de recalculer les écarts et de les expliquer sans aide.\n\nPour le testeur fictif, je propose deux heures de pratique sur la recette et le clavier avant le mois 11. Je prépare des consignes écrites et un support sous-titré. J’adapte les pauses et le temps nécessaire à ses besoins.\n\nCes formations sont prévues avant la séance de recette : je ne compte pas leurs heures dans la charge de cette séance. Pour vérifier leur efficacité, je regarde si la tâche peut être réalisée de façon autonome.\n\nSi un écart critique persiste, je prévois d’abord un accompagnement adapté, puis j’étudie un renfort ponctuel. J’ai détaillé ce besoin conditionnel dans la fiche en annexe."
+    "notes": "Je prévois quatre actions ciblées : une heure de recalcul du suivi pour moi, une heure d’audit de maquette pour Léa, deux heures de recette et de clavier pour Inès, puis une heure de retour arrière pour Sami avec Hugo.\n\nLes cinq heures correspondent au temps des apprenants. Je prévois séparément deux heures d’accompagnement par Hugo pour Inès et Sami, et une heure par moi pour Léa. Ces huit heures de formation et d’accompagnement sont comprises dans les lots et distinctes de la séance de recette.\n\nJe fournis des supports écrits, des sous-titres et des pauses adaptées. Je vérifie l’efficacité par une tâche réalisée sans aide. Si une compétence critique reste indisponible, j’ajuste l’accompagnement puis j’étudie un renfort QA ponctuel, décrit en annexe, sans annoncer un recrutement déjà décidé."
   },
   {
     "title": "Un compte rendu qui aide à décider",
@@ -647,13 +667,13 @@
         [
           "ACTIONS",
           "Préparer la validation",
-          "Porteur : réviser le suivi. Testeur : préparer M11. Club : revoir les critères."
+          "Dorian : suivi. Hugo : version. Inès : recette. Sami : livraison. Claire : décision."
         ]
       ],
       "callout": "Compte rendu structuré : contexte → faits → décision → responsable → prochaine validation."
     },
-    "script": "Pour le suivi client, j’ai préparé un compte rendu simulé avec un représentant de club. Je l’organise en trois parties : le constat, la décision et les actions.\n\nAu mois 10, j’annonce l’écart du cas : 1 800 euros supplémentaires et un mois de décalage. Je le relie au besoin exprimé dans l’exemple : garder un parcours fluide et utilisable.\n\nLa décision proposée est de conserver le fond statique et de maintenir les critères de recette. De mon côté, je révise le suivi. Le testeur prépare la recette et le représentant du club revoit les critères au prochain point.\n\nCette structure donne à mon interlocuteur les informations utiles pour décider. Le compte rendu est simulé ; il illustre le suivi et ne constitue pas l’origine historique de la correction du site.",
-    "source": "A07 ; mise-en-situation.json, clientReviews ; retours simulés du candidat.",
+    "script": "Au point M10 avec Claire, je structure le compte rendu du scénario en trois parties : constat, décision et actions. J’annonce les 1 800 euros et le mois de décalage, puis je relie cet écart à la priorité du client : disposer de parcours utilisables.\n\nClaire arbitre le périmètre proposé. Je mets à jour le planning ; Léa ajuste les parcours ; Hugo prépare la version ; Inès prépare la recette M11 ; Sami vérifie l’environnement. Le compte rendu précise le livrable attendu et le prochain contrôle pour chacun.\n\nCe compte rendu est simulé. Il utilise la correction réelle de navigation pour illustrer une décision d’équipe, sans prétendre que cet échange fictif est à l’origine historique du changement.",
+    "source": "Équipe, planning et affectations : donnees/mise-en-situation.json ; annexes A01–A07.",
     "nature": "Mise en situation pédagogique explicitement simulée",
     "dark": false,
     "action": "",
@@ -661,7 +681,7 @@
     "number": 16,
     "startMinute": 18.0,
     "endMinute": 19.5,
-    "notes": "Pour le suivi client, j’ai préparé un compte rendu simulé avec un représentant de club. Je l’organise en trois parties : le constat, la décision et les actions.\n\nAu mois 10, j’annonce l’écart du cas : 1 800 euros supplémentaires et un mois de décalage. Je le relie au besoin exprimé dans l’exemple : garder un parcours fluide et utilisable.\n\nLa décision proposée est de conserver le fond statique et de maintenir les critères de recette. De mon côté, je révise le suivi. Le testeur prépare la recette et le représentant du club revoit les critères au prochain point.\n\nCette structure donne à mon interlocuteur les informations utiles pour décider. Le compte rendu est simulé ; il illustre le suivi et ne constitue pas l’origine historique de la correction du site."
+    "notes": "Au point M10 avec Claire, je structure le compte rendu du scénario en trois parties : constat, décision et actions. J’annonce les 1 800 euros et le mois de décalage, puis je relie cet écart à la priorité du client : disposer de parcours utilisables.\n\nClaire arbitre le périmètre proposé. Je mets à jour le planning ; Léa ajuste les parcours ; Hugo prépare la version ; Inès prépare la recette M11 ; Sami vérifie l’environnement. Le compte rendu précise le livrable attendu et le prochain contrôle pour chacun.\n\nCe compte rendu est simulé. Il utilise la correction réelle de navigation pour illustrer une décision d’équipe, sans prétendre que cet échange fictif est à l’origine historique du changement."
   },
   {
     "title": "Prévoir les points de validation",
@@ -672,35 +692,35 @@
     "content": {
       "rows": [
         [
-          "Point",
-          "Livrable examiné",
-          "Décision attendue"
+          "Jalon",
+          "Livrable et responsables",
+          "Décideur / résultat"
         ],
         [
           "M3 · cadrage",
-          "Besoin et critères du parcours",
-          "Confirmer le périmètre"
+          "Léa : parcours ; Dorian : périmètre",
+          "Claire confirme le besoin"
         ],
         [
           "M10 · évolution",
-          "Écarts, options et version disponible",
-          "Arbitrer et réviser la prévision"
+          "Dorian : écarts ; Hugo : options",
+          "Claire arbitre coût et périmètre"
         ],
         [
           "M11 · recette",
-          "Résultats des critères et réserves",
-          "Corriger ou autoriser la démo"
+          "Inès : rapport ; Hugo : corrections",
+          "Dorian autorise la démonstration"
         ],
         [
           "M12 · restitution",
-          "Dernière version et parcours complet",
-          "Accepter, réserver ou refuser"
+          "Sami : version ; Dorian : restitution",
+          "Claire accepte, réserve ou refuse"
         ]
       ],
       "callout": "Chaque réserve : problème précis, action, responsable et échéance à convenir."
     },
-    "script": "Je prévois plusieurs points de validation dans mon calendrier simulé pour vérifier le résultat au fur et à mesure.\n\nAu mois 3, je fais confirmer le besoin et les critères. Au mois 10, je présente les écarts et les options pour décider de la suite. Au mois 11, je rapproche les résultats de recette des critères attendus. Au mois 12, je présente la dernière version disponible.\n\nSi une réserve apparaît, je la transforme en action avec un responsable et une échéance à convenir. L’objectif est de garder un lien entre le besoin de départ, ce qui est développé et ce qui peut être accepté.",
-    "source": "A01/A07 ; planning annuel simulé.",
+    "script": "Je place les validations au fil du projet simulé. Au mois 3, Léa prépare les parcours et je présente le périmètre à Claire. Au mois 10, Hugo documente les options techniques et je présente les écarts pour permettre l’arbitrage client.\n\nAu mois 11, Inès rend son rapport et Hugo traite les anomalies ; je décide si la version peut être démontrée. Au mois 12, Sami prépare la version contrôlée et je conduis la restitution. Claire prononce alors la réception selon les critères observés.\n\nPour chaque réserve, je désigne une personne, un résultat attendu et une échéance. Inès vérifie ensuite la correction : une promesse de correction ne suffit pas à fermer la réserve.",
+    "source": "Équipe, planning et affectations : donnees/mise-en-situation.json ; annexes A01–A07.",
     "nature": "Mise en situation pédagogique explicitement simulée",
     "dark": false,
     "action": "",
@@ -708,7 +728,7 @@
     "number": 17,
     "startMinute": 19.5,
     "endMinute": 20.5,
-    "notes": "Je prévois plusieurs points de validation dans mon calendrier simulé pour vérifier le résultat au fur et à mesure.\n\nAu mois 3, je fais confirmer le besoin et les critères. Au mois 10, je présente les écarts et les options pour décider de la suite. Au mois 11, je rapproche les résultats de recette des critères attendus. Au mois 12, je présente la dernière version disponible.\n\nSi une réserve apparaît, je la transforme en action avec un responsable et une échéance à convenir. L’objectif est de garder un lien entre le besoin de départ, ce qui est développé et ce qui peut être accepté."
+    "notes": "Je place les validations au fil du projet simulé. Au mois 3, Léa prépare les parcours et je présente le périmètre à Claire. Au mois 10, Hugo documente les options techniques et je présente les écarts pour permettre l’arbitrage client.\n\nAu mois 11, Inès rend son rapport et Hugo traite les anomalies ; je décide si la version peut être démontrée. Au mois 12, Sami prépare la version contrôlée et je conduis la restitution. Claire prononce alors la réception selon les critères observés.\n\nPour chaque réserve, je désigne une personne, un résultat attendu et une échéance. Inès vérifie ensuite la correction : une promesse de correction ne suffit pas à fermer la réserve."
   },
   {
     "title": "Mesurer le retour pour agir",
@@ -719,35 +739,35 @@
     "content": {
       "rows": [
         [
-          "Indicateur",
+          "Indicateur / responsable",
           "Calcul / recueil",
           "Cible pédagogique"
         ],
         [
-          "Réussite sans aide",
+          "Réussite sans aide · Inès",
           "Parcours réussis / tentés ; noter l’effectif",
           "≥ 80 %"
         ],
         [
-          "Utilité perçue",
+          "Utilité perçue · Léa",
           "Note de 1 à 5 ; moyenne et répondants",
           "≥ 4 / 5"
         ],
         [
-          "Conformité critique",
+          "Conformité critique · Claire",
           "Critères critiques acceptés / évalués",
           "100 %"
         ],
         [
-          "Blocages",
+          "Blocages · Inès",
           "Nombre de tâches empêchées ouvertes",
           "0 avant acceptation"
         ]
       ],
       "callout": "Sous la cible : qualifier → prioriser → corriger → vérifier à nouveau. Résultats : non mesurés."
     },
-    "script": "Pour recueillir un retour utile, je propose quatre indicateurs. Je regarde si le parcours est réalisé sans aide, si le service est jugé utile, si les critères critiques sont acceptés et si des blocages restent ouverts.\n\nLes seuils affichés sont les objectifs proposés pour la mise en situation. Je n’ai pas de résultats réels de satisfaction à présenter. Lors d’une séance, je noterais aussi le nombre de participants pour donner un sens aux pourcentages et à la moyenne.\n\nSi la réussite sans aide est faible, je cherche l’étape qui pose problème. Si l’utilité est mal évaluée, je reviens au besoin. Et si un blocage critique reste ouvert, je corrige avant de demander l’acceptation.\n\nJe complète ainsi les tests techniques par un regard sur l’utilisation du produit.",
-    "source": "A07 ; indicateurs proposés pour les personas simulés.",
+    "script": "Je confie à Inès le relevé des parcours réussis et des blocages. Léa recueille l’utilité perçue auprès des personas. Claire examine la conformité des critères, et je consolide le bilan avec le nombre de participants et la date.\n\nLes seuils sont les objectifs du scénario : au moins 80 % de réussite sans aide, une utilité moyenne de quatre sur cinq, tous les critères critiques acceptés et aucun blocage critique ouvert. Je ne présente pas de résultat réel de satisfaction.\n\nSi un objectif n’est pas atteint, Léa analyse la difficulté d’usage, Hugo corrige, Inès recontrôle et Sami prépare la livraison. Je propose ensuite à Claire une nouvelle validation du périmètre concerné.",
+    "source": "Équipe, planning et affectations : donnees/mise-en-situation.json ; annexes A01–A07.",
     "nature": "Mise en situation pédagogique explicitement simulée",
     "dark": false,
     "action": "",
@@ -755,7 +775,7 @@
     "number": 18,
     "startMinute": 20.5,
     "endMinute": 21.5,
-    "notes": "Pour recueillir un retour utile, je propose quatre indicateurs. Je regarde si le parcours est réalisé sans aide, si le service est jugé utile, si les critères critiques sont acceptés et si des blocages restent ouverts.\n\nLes seuils affichés sont les objectifs proposés pour la mise en situation. Je n’ai pas de résultats réels de satisfaction à présenter. Lors d’une séance, je noterais aussi le nombre de participants pour donner un sens aux pourcentages et à la moyenne.\n\nSi la réussite sans aide est faible, je cherche l’étape qui pose problème. Si l’utilité est mal évaluée, je reviens au besoin. Et si un blocage critique reste ouvert, je corrige avant de demander l’acceptation.\n\nJe complète ainsi les tests techniques par un regard sur l’utilisation du produit."
+    "notes": "Je confie à Inès le relevé des parcours réussis et des blocages. Léa recueille l’utilité perçue auprès des personas. Claire examine la conformité des critères, et je consolide le bilan avec le nombre de participants et la date.\n\nLes seuils sont les objectifs du scénario : au moins 80 % de réussite sans aide, une utilité moyenne de quatre sur cinq, tous les critères critiques acceptés et aucun blocage critique ouvert. Je ne présente pas de résultat réel de satisfaction.\n\nSi un objectif n’est pas atteint, Léa analyse la difficulté d’usage, Hugo corrige, Inès recontrôle et Sami prépare la livraison. Je propose ensuite à Claire une nouvelle validation du périmètre concerné."
   },
   {
     "number": 19,
@@ -792,7 +812,7 @@
           "Manipulation en direct"
         ]
       ],
-      "callout": "Vérifier chaque critère sur la version présentée."
+      "callout": "Dans le cas : Inès vérifie, Hugo corrige, Sami contrôle la version ; Claire prononce la réception."
     },
     "script": "Avant de vous montrer le logiciel, je précise ce que nous allons vérifier. Pour les partenaires, je regarde la cohérence des filtres et la lisibilité de l’état d’une demande.\n\nPour les événements, je vérifie l’inscription et les places disponibles. Avec la session club, je retrouve les participants et les commandes liées à ce rôle. Je montre aussi l’utilisation des commandes au clavier.\n\nJ’utilise une base de démonstration avec des comptes de test. Le résultat attendu reste concret : un grimpeur comprend ce qu’il peut faire, et un club retrouve les informations nécessaires pour organiser sa sortie.\n\nCes critères me servent ensuite à faire le bilan de la démonstration et à identifier les éventuelles réserves.",
     "source": "A08 ; captures du 15/09 ; recette du projet.",
@@ -884,22 +904,22 @@
         [
           "DÉMONSTRATION",
           "Critères observés",
-          "Partenaire, inscription, participants et utilisation au clavier."
+          "Inès relève les résultats ; Sami confirme la version présentée."
         ],
         [
           "DÉCISION",
           "Accepté / avec réserve / refusé",
-          "Une décision fondée sur les critères et les résultats observés."
+          "Dorian présente le bilan ; Claire décide selon les critères."
         ],
         [
           "SUITE",
           "Traiter les réserves",
-          "Un problème, une action, un responsable et une échéance."
+          "Léa et Hugo corrigent ; Inès recontrôle ; Sami livre."
         ]
       ],
       "callout": "Une réserve donne lieu à une action, un responsable et une prochaine vérification."
     },
-    "script": "Pour terminer, je reviens aux critères que nous avons suivis : les partenaires, l’inscription, les participants et l’utilisation au clavier.\n\nÀ partir du résultat observé, je peux demander une décision : accepté, accepté avec réserve ou refusé. Si un point reste à corriger, je le décris précisément et je lui associe une action, un responsable et une prochaine vérification.\n\nCe que je retiens de Spity, c’est l’importance de relier l’organisation du travail à un résultat utilisable. Les tickets me donnent une vue sur le travail, les contrôles me permettent de vérifier les changements et la démonstration me ramène au besoin de l’utilisateur.\n\nMerci pour votre attention. Je suis prêt à répondre à vos questions.",
+    "script": "Pour terminer, je reviens aux critères que nous avons suivis : les partenaires, l’inscription, les participants et l’utilisation au clavier.\n\nÀ partir du résultat observé, je peux demander une décision : accepté, accepté avec réserve ou refusé. Si un point reste à corriger, je le décris précisément et je lui associe une action, un responsable et une prochaine vérification.\n\nCe que je retiens de Spity, c’est l’importance de relier l’organisation du travail à un résultat utilisable. Les tickets me donnent une vue sur le travail, les contrôles me permettent de vérifier les changements et la démonstration me ramène au besoin de l’utilisateur.\n\nMerci pour votre attention. Je suis prêt à répondre à vos questions.\n\nDans le scénario d’équipe, je restitue les résultats d’Inès à Claire. Elle décide de la réception. Je confie les réserves d’usage à Léa, les corrections à Hugo et la livraison à Sami, puis Inès vérifie à nouveau.",
     "source": "Synthèse des pièces citées ; matrice des compétences.",
     "action": "Donner le bilan réel des manipulations, puis ouvrir les questions.",
     "nature": "Éléments du projet documentés",
@@ -907,7 +927,7 @@
     "demo": false,
     "startMinute": 29.0,
     "endMinute": 30.0,
-    "notes": "Pour terminer, je reviens aux critères que nous avons suivis : les partenaires, l’inscription, les participants et l’utilisation au clavier.\n\nÀ partir du résultat observé, je peux demander une décision : accepté, accepté avec réserve ou refusé. Si un point reste à corriger, je le décris précisément et je lui associe une action, un responsable et une prochaine vérification.\n\nCe que je retiens de Spity, c’est l’importance de relier l’organisation du travail à un résultat utilisable. Les tickets me donnent une vue sur le travail, les contrôles me permettent de vérifier les changements et la démonstration me ramène au besoin de l’utilisateur.\n\nMerci pour votre attention. Je suis prêt à répondre à vos questions."
+    "notes": "Pour terminer, je reviens aux critères que nous avons suivis : les partenaires, l’inscription, les participants et l’utilisation au clavier.\n\nÀ partir du résultat observé, je peux demander une décision : accepté, accepté avec réserve ou refusé. Si un point reste à corriger, je le décris précisément et je lui associe une action, un responsable et une prochaine vérification.\n\nCe que je retiens de Spity, c’est l’importance de relier l’organisation du travail à un résultat utilisable. Les tickets me donnent une vue sur le travail, les contrôles me permettent de vérifier les changements et la démonstration me ramène au besoin de l’utilisateur.\n\nMerci pour votre attention. Je suis prêt à répondre à vos questions.\n\nDans le scénario d’équipe, je restitue les résultats d’Inès à Claire. Elle décide de la réception. Je confie les réserves d’usage à Léa, les corrections à Hugo et la livraison à Sami, puis Inès vérifie à nouveau."
   },
   {
     "number": 24,
@@ -920,56 +940,51 @@
       "rows": [
         [
           "Axe",
-          "Support",
-          "Décision associée"
+          "Responsable du cas",
+          "Décision ou livrable"
         ],
         [
           "Organisation",
-          "Planning et priorités",
-          "Ordonner les tâches et préparer les jalons"
+          "Dorian",
+          "Priorités, capacité et jalons"
         ],
         [
-          "Avancement",
-          "Tickets et critères",
-          "Vérifier le périmètre réellement terminé"
+          "Expérience utilisateur",
+          "Léa",
+          "Parcours et maquettes accessibles"
         ],
         [
-          "Écarts",
-          "Prévision de charge, coût et délai",
-          "Actualiser la prévision et le périmètre"
+          "Réalisation",
+          "Hugo",
+          "Interfaces, API et corrections"
         ],
         [
           "Qualité",
-          "Recette et mesures",
-          "Corriger les blocages et vérifier le résultat"
+          "Inès",
+          "Recette, anomalies et recontrôle"
         ],
         [
-          "Collaboration · simulation",
-          "Missions, compétences et accessibilité",
-          "Adapter le travail et l’accompagnement"
+          "Livraison",
+          "Sami",
+          "Version, sécurité et santé"
         ],
         [
-          "Suivi client · simulation",
-          "Compte rendu et objectifs de satisfaction",
-          "Préparer les arbitrages et la réception"
-        ],
-        [
-          "Validation",
-          "Démonstration et réserves",
-          "Accepter ou définir les actions restantes"
+          "Réception",
+          "Claire",
+          "Acceptation ou réserves"
         ]
       ],
-      "callout": "Relier le besoin, le travail réalisé et le résultat attendu."
+      "callout": "Mise en situation : je coordonne les contributions et je conserve la trace des décisions."
     },
-    "script": "Cette synthèse reprend les éléments sur lesquels je m’appuie pour piloter Spity : une organisation du travail, des indicateurs, des choix argumentés et des critères de validation.\n\nLe projet a été développé en solo. J’ai utilisé les traces réelles pour présenter l’avancement et l’arbitrage de navigation. Les mises en situation m’ont permis d’expliquer comment je préparerais une collaboration, une formation et un suivi client.\n\nSi vous souhaitez revenir sur un point, je peux reprendre le tableau, le calcul ou la décision correspondante.",
-    "source": "cadre-evaluation.json ; MATRICE_PREUVES.md.",
+    "script": "Je résume ici les responsabilités de l’équipe fictive. Je prends le pilotage ; Léa prépare l’expérience utilisateur ; Hugo réalise le logiciel ; Inès contrôle les critères ; Sami livre la version ; Claire prononce la réception.\n\nJe relie ces responsabilités dans le backlog, le planning et les comptes rendus. Une tâche a un responsable de réalisation, un livrable attendu et un décideur identifié. Cette synthèse décrit l’organisation du scénario, pas l’équipe historique du développement.",
+    "source": "Équipe, planning et affectations : donnees/mise-en-situation.json ; annexes A01–A07.",
     "action": "",
     "nature": "Analyse de couverture, sans attribution de compétence",
     "dark": false,
     "demo": false,
     "startMinute": 30.0,
     "endMinute": 30.0,
-    "notes": "Cette synthèse reprend les éléments sur lesquels je m’appuie pour piloter Spity : une organisation du travail, des indicateurs, des choix argumentés et des critères de validation.\n\nLe projet a été développé en solo. J’ai utilisé les traces réelles pour présenter l’avancement et l’arbitrage de navigation. Les mises en situation m’ont permis d’expliquer comment je préparerais une collaboration, une formation et un suivi client.\n\nSi vous souhaitez revenir sur un point, je peux reprendre le tableau, le calcul ou la décision correspondante."
+    "notes": "Je résume ici les responsabilités de l’équipe fictive. Je prends le pilotage ; Léa prépare l’expérience utilisateur ; Hugo réalise le logiciel ; Inès contrôle les critères ; Sami livre la version ; Claire prononce la réception.\n\nJe relie ces responsabilités dans le backlog, le planning et les comptes rendus. Une tâche a un responsable de réalisation, un livrable attendu et un décideur identifié. Cette synthèse décrit l’organisation du scénario, pas l’équipe historique du développement."
   },
   {
     "number": 25,
@@ -1032,33 +1047,33 @@
         ],
         [
           "Déclencheur",
-          "Recette critique non maîtrisée après la formation et son évaluation"
+          "Compétence QA critique indisponible après formation et évaluation"
+        ],
+        [
+          "Demandeur",
+          "Dorian formalise ; Inès précise les scénarios à couvrir"
         ],
         [
           "Mission",
-          "4 h de renfort QA avant la restitution ; parcours et anomalies reproductibles"
+          "4 h de recette navigateur et clavier avant restitution"
         ],
         [
-          "Compétences",
-          "Recette navigateur, accessibilité clavier, communication écrite"
-        ],
-        [
-          "Sélection / intégration",
-          "Exercice accessible sur base test ; binôme de prise en main avec le porteur"
+          "Profil / sélection",
+          "Exercice accessible, qualification d’anomalie et communication écrite"
         ],
         [
           "Coût indicatif",
-          "4 h × 45 € = 180 € ; hors budget de base, engagement à arbitrer"
+          "4 h × 45 € = 180 € ; hors base, accueil à estimer"
         ],
         [
-          "Accueil et contrôle",
-          "Accès limités, critères écrits, point de retour et validation du livrable"
+          "Intégration",
+          "Inès accompagne ; Sami limite les accès ; Dorian suit le résultat"
         ]
       ],
       "callout": "Confirmer la mission, la disponibilité, les modalités et le budget avant engagement."
     },
-    "script": "Si une compétence de recette restait indisponible après la formation, je préparerais ce besoin de renfort dans le cadre de la mise en situation.\n\nJe commencerais par préciser le déclencheur et la mission : quatre heures de recette sur les parcours et le clavier, avec un résultat reproductible. Je demanderais un profil capable de décrire une anomalie et de communiquer clairement par écrit.\n\nPour la sélection, je proposerais un exercice accessible sur une base de test. À l’accueil, je fournirais les critères, les accès nécessaires et un point de restitution.\n\nÀ 45 euros de l’heure, le coût indicatif serait de 180 euros, à arbitrer en plus du budget de base. C’est une fiche conditionnelle : je n’ai pas engagé de recrutement dans mon projet solo.",
-    "source": "A06 ; fiche de mise en situation pédagogique.",
+    "script": "Je prépare cette demande uniquement si une compétence critique reste indisponible après la formation et son évaluation. Je formalise le besoin avec Inès : quatre heures de renfort QA avant la restitution, sur des scénarios navigateur et clavier.\n\nJe transmets aux ressources humaines la mission, les compétences attendues, la disponibilité et un exercice de sélection accessible. L’estimation de 180 euros est supplémentaire à la base du cas ; je dois aussi évaluer le temps d’accueil avant de demander l’arbitrage.\n\nInès accompagne la prise en main, Sami prépare des accès limités et je contrôle le résultat. Aucun recrutement ni envoi réel n’est déclaré : il s’agit d’une option conditionnelle du scénario.",
+    "source": "Équipe, planning et affectations : donnees/mise-en-situation.json ; annexes A01–A07.",
     "nature": "Mise en situation pédagogique explicitement simulée",
     "dark": false,
     "action": "",
@@ -1066,6 +1081,6 @@
     "number": 26,
     "startMinute": 30.0,
     "endMinute": 30.0,
-    "notes": "Si une compétence de recette restait indisponible après la formation, je préparerais ce besoin de renfort dans le cadre de la mise en situation.\n\nJe commencerais par préciser le déclencheur et la mission : quatre heures de recette sur les parcours et le clavier, avec un résultat reproductible. Je demanderais un profil capable de décrire une anomalie et de communiquer clairement par écrit.\n\nPour la sélection, je proposerais un exercice accessible sur une base de test. À l’accueil, je fournirais les critères, les accès nécessaires et un point de restitution.\n\nÀ 45 euros de l’heure, le coût indicatif serait de 180 euros, à arbitrer en plus du budget de base. C’est une fiche conditionnelle : je n’ai pas engagé de recrutement dans mon projet solo."
+    "notes": "Je prépare cette demande uniquement si une compétence critique reste indisponible après la formation et son évaluation. Je formalise le besoin avec Inès : quatre heures de renfort QA avant la restitution, sur des scénarios navigateur et clavier.\n\nJe transmets aux ressources humaines la mission, les compétences attendues, la disponibilité et un exercice de sélection accessible. L’estimation de 180 euros est supplémentaire à la base du cas ; je dois aussi évaluer le temps d’accueil avant de demander l’arbitrage.\n\nInès accompagne la prise en main, Sami prépare des accès limités et je contrôle le résultat. Aucun recrutement ni envoi réel n’est déclaré : il s’agit d’une option conditionnelle du scénario."
   }
 ]

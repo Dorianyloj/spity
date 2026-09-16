@@ -69,6 +69,12 @@ def markdown(path):
             if rows[0]==['Activité','CP','DEV','QA','CL']: widths=[3,0.7,0.7,0.7,0.7]
             if columns==6 and rows[0][0]=='Rôle': widths=[0.7,1,1.4,1.1,1.2,0.8]
             if columns==5 and rows[0][0]=='Action prévue': widths=[1.4,0.55,1.1,1.4,2]
+            if rows[0]==['Activité','Dorian','Léa','Hugo','Inès','Sami','Claire']: widths=[3.7,.7,.7,.7,.7,.7,.7]
+            if rows[0]==['Lot','Début','Fin','Charge estimée','Pilote et contributions']: widths=[1.65,.55,.55,.8,3.45]
+            if rows[0]==['Personne','Rôle','Mission','Livrable']: widths=[.7,1.3,2.9,1.9]
+            if rows[0]==['Personne','Base j-h','Consommé simulé','Reste simulé','Prévision j-h']: widths=[1.1,1,1.4,1.3,1.4]
+            if rows[0]==['Membre','Compétence','Actuel','Cible','Commentaire']: widths=[1.05,2.2,.65,.65,3]
+            if rows[0]==['Membre','Moment / durée','Objectif','Modalité','Évaluation']: widths=[.75,1.25,1.3,2,2.2]
             total=sum(widths)
             content=[[Paragraph(inline(c),styles['head' if n==0 else 'cell']) for c in row] for n,row in enumerate(rows)]
             t=Table(content,colWidths=[174*mm*w/total for w in widths],repeatRows=1,hAlign='LEFT')
@@ -92,7 +98,7 @@ def footer(canvas,doc):
 
 def main():
     OUTPUT.parent.mkdir(parents=True,exist_ok=True)
-    story=[Spacer(1,32*mm),Paragraph('SPITY',ParagraphStyle('cover',fontName='Arial-Bold',fontSize=45,leading=50,textColor=GREEN)),Spacer(1,10*mm),Paragraph('Coordonner et piloter<br/>un projet logiciel',styles['h1']),Paragraph('Dossier de soutenance - Bloc 3',styles['h2']),Paragraph('Dorian Joly<br/>Expert en développement logiciel - RNCP39583<br/>Révision documentaire du 16 septembre 2026',styles['body']),Spacer(1,12*mm),Paragraph('Projet solo sur un an, réalisations vérifiables et mises en situation pédagogiques identifiées pour les sept compétences. Le dossier accompagne un oral de 30 minutes, démonstration incluse, suivi de 15 minutes de questions.',styles['body']),PageBreak()]
+    story=[Spacer(1,32*mm),Paragraph('SPITY',ParagraphStyle('cover',fontName='Arial-Bold',fontSize=45,leading=50,textColor=GREEN)),Spacer(1,10*mm),Paragraph('Coordonner et piloter<br/>un projet logiciel',styles['h1']),Paragraph('Dossier de soutenance - Bloc 3',styles['h2']),Paragraph('Dorian Joly<br/>Expert en développement logiciel - RNCP39583<br/>Révision documentaire du 16 septembre 2026',styles['body']),Spacer(1,12*mm),Paragraph('Pilotage d’une équipe fictive sur un an, appuyé sur le logiciel réel Spity et les sept compétences. Le dossier accompagne un oral de 30 minutes, démonstration incluse, suivi de 15 minutes de questions.',styles['body']),PageBreak()]
     files=[DOCS/'DOSSIER_BLOC_03.md',DOCS/'MATRICE_PREUVES.md',*sorted((DOCS/'annexes').glob('A*.md')),DOCS/'VERIFICATION.md']
     for n,f in enumerate(files):
         if not f.exists():raise FileNotFoundError(f)

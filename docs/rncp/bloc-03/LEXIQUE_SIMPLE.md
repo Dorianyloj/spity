@@ -1,8 +1,10 @@
-# Lexique du diaporama v20
+# Lexique du diaporama v21
 
 | Terme | Sens dans Spity |
 | --- | --- |
-| Projet solo | Dorian réalise le projet ; les responsabilités ne désignent pas plusieurs salariés. |
+| Projet solo réel | Dorian a développé le logiciel ; l’équipe du scénario est distincte. |
+| Équipe fictive | Dorian pilote, Léa conçoit, Hugo développe, Inès teste, Sami livre ; Claire est cliente. |
+| RACI | R réalise ; A décide ; C est consulté ; I est informé. Un seul A par activité. |
 | Jour-personne (j-h) | Unité de charge : une personne pendant une journée. Ce n’est pas une durée calendaire. |
 | Prévisionnel | Estimation avant réalisation ; ici les charges et coûts du Bloc 1. |
 | Consommé | Temps ou argent réellement utilisé, à justifier. Non fourni dans ce kit. |

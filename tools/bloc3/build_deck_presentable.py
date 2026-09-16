@@ -1,4 +1,4 @@
-"""Build the editable v20 deck from the solo project narrative and dated evidence.
+"""Build the editable v21 deck from the solo project narrative and dated evidence.
 
 Run from any directory: python tools/bloc3/build_deck_presentable.py
 Dependencies: tools/bloc3/requirements-presentation.txt.
@@ -18,7 +18,7 @@ from pptx.util import Inches, Pt
 
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / 'docs/rncp/bloc-03'
-OUT = ROOT / 'output/bloc-03/spity-bloc-3-soutenance-v20.pptx'
+OUT = ROOT / 'output/bloc-03/spity-bloc-3-soutenance-v21.pptx'
 SOURCE = json.loads((DOCS / 'donnees/support-oral.json').read_text())
 FACTS = json.loads((DOCS / 'donnees/projet-reel.json').read_text())
 B1 = json.loads((DOCS / 'donnees/reference-bloc-01.json').read_text())
@@ -257,7 +257,7 @@ for item in SOURCE:
         rect(s, .94, 4.04, 4.0, .48, LIME, True)
         txt(s, 'BLOC 3 · RNCP39583' if layout == 'cover' else 'GRIMPEUR → CLUB', 1.1, 4.14, 3.68, .27, 12, True, WHITE, PP_ALIGN.CENTER)
         txt(s, 'Dorian Joly', .94, 7.56, 10.8, .42, 18, True, WHITE)
-        txt(s, 'Projet solo sur un an · plateforme sociale pour la communauté escalade' if layout == 'cover' else 'Partenaires, demandes et inscriptions aux événements', .94, 8.08, 13.8, .45, 13, False, WHITE)
+        txt(s, 'Mise en situation · pilotage d’une équipe fictive sur un an' if layout == 'cover' else 'Partenaires, demandes et inscriptions aux événements', .94, 8.08, 13.8, .45, 13, False, WHITE)
     elif layout == 'agenda':
         picture(s, 'docs/rncp/bloc-03/assets/bloc1-sommaire.jpg', .65, .65, 6.55, 7.4, True)
         draw_heading(s, 'SOMMAIRE', 7.78, .8, 7.55, .78, 38)
@@ -284,12 +284,12 @@ for item in SOURCE:
             if i<4:line(s,6.28,y+.81,15.1,y+.81)
     elif layout == 'annual':
         seq=SIM['planning']
-        chart(s,[r['lot'] for r in seq],
+        chart(s,[f"{r['lot']} · {r['owner']}" for r in seq],
               [('Début',[r['startMonth']-1 for r in seq]),
                ('Durée',[r['endMonth']-r['startMonth']+1 for r in seq])],
               .6,2.65,11.0,4.5,12,stacked=True,colors=[None,GREEN],labels=False,fmt='0')
         txt(s,'MOIS RELATIFS · PLANNING RÉVISÉ DU CAS',.9,7.16,10.7,.27,11,True,MUTED)
-        stat(s,'82','j-h estimés B1',11.9,3.03,3.5,False,'Dépendances :\naccès → profils\névénement → inscription')
+        stat(s,'82','j-h partagés',11.9,3.03,3.5,False,'5 membres\nà temps partiel\nDorian coordonne')
     elif layout == 'effort':
         seq=B1['lots']
         chart(s,[r['shortTitle'] for r in seq],[('Charge estimée',[r['personDays'] for r in seq])],.65,2.65,10.65,4.62,14,fmt='0" j-h"')
